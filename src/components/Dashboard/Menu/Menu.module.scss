@@ -1,0 +1,33 @@
+.active {
+    position: relative;
+    filter: invert(56%) sepia(98%) saturate(1084%) hue-rotate(323deg) brightness(99%) contrast(104%);
+    &::after {
+        position: absolute;
+        content: ' ';
+        background: #FF7954;
+        width: 5px;
+        bottom: -5px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        height: 5px;
+        border-radius: 50%;
+    }
+}
+
+.tabMenu {
+    position: fixed;
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+    background: #FFF;
+    bottom: 0;
+    padding: 0;
+    width: 100%;
+    margin-bottom: 0;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+    border-radius: 20px 20px 0  0;
+    li {
+        font-size: 0.8rem;
+    }
+}

@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import ScrollToTop from './components/ScrollTop/resetTop'
+import Home from '../src/containers/Home'
+import SignIn from './containers/SignIn'
+import Error from './containers/Error'
+import Dashboard from './containers/Dashboard'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <ScrollToTop />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+
+        <Route exact path="/sign-in">
+          <SignIn />
+        </Route>
+
+        <Route exact path="/dashboard">
+          <Dashboard page="home" />
+        </Route>
+
+        <Route exact path="/signatures">
+          <Dashboard page="signatures" />
+        </Route>
+
+        <Route exact path="/teams">
+          <Dashboard page="teams" />
+        </Route>
+
+        <Route exact path="/events">
+          <Dashboard page="events" />
+        </Route>
+
+        <Route exact path="/profile">
+          <Dashboard page="profile" />
+        </Route>
+
+        <Route path="/">
+          <Error />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  )
+
 }
 
 export default App;
