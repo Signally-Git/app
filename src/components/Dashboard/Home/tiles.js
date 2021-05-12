@@ -1,4 +1,5 @@
 import ChevronRight from '../../../assets/icons/chevron-right.svg'
+import Sync from '../../Modals/Sync/sync'
 import classes from './tiles.module.css'
 
 function Tiles() {
@@ -42,13 +43,14 @@ function Tiles() {
                             <span className={classes.bigTxt}>36</span>
                             <span> /38</span>
                         </div>
-                        <span>actives</span>
+                        <span>actifs</span>
                     </div>
                 </div>
             </div>
             <div className={classes.watermark}>
                 <h3>Signally</h3>
             </div>
+                <Sync />
         </div>
     )
 }

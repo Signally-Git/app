@@ -1,7 +1,44 @@
 .container {
-    background: #F8F2F0;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 90%;
+    padding: 1rem;
+    margin: auto;
+    background: #F8F2F0AA;
     border-radius: 10px;
-    ul {
-        background: #FFF;
+    span {
+        color: #65443E;
+        font-size: .9rem;
     }
+    div{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    div * {
+        vertical-align: middle;
+    }
+    ul {
+        padding: .5rem 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        list-style: none;
+        width: 70%;
+        margin: .5rem auto;
+        border-radius: 30px;
+        background: #FFF;
+        li * {
+            vertical-align: middle;
+        }
+    }
+}
+
+.blackImg {
+    filter: contrast(0);
 }

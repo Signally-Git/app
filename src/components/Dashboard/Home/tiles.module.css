@@ -1,7 +1,7 @@
 .container {
   width: 95%;
   margin: auto;
-  height: 80vh;
+  height: 83vh;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11,6 +11,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   padding-top: 2rem;
+  padding-bottom: 3rem;
 }
 
 .container h1 {
