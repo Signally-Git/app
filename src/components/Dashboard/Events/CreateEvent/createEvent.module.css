@@ -1,0 +1,177 @@
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 90%;
+  min-height: 90vh;
+  margin: auto;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #402a27;
+  text-align: center;
+  padding-bottom: 3rem;
+}
+
+.container img {
+  padding: 1rem;
+  background: #fff;
+  border-radius: 50%;
+  height: 10rem;
+  width: 10rem;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.container h1 {
+  font-size: 1.6rem;
+}
+
+.container p {
+  color: #865953;
+  font-size: 1rem;
+}
+
+.container .button {
+  margin-top: auto;
+  background: none;
+  color: #402a27;
+  border: 1px solid #402a27;
+  border-radius: 100px;
+  outline: none;
+  width: 100%;
+  padding: 1rem 0;
+  font-weight: bold;
+}
+
+.container .input,
+.container .textarea,
+.container .select {
+  font-family: "Montserrat";
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  border: none;
+  outline: none;
+  background: #fff;
+  border-radius: 5px;
+  padding: 1rem;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.container .input::-webkit-input-placeholder,
+.container .textarea::-webkit-input-placeholder,
+.container .select::-webkit-input-placeholder {
+  color: #a87069;
+}
+
+.container .input:-ms-input-placeholder,
+.container .textarea:-ms-input-placeholder,
+.container .select:-ms-input-placeholder {
+  color: #a87069;
+}
+
+.container .input::-ms-input-placeholder,
+.container .textarea::-ms-input-placeholder,
+.container .select::-ms-input-placeholder {
+  color: #a87069;
+}
+
+.container .input::placeholder,
+.container .textarea::placeholder,
+.container .select::placeholder {
+  color: #a87069;
+}
+
+.container .input select:focus,
+.container .textarea select:focus,
+.container .select select:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.container textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+.subcontainer,
+.subcontainerShort {
+  padding-top: 3rem;
+  height: 65vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.subcontainer p,
+.subcontainerShort p {
+  max-width: 80%;
+  line-height: 1.5;
+  text-align: justify;
+  text-align-last: center;
+}
+
+.subcontainerShort {
+  width: 100%;
+  height: 20vh;
+}
+
+.container .span {
+  font-size: 0.9rem;
+  text-align: left;
+  margin-right: auto;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.container label {
+  margin-right: auto;
+  color: #c9847c;
+  font-size: 0.75rem;
+}
+
+.or {
+  margin-left: auto;
+}
+
+.selectColor option .color {
+  position: relative;
+}
+
+.selectColor option .color::before {
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  position: absolute;
+  content: " ";
+  width: 15px;
+  height: 15px;
+  background: #000;
+  border-radius: 50%;
+}
+
+.select {
+  width: 100%;
+  border: none;
+}
+
+.calendar {
+  width: 100%;
+}

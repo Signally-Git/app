@@ -34,6 +34,11 @@ function App() {
           <Dashboard page="events" />
         </Route>
 
+        
+        <Route exact path="/create-event">
+          <Dashboard page="create-event" />
+        </Route>
+
         <Route exact path="/profile">
           <Dashboard page="profile" />
         </Route>

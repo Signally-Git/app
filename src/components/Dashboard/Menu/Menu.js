@@ -30,11 +30,11 @@ function Menu(props) {
                     <img src={Events} alt="Events" />
                 </Link>
             </li>
-            <li className={props.page === "profile" && classes.active}>
+            {/* <li className={props.page === "profile" && classes.active}>
                 <Link to="/profile">
                     <img src={Profile} alt="Profile" />
                 </Link>
-            </li>
+            </li> */}
         </ul>
     )
 }

@@ -1,0 +1,64 @@
+.container {
+  color: #402A27;
+  width: 90%;
+  margin: auto;
+}
+
+.active::before {
+  position: absolute;
+  content: " ";
+  width: 10px;
+  height: 10px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  left: -1rem;
+  border-radius: 50%;
+  background: #4AEE6E;
+}
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.status {
+  position: relative;
+}
+
+.previewContainer {
+  padding: 1rem;
+  background: #FFF;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.previewContainer img {
+  padding: 1rem;
+  padding-top: 0;
+  margin-top: 0;
+  margin-bottom: auto;
+}
+
+.signText * {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.signText p {
+  font-size: 0.8rem;
+}
+
+.orangeTxt {
+  color: #FF7954;
+}

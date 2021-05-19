@@ -1,6 +1,7 @@
 import ChevronRight from '../../../assets/icons/chevron-right.svg'
 import Sync from '../../Modals/Sync/sync'
 import classes from './tiles.module.css'
+import SignaturePreview from '../Home/signaturePreview'
 
 function Tiles() {
     return (
@@ -47,6 +48,8 @@ function Tiles() {
                     </div>
                 </div>
             </div>
+            
+            <SignaturePreview />
             <div className={classes.watermark}>
                 <h3>Signally</h3>
             </div>

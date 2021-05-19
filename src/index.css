@@ -44,3 +44,47 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+/** Calendar **/ 
+
+.rdrDayToday .rdrDayNumber span {
+  color: #E27D67!important;
+}
+
+.rdrDayToday span::after {
+  content: none!important;
+}
+
+.rdrStartEdge + span {
+  border: 22px solid #E27D67;
+  color: #E27D67!important;
+  width: 44px!important;
+    height: 44px!important;
+    top: -50%!important;
+    left: 0!important;
+    border-radius: 50%!important;
+    transform: translateY(30%)!important;
+    z-index: 1;
+}
+
+.rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span {
+  color: #FFF!important;
+  z-index: 2;
+}
+
+.rdrEndEdge {
+  color: #FFF!important;
+}
+
+.rdrDayStartPreview .rdrDayEndPreview {
+  border-radius: 50%!important;
+  border: 1px solid #E27D67!important;
+}
+
+.rdrInRange, .rdrStartEdge {
+  color: #FDF8F7!important;
+}
+
+.rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span {
+  color: #000!important;
+}

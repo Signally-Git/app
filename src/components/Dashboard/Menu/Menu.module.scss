@@ -16,6 +16,7 @@
 
 .tabMenu {
     position: fixed;
+    z-index: 2;
     display: flex;
     justify-content: space-evenly;
     list-style: none;
