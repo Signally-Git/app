@@ -1,90 +1,134 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
 
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.004)!important;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004) !important;
   box-sizing: border-box;
 }
 
-a, a:hover, a:visited, a:focus {
+a,
+a:hover,
+a:visited,
+a:focus {
   text-decoration: none;
 }
 
 img {
-  image-rendering: -moz-crisp-edges;         /* Firefox */
-  image-rendering:   -o-crisp-edges;         /* Opera */
-  image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+  image-rendering: -moz-crisp-edges; /* Firefox */
+  image-rendering: -o-crisp-edges; /* Opera */
+  image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
   image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
+  -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
 }
 
-html{
+html {
   margin: 0;
   padding: 0;
 }
 
 body {
-  background: #FDF8F7;
+  background: #fdf8f7;
   margin: 0;
   padding: 0;
   font-size: 18px;
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  text-shadow: rgba(0,0,0,.01) 0 0 1px;
+  text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
 }
 
 .orangeBg {
-  background: #FDF8F7;
+  background: #fdf8f7;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
-/** Calendar **/ 
+/** Calendar **/
 
-.rdrDayToday .rdrDayNumber span {
-  color: #E27D67!important;
+.rdrNextPrevButton{
+  background: none!important;
+}
+
+.rdrMonth {
+  margin: auto;
+}
+
+.rdrDateDisplay {
+  display: none!important;
+}
+
+.rdrDayHovered {
+  z-index: 1 !important;
 }
 
 .rdrDayToday span::after {
-  content: none!important;
+  content: none !important;
 }
 
 .rdrStartEdge + span {
-  border: 22px solid #E27D67;
-  color: #E27D67!important;
-  width: 44px!important;
-    height: 44px!important;
-    top: -50%!important;
-    left: 0!important;
-    border-radius: 50%!important;
-    transform: translateY(30%)!important;
-    z-index: 1;
+  border: 22px solid #e27d67;
+  width: 44px !important;
+  height: 44px !important;
+  top: -50% !important;
+  left: 0 !important;
+  border-radius: 50% !important;
+  transform: translateY(30%) !important;
+  z-index: 2 !important;
+}
+
+.rdrStartEdge + span:not(.rdrDayNumber) {
+  display: none;
 }
 
 .rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span {
-  color: #FFF!important;
+  color: #fff !important;
   z-index: 2;
 }
 
 .rdrEndEdge {
   color: #FFF!important;
+  border: 1px solid #E27D67!important;
+  width: 44px!important;
+  height: 44px!important;
+  border-radius: 50%!important;
+  left: 0!important;
+  top: -10%!important;
+}
+
+.rdrDayStartPreview, .rdrDayEndPreview {
+  display: none!important;
+}
+
+.rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span {
+  color: #000!important;
+}
+
+.rdrEndEdge + span span {
+  color: #000!important;
 }
 
 .rdrDayStartPreview .rdrDayEndPreview {
-  border-radius: 50%!important;
+  border-radius: 50% !important;
   border: 1px solid #E27D67!important;
 }
 
-.rdrInRange, .rdrStartEdge {
-  color: #FDF8F7!important;
+.rdrInRange,
+.rdrStartEdge {
+  color: #fdf8f7 !important;
 }
 
 .rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span {
-  color: #000!important;
+  color: #000 !important;
 }
