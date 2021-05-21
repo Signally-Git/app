@@ -35,6 +35,14 @@
   border-top: none;
 }
 
+.container ul a {
+  color: #66433E;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .chevron {
   margin-top: 2px;
   margin-left: auto;

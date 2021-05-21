@@ -1,4 +1,4 @@
-.container {
+.container, .smallContainer, .smallContainer form {
     display: flex;
     width: 90%;
     min-height: 90vh;
@@ -7,7 +7,7 @@
     align-items: center;
     color: #402a27;
     text-align: center;
-    padding-bottom: 3rem;
+    padding: 6rem 0;
     img {
         padding: 1rem;
         background: #fff;
@@ -34,6 +34,7 @@
         padding: 1rem 0;
         font-weight: bold;
     }
+    
     .input,
     .textarea,
     .select {
@@ -50,7 +51,7 @@
         &::placeholder {
             color: #a87069;
         }
-        margin: 1rem 0;
+        margin-top: 1rem;
         select:focus {
             box-shadow: none;
         }
@@ -59,6 +60,47 @@
         width: 100%;
         resize: vertical;
     }
+    hr {
+        height: 1px;
+        width: 100%;
+        border: none;
+        border-top: 1px solid rgba(101, 68, 62, 0.14);
+        margin: 2rem 0;
+    }
+    label {
+        margin-top: .5rem;
+    }
+}
+
+.smallContainer button:not(.enabledBtn) {
+    cursor: not-allowed;
+    opacity: 0.2;
+} 
+
+.enabledBtn {
+    margin-top: 2rem;
+    color: #FFF!important;
+    background: #FF7954!important;
+    border: none!important;
+    font-family: "Montserrat";
+    font-weight: 400!important;
+}
+
+.smallContainer, .smallContainer form {
+    padding-top: 0;
+    padding-bottom: 2rem;
+}
+
+.collapsibleTitle {
+    font-size: .8rem;
+    margin: 3rem 0 1rem;
+}
+
+.collapsibleDiv {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .subcontainer,
@@ -99,6 +141,7 @@
 
 .or {
     margin-left: auto;
+    line-height: 2;
 }
 
 .selectColor {
@@ -133,25 +176,99 @@
     bottom: 0;
     left: 0;
     z-index: 3;
-    background: #FFF;
+    background: #fff;
     img {
         margin-left: auto;
         width: 50px;
         height: 50px;
-        }
+    }
 }
 
-    .calendar {
-        padding-bottom: 2rem;
-        width: 90%;
+.calendar {
+    padding-bottom: 2rem;
+    width: 90%;
     margin: auto;
-        }
+}
 
-            .dateContainer {
-                display: flex;
-                justify-content: space-between;
-                width: 100%;
-                input {
-                    margin: 1rem;
-                    }
-                }
+.dateContainer {
+    display: flex;
+    background: #FFF;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    padding: 1rem 1.5rem;
+    img {
+        width: 25px;
+        padding: 0;
+        height: 25px;
+    }
+    input {
+        letter-spacing: .05rem;
+        font-weight: 600;
+        border: none;
+        width: auto;
+        max-width: 55%;
+        background: none;
+        margin: 0;
+        color: #402a27;
+        outline: none;
+        &::placeholder {
+            font-size: .7rem;
+            letter-spacing: 0;
+            color: #a87069;
+        }
+    }
+    .vr {
+        margin: 0;
+        height: 1rem;
+        min-width: 1px;
+        background: #66433E;
+    }
+}
+
+.fullDate{
+    align-items: center;
+    display: flex;
+    max-width: 50%;
+    justify-content: space-evenly;
+}
+
+.hourInput {
+    font-weight: 400!important;
+    width: 2.5rem!important;
+}
+
+.backgroundCalendar {
+    position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    opacity: 0.2;
+} 
+
+.colorContainer {
+    width: 100%;
+    position: relative;
+    input {
+        text-indent: 2rem;
+    }
+}
+
+.colorPreview {
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-10%);
+    left: 1rem;
+    width: 20px;
+    height: 20px;
+}
+
+.colorPick {
+    margin: 1rem auto;
+}

@@ -1,4 +1,4 @@
-.container {
+.container, .smallContainer, .smallContainer form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -14,10 +14,10 @@
           align-items: center;
   color: #402a27;
   text-align: center;
-  padding-bottom: 3rem;
+  padding: 6rem 0;
 }
 
-.container img {
+.container img, .smallContainer img, .smallContainer form img {
   padding: 1rem;
   background: #fff;
   border-radius: 50%;
@@ -27,16 +27,16 @@
      object-fit: contain;
 }
 
-.container h1 {
+.container h1, .smallContainer h1, .smallContainer form h1 {
   font-size: 1.6rem;
 }
 
-.container p {
+.container p, .smallContainer p, .smallContainer form p {
   color: #865953;
   font-size: 1rem;
 }
 
-.container .button {
+.container .button, .smallContainer .button, .smallContainer form .button {
   margin-top: auto;
   background: none;
   color: #402a27;
@@ -50,7 +50,11 @@
 
 .container .input,
 .container .textarea,
-.container .select {
+.container .select, .smallContainer .input,
+.smallContainer .textarea,
+.smallContainer .select, .smallContainer form .input,
+.smallContainer form .textarea,
+.smallContainer form .select {
   font-family: "Montserrat";
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -61,43 +65,111 @@
   border-radius: 5px;
   padding: 1rem;
   width: 100%;
-  margin: 1rem 0;
+  margin-top: 1rem;
 }
 
 .container .input::-webkit-input-placeholder,
 .container .textarea::-webkit-input-placeholder,
-.container .select::-webkit-input-placeholder {
+.container .select::-webkit-input-placeholder, .smallContainer .input::-webkit-input-placeholder,
+.smallContainer .textarea::-webkit-input-placeholder,
+.smallContainer .select::-webkit-input-placeholder, .smallContainer form .input::-webkit-input-placeholder,
+.smallContainer form .textarea::-webkit-input-placeholder,
+.smallContainer form .select::-webkit-input-placeholder {
   color: #a87069;
 }
 
 .container .input:-ms-input-placeholder,
 .container .textarea:-ms-input-placeholder,
-.container .select:-ms-input-placeholder {
+.container .select:-ms-input-placeholder, .smallContainer .input:-ms-input-placeholder,
+.smallContainer .textarea:-ms-input-placeholder,
+.smallContainer .select:-ms-input-placeholder, .smallContainer form .input:-ms-input-placeholder,
+.smallContainer form .textarea:-ms-input-placeholder,
+.smallContainer form .select:-ms-input-placeholder {
   color: #a87069;
 }
 
 .container .input::-ms-input-placeholder,
 .container .textarea::-ms-input-placeholder,
-.container .select::-ms-input-placeholder {
+.container .select::-ms-input-placeholder, .smallContainer .input::-ms-input-placeholder,
+.smallContainer .textarea::-ms-input-placeholder,
+.smallContainer .select::-ms-input-placeholder, .smallContainer form .input::-ms-input-placeholder,
+.smallContainer form .textarea::-ms-input-placeholder,
+.smallContainer form .select::-ms-input-placeholder {
   color: #a87069;
 }
 
 .container .input::placeholder,
 .container .textarea::placeholder,
-.container .select::placeholder {
+.container .select::placeholder, .smallContainer .input::placeholder,
+.smallContainer .textarea::placeholder,
+.smallContainer .select::placeholder, .smallContainer form .input::placeholder,
+.smallContainer form .textarea::placeholder,
+.smallContainer form .select::placeholder {
   color: #a87069;
 }
 
 .container .input select:focus,
 .container .textarea select:focus,
-.container .select select:focus {
+.container .select select:focus, .smallContainer .input select:focus,
+.smallContainer .textarea select:focus,
+.smallContainer .select select:focus, .smallContainer form .input select:focus,
+.smallContainer form .textarea select:focus,
+.smallContainer form .select select:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.container textarea {
+.container textarea, .smallContainer textarea, .smallContainer form textarea {
   width: 100%;
   resize: vertical;
+}
+
+.container hr, .smallContainer hr, .smallContainer form hr {
+  height: 1px;
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba(101, 68, 62, 0.14);
+  margin: 2rem 0;
+}
+
+.container label, .smallContainer label, .smallContainer form label {
+  margin-top: .5rem;
+}
+
+.smallContainer button:not(.enabledBtn) {
+  cursor: not-allowed;
+  opacity: 0.2;
+}
+
+.enabledBtn {
+  margin-top: 2rem;
+  color: #FFF !important;
+  background: #FF7954 !important;
+  border: none !important;
+  font-family: "Montserrat";
+  font-weight: 400 !important;
+}
+
+.smallContainer, .smallContainer form {
+  padding-top: 0;
+  padding-bottom: 2rem;
+}
+
+.collapsibleTitle {
+  font-size: .8rem;
+  margin: 3rem 0 1rem;
+}
+
+.collapsibleDiv {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .subcontainer,
@@ -148,6 +220,7 @@
 
 .or {
   margin-left: auto;
+  line-height: 2;
 }
 
 .selectColor option .color {
@@ -185,7 +258,7 @@
   bottom: 0;
   left: 0;
   z-index: 3;
-  background: #FFF;
+  background: #fff;
 }
 
 .calendarContainer img {
@@ -204,12 +277,117 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  background: #FFF;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  padding: 1rem 1.5rem;
+}
+
+.dateContainer img {
+  width: 25px;
+  padding: 0;
+  height: 25px;
 }
 
 .dateContainer input {
-  margin: 1rem;
+  letter-spacing: .05rem;
+  font-weight: 600;
+  border: none;
+  width: auto;
+  max-width: 55%;
+  background: none;
+  margin: 0;
+  color: #402a27;
+  outline: none;
+}
+
+.dateContainer input::-webkit-input-placeholder {
+  font-size: .7rem;
+  letter-spacing: 0;
+  color: #a87069;
+}
+
+.dateContainer input:-ms-input-placeholder {
+  font-size: .7rem;
+  letter-spacing: 0;
+  color: #a87069;
+}
+
+.dateContainer input::-ms-input-placeholder {
+  font-size: .7rem;
+  letter-spacing: 0;
+  color: #a87069;
+}
+
+.dateContainer input::placeholder {
+  font-size: .7rem;
+  letter-spacing: 0;
+  color: #a87069;
+}
+
+.dateContainer .vr {
+  margin: 0;
+  height: 1rem;
+  min-width: 1px;
+  background: #66433E;
+}
+
+.fullDate {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 50%;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.hourInput {
+  font-weight: 400 !important;
+  width: 2.5rem !important;
+}
+
+.backgroundCalendar {
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  opacity: 0.2;
+}
+
+.colorContainer {
+  width: 100%;
+  position: relative;
+}
+
+.colorContainer input {
+  text-indent: 2rem;
+}
+
+.colorPreview {
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-10%);
+          transform: translateY(-10%);
+  left: 1rem;
+  width: 20px;
+  height: 20px;
+}
+
+.colorPick {
+  margin: 1rem auto;
 }

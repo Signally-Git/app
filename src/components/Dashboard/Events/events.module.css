@@ -33,6 +33,17 @@
   margin: 1rem 0;
 }
 
+.container ul li a {
+  color: #66433e;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
 .eventText {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -78,24 +89,6 @@
 
 .inactive::before {
   background: #c4c4c4;
-}
-
-.open {
-  height: 100%;
-}
-
-.open li {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.closed {
-  height: 0;
-}
-
-.closed li {
-  display: none;
 }
 
 /** Calendar **/

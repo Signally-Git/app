@@ -1,7 +1,8 @@
 import classes from './signatures.module.css'
 import SignaturePreviewImg from '../../../assets/img/signallypreview.svg'
 
-function Signatures() {
+function Signatures(props) {
+    props.handleHeader("Signatures")
     return (<div className={classes.container}>
         <span>2 modèles</span>
         <ul>
@@ -18,7 +19,7 @@ function Signatures() {
                 </div>
             </div>
             </li>
-            <li>
+            <li className={classes.inactiveSignature}>
                 <h2 className={classes.inactive}>Modèle 2</h2>
                 <div className={classes.previewContainer}>
                 <img src={SignaturePreviewImg} alt="Signature preview" />

@@ -11,15 +11,11 @@ function Header(props) {
                 <img src={Contact} alt="Contact us" />
             </div>
         ) 
-    else if (props.page === "create-event")
-    {
-        return (<div></div>)
-    }
     else
         return (
             <div className={classes.container}>
-                <h2>{props.page}</h2>
-                {props.page === "events" && <Link to="create-event">
+                <h2>{props.title}</h2>
+                {props.create?.length > 0 && <Link to={props.create}>
                 <div className={classes.add}>+</div>
                 </Link>}
             </div>

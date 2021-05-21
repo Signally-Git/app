@@ -23,6 +23,12 @@
             border-radius: 10px;
             margin: 1rem 0;
         }
+        li a {
+            color: #66433e;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
     }
 }
 
@@ -64,20 +70,6 @@
 
 .inactive::before {
     background: #c4c4c4;
-}
-
-.open {
-    height: 100%;
-    li {
-        display: flex;
-    }
-}
-
-.closed {
-    height: 0;
-    li {
-        display: none;
-    }
 }
 
 /** Calendar **/

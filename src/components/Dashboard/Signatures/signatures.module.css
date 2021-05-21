@@ -79,3 +79,7 @@
 .orangeTxt {
   color: #FF7954;
 }
+
+.inactiveSignature {
+  opacity: 0.6;
+}

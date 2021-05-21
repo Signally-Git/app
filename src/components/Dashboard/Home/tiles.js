@@ -50,10 +50,10 @@ function Tiles() {
             </div>
             
             <SignaturePreview />
-            <div className={classes.watermark}>
+            {/* <div className={classes.watermark}>
                 <h3>Signally</h3>
-            </div>
-                <Sync />
+            </div> */}
+                {/* <Sync /> */}
         </div>
     )
 }
