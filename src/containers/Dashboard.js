@@ -24,7 +24,7 @@ function Dashboard(props) {
                 <Teams handleHeader={setIsHeader} create={setCreateEvent} />
             </> : props.page === 'signatures' ? 
             <>
-                <Signatures handleHeader={setIsHeader} />
+                <Signatures handleHeader={setIsHeader} header={isHeader} create={setCreateEvent} />
             </> : props.page === 'events' ? 
             <>
                 <Events handleHeader={setIsHeader} create={setCreateEvent}  />

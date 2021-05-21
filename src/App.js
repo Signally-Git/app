@@ -26,7 +26,7 @@ function App() {
           <Dashboard page="home" />
         </Route>
 
-        <Route exact path="/signatures">
+        <Route path="/signatures">
           <Dashboard page="signatures" />
         </Route>
 

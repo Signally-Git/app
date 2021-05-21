@@ -17,6 +17,10 @@
   list-style: none;
 }
 
+.container ul li a {
+  color: #66433E;
+}
+
 .container ul li h2 {
   margin-top: 2rem;
   font-size: 1rem;

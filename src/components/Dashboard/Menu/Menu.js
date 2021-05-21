@@ -16,7 +16,7 @@ function Menu(props) {
                 </Link>
             </li>
             <li className={props.page === "signatures" && classes.active}>
-                <Link to="/signatures">
+                <Link to="/signatures" key={Date.now()}>
                     <img src={Signatures} alt="Signatures" />
                 </Link>
             </li>
