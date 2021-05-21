@@ -9079,6 +9079,18 @@ react-colorful@^5.2.0:
   resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-5.2.0.tgz#1cd24ca7deff73a70cf34261813a4ed6c45129c2"
   integrity sha512-SJXywyc9oew0rOp7xjmtStiJ5N4Mk2RYc/1OptlaEnbuCz9PvILmRotoHfowdmO142HASUSgKdngL4WOHo/TnQ==
 
+react-credit-card-display@^0.5.7:
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/react-credit-card-display/-/react-credit-card-display-0.5.7.tgz#984ef01cbcfb3248a564c28a7df52ff1b9c29b0f"
+  integrity sha512-Rhbo6aMywFj3Ugfd+vgAs0UV0K40iqRbNTjLcWK3eXiOK6svUyy0GqZ7awMyRg0pvHuxW2YXKp1EHFpYB8jDXQ==
+
+react-credit-card-input-simple@^0.5.8:
+  version "0.5.8"
+  resolved "https://registry.yarnpkg.com/react-credit-card-input-simple/-/react-credit-card-input-simple-0.5.8.tgz#83af4c0fd18260d3b6a4d6e0f482d8241d293578"
+  integrity sha512-+UMACdoUEXgY5F9dOAU6U5+f9dU8MGQ3c0QAxubhhoVewGsXWc73MGx0GVYim8KTOmden4Wff/0kxQDbWSXRvA==
+  dependencies:
+    react-credit-card-display "^0.5.7"
+
 react-date-range@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/react-date-range/-/react-date-range-1.1.3.tgz#8b3bb18066dcac6609b1e8df655c720ffd273d4f"

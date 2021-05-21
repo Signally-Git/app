@@ -9,8 +9,8 @@ function Header() {
                <Logo />
             </Link>
             <ul>
-                <li><Link to="dashboard">Connexion</Link></li>
-                <li><Link to="sign-up">Inscription</Link></li>
+                <li><Link to="/dashboard">Connexion</Link></li>
+                <li><Link to="/sign-up">Inscription</Link></li>
             </ul>
         </header>
     )

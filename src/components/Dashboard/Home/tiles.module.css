@@ -132,3 +132,7 @@
   line-height: 28px;
   color: rgba(101, 68, 62, 0.03);
 }
+
+.syncContainer {
+  padding: 2rem 0 0rem 0;
+}

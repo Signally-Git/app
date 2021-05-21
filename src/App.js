@@ -6,6 +6,8 @@ import Error from './containers/Error'
 import Dashboard from './containers/Dashboard'
 import Team from './components/Dashboard/Teams/Team/team'
 import CreateTeam from './components/Dashboard/Teams/CreateTeam/createTeam'
+import Payment from './components/Payment/Payment'
+import SyncPage from './components/Sync/sync'
 
 function App() {
   return (
@@ -52,17 +54,26 @@ function App() {
           <Dashboard page="past-events" />
         </Route>
 
-        {/* <Route exact path="/profile">
-          <Dashboard page="profile" />
-        </Route> */}
+        <Route exact path="/payment">
+          <Payment />
+        </Route>
+
+        <Route path="/synchronize">
+          <SyncPage />
+        </Route>
 
         <Route path="/">
           <Error />
         </Route>
+      
+      {/* <Route exact path="/profile">
+        <Dashboard page="profile" />
+      </Route> */}
+
       </Switch>
     </BrowserRouter>
   )
-
+  
 }
 
 export default App;

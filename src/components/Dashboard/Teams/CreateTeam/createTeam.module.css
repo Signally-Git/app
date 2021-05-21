@@ -168,10 +168,10 @@
 }
 
 .userCount {
-  font-size: .8rem;
-  margin: .5rem 0;
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
   margin-right: auto;
-  color: #66433E;
+  color: #66433e;
 }
 
 .userSelection {
@@ -206,13 +206,13 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 0.5rem;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
 }
 
 .userList li label {
   font-family: "Montserrat";
   font-weight: 600;
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: #66433e;
 }
 
@@ -241,18 +241,48 @@
   top: 20%;
   right: 0;
   border-radius: 50%;
-  border: 1px solid #D2C8C6;
+  border: 1px solid #d2c8c6;
   height: 20px;
   width: 20px;
 }
 
 .userList li .checkbox:checked ~ .checkmark {
-  background-color: #FF7954;
+  background-color: #ff7954;
   border: transparent;
 }
 
+.imgBgContainer {
+  position: relative;
+}
+
+.congrats {
+  margin-top: 5rem;
+  position: relative;
+}
+
+.imgBg {
+  top: 30%;
+  z-index: -1;
+  left: 10%;
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.createTeamBtn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 90%;
+  margin: auto;
+}
+
 .teamName {
-  color: #FF7954;
+  color: #ff7954;
+  margin: 0 0.5rem;
 }
 
 .btnsContainer {
@@ -268,5 +298,9 @@
 }
 
 .btnsContainer button {
-  margin: .5rem;
+  margin: 0.5rem;
+}
+
+.btnsContainer button a {
+  color: #fff;
 }

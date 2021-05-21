@@ -39,7 +39,10 @@ function CreateTeam() {
             <div className={classes.smallContainer}>
                 <div className={classes.subcontainer}>
                     <h1>Créer une équipe</h1>
-                    <img src={CreateEventImage} alt="Team" />
+                    <div className={classes.imgBgContainer}>
+                        <img className={classes.congrats} src={CreateEventImage} alt="Congratulations" />
+                        <div className={classes.imgBg}></div>
+                    </div>
                     <p>
                         Les équipes vous permettent d’administrer & de mettre à jour les signatures de vos utilisateurs par groupe.
           </p>
@@ -94,7 +97,7 @@ function CreateTeam() {
                                 </li>)
                         })}
                     </ul>
-                    <button className={`${classes.button} ${classes.enabledBtn}`} onClick={() => setStep(step + 1)}>Créer l'équipe</button>
+                    <button className={`${classes.button} ${classes.enabledBtn} ${classes.createTeamBtn}`} onClick={() => setStep(step + 1)}>Créer l'équipe</button>
                 </form>
             </div>
         );
@@ -102,18 +105,21 @@ function CreateTeam() {
         console.log(step)
         return (
             <div className={classes.container}>
-                <img src={CreateEventImage} alt="Congratulations" />
+                <div className={classes.imgBgContainer}>
+                    <img className={classes.congrats} src={CreateEventImage} alt="Congratulations" />
+                    <div className={classes.imgBg}></div>
+                </div>
                 <h1>Félicitations !</h1>
                 <p>L’équipe
                 <span className={classes.teamName}>"{isNameFilled}"</span>
                 vient d’être créée. Vous pouvez maintenant lui assigner une signature.</p>
                 <div className={classes.btnsContainer}>
                     <button className={`${classes.button}`} onClick={() => setStep(2)}>Créer une autre équipe</button>
-                    <button className={`${classes.button} ${classes.enabledBtn}`}>
-                        <Link to="/teams">
+                    <Link to="/payment">
+                        <button className={`${classes.button} ${classes.enabledBtn}`}>
                             Terminer
-                        </Link>
                     </button>
+                    </Link>
                 </div>
             </div>)
     }

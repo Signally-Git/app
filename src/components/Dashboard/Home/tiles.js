@@ -2,8 +2,10 @@ import ChevronRight from '../../../assets/icons/chevron-right.svg'
 import Sync from '../../Modals/Sync/sync'
 import classes from './tiles.module.css'
 import SignaturePreview from '../Home/signaturePreview'
+import { Link } from 'react-router-dom'
 
-function Tiles() {
+function Tiles(props) {
+    props.handleHeader(" ")
     return (
         <div className={classes.container}>
             <h1>Bonjour Benjamin</h1>
@@ -53,7 +55,9 @@ function Tiles() {
             {/* <div className={classes.watermark}>
                 <h3>Signally</h3>
             </div> */}
-                {/* <Sync /> */}
+            <Link to="/synchronize" className={classes.syncContainer}>
+                <Sync />
+            </Link>
         </div>
     )
 }

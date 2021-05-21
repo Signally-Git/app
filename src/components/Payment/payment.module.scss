@@ -1,0 +1,151 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+    width: 90%;
+    height: 100vh;
+    input, label, span {
+        font-family: "Montserrat";
+        outline: none;
+    }
+    label {
+        font-size: .9rem;
+    }
+    span {
+        font-size: .8rem;
+        text-align: center;
+        a {
+            color: #FF7954;
+        }
+    }
+    input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+}
+
+.saveCard {
+    position: relative;
+    label {
+        margin-left: 1.5rem;
+    }
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    div {
+        display: flex;
+    }
+    h2 {
+        text-indent: 1rem;
+        font-size: 1rem;
+    }
+}
+
+.cardHolder{
+    transition: 0.2s;
+    background: #FFF;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 100%;
+    outline: none;
+    &:focus {
+        border: 1px solid #FF7954;
+        box-sizing: border-box;
+        box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+    }
+}
+
+.cardInfos {
+    margin: 1rem 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: #FFF;
+    border-radius: 10px;
+}
+
+input:focus .cardInfos {
+    border: 1px solid #FF7954;
+}
+
+.cardNumberContainer {
+    display: flex;
+} 
+
+.number {
+    text-indent: .75rem;
+    border: none;
+}
+
+.cvc, .expiry {
+    height: 100%;
+    width: 20%;
+    border: none;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    border: 1px solid #FF7954;
+  }
+
+.checkmark:after {
+    left: 4px;
+    top: 2px;
+    width: 3px;
+    height: 6px;
+    border: solid #FF7954;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+.activated {
+    margin: 1.5rem 0;
+    background: #FF7954;
+    color: #FFF;
+    border: 1px solid transparent;
+    border-radius: 100px;
+    outline: none;
+    width: 100%;
+    padding: 1rem 0;
+    font-weight: bold;
+}
+
+.deactivated {
+    opacity: 0.5;
+    margin: 1.5rem 0;
+    background: none;
+    color: #402a27;
+    border: 1px solid #402a27;
+    border-radius: 100px;
+    outline: none;
+    width: 100%;
+    padding: 1rem 0;
+    font-weight: bold;
+}
