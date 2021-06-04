@@ -6,7 +6,11 @@ function SignaturePreview() {
         <div className={classes.container}>
             <div className={classes.row}>
                 <p>Votre signature</p>
+                {JSON.parse(localStorage.getItem("user"))?.is_deployed ? <>
                 <span className={classes.status}>Active <div className={classes.active}></div></span>
+                </> : <> 
+                <span className={classes.status}>Inactive <div className={classes.inactive}></div></span>
+                </>}
             </div>
             <div className={classes.previewContainer}>
                 <img src={SignaturePreviewImg} alt="Signature preview" />

@@ -1,26 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreateEventImage from "../../../../assets/img/create-event.png";
 import classes from "./createEvent.module.css";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
 import * as locales from "react-date-range/dist/locale";
-import { Range } from "react-range";
+// import { Range } from "react-range";
 import CrossIcon from "../../../../assets/icons/cross.svg";
 import Event from "../../../../assets/icons/event.svg";
-import { HexColorInput, HexColorPicker } from "react-colorful";
+// import { HexColorInput, HexColorPicker } from "react-colorful";
 import TimeInput from 'react-time-input';
 
 function CreateEvent(props) {
   const [isNameFilled, setIsNameFilled] = useState("")
-  const [colorPicker, setColorPicker] = useState(false)
-  const [colorTextPicker, setColorTextPicker] = useState(false)
-  const [colorText, setColorText] = useState("#000000");
-  const [color, setColor] = useState("#000000");
+  // const [colorPicker, setColorPicker] = useState(false)
+  // const [colorTextPicker, setColorTextPicker] = useState(false)
+  // const [colorText, setColorText] = useState("#000000");
+  // const [color, setColor] = useState("#000000");
+  // const [isCollapsed, setIsCollapsed] = useState(false)
+  // const [range, setRange] = useState([50])
   const [isClosed, setIsClosed] = useState(false)
-  const [isCollapsed, setIsCollapsed] = useState(false)
   const [step, setStep] = useState(1)
-  const [range, setRange] = useState([50])
   const [state, setState] = useState([
     {
       startDate: null,
@@ -42,8 +42,10 @@ function CreateEvent(props) {
     console.log(e)
   }
 
-  if (step === 1) {
+  useEffect(() => {
     props.handleHeader("")
+  }, [])
+  if (step === 1) {
     return (
       <div className={classes.smallContainer}>
         <div className={classes.subcontainer}>
@@ -54,14 +56,13 @@ function CreateEvent(props) {
             avant un webinar, une nouvelle offre ...
           </p>
         </div>
-        <button className={`${classes.button} ${classes.enabledBtn}`} onClick={() => setStep(2)}>
+        <button className={`${classes.button} ${classes.enabledBtn} ${classes.fixed}`} onClick={() => setStep(2)}>
           Suivant
         </button>
       </div>
     );
   }
   else if (step === 2) {
-    props.handleHeader("")
     return (
       <div className={classes.smallContainer}>
         <form onSubmit={(e) => handleSubmit(e)}>
@@ -75,7 +76,7 @@ function CreateEvent(props) {
               placeholder="Nom de l'évènement"
             />
           </div>
-          <button className={`${classes.button} ${isNameFilled.length > 0 ? classes.enabledBtn : ""}`}>
+          <button className={`${classes.button} ${classes.fixed} ${isNameFilled.length > 0 ? classes.enabledBtn : ""}`}>
             Suivant
         </button>
         </form>
@@ -235,7 +236,7 @@ function CreateEvent(props) {
       </div>
       {/* } */}
 
-      <button className={`${classes.button} ${classes.enabledBtn}`} onClick={() => setStep(step + 1)}>
+      <button className={`${classes.fixed} ${classes.button} ${classes.enabledBtn}`} onClick={() => setStep(step + 1)}>
         Suivant
         </button>
     </div>

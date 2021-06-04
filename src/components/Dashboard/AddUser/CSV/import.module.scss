@@ -1,0 +1,332 @@
+.container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p {
+        font-size: 0.9rem;
+    }
+    h2 {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+}
+
+.spaceBe {
+    height: 70vh;
+    justify-content: space-between;
+}
+
+.center {
+    text-align: center;
+}
+
+.imgContainer {
+    position: relative;
+    margin-top: 5rem;
+}
+
+.whiteBackground {
+    top: 10%;
+    z-index: -1;
+    left: 20%;
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.btnDiv {
+    position: fixed;
+    bottom: 6rem;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+    margin: auto;
+    .btn {
+        position: relative!important;
+        bottom: 0;
+        width: 100%!important;
+    }
+}
+
+.btn {
+    margin: auto;
+    width: 90%;
+    position: fixed;
+    bottom: 6rem;
+    font-family: "Montserrat";
+    background: none;
+    border: none;
+    outline: none;
+    left: 0;
+    right: 0;
+    border-radius: 100px;
+    outline: none;
+    padding: 1rem 0;
+    font-weight: bold;
+}
+
+.orangeBtn {
+    color: #fff;
+    background-color: #ff7954;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    h1 {
+        font-size: 1.75rem;
+    }
+}
+
+.soon {
+    display: flex;
+    align-items: flex-start;
+    background: #f8f2f0;
+    padding: 1rem;
+    border-radius: 10px;
+    color: #66433e;
+    span {
+        margin-left: 1rem;
+        line-height: 1.75;
+        font-size: 0.9rem;
+    }
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    width: 100%;
+    margin: 1.5rem auto 0 0;
+    color: #66433e;
+}
+
+.step {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+    p {
+        margin: 0 0 0 3rem;
+        font-size: 0.9rem;
+        line-height: 1.5rem;
+    }
+}
+
+.stepNumber {
+    position: absolute;
+    flex: 32px;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    background: #ffcc20;
+    span {
+        width: 32px;
+        line-height: 32px;
+        text-align: center;
+        color: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+.tile {
+    margin-top: 3rem;
+    background: #fff;
+    border-radius: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    display: flex;
+    font-size: 0.9rem;
+}
+
+.chevron {
+    filter: brightness(0) saturate(100%);
+}
+
+
+.searchContainer {
+    width: 100%;
+    display: flex;
+    position: relative;
+    img {
+        position: absolute;
+        top: 40%;
+        left: 1rem;
+        transform: translateY(-20%);
+    }
+}
+
+
+.searchInput {
+    color: #402a27;
+    width: 100%;
+    font-family: "Montserrat";
+    text-indent: 2.5rem;
+    transition: 0.2s;
+    padding: 0.75rem;
+    border-radius: 30px;
+    background: #f1e8e7;
+    border: 1px solid transparent;
+    outline: none;
+    margin: 1rem 0;
+    &:focus {
+        background: #fff;
+        border: 1px solid #ff7954;
+        box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+    }
+}
+
+.userCount {
+    font-size: 0.8rem;
+    margin: 0.5rem 0;
+    margin-right: auto;
+    color: #66433e;
+}
+
+.userSelection {
+    width: 100%;
+}
+
+.userList {
+    padding: 0.5rem;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    li {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+        label {
+            font-family: "Montserrat";
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #66433e;
+        }
+        .checkbox {
+            position: absolute;
+            top: 20%;
+            right: 0;
+            width: 100%;
+            z-index: 2;
+            opacity: 0;
+            outline: none;
+            cursor: pointer;
+            &:focus {
+                background: none;
+            }
+            &:hover {
+                background: none;
+            }
+        }
+        .checkmark {
+            z-index: 1;
+            position: absolute;
+            top: 20%;
+            right: 0;
+            border-radius: 50%;
+            border: 1px solid #d2c8c6;
+            height: 20px;
+            width: 20px;
+        }
+        .checkbox:checked ~ .checkmark {
+            background-color: #ff7954;
+            border: transparent;
+        }
+    }
+}
+
+.greyContainer {
+    width: 90%;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 10px;
+    background: #F8F1F0;
+}
+
+.whiteContainer {
+    position: relative;
+    display: flex;
+    box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+    border-radius: 10px;
+    padding: 1.5rem;
+    padding-bottom: 3.5rem;
+    margin-bottom: 2.5rem;
+    background: #FFF;
+    width: 100%;
+    h3 {
+        margin: 0;
+        font-size: 1.2rem;
+        color: #FF7954;
+    }
+    h4 {
+        line-height: 2;
+        margin: 0;
+        font-size: 1.3rem;
+        color: #66433E;
+    }
+    img {
+        position: absolute;
+        right: 0;
+        top: -1rem;
+    }
+}
+
+.textContainer {
+    span {
+        font-size: 0.8rem;
+    }
+}
+
+.priceContainer {
+    display: flex;
+    align-items: baseline;
+    position: absolute;
+    bottom: -1.6rem;
+    max-width: 60%;
+    color: #FFF;
+    padding: .75rem;
+    border-radius: 30px;
+    background: #402A27;
+    .price {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .perMonth {
+        margin-left: .5rem;
+        font-size: .8rem;
+    }
+}
+
+.listAdvantages {
+    list-style: none;
+    margin-top: 0;
+    li {
+        color: #66433E;
+        font-weight: 600;
+        font-size: .9rem;
+        margin: 1rem 0;
+        display: flex;
+        align-items: center;
+    }
+    .listStyle {
+        margin-right: .5rem;
+    }
+}

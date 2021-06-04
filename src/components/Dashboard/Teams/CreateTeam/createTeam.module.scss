@@ -3,7 +3,7 @@
 .smallContainer form {
     display: flex;
     width: 90%;
-    min-height: 100vh;
+    min-height: 80vh;
     margin: auto;
     flex-direction: column;
     align-items: center;
@@ -18,14 +18,14 @@
         font-size: 1rem;
     }
     .button {
-        margin-top: auto;
-        margin-bottom: 1rem;
+        position: fixed;
+        bottom: 6rem;
+        width: 90%;
         background: none;
         color: #402a27;
         border: 1px solid #402a27;
         border-radius: 100px;
         outline: none;
-        width: 100%;
         padding: 1rem 0;
         font-weight: bold;
     }
@@ -78,7 +78,7 @@
         text-align: justify;
         text-align-last: center;
     }
-    padding-top: 3rem;
+    padding: 1rem 0 0;
     height: 65vh;
     display: flex;
     flex-direction: column;
@@ -91,11 +91,23 @@
     height: 20vh;
 }
 
+.searchContainer {
+    width: 100%;
+    display: flex;
+    position: relative;
+    img {
+        position: absolute;
+        top: 40%;
+        left: 1rem;
+        transform: translateY(-20%);
+    }
+}
+
 .searchInput {
     color: #402a27;
     width: 100%;
     font-family: "Montserrat";
-    text-indent: 1rem;
+    text-indent: 2.5rem;
     transition: 0.2s;
     padding: 0.75rem;
     border-radius: 30px;
@@ -215,8 +227,11 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    position: fixed;
+    bottom: -1rem;
     button {
-        margin: 0.5rem;
+        position: relative!important;
+        margin: 0.5rem auto;
         a {
             color: #fff;
         }

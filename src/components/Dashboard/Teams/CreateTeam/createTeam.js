@@ -3,8 +3,9 @@ import CreateEventImage from "../../../../assets/img/create-team.svg";
 import Search from "../../../../assets/icons/search.svg";
 import classes from "./createTeam.module.css";
 import { Link } from "react-router-dom";
-
-const usersAPI = ["Antoine David", "Yanne Alessandri", "David Carez", "Marie Luciani"]
+import Menu from "../../Menu/Menu";
+import axios from "axios";
+import { API } from "../../../../config";
 
 function CreateTeam() {
     const [isNameFilled, setIsNameFilled] = useState("")
@@ -12,6 +13,15 @@ function CreateTeam() {
     const [searchQuery, setSearchQuery] = useState("")
     const [resultCount, setResultCount] = useState(0)
     const [state, setState] = useState([])
+    const [selectedUsers, setSelectedUsers] = useState([])
+    const [allUsers, setAllUsers] = useState([])
+
+    useEffect(async () => {
+        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`).then((res) => {
+            setAllUsers(res.data.data)
+            console.log("users:", allUsers)
+        })
+    }, [])
 
     const handleSubmit = (e) => {
         console.log(e)
@@ -20,15 +30,35 @@ function CreateTeam() {
             setStep(step + 1)
         }
     }
-
-    useEffect(() => {
-        setState([])
-        usersAPI.map((item) => {
-            if (item.toLowerCase().search(searchQuery?.toLowerCase()) >= 0) {
-                setState((prevState) => prevState.concat(item))
-            }
+    
+    const createTeam = async (e) => {
+        e.preventDefault()
+        const team = {"name": isNameFilled, "is_global": false}
+        await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/teams?access_token=${localStorage.getItem("token")}`, team).then((team) => {
+            selectedUsers.map(async (user, index) => {
+                await axios.get(`${API}user/${user}?access_token=${localStorage.getItem("token")}`).then(async (team) => {
+                    console.log(`${API}user/${user}?access_token=${localStorage.getItem("token")}`, {team_id: team.data.id})
+                    // await axios.patch(`${API}user/${user}?access_token=${localStorage.getItem("token")}`, {team_id: team.data.id}).then((res) => {
+                    //     console.log(res)
+                    // })
+                })
+            })
         })
-    }, [searchQuery])
+        // await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/teams?access_token=${localStorage.getItem("token")}`).then((res) => {
+        //    console.log(res)
+        // })
+        
+    }
+
+    // useEffect(() => {
+    //     setState([])
+    //     allUsers.map((item, index) => {
+    //         if (item.first_name.toLowerCase().search(searchQuery?.toLowerCase()) >= 0) {
+    //             setState((prevState) => prevState.push([item.id, item.first_name, item.last_name]))
+    //             console.log("state:", state)
+    //         }
+    //     })
+    // }, [searchQuery])
 
     useEffect(() => {
         setResultCount(state.length)
@@ -50,6 +80,7 @@ function CreateTeam() {
                 <button className={`${classes.button} ${classes.enabledBtn}`} onClick={() => setStep(2)}>
                     Suivant
         </button>
+        <Menu page="teams" />
             </div>
         );
     }
@@ -71,6 +102,7 @@ function CreateTeam() {
                         Suivant
         </button>
                 </form>
+                <Menu page="teams" />
             </div>
         );
     }
@@ -78,27 +110,32 @@ function CreateTeam() {
         return (
             <div className={classes.container}>
                 <h1>{isNameFilled}</h1>
-                <img src={Search} alt="search" />
-                <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className={classes.searchInput} placeholder="Rechercher un utilisateur" />
+                <div className={classes.searchContainer}>
+                    <img src={Search} alt="search" />
+                    <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className={classes.searchInput} placeholder="Rechercher un utilisateur" />
+                </div>
                 <span className={classes.userCount}>
                     {resultCount > 1 ? <> {resultCount} utilisateurs disponibles </> :
                         <> {resultCount} utilisateur disponible </>}
                 </span>
                 <form className={classes.userSelection}>
                     <ul className={classes.userList}>
-                        {state?.map((item, key) => {
+                        {allUsers.map((user, key) => {
+                            console.log(user)
+                            console.log(selectedUsers)
                             return (
                                 <li key={key}>
                                     <label htmlFor={key}>
-                                        {item}
+                                        {`${user.first_name} ${user.last_name}`}
                                     </label>
-                                    <input className={classes.checkbox} type="checkbox" id={key} />
+                                    <input className={classes.checkbox} type="checkbox" id={key} onClick={(e) => e.target.checked ? setSelectedUsers(selected => [...selectedUsers, user.id]) : setSelectedUsers(selectedUsers.filter((id) => user.id !== id))} />
                                     <span className={classes.checkmark}></span>
                                 </li>)
                         })}
                     </ul>
-                    <button className={`${classes.button} ${classes.enabledBtn} ${classes.createTeamBtn}`} onClick={() => setStep(step + 1)}>Créer l'équipe</button>
+                    <button className={`${classes.button} ${classes.enabledBtn} ${classes.createTeamBtn}`} onClick={(e) => createTeam(e)}>Créer l'équipe</button>
                 </form>
+                <Menu page="teams" />
             </div>
         );
     else {
@@ -121,6 +158,7 @@ function CreateTeam() {
                     </button>
                     </Link>
                 </div>
+                <Menu page="teams" />
             </div>)
     }
 }

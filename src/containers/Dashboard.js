@@ -7,10 +7,12 @@ import Events from '../components/Dashboard/Events/events'
 import CreateEvent from '../components/Dashboard/Events/CreateEvent/createEvent'
 import { useState } from 'react'
 import PastEvents from '../components/Dashboard/Events/PastEvents/PastEvents'
+import Profile from '../components/Dashboard/Profile/profile'
 
 function Dashboard(props) {
     const [isHeader, setIsHeader] = useState("")
     const [createEvent, setCreateEvent] = useState(null)
+    
     return (
         <div>
             {
@@ -34,6 +36,9 @@ function Dashboard(props) {
             </> : props.page === 'past-events' ? 
             <>
                 <PastEvents handleHeader={setIsHeader}/>
+            </> : props.page === 'profile' ? 
+            <>
+                <Profile handleHeader={setIsHeader} header={isHeader} create={setCreateEvent}/>
             </> : null}
             <Menu page={props.page} />
         </div>

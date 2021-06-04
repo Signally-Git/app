@@ -2,19 +2,17 @@ import classes from './signatures.module.css'
 import SignaturePreviewImg from '../../../assets/img/signallypreview.svg'
 import { Link, Route } from 'react-router-dom'
 import Signature from './Signature/signature'
+import { useEffect } from 'react'
 
 function Signatures(props) {
+    useEffect(() => {
+        props.handleHeader("Signatures")
+        props.create("/create-signature")
+    }, [])
     return (
         <div>
-            <Route path="/signatures/model1">
-                <Signature model="Modèle 1" handleHeader={props.handleHeader} create={props.create} />
-            </Route>
-            <Route path="/signatures/model2">
-                <Signature model="Modèle 2" handleHeader={props.handleHeader} create={props.create} />
-            </Route>
+
             <Route exact path="/signatures">
-                {props.handleHeader("Signatures")}
-                {props.create("/create-signature")}
                 <div className={classes.container}>
                     <span>2 modèles</span>
                     <ul>
@@ -50,6 +48,12 @@ function Signatures(props) {
                         </li>
                     </ul>
                 </div>
+            </Route>
+            <Route path="/signatures/model1">
+                <Signature model="Modèle 1" handleHeader={props.handleHeader} create={props.create} />
+            </Route>
+            <Route path="/signatures/model2">
+                <Signature model="Modèle 2" handleHeader={props.handleHeader} create={props.create} />
             </Route>
         </div>)
 

@@ -10,8 +10,11 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  min-height: 60vh;
   width: 90%;
-  height: 100vh;
 }
 
 .container input, .container label, .container span {
@@ -24,6 +27,7 @@
 }
 
 .container span {
+  line-height: 1.75;
   font-size: .8rem;
   text-align: center;
 }
@@ -110,21 +114,8 @@ input:focus .cardInfos {
   border: 1px solid #FF7954;
 }
 
-.cardNumberContainer {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.number {
-  text-indent: .75rem;
-  border: none;
-}
-
-.cvc, .expiry {
-  height: 100%;
-  width: 20%;
-  border: none;
+.cardContainer {
+  width: 100%;
 }
 
 .checkmark:after {
@@ -180,4 +171,24 @@ input:focus .cardInfos {
   width: 100%;
   padding: 1rem 0;
   font-weight: bold;
+}
+
+.form {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.form label > div {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border: 1px solid transparent;
+  background: #FFF;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.focused label > div {
+  border-color: #FF7954;
+  -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+          box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }

@@ -8,6 +8,9 @@ import Team from './components/Dashboard/Teams/Team/team'
 import CreateTeam from './components/Dashboard/Teams/CreateTeam/createTeam'
 import Payment from './components/Payment/Payment'
 import SyncPage from './components/Sync/sync'
+import Import from './containers/Import'
+import PrivateRoute from './components/PrivateRoute/privateRoute'
+import CreateSignature from './containers/CreateSignature'
 
 function App() {
   return (
@@ -22,45 +25,31 @@ function App() {
           <SignIn />
         </Route>
 
-        <Route exact path="/dashboard">
-          <Dashboard page="home" />
-        </Route>
+        <PrivateRoute exact path="/dashboard" page="home" component={Dashboard} />
 
-        <Route path="/signatures">
-          <Dashboard page="signatures" />
-        </Route>
+        <PrivateRoute path="/signatures" page="signatures" component={Dashboard} />
 
-        <Route exact path="/teams">
-          <Dashboard page="teams" />
-        </Route>
+        <PrivateRoute path="/create-signature" component={CreateSignature} />
 
-        <Route path="/team/:teamName">
-          <Team />
-        </Route>
+        <PrivateRoute path="/team/:teamId" component={Team} />
 
-        <Route path="/create-team">
-          <CreateTeam />
-        </Route>
+        <PrivateRoute exact path="/teams" page="teams" component={Dashboard} />
+       
+        <PrivateRoute exact path="/events" page="events" component={Dashboard} />
 
-        <Route exact path="/events">
-          <Dashboard page="events" />
-        </Route>
+        <PrivateRoute exact path="/create-team" component={CreateTeam} />
+       
+        <PrivateRoute exact path="/create-event" page="create-event" component={Dashboard} />
 
-        <Route exact path="/create-event">
-          <Dashboard page="create-event" />
-        </Route>
+        <PrivateRoute exact path="/past-events" page="past-events" component={Dashboard} />
 
-        <Route exact path="/past-events">
-          <Dashboard page="past-events" />
-        </Route>
+        <PrivateRoute path="/profile" page="profile" component={Dashboard} />
 
-        <Route exact path="/payment">
-          <Payment />
-        </Route>
+        <PrivateRoute exact path="/payment" component={Payment} />
 
-        <Route path="/synchronize">
-          <SyncPage />
-        </Route>
+        <PrivateRoute path="/synchronize" component={SyncPage} />
+
+        <PrivateRoute path="/import" component={Import} />
 
         <Route path="/">
           <Error />

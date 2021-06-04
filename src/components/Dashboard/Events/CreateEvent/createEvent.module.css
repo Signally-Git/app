@@ -3,7 +3,7 @@
   display: -ms-flexbox;
   display: flex;
   width: 90%;
-  min-height: 90vh;
+  min-height: 110vh;
   margin: auto;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -14,7 +14,7 @@
           align-items: center;
   color: #402a27;
   text-align: center;
-  padding: 6rem 0;
+  padding: 6rem 0 10rem;
 }
 
 .container img, .smallContainer img, .smallContainer form img {
@@ -43,9 +43,14 @@
   border: 1px solid #402a27;
   border-radius: 100px;
   outline: none;
-  width: 100%;
+  width: 90%;
   padding: 1rem 0;
   font-weight: bold;
+}
+
+.container .fixed, .smallContainer .fixed, .smallContainer form .fixed {
+  position: fixed;
+  bottom: 5.5rem;
 }
 
 .container .input,

@@ -1,7 +1,7 @@
 .container {
   color: #66433E;
   max-width: 90%;
-  padding-top: 7rem;
+  padding-top: 5rem;
   padding-bottom: 7rem;
   margin: auto;
 }
@@ -23,16 +23,14 @@
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  text-indent: .5rem;
+  text-indent: 1.5rem;
   position: relative;
   font-weight: 600;
-  font-size: .9rem;
-  padding: 2rem 1rem;
-  border-top: 1px solid rgba(101, 68, 62, 0.14);
-}
-
-.container ul li:first-child {
-  border-top: none;
+  font-size: 0.9rem;
+  padding: 1rem;
+  background: #FFF;
+  border-radius: 10px;
+  margin: 1rem 0;
 }
 
 .container ul a {

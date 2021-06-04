@@ -1,5 +1,5 @@
 .container {
-  color: #66433E;
+  color: #66433e;
   max-width: 90%;
   padding-top: 7rem;
   padding-bottom: 7rem;
@@ -23,16 +23,14 @@
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  text-indent: .5rem;
+  text-indent: 1.5rem;
   position: relative;
   font-weight: 600;
-  font-size: .9rem;
-  padding: 2rem 1rem;
-  border-top: 1px solid rgba(101, 68, 62, 0.14);
-}
-
-.container ul li:first-child {
-  border-top: none;
+  font-size: 0.9rem;
+  padding: 1rem;
+  background: #FFF;
+  border-radius: 10px;
+  margin: 1rem 0;
 }
 
 .chevron {
@@ -42,7 +40,12 @@
           filter: brightness(0) saturate(100%) invert(25%) sepia(16%) saturate(1236%) hue-rotate(319deg) brightness(93%) contrast(82%);
 }
 
-.active::before, .inactive::before {
+.active, .inactive {
+  position: relative;
+}
+
+.active::before,
+.inactive::before {
   position: absolute;
   top: 50%;
   left: 0;
@@ -55,9 +58,50 @@
 }
 
 .active::before {
-  background: #4AEE6E;
+  background: #4aee6e;
 }
 
 .inactive::before {
-  background: #C4C4C4;
+  background: #c4c4c4;
+}
+
+.onSwipe {
+  position: absolute;
+  z-index: -1;
+  -webkit-filter: invert(74%) sepia(58%) saturate(4668%) hue-rotate(325deg) brightness(103%) contrast(105%);
+          filter: invert(74%) sepia(58%) saturate(4668%) hue-rotate(325deg) brightness(103%) contrast(105%);
+  height: 3.2rem;
+  width: 5rem;
+  right: 1.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 1rem 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.editing {
+  margin-left: -5rem;
+}
+
+@-webkit-keyframes swipeLeft {
+  0% {
+    right: 1.5rem;
+    width: 10px;
+  }
+  100% {
+    right: 0;
+    width: 2rem;
+  }
+}
+
+@keyframes swipeLeft {
+  0% {
+    right: 1.5rem;
+    width: 10px;
+  }
+  100% {
+    right: 0;
+    width: 2rem;
+  }
 }

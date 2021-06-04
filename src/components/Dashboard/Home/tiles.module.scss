@@ -25,7 +25,7 @@
 .tile {
     * {
         font-family: "Montserrat";
-        color: #000;
+        color: #66433E;
         margin: 0;
         padding: 0;
     }
@@ -61,6 +61,43 @@
     }
 }
 
+.syncTile {
+    flex: 100%;
+    width: 100%;
+    .row {
+        align-items: center;
+    }
+    h4 {
+        font-size: 1.2rem;
+        line-height: 2rem;
+        vertical-align: middle;
+    }
+}
+
+.rotating {
+    animation:spin 4s linear infinite;
+}
+
+.syncContainer {
+    position: relative;
+}
+
+.syncBtn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+}
+
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.billingTile {
+    background: #66433E;
+    * {
+        color: #FFF;
+    }
+}
+
 .bigTxt {
     line-height: 1.5;
     font-size: 2.5rem!important;
@@ -91,4 +128,9 @@
 
 .syncContainer {
     padding: 2rem 0 0rem 0;
+}
+
+.activeSpan {
+    text-transform: uppercase;
+    font-size: .8rem!important;
 }

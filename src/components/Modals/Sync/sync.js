@@ -8,13 +8,11 @@ import AppStore from '../../../assets/icons/appstore.svg'
 import ChevronRight from '../../../assets/icons/chevron-right.svg'
 
 function Sync() {
-    const [isClosed, setIsClosed] = useState(false)
     return (
-        <div className={classes.container} style={{display: !isClosed ? "block" : "none"}}>
+        <div className={classes.container}>
             <div>
                 <img src={SyncIcon} alt="synchronize" />
                 <span>Synchronisez votre client mail</span>
-                <img src={Cross} alt="close" onClick={() => setIsClosed(true)} />
             </div>
             <ul>
                 <li>

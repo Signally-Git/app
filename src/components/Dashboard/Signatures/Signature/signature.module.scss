@@ -3,7 +3,7 @@
     margin: auto;
     min-height: 90vh;
     padding-top: 5rem;
-    padding-bottom: 7rem;
+    padding-bottom: 10rem;
 }
 
 .previewContainer {
@@ -96,4 +96,31 @@
             border: transparent;
         }
     }
+}
+
+.assignedTeams {
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+}
+
+.saveCTA {
+    z-index: 2;
+    position: fixed;
+    border-radius: 100px;
+    outline: none;
+    width: 90%;
+    padding: 1rem 0;
+    bottom: 6rem;
+    border: none;
+    font-family: "Montserrat";
+    font-weight: 400;
+    background: none;
+    border: 1px solid #66433e;
+    color: #66433e;
+}
+
+.orangeBtn {
+    border-color: transparent;
+    color: #FFF;
+    background: #FF7954;
 }

@@ -1,6 +1,6 @@
 .container {
-  height: 90vh;
-  width: 50%;
+  height: 50vh;
+  width: 90%;
   margin: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -12,13 +12,34 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  text-align: center;
+}
+
+.container img {
+  width: 80%;
+  margin-top: 0rem;
+  margin-right: -8rem;
+}
+
+.container p {
+  line-height: 2;
+  font-size: .8rem;
+}
+
+.container span {
+  font-size: .8rem;
+  text-decoration: underline;
+}
+
+.container form {
+  width: 100%;
 }
 
 .container input {
+  margin: 1rem 0;
+  width: 100%;
   border: 1px solid transparent;
+  padding: 1rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
@@ -29,4 +50,20 @@
 
 .container input:focus {
   border-color: #FF7954;
+}
+
+.container button {
+  background: none;
+  border: none;
+  outline: none;
+  margin: 1rem auto 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  border-radius: 100px;
+  outline: none;
+  padding: 1rem 0;
+  font-weight: bold;
+  color: #fff;
+  background-color: #ff7954;
 }
