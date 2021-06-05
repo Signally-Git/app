@@ -100,7 +100,7 @@
   border-radius: 30px;
   margin: auto;
   top: 12rem;
-  z-index: 2;
+  z-index: 5;
   left: 0;
   right: 0;
   display: -webkit-box;
@@ -115,6 +115,7 @@
 }
 
 .tabs li {
+  cursor: pointer;
   position: relative;
   font-size: 0.9rem;
   color: #66433e;
@@ -387,6 +388,7 @@
 
 .inputOptions {
   position: absolute;
+  cursor: pointer;
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
@@ -414,6 +416,60 @@
 }
 
 /** Tab 3 **/
+.optionsContainer {
+  list-style: none;
+  padding: none;
+  width: 100%;
+}
+
+.optionsContainer li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.optionsContainer li a {
+  line-height: 0;
+  margin-top: .5rem;
+  margin-right: 1rem;
+  color: #67433e;
+}
+
+.iconsList {
+  list-style: none;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.lineDrag {
+  border-color: #ff7954 !important;
+  border-style: solid !important;
+  border-width: 1px !important;
+}
+
+.dragContainer, .dragContainer > div {
+  width: 100%;
+}
+
+.dragContainer ul, .dragContainer > div ul {
+  padding: 0;
+}
+
 .imgUploader {
   width: 100%;
   padding-top: 2rem;
@@ -443,6 +499,10 @@
 .iconsContainer label {
   margin: 0;
   color: #000 !important;
+}
+
+.container ol li::marker {
+  display: none;
 }
 
 /**Switch **/

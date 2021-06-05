@@ -82,7 +82,7 @@
     border-radius: 30px;
     margin: auto;
     top: 12rem;
-    z-index: 2;
+    z-index: 5;
     left: 0;
     right: 0;
     display: flex;
@@ -91,6 +91,7 @@
     list-style: none;
     padding: 1.5rem 0;
     li {
+        cursor: pointer;
         position: relative;
         font-size: 0.9rem;
         color: #66433e;
@@ -303,6 +304,7 @@
 
 .inputOptions {
     position: absolute;
+    cursor: pointer;
     top: 50%;
     transform: translateY(-50%);
     right: 1rem;
@@ -323,6 +325,47 @@
 }
 
 /** Tab 3 **/
+
+.optionsContainer {
+    list-style: none;
+    padding: none;
+    width: 100%;
+    li {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        a {
+            line-height: 0;
+            margin-top: .5rem;
+            margin-right: 1rem;
+            color: #67433e;
+        }
+    }
+}
+
+.iconsList {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lineDrag {
+    border-color: #ff7954!important;
+    border-style: solid!important;
+    border-width: 1px!important;
+}
+
+.dragContainer, .dragContainer > div {
+    ul {
+        padding: 0;
+    }
+    width: 100%;
+}
+
 .imgUploader {
     width: 100%;
     padding-top: 2rem;
@@ -344,6 +387,10 @@
         margin: 0;
         color: #000!important;
     }
+}
+
+.container ol li::marker {
+    display: none;
 }
 
 /**Switch **/
