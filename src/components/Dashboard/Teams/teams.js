@@ -37,7 +37,7 @@ function Teams(props) {
             <ul>
                 {teamsList.map((team, index) => {
                     return (
-                        <li key={index} className={`${team.signature_template_deploy_count === team.members_count ? classes.active : classes.inactive}`}>
+                        <li key={index} className={`${team.signature_template_deploy_count === team.members_count && team.members_count > 0 ? classes.active : classes.inactive}`}>
                             <Link to={`/team/${team.id}`}>
                                 {team.name} ({team.members_count})<img src={ChevronRight} className={classes.chevron} alt="Click" />
                             </Link>

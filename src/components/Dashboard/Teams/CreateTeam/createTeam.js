@@ -35,12 +35,13 @@ function CreateTeam() {
         e.preventDefault()
         const team = {"name": isNameFilled, "is_global": false}
         await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/teams?access_token=${localStorage.getItem("token")}`, team).then((team) => {
+            setStep(step + 1)
             selectedUsers.map(async (user, index) => {
-                await axios.get(`${API}user/${user}?access_token=${localStorage.getItem("token")}`).then(async (team) => {
+                await axios.get(`${API}user/${user}?access_token=${localStorage.getItem("token")}`).then(async (res) => {
                     console.log(`${API}user/${user}?access_token=${localStorage.getItem("token")}`, {team_id: team.data.id})
-                    // await axios.patch(`${API}user/${user}?access_token=${localStorage.getItem("token")}`, {team_id: team.data.id}).then((res) => {
-                    //     console.log(res)
-                    // })
+                    await axios.patch(`${API}user/${user}?access_token=${localStorage.getItem("token")}`, {team_id: team.data.id}).then((res) => {
+                        console.log(res)
+                    })
                 })
             })
         })

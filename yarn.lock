@@ -9236,6 +9236,13 @@ react-device-detect@^1.17.0:
   dependencies:
     ua-parser-js "^0.7.24"
 
+react-dnd-action@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/react-dnd-action/-/react-dnd-action-0.1.4.tgz#dab6c2ea5b117bd366ee73bf976074620163fbae"
+  integrity sha512-vsMN1YoqfPTmgQ+16SMlwXBC2Qe9Ix5qomvM4J9WmIfHM0slJ5woXLdUsaDK2hxsOGBEXwLhOkEiezGHX599bw==
+  dependencies:
+    svelte-dnd-action "^0.7.1"
+
 react-dom@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
@@ -9244,14 +9251,6 @@ react-dom@^17.0.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "^0.20.2"
-
-react-drag-listview@^0.1.8:
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/react-drag-listview/-/react-drag-listview-0.1.8.tgz#e04de326ecbe97d6ad84fb68664e405765e30d72"
-  integrity sha512-ZJnjFEz89RPZ1DzI8f6LngmtsmJbLry/pMz2tEqABxHA+d8cUFRmVPS1DxZdoz/htc+uri9fCdv4dqIiPz0xIA==
-  dependencies:
-    babel-runtime "^6.26.0"
-    prop-types "^15.5.8"
 
 react-error-overlay@^6.0.9:
   version "6.0.9"
@@ -10703,6 +10702,11 @@ supports-hyperlinks@^2.0.0:
   dependencies:
     has-flag "^4.0.0"
     supports-color "^7.0.0"
+
+svelte-dnd-action@^0.7.1:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/svelte-dnd-action/-/svelte-dnd-action-0.7.4.tgz#b4908f4cc718bdc87c2f81335bf122701d58a52a"
+  integrity sha512-REioClDgVdb+j9boO/paUDGGCxnCrk+C7UOjk34fT+Zk6G4HSXVnDYbcmZQVDdnevULCJjZHG4pHwBWtGrBWXw==
 
 svg-parser@^2.0.2:
   version "2.0.4"

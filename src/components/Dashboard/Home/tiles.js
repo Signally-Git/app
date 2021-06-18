@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { VscSync } from 'react-icons/vsc'
 import { AiOutlineCheckCircle } from 'react-icons/ai'
-import { RiInformationFill } from 'react-icons/ri'
 import { API } from '../../../config'
 
 function Tiles(props) {
@@ -18,6 +17,7 @@ function Tiles(props) {
     const [activeTeams, setActiveTeams] = useState([])
     const [users, setUsers] = useState([])
     const [activeUsers, setActiveUsers] = useState([])
+    const [flip, setFlip] = useState(false)
 
     const [syncing, setSyncing] = useState(false)
     const [synchronized, setSynchronized] = useState(false)
@@ -114,21 +114,28 @@ function Tiles(props) {
                     </Link>
                 </> : null}
                 {!localStorage.mailClient &&
-                    <div className={`${classes.tile} ${classes.syncTile}`}>
-                        <div className={classes.row}>
-                            <p>Synchronisation</p>
-                            <RiInformationFill size="2rem" />
+
+                    <div className={`${classes.syncTileInner} ${flip ? classes.fliping : ""} ${classes.tile} ${classes.syncTile}`}>
+                        <div className={classes.syncFront}>
+                            <div className={classes.row}>
+                                <p>Synchronisation</p>
+                                <img src={ChevronRight} alt="View" onClick={() => setFlip(!flip)} />
+                            </div>
+                            <div className={classes.row}>
+                                <img src='https://dummyimage.com/350x50.png' alt=''/>
+                                {/* <div>
+                                    <h4>Microsoft Office 365</h4>
+                                </div>
+                                <div className={classes.syncContainer}>
+                                    {synchronized ?
+                                        <AiOutlineCheckCircle className={classes.syncBtn} size="2rem" /> :
+                                        <VscSync className={`${classes.syncBtn} ${syncing && classes.rotating}`} size="2rem" onClick={() => handleSync()} />
+                                    }
+                                </div> */}
+                            </div>
                         </div>
-                        <div className={classes.row}>
-                            <div>
-                                <h4>Microsoft Office 365</h4>
-                            </div>
-                            <div className={classes.syncContainer}>
-                                {synchronized ?
-                                    <AiOutlineCheckCircle className={classes.syncBtn} size="2rem" /> :
-                                    <VscSync className={`${classes.syncBtn} ${syncing && classes.rotating}`} size="2rem" onClick={() => handleSync()} />
-                                }
-                            </div>
+                        <div className={classes.syncBack} onClick={() => setFlip(!flip)}>
+                            <p>Lorem Ipsum</p>
                         </div>
                     </div>}
                 <Link to="/payment" className={`${classes.tile} ${classes.billingTile}`}>

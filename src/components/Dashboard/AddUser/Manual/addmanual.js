@@ -16,6 +16,7 @@ function AddManual() {
     const [poste, setPoste] = useState("")
     const [mail, setMail] = useState("")
     const [phone, setPhone] = useState("")
+    const [error, setError] = useState("")
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -27,17 +28,17 @@ function AddManual() {
             position: poste
         }
         console.log("req:", req)
-        // await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`, req)
-        //     .then(async (res) => {
-        //         console.log(res)
-                setNewUsers(users.push(req))
-                console.log(newUsers)
-                // await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`).then((res) => {
-                //     setUsers(res.data.data)
+        await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`, req)
+            .then(async (res) => {
+                setNewUsers(newUsers.concat(req))
+                await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`).then((res) => {
+                    setUsers(res.data.data)
                     setStep(1)
-                // })
-            // }
-            // )
+                })
+            }
+            ).catch((err) => {
+                console.log(err)
+            })
     }
 
     if (step === 0)
@@ -54,7 +55,7 @@ function AddManual() {
             <Menu />
         </div>)
     else if (step === 1) {
-        console.log(newUsers.length)
+        console.log(newUsers, newUsers.length)
         return (<div className={classes.container}>
             <h2>Utilisateurs</h2>
             <span>{!newUsers.length > 1 ? <>

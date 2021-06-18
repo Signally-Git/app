@@ -8,17 +8,27 @@
 
 .previewContainer {
     padding: 1rem;
-    margin: .75rem 0;
+    margin: .75rem auto;
     background: #FFF;
-    box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
     border-radius: 20px;
     display: flex;
+    justify-content: space-between;
+    max-width: 350px;
     img {
-        padding: 1rem;
         padding-top: 0;
         margin-top: 0;
         margin-bottom: auto;
     }
+}
+
+.hr {
+    border-bottom: 1px solid #fcf5f4;
+    height: 0px;
+    width: 100%;
+    margin: 1rem auto 2rem;
+    position: relative;
+    background: none;
+    border-top: none;
 }
 
 .assignTo {
@@ -49,7 +59,6 @@
     flex-direction: column;
     width: 100%;
     background: #fff;
-    box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
     border-radius: 10px;
     li {
         position: relative;
@@ -114,7 +123,7 @@
     border: none;
     font-family: "Montserrat";
     font-weight: 400;
-    background: none;
+    background: #fcf5f4;
     border: 1px solid #66433e;
     color: #66433e;
 }
@@ -123,4 +132,13 @@
     border-color: transparent;
     color: #FFF;
     background: #FF7954;
+}
+
+.assignedContainer {
+    background: #FFF;
+    border-radius: 30px;
+}
+
+.shadowed {
+    box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }

@@ -10,14 +10,30 @@ import Checkbox from '../../../../assets/icons/checkbox.svg'
 import Menu from '../../Menu/Menu'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import {API} from '../../../../config'
 
 const usersAPI = ["Antoine David", "Yanne Alessandri", "David Carez", "Marie Luciani"]
 
 function ImportCSV() {
+    const [file, setFile] = useState("")
     const [searchQuery, setSearchQuery] = useState("")
     const [resultCount, setResultCount] = useState(0)
     const [state, setState] = useState([])
     const [step, setStep] = useState(0)
+    
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log("req:", file)
+        await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users/import?access_token=${localStorage.getItem("token")}`, file)
+            .then(async (res) => {
+              console.log(res)
+              setStep(2)
+            }
+            ).catch((err) => {
+                console.log(err)
+            })
+    }
 
     useEffect(() => {
         setState([])
@@ -76,7 +92,8 @@ function ImportCSV() {
                         <p>Vous pouvez ajouter les données suivantes : Prénom, nom, poste/fonction, email, téléphone.</p>
                     </div>
                 </div>
-                <button className={`${classes.btn} ${classes.orangeBtn}`} onClick={() => setStep(2)}>Importer le fichier</button>
+                <input type="file" value={file} onChange={(e) => setFile(e.target.files)} />
+                <button className={`${classes.btn} ${classes.orangeBtn}`} onClick={(e) => handleSubmit(e)}>Importer le fichier</button>
                 <Menu />
             </div>
         )

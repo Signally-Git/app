@@ -84,6 +84,30 @@
   margin-left: -5rem;
 }
 
+.infosContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.assignedSignature {
+  font-size: 0.9rem !important;
+}
+
+.assignedSignature a {
+  color: #FF7954;
+}
+
 @-webkit-keyframes swipeLeft {
   0% {
     right: 1.5rem;

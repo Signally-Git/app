@@ -73,6 +73,20 @@
     margin-left: -5rem;
 }
 
+.infosContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.assignedSignature {
+    a {
+        color: #FF7954;
+    }
+    font-size: .9rem!important;
+}
+
 @keyframes swipeLeft {
     0% {
         right: 1.5rem;

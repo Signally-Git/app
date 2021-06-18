@@ -1,0 +1,127 @@
+.container {
+  width: 100%;
+}
+
+.inputOptions {
+  position: absolute;
+  cursor: pointer;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  right: 1rem;
+  width: 3.5rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.select {
+  font-family: "Montserrat";
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  border: none;
+  outline: none;
+  background: #fff;
+  border: 1px solid #ff7954;
+  border-radius: 5px;
+  padding: 1rem;
+  width: 50%;
+  display: block;
+  margin: 2rem auto;
+}
+
+.select::-webkit-input-placeholder {
+  color: #a87069;
+}
+
+.select:-ms-input-placeholder {
+  color: #a87069;
+}
+
+.select::-ms-input-placeholder {
+  color: #a87069;
+}
+
+.select::placeholder {
+  color: #a87069;
+}
+
+.select select:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.span {
+  font-size: 0.9rem;
+  text-align: left;
+  margin-right: auto;
+  margin-bottom: 0.5rem;
+}
+
+.or {
+  margin-left: auto;
+  line-height: 1;
+}
+
+.optionsContainer {
+  background: #FFF;
+  border-radius: 0 0 10px 10px;
+}
+
+.optionContainer {
+  margin-top: -2rem;
+  padding-bottom: 2rem;
+  padding-top: 1rem;
+}
+
+.container input {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background: #fff;
+  border: 1px solid transparent;
+  padding: 1rem;
+  padding-right: 5rem;
+  border-radius: 10px;
+  margin: 0.5rem 0;
+  font-family: "Montserrat";
+  outline: none;
+}
+
+.container input:focus {
+  border: 1px solid #ff7954;
+  -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+          box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+}
+
+.colorPreview {
+  border-radius: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+.colorPick {
+  margin: 1rem auto;
+}
+
+.inputColorSize {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 0;
+}
+
+.inputColorSize {
+  position: relative;
+}

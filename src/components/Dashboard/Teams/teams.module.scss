@@ -40,7 +40,6 @@
 .active::before, .inactive::before {
     position: absolute;
     top: 50%;
-    left: 0;
     transform: translateY(-50%);
     content: " ";
     width: 8px;
