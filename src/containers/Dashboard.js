@@ -16,7 +16,7 @@ function Dashboard(props) {
     return (
         <div>
             {
-                isHeader.length > 0 &&
+                isHeader?.length > 0 &&
                 <Header page={props.page} title={isHeader} create={createEvent} />
             }
             {props.page === 'home' ? <>

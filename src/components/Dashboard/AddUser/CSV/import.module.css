@@ -249,6 +249,7 @@
 
 .userList {
   padding: 0.5rem;
+  margin-bottom: 15rem;
   list-style: none;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -332,7 +333,7 @@
           flex-direction: column;
   position: relative;
   border-radius: 10px;
-  background: #F8F1F0;
+  background: #f8f1f0;
 }
 
 .whiteContainer {
@@ -346,21 +347,21 @@
   padding: 1.5rem;
   padding-bottom: 3.5rem;
   margin-bottom: 2.5rem;
-  background: #FFF;
+  background: #fff;
   width: 100%;
 }
 
 .whiteContainer h3 {
   margin: 0;
   font-size: 1.2rem;
-  color: #FF7954;
+  color: #ff7954;
 }
 
 .whiteContainer h4 {
   line-height: 2;
   margin: 0;
   font-size: 1.3rem;
-  color: #66433E;
+  color: #66433e;
 }
 
 .whiteContainer img {
@@ -383,10 +384,10 @@
   position: absolute;
   bottom: -1.6rem;
   max-width: 60%;
-  color: #FFF;
-  padding: .75rem;
+  color: #fff;
+  padding: 0.75rem;
   border-radius: 30px;
-  background: #402A27;
+  background: #402a27;
 }
 
 .priceContainer .price {
@@ -395,8 +396,8 @@
 }
 
 .priceContainer .perMonth {
-  margin-left: .5rem;
-  font-size: .8rem;
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
 }
 
 .listAdvantages {
@@ -405,9 +406,9 @@
 }
 
 .listAdvantages li {
-  color: #66433E;
+  color: #66433e;
   font-weight: 600;
-  font-size: .9rem;
+  font-size: 0.9rem;
   margin: 1rem 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -418,5 +419,38 @@
 }
 
 .listAdvantages .listStyle {
-  margin-right: .5rem;
+  margin-right: 0.5rem;
+}
+
+.uploadFile {
+  margin: auto;
+  width: 90%;
+  position: fixed;
+  bottom: 6rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.uploadFile input {
+  cursor: pointer;
+  opacity: 0;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  border-radius: 100px;
+}
+
+.uploadFile button {
+  width: 100%;
+  font-family: "Montserrat";
+  border: none;
+  outline: none;
+  left: 0;
+  right: 0;
+  border-radius: 100px;
+  outline: none;
+  padding: 1rem 0;
+  font-weight: bold;
 }

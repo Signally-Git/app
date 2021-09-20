@@ -5,11 +5,15 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
 import * as locales from "react-date-range/dist/locale";
+import { IoMdClose } from "react-icons/io";
+import { BsUpload } from "react-icons/bs";
 // import { Range } from "react-range";
 import CrossIcon from "../../../../assets/icons/cross.svg";
 import Event from "../../../../assets/icons/event.svg";
 // import { HexColorInput, HexColorPicker } from "react-colorful";
 import TimeInput from 'react-time-input';
+import axios from "axios";
+import { API } from "../../../../config";
 
 function CreateEvent(props) {
   const [isNameFilled, setIsNameFilled] = useState("")
@@ -21,6 +25,14 @@ function CreateEvent(props) {
   // const [range, setRange] = useState([50])
   const [isClosed, setIsClosed] = useState(false)
   const [step, setStep] = useState(1)
+  const [uploadedMedia, setUploadedMedia] = useState()
+  const [autofocus, setAutofocus] = useState(false)
+  const [timeStartAF, setTimeStartAF] = useState(false)
+  const [timeEndAF, setTimeEndAF] = useState(false)
+  const [startTime, setStartTime] = useState("")
+  const [endTime, setEndTime] = useState("")
+  const [imgName, setImgName] = useState("")
+  const [url, setUrl] = useState("")
   const [state, setState] = useState([
     {
       startDate: null,
@@ -33,15 +45,37 @@ function CreateEvent(props) {
     console.log(e)
     e.preventDefault()
     if (isNameFilled.length > 0) {
-       setStep(step + 1)
-       console.log('yes')
+      setStep(step + 1)
+      console.log('yes')
     }
   }
+  const handleSave = async () => {
+    var start = new Date(Date.UTC(state[0].startDate.getUTCFullYear(), state[0].startDate.getUTCMonth(), state[0].startDate.getUTCDate() + 1, parseInt(startTime.substring(0, 2)) - 2, parseInt(startTime.substring(3, 6)), 0))
+    var end = new Date(Date.UTC(state[0].endDate.getUTCFullYear(), state[0].endDate.getUTCMonth(), state[0].endDate.getUTCDate() + 1, parseInt(endTime.substring(0, 2)) - 2, parseInt(endTime.substring(3, 6)), 0))
+    start = start.getTime()
+    end = end.getTime()
 
-  const handleTimer = (e) => {
-    console.log(e)
+    const img = new FormData()
+    img.append('file', uploadedMedia)
+    if (uploadedMedia)
+      await axios.post(`${API}media`, img).then(async (res) => {
+        const req = {
+          banner_id: res.data.id,
+          name: isNameFilled,
+          start_date: start,
+          end_date: end,
+          expire: end,
+          active: true
+        }
+        console.log(req, res.data)
+        await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/campaigns?access_token=${localStorage.getItem("token")}`, req).then((res) => {
+          console.log(res)
+        })
+      })
+      else
+      console.log("Vous devez d'abord importer une image pour l'évènement.")
+    console.log(start, end)
   }
-
   useEffect(() => {
     props.handleHeader("")
   }, [])
@@ -78,7 +112,7 @@ function CreateEvent(props) {
           </div>
           <button className={`${classes.button} ${classes.fixed} ${isNameFilled.length > 0 ? classes.enabledBtn : ""}`}>
             Suivant
-        </button>
+          </button>
         </form>
       </div>
     );
@@ -96,13 +130,15 @@ function CreateEvent(props) {
             value={state[0].startDate?.toLocaleDateString('fr-FR')}
             type="text"
             placeholder="Date de début"
+            onChange={() => { setTimeStartAF(true) }}
             onFocus={() => setIsClosed(true)}
           />
           <TimeInput
             placeholder="00:00"
+            autoFocus={timeStartAF}
             useRef="TimeInputWrapper"
             className={classes.hourInput}
-            onTimeChange={(e) => handleTimer(e)}
+            onTimeChange={(e) => setStartTime(e)}
           />
         </div>
         <div className={classes.vr}></div>
@@ -110,14 +146,16 @@ function CreateEvent(props) {
           <input
             value={state[0].endDate?.toLocaleDateString('fr-FR')}
             type="text"
+            onChange={() => { setTimeEndAF(true) }}
             placeholder="Date de fin"
             onFocus={() => setIsClosed(true)}
           />
           <TimeInput
             placeholder="00:00"
+            autoFocus={timeEndAF}
             useRef="TimeInputWrapper"
             className={classes.hourInput}
-            onTimeChange={(e) => handleTimer(e)}
+            onTimeChange={(e) => setEndTime(e)}
           />
         </div>
       </div>
@@ -142,103 +180,46 @@ function CreateEvent(props) {
           />
         </div>
       </>}
-      <span className={classes.span}>Image</span>
-      <label htmlFor="url">Lien URL</label>
-      <input
-        className={classes.input}
-        type="text"
-        id="url"
-        placeholder="https://exemple.fr/image"
-      />
-      <span className={`${classes.span} ${classes.or}`}>OU</span>
-      <button className={classes.button}>Télécharger une image</button>
-      <hr />
-      <span className={classes.span}>Redirection de la bannière</span>
-      <label htmlFor="bannerUrl">Lien URL</label>
-      <input
-        className={classes.input}
-        id="bannerUrl"
-        type="text"
-        placeholder="https://mon_evenement.fr/"
-      />
-      {/* <span className={classes.collapsibleTitle} onClick={() => setIsCollapsed(!isCollapsed)}>Créer un évènement personnalisé</span> */}
-      {/* {isCollapsed && */}
+      <div className={classes.inputContainer}>
+        <span className={classes.span}>Image</span>
+        <div className={classes.fileUpload}>
+          {imgName.length > 0 ? (
+            <div className={classes.uploadedFile}>
+              <span>{imgName}</span>{" "}
+              <IoMdClose
+                onClick={() => {
+                  setImgName("");
+                }}
+              />
+            </div>
+          ) : (
+            <>
+              <input
+                type="file"
+                onChange={(e) => {
+                  setImgName(e.target.files[0].name);
+                  setUploadedMedia(e.target.files[0])
+                  setAutofocus(true)
+                }}
+              />
+              <span>
+                <BsUpload />
+                Importer une image
+              </span>
+            </>
+          )}
+        </div>
+        <input autoFocus={autofocus} value={url} onChange={(e) => setUrl(e.target.value)} className={classes.input} type="text" placeholder="URL" />
+      </div>
+      {/* <label htmlFor="bannerUrl">Lien URL</label>
       <div className={classes.collapsibleDiv}>
         <span className={classes.span}>Informations</span>
         <input className={classes.input} type="text" placeholder="Titre" />
         <textarea className={classes.textarea} placeholder="Message" />
-        {/* <span className={classes.span}>Colorimétrie</span>
-          <label htmlFor="themeColor">Couleur du thème</label>
-          <div className={classes.colorContainer} >
-            <div className={classes.colorPreview} style={{ background: color }}></div>
-            <HexColorInput className={classes.input} color={color} onChange={setColor} onClick={() => setColorPicker(!colorPicker)} />
-          </div>
-          {
-            colorPicker &&
-            <HexColorPicker className={classes.colorPick} color={color} onChange={setColor} />
-          }
-          <label htmlFor="textColor">Couleur du texte</label>
-          <div className={classes.colorContainer} >
-            <div className={classes.colorPreview} style={{ background: colorText }}></div>
-            <HexColorInput className={classes.input} color={colorText} onChange={setColorText} onClick={() => setColorTextPicker(!colorTextPicker)} />
-          </div>
-          {
-            colorTextPicker &&
-            <HexColorPicker className={classes.colorPick} color={colorText} onChange={setColorText} />
-          }
-          <br />
-          <span className={classes.span}>Typographie</span>
-          <label htmlFor="fontFamily">Police</label>
-          <select id="fontFamily" className={classes.select}>
-            <option>Roboto</option>
-            <option>Arial</option>
-            <option>Times New Roman</option>
-          </select>
-          <label htmlFor="fontSize">Taille de la police</label>
-          <span className={`${classes.span} ${classes.or}`}>
-            {range[0] === 0 ? "Petite" : range[0] === 50 ? "Normale" : "Grande"}
-          </span>
-          <Range
-            step={50}
-            min={0}
-            max={100}
-            values={range}
-            onChange={(range) => setRange(range)}
-            renderTrack={({ props, children }) => (
-              <div
-                {...props}
-                style={{
-                  ...props.style,
-                  height: "6px",
-                  width: "100%",
-                  backgroundColor: "#FFF",
-                  margin: "1rem 0",
-                }}
-              >
-                {children}
-              </div>
-            )}
-            renderThumb={({ props }) => (
-              <div
-                {...props}
-                style={{
-                  ...props.style,
-                  height: "25px",
-                  width: "25px",
-                  backgroundColor: "#FF7954",
-                  border: "3px solid #FFF",
-                  borderRadius: "50%",
-                  outline: "none",
-                }}
-              />
-            )}
-          /> */}
-      </div>
-      {/* } */}
-
-      <button className={`${classes.fixed} ${classes.button} ${classes.enabledBtn}`} onClick={() => setStep(step + 1)}>
+      </div> */}
+      <button className={`${classes.fixed} ${classes.button} ${classes.enabledBtn}`} onClick={() => handleSave()}>
         Suivant
-        </button>
+      </button>
     </div>
   );
 }

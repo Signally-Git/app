@@ -1,5 +1,5 @@
 import classes from './adduser.module.css'
-import Import from '../../../assets/img/import.svg'
+import {ReactComponent as Import} from '../../../assets/img/import.svg'
 import Menu from '../Menu/Menu'
 import { Link } from 'react-router-dom'
 
@@ -8,7 +8,7 @@ function AddUser() {
         <div className={classes.container}>
             <h2>Ajoutez des utilisateurs</h2>
             <div className={classes.imgContainer}>
-                <img src={Import} alt="Utilisateurs" />
+                <Import alt="Utilisateurs" />
                 <div className={classes.whiteBackground}></div>
             </div>
             <div className={classes.btnsContainer}>
@@ -22,7 +22,7 @@ function AddUser() {
                     <button className={classes.skipCTA}>Passer cette étape</button>
                 </Link>
             </div>
-            <Menu />
+            <Menu page={"team"} />
         </div>
     )
 }

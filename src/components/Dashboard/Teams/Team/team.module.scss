@@ -11,15 +11,18 @@
         padding: 0;
         list-style: none;
         li {
+            position: relative;
+            z-index: 0;
+        }
+        li a {
             display: flex;
             align-items: center;
             width: 100%;
-            text-indent: 1.5rem;
             position: relative;
             font-weight: 600;
             font-size: 0.9rem;
             padding: 1rem;
-            background: #FFF;
+            background: #fff;
             border-radius: 10px;
             margin: 1rem 0;
         }
@@ -33,7 +36,8 @@
         contrast(82%);
 }
 
-.active, .inactive {
+.active,
+.inactive {
     position: relative;
 }
 
@@ -63,14 +67,20 @@
     filter: invert(74%) sepia(58%) saturate(4668%) hue-rotate(325deg) brightness(103%) contrast(105%);
     height: 3.2rem;
     width: 5rem;
-    right: 1.2rem;
+    top: 0;
+    right: 0;
+    border-radius: 0 10px 10px 0;
     display: flex;
-    margin: 1rem 0;
     background: rgba(0, 0, 0, 0.1);
 }
 
+.swipeable {
+    transition: 0.2s;
+    color: #66433e;
+}
+
 .editing {
-    margin-left: -5rem;
+    margin-left: -3rem !important;
 }
 
 .infosContainer {
@@ -82,9 +92,9 @@
 
 .assignedSignature {
     a {
-        color: #FF7954;
+        color: #ff7954;
     }
-    font-size: .9rem!important;
+    font-size: 0.9rem !important;
 }
 
 @keyframes swipeLeft {

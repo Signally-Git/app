@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import CreateEventImage from "../../../../assets/img/create-team.svg";
+import { ReactComponent as CreateEventImage } from '../../../../assets/img/create-team.svg';
+// import CreateEventImage from "../../../../assets/img/create-team.svg";
 import Search from "../../../../assets/icons/search.svg";
 import classes from "./createTeam.module.css";
 import { Link } from "react-router-dom";
@@ -30,16 +31,16 @@ function CreateTeam() {
             setStep(step + 1)
         }
     }
-    
+
     const createTeam = async (e) => {
         e.preventDefault()
-        const team = {"name": isNameFilled, "is_global": false}
+        const team = { "name": isNameFilled, "is_global": false }
         await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/teams?access_token=${localStorage.getItem("token")}`, team).then((team) => {
             setStep(step + 1)
             selectedUsers.map(async (user, index) => {
                 await axios.get(`${API}user/${user}?access_token=${localStorage.getItem("token")}`).then(async (res) => {
-                    console.log(`${API}user/${user}?access_token=${localStorage.getItem("token")}`, {team_id: team.data.id})
-                    await axios.patch(`${API}user/${user}?access_token=${localStorage.getItem("token")}`, {team_id: team.data.id}).then((res) => {
+                    console.log(`${API}user/${user}?access_token=${localStorage.getItem("token")}`, { team_id: team.data.id })
+                    await axios.patch(`${API}user/${user}?access_token=${localStorage.getItem("token")}`, { team_id: team.data.id }).then((res) => {
                         console.log(res)
                     })
                 })
@@ -48,7 +49,7 @@ function CreateTeam() {
         // await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/teams?access_token=${localStorage.getItem("token")}`).then((res) => {
         //    console.log(res)
         // })
-        
+
     }
 
     // useEffect(() => {
@@ -71,17 +72,17 @@ function CreateTeam() {
                 <div className={classes.subcontainer}>
                     <h1>Créer une équipe</h1>
                     <div className={classes.imgBgContainer}>
-                        <img className={classes.congrats} src={CreateEventImage} alt="Congratulations" />
+                        <CreateEventImage className={classes.congrats} alt="Congratulations" />
                         <div className={classes.imgBg}></div>
                     </div>
                     <p>
                         Les équipes vous permettent d’administrer & de mettre à jour les signatures de vos utilisateurs par groupe.
-          </p>
+                    </p>
                 </div>
                 <button className={`${classes.button} ${classes.enabledBtn}`} onClick={() => setStep(2)}>
                     Suivant
-        </button>
-        <Menu page="teams" />
+                </button>
+                <Menu page="teams" />
             </div>
         );
     }
@@ -101,7 +102,7 @@ function CreateTeam() {
                     </div>
                     <button className={`${classes.button} ${isNameFilled.length > 0 ? classes.enabledBtn : ""}`}>
                         Suivant
-        </button>
+                    </button>
                 </form>
                 <Menu page="teams" />
             </div>
@@ -134,7 +135,9 @@ function CreateTeam() {
                                 </li>)
                         })}
                     </ul>
-                    <button className={`${classes.button} ${classes.enabledBtn} ${classes.createTeamBtn}`} onClick={(e) => createTeam(e)}>Créer l'équipe</button>
+                    <div className={classes.createBtnContainer}>
+                        <button className={`${classes.button} ${classes.enabledBtn} ${classes.createTeamBtn}`} onClick={(e) => createTeam(e)}>Créer l'équipe</button>
+                    </div>
                 </form>
                 <Menu page="teams" />
             </div>
@@ -143,20 +146,22 @@ function CreateTeam() {
         console.log(step)
         return (
             <div className={classes.container}>
+                <br />
+                <br />
                 <div className={classes.imgBgContainer}>
-                    <img className={classes.congrats} src={CreateEventImage} alt="Congratulations" />
+                    <CreateEventImage className={classes.congrats} alt="Congratulations" />
                     <div className={classes.imgBg}></div>
                 </div>
                 <h1>Félicitations !</h1>
                 <p>L’équipe
-                <span className={classes.teamName}>"{isNameFilled}"</span>
-                vient d’être créée. Vous pouvez maintenant lui assigner une signature.</p>
+                    <span className={classes.teamName}>"{isNameFilled}"</span>
+                    vient d’être créée. Vous pouvez maintenant lui assigner une signature.</p>
                 <div className={classes.btnsContainer}>
                     <button className={`${classes.button}`} onClick={() => setStep(2)}>Créer une autre équipe</button>
-                    <Link to="/payment">
+                    <Link to="/teams">
                         <button className={`${classes.button} ${classes.enabledBtn}`}>
                             Terminer
-                    </button>
+                        </button>
                     </Link>
                 </div>
                 <Menu page="teams" />

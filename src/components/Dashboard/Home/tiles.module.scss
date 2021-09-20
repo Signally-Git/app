@@ -140,6 +140,12 @@
     font-weight: 600!important;
 }
 
+.free {
+    line-height: 3rem;
+    font-size: 1.2rem!important;
+    font-weight: 600!important;
+}
+
 .row {
     display: flex;
     width: 100%;
@@ -169,6 +175,7 @@
 
 .activeSpan {
     text-transform: uppercase;
+    font-weight: 600!important;
     font-size: .8rem!important;
 }
 

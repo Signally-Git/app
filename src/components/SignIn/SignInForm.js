@@ -33,13 +33,12 @@ function SignInForm() {
     }
 
     if (step === 0){
-    console.log(step)
         return (
             <div className={classes.container}>
                 <img src={MagicLink} alt="MagicLink" />
                 <p>Pour récupérer votre signature et pouvoir la modifier vous devez vous connecter à Signally</p>
                 <form onSubmit={(e) => handleMagicLink(e)}>
-                    <input type="mail" value={mail} onChange={(mail) => setMail(mail.target.value)} placeholder={"Adresse email"} />
+                    <input autoFocus type="mail" value={mail} onChange={(mail) => setMail(mail.target.value)} placeholder={"Adresse email"} />
                     <button>Envoyez moi un Magic Link</button>
                 </form>
             </div>
@@ -52,7 +51,7 @@ function SignInForm() {
                 <p>Vous n’avez pas reçu de mail ?</p>
                 <span className={classes.verify} onClick={() => setStep(0)}>Vérifiez votre adresse</span>
                 <form onSubmit={(e) => handleSignIn(e)}>
-                    <input type="tel" value={code} onChange={(code) => setCode(code.target.value)} placeholder={"Code"} />
+                    <input autoFocus type="tel" value={code} onChange={(code) => setCode(code.target.value)} placeholder={"Code"} />
                     <button>Me connecter</button>
                 </form>
             </div>

@@ -74,6 +74,57 @@
     transition: 0.4s;
 }
 
+
+.fileUpload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    background: #FFF;
+    border-radius: 10px;
+    margin-top: .5rem;
+    .rangeUpload {
+        display: flex;
+        flex-direction: column;
+    }
+    input {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        z-index: 2;
+    }
+    span {
+        margin: auto;
+        font-size: .9rem;
+        line-height: 3rem;
+        svg {
+            vertical-align: sub;
+            margin-right: .5rem;
+            margin-bottom: 2px;
+        }
+    }
+}
+
+.uploadedFile {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    svg {
+        right: 1rem;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        position: absolute;
+        z-index: 3;
+    }
+}
+
 input:not(:checked) + .slider:before {
     left: 0;
 }

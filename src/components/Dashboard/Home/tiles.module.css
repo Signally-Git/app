@@ -205,6 +205,12 @@
   font-weight: 600 !important;
 }
 
+.free {
+  line-height: 3rem;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+}
+
 .row {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -247,6 +253,7 @@
 
 .activeSpan {
   text-transform: uppercase;
+  font-weight: 600 !important;
   font-size: 0.8rem !important;
 }
 

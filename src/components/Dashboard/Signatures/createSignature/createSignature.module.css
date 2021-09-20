@@ -23,19 +23,33 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
+  z-index: 5;
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  padding: 0 7.5%;
-  height: 18rem;
+  padding: 0 2rem;
+  height: 13rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   margin: 0;
+  padding-top: 1rem;
   list-style: none;
   background: #fdf8f7;
+}
+
+.signaturePreviewList input + div {
+  -webkit-transform: scale(0.65) translateX(-25%);
+          transform: scale(0.65) translateX(-25%);
+  pointer-events: none;
+}
+
+.signaturePreviewList input {
+  -webkit-transform: scaleX(0.75) scaleY(0.65) translateX(-16%);
+          transform: scaleX(0.75) scaleY(0.65) translateX(-16%);
 }
 
 .signaturePreviewList li {
@@ -50,8 +64,28 @@
   transition: 0.3s;
 }
 
+.signaturePreviewList input:not(:checked) + div {
+  padding: 1rem;
+  background: #FFF;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  margin-right: -8rem;
+  -webkit-box-shadow: 0px 2px 5px rgba(230, 208, 201, 0.8);
+          box-shadow: 0px 2px 5px rgba(230, 208, 201, 0.8);
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
+}
+
 .signaturePreviewList input:checked + div {
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
+  background: #FFF;
+  padding: 1rem;
+  margin-right: -8rem;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
   border: 1px solid #ff7954;
+  border-radius: 20px;
   -webkit-box-shadow: 0px 2px 5px rgba(230, 208, 201, 0.8);
           box-shadow: 0px 2px 5px rgba(230, 208, 201, 0.8);
 }
@@ -178,6 +212,10 @@
           box-sizing: content-box;
 }
 
+.signatureName {
+  height: 2rem;
+}
+
 .signText {
   -webkit-box-flex: 50%;
       -ms-flex: 50%;
@@ -284,12 +322,8 @@
   left: -2.5rem;
 }
 
-.tab1 {
-  left: 4.7rem;
-}
-
-.tab2 {
-  left: 5.5rem;
+.tab2, .tab1 {
+  left: 5.3rem;
 }
 
 /** Tab 1 **/
@@ -410,7 +444,7 @@
           align-items: center;
   color: #402a27;
   text-align: center;
-  padding: 21rem 0 10rem;
+  padding: 16.5rem 0 10rem;
 }
 
 .tabContent textarea {
@@ -524,6 +558,10 @@
   margin: auto;
   position: absolute;
   z-index: 3;
+}
+
+.deactivated {
+  pointer-events: none;
 }
 
 .iconsContainer {

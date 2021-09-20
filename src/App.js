@@ -11,6 +11,7 @@ import SyncPage from './components/Sync/sync'
 import Import from './containers/Import'
 import PrivateRoute from './components/PrivateRoute/privateRoute'
 import CreateSignature from './containers/CreateSignature'
+import Users from './components/Dashboard/Users/users'
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
         <PrivateRoute path="/create-signature" component={CreateSignature} />
 
         <PrivateRoute path="/team/:teamId" component={Team} />
+
+        <PrivateRoute path="/user/:userId" component={Users} />
 
         <PrivateRoute exact path="/teams" page="teams" component={Dashboard} />
        

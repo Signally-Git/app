@@ -11,42 +11,92 @@ import Menu from '../../Menu/Menu'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import {API} from '../../../../config'
-
-const usersAPI = ["Antoine David", "Yanne Alessandri", "David Carez", "Marie Luciani"]
+import { API } from '../../../../config'
 
 function ImportCSV() {
-    const [file, setFile] = useState("")
     const [searchQuery, setSearchQuery] = useState("")
     const [resultCount, setResultCount] = useState(0)
     const [state, setState] = useState([])
     const [step, setStep] = useState(0)
-    
+    const [error, setError] = useState("")
+    const [importedUsers, setImportedUsers] = useState([])
+    const [userCount, setUserCount] = useState([])
+
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        console.log("req:", file)
-        await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users/import?access_token=${localStorage.getItem("token")}`, file)
+        if (e.target.files[0]?.name?.split('.').pop() !== 'csv') {
+            setError("Le fichier doit etre en .csv")
+            console.log(error)
+            return
+        }
+        const req = new FormData()
+        req.append('file', new Blob([e.target.files[0]], { type: 'text/csv' }))
+
+        await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users/import?access_token=${localStorage.getItem("token")}`,
+            req)
             .then(async (res) => {
-              console.log(res)
-              setStep(2)
+                setImportedUsers(res.data)
+                // console.log(res)
+                setStep(2)
             }
             ).catch((err) => {
                 console.log(err)
             })
     }
 
+    const handleImport = async () => {
+        let defaultSignature = {}
+        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/signature-templates?access_token=${localStorage.getItem("token")}`).then(async (res) => {
+            if (res.data.data.length > 0)
+                defaultSignature = res.data.data[0].id
+            importedUsers.map(async (user) => {
+                let req
+                if (res.data.data.length > 0)
+                req = {
+                    email: user.email,
+                    phone_number: user.phone_number,
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    position: user.position,
+                    signature_template_id: defaultSignature
+                }
+                else {
+                    req = {
+                        email: user.email,
+                        phone_number: user.phone_number,
+                        first_name: user.first_name,
+                        last_name: user.last_name,
+                        position: user.position
+                    }
+                }
+                await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`, req).then(async (res) => {
+                    await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`).then((res) => {
+                        setUserCount(res.data.data)
+                    })
+                    setStep(4)
+                })
+            })
+            const req = {signature_template_id: defaultSignature}
+            await axios.patch(`${API}user/${localStorage.getItem("user_id")}?access_token=${localStorage.getItem("token")}`, req).then((res) => {
+                console.log(res)
+            })
+        })
+    }
+
     useEffect(() => {
         setState([])
-        usersAPI.map((item) => {
-            if (item.toLowerCase().search(searchQuery?.toLowerCase()) >= 0) {
-                setState((prevState) => prevState.concat(item))
+        importedUsers.map((item) => {
+            if (item.first_name.toLowerCase().search(searchQuery?.toLowerCase()) >= 0) {
+                setState((prevState) => prevState.concat(`${item.first_name} ${item.last_name}`))
+            }
+            else if (item.last_name.toLowerCase().search(searchQuery?.toLowerCase()) >= 0) {
+                setState((prevState) => prevState.concat(`${item.first_name} ${item.last_name}`))
             }
         })
-    }, [searchQuery])
+    }, [searchQuery, importedUsers])
 
     useEffect(() => {
         setResultCount(state.length)
-    }, [state])
+    }, [state, userCount])
 
     if (step === 0)
         return (
@@ -58,7 +108,7 @@ function ImportCSV() {
                 </div>
                 <p className={classes.center}>Importez vos utilisateurs via un fichier .csv. Vous pouvez les organiser par équipe si vous le souhaitez.</p>
                 <button className={`${classes.btn} ${classes.orangeBtn}`} onClick={() => setStep(1)}>Suivant</button>
-                <Menu />
+                <Menu page={"teams"} />
             </div>
         )
     else if (step === 1) {
@@ -92,9 +142,11 @@ function ImportCSV() {
                         <p>Vous pouvez ajouter les données suivantes : Prénom, nom, poste/fonction, email, téléphone.</p>
                     </div>
                 </div>
-                <input type="file" value={file} onChange={(e) => setFile(e.target.files)} />
-                <button className={`${classes.btn} ${classes.orangeBtn}`} onClick={(e) => handleSubmit(e)}>Importer le fichier</button>
-                <Menu />
+                <div className={classes.uploadFile}>
+                    <input type="file" onChange={(e) => {handleSubmit(e)}} />
+                    <button className={`${classes.orangeBtn}`}>Importer le fichier</button>
+                </div>
+                <Menu page={"teams"} />
             </div>
         )
     }
@@ -102,14 +154,14 @@ function ImportCSV() {
         return (<div className={`${classes.container} ${classes.spaceBe}`}>
             <h2>Import réussi</h2>
             <img src={Success} alt="success" />
-            <p className={classes.center}>Les 120 utilisateurs contenus dans votre fichier ont bien été importés.</p>
-            <div className={classes.tile}>
+            <p className={classes.center}>Les {importedUsers.length} utilisateurs contenus dans votre fichier ont bien été importés.</p>
+            <div className={classes.tile} onClick={() => setStep(3)}>
                 <img src={Users} alt="users" />
-                <span>Voir les 120 nouveaux utilisateurs</span>
+                <span>Voir les {importedUsers.length} nouveaux utilisateurs</span>
                 <img src={ChevronRight} className={classes.chevron} alt="view" />
             </div>
             <button className={`${classes.btn} ${classes.orangeBtn}`} onClick={() => setStep(3)}>Suivant</button>
-            <Menu />
+            <Menu page={"teams"} />
         </div>)
     }
     else if (step === 3) {
@@ -135,7 +187,7 @@ function ImportCSV() {
                 </ul>
                 <div className={classes.btnDiv}>
                     <button className={`${classes.btn} ${classes.blackBtn}`} onClick={() => setStep(1)}>Réimporter le CSV</button>
-                    <button className={`${classes.btn} ${classes.orangeBtn}`} onClick={() => setStep(4)}>Valider</button>
+                    <button className={`${classes.btn} ${classes.orangeBtn}`} onClick={() => handleImport()}>Valider</button>
                 </div>
             </form>
             <Menu page="teams" />
@@ -149,12 +201,12 @@ function ImportCSV() {
                     <div className={classes.whiteContainer}>
                         <div className={classes.textContainer}>
                             <h3>Votre abonnement</h3>
-                            <h4>120 utilisateurs</h4>
+                            <h4>{userCount.length} utilisateurs</h4>
                             <span>0,5 € / mois / utilisateur</span>
                         </div>
                         <img src={Rocket} alt="rocket" />
                         <div className={classes.priceContainer}>
-                            <span className={classes.price}>60 €</span>
+                            <span className={classes.price}>{0.5 * userCount.length} €</span>
                             <span className={classes.perMonth}>/ mois</span>
                         </div>
                     </div>
@@ -168,7 +220,7 @@ function ImportCSV() {
                 <Link to="/payment">
                     <button className={`${classes.btn} ${classes.orangeBtn}`} onClick={() => setStep(4)}>Continuer vers le paiement</button>
                 </Link>
-                <Menu />
+                <Menu page={"teams"} />
             </div>
         )
     }

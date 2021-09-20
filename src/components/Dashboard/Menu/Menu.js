@@ -15,22 +15,22 @@ function Menu(props) {
                     <img src={Home} alt="Home" />
                 </Link>
             </li>
-            <li className={`${props.page === "signatures" && classes.active}`}>
+            <li className={`${props.page.search("signatures") !== -1 && classes.active}`}>
                 <Link to="/signatures" key={Date.now()}>
                     <img src={Signatures} alt="Signatures" />
                 </Link>
             </li>
-            <li className={`${props.page === "teams" && classes.active}`}>
+            <li className={`${props.page.search("team") !== -1 && classes.active}`}>
                 <Link to="/teams">
                     <img src={Teams} alt="Teams" />
                 </Link>
             </li>
-                <li className={`${props.page === "events" && classes.active}`}>
+                <li className={`${props.page.search("event") !== -1 && classes.active}`}>
                 <Link to="/events">
                     <img src={Events} alt="Events" />
                 </Link>
             </li>
-            <li className={props.page === "profile" && classes.active}>
+            <li className={props.page.search("profile") !== -1 && classes.active}>
                 <Link to="/profile">
                     <img src={Profile} alt="Profile" />
                 </Link>

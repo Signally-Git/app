@@ -10,7 +10,7 @@ function Header() {
             </Link>
             <ul>
                 <li><Link to="/dashboard">Connexion</Link></li>
-                <li><Link to="/sign-in">Inscription</Link></li>
+                <li><Link to="/profile/informations">Inscription</Link></li>
             </ul>
         </header>
     )

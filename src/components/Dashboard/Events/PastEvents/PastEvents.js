@@ -17,13 +17,7 @@ function PastEvents(props) {
         })
         count = 0;
     }, [])
-
-    const formattedDate = (d = new Date) => {
-        if (d.typeOf === "date"){
-        return [d.getDate(), d.getMonth() + 1, d.getFullYear()]
-            .map(n => n < 10 ? `0${n}` : `${n}`).join('/');}
-    }
-
+    
     return (
         <div className={classes.container}>
             <span>{count > 1 ? count+" évènements passés" : count+" évènement passé"}</span>
@@ -36,7 +30,10 @@ function PastEvents(props) {
                             <li key={index}>
                                 <div className={classes.eventText}>
                                     <span className={classes.inactive}>{pastEvent.name}</span>
-                                    <span className={classes.duration}>{Date(pastEvent.start_date)} <img src={ArrowRight} className={classes.arrow} alt="arrow" /> {pastEvent.end_date}</span>
+                                    <span className={classes.duration}>
+                                     {new Date(pastEvent.start_date).toLocaleString([], {day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute:'2-digit'})}
+                                        <img src={ArrowRight} className={classes.arrow} alt="arrow" /> 
+                                     {new Date(pastEvent.end_date).toLocaleString([], {day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute:'2-digit'})}</span>
                                 </div>
                                 <img src={ChevronRight} className={classes.chevron} alt="Click" />
                             </li>

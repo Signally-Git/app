@@ -4,26 +4,28 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { API } from '../../../config'
 import axios from 'axios'
+import SingleTeam from './singleTeam'
 
 function Teams(props) {
     const [teamsList, setTeamsList] = useState([])
     const [allUsers, setAllUsers] = useState([])
+    const [deleted, setDeleted] = useState(false)
+
+    useEffect(() => {
+        setDeleted(false)
+    }, [deleted])
 
     useEffect(async () => {
-        props.handleHeader("Équipes")
-        props.create("create-team")
+        props.handleHeader("Équipes et utilisateurs")
+        props.create([["Créer une équipe", "create-team"], ["Ajouter des utilisateurs", "import"]])
         await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/teams?access_token=${localStorage.getItem("token")}`).then((res) => {
             setTeamsList(res.data.data)
-            
-            console.log(teamsList)
         })
         await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`).then((res) => {
             setAllUsers(res.data.data)
-            console.log(allUsers)
         })
-    }, [])
-    // console.log(localStorage)
-    console.log(API, "organisation/", localStorage.organisation_id, "/teams?access_token=", localStorage.token)
+    }, [deleted])
+    
     return (
         <div className={classes.container}>
             <ul>
@@ -37,11 +39,7 @@ function Teams(props) {
             <ul>
                 {teamsList.map((team, index) => {
                     return (
-                        <li key={index} className={`${team.signature_template_deploy_count === team.members_count && team.members_count > 0 ? classes.active : classes.inactive}`}>
-                            <Link to={`/team/${team.id}`}>
-                                {team.name} ({team.members_count})<img src={ChevronRight} className={classes.chevron} alt="Click" />
-                            </Link>
-                        </li>
+                        <SingleTeam team={team} index={index} deleted={setDeleted} />
                     )
                 })}
             </ul>
