@@ -52,9 +52,9 @@ function CreateSignatureComponent() {
       return
     }
     else
-    await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/signature-templates?access_token=${localStorage.getItem("token")}`, req).then((res) => {
-      history.push("/signatures")
-    })
+      await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/signature-templates?access_token=${localStorage.getItem("token")}`, req).then((res) => {
+        history.push("/signatures")
+      })
   }
 
   useEffect(() => {
@@ -63,14 +63,14 @@ function CreateSignatureComponent() {
       signatureData: selectedSignature
     }
     if (selectedSignature.search(bannerImgHosted) > 0)
-    axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/signature-templates?access_token=${localStorage.getItem("token")}`, req).then((res) => {
-      history.push("/signatures")
-      // console.log("UPLOADING SIGN", bannerImgHosted)
-    })
+      axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/signature-templates?access_token=${localStorage.getItem("token")}`, req).then((res) => {
+        history.push("/signatures")
+        // console.log("UPLOADING SIGN", bannerImgHosted)
+      })
   })
   const [displaySocials, setDisplaySocials] = useState(true);
   const [signatureAPI, setSignatureAPI] = useState([])
-  
+
   const [socialColor, setSocialColor] = useState("#FFFFFF");
   const [socialBgColor, setSocialBgColor] = useState("#000000");
   const [socialOption, setSocialOption] = useState("");
@@ -261,7 +261,80 @@ function CreateSignatureComponent() {
   </tbody>
   </table><div class="yj6qo"></div><div class="adL">
   </div></div><div class="adL">
-  </div></div>`])
+  </div></div>`,
+      `<div style="font-family:Helvetica,Arial,sans-serif;">
+      <div>
+  <table>
+      <tr>
+          <table style="margin-bottom: 12px; margin-top: 0;">
+              <tbody>
+                  <tr>
+                      <td>
+                          <img style="margin: 0 4px 0 0; padding: 0; width: 108px; height: 108px;" src='PLACEHOLDER_COMPANY_ICON'
+                              alt='PLACEHOLDER_COMPANY' />
+                      </td>
+                      <td
+                          style="background-color: #FFD500; border-radius: 4px; width: 264px; height: 108px; box-sizing: border-box; padding: 12px;">
+                          <p
+                              style="line-height: 0px; font-size:11px; font-weight:600; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;">
+                              <span>PLACEHOLDER_FIRST_NAME</span>
+                              <span>PLACEHOLDER_LAST_NAME</span>
+                          </p>
+                          <p
+                              style="line-height: 0px; font-size:11px; font-weight:200; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;">
+                              PLACEHOLDER_POSTE</p>
+                          <p
+                              style="line-height: 0px; margin: 0; margin-top: 7px; font-size:11px; font-weight:600; line-height:14px; padding: 0; letter-spacing:normal;">
+                              PLACEHOLDER_COMPANY</p>
+                          <p
+                              style="line-height: 0px; font-size:11px; font-weight:200; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;">
+                              PLACEHOLDER_ADDRESS</p>
+                          <p style="line-height: 0px; margin: 0; padding: 0;">
+                              <span
+                                  style="font-size:11px; font-weight:600; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;">T</span>
+                              <span
+                                  style="font-size:11px; font-weight:200; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;">+33
+                                  PLACEHOLDER_MOBILE</span>
+                              <span
+                                  style="font-size:11px; font-weight:600; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;">M</span>
+                              <span
+                                  style="font-size:11px; font-weight:200; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;">+33
+                                  PLACEHOLDER_PHONE</span>
+                          </p>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </tr>
+      <tr>
+          <table style="margin-top: 0;">
+              <tbody>
+                  <tr>
+                      <td>
+                          <img style="border-radius: 4px; margin-bottom: 12px; width: 380px;" src='PLACEHOLDER_EVENT_BANNER'
+                              alt='banner' />
+                      </td>
+                  </tr>
+                  <tr>
+                      <td style="background-color: #000; border-radius: 4px; padding: 12px; height: 38px; width: 380px; ">
+                      <div style="margin-top: 2px;">
+                          <span style="color: #FFF; font-size: 13px; font-weight: 400;vertical-align:super">Follow us</span>
+                          <a href="https://facebook.com/MamaShelterOfficial/"><img style="width: 22px; height: 22px;" src="https://images.signally.io/ed8f47210ec0a5c9d6b39a4e1985a5373f306935585" alt="facebook" /></a>
+                          <a href="https://www.instagram.com/mamashelter/"><img style="width: 22px; height: 22px;" src="https://images.signally.io/ed8f459ae3ae29b20507b5aa30d6c0aa3f7509f9f8c" alt="instagram" /></a>
+                          <a href="https://www.linkedin.com/company/mama-shelter"><img src="https://images.signally.io/ed8c7ec09500680f99f2b345a4d028f5e0fd433a6a5" alt="linkedin" /></a>
+                          <a href="https://www.pinterest.fr/mamashelter/"><img src="https://images.signally.io/ed8c7ef3ca6dd5aa1eb73a7d1e15fe9c1cdcb597edd" alt="pinterest" /></a>
+                          <a href="https://www.snapchat.com/"><img src="https://images.signally.io/ed8c7f1cbe46ad4662314f88113b85434e03da2a40f" alt="snapchat" /></a>
+                          <a href="https://twitter.com/mama_shelter/"><img src="https://images.signally.io/ed8c7f3cce65502f5b3c51b3caa8e2da3603dfd77c3" alt="twitter" /></a>
+                          <a href="https://fr.mamashelter.com/"><img src="https://images.signally.io/ed8f5e255e7c1f63e6f1f132e94b33036a44dacf2b2" alt="mama shelter" style="margin-left: 65px; height:20px;" /></a>
+                        </div>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </tr>
+  </table>
+  </div>
+</div>`])
   }, [displaySocials, socialColor, socialBgColor])
   useEffect(async () => {
     await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}?access_token=${localStorage.getItem("token")}`).then((res) => {
@@ -286,7 +359,7 @@ function CreateSignatureComponent() {
   }, [])
 
   useEffect(() => {
-    setSelectedSignature(renderToString(<RenderHTML template={signatureAPI[0]} data={{
+    setSelectedSignature(renderToString(<RenderHTML template={signatureAPI[checked]} data={{
       banner: bannerImgHosted,
       firstName: "PLACEHOLDER_FIRST_NAME",
       firstNameStyle: `color:${firstNameColor};font-family:${firstNameFont};`,
@@ -394,9 +467,9 @@ function CreateSignatureComponent() {
         phone: phone,
         phoneStyle: `color:${phoneColor};font-family:${phoneFont};`,
         facebook: companyDetails.facebook,
-      twitter: companyDetails.twitter,
-      instagram: companyDetails.instagram,
-      linkedin: companyDetails.linkedin,
+        twitter: companyDetails.twitter,
+        instagram: companyDetails.instagram,
+        linkedin: companyDetails.linkedin,
         eventBanner: event
       }} /></div>
     })

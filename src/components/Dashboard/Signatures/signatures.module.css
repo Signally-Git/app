@@ -48,15 +48,11 @@
           box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
   border-radius: 10px;
   padding: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   margin: 0;
   color: #66433e;
-  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
