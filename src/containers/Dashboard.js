@@ -8,6 +8,7 @@ import Signatures from '../components/Dashboard/Signatures/signatures'
 import Events from '../components/Dashboard/Events/events'
 import CreateEvent from '../components/Dashboard/Events/CreateEvent/createEvent'
 import { useEffect, useState } from 'react'
+import ArrowRight from '../assets/icons/arrow-right.svg'
 import PastEvents from '../components/Dashboard/Events/PastEvents/PastEvents'
 import Profile from '../components/Dashboard/Profile/profile'
 
@@ -15,6 +16,8 @@ import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detec
 import axios from 'axios'
 import { API } from '../config'
 import RenderHTML from '../components/Dashboard/Signatures/createSignature/RenderHTML/RenderHTML'
+
+let count = 0;
 
 function Dashboard(props) {
     const [isHeader, setIsHeader] = useState("")
@@ -24,6 +27,7 @@ function Dashboard(props) {
     const [template, setTemplate] = useState()
     const [stat, setStat] = useState(false)
     const [data, setData] = useState([])
+    const [activeEvents, setActiveEvents] = useState()
     const [organisation, setOrganisation] = useState()
 
     useEffect(async () => {
@@ -35,10 +39,19 @@ function Dashboard(props) {
                     console.log(res.data)
                 })
         })
+
         await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}?access_token=${localStorage.getItem("token")}`).then((res) => {
             setOrganisation(res.data)
         })
-        console.log(organisation)
+
+    }, [])
+
+    useEffect(async () => {
+        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user"))?.organisation_id}/campaigns?access_token=${localStorage.getItem("token")}`).then((res) => {
+            setActiveEvents(res.data.data)
+            console.log("TEST", res.data.data[0])
+        })
+        count = 0;
     }, [])
 
     useEffect(() => {
@@ -94,7 +107,7 @@ function Dashboard(props) {
                 <div className={classes.mainContent}>
                     <div className={classes.menuContainer}>
                         <div className={classes.userInfos}>
-                            <img src={organisation.logo.path} alt='' />
+                            <img src={organisation?.logo?.path} alt='' />
                             <p>{JSON.parse(localStorage.getItem('user'))?.first_name}</p>
                             <p className={classes.capitalize}>{JSON.parse(localStorage.getItem('user'))?.last_name}</p>
                         </div>
@@ -120,6 +133,18 @@ function Dashboard(props) {
                                 <div className={classes.tilesContainer}>
                                     <Tiles handleHeader={setIsHeader} />
                                 </div>
+                                <div className={classes.spacer}></div>
+                                {activeEvents ?
+                                    <div className={classes.eventText}>
+                                        <h5>Évènement actif</h5>
+                                        <img src={activeEvents[0]?.banner.path} />
+                                        <br />
+                                        <span className={classes.active}>{activeEvents[0]?.name}</span>
+                                        <span className={classes.duration}>
+                                            {new Date(activeEvents[0]?.start_date).toLocaleString([], { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                                            <img src={ArrowRight} className={classes.arrow} alt="arrow" />
+                                            {new Date(activeEvents[0]?.end_date).toLocaleString([], { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+                                    </div> : ""}
                             </> : props.page === 'teams' ?
                                 <>
                                     <Teams handleHeader={setIsHeader} create={setCreateEvent} />
