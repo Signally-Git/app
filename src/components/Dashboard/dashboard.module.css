@@ -55,6 +55,7 @@
 }
 
 .userInfos > img {
+  width: 100px;
   border-radius: 50%;
 }
 
@@ -101,7 +102,7 @@
   margin-top: 0;
 }
 
-.dashboardContainer > div:last-child {
+.dashboardContainer .tilesContainer {
   width: 26vw;
 }
 

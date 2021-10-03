@@ -38,6 +38,7 @@
         text-transform: uppercase;
     }
     > img {
+        width: 100px;
         border-radius: 50%;
     }
 }
@@ -66,7 +67,7 @@
         flex-direction: row-reverse;
         margin-top: 0;
     }
-    > div:last-child {
+    .tilesContainer {
         width: 26vw;
     }
 }

@@ -38,6 +38,7 @@ function Dashboard(props) {
         await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}?access_token=${localStorage.getItem("token")}`).then((res) => {
             setOrganisation(res.data)
         })
+        console.log(organisation)
     }, [])
 
     useEffect(() => {
@@ -93,7 +94,7 @@ function Dashboard(props) {
                 <div className={classes.mainContent}>
                     <div className={classes.menuContainer}>
                         <div className={classes.userInfos}>
-                            <img src='https://dummyimage.com/60.png' alt='' />
+                            <img src={organisation.logo.path} alt='' />
                             <p>{JSON.parse(localStorage.getItem('user'))?.first_name}</p>
                             <p className={classes.capitalize}>{JSON.parse(localStorage.getItem('user'))?.last_name}</p>
                         </div>
@@ -103,7 +104,7 @@ function Dashboard(props) {
                     <div className={classes.dashboardContainer}>
                         {props.page === 'home' ?
                             <>
-                            <h1 className={classes.h1}>Bonjour {JSON.parse(localStorage.getItem('user'))?.first_name}</h1>
+                                <h1 className={classes.h1}>Bonjour {JSON.parse(localStorage.getItem('user'))?.first_name}</h1>
                                 <div onClick={() => setStat(!stat)}>
                                     <h5>Signature active</h5>
                                     <div className={classes.signatureContainer}>
@@ -116,7 +117,9 @@ function Dashboard(props) {
                                             </div> : ""}
                                     </div>
                                 </div>
-                                <Tiles handleHeader={setIsHeader} />
+                                <div className={classes.tilesContainer}>
+                                    <Tiles handleHeader={setIsHeader} />
+                                </div>
                             </> : props.page === 'teams' ?
                                 <>
                                     <Teams handleHeader={setIsHeader} create={setCreateEvent} />
