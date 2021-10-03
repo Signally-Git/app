@@ -1,0 +1,90 @@
+.desktop {
+    background-color: #E3D8DB;
+    min-height: 100vh;
+    margin: 0;
+    padding: 3.5rem;
+    .desktopSubcontainer {
+        border-radius: 40px;
+        display: flex;
+        flex-direction: column;
+        > div {
+            flex: 1;
+        }
+        background-color: #FCF8F7;
+        filter: drop-shadow(16px 0px 40px rgba(0, 0, 0, 0.40));
+    }
+}
+
+.mainContent {
+    margin: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    > ul {
+        padding: 5rem;
+    }
+}
+
+.userInfos {
+    width: 100%;
+    font-size: .9rem;
+    text-align: center;
+    color: #FF7954;
+    p {
+        line-height: .5rem;
+        margin-bottom: 0;
+    }
+    .capitalize {
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    > img {
+        border-radius: 50%;
+    }
+}
+
+.menuContainer {
+    display: flex;
+    margin: 0 auto;
+    margin-right: 3rem;
+    max-height: 100vh;
+    min-height: 80vh;
+    justify-content: center;
+    margin-left: 1rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashboardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-left: 2rem;
+    background-color: #f6f1ef;
+    border-radius: 20px;
+    align-content: flex-start;
+    > div {
+        flex-direction: row-reverse;
+        margin-top: 0;
+    }
+    > div:last-child {
+        width: 26vw;
+    }
+}
+
+.signaturePreview {
+    transform: scale(0.8);
+    transform-origin: top left;
+    margin-right: -3rem;
+}
+
+.signatureContainer {
+    transition: width 1s;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.h1 {
+    color: #402A27;
+    flex: 100%;
+    font-size: 1.75rem;
+}

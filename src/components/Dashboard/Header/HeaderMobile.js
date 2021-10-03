@@ -1,24 +1,18 @@
 import Logo from "../../Logo/logo"
 import Contact from "../../../assets/icons/contactus.svg"
 import { IoPower } from 'react-icons/io5'
-import { HiOutlineSearch } from 'react-icons/hi'
 import classes from "./header.module.css"
 import { Link, useHistory } from "react-router-dom"
 import { useState } from "react"
 
 function Header(props) {
-    console.log(props)
     const [modal, setModal] = useState(false)
     let history = useHistory()
     if (props.page === "home")
-        return (
+        return (            
             <div className={classes.dashboardContainer}>
                 <Logo />
-                {/* <div className={classes.searchContainer}>
-                    <HiOutlineSearch color={"#666666"} size={"1.5rem"} />
-                    <input type="text" placeholder="Search" />
-                </div> */}
-                {/* <span className={classes.headerSpan}>Bonjour <Link to="/profile">{props.user?.first_name}</Link></span> */}
+                {/* <img src={Contact} alt="Contact us" /> */}
                 <IoPower color={"#FF7954"} size={"1.2rem"} stroke={"#FF7954"} strokeWidth={"15px"} onClick={() => { localStorage.clear(); history.push("/") }} />
             </div>
         )

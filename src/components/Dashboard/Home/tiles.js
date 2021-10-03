@@ -8,6 +8,7 @@ import axios from 'axios'
 import { VscSync } from 'react-icons/vsc'
 import { AiOutlineCheckCircle } from 'react-icons/ai'
 import { API } from '../../../config'
+import { MobileView } from 'react-device-detect'
 
 function Tiles(props) {
     const [loading, setLoading] = useState(false)
@@ -67,7 +68,7 @@ function Tiles(props) {
     }, [users])
     return (
         <div className={classes.container}>
-            <h1>Bonjour {JSON.parse(localStorage.getItem("user"))?.first_name}</h1>
+            <MobileView><h1>Bonjour {JSON.parse(localStorage.getItem("user"))?.first_name}</h1></MobileView>
             <div className={classes.tilesList}>
                 <Link to="/signatures" className={classes.tile}>
                     <div className={classes.row}>
@@ -137,7 +138,6 @@ function Tiles(props) {
                     </div>
                 </Link>
             </div>
-            {teamsList.length === 0 ? <SignaturePreview /> : null}
             {localStorage.mailClient &&
                 <Link to="/synchronize" className={classes.syncContainer}>
                     <Sync />

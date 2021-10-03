@@ -1,6 +1,6 @@
 import classes from './team.module.css'
 import { Link, useParams } from 'react-router-dom'
-import Header from '../../Header/Header'
+import Header from '../../Header/HeaderMobile'
 import { useEffect, useState } from 'react'
 import Menu from '../../Menu/Menu'
 import axios from 'axios'

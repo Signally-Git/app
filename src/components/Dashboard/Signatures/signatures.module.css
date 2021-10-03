@@ -1,3 +1,9 @@
+@media screen and (max-width: 680px) {
+  .container ul {
+    display: list-item;
+  }
+}
+
 .container {
   color: #66433e;
   max-width: 90%;
@@ -13,6 +19,11 @@
 .container ul {
   margin: 0;
   padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   list-style: none;
 }
 

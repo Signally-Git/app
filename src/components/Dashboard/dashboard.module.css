@@ -1,0 +1,132 @@
+.desktop {
+  background-color: #E3D8DB;
+  min-height: 100vh;
+  margin: 0;
+  padding: 3.5rem;
+}
+
+.desktop .desktopSubcontainer {
+  border-radius: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #FCF8F7;
+  -webkit-filter: drop-shadow(16px 0px 40px rgba(0, 0, 0, 0.4));
+          filter: drop-shadow(16px 0px 40px rgba(0, 0, 0, 0.4));
+}
+
+.desktop .desktopSubcontainer > div {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.mainContent {
+  margin: 2rem;
+  margin-top: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.mainContent > ul {
+  padding: 5rem;
+}
+
+.userInfos {
+  width: 100%;
+  font-size: .9rem;
+  text-align: center;
+  color: #FF7954;
+}
+
+.userInfos p {
+  line-height: .5rem;
+  margin-bottom: 0;
+}
+
+.userInfos .capitalize {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.userInfos > img {
+  border-radius: 50%;
+}
+
+.menuContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  margin-right: 3rem;
+  max-height: 100vh;
+  min-height: 80vh;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: 1rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.dashboardContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+  padding-left: 2rem;
+  background-color: #f6f1ef;
+  border-radius: 20px;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+}
+
+.dashboardContainer > div {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  margin-top: 0;
+}
+
+.dashboardContainer > div:last-child {
+  width: 26vw;
+}
+
+.signaturePreview {
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+  margin-right: -3rem;
+}
+
+.signatureContainer {
+  -webkit-transition: width 1s;
+  transition: width 1s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+}
+
+.h1 {
+  color: #402A27;
+  -webkit-box-flex: 100%;
+      -ms-flex: 100%;
+          flex: 100%;
+  font-size: 1.75rem;
+}

@@ -1,7 +1,14 @@
+@media screen and (max-width: 680px) {
+  .container {
+    padding-bottom: 10rem;
+    min-height: 100vh;
+    padding-top: 2rem;
+    margin: auto;
+  }
+}
+
 .container {
   width: 95%;
-  margin: auto;
-  min-height: 100vh;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -10,11 +17,12 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding-top: 2rem;
-  padding-bottom: 10rem;
 }
 
 .container h1 {
+  -webkit-box-flex: 100%;
+      -ms-flex: 100%;
+          flex: 100%;
   margin-left: .5rem;
   color: #402A27;
   font-size: 1.75rem;

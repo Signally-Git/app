@@ -266,10 +266,10 @@ function CreateSignatureComponent() {
       <div>
   <table>
       <tr>
-          <table style="margin-bottom: 12px; margin-top: 0;">
+          <table style="margin-bottom: 12px; margin-top: 0; box-sizing: border-box; border-collapse: collapse;">
               <tbody>
-                  <tr>
-                      <td>
+                  <tr style="box-sizing: border-box;">
+                      <td style="box-sizing: border-box;">
                           <img style="margin: 0 4px 0 0; padding: 0; width: 108px; height: 108px;" src='PLACEHOLDER_COMPANY_ICON'
                               alt='PLACEHOLDER_COMPANY' />
                       </td>
@@ -307,16 +307,16 @@ function CreateSignatureComponent() {
           </table>
       </tr>
       <tr>
-          <table style="margin-top: 0;">
+          <table style="margin-top: 0; box-sizing: border-box; border-collapse: collapse;">
               <tbody>
-                  <tr>
-                      <td>
+                  <tr style="box-sizing: border-box;">
+                      <td style="box-sizing: border-box;">
                           <img style="border-radius: 4px; margin-bottom: 12px; width: 380px;" src='PLACEHOLDER_EVENT_BANNER'
                               alt='banner' />
                       </td>
                   </tr>
-                  <tr>
-                      <td style="background-color: #000; border-radius: 4px; padding: 12px; height: 38px; width: 380px; ">
+                  <tr style="box-sizing: border-box;">
+                      <td style="background-color: #000; border-radius: 4px; padding: 12px; height: 38px; width: 380px; box-sizing: border-box;">
                       <div style="margin-top: 2px;">
                           <span style="color: #FFF; font-size: 13px; font-weight: 400;vertical-align:super">Follow us</span>
                           <a href="https://facebook.com/MamaShelterOfficial/"><img style="width: 22px; height: 22px;" src="https://images.signally.io/ed8f47210ec0a5c9d6b39a4e1985a5373f306935585" alt="facebook" /></a>

@@ -6,10 +6,10 @@
 
 .active::after {
   position: absolute;
-  content: ' ';
-  background: #FF7954;
+  content: " ";
+  background: #ff7954;
   width: 5px;
-  bottom: -5px;
+  bottom: 0px;
   left: 50%;
   -webkit-transform: translate(-50%, 0);
           transform: translate(-50%, 0);
@@ -18,25 +18,48 @@
 }
 
 .tabMenu {
-  position: fixed;
-  z-index: 2;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   list-style: none;
-  background: #FFF;
-  bottom: 0;
   padding: 0;
-  width: 100%;
-  margin-bottom: 0;
-  padding-bottom: 2rem;
-  padding-top: 1rem;
-  border-radius: 20px 20px 0  0;
 }
 
 .tabMenu li {
-  font-size: 0.8rem;
+  font-size: 5rem;
+}
+
+.tabMenu li img {
+  width: 1.85rem;
+}
+
+@media screen and (max-width: 680px) {
+  .active ::after {
+    bottom: -5px;
+  }
+  .tabMenu {
+    position: fixed;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    z-index: 2;
+    background: #fff;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 0;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+    border-radius: 20px 20px 0 0;
+  }
+  .tabMenu li {
+    font-size: 0.8rem;
+  }
 }

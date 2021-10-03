@@ -1,6 +1,6 @@
 .dashboardContainer {
-    width: 90%;
-    padding-top: 1rem;
+    width: 100%;
+    padding: 2rem;
     margin: auto;
     display: flex;
     align-items: center;
@@ -10,38 +10,69 @@
 .container {
     position: fixed;
     box-sizing: border-box;
-    width: 100%;
+    width: 72rem;
     left: 0;
-    top: 0;
-    right: 0;
-    margin: auto;
+    top: 2rem;
+    right: 2rem;
+    margin-left: auto;
     margin-top: 0;
     padding: 1rem 5%;
     z-index: 5;
+    border-radius: 20px 20px 0px 0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba($color: #FFF, $alpha: 0.5);
+    background: rgba($color: #fff, $alpha: 0.5);
     backdrop-filter: blur(5px);
-    box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.5);
     h2 {
         font-size: 1.35rem;
-        color: #402A27;
+        color: #402a27;
         line-height: 0;
     }
 }
 
-.add{
+.searchContainer {
+    display: flex;
+    width: 100%;
+    max-width: 30rem;
+    position: relative;
+    input {
+        border: none;
+        background: #fff;
+        outline: none;
+        border-radius: 25px;
+        padding: 1rem;
+        text-indent: 2rem;
+        width: 100%;
+    }
+    svg {
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        left: 1rem;
+        position: absolute;
+    }
+}
+
+.headerSpan {
+    color: #ff7954;
+    a {
+        color: #ff7954;
+        text-decoration: underline;
+    }
+}
+
+.add {
     cursor: pointer;
     text-align: center;
     width: 25px;
     line-height: 25px;
     height: 25px;
-    color: #FFF;
+    color: #fff;
     font-size: 26px;
     border-radius: 50%;
     margin: 0;
-    background: #FF7954;
+    background: #ff7954;
 }
 
 .options {
@@ -50,21 +81,36 @@
     right: 1rem;
     top: 2.5rem;
     background: rgba(255, 255, 255, 1);
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 10px;
     box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
     display: flex;
     flex-direction: column;
     li {
         a {
-            color: #66433E;
+            color: #66433e;
         }
         font-size: 1rem;
-        color: #66433E;
-        font-family: 'Trebuchet MS';
-        padding: .5rem 0;
+        color: #66433e;
+        font-family: "Trebuchet MS";
+        padding: 0.5rem 0;
         &:not(:last-of-type) {
-            border-bottom: 1px solid #66433E22;;
+            border-bottom: 1px solid #66433e22;
         }
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .dashboardContainer {
+        width: 90%;
+        padding-top: 1rem;
+    }
+    .container {
+        top: 0;
+        box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.5);
+        right: 0;
+        margin-left: 0;
+        width: 100%;
+        border-radius: 0px;
     }
 }
