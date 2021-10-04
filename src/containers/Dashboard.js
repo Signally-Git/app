@@ -22,7 +22,7 @@ let count = 0;
 function Dashboard(props) {
     const [isHeader, setIsHeader] = useState("")
     const [createEvent, setCreateEvent] = useState(null)
-    const userId = JSON.parse(localStorage.getItem("user")).id
+    const userId = JSON.parse(localStorage.getItem("user"))?.id
     const [user, setUser] = useState()
     const [template, setTemplate] = useState()
     const [stat, setStat] = useState(false)
@@ -40,7 +40,7 @@ function Dashboard(props) {
                 })
         })
 
-        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}?access_token=${localStorage.getItem("token")}`).then((res) => {
+        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user"))?.organisation_id}?access_token=${localStorage.getItem("token")}`).then((res) => {
             setOrganisation(res.data)
         })
 
