@@ -321,7 +321,7 @@ function CreateSignatureComponent() {
                           <span style="color: #FFF; font-size: 13px; font-weight: 400;vertical-align:super">Follow us</span>
                           <a href="https://facebook.com/MamaShelterOfficial/"><img style="width: 22px; height: 22px;" src="https://images.signally.io/ed8f47210ec0a5c9d6b39a4e1985a5373f306935585" alt="facebook" /></a>
                           <a href="https://www.instagram.com/mamashelter/"><img style="width: 22px; height: 22px;" src="https://images.signally.io/ed8f459ae3ae29b20507b5aa30d6c0aa3f7509f9f8c" alt="instagram" /></a>
-                          <a href="https://www.linkedin.com/company/mama-shelter"><img src="https://images.signally.io/ed8c7ec09500680f99f2b345a4d028f5e0fd433a6a5" alt="linkedin" /></a>
+                          <a href="https://www.linkedin.com/company/mama-shelter"><img src="https://images.signally.io/edb348ca91a6c4c0d3eba124b0d4e9e320d9bfaa22d" alt="linkedin" /></a>
                           <a href="https://www.pinterest.fr/mamashelter/"><img src="https://images.signally.io/ed8c7ef3ca6dd5aa1eb73a7d1e15fe9c1cdcb597edd" alt="pinterest" /></a>
                           <a href="https://www.snapchat.com/"><img src="https://images.signally.io/ed8c7f1cbe46ad4662314f88113b85434e03da2a40f" alt="snapchat" /></a>
                           <a href="https://twitter.com/mama_shelter/"><img src="https://images.signally.io/ed8c7f3cce65502f5b3c51b3caa8e2da3603dfd77c3" alt="twitter" /></a>

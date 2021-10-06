@@ -26,6 +26,7 @@ function Dashboard(props) {
     const [user, setUser] = useState()
     const [template, setTemplate] = useState()
     const [stat, setStat] = useState(false)
+    const [statEvent, setStatEvent] = useState(false)
     const [data, setData] = useState([])
     const [activeEvents, setActiveEvents] = useState()
     const [organisation, setOrganisation] = useState()
@@ -117,33 +118,40 @@ function Dashboard(props) {
                     <div className={classes.dashboardContainer}>
                         {props.page === 'home' ?
                             <>
-                                <h1 className={classes.h1}>Bonjour {JSON.parse(localStorage.getItem('user'))?.first_name}</h1>
+                                {/* <h1 className={classes.h1}>Bonjour {JSON.parse(localStorage.getItem('user'))?.first_name}</h1> */}
                                 <div onClick={() => setStat(!stat)}>
-                                    <h5>Signature active</h5>
-                                    <div className={classes.signatureContainer}>
+                                    <div className={`${classes.signatureContainer} ${stat ? classes.open : classes.closed}`}>
                                         <div className={classes.signaturePreview}>
+                                            <h5>Signature active</h5>
                                             <RenderHTML template={template} data={data} />
                                         </div>
                                         {stat ?
                                             <div>
-                                                <img src="https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Fh5p.org%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium-logo%2Fpublic%2Flogos%2Fchart-icon-color.png%3Fitok%3DkpLTYHHJ&sp=1633294646Te40312a64c82f7e9834ca7bfaf8bba6ab184e28fa2fb710cac59847851007d7a" />
+                                                <img src="http://fakeimg.pl/150x200?text=Statistics&font=lobster" />
                                             </div> : ""}
                                     </div>
                                 </div>
                                 <div className={classes.tilesContainer}>
                                     <Tiles handleHeader={setIsHeader} />
                                 </div>
-                                <div className={classes.spacer}></div>
+                                {/* <div className={classes.spacer}></div> */}
                                 {activeEvents ?
-                                    <div className={classes.eventText}>
-                                        <h5>Évènement actif</h5>
-                                        <img src={activeEvents[0]?.banner.path} />
-                                        <br />
-                                        <span className={classes.active}>{activeEvents[0]?.name}</span>
-                                        <span className={classes.duration}>
-                                            {new Date(activeEvents[0]?.start_date).toLocaleString([], { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
-                                            <img src={ArrowRight} className={classes.arrow} alt="arrow" />
-                                            {new Date(activeEvents[0]?.end_date).toLocaleString([], { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+                                    <div onClick={() => setStatEvent(!statEvent)} className={`${classes.eventText} ${statEvent ? classes.open : classes.closed}`}>
+                                        <div>
+                                            <h5>Évènement actif</h5>
+                                            <img src={activeEvents[0]?.banner.path} />
+                                            <br />
+                                            <span className={classes.active}>{activeEvents[0]?.name}</span>
+                                            <span className={classes.duration}>
+                                                {new Date(activeEvents[0]?.start_date).toLocaleString([], { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+
+                                                <img src={ArrowRight} className={classes.arrow} alt="arrow" />
+                                                {new Date(activeEvents[0]?.end_date).toLocaleString([], { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+                                        </div>
+                                        {statEvent ?
+                                            <div>
+                                                <img src="http://fakeimg.pl/150x200?text=Statistics&font=lobster" />
+                                            </div> : ""}
                                     </div> : ""}
                             </> : props.page === 'teams' ?
                                 <>

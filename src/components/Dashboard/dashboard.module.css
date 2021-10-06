@@ -1,5 +1,5 @@
 .desktop {
-  background-color: #e3d8db;
+  background-color: #DFD5D8;
   min-height: 100vh;
   margin: 0;
   padding: 3.5rem;
@@ -37,6 +37,11 @@
   padding: 5rem;
 }
 
+.mainContent h5 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
 .userInfos {
   width: 100%;
   font-size: 0.9rem;
@@ -55,8 +60,10 @@
 }
 
 .userInfos > img {
-  width: 100px;
-  border-radius: 50%;
+  max-width: 100px;
+  max-height: 100px;
+  width: auto;
+  height: auto;
 }
 
 .menuContainer {
@@ -88,7 +95,8 @@
       flex-wrap: wrap;
   width: 100%;
   padding-left: 2rem;
-  background-color: #f6f1ef;
+  padding-top: 2rem;
+  background-color: #F5EEEF;
   border-radius: 20px;
   -ms-flex-line-pack: start;
       align-content: flex-start;
@@ -99,21 +107,42 @@
 }
 
 .signaturePreview {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.signaturePreview > div {
   -webkit-transform: scale(0.8);
           transform: scale(0.8);
-  -webkit-transform-origin: top left;
-          transform-origin: top left;
+  -webkit-transform-origin: left;
+          transform-origin: left;
   margin-right: -3rem;
 }
 
 .signatureContainer {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 2rem;
   -webkit-transition: width 1s;
   transition: width 1s;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  background: #FFF;
+  border-radius: 30px;
+  padding: 1.5rem 2.5rem;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
+  overflow: hidden;
 }
 
 .h1 {
@@ -129,9 +158,37 @@
   min-width: 45%;
 }
 
+.open {
+  -webkit-transition: 1s;
+  transition: 1s;
+  max-width: 35rem;
+  width: 35rem;
+}
+
+.closed {
+  -webkit-transition: 1s;
+  transition: 1s;
+  max-width: 25rem;
+  width: 25rem;
+}
+
 .eventText {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
   margin-top: 1rem;
   margin-bottom: 3rem;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 30px;
+}
+
+.eventText > div {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+  -webkit-transform-origin: left;
+          transform-origin: left;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -139,16 +196,16 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  text-indent: 1.5rem;
   position: relative;
   font-weight: 600;
   font-size: 0.9rem;
-  padding: 1rem;
-  background: #fff;
-  border-radius: 10px;
 }
 
-.eventText::before {
+.eventText > div h5 {
+  margin-bottom: 1rem;
+}
+
+.eventText > div::before {
   -webkit-box-ordinal-group: 4;
       -ms-flex-order: 3;
           order: 3;
