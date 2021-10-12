@@ -28,6 +28,24 @@
     }
 }
 
+.event {
+    position: relative;
+    & :hover span {
+        color: #66433e;
+    }
+    span {
+        font-weight: 600;
+        color: #66433e;
+        text-align: center;
+        right: 0;
+        left: 0;
+        bottom: 1.55rem;
+        margin: auto;
+        font-size: .7rem;
+        position: absolute;
+    }
+}
+
 @media screen and (max-width: 680px) {
     .active &::after {
         bottom: -5px;

@@ -12,6 +12,7 @@ import Import from './containers/Import'
 import PrivateRoute from './components/PrivateRoute/privateRoute'
 import CreateSignature from './containers/CreateSignature'
 import Users from './components/Dashboard/Users/users'
+import ImgUploader from './components/imgUploader/imgUploader'
 
 function App() {
   return (
@@ -53,6 +54,8 @@ function App() {
         <PrivateRoute path="/synchronize" component={SyncPage} />
 
         <PrivateRoute path="/import" component={Import} />
+
+        <PrivateRoute path="/upload-img" component={ImgUploader} />
 
         <Route path="/">
           <Error />

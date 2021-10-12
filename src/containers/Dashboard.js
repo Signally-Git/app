@@ -11,11 +11,13 @@ import { useEffect, useState } from 'react'
 import ArrowRight from '../assets/icons/arrow-right.svg'
 import PastEvents from '../components/Dashboard/Events/PastEvents/PastEvents'
 import Profile from '../components/Dashboard/Profile/profile'
+import Chart from 'react-apexcharts'
 
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 import axios from 'axios'
 import { API } from '../config'
 import RenderHTML from '../components/Dashboard/Signatures/createSignature/RenderHTML/RenderHTML'
+import Users from '../components/Dashboard/UsersDesktop/users'
 
 let count = 0;
 
@@ -30,6 +32,25 @@ function Dashboard(props) {
     const [data, setData] = useState([])
     const [activeEvents, setActiveEvents] = useState()
     const [organisation, setOrganisation] = useState()
+    const [chartOptions, setChartOptions] = useState({
+        chart: {
+            id: 'apexchart-example', toolbar: {
+                show: false
+            }
+        },
+        stroke: {
+            curve: 'smooth',
+            width: 2
+        },
+        markers: {
+            size: 4,
+        },
+        colors: ['#ff7954'],
+        xaxis: {
+            categories: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        },
+    })
+    const [chartSeries, setChartSeries] = useState([{ name: 'CPM signature', type: "line", data: [30, 40, 45, 50, 49, 22, 70, 41] }])
 
     useEffect(async () => {
         await axios.get(`${API}user/${userId}?access_token=${localStorage.getItem("token")}`).then(async (res) => {
@@ -78,7 +99,7 @@ function Dashboard(props) {
                     <Tiles handleHeader={setIsHeader} />
                 </> : props.page === 'teams' ?
                     <>
-                        <Teams handleHeader={setIsHeader} create={setCreateEvent} />
+                            <Teams handleHeader={setIsHeader} create={setCreateEvent} />
                     </> : props.page === 'signatures' ?
                         <>
                             <Signatures handleHeader={setIsHeader} header={isHeader} create={setCreateEvent} />
@@ -109,8 +130,8 @@ function Dashboard(props) {
                     <div className={classes.menuContainer}>
                         <div className={classes.userInfos}>
                             <img src={organisation?.logo?.path} alt='' />
-                            <p>{JSON.parse(localStorage.getItem('user'))?.first_name}</p>
-                            <p className={classes.capitalize}>{JSON.parse(localStorage.getItem('user'))?.last_name}</p>
+                            <p className={classes.capitalize}>{organisation?.name}</p>
+                            {/* <p className={classes.capitalize}>{JSON.parse(localStorage.getItem('user'))?.last_name}</p> */}
                         </div>
                         <Menu className={classes.menu} page={props.page} />
                     </div>
@@ -119,20 +140,23 @@ function Dashboard(props) {
                         {props.page === 'home' ?
                             <>
                                 {/* <h1 className={classes.h1}>Bonjour {JSON.parse(localStorage.getItem('user'))?.first_name}</h1> */}
-                                <div onClick={() => setStat(!stat)}>
-                                    <div className={`${classes.signatureContainer} ${stat ? classes.open : classes.closed}`}>
-                                        <div className={classes.signaturePreview}>
-                                            <h5>Signature active</h5>
-                                            <RenderHTML template={template} data={data} />
+
+                                <div className={classes.row}>
+                                    <div onClick={() => setStat(!stat)}>
+                                        <div className={`${classes.signatureContainer} ${stat ? classes.open : classes.closed}`}>
+                                            <div className={classes.signaturePreview}>
+                                                <h5>Signature active</h5>
+                                                <RenderHTML template={template} data={data} />
+                                            </div>
+                                            {stat ?
+                                                <div>
+                                                    <Chart options={chartOptions} series={chartSeries} width={250} height={320} />
+                                                </div> : ""}
                                         </div>
-                                        {stat ?
-                                            <div>
-                                                <img src="http://fakeimg.pl/150x200?text=Statistics&font=lobster" />
-                                            </div> : ""}
                                     </div>
-                                </div>
-                                <div className={classes.tilesContainer}>
-                                    <Tiles handleHeader={setIsHeader} />
+                                    <div className={classes.tilesContainer}>
+                                        <Tiles handleHeader={setIsHeader} />
+                                    </div>
                                 </div>
                                 {/* <div className={classes.spacer}></div> */}
                                 {activeEvents ?
@@ -150,12 +174,12 @@ function Dashboard(props) {
                                         </div>
                                         {statEvent ?
                                             <div>
-                                                <img src="http://fakeimg.pl/150x200?text=Statistics&font=lobster" />
+                                                <Chart options={chartOptions} series={chartSeries} width={250} height={320} />
                                             </div> : ""}
                                     </div> : ""}
                             </> : props.page === 'teams' ?
                                 <>
-                                    <Teams handleHeader={setIsHeader} create={setCreateEvent} />
+                                    <Users />
                                 </> : props.page === 'signatures' ?
                                     <>
                                         <Signatures handleHeader={setIsHeader} header={isHeader} create={setCreateEvent} />

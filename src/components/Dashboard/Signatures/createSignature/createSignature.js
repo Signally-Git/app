@@ -263,7 +263,6 @@ function CreateSignatureComponent() {
   </div></div><div class="adL">
   </div></div>`,
       `<div style="font-family:Helvetica,Arial,sans-serif;">
-      <div>
   <table>
       <tr>
           <table style="margin-bottom: 12px; margin-top: 0; box-sizing: border-box; border-collapse: collapse;">
@@ -274,7 +273,7 @@ function CreateSignatureComponent() {
                               alt='PLACEHOLDER_COMPANY' />
                       </td>
                       <td
-                          style="background-color: #FFD500; border-radius: 4px; width: 264px; height: 108px; box-sizing: border-box; padding: 12px;">
+                          style="background-color: #FCE750; border-radius: 4px; width: 264px; height: 108px; box-sizing: border-box; padding: 12px;">
                           <p
                               style="line-height: 0px; font-size:11px; font-weight:600; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;">
                               <span>PLACEHOLDER_FIRST_NAME</span>
@@ -319,13 +318,13 @@ function CreateSignatureComponent() {
                       <td style="background-color: #000; border-radius: 4px; padding: 12px; height: 38px; width: 380px; box-sizing: border-box;">
                       <div style="margin-top: 2px;">
                           <span style="color: #FFF; font-size: 13px; font-weight: 400;vertical-align:super">Follow us</span>
-                          <a href="https://facebook.com/MamaShelterOfficial/"><img style="width: 22px; height: 22px;" src="https://images.signally.io/ed8f47210ec0a5c9d6b39a4e1985a5373f306935585" alt="facebook" /></a>
-                          <a href="https://www.instagram.com/mamashelter/"><img style="width: 22px; height: 22px;" src="https://images.signally.io/ed8f459ae3ae29b20507b5aa30d6c0aa3f7509f9f8c" alt="instagram" /></a>
-                          <a href="https://www.linkedin.com/company/mama-shelter"><img src="https://images.signally.io/edb348ca91a6c4c0d3eba124b0d4e9e320d9bfaa22d" alt="linkedin" /></a>
-                          <a href="https://www.pinterest.fr/mamashelter/"><img src="https://images.signally.io/ed8c7ef3ca6dd5aa1eb73a7d1e15fe9c1cdcb597edd" alt="pinterest" /></a>
-                          <a href="https://www.snapchat.com/"><img src="https://images.signally.io/ed8c7f1cbe46ad4662314f88113b85434e03da2a40f" alt="snapchat" /></a>
-                          <a href="https://twitter.com/mama_shelter/"><img src="https://images.signally.io/ed8c7f3cce65502f5b3c51b3caa8e2da3603dfd77c3" alt="twitter" /></a>
-                          <a href="https://fr.mamashelter.com/"><img src="https://images.signally.io/ed8f5e255e7c1f63e6f1f132e94b33036a44dacf2b2" alt="mama shelter" style="margin-left: 65px; height:20px;" /></a>
+                          <a href="https://facebook.com/MamaShelterOfficial/"><img style="width: 22px; height: 22px;" src="https://images.signally.io/edc03474ffce5393c3ae4c9f41644ae308f47589a5f" alt="facebook" /></a>
+                          <a href="https://www.instagram.com/mamashelter/"><img style="width: 22px; height: 22px;" src="https://images.signally.io/edbfaae920ace429a72d544d821c8b75da78dc4c9ed" alt="instagram" /></a>
+                          <a href="https://www.linkedin.com/company/mama-shelter"><img style="width: 22px; height: 22px;" src="https://images.signally.io/edbfab0005df1154f814c95baf8879479b4cb8e5eb0" alt="linkedin" /></a>
+                          <a href="https://www.pinterest.fr/mamashelter/"><img style="width: 22px; height: 22px;" src="https://images.signally.io/edbfab2a476d6472c6c67fd6046cdb1e9d4575cd714" alt="pinterest" /></a>
+                          <a href="https://www.snapchat.com/"><img style="width: 22px; height: 22px;" src="https://images.signally.io/edbfabbfb42883d3386eccee0993a0fa471f88b5d43" alt="snapchat" /></a>
+                          <a href="https://twitter.com/mama_shelter/"><img style="width: 22px; height: 22px;" src="https://images.signally.io/edbfab48f4d887780c7e44ed495e3eadfbe311fbd52" alt="twitter" /></a>
+                          <a href="https://fr.mamashelter.com/"><img src="https://images.signally.io/edbfe35188fc8bd33897cb1517a91b0bb6f4d791bae" alt="mama shelter" style="margin-left: 65px; height:22px;" /></a>
                         </div>
                       </td>
                   </tr>
@@ -333,7 +332,6 @@ function CreateSignatureComponent() {
           </table>
       </tr>
   </table>
-  </div>
 </div>`])
   }, [displaySocials, socialColor, socialBgColor])
   useEffect(async () => {

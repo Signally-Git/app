@@ -1,5 +1,14 @@
+@media screen and (max-width: 680px) {
+  .dashboardContainer {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+
 .desktop {
-  background-color: #DFD5D8;
+  background-color: #dfd5d8;
   min-height: 100vh;
   margin: 0;
   padding: 3.5rem;
@@ -87,16 +96,30 @@
           align-items: center;
 }
 
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.row > div:last-child {
+  margin-top: -0.5rem;
+}
+
 .dashboardContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   width: 100%;
   padding-left: 2rem;
   padding-top: 2rem;
-  background-color: #F5EEEF;
+  background-color: #f5eeef;
   border-radius: 20px;
   -ms-flex-line-pack: start;
       align-content: flex-start;
@@ -137,7 +160,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background: #FFF;
+  background: #fff;
   border-radius: 30px;
   padding: 1.5rem 2.5rem;
   -ms-flex-wrap: nowrap;
@@ -161,8 +184,8 @@
 .open {
   -webkit-transition: 1s;
   transition: 1s;
-  max-width: 35rem;
-  width: 35rem;
+  max-width: 40rem;
+  width: 40rem;
 }
 
 .closed {
