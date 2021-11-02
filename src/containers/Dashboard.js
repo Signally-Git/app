@@ -5,7 +5,9 @@ import Menu from '../components/Dashboard/Menu/Menu'
 import Tiles from '../components/Dashboard/Home/tiles'
 import Teams from '../components/Dashboard/Teams/teams'
 import Signatures from '../components/Dashboard/Signatures/signatures'
+import SignaturesDesktop from '../components/Dashboard/Signatures/signaturesDesktop/signaturesDesktop'
 import Events from '../components/Dashboard/Events/events'
+import EventsDesktop from '../components/Dashboard/Events/desktopEvents'
 import CreateEvent from '../components/Dashboard/Events/CreateEvent/createEvent'
 import { useEffect, useState } from 'react'
 import ArrowRight from '../assets/icons/arrow-right.svg'
@@ -18,6 +20,7 @@ import axios from 'axios'
 import { API } from '../config'
 import RenderHTML from '../components/Dashboard/Signatures/createSignature/RenderHTML/RenderHTML'
 import Users from '../components/Dashboard/UsersDesktop/users'
+import CreateSignature from '../components/Dashboard/Signatures/createSignatureDesktop/createSignature'
 
 let count = 0;
 
@@ -99,7 +102,7 @@ function Dashboard(props) {
                     <Tiles handleHeader={setIsHeader} />
                 </> : props.page === 'teams' ?
                     <>
-                            <Teams handleHeader={setIsHeader} create={setCreateEvent} />
+                        <Teams handleHeader={setIsHeader} create={setCreateEvent} />
                     </> : props.page === 'signatures' ?
                         <>
                             <Signatures handleHeader={setIsHeader} header={isHeader} create={setCreateEvent} />
@@ -122,10 +125,7 @@ function Dashboard(props) {
     return (
         <div className={classes.desktop}>
             <div className={classes.desktopSubcontainer}>
-                {
-                    isHeader?.length > 0 &&
-                    <Header page={props.page} user={JSON.parse(localStorage.getItem('user'))} title={isHeader} create={createEvent} />
-                }
+                <Header page={props.page} user={JSON.parse(localStorage.getItem('user'))} title={isHeader} create={createEvent} />
                 <div className={classes.mainContent}>
                     <div className={classes.menuContainer}>
                         <div className={classes.userInfos}>
@@ -137,10 +137,11 @@ function Dashboard(props) {
                     </div>
 
                     <div className={classes.dashboardContainer}>
+                        
                         {props.page === 'home' ?
                             <>
                                 {/* <h1 className={classes.h1}>Bonjour {JSON.parse(localStorage.getItem('user'))?.first_name}</h1> */}
-
+                                <h1>Tableau de bord</h1>
                                 <div className={classes.row}>
                                     <div onClick={() => setStat(!stat)}>
                                         <div className={`${classes.signatureContainer} ${stat ? classes.open : classes.closed}`}>
@@ -182,20 +183,23 @@ function Dashboard(props) {
                                     <Users />
                                 </> : props.page === 'signatures' ?
                                     <>
-                                        <Signatures handleHeader={setIsHeader} header={isHeader} create={setCreateEvent} />
-                                    </> : props.page === 'events' ?
+                                        <SignaturesDesktop />
+                                    </> : props.page === 'create-signature' ?
                                         <>
-                                            <Events handleHeader={setIsHeader} create={setCreateEvent} />
-                                        </> : props.page === 'create-event' ?
+                                            <CreateSignature />
+                                        </> : props.page === 'events' ?
                                             <>
-                                                <CreateEvent handleHeader={setIsHeader} />
-                                            </> : props.page === 'past-events' ?
+                                                <EventsDesktop />
+                                            </> : props.page === 'create-event' ?
                                                 <>
-                                                    <PastEvents handleHeader={setIsHeader} />
-                                                </> : props.page === 'profile' ?
+                                                    <CreateEvent handleHeader={setIsHeader} />
+                                                </> : props.page === 'past-events' ?
                                                     <>
-                                                        <Profile handleHeader={setIsHeader} header={isHeader} create={setCreateEvent} />
-                                                    </> : null}
+                                                        <PastEvents handleHeader={setIsHeader} />
+                                                    </> : props.page === 'profile' ?
+                                                        <>
+                                                            <Profile handleHeader={setIsHeader} header={isHeader} create={setCreateEvent} />
+                                                        </> : null}
                     </div>
                 </div>
             </div>

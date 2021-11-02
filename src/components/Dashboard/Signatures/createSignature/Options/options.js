@@ -6,7 +6,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 const DRAG_HANDLES_SELECTOR_CLASS = "drag-handle-marker";
 export function Options(props) {
     const [items, onItemsChange] = useState([
-        { id: "eco", title: "Message eco-responsable" },
+        { id: "eco", title: "eco-resp" },
         { id: "disclaimer", title: "Disclaimer" }
     ]);
     const listRef = useRef();

@@ -10,16 +10,24 @@ import { useState } from "react"
 function Header(props) {
     console.log(props)
     const [modal, setModal] = useState(false)
+    const [notif, setNotif] = useState(true)
     let history = useHistory()
     // if (props.page === "home")
     return (
         <div className={classes.dashboardContainer}>
-            <Logo />
+            <div  onClick={() => setNotif(!notif)}>
+                <Logo />
+                </div>
             {/* <div className={classes.searchContainer}>
                     <HiOutlineSearch color={"#666666"} size={"1.5rem"} />
                     <input type="text" placeholder="Search" />
                 </div> */}
+            {/* <h2 className={classes.pageTitle}>Création de signature</h2> */}
             {/* <span className={classes.headerSpan}>Bonjour <Link to="/profile">{props.user?.first_name}</Link></span> */}
+            <div className={classes.btnsContainer}>
+                {props.page !== "studio" ? <Link className={classes.studio} to="/studio">STUDIO</Link> : <Link className={classes.studio} to="/dashboard">QUITTER LE STUDIO</Link>}
+                {props.page !== "store" ? <Link className={`${classes.store} ${notif ? classes.notif : ""}`} to="/store">STORE</Link> : <Link className={classes.store} to="/dashboard">QUITTER LE STORE</Link>}
+            </div>
             <div className={classes.name}>
                 <Link to="/profile">
                 {props.user?.first_name} {props.user?.last_name}

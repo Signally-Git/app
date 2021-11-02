@@ -76,7 +76,7 @@
 }
 
 .tile:first-of-type {
-  background-color: #FF7954;
+  background-color: #ED693D;
 }
 
 .tile:first-of-type * {
@@ -84,7 +84,7 @@
 }
 
 .tile:nth-of-type(2) {
-  background-color: #FFCC20;
+  background-color: #F6C444;
 }
 
 .tile:nth-of-type(2) * {
@@ -200,7 +200,7 @@
 }
 
 .billingTile {
-  background: #66433E;
+  background: #3D2B28;
 }
 
 .billingTile * {

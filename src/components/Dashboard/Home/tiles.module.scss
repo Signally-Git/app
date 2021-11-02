@@ -48,13 +48,13 @@
     background: #FFF;
     box-shadow: 0px 20px 20px rgba(206, 142, 124, 0.15);
     &:first-of-type {
-        background-color: #FF7954;
+        background-color: #ED693D;
         * {
             color: #FFF;
         }
     }
     &:nth-of-type(2) {
-        background-color: #FFCC20;
+        background-color: #F6C444;
         * {
             color: #FFF;
         }
@@ -135,7 +135,7 @@
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 .billingTile {
-    background: #66433E;
+    background: #3D2B28;
     * {
         color: #FFF;
     }

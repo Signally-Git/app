@@ -292,13 +292,13 @@ function CreateSignatureComponent() {
                               <span
                                   style="font-size:11px; font-weight:600; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;">T</span>
                               <span
-                                  style="font-size:11px; font-weight:200; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;">+33
-                                  PLACEHOLDER_MOBILE</span>
+                                  style="font-size:11px; font-weight:200; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;">
+                                  PLACEHOLDER_PHONE</span>
                               <span
                                   style="font-size:11px; font-weight:600; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;">M</span>
                               <span
-                                  style="font-size:11px; font-weight:200; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;">+33
-                                  PLACEHOLDER_PHONE</span>
+                                  style="font-size:11px; font-weight:200; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;">
+                                  PLACEHOLDER_MOBILE</span>
                           </p>
                       </td>
                   </tr>

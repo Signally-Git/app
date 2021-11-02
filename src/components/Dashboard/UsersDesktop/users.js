@@ -5,6 +5,9 @@ import axios from 'axios'
 import { API } from '../../../config'
 import ListItem from '../Teams/Team/user'
 import RenderHTML from '../Signatures/createSignature/RenderHTML/RenderHTML'
+import { HiOutlineSearch } from 'react-icons/hi'
+import { previousWednesday } from 'date-fns'
+import { FiEdit } from 'react-icons/fi'
 
 function Team() {
     const [teamInfos, setTeamInfos] = useState([])
@@ -16,7 +19,8 @@ function Team() {
     const [data, setData] = useState([])
     const [organisation, setOrganisation] = useState()
     let { teamId } = useParams()
-    let userId = "ed89e8b9953171695dd6628789be3b8108605073f83";
+    const [preview, setPreview] = useState({ name: "Design" })
+    let userId = localStorage.getItem('user_id');
     // const handlers = useSwipeable({ onSwipedLeft: (e) => console.log(e.event.target) })
     // const handlers = useSwipeable({ onSwipedLeft: () => setEditing(true), onSwipedRight: () => setEditing(false) })
 
@@ -36,12 +40,12 @@ function Team() {
 
     useEffect(() => {
         setData({
-            firstName: user?.first_name,
-            lastName: user?.last_name,
-            poste: user?.position,
+            firstName: "Prénom",
+            lastName: "Nom",
+            poste: "Poste",
             company: organisation?.name,
             address: organisation?.address,
-            mobile: user?.phone_number,
+            mobile: "Mobile",
             phone: organisation?.phone_number
         })
     }, [user, template])
@@ -67,6 +71,7 @@ function Team() {
     return (
         <div>
             <div className={classes.container}>
+                <h1>Équipes</h1>
                 <div className={classes.teamsContainer}>
                     <ul className={classes.menu}>
                         <li onClick={() => setActive("groups")} className={active === "groups" ? classes.active : ""}>Groupes</li>
@@ -75,81 +80,118 @@ function Team() {
                     </ul>
                     {active === "groups" ?
                         <div>
-                            <input className={classes.search} type="text" placeholder="Search" />
-                            <span>19 groupes</span>
                             <div className={classes.btn}>Ajouter un groupe</div>
+                            <div className={classes.searchInput}>
+                                <HiOutlineSearch />
+                                <input className={classes.search} type="text" placeholder="Rechercher un groupe" />
+                            </div>
+                            <span>3 groupes</span>
                             <ul className={classes.itemsList}>
-                                <li>
+                                <li tabIndex="0">
                                     Mama Los Angeles
                                 </li>
-                                <li>Mama Lyon</li>
-                                <li>Mama Rio de Janeiro</li>
+                                <li tabIndex="0">Mama Lyon</li>
+                                <li tabIndex="0">Mama Rio de Janeiro</li>
                             </ul>
                         </div>
                         : active === "teams" ?
                             <div>
-                                <input className={classes.search} type="text" placeholder="Search" />
-                                <span>19 équipes</span>
                                 <div className={classes.btn}>Ajouter une équipe</div>
+                                <div className={classes.searchInput}>
+                                    <HiOutlineSearch />
+                                    <input className={classes.search} type="text" placeholder="Rechercher une équipe" />
+                                </div>
+                                <span>3 équipes</span>
                                 <ul className={classes.itemsList}>
-                                    <li>
+                                    <li tabIndex="0">
                                         <div>
-                                            <span>Design</span>
+                                            <span>Design <span>(22)</span></span>
                                         </div>
                                         <div className={classes.infos}>
                                             <span className={classes.groupName}>#Mama Los Angeles</span>
-                                            <span>17 utilisateurs</span>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li tabIndex="0">
                                         <div>
-                                            <span>Commercial</span>
+                                            <span>Commercial <span>(44)</span></span>
                                         </div>
                                         <div className={classes.infos}>
                                             <span className={classes.groupName}>#Mama Los Angeles</span>
-                                            <span>45 utilisateurs</span>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li tabIndex="0">
                                         <div>
-                                            <span>Commercial</span>
+                                            <span>Commercial <span>(7)</span></span>
                                         </div>
                                         <div className={classes.infos}>
                                             <span className={classes.groupName}>#Mama Rio de Janeiro</span>
-                                            <span>22 utilisateurs</span>
                                         </div>
                                     </li>
                                 </ul>
                             </div> :
                             <div>
-                                <input className={classes.search} type="text" placeholder="Search" />
-                                <span>19 utilisateurs</span>
                                 <div className={classes.btn}>Ajouter un utilisateur</div>
+                                <div className={classes.searchInput}>
+                                    <HiOutlineSearch />
+                                    <input className={classes.search} type="text" placeholder="Rechercher un utilisateur" />
+                                </div>
+                                <span>22 utilisateurs</span>
                                 <ul className={classes.itemsList}>
-                                    <li>Sylvain</li>
-                                    <li>Benjamin</li>
-                                    <li>Sylvain</li>
-                                    <li>Benjamin</li>
-                                    <li>Sylvain</li>
-                                    <li>Benjamin</li>
-                                    <li>Sylvain</li>
-                                    <li>Benjamin</li>
-                                    <li>Sylvain</li>
-                                    <li>Benjamin</li>
-                                    <li>Sylvain</li>
-                                    <li>Benjamin</li>
-                                    <li>Sylvain</li>
-                                    <li>Benjamin</li>
-                                    <li>Sylvain</li>
-                                    <li>Benjamin</li>
-                                    <li>Sylvain</li>
-                                    <li>Benjamin</li>
+                                    <li tabIndex="0">Sylvain</li>
+                                    <li tabIndex="0">Benjamin</li>
+                                    <li tabIndex="0">Sylvain</li>
+                                    <li tabIndex="0">Benjamin</li>
+                                    <li tabIndex="0">Sylvain</li>
+                                    <li tabIndex="0">Benjamin</li>
+                                    <li tabIndex="0">Sylvain</li>
+                                    <li tabIndex="0">Benjamin</li>
+                                    <li tabIndex="0">Sylvain</li>
+                                    <li tabIndex="0">Benjamin</li>
+                                    <li tabIndex="0">Sylvain</li>
+                                    <li tabIndex="0">Benjamin</li>
+                                    <li tabIndex="0">Sylvain</li>
+                                    <li tabIndex="0">Benjamin</li>
+                                    <li tabIndex="0">Sylvain</li>
+                                    <li tabIndex="0">Benjamin</li>
+                                    <li tabIndex="0">Sylvain</li>
+                                    <li tabIndex="0">Benjamin</li>
                                 </ul>
                             </div>}
                 </div>
-                <div className={classes.signaturePreview}>
-                    <h2>Signature active</h2>
-                    <RenderHTML template={template} data={data} />
+                <div className={classes.overflow}>
+                    <div className={classes.signaturePreview}>
+                        <div className={classes.topLine}>
+                            <h2>Signature active pour l'équipe <span className={classes.orangeTxt}>{preview.name}</span></h2>
+                            <FiEdit />
+                        </div>
+                        <div className={classes.signatureContainer}>
+                            <RenderHTML template={template} data={data} />
+                        </div>
+                        <span className={classes.groupName}>#Mama Los Angeles</span>
+
+                    </div>
+                    <div className={classes.teamAssignment}>
+                        <div className={classes.col}>
+                            <h2>Membres de l'équipe </h2>
+                            <span>3 utilisateurs</span>
+                            <ul className={`${classes.itemsList} ${classes.users}`}>
+                                <li tabIndex="0">Sylvain</li>
+                                <li tabIndex="0">Benjamin</li>
+                                <li tabIndex="0">Sylvain</li>
+                            </ul>
+                        </div>
+                        <div className={classes.col}>
+                            <h2>Autres utilisateurs</h2>
+                            <div className={classes.searchInput}>
+                                <HiOutlineSearch />
+                                <input className={classes.search} type="text" placeholder="Rechercher un utilisateur" />
+                            </div>
+                            <ul className={classes.itemsList}>
+                                <li tabIndex="0">Sylvain</li>
+                                <li tabIndex="0">Benjamin</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>)

@@ -8,13 +8,21 @@
 }
 
 .desktop {
-  background-color: #dfd5d8;
-  min-height: 100vh;
+  background-color: #E3D8D8;
+  height: 100vh;
   margin: 0;
-  padding: 3.5rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .desktop .desktopSubcontainer {
+  width: 95%;
+  height: 95%;
+  position: relative;
+  margin: auto;
   border-radius: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -23,9 +31,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background-color: #fcf8f7;
-  -webkit-filter: drop-shadow(16px 0px 40px rgba(0, 0, 0, 0.4));
-          filter: drop-shadow(16px 0px 40px rgba(0, 0, 0, 0.4));
+  background-color: #FBF8F7;
+  -webkit-box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.2);
 }
 
 .desktop .desktopSubcontainer > div {
@@ -35,8 +43,11 @@
 }
 
 .mainContent {
+  max-height: 100vh;
+  overflow: hidden;
+  height: 100%;
   margin: 2rem;
-  margin-top: 2rem;
+  margin-top: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -65,6 +76,7 @@
 
 .userInfos .capitalize {
   font-weight: bold;
+  line-height: 1rem;
   text-transform: uppercase;
 }
 
@@ -97,9 +109,11 @@
 }
 
 .row {
+  height: auto !important;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  min-width: 100%;
 }
 
 .row > div:last-child {
@@ -110,16 +124,15 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   width: 100%;
-  padding-left: 2rem;
-  padding-top: 2rem;
-  background-color: #f5eeef;
+  max-height: 100vh;
+  overflow: auto;
+  height: 100%;
+  padding: 2rem;
+  background-color: #F4EEEF;
+  position: relative;
   border-radius: 20px;
   -ms-flex-line-pack: start;
       align-content: flex-start;
@@ -127,6 +140,10 @@
 
 .dashboardContainer .tilesContainer {
   width: 26vw;
+}
+
+.dashboardContainer > div {
+  height: 100%;
 }
 
 .signaturePreview {
@@ -199,6 +216,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  height: auto !important;
   overflow: hidden;
   margin-top: 1rem;
   margin-bottom: 3rem;
@@ -234,6 +252,10 @@
           order: 3;
   content: "";
   width: 100%;
+}
+
+.eventText > div img {
+  max-width: 350px;
 }
 
 .duration {

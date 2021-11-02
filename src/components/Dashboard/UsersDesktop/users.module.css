@@ -2,7 +2,13 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 70vh;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: 90%;
+}
+
+.container h1 {
+  width: 100%;
 }
 
 .infosContainer {
@@ -39,13 +45,17 @@
   font-size: 0.8rem;
 }
 
+.overflow {
+  overflow: auto;
+}
+
 .menu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -53,17 +63,21 @@
   font-size: 1rem;
   font-weight: 600;
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .menu li {
+  width: 33%;
+  margin: 0 auto;
+  text-align: center;
   cursor: pointer;
 }
 
 .menu li::after {
   content: " ";
   display: block;
-  width: 100%;
+  width: 60%;
+  margin: auto;
   height: 2px;
   margin-top: 0.5rem;
 }
@@ -90,12 +104,17 @@
           flex-direction: column;
   overflow: auto;
   height: 100%;
-  margin-top: 0;
+  margin-top: 1rem;
   width: 25rem;
 }
 
 .itemsList li {
   margin: .5rem 0;
+  margin-left: auto;
+  width: 100%;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  z-index: 2;
   padding: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -112,8 +131,44 @@
           justify-content: space-between;
   font-size: 0.85rem;
   font-weight: 600;
+  position: relative;
   background: #f7f5f5;
   border-radius: 10px;
+}
+
+.itemsList li::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0rem;
+  top: 0;
+  z-index: -1;
+  bottom: 0;
+  margin: auto;
+  height: 4px;
+  border-radius: 50%;
+  width: 4px;
+  background: transparent;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.itemsList li:hover {
+  width: 95%;
+  cursor: pointer;
+}
+
+.itemsList li:focus-within {
+  width: 95%;
+}
+
+.itemsList li:focus-within::before {
+  content: "";
+  display: block;
+  left: -1em;
+  height: 4px;
+  width: 4px;
+  background: #ED693D;
 }
 
 .itemsList li > div {
@@ -125,11 +180,38 @@
           justify-content: space-between;
 }
 
-.itemsList .groupName {
-  padding: 0.25rem 0.45rem;
-  color: #fff;
+.itemsList li > div > span > span {
+  font-weight: normal;
+  font-size: .75rem;
+  text-decoration: underline;
+}
+
+.topLine {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 2rem;
+  width: 100%;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.topLine svg {
+  color: #66433e;
+}
+
+.topLine svg:hover {
+  cursor: pointer;
+  color: #ED693D;
+}
+
+.groupName {
+  color: #ED693D !important;
   border-radius: 20px;
-  background: #ffc392;
   font-weight: normal;
   font-size: 0.75rem;
 }
@@ -145,15 +227,31 @@
   margin-top: .25rem;
 }
 
+.searchInput {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.searchInput svg {
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: .75rem;
+  position: absolute;
+}
+
 .search {
-  text-indent: 0.5rem;
+  text-indent: 2rem;
   border-radius: 20px;
   width: 100%;
   outline: none;
-  border: 1px solid grey;
+  border: 1px solid transparent;
+  margin: 1rem 0;
   padding: 0.5rem;
+  background: #f7f5f5;
   display: block;
-  background: transparent;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -162,18 +260,88 @@
   border-color: #ff7954;
 }
 
-.signaturePreview {
+.orangeTxt {
+  color: #ED693D;
+}
+
+.signaturePreview, .teamAssignment {
   margin-left: 3rem;
   background-color: #fff;
   border-radius: 20px;
-  padding: 3rem;
-  padding-top: 1rem;
+  padding: 2rem;
   margin-bottom: auto;
 }
 
-.signaturePreview h2 {
+.signaturePreview h2, .teamAssignment h2 {
   font-size: 1.2rem;
   margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+.signaturePreview > div, .teamAssignment > div {
+  margin-bottom: 1rem;
+}
+
+.signaturePreview .groupName, .teamAssignment .groupName {
+  font-weight: 600;
+}
+
+.signaturePreview > span, .teamAssignment > span {
+  color: grey;
+  padding-top: .5rem;
+  font-size: 0.8rem;
+}
+
+.signaturePreview .signatureContainer {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  max-width: 30rem;
+  height: 15rem;
+  margin-left: -7.5rem;
+  margin-top: -5rem;
+  margin-bottom: 1rem;
+}
+
+.signaturePreview .signatureContainer > div {
+  -webkit-transform: scale(0.5);
+          transform: scale(0.5);
+}
+
+.teamAssignment {
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: normal !important;
+      -ms-flex-direction: row !important;
+          flex-direction: row !important;
+  margin-top: 2rem;
+}
+
+.teamAssignment ul {
+  padding: 0;
+}
+
+.teamAssignment .search {
+  margin: 0;
+}
+
+.teamAssignment .col span {
+  color: grey;
+  padding-top: .5rem;
+  font-size: 0.8rem;
+}
+
+.users {
+  overflow: initial;
+}
+
+.users li::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -1em;
+  height: 5px;
+  border-radius: 50%;
+  width: 5px;
+  background: #ED693D;
 }
 
 .btn {
@@ -185,7 +353,7 @@
   background-color: #fff !important;
   color: #ff7954;
   margin: .5rem 0;
-  padding: 1rem;
+  padding: .75rem;
   font-size: 0.85rem;
   font-weight: 600;
   border-radius: 10px;

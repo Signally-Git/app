@@ -13,27 +13,31 @@ function Menu(props) {
 
     return (
         <ul className={classes.tabMenu}>
-            <li className={`${props.page === "home" && classes.active}`}>
+            <li className={`${props.page === "home" ? classes.active : ""}`}>
                 <Link to="/dashboard">
                     <img src={Home} alt="Home" />
+                    <label>Dashboard</label>
                 </Link>
             </li>
-            <li className={`${props.page.search("signatures") !== -1 && classes.active}`}>
+            <li className={`${props.page.search("signature") !== -1 ? classes.active : ""}`}>
                 <Link to="/signatures" key={Date.now()}>
                     <img src={Signatures} alt="Signatures" />
+                    <label>Signatures</label>
                 </Link>
             </li>
-            <li className={`${props.page.search("team") !== -1 && classes.active}`}>
+            <li className={`${props.page.search("team") !== -1 ? classes.active : ""}`}>
                 <Link to="/teams">
                     <img src={Teams} alt="Teams" />
+                    <label>Teams</label>
                 </Link>
             </li>
-            <li className={`${props.page.search("event") !== -1 && classes.active}`}>
+            <li className={`${props.page.search("event") !== -1 ? classes.active : ""}`}>
                 <Link to="/events">
                     <div className={classes.event}>
                         <img src={Events} alt="Events" />
                         <span>{String(today.getDate()).padStart(2, '0')}</span>
                     </div>
+                    <label>Events</label>
                 </Link>
             </li>
             <MobileView>

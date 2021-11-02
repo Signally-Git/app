@@ -23,6 +23,8 @@
   width: 100%;
   width: 330px;
   height: 4.5rem;
+  min-height: 4.5rem;
+  cursor: pointer;
 }
 
 .switch * {

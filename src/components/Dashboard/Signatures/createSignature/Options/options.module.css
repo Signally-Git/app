@@ -1,8 +1,14 @@
 .optionsContainer {
   list-style: none;
-  padding: none;
+  padding: 0;
   width: 100%;
   margin: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border: none !important;
+  outline: none !important;
 }
 
 .optionsContainer * {
@@ -86,7 +92,6 @@
 }
 
 .iconInput input[type="text"] {
-  width: 100%;
   -webkit-transition: 0.2s;
   transition: 0.2s;
   background: #fff;
