@@ -22,7 +22,7 @@ function Landing() {
                     <p>TPE, PME, Indépendants, Auto-entrepreneurs, Freelance, avec Signally votre signature d’email devient dynamique et renforce votre communication.</p>
                     <button className={classes.orangeCTA}>Commencer<img src={ChevronRight} alt="Begin" /></button>
                 </div>
-                <div>
+                <div className={classes.previewSign}>
                     <div className={classes.signaturePreview}>
                         <img src="https://dummyimage.com/25.png" alt="John Doe" />
                         <div>

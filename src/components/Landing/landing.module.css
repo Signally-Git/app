@@ -173,7 +173,7 @@
 }
 
 .centeredDiv img {
-  width: 70%;
+  width: 100%;
 }
 
 .whiteContainer {
@@ -294,22 +294,6 @@
           justify-content: space-between;
 }
 
-.prefooter div {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
 .socials {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -327,8 +311,91 @@
   margin: 1rem;
 }
 
-@media screen and (max-width: 1000px) {
+.container footer ul li a {
+  color: unset;
+}
+
+@media screen and (max-width: 1024px) {
   .container h1 {
     font-size: 2rem !important;
+  }
+
+  .previewSign {
+    display: none;
+  }
+
+  .orangeContainer {
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .orangeContainer > .textDiv {
+    max-width: 100%;
+  }
+
+  .centeredDiv {
+    max-width: 100%;
+  }
+
+  .centeredDiv img {
+    max-width: 70%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .whiteContainer {
+    margin: 2rem 0;
+    padding: 2rem;
+  }
+
+  .whiteContainer ul li {
+    height: initial;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .whiteContainer ul li img {
+    padding: 0;
+  }
+
+  .textOnRight, .textOnLeft {
+    margin: 2rem auto;
+  }
+
+  .textOnRight .txtContainer {
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .textOnLeft .txtContainer {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .textOnRight .txtContainer h3, .textOnLeft .txtContainer h3 {
+    max-width: 100%;
+  }
+
+  .prefooter {
+    display: block;
+    padding: 1rem;
+  }
+
+  .prefooter div {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .centeredDiv img {
+    max-width: 90%;
+  }
+  
+  .textOnRight .imgContainer, .textOnRight .imgContainer img {
+    width: 100%;
+  }
+
+  .textOnLeft .imgContainer, .textOnLeft .imgContainer img {
+    width: 100%;
   }
 }
