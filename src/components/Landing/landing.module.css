@@ -41,12 +41,18 @@
   margin-bottom: 5rem;
 }
 
-.orangeContainer .textDiv, .prefooter .textDiv {
-  max-width: 50%;
+.orangeContainer .textDiv {
+  flex-direction: row;
+  height: 100%;
+  display: flex;
+}
+
+.prefooter .textDiv {
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  max-width: 50%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -62,6 +68,41 @@
 .orangeContainer .textDiv h1, .prefooter .textDiv h1 {
   font-size: 4.2rem;
 }
+
+.orangeContainer .orangeCTA {
+  animation: bounce linear .7s;
+  animation-delay: 1s;
+}
+
+.orangeCTA svg {
+  margin-left: 12px;
+}
+
+@keyframes bounce {
+  0% { transform: scale(1); }
+  50% {  transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeInLeft {
+  0% {opacity:0; transform: translateX(-50px);}
+  100% {opacity:1;}
+}
+
+@keyframes fadeInRight {
+  0% {opacity:0; transform: translateX(50px);}
+  100% {opacity:1;}
+}
+
+@keyframes signature1 {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes signature2 {
+  0%, 100% { opacity: 0; transform: translateX(100px);}
+}
+
 
 .orangeContainer .textDiv .label, .prefooter .textDiv .label {
   font-size: 1rem;
@@ -106,11 +147,6 @@
   color: #FF7954;
 }
 
-.orangeCTA:hover img {
-  -webkit-filter: invert(66%) sepia(26%) saturate(6416%) hue-rotate(327deg) brightness(106%) contrast(101%);
-          filter: invert(66%) sepia(26%) saturate(6416%) hue-rotate(327deg) brightness(106%) contrast(101%);
-}
-
 .orangeCTA img {
   -webkit-transition: 0.2s;
   transition: 0.2s;
@@ -118,12 +154,81 @@
   margin-top: 1px;
 }
 
+.previewSign {
+  position: relative;
+}
+
+.fadeInSection {
+  opacity: 0;
+  transform: translateY(20vh);
+  visibility: hidden;
+  transition: opacity 1200ms ease-out, transform 600ms ease-out,
+    visibility 1200ms ease-out;
+  will-change: opacity, transform, visibility;
+}
+
+.fadeInRightSection {
+  opacity: 0;
+  transform: translateX(-100px);
+  visibility: hidden;
+  transition: opacity 1200ms ease-out, transform 600ms ease-out,
+    visibility 1200ms ease-out;
+  will-change: opacity, transform, visibility;
+}
+
+.fadeInRightSection.isVisible {
+  opacity: 1;
+  transform: translateX(0px);
+  visibility: visible;
+}
+
+.whiteContainer .fadeInSection:hover {
+  transform: scale(1.05)!important;
+  transition: transform 300ms ease-out;
+  cursor: pointer;
+  background-color: rgba(251, 244, 242, 0.6);
+  border-radius: 4px;
+}
+
+.fadeInFirstText {
+  transform: translateX(0px)!important;
+  transition: transform 600ms ease-out;
+}
+
+.stepsContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.stepsContainer div {
+  padding: 1.5em;
+}
+
+.fadeInSection.isVisible {
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+}
+
+@keyframes signatureAnim {
+  0% {
+    opacity: 0;
+    transform: scale(.7);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
 .signaturePreview {
-  position: absolute;
-  min-width: 320px;
-  right: -1rem;
   padding: 1rem;
-  top: 25%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -132,23 +237,19 @@
           align-items: flex-start;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
-          justify-content: space-between;
+          justify-content: flex-start;
   background: #FFF;
   -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
           box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
   border-radius: 10px;
-  -webkit-transform: rotate(-5deg);
-          transform: rotate(-5deg);
+  opacity: 0;
+  position: absolute;
+  width: 100%;
 }
 
 .signaturePreview * {
   font-family: "Montserrat" !important;
   line-height: 1;
-}
-
-.signaturePreview:last-child {
-  top: 40%;
-  right: 1rem;
 }
 
 .signaturePreview img {
@@ -160,6 +261,22 @@
 
 .signaturePreview p {
   font-size: 0.8rem;
+}
+
+.signaturePreview:nth-child(1) {
+  animation: signature1 1s forwards 2s;
+}
+
+.signaturePreview:nth-child(2) {
+  animation: signature1 1s forwards 5.5s;
+}
+
+.signaturePreview:nth-child(3) {
+  animation: signature1 1s forwards 7.5s;
+}
+
+.signaturePreview:nth-child(4) {
+  animation: signature1 1s forwards 9.5s;
 }
 
 .orangeTxt {
@@ -184,6 +301,35 @@
   border-radius: 20px;
   padding: 5rem;
   text-align: center;
+}
+
+.orangeContainer .textDiv h1 {
+  animation-delay: 0.6s;
+  width: 100%;
+  float: left;
+  animation-name: titleAnimation;
+  animation-timing-function:ease;
+  animation-duration: 3s;
+}
+
+@keyframes titleAnimation {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 95%);
+  }
+
+  20% {
+      transform: translateY(0);
+      opacity: 1;
+      clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0%);
+  }
+
+  80% {
+      transform: translateY(0);
+      opacity: 1;
+      clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0%);
+  }
 }
 
 .whiteContainer ul {
@@ -270,7 +416,7 @@
 }
 
 .textOnRight .imgContainer, .textOnLeft .imgContainer {
-  width: 40%;
+  width: 100%;
   min-width: 200px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -307,8 +453,41 @@
 .socials li {
   border-radius: 50%;
   background: #FFF;
-  padding: 2rem;
+  padding: 1rem;
   margin: 1rem;
+  display: flex;
+  cursor: pointer;
+}
+
+.socials li spam {
+  border-radius: 56px;
+  height: 28px;
+  width: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.socials li spam.linkedin {
+  background-color: #1275B1;
+}
+
+.socials li spam.facebook {
+  background: linear-gradient(180deg, #18ACFE 0%, #0163E0 99.7%);
+}
+
+.socials li spam.facebook {
+  background: linear-gradient(180deg, #18ACFE 0%, #0163E0 99.7%);
+}
+
+
+.socials li spam.instagram {
+  background: #f09433; 
+  background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+  background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+  background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+  border-radius: 6px;
 }
 
 .container footer ul li a {
@@ -318,10 +497,6 @@
 @media screen and (max-width: 1024px) {
   .container h1 {
     font-size: 2rem !important;
-  }
-
-  .previewSign {
-    display: none;
   }
 
   .orangeContainer {
@@ -340,12 +515,29 @@
   .centeredDiv img {
     max-width: 70%;
   }
+
+  .stepsContainer div {
+    padding: 0;
+  }
+  
+  .whiteContainer {
+    padding: 5rem 1rem;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .whiteContainer {
     margin: 2rem 0;
     padding: 2rem;
+  }
+
+  .textOnRight .imgContainer {
+    transform: translateX(80vw);
+    transition: transform 600ms ease-out;
+  }
+
+  .textOnLeft .imgContainer, .textOnLeft .imgContainer img {
+    width: 100%;
   }
 
   .whiteContainer ul li {
@@ -384,18 +576,50 @@
   .prefooter div {
     display: block;
   }
+  
+  .stepsContainer { 
+    flex-direction: column
+  }
+
+  .signaturePreview {
+    position: relative;
+    opacity: 1;
+  }
+
+  .signaturePreview:nth-child(1) {
+    animation: none;
+  }
+
+  .signaturePreview {
+    margin-bottom: 1rem;
+  }
+
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 620px) {
   .centeredDiv img {
     max-width: 90%;
+  }
+
+  .prefooter {
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .socials li {
+    margin: 1.5rem;
   }
   
   .textOnRight .imgContainer, .textOnRight .imgContainer img {
     width: 100%;
   }
+}
 
-  .textOnLeft .imgContainer, .textOnLeft .imgContainer img {
-    width: 100%;
+@media screen and (max-width: 480px) {
+  .socials li {
+    margin: .5rem;
   }
 }
