@@ -1,0 +1,104 @@
+.container {
+  width: 100%;
+  min-width: 30vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background: #fff;
+  border-radius: 20px;
+  padding: 2rem;
+}
+
+.container h2 {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 0;
+  color: #402927;
+}
+
+.container h2 span {
+  margin-left: .5rem;
+  color: #FF7954;
+}
+
+.container h2 svg {
+  margin-left: auto;
+}
+
+.container label {
+  font-size: .7rem;
+  font-weight: 600;
+  color: #FF7954;
+  margin-left: .15rem;
+}
+
+.container input {
+  border: 1px solid #F1ECEA;
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 0.5rem 0;
+  margin-bottom: 1rem;
+  outline: none;
+}
+
+.container input:focus {
+  border-color: #FF7954;
+  -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+          box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+}
+
+.container button {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.datePick {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.datePick > div {
+  width: 48%;
+}
+
+.datePick > div input {
+  -webkit-transition: border-color .3s, -webkit-box-shadow .3s;
+  transition: border-color .3s, -webkit-box-shadow .3s;
+  transition: border-color .3s, box-shadow .3s;
+  transition: border-color .3s, box-shadow .3s, -webkit-box-shadow .3s;
+  cursor: pointer;
+  width: 100%;
+}
+
+.datePick > div input:hover, .datePick > div input:focus-within {
+  border-color: #FF7954;
+  -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+          box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+}
+
+.currentEventPreview {
+  width: 100%;
+}
+
+.currentEventPreview img {
+  margin: 0 0 1rem 0;
+  max-width: 100%;
+}
+
+.eventName {
+  margin-top: 1rem;
+  width: 100%;
+}

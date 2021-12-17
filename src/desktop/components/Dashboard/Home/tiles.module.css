@@ -1,0 +1,273 @@
+@media screen and (max-width: 680px) {
+  .container {
+    padding-bottom: 10rem;
+    min-height: 100vh;
+    padding-top: 2rem;
+    margin: auto;
+  }
+}
+
+.container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: auto;
+}
+
+.container h1 {
+  -webkit-box-flex: 100%;
+      -ms-flex: 100%;
+          flex: 100%;
+  margin-left: .5rem;
+  color: #402927;
+  font-size: 1.75rem;
+}
+
+.tilesList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+
+.tile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 48%;
+  -webkit-box-flex: 48%;
+      -ms-flex: 48%;
+          flex: 48%;
+  max-width: 48%;
+  padding: 1rem 1rem;
+  border-radius: 10px;
+  margin: .5rem 0;
+  background: #FFF;
+  -webkit-box-shadow: 0px 20px 20px rgba(206, 142, 124, 0.15);
+          box-shadow: 0px 20px 20px rgba(206, 142, 124, 0.15);
+}
+
+.tile * {
+  font-family: "Montserrat";
+  color: #402927;
+  margin: 0;
+  padding: 0;
+}
+
+.tile:first-of-type {
+  background-color: #FF7954;
+}
+
+.tile:first-of-type * {
+  color: #FFF;
+}
+
+.tile:nth-of-type(2) {
+  background-color: #F6CE4D;
+}
+
+.tile:nth-of-type(2) * {
+  color: #FFF;
+}
+
+.tile p, .tile span {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.tile p {
+  line-height: 2.5;
+}
+
+.syncTile {
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+  position: relative;
+  height: 6rem;
+  -webkit-transition: -webkit-transform 0.1s;
+  transition: -webkit-transform 0.1s;
+  transition: transform 0.1s;
+  transition: transform 0.1s, -webkit-transform 0.1s;
+  -webkit-box-flex: 100%;
+      -ms-flex: 100%;
+          flex: 100%;
+  width: 100%;
+}
+
+.syncTile h4 {
+  font-size: 1.2rem;
+  line-height: 2rem;
+  vertical-align: middle;
+}
+
+.rotating {
+  -webkit-animation: spin 4s linear infinite;
+          animation: spin 4s linear infinite;
+}
+
+.syncContainer {
+  position: relative;
+}
+
+.syncBtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+
+.syncTileInner {
+  position: relative;
+  width: 100%;
+  min-height: 7rem;
+  height: 100%;
+  text-align: center;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.fliping {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.syncFront, .syncBack {
+  position: absolute;
+  width: 100%;
+  padding: 1rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-backface-visibility: hidden;
+  /* Safari */
+  backface-visibility: hidden;
+}
+
+.syncBack {
+  background: red;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.billingTile {
+  background: #402927;
+}
+
+.billingTile * {
+  color: #FFF;
+}
+
+.bigTxt {
+  line-height: 1.5;
+  font-size: 2.5rem !important;
+  font-weight: 600 !important;
+}
+
+.free {
+  line-height: 3rem;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+}
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-height: 40%;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.blackImg {
+  -webkit-filter: contrast(0);
+          filter: contrast(0);
+}
+
+.watermark {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 5rem;
+  line-height: 28px;
+  color: rgba(101, 68, 62, 0.03);
+}
+
+.syncContainer {
+  padding: 2rem 0 0rem 0;
+}
+
+.activeSpan {
+  text-transform: uppercase;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
+}
+
+.fliping {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}

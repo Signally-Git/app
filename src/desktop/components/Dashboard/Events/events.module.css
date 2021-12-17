@@ -1,0 +1,485 @@
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: 70vh;
+}
+
+.container h1 {
+  width: 100%;
+}
+
+.infosContainer {
+  background-color: #fff;
+}
+
+.bannerPreview {
+  height: auto;
+  width: 40%;
+  padding: 0.5rem;
+  margin: auto;
+}
+
+.eventsContainer {
+  background-color: #fff;
+  border-radius: 20px;
+  max-width: 45%;
+  min-width: 45%;
+  padding: 2rem;
+  position: relative;
+  height: 100%;
+  margin-right: 2rem;
+}
+
+.eventsContainer ul {
+  padding: 0;
+  list-style: none;
+}
+
+.eventsContainer > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 95%;
+}
+
+.eventsContainer > div > span {
+  color: grey;
+  padding-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.actionsContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 1rem;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  margin: auto;
+}
+
+.actionsContainer:hover {
+  color: #FF7954;
+}
+
+.menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.menu li {
+  width: 33%;
+  margin: 0 auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+.menu li::after {
+  content: " ";
+  display: block;
+  width: 60%;
+  margin: auto;
+  height: 2px;
+  margin-top: 0.5rem;
+}
+
+.active {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  margin-bottom: 0.5rem;
+  color: #FF7954;
+}
+
+.active::after {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #FF7954;
+}
+
+.pastEvent {
+  -webkit-filter: saturate(0);
+          filter: saturate(0);
+}
+
+.eventText {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  position: relative;
+  margin-left: 1rem;
+}
+
+.duration {
+  margin-top: 0.25rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: normal;
+}
+
+.duration .col {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.duration .col:first-child {
+  margin-right: 1rem;
+}
+
+.modal {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: #fff;
+  border-radius: 20px;
+  width: 30%;
+  padding: 0 1rem 1rem;
+  z-index: 3;
+  left: 15%;
+  overflow: hidden;
+  text-align: center;
+  right: 0;
+  -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.288);
+          box-shadow: 0 0 30px rgba(0, 0, 0, 0.288);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  margin: auto;
+}
+
+.modal h4 {
+  line-height: 2rem;
+}
+
+.modal > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 70%;
+}
+
+.bold > span {
+  font-weight: bold;
+}
+
+.itemsList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: auto;
+  height: 100%;
+  margin-top: 1rem;
+}
+
+.itemsList li {
+  margin: 0.5rem 0;
+  margin-left: auto;
+  width: 100%;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  z-index: 2;
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  position: relative;
+  background: #f7f5f5;
+  border-radius: 10px;
+}
+
+.itemsList li::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0rem;
+  top: 0;
+  z-index: -1;
+  bottom: 0;
+  margin: auto;
+  height: 6px;
+  border-radius: 50%;
+  width: 6px;
+  background: transparent;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.itemsList li:hover {
+  width: 95%;
+  cursor: pointer;
+}
+
+.itemsList li:focus-within {
+  width: 95%;
+}
+
+.itemsList li:focus-within::before {
+  content: "";
+  display: block;
+  left: -1rem;
+  height: 8px;
+  width: 8px;
+  background: #FF7954;
+}
+
+.itemsList li > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 60%;
+}
+
+.itemsList li > div > span > span {
+  font-weight: normal;
+  font-size: 0.75rem;
+}
+
+.itemsList li > div img {
+  height: auto;
+}
+
+.infos {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.searchInput {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.searchInput svg {
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 0.75rem;
+  position: absolute;
+}
+
+.search {
+  text-indent: 2rem;
+  border-radius: 20px;
+  width: 100%;
+  outline: none;
+  border: 1px solid transparent;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background: #f7f5f5;
+  display: block;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.search:focus {
+  border-color: #FF7954;
+}
+
+.orangeTxt {
+  color: #FF7954;
+}
+
+.createEventContainer {
+  max-width: 45%;
+}
+
+.eventPreview {
+  margin-bottom: auto;
+  width: 100%;
+  padding: 2rem;
+}
+
+.eventPreview img {
+  max-width: 25rem;
+}
+
+.eventPreview svg {
+  margin-left: auto;
+}
+
+.eventPreview h2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+.eventPreview > div {
+  margin-bottom: 1rem;
+}
+
+.eventPreview .groupName {
+  font-weight: 600;
+}
+
+.flipcontainer {
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+  max-width: 50%;
+}
+
+.flip {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.flipcontainer,
+.front,
+.back {
+  width: 100%;
+  height: 100%;
+}
+
+/* flip speed goes here */
+.flipper {
+  -webkit-transition: 0.6s linear;
+  transition: 0.6s linear;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  height: 60%;
+  position: relative;
+}
+
+/* hide back of pane during swap */
+.front,
+.back {
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  background-color: #fff;
+  border-radius: 20px;
+  margin-bottom: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.front h2,
+.back h2 {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+.front h2 svg:hover,
+.back h2 svg:hover {
+  cursor: pointer;
+  color: #FF7954;
+}
+
+.front > div,
+.back > div {
+  margin-bottom: 1rem;
+}
+
+.front .groupName,
+.back .groupName {
+  font-weight: 600;
+}
+
+.front > span,
+.back > span {
+  color: grey;
+  padding-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.back > div {
+  width: 100%;
+  max-width: 100%;
+}

@@ -1,0 +1,16 @@
+@import "../../Assets/style/colors.scss";
+
+.input {
+    transition: 0.2s;
+    background: #fff;
+    border: 1px solid $signally-lightgrey;
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 0.5rem 0;
+    outline: none;
+    font-family: inherit;
+    &:focus {
+        border-color: $signally-orange;
+        box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+    }
+}

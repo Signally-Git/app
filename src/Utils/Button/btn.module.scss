@@ -1,0 +1,89 @@
+@import "../../Assets/style/colors.scss";
+
+.btn {
+    display: flex;
+    border-radius: 20px;
+    border: 1px solid;
+    text-align: center;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem auto;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 20px;
+    * {
+        color: inherit;
+    }
+}
+
+.orange {
+    color: $signally-orange;
+    border-color: $signally-orange;
+    &:hover {
+        cursor: pointer;
+        background-color: $signally-orange;
+        color: #FFF;
+        svg {
+            stroke: #FFF;
+        }
+    }
+    svg {
+        transition: 0.2s;
+        margin-left: .5rem;
+        stroke: $signally-orange;
+        stroke-width: 1px;
+    }
+}
+
+.orangeFill {
+    color: #FFF;
+    background-color: $signally-orange;
+    border-color: $signally-orange;
+    &:hover {
+        background-color: transparent;
+        color: $signally-orange;
+        cursor: pointer;
+        svg {
+            stroke: $signally-orange;
+        }
+    }
+    svg {
+        transition: 0.2s;
+        margin-left: .5rem;
+        stroke: #FFF;
+        stroke-width: 1px;
+    }
+}
+
+.brown {
+    color: $signally-brown;
+    border-color: $signally-brown;
+    &:hover {
+        cursor: pointer;
+        background: $signally-brown;
+        color: #FFF;
+        svg {
+            stroke: #FFF;
+        }
+    }
+    svg {
+        transition: 0.2s;
+        margin-left: .5rem;
+        stroke: $signally-brown;
+        stroke-width: 1px;
+    }
+}
+
+.brownFill {
+    color: #FFF;
+    background-color: $signally-brown;
+    border-color: $signally-brown;
+    &:hover {
+        background-color: transparent;
+        color: $signally-brown;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,92 @@
+@import "../../Assets/style/colors.scss";
+
+.container {
+    display: flex;
+    align-items: center;
+    animation: fadeInLeft 1s forwards ease-in-out;
+    justify-content: center;
+    width: fit-content!important;
+    height: 2.5rem!important;
+    border-radius: 10px;
+    z-index: 10;
+    padding: 0.5rem 3rem;
+    position: fixed;
+    inset: 3rem 0 0 14rem;
+    color: $signally-brown;
+    font-weight: bold;
+    svg {
+        border-radius: 50%;
+        padding: 4px;
+        fill: #fff;
+        font-size: 1.25rem;
+    }
+    // background: $signally-brown;
+    p {
+        font-size: 1rem;
+        margin: 0;
+        margin-right: 0.5rem;
+    }
+}
+
+@keyframes fadeInLeft {
+    0% {
+        top: .5rem;
+        opacity: 0;
+    }
+    10% {
+        top: 3rem;
+        opacity: 1;
+    }
+    80% {
+        top: 3rem;
+        opacity: 1;
+    }
+}
+
+.fadeOut {
+    animation: fadeOutAnimate 1s forwards ease-out!important;
+}
+
+@keyframes fadeOutAnimate {
+    0% {
+        top: 3rem;
+        opacity: 1;
+    }
+    100% {
+        top: .5rem;
+        opacity: 0;
+    }
+}
+
+.valid svg {
+    background: green;
+}
+
+.invalid {
+    animation: shakeX 1s forwards ease-in-out;
+    animation-delay: 1s;
+    svg {
+        background: red;
+    }
+}
+
+@keyframes shakeX {
+    from,
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translate3d(-10px, 0, 0);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translate3d(10px, 0, 0);
+    }
+}

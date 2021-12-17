@@ -2,13 +2,46 @@
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: subpixel-antialiased;
   text-rendering: optimizeLegibility;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004) !important;
   box-sizing: border-box;
 }
 
-::selection {
-  background-color: #E6988E;
+/* SOON FEATURES */
+.disabled {
+  filter: grayscale(0.8);
+  cursor: default!important;
+  pointer-events: none;
+}
+
+.rdtActive {
+  background-color: #FF7954!important;
+}
+
+
+.rdtPicker {
+  border-radius: 10px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.rdtDay {
+  border-radius: 50%;
+  font-weight: 400;
+  height: 30px!important;
+  font-size: .9rem;
+}
+
+.rdtTimeToggle {
+  border-radius: 10px;
+}
+
+.rdtDays th {
+  font-weight: bolder;
+}
+
+.rdtToday::before {
+  border-bottom-color: #FF7954!important;
 }
 
 li {
@@ -36,12 +69,6 @@ img {
   image-rendering: crisp-edges;
   -ms-interpolation-mode: nearest-neighbor;
   /* IE (non-standard property) */
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  user-drag: none;
-  user-select: none;
 }
 
 html {
@@ -58,7 +85,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  user-select: text;
   text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
 }
 
@@ -93,7 +119,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .rdrStartEdge+span {
-  border: 22px solid #e27d67;
+  border: 22px solid #FF7954;
   width: 44px !important;
   height: 44px !important;
   top: -50% !important;
@@ -114,7 +140,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .rdrEndEdge {
   color: #FFF!important;
-  border: 1px solid #E27D67!important;
+  border: 1px solid #FF7954!important;
   width: 44px!important;
   height: 44px!important;
   border-radius: 50%!important;
@@ -136,7 +162,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .rdrDayStartPreview .rdrDayEndPreview {
   border-radius: 50% !important;
-  border: 1px solid #E27D67!important;
+  border: 1px solid #FF7954!important;
 }
 
 .rdrInRange, .rdrStartEdge {

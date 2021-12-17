@@ -1,0 +1,284 @@
+@import '../../../../../../Assets/style/colors.scss';
+
+.modal {
+    h1 {
+        color: $signally-brown;
+    }
+    width: 100%;
+    margin-left: 3rem;
+    height: 100%;
+    padding-left: 1rem;
+    max-height: 80vh;
+    overflow: auto!important;
+    background-color: #f5eef0;
+    display: flex;
+    flex-direction: column;
+    .searchContainer {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        border-radius: 20px;
+    }
+    input {
+        padding: 3rem 10rem;
+        width: 100%;
+        text-indent: 1rem;
+        height: 3rem;
+        font-size: 0.9rem;
+        color: grey;
+        border-radius: 30px;
+        background: transparent;
+        border: none;
+        &:focus {
+            border: none;
+            outline: none;
+        }
+    }
+    form {
+        margin-right: auto;
+        width: 100%;
+    }
+    button {
+        cursor: pointer;
+        margin-right: auto;
+        margin-left: 0;
+        padding: 0;
+    }
+    .orientationContainer {
+        width: 100%;
+    }
+    .orientationContainer form {
+        display: flex;
+        margin-top: 3rem;
+        margin-left: 2px;
+        align-items: center;
+        input {
+            width: 10px;
+        }
+        label {
+            margin-right: 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            color: $signally-brown;
+        }
+    }
+    .tagsContainer {
+        display: flex;
+        align-items: center;
+        input {
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+    }
+    .tagsContainer .otherTags,
+    .studioStore {
+        padding: 0;
+        height: 1.5rem;
+        display: flex;
+        list-style: none;
+        font-size: 0.7rem;
+        li {
+            position: relative;
+            transition: 0.2s;
+            text-transform: uppercase;
+            border-radius: 20px;
+            border: 1px solid $signally-brown;
+            color: $signally-brown;
+            padding: 0.25rem 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin: 0 0.5rem;
+            &::before {
+                content: "";
+                display: block;
+            }
+            &:hover {
+                background: $signally-brown;
+                color: #fff;
+                cursor: pointer;
+            }
+        }
+        .active {
+            font-weight: bold;
+            background: $signally-brown;
+            color: #fff;
+        }
+    }
+    .otherTagsContainer {
+        display: flex;
+        align-items: center;
+        svg {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    }
+    .otherTags {
+        max-height: 2rem;
+        margin: 0;
+        margin-right: auto;
+        flex-wrap: nowrap;
+        display: flex;
+        overflow: auto;
+        overflow-y: hidden;
+        padding-bottom: 1rem;
+        &::-webkit-scrollbar {
+            background: transparent;
+            height: 0;
+        }
+    }
+    .studioStore {
+        & li:first-child {
+            margin-left: 0;
+        }
+        .studio,
+        .store {
+            color: $signally-orange;
+            border-color: $signally-orange;
+            &:hover {
+                background-color: $signally-orange;
+            }
+            input {
+                cursor: pointer;
+            }
+        }
+        .activeStudio {
+            background-color: $signally-orange!important;
+            color: #FFF;
+        }
+    }
+    h5 {
+        color: $signally-brown;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+    .templatesContainer {
+        margin-top: 1rem;
+        padding: 0;
+        list-style: none;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        input {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            &:hover {
+                cursor: pointer!important;
+                
+            }
+        }
+        li {
+            padding: 1rem;
+            position: relative;
+            max-width: 48%;
+            border-radius: 20px;
+            background-color: #fff;
+            transition: 0.2s;
+            margin-right: 2rem;
+            margin-bottom: 2rem;
+            &:hover {
+                box-shadow: 0 0 20px rgba(112, 112, 112, 0.37);
+            }
+            // width: 17rem;
+            // height: 10rem;
+        }
+    }
+}
+
+.btnBackTemplate {
+    cursor: pointer;
+    transition: 0.2s;
+    margin-bottom: 1rem;
+    display: flex;
+    margin-left: auto;
+    justify-content: space-evenly;
+    border: none;
+    font-weight: bold;
+    font-size: 1rem;
+    color: $signally-brown;
+    background: none;
+    &:hover {
+        color: $signally-orange;
+    }
+    svg {
+        font-size: 1.2rem;
+        margin-left: 0.65rem;
+    }
+}
+
+.btnBackTemplate {
+    svg {
+        margin-left: 0;
+        margin-right: 0.65rem;
+    }
+}
+
+// RADIO
+/* Customize the label (the radioCtr) */
+.radioCtr {
+    display: block;
+    position: relative;
+    padding-left: 1.5rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radioCtr input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    border: 2px solid $signally-brown;
+    border-radius: 50%;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radioCtr input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radioCtr .checkmark:after {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: $signally-brown;
+}

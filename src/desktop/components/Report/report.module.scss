@@ -1,0 +1,38 @@
+.container {
+    max-width: 60%;
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    justify-content: space-around;
+    .tagLine {
+        text-align: center;
+    }
+    p {
+        font-size: .8rem;
+    }
+    h4 {
+        font-size: 1rem;
+        margin: 0;
+    }
+    select {
+        transition: 0.2s;
+        background: #fff;
+        border: 1px solid #f7f5f5;
+        padding: 1rem;
+        border-radius: 10px;
+        margin: 0.5rem 0;
+        outline: none;
+        font-family: inherit;
+    }
+}
+
+.actionsContainer {
+    display: flex;
+    justify-content: start;
+    width: 60%;
+    button {
+        margin-left: 0;
+    }
+}

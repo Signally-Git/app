@@ -1,0 +1,331 @@
+.infosContainer {
+  width: 100%;
+}
+
+.infosContainer h4 {
+  color: #402927;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.inputsContainer {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.inputsContainer input {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background: #fff;
+  border: 1px solid #f5eef0;
+  padding: 1rem;
+  border-radius: 20px;
+  margin: 0.5rem 0;
+  font-family: "Montserrat";
+  outline: none;
+}
+
+.inputsContainer input:focus {
+  border: 1px solid #FF7954;
+  -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+          box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+}
+
+.CTAcontainer {
+  width: 100%;
+  height: 2rem;
+  padding: 1.5rem 5% 3rem 5%;
+  position: absolute;
+  z-index: 4;
+  bottom: -1.25rem;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.fileUpload {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #F1ECEA;
+}
+
+.fileUpload div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.fileUpload .rangeUpload {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.fileUpload input {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.fileUpload span {
+  width: 100%;
+  margin: auto;
+  font-size: 0.9rem;
+  line-height: 3rem;
+}
+
+.fileUpload span svg {
+  vertical-align: sub;
+  margin-right: 0.5rem;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+.outlineBtn {
+  width: auto;
+  padding: 1rem 2rem;
+  margin-right: 1rem;
+  background: transparent;
+  color: #402a27;
+  border: 1px solid #402a27;
+}
+
+.inputContainer,
+.inputColorSize {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 0;
+}
+
+.selectColor option .color {
+  position: relative;
+}
+
+.selectColor option .color::before {
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  position: absolute;
+  content: " ";
+  width: 15px;
+  height: 15px;
+  background: #000;
+  border-radius: 50%;
+}
+
+.select {
+  width: 100%;
+  border: none;
+}
+
+.colorContainer {
+  width: 100%;
+  position: relative;
+}
+
+.colorContainer input {
+  text-indent: 2rem;
+}
+
+.inputColorSize {
+  position: relative;
+}
+
+.styleContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.styleContainer .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.styleContainer .row h6 {
+  color: #FF7954;
+  font-weight: normal;
+  padding-right: 1rem;
+}
+
+.styleContainer .row > div {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.selectSize {
+  position: relative;
+  margin-left: 1rem;
+  width: 100%;
+}
+
+.fontSize {
+  font-size: .75rem;
+  position: absolute;
+  bottom: 1.05rem;
+}
+
+.selectFontContainer {
+  width: 100%;
+  position: relative;
+  -webkit-transition: 0.2s height;
+  transition: 0.2s height;
+}
+
+.selectFontContainer svg {
+  font-size: .75rem;
+  position: absolute;
+  right: .5rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 2;
+}
+
+.selectedFont {
+  outline: none;
+  width: 100%;
+  text-indent: .5rem;
+  height: 3rem;
+  z-index: 1;
+  border: 1px solid #f1f1f1;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  background: #FFF;
+  cursor: pointer;
+}
+
+.selectFont {
+  padding: 0;
+  position: absolute;
+  z-index: 5;
+  top: 1.5rem;
+  left: 0;
+  max-height: 10rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: .5rem 0;
+  border-radius: 0  0 20px 20px;
+  list-style: none;
+  background-color: #fbf8f7;
+  width: 100%;
+}
+
+.selectFont li {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: .5rem 1rem;
+  font-size: .85rem;
+  align-items: center;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.selectFont li:nth-child(even) {
+  border: 1px solid #FFF;
+  border-right: none;
+  border-left: none;
+}
+
+.selectFont li label {
+  cursor: pointer;
+  margin: 0;
+}
+
+.selectFont li:hover {
+  color: rgba(0, 0, 0, 0.356);
+}
+
+.selectFont input {
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
