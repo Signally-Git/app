@@ -41,6 +41,40 @@
     }
 }
 
+.nonLogged {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    li {
+        transition: 0.2s;
+        font-size: .95rem;
+        a {
+            transition: 0.2s;
+            color: #65443E;
+        }
+        padding: .5rem 1rem;
+        &:hover {
+            cursor: pointer;
+            a {
+                color: #FF7954;
+            }
+        }
+        &:last-child {
+            border: 1px solid #65443E;
+            border-radius: 100px;
+            &:hover {
+                cursor: pointer;
+                opacity: 1;
+                a{
+                    color: #FF7954;
+                }
+                border-color: #FF7954;
+            }
+        }
+    }
+}
+
 // .beta {
 //     color: #fff;
 //     background: $signally-brown;

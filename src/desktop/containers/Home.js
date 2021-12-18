@@ -1,10 +1,10 @@
-import Header from '../components/Landing/Header/header'
-import Landing from '../components/Landing/landing'
+import Header from '../components/Header/Header'
+import Landing from '../components/Landing/SignIn/landing'
 
 function Home() {
     return (
         <div style={{background: "#FFF", margin: 0}}>
-            <Header />
+            <Header landing={true} />
             <Landing />
         </div>
     )

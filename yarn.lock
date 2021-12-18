@@ -9288,6 +9288,11 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
+react-auth-code-input@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-auth-code-input/-/react-auth-code-input-1.2.1.tgz#6042207d2f9688aa06d48594889e5f70675a44be"
+  integrity sha512-+S5yBwi/lv/2/jolaryx1veHXDIomeIL/YOx1HVpqIWFlFz2eXWFNN8aA3RniJmp+YzVc5G04gQlFLpXT8Km+w==
+
 react-colorful@^5.2.0:
   version "5.5.0"
   resolved "https://registry.npmjs.org/react-colorful/-/react-colorful-5.5.0.tgz"

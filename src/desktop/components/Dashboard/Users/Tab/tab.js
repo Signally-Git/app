@@ -11,6 +11,7 @@ import { API } from 'config'
 import { FaUser } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import Input from 'Utils/Input/input'
+import request from 'Utils/Request/request'
 
 // Displays the current list
 // Groups by default
@@ -78,21 +79,20 @@ export default function Tab(props) {
     }
 
     const getDataTeam = async () => {
-        return await axios.get(`${API}organisations/${localStorage.getItem('organisation_id')}/teams?access_token=${localStorage.getItem('token')}`)
-            .then(
-                (res) => {
-                    setTeams(res.data.data);
-                })
+        const teams = await request.get("teams")
+        setTeams(teams.data["hydra:member"])
+        console.log(teams)
     }
+
     const getDataUser = async () => {
         return await axios.get(`${API}organisations/${localStorage.getItem('organisation_id')}/users?access_token=${localStorage.getItem('token')}`).then(
             (res) => { setUsers(res.data.data) })
     }
 
     const refreshData = () => {
-        getDataGroup()
-        // getDataTeam()
-        getDataUser()
+        // getDataGroup()
+        getDataTeam()
+        // getDataUser()
     }
 
     useEffect(() => {
@@ -101,7 +101,7 @@ export default function Tab(props) {
 
     // Deletes either specified group, team or user
     const handleDelete = (id, type) => {
-        axios.delete(`${API}${type}/${id}?access_token=${localStorage.getItem("token")}`).then(
+        request.delete(`${type}/${id}`).then(
             () => { refreshData() }
         )
         setModal({ type: "", name: "", id: "" })
@@ -113,14 +113,14 @@ export default function Tab(props) {
             case "group":
                 for (let index = 0; index < groups.length; index++) {
                     const element = groups[index];
-                    axios.delete(`${API}group/${element.id}?access_token=${localStorage.getItem("token")}`).then(
+                    axios.delete(`${API}group/${element.id}`).then(
                         (res) => index === groups.length - 1 && refreshData())
                 }
                 break;
-            case "team":
+            case "teams":
                 for (let index = 0; index < teams.length; index++) {
                     const element = teams[index];
-                    axios.delete(`${API}teams/${element.id}?access_token=${localStorage.getItem("token")}`).then(
+                    request.delete(`teams/${element["@id"]}`).then(
                         (res) => index === teams.length - 1 && refreshData())
                 }
                 break;
@@ -128,7 +128,7 @@ export default function Tab(props) {
                 for (let index = 0; index < users.length; index++) {
                     const element = users[index];
                     if (element.id !== localStorage.getItem("user_id"))
-                        axios.delete(`${API}users/${element.id}?access_token=${localStorage.getItem("token")}`).then(
+                        axios.delete(`${API}users/${element.id}`).then(
                             (res) => index === users.length - 1 && refreshData())
                 }
                 break;
@@ -158,7 +158,7 @@ export default function Tab(props) {
                             <br /><span className={classes.orangeTxt}>{`${teams.length} teams`}</span></h4>
                         <div>
                             <Button color="orangeFill">Annuler</Button>
-                            <Button color="orange" onClick={() => handleDeleteAll("team")}>Supprimer</Button>
+                            <Button color="orange" onClick={() => handleDeleteAll("teams")}>Supprimer</Button>
                         </div>
                     </div>)
                 case "allusers":
@@ -271,7 +271,7 @@ export default function Tab(props) {
                                     </div>
                                     <div className={classes.actionsContainer}>
                                         <AiOutlineEdit />
-                                        <FiTrash onClick={() => setModal({ name: team.name, id: team.id, type: "team" })} />
+                                        <FiTrash onClick={() => setModal({ name: team.name, id: team.id, type: "teams" })} />
                                     </div>
                                 </li>)
                     })}
@@ -312,9 +312,9 @@ export default function Tab(props) {
                                             {edit === user ? <FiCheck onClick={(e) => { e.preventDefault(); setEdit() }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEdit(user) }} />}
                                             <FiTrash onClick={() => setModal({ name: `${user.first_name} ${user.last_name}`, id: user.id, type: "user" })} />
                                         </div>}
-                                        {edit === user ? <>
+                                    {edit === user ? <>
                                         <div className={classes.editDiv}>
-                                                <Input type="text" placeholder="Adresse mail" />
+                                            <Input type="text" placeholder="Adresse mail" />
                                             <div className={classes.inputsContainer}>
                                                 <Input type="text" placeholder="Poste" />
                                                 <Input type="tel" placeholder="Mobile" />

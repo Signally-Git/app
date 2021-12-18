@@ -1,8 +1,6 @@
-import axios from "axios";
-import { API } from "config";
+import request from "Utils/Request/request";
 
-export function UseUserInfos(userId) {
-    return axios.get(`${API}user/${userId}?access_token=${localStorage.getItem("token")}`).then((res) => {
-        return res.data
-    })
+export async function UseUserInfos(userId) {
+    const user = await request.get(`user/${userId}`)
+    return user.data
 }
