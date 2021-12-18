@@ -10,76 +10,55 @@ import Checkbox from 'Assets/icons/checkbox.svg'
 import Menu from '../../../Menu/Menu'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import { API } from 'config'
+import request from 'Utils/Request/request'
 
 function ImportCSV() {
     const [searchQuery, setSearchQuery] = useState("")
     const [resultCount, setResultCount] = useState(0)
     const [state, setState] = useState([])
     const [step, setStep] = useState(0)
-    const [error, setError] = useState("")
     const [importedUsers, setImportedUsers] = useState([])
     const [userCount, setUserCount] = useState([])
 
     const handleSubmit = async (e) => {
-        if (e.target.files[0]?.name?.split('.').pop() !== 'csv') {
-            setError("Le fichier doit etre en .csv")
-            console.log(error)
-            return
-        }
         const req = new FormData()
         req.append('file', new Blob([e.target.files[0]], { type: 'text/csv' }))
 
-        await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users/import?access_token=${localStorage.getItem("token")}`,
-            req)
-            .then(async (res) => {
-                setImportedUsers(res.data)
-                // console.log(res)
-                setStep(2)
-            }
-            ).catch((err) => {
-                console.log(err)
-            })
+        const importCSV = await request.post(`organisation/users/import`, req)
+        setImportedUsers(importCSV.data)
+        setStep(2)
     }
 
     const handleImport = async () => {
         let defaultSignature = {}
-        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/signature-templates?access_token=${localStorage.getItem("token")}`).then(async (res) => {
-            if (res.data.data.length > 0)
-                defaultSignature = res.data.data[0].id
-            importedUsers.map(async (user) => {
-                let req
-                if (res.data.data.length > 0)
-                req = {
-                    email: user.email,
-                    phone_number: user.phone_number,
-                    first_name: user.first_name,
-                    last_name: user.last_name,
-                    position: user.position,
-                    signature_template_id: defaultSignature
-                }
-                else {
-                    req = {
-                        email: user.email,
-                        phone_number: user.phone_number,
-                        first_name: user.first_name,
-                        last_name: user.last_name,
-                        position: user.position
-                    }
-                }
-                await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`, req).then(async (res) => {
-                    await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`).then((res) => {
-                        setUserCount(res.data.data)
-                    })
-                    setStep(4)
-                })
-            })
-            const req = {signature_template_id: defaultSignature}
-            await axios.patch(`${API}user/${localStorage.getItem("user_id")}?access_token=${localStorage.getItem("token")}`, req).then((res) => {
-                console.log(res)
-            })
+        const signatures = await request.get(`signatures`)
+        if (signatures.data["hydra:totalItems"] > 0)
+            defaultSignature = signatures.data["hydra:member"][0]
+        importedUsers.map(async (user) => {
+            const req = signatures.data["hydra:totalItems"] > 0 ? {
+                email: user.email,
+                phone_number: user.phone_number,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                position: user.position,
+                signature_template_id: defaultSignature
+            } : {
+                email: user.email,
+                phone_number: user.phone_number,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                position: user.position
+            }
+
+            await request.post(`users`, req)
+            const users = await request.get(`users`)
+            setUserCount(users.data["hydra:totalItems"])
+            setStep(4)
         })
+        const req = { signature_template_id: defaultSignature }
+        // ADD USER ID
+        await request.patch(`users/`, req)
     }
 
     useEffect(() => {
@@ -143,7 +122,7 @@ function ImportCSV() {
                     </div>
                 </div>
                 <div className={classes.uploadFile}>
-                    <input type="file" onChange={(e) => {handleSubmit(e)}} />
+                    <input type="file" onChange={(e) => { handleSubmit(e) }} />
                     <button className={`${classes.orangeBtn}`}>Importer le fichier</button>
                 </div>
                 <Menu page={"teams"} />

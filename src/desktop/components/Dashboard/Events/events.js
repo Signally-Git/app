@@ -1,12 +1,11 @@
 import classes from './events.module.css'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { API } from 'config'
 import { HiOutlineSearch } from 'react-icons/hi'
 import Button from 'Utils/Button/btn'
 import CreateEvent from './CreateEvent/createEvent'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import { useNotification } from 'Utils/Notifications/notifications'
+import request from 'Utils/Request/request'
 
 function Events() {
     const [active, setActive] = useState("present")
@@ -22,9 +21,8 @@ function Events() {
     const [drag, setDrag] = useState()
 
     const getData = async () => {
-        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/campaigns?access_token=${localStorage.getItem("token")}`).then((res) => {
-            setActiveEvents(res.data.data)
-        })
+        const events = await request.get(`events`)
+        setActiveEvents(events.data["hydra:member"])
     }
 
     useEffect(() => {
@@ -33,12 +31,11 @@ function Events() {
     }, [create, edit, preview])
 
     const handleDelete = (id) => {
-        axios.delete(`${API}campaign/${id}?access_token=${localStorage.getItem("token")}`).then(
-            () => { getData() }
-        )
+        request.delete(`events/${id}`)
+        getData()
         setModal()
         setPreview()
-        notification({ content: <>Event supprimé avec succès</>, status: "invalid"})
+        notification({ content: <>Event supprimé avec succès</>, status: "invalid" })
     }
 
     useEffect(() => {
@@ -88,7 +85,7 @@ function Events() {
     }
     return (
         <div onDragEnter={() => setDrag(true)}
-            
+
         >
             {modal ? modalContent : ""}
             <div className={classes.container}>

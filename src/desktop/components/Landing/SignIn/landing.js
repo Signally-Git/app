@@ -75,7 +75,8 @@ const Login = () => {
                                 // /> 
                                 <Input defaultValue={code} placeholder="Password" type="password" onChange={(e) => setCode(e.target.value)} />
                                 : <>
-                                    <div>
+                                <Input defaultValue={code} placeholder="Password" type="password" onChange={(e) => setCode(e.target.value)} />
+                                    {/* <div>
                                         <input />
                                         <input />
                                         <input />
@@ -85,7 +86,7 @@ const Login = () => {
                                         <input />
                                         <input />
                                         <input />
-                                    </div>
+                                    </div> */}
                                 </>}
                     </div>
                     <div className={classes.btnsContainer}>

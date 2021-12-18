@@ -5,12 +5,11 @@ import 'moment/locale/fr';
 import Input from 'Utils/Input/input';
 import Button from 'Utils/Button/btn';
 import { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
-import { API } from 'config';
 import moment from 'moment';
 import UploadFile from 'Utils/Upload/uploadFile';
 import { FiEdit } from 'react-icons/fi';
 import { useNotification } from 'Utils/Notifications/notifications';
+import request from 'Utils/Request/request';
 
 export default function CreateEvent({ setDone, event }) {
     const [startDate, setStartDate] = useState(new Date())
@@ -44,7 +43,7 @@ export default function CreateEvent({ setDone, event }) {
         const img = new FormData()
         img.append('file', banner)
         if (!event && banner) {
-            await axios.post(`${API}media`, img).then(async (res) => {
+            await request.post(`import/images`, img).then(async (res) => {
                 const req = {
                     banner_id: res.data.id,
                     name: eventName,
@@ -54,7 +53,7 @@ export default function CreateEvent({ setDone, event }) {
                     active: true
                 }
                 console.log(req, res.data)
-                await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/campaigns?access_token=${localStorage.getItem("token")}`, req).then((res) => {
+                await request.post(`events`, req).then((res) => {
                     notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> créé avec succès</>, status: "valid"})
                     setDone(false)
                 })
@@ -68,15 +67,14 @@ export default function CreateEvent({ setDone, event }) {
 
             if (banner) {
                 img.append('file', banner)
-                await axios.post(`${API}media`, img).then(async (res) => {
+                await request.post(`import/images`, img).then(async (res) => {
                     const req = {
                         name: eventName,
                         start_date: start,
                         end_date: end,
-                        expire: end,
                         banner_id: res.data.id
                     }
-                    await axios.patch(`${API}campaign/${event.id}?access_token=${localStorage.getItem("token")}`, req).then((res) => {
+                    await request.patch(`events/${event.id}`, req).then((res) => {
                         setDone(false)
                         notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> modifié avec succès</>, status: "valid"})
                     })
@@ -90,7 +88,7 @@ export default function CreateEvent({ setDone, event }) {
                     end_date: end,
                     expire: end
                 }
-                await axios.patch(`${API}campaign/${event.id}?access_token=${localStorage.getItem("token")}`, req).then((res) => {
+                await request.patch(`events/${event.id}`, req).then((res) => {
                     setDone(false)
                     notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> modifié avec succès</>, status: "valid"})
                 })

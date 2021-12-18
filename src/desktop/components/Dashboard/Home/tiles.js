@@ -2,11 +2,8 @@ import ChevronRight from 'Assets/icons/chevron-right.svg'
 import classes from './tiles.module.css'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { VscSync } from 'react-icons/vsc'
-import { AiOutlineCheckCircle } from 'react-icons/ai'
-import { API } from 'config'
 import { MobileView } from 'react-device-detect'
+import request from 'Utils/Request/request'
 
 function Tiles(props) {
     const [loading, setLoading] = useState(false)
@@ -19,43 +16,32 @@ function Tiles(props) {
     const [templates, setTemplates] = useState([])
     const [signatures, setSignatures] = useState([])
 
-    const [syncing, setSyncing] = useState(false)
-    const [synchronized, setSynchronized] = useState(false)
-
-    const handleSync = () => {
-        setSyncing(true)
-        setTimeout(() => {
-            setSynchronized(true)
-        }, 2500)
-    }
-
-
     useEffect(async () => {
         props.handleHeader(" ")
-        await axios.get(`${API}user/${localStorage.getItem("user_id")}?access_token=${localStorage.getItem("token")}`).then((res) => {
+        await request.get(`whoami`).then((res) => {
             localStorage.setItem("user", JSON.stringify(res.data))
             setLoading(true)
             // console.log(res)
         })
-        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/campaigns?access_token=${localStorage.getItem("token")}`).then((res) => {
+        await request.get(`events`).then((res) => {
             setEvents(res.data.data)
         })
-        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/teams?access_token=${localStorage.getItem("token")}`).then((res) => {
+        await request.get(`teams`).then((res) => {
             setTeamsList(res.data.data)
         })
-        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`).then((res) => {
+        await request.get(`users`).then((res) => {
             setUsers(res.data.data)
         })
-        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/signature-templates?access_token=${localStorage.getItem("token")}`).then((res) => {
+        await request.get(`signatures`).then((res) => {
             setTemplates(res.data.data)
         })
     
     }, [])
 
     useEffect(() => {
-        setActiveEvents(events.filter(isActive => isActive.active === true))
-        setActiveTeams(teamsList.filter(isActive => isActive.members_count > 0))
-        setActiveUsers(users.filter(isActive => isActive.is_deployed === true))
+        setActiveEvents(events?.filter(isActive => isActive.active === true))
+        setActiveTeams(teamsList?.filter(isActive => isActive.members_count > 0))
+        setActiveUsers(users?.filter(isActive => isActive.is_deployed === true))
     }, [events, users, teamsList])
 
     useEffect(() => {
@@ -75,7 +61,7 @@ function Tiles(props) {
                     </div>
                     <div className={classes.row}>
                         <div>
-                            <span className={classes.bigTxt}>{signatures.length}</span>
+                            <span className={classes.bigTxt}>{signatures?.length}</span>
                             <span> /{templates?.length}</span>
                         </div>
                         <span className={classes.activeSpan}>actives</span>
@@ -88,8 +74,8 @@ function Tiles(props) {
                     </div>
                     <div className={classes.row}>
                         <div>
-                            <span className={classes.bigTxt}>{activeEvents.length}</span>
-                            <span> /{events.length}</span>
+                            <span className={classes.bigTxt}>{activeEvents?.length}</span>
+                            <span> /{events?.length}</span>
                         </div>
                         <span className={classes.activeSpan}>actifs</span>
 
@@ -103,8 +89,8 @@ function Tiles(props) {
                         </div>
                         <div className={classes.row}>
                             <div>
-                                <span className={classes.bigTxt}>{activeTeams.length}</span>
-                                <span> /{teamsList.length}</span>
+                                <span className={classes.bigTxt}>{activeTeams?.length}</span>
+                                <span> /{teamsList?.length}</span>
                             </div>
                             <span className={classes.activeSpan}>actives</span>
                         </div>
@@ -117,7 +103,7 @@ function Tiles(props) {
                         </div>
                         <div className={classes.row}>
                             <div>
-                                <span className={classes.bigTxt}>{users.length}</span>
+                                <span className={classes.bigTxt}>{users?.length}</span>
                             </div>
                             <span className={classes.activeSpan}>actifs</span>
                         </div>
@@ -129,8 +115,8 @@ function Tiles(props) {
                     </div>
                     <div className={classes.row}>
                         <div>
-                            {users.length === 1 ?  <><span className={classes.bigTxt}> </span><span className={classes.free}>Gratuit</span></> : <>
-                            <span className={classes.bigTxt}>{users.length * 0.5 + activeEvents.length * 10}€</span>
+                            {users?.length === 1 ?  <><span className={classes.bigTxt}> </span><span className={classes.free}>Gratuit</span></> : <>
+                            <span className={classes.bigTxt}>{users?.length * 0.5 + activeEvents?.length * 10}€</span>
                             <span> /mois</span> </>}
                         </div>
                     </div>

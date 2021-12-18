@@ -17,10 +17,11 @@ import Hello from 'Assets/img/hi.svg';
 import Button from 'Utils/Button/btn';
 import Input from 'Utils/Input/input';
 import UploadFile from 'Utils/Upload/uploadFile';
+import request from 'Utils/Request/request';
 
 function Informations() {
     const [active, setActive] = useState("company")
-    const [social, setSocial] = useState([""])
+    const [social, setSocial] = useState([])
     const [icon, setIcon] = useState([<FaLink />])
     const [logo, setLogo] = useState()
     const [uploadedMedia, setUploadedMedia] = useState()
@@ -33,22 +34,33 @@ function Informations() {
     const [position, setPosition] = useState("")
     const [mobile, setMobile] = useState("")
     const [socials, setSocials] = useState({})
+    const [user, setUser] = useState()
     let history = useHistory()
+    useEffect(async () => {
+        await request.get(`whoami`).then((res) => {
+            localStorage.setItem("user", JSON.stringify(res.data))
+            setFirstName(res.data.firstName)
+            setLastName(res.data.lastName)
+            setPosition(res.data.position)
+            setMobile(res.data.phone_number)
+        })
+    }, [])
+
 
     const handleSaveCompany = async () => {
         const img = new FormData()
         img.append('file', uploadedMedia)
         if (uploadedMedia)
-            await axios.post(`${API}media`, img).then(async (res) => {
+            await request.post(`import/images`, img).then(async (res) => {
                 const req = {
                     name: companyName,
                     address: companyAddress,
                     website_url: website,
-                    logo_id: res.data.id,
+                    logo_id: res.data.url,
                     phone_number: phone,
                     ...socials
                 }
-                await axios.patch(`${API}organisations/${JSON.parse(localStorage.getItem("user"))?.organisation_id}?access_token=${localStorage.getItem("token")}`, req).then((res) => {
+                await request.patch(`organisations/`, req).then((res) => {
                     history.goBack()
                 })
             })
@@ -115,19 +127,13 @@ function Informations() {
             const tmp = [res.data.twitter, res.data.facebook, res.data.instagram, res.data.linkedin]
             setSocial(tmp.filter((rs) => { return (rs !== undefined) }))
         })
-
-        await axios.get(`${API}users/${JSON.parse(localStorage.getItem("user")).id}?access_token=${localStorage.getItem("token")}`).then((res) => {
-            localStorage.setItem("user", JSON.stringify(res.data))
-            setFirstName(res.data.first_name)
-            setLastName(res.data.last_name)
-            setPosition(res.data.position)
-            setMobile(res.data.phone_number)
-        })
     }, [])
 
     const handleSocial = (string, index) => {
-        social[index] = string;
-        setSocial([...social]);
+        if (social?.length > 0) {
+            social[index] = string
+            setSocial([...social]);
+        }
 
         if (string) {
             if (string.search(/twitter/i) !== -1) {
@@ -175,9 +181,9 @@ function Informations() {
                         <div className={classes.inputContainer}>
                             <label>Logo de l'entreprise</label>
                             <UploadFile file={uploadedMedia}
-                                    setFile={(e) => setUploadedMedia(e)}
-                                    placeholder="Importer une image"
-                                    type="image/*" />
+                                setFile={(e) => setUploadedMedia(e)}
+                                placeholder="Importer une image"
+                                type="image/*" />
                         </div>
                         <div className={classes.inputContainer}>
                             <label>Nom société</label>
@@ -200,11 +206,11 @@ function Informations() {
                             <AiOutlinePlusCircle onClick={() => { setSocial(social.concat("")); setIcon(icon.concat(<FaLink />)) }} />
                         </div>
                         {
-                            social.map((rs, index) => {
+                            social?.map((rs, index) => {
                                 return (
                                     <div className={classes.iconInput} key={index}>
                                         {icon[index]}
-                                        <Input style={{textIndent: "2rem", width: "100%"}} autoFocus={rs.length === 0 && icon[index] && icon[index] !== <FaLink />} type="text" placeholder="URL" value={rs} onChange={(e) => handleSocial(e.target.value, index)} />
+                                        <Input style={{ textIndent: "2rem", width: "100%" }} autoFocus={rs.length === 0 && icon[index] && icon[index] !== <FaLink />} type="text" placeholder="URL" value={rs} onChange={(e) => handleSocial(e.target.value, index)} />
                                     </div>)
                             })
                         }

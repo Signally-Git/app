@@ -1,1 +1,1 @@
-export const API = "https://api.signally.local/"
+export const API = "https://api.staging.signally.io/"
