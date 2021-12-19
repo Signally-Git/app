@@ -41,7 +41,7 @@ function Header(props) {
                             onMouseOver={() => setHover(true)}
                             onMouseLeave={() => setTimeout(() => { setHover(false) }, 300)}>
                             <li className={classes.UserName}>
-                                <span>{props.user?.first_name} {props.user?.last_name || "profil"}</span>
+                                <span>{props.user?.firstName} {props.user?.lastName || "profil"}</span>
                             </li>
                             <li><Link to="/profile/informations">Compte</Link></li>
                             <li title={soon}><Link to="/billing" className="disabled">Abonnement</Link></li>

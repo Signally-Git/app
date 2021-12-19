@@ -7,7 +7,7 @@ import Tab from './Tab/tab'
 import SignaturePreview from './SignaturePreview/signaturePreview'
 
 function Team() {
-    const [active, setActive] = useState("groups")
+    const [active, setActive] = useState("workplaces")
     const [entity, setEntity] = useState()
     
     return (
@@ -16,7 +16,7 @@ function Team() {
                 <h1>Teams</h1>
                 <div className={classes.teamsContainer}>
                     <ul className={classes.menu}>
-                        <li onClick={() => setActive("groups")} className={active === "groups" ? classes.active : ""}>Hotels</li>
+                        <li onClick={() => setActive("workplaces")} className={active === "workplaces" ? classes.active : ""}>Hotels</li>
                         <li onClick={() => setActive("teams")} className={active === "teams" ? classes.active : ""}>Équipes</li>
                         <li onClick={() => setActive("users")} className={active === "users" ? classes.active : ""}>Collaborateurs</li>
                     </ul>

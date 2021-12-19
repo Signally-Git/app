@@ -6,5 +6,6 @@ const request = axios.create({
 });
 
 request.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+// request.defaults.headers.common['Content-Type'] = 'application/merge-patch+json';
 // INTERCEPTORS
 export default request;

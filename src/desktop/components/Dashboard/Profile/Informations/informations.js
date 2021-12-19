@@ -24,6 +24,7 @@ function Informations() {
     const [social, setSocial] = useState([])
     const [icon, setIcon] = useState([<FaLink />])
     const [logo, setLogo] = useState()
+    const [organisationId, setOrganisationId] = useState()
     const [uploadedMedia, setUploadedMedia] = useState()
     const [companyName, setCompanyName] = useState("")
     const [companyAddress, setCompanyAddress] = useState("")
@@ -34,7 +35,7 @@ function Informations() {
     const [position, setPosition] = useState("")
     const [mobile, setMobile] = useState("")
     const [socials, setSocials] = useState({})
-    const [user, setUser] = useState()
+
     let history = useHistory()
     useEffect(async () => {
         await request.get(`whoami`).then((res) => {
@@ -42,7 +43,7 @@ function Informations() {
             setFirstName(res.data.firstName)
             setLastName(res.data.lastName)
             setPosition(res.data.position)
-            setMobile(res.data.phone_number)
+            setMobile(res.data.phone)
         })
     }, [])
 
@@ -54,25 +55,23 @@ function Informations() {
             await request.post(`import/images`, img).then(async (res) => {
                 const req = {
                     name: companyName,
-                    address: companyAddress,
-                    website_url: website,
-                    logo_id: res.data.url,
-                    phone_number: phone,
-                    ...socials
+                    websiteUrl: website,
+                    logos: [{logos: [res.data.url]}]
                 }
-                await request.patch(`organisations/`, req).then((res) => {
+                await request.patch(`organisations/${organisationId}`, req, {
+                    headers: { 'Content-Type': 'application/merge-patch+json' }
+                }).then((res) => {
                     history.goBack()
                 })
             })
         else {
             const req = {
                 name: companyName,
-                address: companyAddress,
-                website_url: website,
-                phone_number: phone,
-                ...socials
+                websiteUrl: website,
             }
-            await axios.patch(`${API}organisations/${JSON.parse(localStorage.getItem("user"))?.organisation_id}?access_token=${localStorage.getItem("token")}`, req).then((res) => {
+            await request.patch(`organisations/${organisationId}`, req, {
+                headers: { 'Content-Type': 'application/merge-patch+json' }
+            }).then((res) => {
                 history.goBack()
             })
         }
@@ -80,53 +79,52 @@ function Informations() {
 
     const handleSavePersonal = async () => {
         const req = {
-            first_name: firstName,
-            last_name: lastName,
+            firstName: firstName,
+            lastName: lastName,
             position: position,
-            phone_number: mobile
+            phone: mobile
         }
-        await axios.patch(`${API}users/${JSON.parse(localStorage.getItem("user")).id}?access_token=${localStorage.getItem("token")}`, req).then((res) => {
-            history.goBack()
+        await request.patch(`users/${JSON.parse(localStorage.getItem('user')).id}`, req, {
+            headers: { 'Content-Type': 'application/merge-patch+json' }
         })
+        history.goBack()
     }
 
     useEffect(async () => {
         handleSocial()
-        await axios.get(`${API}organisations/${JSON.parse(localStorage.getItem("user"))?.organisation_id}?access_token=${localStorage.getItem("token")}`).then((res) => {
-            if (res.data.logo)
-                setLogo(res.data.logo.path)
-            if (res.data.name)
-                setCompanyName(res.data.name)
-            if (res.data.address)
-                setCompanyAddress(res.data.address)
-            if (res.data.phone_number)
-                setPhone(res.data.phone_number)
-            if (res.data.website_url)
-                setWebsite(res.data.website_url)
-            if (res.data.twitter) {
-                setSocials(({ ...socials, twitter: res.data.twitter }))
-                icon[0] = <FaTwitter />
-                setIcon([...icon])
-            }
-            if (res.data.facebook) {
-                setSocials(({ ...socials, facebook: res.data.facebook }))
-                icon[1] = <FaFacebookF />
-                setIcon([...icon])
-            }
-            if (res.data.instagram) {
-                setSocials(({ ...socials, instagram: res.data.instagram }))
-                icon[2] = <FaInstagram />
-                setIcon([...icon])
-            }
-            if (res.data.linkedin) {
-                setSocials(({ ...socials, linkedin: res.data.linkedin }))
-                icon[3] = <FaLinkedinIn />
-                setIcon([...icon])
-            }
+        let organisation = await request.get(`organisations`)
+        organisation = organisation.data["hydra:member"][0]
+        setOrganisationId(organisation.id)
+        setLogo(organisation.logos[0])
+        setCompanyName(organisation.name)
+        setCompanyAddress(organisation.address.street)
+        setWebsite(organisation.websiteUrl)
+        setPhone(organisation.digitalAddress.phone)
 
-            const tmp = [res.data.twitter, res.data.facebook, res.data.instagram, res.data.linkedin]
-            setSocial(tmp.filter((rs) => { return (rs !== undefined) }))
-        })
+        if (organisation.socialMediaAccounts.twitter) {
+            setSocials(({ ...socials, twitter: organisation.socialMediaAccounts.twitter }))
+            icon[0] = <FaTwitter />
+            setIcon([...icon])
+        }
+        if (organisation.socialMediaAccounts.facebook) {
+            setSocials(({ ...socials, facebook: organisation.socialMediaAccounts.facebook }))
+            icon[1] = <FaFacebookF />
+            setIcon([...icon])
+        }
+        if (organisation.socialMediaAccounts.instagram) {
+            setSocials(({ ...socials, instagram: organisation.socialMediaAccounts.instagram }))
+            icon[2] = <FaInstagram />
+            setIcon([...icon])
+        }
+        if (organisation.socialMediaAccounts.linkedin) {
+            setSocials(({ ...socials, linkedin: organisation.socialMediaAccounts.linkedin }))
+            icon[3] = <FaLinkedinIn />
+            setIcon([...icon])
+        }
+
+        const tmp = [organisation.socialMediaAccounts.twitter, organisation.socialMediaAccounts.facebook, organisation.socialMediaAccounts.instagram, organisation.socialMediaAccounts.linkedin]
+        setSocial(tmp.filter((rs) => { return (rs !== undefined) }))
+
     }, [])
 
     const handleSocial = (string, index) => {

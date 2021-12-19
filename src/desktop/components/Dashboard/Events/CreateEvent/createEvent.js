@@ -38,21 +38,18 @@ export default function CreateEvent({ setDone, event }) {
 
     const saveEvent = async (e) => {
         e.preventDefault()
-        const start = moment(startDate).valueOf()
-        const end = moment(endDate).valueOf()
+        const start = (moment(startDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss') 
+        const end = (moment(endDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss')
         const img = new FormData()
         img.append('file', banner)
         if (!event && banner) {
             await request.post(`import/images`, img).then(async (res) => {
                 const req = {
-                    banner_id: res.data.id,
+                    imagePath: res.data.url,
                     name: eventName,
-                    start_date: start,
-                    end_date: end,
-                    expire: end,
-                    active: true
+                    startAt: start,
+                    endAt: end,
                 }
-                console.log(req, res.data)
                 await request.post(`events`, req).then((res) => {
                     notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> créé avec succès</>, status: "valid"})
                     setDone(false)
@@ -61,8 +58,8 @@ export default function CreateEvent({ setDone, event }) {
             return false;
         }
         if (event) {
-            const start = moment(startDate).valueOf()
-            const end = moment(endDate).valueOf()
+            const start = (moment(startDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss') 
+            const end = (moment(endDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss')
             const img = new FormData()
 
             if (banner) {
@@ -70,13 +67,15 @@ export default function CreateEvent({ setDone, event }) {
                 await request.post(`import/images`, img).then(async (res) => {
                     const req = {
                         name: eventName,
-                        start_date: start,
-                        end_date: end,
-                        banner_id: res.data.id
+                        startAt: start,
+                        endAt: end,
+                        imagePath: res.data.url
                     }
-                    await request.patch(`events/${event.id}`, req).then((res) => {
+                    await request.patch(`events/${event.id}`, req, {
+                        headers: { 'Content-Type': 'application/merge-patch+json' }
+                    }).then((res) => {
                         setDone(false)
-                        notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> modifié avec succès</>, status: "valid"})
+                        notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> créé avec succès</>, status: "valid"})
                     })
                 })
                 return false;
@@ -84,13 +83,14 @@ export default function CreateEvent({ setDone, event }) {
             else {
                 const req = {
                     name: eventName,
-                    start_date: start,
-                    end_date: end,
-                    expire: end
+                    startAt: start,
+                    endAt: end,
                 }
-                await request.patch(`events/${event.id}`, req).then((res) => {
+                await request.patch(`events/${event.id}`, req, {
+                    headers: { 'Content-Type': 'application/merge-patch+json' }
+                }).then((res) => {
                     setDone(false)
-                    notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> modifié avec succès</>, status: "valid"})
+                    notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> créé avec succès</>, status: "valid"})
                 })
             }
         }
@@ -105,11 +105,11 @@ export default function CreateEvent({ setDone, event }) {
         <div className={classes.datePick}>
             <div>
                 <label>Date et heure de début</label>
-                <Datetime locale="fr-fr" value={startDate} onChange={setStartDate} closeOnSelect={true} />
+                <Datetime locale="fr-fr" value={startDate} onChange={setStartDate} closeOnSelect={true} dateFormat="D MMM YYYY" />
             </div>
             <div>
                 <label>Date et heure de fin</label>
-                <Datetime locale="fr-fr" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="d MMM yyyy" />
+                <Datetime locale="fr-fr" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="D MMM YYYY" />
             </div>
         </div>
         <Input required defaultValue={eventNameDefault} onChange={(e) => setEventName(e.target.value)} style={{ width: "100%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef}  />

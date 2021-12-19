@@ -6,6 +6,7 @@ import CreateEvent from './CreateEvent/createEvent'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import { useNotification } from 'Utils/Notifications/notifications'
 import request from 'Utils/Request/request'
+import { API } from 'config'
 
 function Events() {
     const [active, setActive] = useState("present")
@@ -56,20 +57,20 @@ function Events() {
     const handleEvents = (status) => {
         const events = activeEvents.map((activeEvent, index) => {
             if (activeEvent?.name.toLowerCase().search(search.toLowerCase()) !== -1)
-                if ((status === "past" && new Date(activeEvent.end_date) < new Date()) || (status === "present" && activeEvent.active) || (status === "future" && new Date(activeEvent.start_date) > new Date())) {
+                if ((status === "past" && new Date(activeEvent.endAt) < new Date()) || (new Date(activeEvent.startAt) < new Date() && status === "present" && new Date(activeEvent.endAt) > new Date()) || (status === "future" && new Date(activeEvent.startAt) > new Date())) {
                     return (
                         <li key={index} className={`${status === "past" ? classes.pastEvent : ""}`} onClick={() => { setPreview({ activeEvent, past: status === "past", index }); setCreate(false); setEdit(false) }} tabIndex={index}>
-                            <img className={classes.bannerPreview} src={activeEvent.banner?.path} />
+                            <img className={classes.bannerPreview} src={`${API}${activeEvent.imagePath}`} />
                             <div className={classes.eventText}>
                                 <span className={classes.active}>{activeEvent.name}</span>
                                 <span className={classes.duration}>
                                     <div className={`${classes.col} ${classes.bold}`}>
-                                        <span>{`du ${new Date(activeEvent?.start_date).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
-                                        <span>{`au ${new Date(activeEvent?.end_date).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
+                                        <span>{`du ${new Date(activeEvent?.startAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
+                                        <span>{`au ${new Date(activeEvent?.endAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
                                     </div>
                                     <div className={classes.col}>
-                                        <span>{`${new Date(activeEvent?.start_date).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
-                                        <span>{`${new Date(activeEvent?.end_date).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
+                                        <span>{`${new Date(activeEvent?.startAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
+                                        <span>{`${new Date(activeEvent?.endAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
                                     </div>
                                 </span>
                                 <div className={classes.actionsContainer}>
@@ -141,7 +142,7 @@ function Events() {
                                 <div className={`${classes.eventPreview} ${activeEvents[preview?.index].past ? classes.pastEvent : ""}`}>
                                     {/* <h3>Signature active</h3> */}
                                     <h2><span className={classes.orangeTxt}>{activeEvents[preview?.index].name}</span><FiEdit onClick={() => setEdit(!edit)} /></h2>
-                                    <img src={activeEvents[preview?.index]?.banner?.path} />
+                                    <img src={`${API}${activeEvents[preview?.index]?.imagePath}`} />
                                 </div>
                             </div>
                             <div className={classes.back}>
