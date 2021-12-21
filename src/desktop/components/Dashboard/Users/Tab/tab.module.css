@@ -15,7 +15,7 @@
           justify-content: center;
   background: #fff;
   border-radius: 20px;
-  width: 30%;
+  width: 25%;
   padding: 0 1rem 1rem;
   z-index: 3;
   left: 15%;
@@ -265,6 +265,7 @@
   -webkit-box-pack: center !important;
       -ms-flex-pack: center !important;
           justify-content: center !important;
+  top: auto;
 }
 
 .rename:not(:disabled) {

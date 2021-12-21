@@ -50,13 +50,13 @@ function Informations() {
 
     const handleSaveCompany = async () => {
         const img = new FormData()
-        img.append('file', uploadedMedia)
+        img.append('image', uploadedMedia)
         if (uploadedMedia)
-            await request.post(`import/images`, img).then(async (res) => {
+            await request.post(`import/image`, img).then(async (res) => {
                 const req = {
                     name: companyName,
                     websiteUrl: website,
-                    logos: [{logos: [res.data.url]}]
+                    logos: [{ path: res.data.path }]
                 }
                 await request.patch(`organisations/${organisationId}`, req, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
@@ -68,6 +68,13 @@ function Informations() {
             const req = {
                 name: companyName,
                 websiteUrl: website,
+                address: {
+                    street: companyAddress
+                },
+                digitalAddress: {
+                    phone: phone
+                }
+
             }
             await request.patch(`organisations/${organisationId}`, req, {
                 headers: { 'Content-Type': 'application/merge-patch+json' }
@@ -92,8 +99,9 @@ function Informations() {
 
     useEffect(async () => {
         handleSocial()
-        let organisation = await request.get(`organisations`)
-        organisation = organisation.data["hydra:member"][0]
+        let organisation = await request.get(JSON.parse(localStorage.getItem('user')).organisation)
+        console.log(organisation)
+        organisation = organisation.data
         setOrganisationId(organisation.id)
         setLogo(organisation.logos[0])
         setCompanyName(organisation.name)
@@ -199,7 +207,7 @@ function Informations() {
                             <label>Téléphone fixe</label>
                             <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
                         </div>
-                        <div className={classes.iconsContainer}>
+                        {/* <div className={classes.iconsContainer}>
                             <label htmlFor="socials">Réseaux sociaux</label>
                             <AiOutlinePlusCircle onClick={() => { setSocial(social.concat("")); setIcon(icon.concat(<FaLink />)) }} />
                         </div>
@@ -211,7 +219,7 @@ function Informations() {
                                         <Input style={{ textIndent: "2rem", width: "100%" }} autoFocus={rs.length === 0 && icon[index] && icon[index] !== <FaLink />} type="text" placeholder="URL" value={rs} onChange={(e) => handleSocial(e.target.value, index)} />
                                     </div>)
                             })
-                        }
+                        } */}
                     </div>
                     <Button width="40%" color="orangeFill" onClick={() => handleSaveCompany()}>Sauvegarder</Button>
                 </> : <>

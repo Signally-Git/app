@@ -29,17 +29,17 @@ export default function Preview(props) {
     const handleImg = (item) => {
         switch (item) {
             case "pinterest":
-                return "https://images.signally.io/ee7a76d7b866f17a1205fc28b877ba8fbd46c385296"
+                return "https://api.staging.signally.io/images//pinterest-61c0f24103ecb.png"
             case "facebook":
-                return "https://images.signally.io/ee7a7723b8c733fa0fb9ee2afcd40bb237b2f08427e"
+                return "https://api.staging.signally.io/images//facebook-61c0f270dc582.png"
             case "twitter":
-                return "https://images.signally.io/ee7a76af9fb124784600544d36803f31287d0952bd2"
+                return "https://api.staging.signally.io/images//twitter-61c0f269b42bb.png"
             case "instagram":
-                return "https://images.signally.io/ee7a7552080bb0f59d5463fb68c803f22a3d7d769b9"
+                return "https://api.staging.signally.io/images//instagram-61c0f25a1488a.png"
             case "linkedin":
-                return "https://images.signally.io/ee7a769940e8bcca4a15d53b5ccb721fa17bb3a59a5"
+                return "https://api.staging.signally.io/images//linkedin-61c0f27682eb6.png"
             case "snapchat":
-                return "https://images.signally.io/ee7a76c3412acbcf12f1d1fcbffb99cd7d98bc15feb"
+                return "https://api.staging.signally.io/images//snapchat-61c0f26174451.png"
             default:
                 break;
         }
@@ -51,7 +51,7 @@ export default function Preview(props) {
         PLACEHOLDER_GENERAL_FONT: props.infos?.fontFamily || "Helvetica,Arial,sans-serif",
         PLACEHOLDER_GENERAL_FONTSIZE: `${props.infos?.fontSize[0]}px` || "11px",
         PLACEHOLDER_COMPANY_ICON: props.infos?.logo?.path || "https://via.placeholder.com/108",
-        PLACEHOLDER_BANNER: props.options?.bannerTop.data ? `<img style="border-radius: 4px; margin-bottom: 12px;" src='${URL.createObjectURL(props.options.bannerTop.data)}'
+        PLACEHOLDER_BANNER: props.options?.bannerTop.data ? `<img style="border-radius: 4px; margin-bottom: 12px; max-width: 380px" src='${URL.createObjectURL(props.options.bannerTop.data)}'
     alt='banner' />` : "",
         PLACEHOLDER_SALUTATION: props.options?.salutation.enabled ? `<p style="padding-bottom: ${props.options?.salutation.padding}px;"}>${props.options?.salutation.value || "Cordialement,"}</p>` : "",
         PLACEHOLDER_DIV_COLOR: props.options?.bgColor || "#FCE750",
@@ -59,7 +59,7 @@ export default function Preview(props) {
         PLACEHOLDER_FIRST_NAME_STYLE: `color:${props.infos?.firstName?.color}; ${convertToHTML(props.infos?.firstName?.style)}` || "PLACEHOLDER_FIRST_NAME_STYLE",
         PLACEHOLDER_LAST_NAME: props.infos?.lastName?.value || "Nom",
         PLACEHOLDER_LAST_NAME_STYLE: `color:${props.infos?.lastName?.color};${convertToHTML(props.infos?.lastName?.style)}` || "PLACEHOLDER_LAST_NAME_STYLE",
-        PLACEHOLDER_POSTE: props.infos?.jobName?.value || "Poste",
+        PLACEHOLDER_POSITION: props.infos?.jobName?.value || "Poste",
         PLACEHOLDER_POSTE_STYLE: `color:${props.infos?.jobName?.color};${convertToHTML(props.infos?.jobName?.style)}` || "PLACEHOLDER_POSTE_STYLE",
         PLACEHOLDER_COMPANY: props.infos?.company?.value || "Société",
         PLACEHOLDER_COMPANY_STYLE: `color:${props.infos?.company?.color};${convertToHTML(props.infos?.company?.style)}` || "PLACEHOLDER_COMPANY_STYLE",
@@ -74,10 +74,10 @@ export default function Preview(props) {
         PLACEHOLDER_EVENT_BANNER: props.infos.event ? props.infos.event : (props.options?.event?.enabled ? props?.options?.event?.display : ""), 
         PLACEHOLDER_DISCLAIMER: props.options?.footer?.enabled ? `<p style="box-sizing: border-box; margin-top:${props.options?.footer?.padding}px; font-size:${props.options?.footer?.size}px; max-width: ${props.options?.footer?.maxWidth}px;">${props.options?.footer?.value.replace(/\n/g, "<br />")}</p>` : ""
     }
-    const template = props.template.replace("<pre>(.*?)</pre>", "TEST")
+
     return parse(
-        template.replace(
-            /\b(?:PLACEHOLDER_GENERAL_FONT|PLACEHOLDER_GENERAL_FONTSIZE|PLACEHOLDER_BANNER|PLACEHOLDER_FOLLOWUS|PLACEHOLDER_SALUTATION|PLACEHOLDER_DIV_COLOR|PLACEHOLDER_FIRST_NAME|PLACEHOLDER_COMPANY_ICON|PLACEHOLDER_FIRST_NAME_STYLE|PLACEHOLDER_LAST_NAME|PLACEHOLDER_LAST_NAME_STYLE|PLACEHOLDER_POSTE|PLACEHOLDER_POSTE_STYLE|PLACEHOLDER_COMPANY|PLACEHOLDER_COMPANY_STYLE|PLACEHOLDER_ADDRESS|PLACEHOLDER_ADDRESS_STYLE|PLACEHOLDER_MOBILE|PLACEHOLDER_MOBILE_STYLE|PLACEHOLDER_PHONE|PLACEHOLDER_PHONE_STYLE|PLACEHOLDER_FACEBOOK|PLACEHOLDER_INSTAGRAM|PLACEHOLDER_TWITTER|PLACEHOLDER_LINKEDIN|PLACEHOLDER_SOCIALS|PLACEHOLDER_EVENT_BANNER|PLACEHOLDER_DISCLAIMER)\b/gi,
+        props.template.replace(
+            /\b(?:PLACEHOLDER_GENERAL_FONT|PLACEHOLDER_GENERAL_FONTSIZE|PLACEHOLDER_BANNER|PLACEHOLDER_FOLLOWUS|PLACEHOLDER_SALUTATION|PLACEHOLDER_DIV_COLOR|PLACEHOLDER_FIRST_NAME|PLACEHOLDER_COMPANY_ICON|PLACEHOLDER_FIRST_NAME_STYLE|PLACEHOLDER_LAST_NAME|PLACEHOLDER_LAST_NAME_STYLE|PLACEHOLDER_POSITION|PLACEHOLDER_POSTE_STYLE|PLACEHOLDER_COMPANY|PLACEHOLDER_COMPANY_STYLE|PLACEHOLDER_ADDRESS|PLACEHOLDER_ADDRESS_STYLE|PLACEHOLDER_MOBILE|PLACEHOLDER_MOBILE_STYLE|PLACEHOLDER_PHONE|PLACEHOLDER_PHONE_STYLE|PLACEHOLDER_FACEBOOK|PLACEHOLDER_INSTAGRAM|PLACEHOLDER_TWITTER|PLACEHOLDER_LINKEDIN|PLACEHOLDER_SOCIALS|PLACEHOLDER_EVENT_BANNER|PLACEHOLDER_DISCLAIMER)\b/gi,
             (matched) => mapObj[matched]
         )
     )

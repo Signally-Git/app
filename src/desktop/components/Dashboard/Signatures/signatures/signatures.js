@@ -33,8 +33,8 @@ function Team() {
     const getData = async () => {
         const signatures = await request.get(`signatures`)
         signatures.data["hydra:totalItems"] < 1 ? history.push("/create-signature")
-        : console.log(signatures.data["hydra:member"])
-            // : setTemplates(signatures.data)
+        // : console.log(signatures.data["hydra:member"])
+            : setTemplates(signatures.data["hydra:member"])
         setLoading(false)
 
     }
@@ -52,12 +52,12 @@ function Team() {
             address: organisation?.address,
             mobile: "Mobile",
             phone: organisation?.phone_number,
-            event: `<img src="http://fakeimg.pl/380x126?font=noto&amp;font_size=14" style="margin-bottom: 12px; border-radius: 4px;"/>`
+            event: `<img src="http://fakeimg.pl/380x126?font=noto&amp;font_size=14" style="margin-bottom: 12px; border-radius: 4px; max-width: 380px"/>`
         })
     }, [user, template])
 
     const handleDelete = async (id) => {
-        await request.delete(`template/${id}`).then(
+        await request.delete(`signatures/${id}`).then(
             (res) => {
                 notification({ content: <>La signature a été supprimée avec succès</>, status: "valid" })
                 setPreview([]); setDeleted(res.data)
@@ -75,7 +75,7 @@ function Team() {
                     <div className={classes.teamsContainer}>
                         <ul className={classes.menu}>
                             <li onClick={() => setActive("active")} className={active === "active" ? classes.active : ""}>Actives</li>
-                            <li onClick={() => setActive("inactive")} className={`${active === "inactive" ? classes.active : ""}`}>Inactives</li>
+                            {/* <li onClick={() => setActive("inactive")} className={`${active === "inactive" ? classes.active : ""}`}>Inactives</li> */}
                         </ul>
                         {active === "active" ?
                             <div>
@@ -90,7 +90,7 @@ function Team() {
                                         return (<li key={signature.id} tabIndex="0" onClick={() => setPreview(signature)}>
                                             <span>{signature.name}</span>
                                             <div className={classes.actionsContainer}>
-                                                <AiOutlineEdit />
+                                                {/* <AiOutlineEdit /> */}
                                                 <FiTrash onClick={() => handleDelete(signature.id)} />
                                             </div>
                                         </li>)
@@ -115,14 +115,14 @@ function Team() {
                                     {/* </ul> */}
                                 </div> : ""}
                     </div>
-                    {preview.signatureData?.length > 0 ?
+                    {preview.html?.length > 0 ?
                         <div className={classes.signaturePreview}>
                             {/* <h2>Design</h2> */}
                             <ul>
                                 <li>
                                     <h5>Signature <span className={classes.orangeTxt}>{preview.name}</span></h5>
                                     {/* {preview.signatureData?.length > 0 && parse(preview.signatureData)} */}
-                                    <ReadOnlyPreview infos={data} template={preview.signatureData} />
+                                    <ReadOnlyPreview infos={data} template={preview.html} />
                                     {/* <p className={classes.groupName}>Team Design</p>
                                     <span className={classes.groupName}>#Mama Los Angeles</span> */}
                                 </li>

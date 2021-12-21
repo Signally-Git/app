@@ -82,7 +82,7 @@ function Tiles(props) {
                     </div>
                 </Link>
                 {!teamsList.length < 1 ? <>
-                    <Link to="/teams" className={classes.tile}>
+                    <Link to="/teams/teams" className={classes.tile}>
                         <div className={classes.row}>
                             <p>Teams</p>
                             <img src={ChevronRight} alt="View" className={classes.blackImg} />
@@ -96,7 +96,7 @@ function Tiles(props) {
                         </div>
                     </Link>
                 </> : null}
-                    <Link to="/team/allusers" className={classes.tile}>
+                    <Link to="/teams/users" className={classes.tile}>
                         <div className={classes.row}>
                             <p>Collaborateurs</p>
                             <img src={ChevronRight} alt="View" className={classes.blackImg} />
@@ -108,19 +108,20 @@ function Tiles(props) {
                             <span className={classes.activeSpan}>actifs</span>
                         </div>
                     </Link>
-                <Link to="/billing" className={`${classes.tile} ${classes.billingTile}`}>
+                <div to="#" className={`${classes.tile} ${classes.billingTile}`}>
                     <div className={classes.row}>
                         <p>Abonnement</p>
                         <img src={ChevronRight} alt="View" />
                     </div>
                     <div className={classes.row}>
                         <div>
-                            {users.length === 1 ?  <><span className={classes.bigTxt}> </span><span className={classes.free}>Gratuit</span></> : <>
-                            <span className={classes.bigTxt}>{users.length * 0.5 + activeEvents.length * 10}€</span>
-                            <span> /mois</span> </>}
+                        <span className={classes.free}>Gratuit</span>
+                            {/* {users.length === 1 ?  <><span className={classes.bigTxt}> </span><span className={classes.free}>Gratuit</span></> : <>
+                            <span className={classes.bigTxt}>{users.length * 0.5 + activeEvents.length * 10}€</span> */}
+                            {/* <span> /mois</span> </>} */}
                         </div>
                     </div>
-                </Link>
+                </div>
             </div>
         </div>
     )

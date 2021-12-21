@@ -29,7 +29,7 @@ function Menu(props) {
                 </Link>
             </li>
             <li className={`${page.search("team") !== -1 ? classes.active : ""}`}>
-                <Link to="/teams">
+                <Link to="/teams/workplaces">
                     <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20.7925 9.52352C21.5825 10.3136 21.5825 11.5944 20.7925 12.3845C20.0025 13.1745 18.7216 13.1745 17.9315 12.3845C17.1415 11.5944 17.1415 10.3136 17.9315 9.52352C18.7216 8.73349 20.0025 8.73349 20.7925 9.52352" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M14.2026 5.91236C15.4191 7.12884 15.4191 9.10115 14.2026 10.3176C12.9861 11.5341 11.0138 11.5341 9.79732 10.3176C8.58084 9.10116 8.58084 7.12885 9.79732 5.91236C11.0138 4.69588 12.9861 4.69588 14.2026 5.91236" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

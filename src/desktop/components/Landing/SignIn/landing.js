@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import classes from '../landing.module.css';
 
 import Illustration from 'Assets/img/takeoff.png'
@@ -6,17 +6,34 @@ import Logo from "Assets/img/logo-full.svg";
 import Button from 'Utils/Button/btn';
 import Input from 'Utils/Input/input';
 import AuthCode from 'react-auth-code-input';
-import axios from 'axios';
 import { API } from 'config';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import request from 'Utils/Request/request';
 
+function useQuery() {
+    const { search } = useLocation();
+  
+    return useMemo(() => new URLSearchParams(search), [search]);
+  }
+  
+
 const Login = () => {
-    const [email, setEmail] = useState('diegos@M365x606019.onmicrosoft.com')
-    const [code, setCode] = useState('ChangeMe!')
+    const [email, setEmail] = useState('')
+    const [code, setCode] = useState('')
     const [logging, setLogging] = useState(false)
     const slider = useRef(null)
     const history = useHistory()
+    const query = useQuery()
+
+    useEffect(async () => {
+        console.log(query.get('user'), decodeURI(encodeURI(query.get('user'))))
+        if (query.get('user')) {
+            setEmail(query.get('user'))
+            const magicLink = await request.get(`login_check?user=${query.get("user")}&expires=${query.get('expires')}&hash=${query.get('hash')}`)
+            localStorage.setItem('token', magicLink.data.token)
+            history.push('/dashboard')
+        }
+    }, [])
 
     const handleScroll = (e, scroll) => {
         e.preventDefault()
@@ -40,11 +57,11 @@ const Login = () => {
     const handleLogIn = async (e) => {
         e.preventDefault()
         const req = {
-            email: email,
+            username: email,
             password: code
         }
-        const token = await axios.post(`${API}token/auth`, req);
-        localStorage.setItem('token', token.data.token)
+        const token = await request.post(`token/auth`, req);
+        localStorage.setItem('token', token.data.refresh_token)
         history.push('/dashboard')
     }
 
@@ -56,7 +73,7 @@ const Login = () => {
                     <div className={classes.inputContainer}>
                         <label className={classes.inputTitle}>Adresse e-mail</label>
                         <div style={{ position: 'relative', display: 'flex' }}>
-                            <Input style={{ width: "100%" }} placeholder='xyrn@gmail.com' onChange={(e) => setEmail(e.target.value)} value={email} type="email" />
+                            <Input style={{ width: "100%" }} placeholder='xyrn@gmail.com' onChange={(e) => setEmail(e.target.value)} value={email} type="text" />
                         </div>
                     </div>
                     <Button width={"50%"} color="orangeFill" type="submit">Connexion</Button>

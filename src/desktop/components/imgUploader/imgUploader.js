@@ -6,6 +6,7 @@ import axios from 'axios';
 import { API } from 'config';
 import Logo from 'Utils/Logo/logo';
 import Button from 'Utils/Button/btn';
+import request from 'Utils/Request/request';
 
 // Custom functions
 // First one converts SVG HTML code to PNG image
@@ -39,15 +40,17 @@ function ImgUploader() {
     // Uploading image to signally servers
     const uploadImg = async (uploadedMedia) => {
         const img = new FormData()
-        img.append('file', uploadedMedia)
-        await axios.post(`${API}media`, img).then(async (res) => {
-            console.log(res.data)
+        img.append('image', uploadedMedia)
+        await request.post(`import/image`, img).then(async (res) => {
+
+            console.log(res)
             if (res.data.path) {
                 setPath(res.data)
-                copyToClipboard(res.data.id)
+                copyToClipboard(res.data.path)
             }
-            else
-                setMessage(res.data)
+            // 
+            // else
+            //     setMessage(res.data)
         }).catch((err) => { setMessage(err) })
     }
 
@@ -95,7 +98,6 @@ function ImgUploader() {
                                     onChange={(e) => {
                                         setImgName(e.target.files[0].name);
                                         uploadImg(e.target.files[0]);
-                                        convertSvg(e.target.files[0])
                                     }}
                                 />
                                 <span>

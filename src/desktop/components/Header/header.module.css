@@ -174,14 +174,14 @@
 }
 
 .btnsContainer .store {
-  border: 1px solid #3d2b28;
-  color: #3d2b28;
+  border: 1px solid #FF7954;
+  color: #FF7954;
 }
 
 .btnsContainer .store:hover {
   color: #fff;
-  background: #3d2b28;
-  border-color: #3d2b28;
+  background: #FF7954;
+  border-color: #FF7954;
 }
 
 .btnsContainer a {
@@ -325,6 +325,10 @@
   transition: 0.2s;
 }
 
+.name ul li:first-child {
+  text-align: center;
+}
+
 .name ul li:first-child,
 .name ul li:last-child {
   margin-bottom: 0.5rem;
@@ -387,9 +391,9 @@
 .reportContainer > div {
   -webkit-transition: background-color 0.2s, border-color 0.2s;
   transition: background-color 0.2s, border-color 0.2s;
-  color: #fff;
-  background: #402927;
-  border: 1px solid #402927;
+  color: #402927;
+  background: #F4EEEF;
+  border: 1px solid #F4EEEF;
   font-weight: bold;
   font-size: 0.9rem;
   width: 100%;
@@ -404,16 +408,20 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background: #402927;
 }
 
 .reportContainer > div:hover {
-  border-color: #FF7954;
-  background-color: #FF7954;
+  border-color: #402927;
+  color: #FFF;
+  background-color: #402927;
+}
+
+.reportContainer > div:hover button {
+  color: #FFF;
 }
 
 .reportContainer button {
-  color: #fff;
+  color: #402927;
   font-size: .6rem;
   margin-top: .15rem;
   cursor: pointer;

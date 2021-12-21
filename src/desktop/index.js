@@ -41,7 +41,7 @@ export default function DesktopRoutes() {
 
             <PrivateRoute path="/user/:userId" component={Users} />
 
-            <PrivateRoute exact path="/teams" page="teams" component={Dashboard} />
+            <PrivateRoute exact path="/teams/:type" page="teams" component={Dashboard} />
 
             <PrivateRoute path="/profile" page="profile" component={Dashboard} />
 

@@ -137,12 +137,12 @@
         }
     }
     .store {
-        border: 1px solid #3d2b28;
-        color: #3d2b28;
+        border: 1px solid $signally-orange;
+        color: $signally-orange;
         &:hover {
             color: #fff;
-            background: #3d2b28;
-            border-color: #3d2b28;
+            background: $signally-orange;
+            border-color: $signally-orange;
         }
     }
     a {
@@ -257,6 +257,10 @@
         margin-right: 1rem;
         position: relative;
         transition: 0.2s;
+
+        li:first-child{
+            text-align: center;
+        }
         li:first-child,
         li:last-child {
             margin-bottom: 0.5rem;
@@ -306,9 +310,9 @@
     position: relative;
     > div {
         transition: background-color 0.2s, border-color 0.2s;
-        color: #fff;
-        background: $signally-brown;
-        border: 1px solid $signally-brown;
+        color: $signally-brown;
+        background: $signally-pink;
+        border: 1px solid $signally-pink;
         font-weight: bold;
         font-size: 0.9rem;
         width: 100%;
@@ -318,14 +322,17 @@
         padding: 0.5rem .55rem;
         display: flex;
         flex-direction: column;
-        background: $signally-brown;
         &:hover {
-            border-color: $signally-orange;
-            background-color: $signally-orange;
+            border-color: $signally-brown;
+            color: #FFF;
+            background-color: $signally-brown;
+            button {
+                color: #FFF;
+            }
         }
     }
     button {
-        color: #fff;
+        color: $signally-brown;
         font-size: .6rem;
         margin-top: .15rem;
         cursor: pointer;

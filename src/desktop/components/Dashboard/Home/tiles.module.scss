@@ -137,7 +137,7 @@
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 .billingTile {
-    background: $signally-brown;
+    background: $signally-brown!important;
     * {
         color: #FFF;
     }

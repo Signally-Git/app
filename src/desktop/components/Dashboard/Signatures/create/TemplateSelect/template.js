@@ -11,7 +11,7 @@ export default function Template(props) {
         PLACEHOLDER_GENERAL_FONT: props.infos?.fontFamily || "Helvetica,Arial,sans-serif",
         PLACEHOLDER_GENERAL_FONTSIZE: "11px;",
         PLACEHOLDER_COMPANY_ICON: props.infos?.logo.path || "http://fakeimg.pl/108?font=noto&font_size=12",
-        PLACEHOLDER_BANNER: props.options?.bannerTop.data ? `<img style="border-radius: 4px; margin-bottom: 12px; width: 380px;" src='${props.options.bannerTop.data}'
+        PLACEHOLDER_BANNER: props.options?.bannerTop.data ? `<img style="border-radius: 4px; margin-bottom: 12px; max-width: 380px;" src='${props.options.bannerTop.data}'
     alt='banner' />` : "",
         PLACEHOLDER_DIV_COLOR: "#FCE750",
         PLACEHOLDER_SALUTATION: props.options?.salutation.enabled ? `<p style="padding-bottom: ${props.options?.salutation.padding}px;"}>${props.options?.salutation.value || "Cordialement,"}</p>` : "",
@@ -19,7 +19,7 @@ export default function Template(props) {
         PLACEHOLDER_FIRST_NAME_STYLE: "font-weight: bold;",
         PLACEHOLDER_LAST_NAME: props.infos?.lastName.value || "Nom",
         PLACEHOLDER_LAST_NAME_STYLE: "font-weight: bold;",
-        PLACEHOLDER_POSTE: props.infos?.jobName.value || "Poste",
+        PLACEHOLDER_POSITION: props.infos?.jobName.value || "Poste",
         PLACEHOLDER_POSTE_STYLE: "font-size: 11px;",
         PLACEHOLDER_COMPANY: props.infos?.company.value || "Société",
         PLACEHOLDER_COMPANY_STYLE: "font-weight: bold;",
@@ -31,12 +31,12 @@ export default function Template(props) {
         PLACEHOLDER_MOBILE_STYLE: "font-size: 11px;",
         PLACEHOLDER_PHONE: props.infos?.phone.value || "fixe",
         PLACEHOLDER_PHONE_STYLE: "font-size: 11px;",
-        PLACEHOLDER_EVENT_BANNER: props.infos?.logo.path || `<img style="margin-bottom: 12px; border-radius: 4px;" src="http://fakeimg.pl/380x126?font=noto&font_size=14" />`,
+        PLACEHOLDER_EVENT_BANNER: props.infos?.logo.path || `<img style="margin-bottom: 12px; border-radius: 4px; max-width: 380px" src="http://fakeimg.pl/380x126?font=noto&font_size=14" />`,
         PLACEHOLDER_DISCLAIMER: props.options?.footer?.enabled ? `<p style="box-sizing: border-box; margin-top:${props.options?.footer?.padding}px; font-size:${props.options?.footer?.size}px; max-width: ${props.options?.footer?.maxWidth}px;">${props.options?.footer?.value.replace(/\n/g, "<br />")}</p>` : ""
     }
     return parse(
         props.template.replace(
-            /\b(?:PLACEHOLDER_GENERAL_FONT|PLACEHOLDER_DISCLAIMER|PLACEHOLDER_DIV_COLOR|PLACEHOLDER_GENERAL_FONTSIZE|PLACEHOLDER_FOLLOWUS|PLACEHOLDER_SOCIALS|PLACEHOLDER_BANNER|PLACEHOLDER_SALUTATION|PLACEHOLDER_FIRST_NAME|PLACEHOLDER_COMPANY_ICON|PLACEHOLDER_FIRST_NAME_STYLE|PLACEHOLDER_LAST_NAME|PLACEHOLDER_LAST_NAME_STYLE|PLACEHOLDER_POSTE|PLACEHOLDER_POSTE_STYLE|PLACEHOLDER_COMPANY|PLACEHOLDER_COMPANY_STYLE|PLACEHOLDER_ADDRESS|PLACEHOLDER_ADDRESS_STYLE|PLACEHOLDER_MOBILE|PLACEHOLDER_MOBILE_STYLE|PLACEHOLDER_PHONE|PLACEHOLDER_PHONE_STYLE|PLACEHOLDER_FACEBOOK|PLACEHOLDER_INSTAGRAM|PLACEHOLDER_TWITTER|PLACEHOLDER_LINKEDIN|PLACEHOLDER_SOCIALS_STYLE|PLACEHOLDER_EVENT_BANNER)\b/gi,
+            /\b(?:PLACEHOLDER_GENERAL_FONT|PLACEHOLDER_DISCLAIMER|PLACEHOLDER_DIV_COLOR|PLACEHOLDER_GENERAL_FONTSIZE|PLACEHOLDER_FOLLOWUS|PLACEHOLDER_SOCIALS|PLACEHOLDER_BANNER|PLACEHOLDER_SALUTATION|PLACEHOLDER_FIRST_NAME|PLACEHOLDER_COMPANY_ICON|PLACEHOLDER_FIRST_NAME_STYLE|PLACEHOLDER_LAST_NAME|PLACEHOLDER_LAST_NAME_STYLE|PLACEHOLDER_POSITION|PLACEHOLDER_POSTE_STYLE|PLACEHOLDER_COMPANY|PLACEHOLDER_COMPANY_STYLE|PLACEHOLDER_ADDRESS|PLACEHOLDER_ADDRESS_STYLE|PLACEHOLDER_MOBILE|PLACEHOLDER_MOBILE_STYLE|PLACEHOLDER_PHONE|PLACEHOLDER_PHONE_STYLE|PLACEHOLDER_FACEBOOK|PLACEHOLDER_INSTAGRAM|PLACEHOLDER_TWITTER|PLACEHOLDER_LINKEDIN|PLACEHOLDER_SOCIALS_STYLE|PLACEHOLDER_EVENT_BANNER)\b/gi,
             (matched) => mapObj[matched]
         )
     )

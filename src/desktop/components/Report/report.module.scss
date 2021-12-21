@@ -1,7 +1,7 @@
 .container {
-    max-width: 60%;
+    max-width: 65%;
     border-radius: 20px;
-    padding: 2rem;
+    padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -10,15 +10,20 @@
         text-align: center;
     }
     p {
-        font-size: .8rem;
+        font-size: .75rem;
+        text-align: justify;
     }
     h4 {
         font-size: 1rem;
         margin: 0;
     }
+    h4 ~ div {
+        margin-top: .5rem;
+    }
     select {
         transition: 0.2s;
         background: #fff;
+        width: 55%;
         border: 1px solid #f7f5f5;
         padding: 1rem;
         border-radius: 10px;
@@ -32,6 +37,7 @@
     display: flex;
     justify-content: start;
     width: 60%;
+    margin-top: .5rem;
     button {
         margin-left: 0;
     }

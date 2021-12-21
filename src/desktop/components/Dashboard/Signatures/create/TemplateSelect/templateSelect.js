@@ -27,7 +27,7 @@ const templateAPI = [{
                         </p>
                         <p
                             style="line-height: 0px;  font-weight:200; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;font-size:PLACEHOLDER_GENERAL_FONTSIZE;PLACEHOLDER_POSTE_STYLE;">
-                            PLACEHOLDER_POSTE</p>
+                            PLACEHOLDER_POSITION</p>
                         <p
                             style="line-height: 0px; margin: 0; margin-top: 7px; line-height:14px; padding: 0; letter-spacing:normal;font-size:PLACEHOLDER_GENERAL_FONTSIZE;PLACEHOLDER_COMPANY_STYLE;">
                             PLACEHOLDER_COMPANY</p>
@@ -39,12 +39,12 @@ const templateAPI = [{
                                 style=" font-weight:600; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;font-size:PLACEHOLDER_GENERAL_FONTSIZE;">T</span>
                             <span
                                 style=" font-weight:200; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;font-size:PLACEHOLDER_GENERAL_FONTSIZE;PLACEHOLDER_PHONE_STYLE;">
-                                PLACEHOLDER_PHONE</span>
+                                PLACEHOLDER_MOBILE</span>
                             <span
                                 style=" font-weight:600; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;font-size:PLACEHOLDER_GENERAL_FONTSIZE;">M</span>
                             <span
                                 style=" font-weight:200; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;font-size:PLACEHOLDER_GENERAL_FONTSIZE;PLACEHOLDER_MOBILE_STYLE;">
-                                PLACEHOLDER_MOBILE</span>
+                                PLACEHOLDER_PHONE</span>
                         </p>
                     </td>
                 </tr>
@@ -63,7 +63,7 @@ const templateAPI = [{
                     <div style="padding-top: 3px">
                         <span style="color: #FFF; font-size: 13px; font-weight: bold;vertical-align:super;margin-right: 4px;">PLACEHOLDER_FOLLOWUS</span>
                         PLACEHOLDER_SOCIALS
-                        <a href="https://fr.mamashelter.com/"><img src="https://images.signally.io/ee7a797f02a400ef3aa48b903767ee0a2d5218b5e6d" alt="mama shelter" style="margin-left: 42px; height: 24px" /></a>
+                        <a href="https://fr.mamashelter.com/"><img src="https://api.staging.signally.io/images//mama-61c0f1b6cbc19.png" alt="mama shelter" style="margin-left: 42px; height: 24px" /></a>
                       </div>
                     </td>
                 </tr>
@@ -92,7 +92,7 @@ PLACEHOLDER_BANNER
                         </p>
                         <p
                             style="line-height: 0px;  font-weight:200; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;font-size:PLACEHOLDER_GENERAL_FONTSIZE;">
-                            PLACEHOLDER_POSTE</p>
+                            PLACEHOLDER_POSITION</p>
                         <p
                             style="line-height: 0px; margin: 0; margin-top: 7px;  font-weight:600; line-height:14px; padding: 0; letter-spacing:normal;font-size:PLACEHOLDER_GENERAL_FONTSIZE;">
                             PLACEHOLDER_COMPANY</p>
@@ -124,7 +124,7 @@ PLACEHOLDER_BANNER
                     <div style="padding-top: 3px; color: #FFF;" >
                         <span style="color: #FFF; font-size: 13px; font-weight: bold;vertical-align:super;margin-right: 4px;">PLACEHOLDER_FOLLOWUS</span>
                         PLACEHOLDER_SOCIALS
-                        <a href="https://fr.mamashelter.com/"><img src="https://images.signally.io/ee7a797f02a400ef3aa48b903767ee0a2d5218b5e6d" alt="mama shelter" style="margin-left: 42px; height: 24px" /></a>
+                        <a href="https://fr.mamashelter.com/"><img src="https://api.staging.signally.io/images//mama-61c0f1b6cbc19.png" alt="mama shelter" style="margin-left: 42px; height: 24px" /></a>
                       </div>
                     </td>
                 </tr>

@@ -31,12 +31,12 @@ function Events() {
         handleEvents()
     }, [create, edit, preview])
 
-    const handleDelete = (id) => {
-        request.delete(`events/${id}`)
+    const handleDelete = async (id) => {
+        await request.delete(`events/${id}`)
         getData()
         setModal()
         setPreview()
-        notification({ content: <>Event supprimé avec succès</>, status: "invalid" })
+        notification({ content: <>Event supprimé avec succès</>, status: "valid" })
     }
 
     useEffect(() => {

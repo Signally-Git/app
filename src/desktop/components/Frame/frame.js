@@ -5,6 +5,7 @@ import { UseOrganizationInfos } from "Utils/useOrganizationInfos/useOrganization
 import { UseUserInfos } from "Utils/useUserInfos/useUserInfos";
 import classes from "./frame.module.scss";
 import request from "Utils/Request/request";
+import { API } from "config";
 
 export default function Frame(props) {
     const [user, setUser] = useState()
@@ -13,13 +14,15 @@ export default function Frame(props) {
     useEffect(() => {
         const getUser = async () => {
             const logUser = await request.get('whoami')
+            // console.log(logUser)
             setUser(logUser.data)
-            setOrganisation(await UseOrganizationInfos(localStorage.getItem("organisation_id")))
+            const organisation = await request.get(logUser.data.organisation)
+            setOrganisation(organisation.data)
         }
 
         getUser()
     }, [])
-
+    console.log(organisation)
     return (<>
         <div className={classes.desktop}>
             <div className={classes.desktopSubcontainer}>
@@ -27,7 +30,7 @@ export default function Frame(props) {
                 <div className={classes.mainContent}>
                     <div className={classes.menuContainer}>
                         <div className={classes.userInfos}>
-                            <img src={organisation?.logos[0] || 'https://dummyimage.com/108/f4eeef.png'} alt='' />
+                            <img src={organisation?.logos[0]?.path ? (API + organisation?.logos[0]?.path) : 'https://dummyimage.com/108/f4eeef.png'} alt='' />
                             <p className={classes.capitalize}>{organisation?.name}</p>
                         </div>
                         <Menu className={classes.menu} page={props.path} />

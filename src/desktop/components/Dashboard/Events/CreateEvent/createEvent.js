@@ -10,25 +10,23 @@ import UploadFile from 'Utils/Upload/uploadFile';
 import { FiEdit } from 'react-icons/fi';
 import { useNotification } from 'Utils/Notifications/notifications';
 import request from 'Utils/Request/request';
+import { API } from 'config';
 
 export default function CreateEvent({ setDone, event }) {
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
+    const [startDate, setStartDate] = useState(event?.startAt ? new Date(event?.startAt) : new Date())
+    const [endDate, setEndDate] = useState(event?.endAt ? new Date(event?.endAt) : new Date())
     const [banner, setBanner] = useState()
-    const [eventName, setEventName] = useState("")
+    const [eventName, setEventName] = useState(event?.name || "")
     const [eventNameDefault, setEventNameDefault] = useState()
 
     const notification = useNotification()
     const eventNameRef = useRef(null)
 
     useEffect(() => {
-        setStartDate(event?.start_date)
-        setEndDate(event?.end_date)
+        console.log(event)
+        setStartDate(event?.startAt)
+        setEndDate(event?.endAt)
     }, [])
-
-    useEffect(() => {
-        setEventNameDefault(event?.name)
-    })
 
     useEffect(() => {
         if (!event) {
@@ -38,14 +36,18 @@ export default function CreateEvent({ setDone, event }) {
 
     const saveEvent = async (e) => {
         e.preventDefault()
+        if (!eventName) {
+            notification({ content: <>Veuillez remplir le nom de l'event.</>, status: "invalid"})
+            return false;
+        }
         const start = (moment(startDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss') 
         const end = (moment(endDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss')
-        const img = new FormData()
-        img.append('file', banner)
+        const image = new FormData()
+        image.append('image', banner)
         if (!event && banner) {
-            await request.post(`import/images`, img).then(async (res) => {
+            await request.post(`import/image`, image).then(async (res) => {
                 const req = {
-                    imagePath: res.data.url,
+                    imagePath: res.data.path,
                     name: eventName,
                     startAt: start,
                     endAt: end,
@@ -60,29 +62,29 @@ export default function CreateEvent({ setDone, event }) {
         if (event) {
             const start = (moment(startDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss') 
             const end = (moment(endDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss')
-            const img = new FormData()
+            const image = new FormData()
 
             if (banner) {
-                img.append('file', banner)
-                await request.post(`import/images`, img).then(async (res) => {
+                image.append('image', banner)
+                await request.post(`import/image`, image ).then(async (res) => {
                     const req = {
                         name: eventName,
                         startAt: start,
                         endAt: end,
-                        imagePath: res.data.url
+                        imagePath: res.data.path
                     }
                     await request.patch(`events/${event.id}`, req, {
                         headers: { 'Content-Type': 'application/merge-patch+json' }
                     }).then((res) => {
                         setDone(false)
-                        notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> créé avec succès</>, status: "valid"})
+                        notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> modifié avec succès</>, status: "valid"})
                     })
                 })
                 return false;
             }
             else {
                 const req = {
-                    name: eventName,
+                    name: eventName ,
                     startAt: start,
                     endAt: end,
                 }
@@ -90,7 +92,7 @@ export default function CreateEvent({ setDone, event }) {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
                 }).then((res) => {
                     setDone(false)
-                    notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> créé avec succès</>, status: "valid"})
+                    notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> modifié avec succès</>, status: "valid"})
                 })
             }
         }
@@ -98,7 +100,7 @@ export default function CreateEvent({ setDone, event }) {
 
     return (<div className={classes.container}>
         {event ? <>
-            <h2>Modifier event <span>{eventNameDefault}</span><FiEdit onClick={() => setDone(false)} /></h2>
+            <h2>Modifier event <span>{eventName}</span><FiEdit onClick={() => setDone(false)} /></h2>
         </> : <>
             <h2>Créer un event</h2>
         </>}
@@ -112,19 +114,19 @@ export default function CreateEvent({ setDone, event }) {
                 <Datetime locale="fr-fr" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="D MMM YYYY" />
             </div>
         </div>
-        <Input required defaultValue={eventNameDefault} onChange={(e) => setEventName(e.target.value)} style={{ width: "100%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef}  />
+        <Input required defaultValue={eventName} onChange={(e) => setEventName(e.target.value)} style={{ width: "100%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef}  />
         <div className={classes.currentEventPreview}>
-            {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={event.banner?.path} title={event.banner?.name} /> : ""}
+            {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={API + event.imagePath} title={event.banner?.name} /> : ""}
         </div>
         <UploadFile
             accept="image/*"
             file={banner}
-            placeholder="Importer une autre bannière"
+            placeholder={event ? "Importer une autre bannière" : "Importer une bannière"}
             setFile={setBanner}
         />
         <form>
             <div className={classes.eventName}>
-                <Button type="submit" color="orange" onClick={eventName.length > 0 ? (e) => saveEvent(e) : () => { return; }}>Sauvegarder</Button>
+                <Button type="submit" color="orange" onClick={(e) => saveEvent(e)}>Sauvegarder</Button>
             </div>
         </form>
     </div>)

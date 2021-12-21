@@ -1,7 +1,7 @@
 .container {
-  max-width: 60%;
+  max-width: 65%;
   border-radius: 20px;
-  padding: 2rem;
+  padding: 1rem 2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -19,7 +19,8 @@
 }
 
 .container p {
-  font-size: .8rem;
+  font-size: .75rem;
+  text-align: justify;
 }
 
 .container h4 {
@@ -27,10 +28,15 @@
   margin: 0;
 }
 
+.container h4 ~ div {
+  margin-top: .5rem;
+}
+
 .container select {
   -webkit-transition: 0.2s;
   transition: 0.2s;
   background: #fff;
+  width: 55%;
   border: 1px solid #f7f5f5;
   padding: 1rem;
   border-radius: 10px;
@@ -47,6 +53,7 @@
       -ms-flex-pack: start;
           justify-content: start;
   width: 60%;
+  margin-top: .5rem;
 }
 
 .actionsContainer button {
