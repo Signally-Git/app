@@ -39,7 +39,11 @@ function CreateSignatureComponent() {
     lastName: { value: user?.last_name, color: "#000", style: { fontWeight: "bold" } },
     jobName: { value: user?.position, color: "#000", style: {} },
     company: { value: company?.name, color: "#000", style: { fontWeight: "bold" } },
-    address: { value: company?.address, color: "#000", style: {} },
+    addressStreet: { value: company?.street, color: "#000", style: {} },
+    addressInfo: { value: company?.streetInfo, color: "#000", style: {} },
+    addressZipcode: { value: company?.zipCode, color: "#000", style: {} },
+    addressCity: { value: company?.city, color: "#000", style: {} },
+    addressCountry: { value: company?.country, color: "#000", style: {} },
     mobile: { value: user?.phone_number, color: "#000", style: {} },
     phone: { value: company?.phone_number, color: "#000", style: {} },
     fontSize: [11],
@@ -54,7 +58,7 @@ function CreateSignatureComponent() {
     bgColor: "#FCE750",
     bannerTop: { url: "test", enabled: false, padding: 10 },
     event: { list: events, selected: events[0], enabled: false, padding: 12 },
-    socials: { enabled: false, bgColor: "#000", fill: "#FFF", items: ["facebook", "linkedin", "twitter", "instagram", "snapchat", "pinterest" ] },
+    socials: { enabled: false, bgColor: "#000", fill: "#FFF", items: ["facebook", "linkedin", "twitter", "instagram", "snapchat", "pinterest"] },
     footer: {
       maxWidth: 380, value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.
     
@@ -90,13 +94,18 @@ function CreateSignatureComponent() {
 
       setUser(user)
       setCompany(company)
+      console.log(company)
       setSignatureInfo({
         logo: company?.logo,
         firstName: { value: user?.first_name, color: "#000", style: { fontWeight: "bold" } },
         lastName: { value: user?.last_name, color: "#000", style: { fontWeight: "bold" } },
         jobName: { value: user?.position, color: "#000", style: {} },
         company: { value: company?.name, color: "#000", style: { fontWeight: "bold" } },
-        address: { value: company?.address, color: "#000", style: {} },
+        addressStreet: { value: company?.street, color: "#000", style: {} },
+        addressInfo: { value: company?.streetInfo, color: "#000", style: {} },
+        addressZipcode: { value: company?.zipCode, color: "#000", style: {} },
+        addressCity: { value: company?.city, color: "#000", style: {} },
+        addressCountry: { value: company?.country, color: "#000", style: {} },
         mobile: { value: user?.phone_number, color: "#000", style: {} },
         phone: { value: company?.phone_number, color: "#000", style: {} },
         fontSize: [11],
@@ -156,9 +165,14 @@ function CreateSignatureComponent() {
       lastName: { ...signatureInfo.lastName, value: "PLACEHOLDER_LAST_NAME" },
       jobName: { ...signatureInfo.jobName, value: "PLACEHOLDER_POSITION" },
       company: { ...signatureInfo.company, value: "PLACEHOLDER_COMPANY" },
-      address: { ...signatureInfo.address, value: "PLACEHOLDER_ADDRESS" },
+      addressStreet: { ...signatureInfo.addressStreet, value: "PLACEHOLDER_ADDRESS_STREET" },
+      addressInfo: { ...signatureInfo.addressInfo, value: "PLACEHOLDER_ADDRESS_INFO" },
+      addressZipcode: { ...signatureInfo.addressZipcode, value: "PLACEHOLDER_ADDRESS_ZIPCODE" },
+      addressCity: { ...signatureInfo.addressCity, value: "PLACEHOLDER_ADDRESS_CITY" },
+      addressCountry: { ...signatureInfo.country, value: "PLACEHOLDER_ADDRESS_COUNTRY" },
       mobile: { ...signatureInfo.mobile, value: "PLACEHOLDER_MOBILE" },
       phone: { ...signatureInfo.phone, value: "PLACEHOLDER_PHONE" },
+
       event: signatureOption.event.enabled === true ? "PLACEHOLDER_EVENT_BANNER" : "",
     }
     const test = <Preview infos={toSave} options={signatureOption} template={selectedTemplate} />
@@ -170,7 +184,7 @@ function CreateSignatureComponent() {
 
     await request.post(`signatures`, req).then(
       async (res) => {
-        notification({ content: <>Votre signature <span style={{color: "#FF7954"}}>{signatureName}</span> a été créée avec succès</>, status: "valid" })
+        notification({ content: <>Votre signature <span style={{ color: "#FF7954" }}>{signatureName}</span> a été créée avec succès</>, status: "valid" })
         setTemplateIdToPatch(res.data.id)
 
         // console.log(localStorage.getItem('user').signature_template_id)

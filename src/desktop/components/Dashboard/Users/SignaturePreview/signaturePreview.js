@@ -147,6 +147,7 @@ export default function SignaturePreview({ show }) {
         if (isEvent.includes("PLACEHOLDER_EVENT_BANNER") === true) {
             const events = await request.get('events');
             setEvents(events.data["hydra:member"])
+            setEvent(events.data["hydra:member"][0])
         }
         else
             setEvents([])
@@ -161,7 +162,7 @@ export default function SignaturePreview({ show }) {
         const entity = await request.get(`${type}s/${show.id}`)
         setAssignedTemplate(entity.data.compiledSignature)
         const templates = await request.get('signatures')
-
+        console.log(assignedTemplate)
         setSelectedTemplate(templates.data["hydra:member"][0])
         setTemplates(templates.data["hydra:member"])
     }, [show, edit])
@@ -200,7 +201,7 @@ export default function SignaturePreview({ show }) {
                 </div>
                 <div className={classes.signatureContainer}>
                     <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
-                        <select defaultValue={JSON.stringify(selectedTemplate)}>
+                        <select defaultValue={JSON.stringify(templates[0])}>
                             {templates.map((template) => {
                                 return <option key={template.id} value={JSON.stringify(template)} template={template.html}>
                                     {template.name}

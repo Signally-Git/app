@@ -19,7 +19,11 @@ export default function Infos(props) {
     { placeholder: "Nom", type: "text", toChange: "lastName", value: props.content.lastName },
     { placeholder: "Poste / Fonction", type: "text", toChange: "jobName", value: props.content.jobName },
     { placeholder: "Company", type: "text", toChange: "company", value: props.content.company, disabled: true },
-    { placeholder: "Adresse", type: "text", toChange: "address", value: props.content.address },
+    { placeholder: "Adresse Street", type: "text", toChange: "addressStreet", value: props.content.addressStreet },
+    { placeholder: "Adresse Info", type: "text", toChange: "addressInfo", value: props.content.addressInfo },
+    { placeholder: "Adresse Zipcode", type: "text", toChange: "addressZipcode", value: props.content.addressZipcode },
+    { placeholder: "Adresse City ", type: "text", toChange: "addressCity", value: props.content.addressCity },
+    { placeholder: "Adresse Country ", type: "text", toChange: "addressCountry", value: props.content.addressCountry },
     { placeholder: "Téléphone mobile", type: "tel", toChange: "mobile", value: props.content.mobile },
     { placeholder: "Téléphone fixe", type: "tel", toChange: "phone", value: props.content.phone }]
 

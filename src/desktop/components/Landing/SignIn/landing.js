@@ -61,7 +61,7 @@ const Login = () => {
             password: code
         }
         const token = await request.post(`token/auth`, req);
-        localStorage.setItem('token', token.data.refresh_token)
+        localStorage.setItem('token', token.data.token)
         history.push('/dashboard')
     }
 

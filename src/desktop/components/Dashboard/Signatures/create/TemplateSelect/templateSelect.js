@@ -9,14 +9,14 @@ const templateAPI = [{
     id: 1, alignment: "Horizontal", tags: ["studio"], html: `<div style="font-family:PLACEHOLDER_GENERAL_FONT; width: 380px;">
     PLACEHOLDER_SALUTATION
     PLACEHOLDER_BANNER
-<table>
-    <tr>
-        <table style="margin-bottom: 12px; margin-top: 0;  border-collapse: collapse; border-spacing: 0;">
-            <tbody>
+    <table>
+        <tr>
+            <table style="margin-bottom: 12px; margin-top: 0;  border-collapse: collapse; border-spacing: 0;">
+                <tbody>
                 <tr>
                     <td style="line-height: 0">
                         <img style="margin: 0 4px 0 0; padding: 0; width: 108px; height: 108px;" src='PLACEHOLDER_COMPANY_ICON'
-                            alt='PLACEHOLDER_COMPANY' />
+                             alt='PLACEHOLDER_COMPANY' />
                     </td>
                     <td
                         style="box-sizing: border-box; border-radius: 4px; width: 264px; height: 108px;  padding: 12px;background-color: PLACEHOLDER_DIV_COLOR; ">
@@ -33,7 +33,9 @@ const templateAPI = [{
                             PLACEHOLDER_COMPANY</p>
                         <p
                             style="line-height: 0px;  font-weight:200; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;font-size:PLACEHOLDER_GENERAL_FONTSIZE;PLACEHOLDER_ADDRESS_STYLE;">
-                            PLACEHOLDER_ADDRESS</p>
+                            PLACEHOLDER_ADDRESS_STREET PLACEHOLDER_ADDRESS_INFO <br />
+                            PLACEHOLDER_ADDRESS_ZIPCODE PLACEHOLDER_ADDRESS_CITY PLACEHOLDER_ADDRESS_COUNTRY
+                        </p>
                         <p style="line-height: 0px; margin: 0; padding: 0;">
                             <span
                                 style=" font-weight:600; line-height:14px; padding: 0; margin: 0; letter-spacing:normal;font-size:PLACEHOLDER_GENERAL_FONTSIZE;">T</span>
@@ -48,30 +50,30 @@ const templateAPI = [{
                         </p>
                     </td>
                 </tr>
-            </tbody>
-        </table>
-    </tr>
-    <tr>
-        <table style="margin-top: 0;  border-collapse: collapse; border-spacing: 0;">
-            <tbody>
+                </tbody>
+            </table>
+        </tr>
+        <tr>
+            <table style="margin-top: 0;  border-collapse: collapse; border-spacing: 0;">
+                <tbody>
                 <tr>
                     <td style="line-height: 0">
-                    PLACEHOLDER_EVENT_BANNER
+                        PLACEHOLDER_EVENT_BANNER
                 </tr>
                 <tr>
                     <td style="box-sizing: border-box; background-color: #000; border-radius: 4px; padding: 8px 12px; height: 38px; width: 380px; ">
-                    <div style="padding-top: 3px">
-                        <span style="color: #FFF; font-size: 13px; font-weight: bold;vertical-align:super;margin-right: 4px;">PLACEHOLDER_FOLLOWUS</span>
-                        PLACEHOLDER_SOCIALS
-                        <a href="https://fr.mamashelter.com/"><img src="https://api.staging.signally.io/images//mama-61c0f1b6cbc19.png" alt="mama shelter" style="margin-left: 42px; height: 24px" /></a>
-                      </div>
+                        <div style="padding-top: 3px">
+                            <span style="color: #FFF; font-size: 13px; font-weight: bold;vertical-align:super;margin-right: 4px;">PLACEHOLDER_FOLLOWUS</span>
+                            PLACEHOLDER_SOCIALS
+                            <a href="https://fr.mamashelter.com/"><img src="https://api.staging.signally.io/images//mama-61c0f1b6cbc19.png" alt="mama shelter" style="margin-left: 42px; height: 24px" /></a>
+                        </div>
                     </td>
                 </tr>
-            </tbody>
-        </table>
-    </tr>
-</table>
-PLACEHOLDER_DISCLAIMER
+                </tbody>
+            </table>
+        </tr>
+    </table>
+    PLACEHOLDER_DISCLAIMER
 </div>`}, {
     id: 0, alignment: "Horizontal", tags: ["classique"], html: `<div style="font-family:PLACEHOLDER_GENERAL_FONT;font-size:PLACEHOLDER_GENERAL_FONTSIZE;">
 PLACEHOLDER_SALUTATION
