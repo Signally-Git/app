@@ -6,6 +6,9 @@ import Button from 'Utils/Button/btn'
 import Input from 'Utils/Input/input'
 import classes from './create.module.css'
 import parse from 'html-react-parser'
+import { useHistory } from 'react-router-dom'
+import request from 'Utils/Request/request'
+import { hydrate } from 'react-dom'
 
 const svg = parse(`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1293" height="2309" viewBox="0 0 1293 2309" fill="none">
     <mask id="mask0_1062_86" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="67" y="36" width="1120" height="2163">
@@ -271,16 +274,20 @@ export default function Create(props) {
     const slide = useRef(null)
     const focus = useRef(null)
     const width = "15rem"
+    const history = useHistory()
     const [groupName, setGroupName] = useState("")
 
     const handleCSV = async (file) => {
         const csv = new FormData()
+        console.log(props.fill.type)
+        const url = `import/organisation/${props.fill.type === "users" ? "users" : `${JSON.parse(localStorage.getItem('user')).organisation.replace("/organisations/", "")}/workplaces`}`
+
         csv.append('file', file)
 
-        await axios.post(`${API}organisation/${localStorage.getItem('organisation_id')}/${props.fill.type}/import?access_token=${localStorage.getItem('token')}`, csv)
+        await request.post(url, csv)
             .then((res) => {
-                props.setState(`${res.data.length} ${props.fill.type} ajoutés`)
-                props.setValidate(props.fill.type);
+                props.setState(`${res.data["hydra:totalItems"]} ${props.fill.type} ajoutés`)
+                history.push(`/teams/${props.fill.type}`)
             }).catch((err) => console.log("ERR", err))
     }
 

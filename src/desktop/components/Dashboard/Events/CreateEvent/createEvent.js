@@ -5,31 +5,28 @@ import 'moment/locale/fr';
 import Input from 'Utils/Input/input';
 import Button from 'Utils/Button/btn';
 import { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
-import { API } from 'config';
 import moment from 'moment';
 import UploadFile from 'Utils/Upload/uploadFile';
 import { FiEdit } from 'react-icons/fi';
 import { useNotification } from 'Utils/Notifications/notifications';
+import request from 'Utils/Request/request';
+import { API } from 'config';
 
 export default function CreateEvent({ setDone, event }) {
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
+    const [startDate, setStartDate] = useState(event?.startAt ? new Date(event?.startAt) : new Date())
+    const [endDate, setEndDate] = useState(event?.endAt ? new Date(event?.endAt) : new Date())
     const [banner, setBanner] = useState()
-    const [eventName, setEventName] = useState("")
+    const [eventName, setEventName] = useState(event?.name || "")
     const [eventNameDefault, setEventNameDefault] = useState()
 
     const notification = useNotification()
     const eventNameRef = useRef(null)
 
     useEffect(() => {
-        setStartDate(event?.start_date)
-        setEndDate(event?.end_date)
+        console.log(event)
+        setStartDate(event?.startAt)
+        setEndDate(event?.endAt)
     }, [])
-
-    useEffect(() => {
-        setEventNameDefault(event?.name)
-    })
 
     useEffect(() => {
         if (!event) {
@@ -39,22 +36,23 @@ export default function CreateEvent({ setDone, event }) {
 
     const saveEvent = async (e) => {
         e.preventDefault()
-        const start = moment(startDate).valueOf()
-        const end = moment(endDate).valueOf()
-        const img = new FormData()
-        img.append('file', banner)
+        if (!eventName) {
+            notification({ content: <>Veuillez remplir le nom de l'event.</>, status: "invalid"})
+            return false;
+        }
+        const start = (moment(startDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss') 
+        const end = (moment(endDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss')
+        const image = new FormData()
+        image.append('image', banner)
         if (!event && banner) {
-            await axios.post(`${API}media`, img).then(async (res) => {
+            await request.post(`import/image`, image).then(async (res) => {
                 const req = {
-                    banner_id: res.data.id,
+                    imagePath: res.data.path,
                     name: eventName,
-                    start_date: start,
-                    end_date: end,
-                    expire: end,
-                    active: true
+                    startAt: start,
+                    endAt: end,
                 }
-                console.log(req, res.data)
-                await axios.post(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/campaigns?access_token=${localStorage.getItem("token")}`, req).then((res) => {
+                await request.post(`events`, req).then((res) => {
                     notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> créé avec succès</>, status: "valid"})
                     setDone(false)
                 })
@@ -62,21 +60,22 @@ export default function CreateEvent({ setDone, event }) {
             return false;
         }
         if (event) {
-            const start = moment(startDate).valueOf()
-            const end = moment(endDate).valueOf()
-            const img = new FormData()
+            const start = (moment(startDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss') 
+            const end = (moment(endDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss')
+            const image = new FormData()
 
             if (banner) {
-                img.append('file', banner)
-                await axios.post(`${API}media`, img).then(async (res) => {
+                image.append('image', banner)
+                await request.post(`import/image`, image ).then(async (res) => {
                     const req = {
                         name: eventName,
-                        start_date: start,
-                        end_date: end,
-                        expire: end,
-                        banner_id: res.data.id
+                        startAt: start,
+                        endAt: end,
+                        imagePath: res.data.path
                     }
-                    await axios.patch(`${API}campaign/${event.id}?access_token=${localStorage.getItem("token")}`, req).then((res) => {
+                    await request.patch(`events/${event.id}`, req, {
+                        headers: { 'Content-Type': 'application/merge-patch+json' }
+                    }).then((res) => {
                         setDone(false)
                         notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> modifié avec succès</>, status: "valid"})
                     })
@@ -85,12 +84,13 @@ export default function CreateEvent({ setDone, event }) {
             }
             else {
                 const req = {
-                    name: eventName,
-                    start_date: start,
-                    end_date: end,
-                    expire: end
+                    name: eventName ,
+                    startAt: start,
+                    endAt: end,
                 }
-                await axios.patch(`${API}campaign/${event.id}?access_token=${localStorage.getItem("token")}`, req).then((res) => {
+                await request.patch(`events/${event.id}`, req, {
+                    headers: { 'Content-Type': 'application/merge-patch+json' }
+                }).then((res) => {
                     setDone(false)
                     notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> modifié avec succès</>, status: "valid"})
                 })
@@ -100,33 +100,33 @@ export default function CreateEvent({ setDone, event }) {
 
     return (<div className={classes.container}>
         {event ? <>
-            <h2>Modifier event <span>{eventNameDefault}</span><FiEdit onClick={() => setDone(false)} /></h2>
+            <h2>Modifier event <span>{eventName}</span><FiEdit onClick={() => setDone(false)} /></h2>
         </> : <>
             <h2>Créer un event</h2>
         </>}
         <div className={classes.datePick}>
             <div>
                 <label>Date et heure de début</label>
-                <Datetime locale="fr-fr" value={startDate} onChange={setStartDate} closeOnSelect={true} />
+                <Datetime locale="fr-fr" value={startDate} onChange={setStartDate} closeOnSelect={true} dateFormat="D MMM YYYY" />
             </div>
             <div>
                 <label>Date et heure de fin</label>
-                <Datetime locale="fr-fr" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="d MMM yyyy" />
+                <Datetime locale="fr-fr" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="D MMM YYYY" />
             </div>
         </div>
-        <Input required defaultValue={eventNameDefault} onChange={(e) => setEventName(e.target.value)} style={{ width: "100%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef}  />
+        <Input required defaultValue={eventName} onChange={(e) => setEventName(e.target.value)} style={{ width: "100%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef}  />
         <div className={classes.currentEventPreview}>
-            {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={event.banner?.path} title={event.banner?.name} /> : ""}
+            {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={API + event.imagePath} title={event.banner?.name} /> : ""}
         </div>
         <UploadFile
             accept="image/*"
             file={banner}
-            placeholder="Importer une autre bannière"
+            placeholder={event ? "Importer une autre bannière" : "Importer une bannière"}
             setFile={setBanner}
         />
         <form>
             <div className={classes.eventName}>
-                <Button type="submit" color="orange" onClick={eventName.length > 0 ? (e) => saveEvent(e) : () => { return; }}>Sauvegarder</Button>
+                <Button type="submit" color="orange" onClick={(e) => saveEvent(e)}>Sauvegarder</Button>
             </div>
         </form>
     </div>)

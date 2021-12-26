@@ -140,15 +140,15 @@ function Dashboard(props) {
                                         <div className={`${classes.signatureContainer} ${stat ? classes.open : classes.closed}`}>
                                             <div className={classes.eventPreview}>
                                                 <h5>Event actif <Link to="/signatures">{activeEvents[0]?.name}</Link></h5>
-                                                <img className={classes.banner} src={activeEvents[0]?.banner.path} />
+                                                <img className={classes.banner} src={API+activeEvents[0]?.imagePath} />
                                                 <span className={classes.duration}>
                                                     <div className={`${classes.col} ${classes.bold}`}>
-                                                        <span>{`du ${new Date(activeEvents[0]?.start_date).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
-                                                        <span>{`au ${new Date(activeEvents[0]?.end_date).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
+                                                        <span>{`du ${new Date(activeEvents[0]?.startAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
+                                                        <span>{`au ${new Date(activeEvents[0]?.endAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
                                                     </div>
                                                     <div className={classes.col}>
-                                                        <span>{`${new Date(activeEvents[0].start_date).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
-                                                        <span>{`${new Date(activeEvents[0]?.end_date).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
+                                                        <span>{`${new Date(activeEvents[0].startAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
+                                                        <span>{`${new Date(activeEvents[0]?.endAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
                                                     </div>
                                                 </span>
                                             </div>

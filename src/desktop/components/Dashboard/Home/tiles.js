@@ -2,11 +2,8 @@ import ChevronRight from 'Assets/icons/chevron-right.svg'
 import classes from './tiles.module.css'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { VscSync } from 'react-icons/vsc'
-import { AiOutlineCheckCircle } from 'react-icons/ai'
-import { API } from 'config'
 import { MobileView } from 'react-device-detect'
+import request from 'Utils/Request/request'
 
 function Tiles(props) {
     const [loading, setLoading] = useState(false)
@@ -19,35 +16,24 @@ function Tiles(props) {
     const [templates, setTemplates] = useState([])
     const [signatures, setSignatures] = useState([])
 
-    const [syncing, setSyncing] = useState(false)
-    const [synchronized, setSynchronized] = useState(false)
-
-    const handleSync = () => {
-        setSyncing(true)
-        setTimeout(() => {
-            setSynchronized(true)
-        }, 2500)
-    }
-
-
     useEffect(async () => {
         props.handleHeader(" ")
-        await axios.get(`${API}user/${localStorage.getItem("user_id")}?access_token=${localStorage.getItem("token")}`).then((res) => {
+        await request.get(`whoami`).then((res) => {
             localStorage.setItem("user", JSON.stringify(res.data))
             setLoading(true)
             // console.log(res)
         })
-        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/campaigns?access_token=${localStorage.getItem("token")}`).then((res) => {
-            setEvents(res.data.data)
+        await request.get(`events`).then((res) => {
+            setEvents(res.data["hydra:member"])
         })
-        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/teams?access_token=${localStorage.getItem("token")}`).then((res) => {
-            setTeamsList(res.data.data)
+        await request.get(`teams`).then((res) => {
+            setTeamsList(res.data["hydra:member"])
         })
-        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`).then((res) => {
-            setUsers(res.data.data)
+        await request.get(`users`).then((res) => {
+            setUsers(res.data["hydra:member"])
         })
-        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/signature-templates?access_token=${localStorage.getItem("token")}`).then((res) => {
-            setTemplates(res.data.data)
+        await request.get(`signatures`).then((res) => {
+            setTemplates(res.data["hydra:member"])
         })
     
     }, [])
@@ -96,7 +82,7 @@ function Tiles(props) {
                     </div>
                 </Link>
                 {!teamsList.length < 1 ? <>
-                    <Link to="/teams" className={classes.tile}>
+                    <Link to="/teams/teams" className={classes.tile}>
                         <div className={classes.row}>
                             <p>Teams</p>
                             <img src={ChevronRight} alt="View" className={classes.blackImg} />
@@ -110,7 +96,7 @@ function Tiles(props) {
                         </div>
                     </Link>
                 </> : null}
-                    <Link to="/team/allusers" className={classes.tile}>
+                    <Link to="/teams/users" className={classes.tile}>
                         <div className={classes.row}>
                             <p>Collaborateurs</p>
                             <img src={ChevronRight} alt="View" className={classes.blackImg} />
@@ -122,19 +108,20 @@ function Tiles(props) {
                             <span className={classes.activeSpan}>actifs</span>
                         </div>
                     </Link>
-                <Link to="/billing" className={`${classes.tile} ${classes.billingTile}`}>
+                <div to="#" className={`${classes.tile} ${classes.billingTile}`}>
                     <div className={classes.row}>
                         <p>Abonnement</p>
                         <img src={ChevronRight} alt="View" />
                     </div>
                     <div className={classes.row}>
                         <div>
-                            {users.length === 1 ?  <><span className={classes.bigTxt}> </span><span className={classes.free}>Gratuit</span></> : <>
-                            <span className={classes.bigTxt}>{users.length * 0.5 + activeEvents.length * 10}€</span>
-                            <span> /mois</span> </>}
+                        <span className={classes.free}>Gratuit</span>
+                            {/* {users.length === 1 ?  <><span className={classes.bigTxt}> </span><span className={classes.free}>Gratuit</span></> : <>
+                            <span className={classes.bigTxt}>{users.length * 0.5 + activeEvents.length * 10}€</span> */}
+                            {/* <span> /mois</span> </>} */}
                         </div>
                     </div>
-                </Link>
+                </div>
             </div>
         </div>
     )

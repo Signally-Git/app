@@ -1,4 +1,4 @@
-import Header from '../Landing/Header/header'
+import Header from '../Header/Header'
 import classes from './errorpage.module.css'
 
 // Page displaying front errors

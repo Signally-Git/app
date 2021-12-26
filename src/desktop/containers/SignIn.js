@@ -1,4 +1,4 @@
-import Header from '../components/Landing/Header/header'
+import Header from '../components/Header/Header'
 import SignInForm from '../components/SignIn/SignInForm'
 
 function SignIn() {

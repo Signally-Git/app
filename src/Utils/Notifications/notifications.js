@@ -33,17 +33,3 @@ function useNotification() {
 }
 
 export { NotificationProvider, useNotification }
-
-
-// export default function Notifications({ msg }) {
-//     if (msg)
-//         return (<>
-//             <div className={`${classes[msg.status]} ${classes.container}`}>
-//                 <p>{msg.content}</p>
-//                 {msg.status === "valid" ?
-//                     <ImCheckmark /> :
-//                     <ImCross />}
-//             </div>
-//         </>)
-//     return <></>
-// }

@@ -17,12 +17,14 @@ import Hello from 'Assets/img/hi.svg';
 import Button from 'Utils/Button/btn';
 import Input from 'Utils/Input/input';
 import UploadFile from 'Utils/Upload/uploadFile';
+import request from 'Utils/Request/request';
 
 function Informations() {
     const [active, setActive] = useState("company")
-    const [social, setSocial] = useState([""])
+    const [social, setSocial] = useState([])
     const [icon, setIcon] = useState([<FaLink />])
     const [logo, setLogo] = useState()
+    const [organisationId, setOrganisationId] = useState()
     const [uploadedMedia, setUploadedMedia] = useState()
     const [companyName, setCompanyName] = useState("")
     const [companyAddress, setCompanyAddress] = useState("")
@@ -33,34 +35,50 @@ function Informations() {
     const [position, setPosition] = useState("")
     const [mobile, setMobile] = useState("")
     const [socials, setSocials] = useState({})
+
     let history = useHistory()
+    useEffect(async () => {
+        await request.get(`whoami`).then((res) => {
+            localStorage.setItem("user", JSON.stringify(res.data))
+            setFirstName(res.data.firstName)
+            setLastName(res.data.lastName)
+            setPosition(res.data.position)
+            setMobile(res.data.phone)
+        })
+    }, [])
+
 
     const handleSaveCompany = async () => {
         const img = new FormData()
-        img.append('file', uploadedMedia)
+        img.append('image', uploadedMedia)
         if (uploadedMedia)
-            await axios.post(`${API}media`, img).then(async (res) => {
+            await request.post(`import/image`, img).then(async (res) => {
                 const req = {
                     name: companyName,
-                    address: companyAddress,
-                    website_url: website,
-                    logo_id: res.data.id,
-                    phone_number: phone,
-                    ...socials
+                    websiteUrl: website,
+                    logos: [{ path: res.data.path }]
                 }
-                await axios.patch(`${API}organisations/${JSON.parse(localStorage.getItem("user"))?.organisation_id}?access_token=${localStorage.getItem("token")}`, req).then((res) => {
+                await request.patch(`organisations/${organisationId}`, req, {
+                    headers: { 'Content-Type': 'application/merge-patch+json' }
+                }).then((res) => {
                     history.goBack()
                 })
             })
         else {
             const req = {
                 name: companyName,
-                address: companyAddress,
-                website_url: website,
-                phone_number: phone,
-                ...socials
+                websiteUrl: website,
+                address: {
+                    street: companyAddress
+                },
+                digitalAddress: {
+                    phone: phone
+                }
+
             }
-            await axios.patch(`${API}organisations/${JSON.parse(localStorage.getItem("user"))?.organisation_id}?access_token=${localStorage.getItem("token")}`, req).then((res) => {
+            await request.patch(`organisations/${organisationId}`, req, {
+                headers: { 'Content-Type': 'application/merge-patch+json' }
+            }).then((res) => {
                 history.goBack()
             })
         }
@@ -68,66 +86,60 @@ function Informations() {
 
     const handleSavePersonal = async () => {
         const req = {
-            first_name: firstName,
-            last_name: lastName,
+            firstName: firstName,
+            lastName: lastName,
             position: position,
-            phone_number: mobile
+            phone: mobile
         }
-        await axios.patch(`${API}users/${JSON.parse(localStorage.getItem("user")).id}?access_token=${localStorage.getItem("token")}`, req).then((res) => {
-            history.goBack()
+        await request.patch(`users/${JSON.parse(localStorage.getItem('user')).id}`, req, {
+            headers: { 'Content-Type': 'application/merge-patch+json' }
         })
+        history.goBack()
     }
 
     useEffect(async () => {
         handleSocial()
-        await axios.get(`${API}organisations/${JSON.parse(localStorage.getItem("user"))?.organisation_id}?access_token=${localStorage.getItem("token")}`).then((res) => {
-            if (res.data.logo)
-                setLogo(res.data.logo.path)
-            if (res.data.name)
-                setCompanyName(res.data.name)
-            if (res.data.address)
-                setCompanyAddress(res.data.address)
-            if (res.data.phone_number)
-                setPhone(res.data.phone_number)
-            if (res.data.website_url)
-                setWebsite(res.data.website_url)
-            if (res.data.twitter) {
-                setSocials(({ ...socials, twitter: res.data.twitter }))
-                icon[0] = <FaTwitter />
-                setIcon([...icon])
-            }
-            if (res.data.facebook) {
-                setSocials(({ ...socials, facebook: res.data.facebook }))
-                icon[1] = <FaFacebookF />
-                setIcon([...icon])
-            }
-            if (res.data.instagram) {
-                setSocials(({ ...socials, instagram: res.data.instagram }))
-                icon[2] = <FaInstagram />
-                setIcon([...icon])
-            }
-            if (res.data.linkedin) {
-                setSocials(({ ...socials, linkedin: res.data.linkedin }))
-                icon[3] = <FaLinkedinIn />
-                setIcon([...icon])
-            }
+        let organisation = await request.get(JSON.parse(localStorage.getItem('user')).organisation)
+        console.log(organisation)
+        organisation = organisation.data
+        setOrganisationId(organisation.id)
+        setLogo(organisation.logos[0])
+        setCompanyName(organisation.name)
+        setCompanyAddress(organisation.address.street)
+        setWebsite(organisation.websiteUrl)
+        setPhone(organisation.digitalAddress.phone)
 
-            const tmp = [res.data.twitter, res.data.facebook, res.data.instagram, res.data.linkedin]
-            setSocial(tmp.filter((rs) => { return (rs !== undefined) }))
-        })
+        if (organisation.socialMediaAccounts.twitter) {
+            setSocials(({ ...socials, twitter: organisation.socialMediaAccounts.twitter }))
+            icon[0] = <FaTwitter />
+            setIcon([...icon])
+        }
+        if (organisation.socialMediaAccounts.facebook) {
+            setSocials(({ ...socials, facebook: organisation.socialMediaAccounts.facebook }))
+            icon[1] = <FaFacebookF />
+            setIcon([...icon])
+        }
+        if (organisation.socialMediaAccounts.instagram) {
+            setSocials(({ ...socials, instagram: organisation.socialMediaAccounts.instagram }))
+            icon[2] = <FaInstagram />
+            setIcon([...icon])
+        }
+        if (organisation.socialMediaAccounts.linkedin) {
+            setSocials(({ ...socials, linkedin: organisation.socialMediaAccounts.linkedin }))
+            icon[3] = <FaLinkedinIn />
+            setIcon([...icon])
+        }
 
-        await axios.get(`${API}users/${JSON.parse(localStorage.getItem("user")).id}?access_token=${localStorage.getItem("token")}`).then((res) => {
-            localStorage.setItem("user", JSON.stringify(res.data))
-            setFirstName(res.data.first_name)
-            setLastName(res.data.last_name)
-            setPosition(res.data.position)
-            setMobile(res.data.phone_number)
-        })
+        const tmp = [organisation.socialMediaAccounts.twitter, organisation.socialMediaAccounts.facebook, organisation.socialMediaAccounts.instagram, organisation.socialMediaAccounts.linkedin]
+        setSocial(tmp.filter((rs) => { return (rs !== undefined) }))
+
     }, [])
 
     const handleSocial = (string, index) => {
-        social[index] = string;
-        setSocial([...social]);
+        if (social?.length > 0) {
+            social[index] = string
+            setSocial([...social]);
+        }
 
         if (string) {
             if (string.search(/twitter/i) !== -1) {
@@ -175,9 +187,9 @@ function Informations() {
                         <div className={classes.inputContainer}>
                             <label>Logo de l'entreprise</label>
                             <UploadFile file={uploadedMedia}
-                                    setFile={(e) => setUploadedMedia(e)}
-                                    placeholder="Importer une image"
-                                    type="image/*" />
+                                setFile={(e) => setUploadedMedia(e)}
+                                placeholder="Importer une image"
+                                type="image/*" />
                         </div>
                         <div className={classes.inputContainer}>
                             <label>Nom société</label>
@@ -195,19 +207,19 @@ function Informations() {
                             <label>Téléphone fixe</label>
                             <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
                         </div>
-                        <div className={classes.iconsContainer}>
+                        {/* <div className={classes.iconsContainer}>
                             <label htmlFor="socials">Réseaux sociaux</label>
                             <AiOutlinePlusCircle onClick={() => { setSocial(social.concat("")); setIcon(icon.concat(<FaLink />)) }} />
                         </div>
                         {
-                            social.map((rs, index) => {
+                            social?.map((rs, index) => {
                                 return (
                                     <div className={classes.iconInput} key={index}>
                                         {icon[index]}
-                                        <Input style={{textIndent: "2rem", width: "100%"}} autoFocus={rs.length === 0 && icon[index] && icon[index] !== <FaLink />} type="text" placeholder="URL" value={rs} onChange={(e) => handleSocial(e.target.value, index)} />
+                                        <Input style={{ textIndent: "2rem", width: "100%" }} autoFocus={rs.length === 0 && icon[index] && icon[index] !== <FaLink />} type="text" placeholder="URL" value={rs} onChange={(e) => handleSocial(e.target.value, index)} />
                                     </div>)
                             })
-                        }
+                        } */}
                     </div>
                     <Button width="40%" color="orangeFill" onClick={() => handleSaveCompany()}>Sauvegarder</Button>
                 </> : <>

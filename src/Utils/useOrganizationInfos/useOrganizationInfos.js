@@ -1,8 +1,6 @@
-import axios from "axios";
-import { API } from "config";
+import request from "Utils/Request/request";
 
-export function UseOrganizationInfos(organisation_id) {
-    return axios.get(`${API}organisation/${organisation_id}?access_token=${localStorage.getItem("token")}`).then((res) => {
-        return res.data
-    })
+export async function UseOrganizationInfos(organisation_id) {
+    const organisation = await request.get(`${organisation_id}`)
+    return organisation.data["hydra:member"]
 }

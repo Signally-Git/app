@@ -62,6 +62,9 @@
         width: 33%;
         margin: 0 auto;
         text-align: center;
+        a {
+            color: $signally-brown;
+        }
         cursor: pointer;
     }
     li::after {
@@ -78,9 +81,12 @@
     overflow: auto;
 }
 
-.active {
-    transition: 0.2s;
+.active { 
     color: $signally-orange;
+    a {
+        transition: 0.2s;
+        color: $signally-orange!important;
+    }
     &::after {
         transition: 0.2s;
         background-color: $signally-orange;

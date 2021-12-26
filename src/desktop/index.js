@@ -14,6 +14,7 @@ import Studio from './containers/Studio'
 import Store from './containers/Store'
 import Billing from './containers/Billing'
 import Report from './containers/Report'
+import Signup from './components/Landing/SignUp/SignUp'
 
 // Routing for desktop view
 
@@ -25,7 +26,11 @@ export default function DesktopRoutes() {
             </Route>
 
             <Route exact path="/sign-in">
-                <SignIn />
+                <Home />
+            </Route>
+
+            <Route exact path="/sign-up">
+                <Signup />
             </Route>
 
             <PrivateRoute exact path="/dashboard" page="home" component={Dashboard} />
@@ -36,7 +41,7 @@ export default function DesktopRoutes() {
 
             <PrivateRoute path="/user/:userId" component={Users} />
 
-            <PrivateRoute exact path="/teams" page="teams" component={Dashboard} />
+            <PrivateRoute exact path="/teams/:type" page="teams" component={Dashboard} />
 
             <PrivateRoute path="/profile" page="profile" component={Dashboard} />
 
