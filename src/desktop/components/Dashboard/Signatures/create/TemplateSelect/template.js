@@ -35,7 +35,7 @@ export default function Template(props) {
         PLACEHOLDER_MOBILE_STYLE: "font-size: 11px;",
         PLACEHOLDER_PHONE: props.infos?.phone.value || "fixe",
         PLACEHOLDER_PHONE_STYLE: "font-size: 11px;",
-        PLACEHOLDER_EVENT_BANNER: props.infos?.logo.path || `<img style="margin-bottom: 12px; border-radius: 4px; max-width: 380px" src="http://fakeimg.pl/380x126?font=noto&font_size=14" />`,
+        PLACEHOLDER_EVENT_BANNER: props.infos?.logo.path || `http://fakeimg.pl/380x126?font=noto&font_size=14`,
         PLACEHOLDER_DISCLAIMER: props.options?.footer?.enabled ? `<p style="box-sizing: border-box; margin-top:${props.options?.footer?.padding}px; font-size:${props.options?.footer?.size}px; max-width: ${props.options?.footer?.maxWidth}px;">${props.options?.footer?.value.replace(/\n/g, "<br />")}</p>` : ""
     }
     return parse(

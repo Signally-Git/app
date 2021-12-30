@@ -142,7 +142,8 @@ export default function SignaturePreview({ show }) {
 
     //  PREVIEW EVENT
     useEffect(async () => {
-        setEntity( await request.get(`${type}s/${show.id}`))
+        setEntity(await request.get(`${type}s/${show.id}`))
+        // console.log(selectedTemplate)
         const isEvent = selectedTemplate?.html !== undefined ? selectedTemplate.html : "asd"
         if (isEvent.includes("PLACEHOLDER_EVENT_BANNER") === true) {
             const events = await request.get('events');
@@ -154,24 +155,25 @@ export default function SignaturePreview({ show }) {
     }, [selectedTemplate])
 
     useEffect(() => {
-        console.log(show)
+        // console.log(show)
     }, [event])
 
     // PREVIEW SIGNATURE
     useEffect(async () => {
-        const entity = await request.get(`${type}s/${show.id}`)
-        setAssignedTemplate(entity.data.compiledSignature)
-        const templates = await request.get('signatures')
-        console.log(assignedTemplate)
-        setSelectedTemplate(templates.data["hydra:member"][0])
-        setTemplates(templates.data["hydra:member"])
+        if (type === "user") {
+            const entity = await request.get(`${type}s/${show.id}`)
+            setAssignedTemplate(entity.data.compiledSignature)
+            const templates = await request.get('signatures')
+            setSelectedTemplate(templates.data["hydra:member"][0])
+            setTemplates(templates.data["hydra:member"])
+        }
     }, [show, edit])
 
     // ASSIGNATION
     const handleAssign = async (id) => {
-        console.log(selectedTemplate)
-        
-        const req = event ? { signature: selectedTemplate["@id"], events: [event['@id']] } : { signature: selectedTemplate["@id"]}
+        // console.log(selectedTemplate)
+
+        const req = event ? { signature: selectedTemplate["@id"], events: [event['@id']] } : { signature: selectedTemplate["@id"] }
         await request.patch(`${type}s/${id}`, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(
@@ -229,7 +231,7 @@ export default function SignaturePreview({ show }) {
                             })}
                         </select>
                     </form> */}
-                    {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate?.html} infos={{ event: `<img src="${API}/${event.imagePath}" />` }} /> : ""}
+                    {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate?.html} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
                     <Button onClick={() => handleAssign(show.id)} color="orangeFill">Changer de signature</Button>
                 </div>
             </div>

@@ -81,7 +81,7 @@ function ImgUploader() {
                 {message && <span className={classes.message}>{message}</span>}
                 <input type="text" readOnly value={path.id} onClick={() => copyToClipboard()} disabled={path.path !== "Cliquez ici pour copier le lien de l'image" ? false : true} />
                 <div className={classes.inputContainer}>
-                    {path.path !== "Cliquez ici pour copier le lien de l'image" ? <img className={classes.imgPreview} src={path.path} /> : ""}
+                    {path.path !== "Cliquez ici pour copier le lien de l'image" ? <img className={classes.imgPreview} src={`${API}${path.path}`} /> : ""}
                     <div className={classes.fileUpload}>
                         {imgName.length > 0 ? (
                             <div className={classes.uploadedFile} onClick={() => {

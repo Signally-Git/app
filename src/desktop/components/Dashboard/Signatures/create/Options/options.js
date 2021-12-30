@@ -312,7 +312,7 @@ export default function Options(props) {
                     </div>
                     {props.data.event.enabled ?
                         <>
-                            <form onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `<img style="padding-bottom:${props?.data?.event?.padding}px;" src="${API}${JSON.parse(e.target.value).imagePath}" />`, selected: JSON.parse(e.target.value) } })}>
+                            <form onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${API}${JSON.parse(e.target.value).imagePath}`, selected: JSON.parse(e.target.value) } })}>
                                 <select defaultValue={JSON.stringify(props.data.event.selected)}>
                                     {props.data.event.list.map((event) => {
                                         return <option key={event.id} value={JSON.stringify(event)}>{event.name}</option>
@@ -326,7 +326,7 @@ export default function Options(props) {
                                     min={0}
                                     max={50}
                                     values={[props.data.event.padding]}
-                                    onChange={(range) => props.setData({ ...props.data, event: { ...props.data.event, padding: range, display: `<img style="padding-bottom:${props?.data?.event?.padding}px;" src="${API}${props?.data?.event?.selected.imagePath}" />` } })}
+                                    onChange={(range) => props.setData({ ...props.data, event: { ...props.data.event, padding: range, display: `${API}${props?.data?.event?.selected.imagePath}` } })}
                                     renderTrack={({ props, children }) => (
                                         <div {...props} className={classes.rangeSlider} style={{
                                             ...props.style,

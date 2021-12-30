@@ -178,10 +178,14 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
   width: 100%;
 }
 
-.btnsContainer button:first-child {
+.btnsContainer button:last-child {
   background: none;
 }
 

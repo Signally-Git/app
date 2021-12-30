@@ -1,7 +1,6 @@
 import parse from "html-react-parser"
 
 export default function ReadOnlyPreview({ template, infos }) {
-    console.log(infos?.event)
     const mapObj = {
         PLACEHOLDER_COMPANY_ICON: infos?.logo ? <img src="" /> : "https://via.placeholder.com/108",
         PLACEHOLDER_FIRST_NAME: infos?.firstName || "Prénom",

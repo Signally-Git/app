@@ -12,16 +12,18 @@ import request from 'Utils/Request/request';
 
 function useQuery() {
     const { search } = useLocation();
-  
+
     return useMemo(() => new URLSearchParams(search), [search]);
-  }
-  
+}
+
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [code, setCode] = useState('')
     const [logging, setLogging] = useState(false)
     const slider = useRef(null)
+    const toFocus = useRef(null)
+
     const history = useHistory()
     const query = useQuery()
 
@@ -51,6 +53,8 @@ const Login = () => {
         handleScroll(e, 1000)
         setTimeout(() => {
             setLogging(true)
+
+            toFocus.current.focus()
         }, 300)
     }
 
@@ -81,7 +85,7 @@ const Login = () => {
             </div>
             <div className={classes.formContainer}>
                 <h2>Entrez le code reçu par mail.</h2>
-                <form onSubmit={(e) => handleLogIn(e)}> 
+                <form onSubmit={(e) => handleLogIn(e)}>
                     <div className={classes.codeContainer}>
                         {
                             logging ?
@@ -90,9 +94,9 @@ const Login = () => {
                                 //     characters={9}
                                 //     onChange={setCode}
                                 // /> 
-                                <Input defaultValue={code} placeholder="Password" type="password" onChange={(e) => setCode(e.target.value)} />
+                                <Input defaultValue={code} ref={toFocus} placeholder="Passwordd" type="password" onChange={(e) => setCode(e.target.value)} />
                                 : <>
-                                <Input defaultValue={code} placeholder="Password" type="password" onChange={(e) => setCode(e.target.value)} />
+                                    <Input defaultValue={code} placeholder="Password" type="password" onChange={(e) => setCode(e.target.value)} />
                                     {/* <div>
                                         <input />
                                         <input />
@@ -107,8 +111,8 @@ const Login = () => {
                                 </>}
                     </div>
                     <div className={classes.btnsContainer}>
-                        <Button width={"40%"} color="orange" onClick={(e) => { handleScroll(e, 0) }}>Annuler</Button>
                         <Button width={"40%"} color="orangeFill" type="submit">Connexion</Button>
+                        <Button width={"40%"} color="orange" onClick={(e) => { handleScroll(e, 0) }}>Annuler</Button>
                     </div>
                 </form>
             </div>

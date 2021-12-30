@@ -134,8 +134,9 @@
 
 .btnsContainer {
     display: flex;
+    flex-direction: row-reverse;
     width: 100%;
-    button:first-child {
+    button:last-child {
         background: none;
     }
 }
