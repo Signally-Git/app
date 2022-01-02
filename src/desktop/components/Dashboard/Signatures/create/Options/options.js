@@ -92,7 +92,7 @@ export default function Options(props) {
             </>
     }
     useEffect(() => {
-        props.setData({ ...props.data, event: { ...props.data?.event, display: `<img style="padding-bottom:${props?.data?.event?.padding}px; max-width: 380px" src="${API}${props?.data?.event?.list[0]?.imagePath}" />` } })
+        props.setData({ ...props.data, event: { ...props.data?.event, display: `${API}${props?.data?.event?.list[0]?.imagePath}` } })
     }, [props?.display?.event?.enabled, props?.display?.event?.padding])
     return (
         <>

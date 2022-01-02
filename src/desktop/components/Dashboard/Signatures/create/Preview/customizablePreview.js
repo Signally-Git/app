@@ -4,6 +4,7 @@ import DetectSocialNetwork from "Utils/DetectSocialNetwork/DetectSocialNetwork"
 
 export default function Preview(props) {
     // Converts JSX camel Case attributes to dashed classics HTML
+    console.log(props?.options?.event?.display)
     const convertToHTML = (object) => {
         return JSON.stringify(object).replace(/[,]+/g, ';').replace(/[{}]+/g, '').replace(/["]+/g, '').replace(/[A-Z]/g, m => "-" + m.toLowerCase())
     }
@@ -75,7 +76,8 @@ export default function Preview(props) {
         PLACEHOLDER_MOBILE_STYLE: `color:${props.infos?.mobile?.color};${convertToHTML(props.infos?.mobile?.style)}` || "PLACEHOLDER_MOBILE_STYLE",
         PLACEHOLDER_PHONE: props.infos?.phone?.value || "fixe",
         PLACEHOLDER_PHONE_STYLE: `color:${props.infos?.phone?.color};${convertToHTML(props.infos?.phone?.style)}` || "PLACEHOLDER_PHONE_STYLE",
-        PLACEHOLDER_EVENT_BANNER: props.infos.event ? props.infos.event : (props.options?.event?.enabled ? props?.options?.event?.display : ""), 
+        PLACEHOLDER_EVENT_BANNER: props.infos.event ? props.infos.event : (props.options?.event?.enabled ? `PLACEHOLDER_EVENT_BANNER` : ""), 
+        // PLACEHOLDER_EVENT_BANNER: props.options?.event?.enabled ? `${props?.options?.event?.display}` : "", 
         PLACEHOLDER_DISCLAIMER: props.options?.footer?.enabled ? `<p style="box-sizing: border-box; margin-top:${props.options?.footer?.padding}px; font-size:${props.options?.footer?.size}px; max-width: ${props.options?.footer?.maxWidth}px;">${props.options?.footer?.value.replace(/\n/g, "<br />")}</p>` : ""
     }
 

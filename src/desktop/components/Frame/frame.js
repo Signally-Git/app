@@ -1,8 +1,6 @@
 import Menu from "Desktop/components/Menu/Menu";
 import Header from "Desktop/components/Header/Header";
 import { useEffect, useState } from "react";
-import { UseOrganizationInfos } from "Utils/useOrganizationInfos/useOrganizationInfos";
-import { UseUserInfos } from "Utils/useUserInfos/useUserInfos";
 import classes from "./frame.module.scss";
 import request from "Utils/Request/request";
 import { API } from "config";
@@ -22,7 +20,7 @@ export default function Frame(props) {
 
         getUser()
     }, [])
-    console.log(organisation)
+
     return (<>
         <div className={classes.desktop}>
             <div className={classes.desktopSubcontainer}>

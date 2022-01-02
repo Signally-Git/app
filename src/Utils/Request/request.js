@@ -14,6 +14,7 @@ axios.interceptors.response.use((response) => {
     return response;
 }, (error) => {
     if (error.response && error.response.data) {
+        // alert(error)
         return Promise.reject(error.response.data);
     }
     return Promise.reject(error.message);

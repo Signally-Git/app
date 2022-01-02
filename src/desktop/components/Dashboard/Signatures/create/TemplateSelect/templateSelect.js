@@ -6,33 +6,19 @@ import Template from './template';
 // Displaying the list of bought and free templates (Studio, Store) and allows to select one to create custom signature
 
 const templateAPI = [{
-    id: 1, alignment: "Horizontal", tags: ["studio"], html: `<!--[if mso]>
-<style type="text/css">0
-body, table, td {font-family: Helvetica, Arial sans-serif !important; mso-line-height: exactly; line-height: 1%; line-height: 1px; 0}
-p {margin: 0; padding: 0; margin-block-start: 0; margin-block-end: 0}
-p img {vertical-align: middle !important;}
-</style>
-<![endif]-->
-<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:0">
-    <tbody>
+    id: 1, alignment: "Horizontal", tags: ["studio"], html: `<div style="font-family:PLACEHOLDER_GENERAL_FONT; width: 380px;">
+    PLACEHOLDER_SALUTATION
+    PLACEHOLDER_BANNER
+    <table>
         <tr>
-            <td valign="top" style="width:380px; height: 108px; border: none; padding: 0cm">
-                <table class="x_MsoTableGrid" border="0" cellspacing="2" cellpadding="2"
-                    style="border-collapse:collapse; border:none">
-                    <tbody>
-                        <tr>
-                            <td valign="top" style="width:108px; border: none; padding: 0cm 8px 0 0; font-size: 8.5pt;">
-                                <p class="x_MsoNormal" style="height: 108px; margin: 0; padding: 0;" height="108"
-                                    valign="middle">
-                                    <span style="height: 108px;" height="108">
-                                        <img style="width: 108px; height: 108px; vertical-align: middle;" height="108"
-                                            width="108" valign="middle" src='PLACEHOLDER_COMPANY_ICON'
-                                            alt='PLACEHOLDER_COMPANY' />
-                                    </span>
-
-                                </p>
-                            </td>
-                            <td valign="middle" style="box-sizing: border-box; border: none; padding: 0;">
+            <table style="margin-bottom: 12px; margin-top: 0;  border-collapse: collapse; border-spacing: 0;">
+                <tbody>
+                <tr>
+                    <td style="line-height: 0; padding: 0; width: 108px; height: 108px;">
+                        <img style="margin: 0 4px 0 0; padding: 0; width: 108px; height: 108px;" width="108" height="108";  src='PLACEHOLDER_COMPANY_ICON'
+                             alt='PLACEHOLDER_COMPANY' />
+                    </td>
+                    <td valign="middle" style="box-sizing: border-box; border: none; padding: 0; height: 108px;">
                                 <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0"
                                     style="border-collapse:collapse; border:none; border-color: PLACEHOLDER_DIV_COLOR;">
                                     <tbody>
@@ -48,7 +34,7 @@ p img {vertical-align: middle !important;}
                                         <tr>
                                             <td style="background: PLACEHOLDER_DIV_COLOR; width: 12px;"></td>
                                             <td
-                                                style="box-sizing: border-box; border: none; background: PLACEHOLDER_DIV_COLOR; font-size: 8pt; height: 94px; width: 272px">
+                                                style="box-sizing: border-box; border: none; background: PLACEHOLDER_DIV_COLOR; font-size: 8pt; height: 100px; width: 272px; vertical-align: middle;">
                                                 <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0"
                                                     style="border-collapse:collapse; border:none; font-size: 8pt;">
                                                     <tbody>
@@ -110,20 +96,21 @@ p img {vertical-align: middle !important;}
                                     </tbody>
                                 </table>
                             </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p class="x_MsoNormal"></p>
-            </td>
+                </tr>
+                </tbody>
+            </table>
         </tr>
         <tr>
-            <td style="border: none; padding: 12px 0">
-                <img src="PLACEHOLDER_EVENT_BANNER" style="padding: 0cm; width: 380px; height: 126px;"/>
-            </td>
-        </tr>
-        <tr>
-            <td style="width:380px; box-sizing: border-box; border: none;">
-                <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0"
+            <table style="margin-top: 0;  border-collapse: collapse; border-spacing: 0;">
+                <tbody>
+                <tr>
+                    <td style="line-height: 0;">
+                        <img style="width: 380px; vertical-align: middle; padding-bottom: 12px;" src="PLACEHOLDER_EVENT_BANNER" alt="Event" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="box-sizing: border-box; background-color: #000; border-radius: 4px; height: 38px; width: 380px; ">
+                        <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0"
                     style="border:none; border-color:#000;">
                     <tbody>
                         <tr>
@@ -136,15 +123,15 @@ p img {vertical-align: middle !important;}
                             </td>
                         </tr>
                         <tr>
-                            <td style="background: #000;width: 10px;"></td>
+                            <td style="background: #000;width: 12px;"></td>
                             <td>
                                 <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0">
                                     <tbody>
                                         <tr>
                                             <td
-                                                style="width:93px; border: none; background:black; padding: 0cm; font-size: 9.5pt;">
-                                                <p class="x_MsoNormal"><b
-                                                        style="color:white; font-family: Helvetica; font-size: 12px">Follow
+                                                style="width:75px; border: none; background:black; padding: 0cm; font-size: 9.5pt;">
+                                                <p class="x_MsoNormal" style="vertical-align: middle;"><b
+                                                        style="color:white; font-family: Helvetica; font-size: 12px; vertical-align: text-top;">Follow
                                                         us</b></p>
                                             </td>
                                             <td style="width:220px; border: none; background:black; padding: 0cm"
@@ -156,42 +143,42 @@ p img {vertical-align: middle !important;}
                                                             <td style="margin-right: 5px;">
                                                                 <a href="https://www.facebook.com/MamaShelterOfficial/"><img height="24"
                                                                         width="24"
-                                                                        style="vertical-align: middle; margin-right: 5px;"
+                                                                        style="vertical-align: middle; margin-right: 6px;"
                                                                         src='https://api.staging.signally.io/images//iconmonstr-facebook-4-48-1-61cc73165961b.png'
                                                                         alt='' /></a>
                                                             </td>
                                                             <td style="margin-right: 5px;">
                                                                 <a href="https://www.linkedin.com/company/mama-shelter"><img height="24"
                                                                         width="24"
-                                                                        style="vertical-align: middle; margin-right: 5px;"
+                                                                        style="vertical-align: middle; margin-right: 6px;"
                                                                         src='https://api.staging.signally.io/images//iconmonstr-linkedin-4-48-61cc7336e67e8.png'
                                                                         alt='' /></a>
                                                             </td>
                                                             <td style="margin-right: 5px;">
                                                                 <a href="https://twitter.com/mama_shelter/"><img height="24"
                                                                         width="24"
-                                                                        style="vertical-align: middle; margin-right: 5px;"
+                                                                        style="vertical-align: middle; margin-right: 6px;"
                                                                         src='https://api.staging.signally.io/images//iconmonstr-twitter-4-48-61cc7355e7d05.png'
                                                                         alt='' /></a>
                                                             </td>
                                                             <td style="margin-right: 5px;">
                                                                 <a href="https://www.instagram.com/mamashelter/">
                                                                     <img src='https://api.staging.signally.io/images//iconmonstr-instagram-14-48-61cc732d0e0eb.png'
-                                                                        style="vertical-align: middle; margin-right: 5px;"
+                                                                        style="vertical-align: middle; margin-right: 6px;"
                                                                         height="24" width="24" alt='' />
                                                                 </a>
                                                             </td>
                                                             <td style="margin-right: 5px;">
                                                                 <a href="https://www.snapchat.com/add/mamashelter">
                                                                     <img src='https://api.staging.signally.io/images//iconmonstr-snapchat-4-48-61cc734da01ca.png'
-                                                                        style="vertical-align: middle; margin-right: 5px;"
+                                                                        style="vertical-align: middle; margin-right: 6px;"
                                                                         height="24" width="24" alt='' />
                                                                 </a>
                                                             </td>
                                                             <td style="margin-right: 5px;">
                                                                 <a href="https://www.pinterest.fr/mamashelter/">
                                                                     <img src='https://api.staging.signally.io/images//iconmonstr-pinterest-1-48-61cc73437269b.png'
-                                                                        style="vertical-align: middle; margin-right: 5px;"
+                                                                        style="vertical-align: middle; margin-right: 6px;"
                                                                         height="24" width="24" alt='' />
                                                                 </a>
                                                             </td>
@@ -206,7 +193,7 @@ p img {vertical-align: middle !important;}
                                         </tr>
                                 </table>
                             </td>
-                            <td style="background: #000; width: 10px;"></td>
+                            <td style="background: #000; width: 12px;"></td>
                         </tr>
                         <tr>
                             <td style="height: 8px;">
@@ -218,9 +205,14 @@ p img {vertical-align: middle !important;}
                             </td>
                         </tr>
                     </tbody>
-            </td>
-    </tbody>
-</table>`}, {
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </tr>
+    </table>
+    PLACEHOLDER_DISCLAIMER
+</div>`}, {
     id: 0, alignment: "Horizontal", tags: ["classique"], html: `<div style="font-family:PLACEHOLDER_GENERAL_FONT;font-size:PLACEHOLDER_GENERAL_FONTSIZE;">
 PLACEHOLDER_SALUTATION
 PLACEHOLDER_BANNER
@@ -344,11 +336,11 @@ export default function TemplateSelection(props) {
                                 </li>)
                             }
                         }
-                        else
-                            return (<li key={template.id}>
-                                <input type="radio" name="template" value={template.html} />
-                                <Template template={template.html} socials={props.icons} />
-                            </li>)
+                            else
+                                return (<li key={template.id}>
+                                    <input type="radio" name="template" value={template.html} />
+                                    <Template template={template.html} socials={props.icons} />
+                                </li>)
                 })}
                 {!tag ? <li style={{ width: "412px", height: "220px" }}></li> : ""}
             </ul>

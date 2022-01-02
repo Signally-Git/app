@@ -122,7 +122,7 @@ function CreateSignatureComponent() {
 
   useEffect(() => {
     const getEvents = async () => {
-      const eventAPI = await UseEvents(localStorage.getItem("organisation_id"), 'active')
+      const eventAPI = await UseEvents(localStorage.getItem("organisation_id"))
       setSignatureOption({ ...signatureOption, event: { ...signatureOption.event, selected: eventAPI[0], list: eventAPI } }, "active")
     }
     getEvents()

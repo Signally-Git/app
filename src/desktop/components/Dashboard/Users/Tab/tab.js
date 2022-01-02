@@ -129,7 +129,7 @@ export default function Tab({ tab, selected, setSelected }) {
             case "users":
                 for (let index = 0; index < users.length; index++) {
                     const element = users[index];
-                    if (element.id !== (localStorage.getItem("user").id))
+                    if (element['@id'] !== (localStorage.getItem("user")['@id']))
                         await request.delete(`users/${element.id}`).then(
                             (res) => index === users.length - 1 && refreshData())
                 }
