@@ -293,6 +293,7 @@ export default function Create(props) {
 
     const createGroup = () => {
         // axios.post(`${API}organisation/${localStorage.getItem('organisation_id')}/groups?access_token=${localStorage.getItem('token')}`, groupName).then((res) => console.log(res))
+        console.log("createGroup")
         return
     }
 
@@ -306,7 +307,8 @@ export default function Create(props) {
     }
 
     const handleSave = () => {
-        axios.get(`${API}organisation/${localStorage.getItem('organisation_id')}/groups?access_token=${localStorage.getItem('token')}`).then((res) => console.log(res))
+        console.log("handleSave")
+        // axios.get(`${API}organisation/${localStorage.getItem('organisation_id')}/groups?access_token=${localStorage.getItem('token')}`).then((res) => console.log(res))
     }
 
     return (<div className={classes.container}>

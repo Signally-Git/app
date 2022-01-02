@@ -10,7 +10,7 @@ function NotificationProvider({ children }) {
     React.useEffect(() => {
         const timeout = setTimeout(() => {
             setMessage((a) => ({ ...a, disappear: true }));
-        }, 4500);
+        }, 5500);
 
         return () => clearTimeout(timeout);
     }, [message])

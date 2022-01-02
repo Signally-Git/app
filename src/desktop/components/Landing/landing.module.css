@@ -100,6 +100,12 @@
   margin-bottom: 5rem;
 }
 
+.error p {
+  font-size: .7rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
 .showPassword {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -185,7 +191,7 @@
   width: 100%;
 }
 
-.btnsContainer button:last-child {
+.btnsContainer button:last-child:not(:hover) {
   background: none;
 }
 

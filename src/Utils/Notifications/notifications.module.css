@@ -21,6 +21,7 @@
   inset: 3rem 0 0 14rem;
   color: #402927;
   font-weight: bold;
+  max-width: 50%;
 }
 
 .container svg {
@@ -100,8 +101,6 @@
 .invalid {
   -webkit-animation: shakeX 1s forwards ease-in-out;
           animation: shakeX 1s forwards ease-in-out;
-  -webkit-animation-delay: 1s;
-          animation-delay: 1s;
 }
 
 .invalid svg {

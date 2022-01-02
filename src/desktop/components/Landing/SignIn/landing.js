@@ -24,6 +24,8 @@ const Login = () => {
     const slider = useRef(null)
     const toFocus = useRef(null)
 
+    const [error, setError] = useState('')
+
     const history = useHistory()
     const query = useQuery()
 
@@ -46,27 +48,36 @@ const Login = () => {
         });
         setTimeout(() => {
             setLogging(false)
+            setError('')
         }, 300)
     }
-
+    
     const handleSubmit = (e) => {
         handleScroll(e, 1000)
         setTimeout(() => {
             setLogging(true)
-
+            setError('')
             toFocus.current.focus()
         }, 300)
     }
-
+    
     const handleLogIn = async (e) => {
+        setError('')
         e.preventDefault()
         const req = {
             username: email,
             password: code
         }
-        const token = await request.post(`token/auth`, req);
-        localStorage.setItem('token', token.data.token)
-        history.push('/dashboard')
+        
+        const token = await request.post(`token/auth`, req).catch((error) => {
+            setError(<p>Impossible de se connecter.<br />Veuillez vérifier vos identifiants.</p>)
+        });
+
+        if (token) {
+            localStorage.setItem('token', token.data.token)
+            history.push('/dashboard')
+        }
+
     }
 
     return (<div className={classes.container}>
@@ -94,7 +105,7 @@ const Login = () => {
                                 //     characters={9}
                                 //     onChange={setCode}
                                 // /> 
-                                <Input defaultValue={code} ref={toFocus} placeholder="Passwordd" type="password" onChange={(e) => setCode(e.target.value)} />
+                                <Input defaultValue={code} ref={toFocus} placeholder="Password" type="password" onChange={(e) => setCode(e.target.value)} />
                                 : <>
                                     <Input defaultValue={code} placeholder="Password" type="password" onChange={(e) => setCode(e.target.value)} />
                                     {/* <div>
@@ -115,6 +126,9 @@ const Login = () => {
                         <Button width={"40%"} color="orange" onClick={(e) => { handleScroll(e, 0) }}>Annuler</Button>
                     </div>
                 </form>
+                <span className={classes.error}>
+                    {error}
+                </span>
             </div>
         </div>
         <div className={classes.textIllustration}>

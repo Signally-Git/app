@@ -29,17 +29,17 @@ export default function Preview(props) {
     const handleImg = (item) => {
         switch (item) {
             case "pinterest":
-                return "https://api.staging.signally.io/images//pinterest-61c0f24103ecb.png"
+                return "https://api.staging.signally.io/images//iconmonstr-pinterest-1-48-61cc73437269b.png"
             case "facebook":
-                return "https://api.staging.signally.io/images//facebook-61c0f270dc582.png"
+                return "https://api.staging.signally.io/images//iconmonstr-facebook-4-48-1-61cc73165961b.png"
             case "twitter":
-                return "https://api.staging.signally.io/images//twitter-61c0f269b42bb.png"
+                return "https://api.staging.signally.io/images//iconmonstr-twitter-4-48-61cc7355e7d05.png"
             case "instagram":
-                return "https://api.staging.signally.io/images//instagram-61c0f25a1488a.png"
+                return "https://api.staging.signally.io/images//iconmonstr-instagram-14-48-61cc732d0e0eb.png"
             case "linkedin":
-                return "https://api.staging.signally.io/images//linkedin-61c0f27682eb6.png"
+                return "https://api.staging.signally.io/images//iconmonstr-linkedin-4-48-61cc7336e67e8.png"
             case "snapchat":
-                return "https://api.staging.signally.io/images//snapchat-61c0f26174451.png"
+                return "https://api.staging.signally.io/images//iconmonstr-snapchat-4-48-61cc734da01ca.png"
             default:
                 break;
         }

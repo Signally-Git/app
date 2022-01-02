@@ -38,11 +38,11 @@ p img {vertical-align: middle !important;}
                                     <tbody>
                                         <tr>
                                             <td style="height: 4px">
-                                                <img style="margin: 0!important;padding:0; display: block;" src="https://api.beta.signally.io/images//left-upper-corner-61cda11101146.png" />
+                                                <img style="margin: 0!important;padding:0; display: block;" src="https://api.staging.signally.io/images//left-upper-corner-61cf1eddcc414.png" />
                                             </td>
                                             <td style="background: PLACEHOLDER_DIV_COLOR; height: 4px;"></td>
                                             <td style="height: 4px">
-                                                <img style="margin: 0!important;padding:0; display: block;" src="https://api.beta.signally.io/images//right-upper-corner-61cda36084494.png" />
+                                                <img style="margin: 0!important;padding:0; display: block;" src="https://api.staging.signally.io/images//right-upper-corner-61cf1ef7d60eb.png" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -100,11 +100,11 @@ p img {vertical-align: middle !important;}
                                         </tr>
                                         <tr>
                                         <td style="height: 4px">
-                                            <img style="margin: 0!important;padding:0; display: block;" src="https://api.beta.signally.io/images//left-lower-corner-61cda38fcfc1f.png" />
+                                            <img style="margin: 0!important;padding:0; display: block;" src="https://api.staging.signally.io/images//left-lower-corner-61cf1f0f5dbf2.png" />
                                         </td>
                                         <td style="background: PLACEHOLDER_DIV_COLOR; height: 4px;"></td>
                                         <td style="height: 4px">
-                                            <img style="margin: 0!important;padding:0; display: block;" src="https://api.beta.signally.io/images//right-lower-corner-61cda39a862b2.png" />
+                                            <img style="margin: 0!important;padding:0; display: block;" src="https://api.staging.signally.io/images//right-lower-corner-61cf1f18a83a5.png" />
                                         </td>
                                         </tr>
                                     </tbody>
@@ -128,11 +128,11 @@ p img {vertical-align: middle !important;}
                     <tbody>
                         <tr>
                             <td style="height: 8px;">
-                                <img style="margin: 0!important;padding:0; display: block;" src="https://api.beta.signally.io/images//black-left-upper-corner-61cda63d6deba.png" />
+                                <img style="margin: 0!important;padding:0; display: block;" src="https://api.staging.signally.io/images//black-left-upper-corner-61cf1f27e9a8d.png" />
                             </td>
                             <td style="background: #000; height: 8px;"></td>
                             <td style="height: 8px;">
-                                <img style="margin: 0!important;padding:0; display: block;" src="https://api.beta.signally.io/images//black-right-upper-corner-61cda6991cee0.png" />
+                                <img style="margin: 0!important;padding:0; display: block;" src="https://api.staging.signally.io/images//black-right-upper-corner-61cf1f341275a.png" />
                             </td>
                         </tr>
                         <tr>
@@ -154,48 +154,47 @@ p img {vertical-align: middle !important;}
                                                     <tbody>
                                                         <tr>
                                                             <td style="margin-right: 5px;">
-                                                                <a href="https://facebook.com"><img height="24"
+                                                                <a href="https://www.facebook.com/MamaShelterOfficial/"><img height="24"
                                                                         width="24"
                                                                         style="vertical-align: middle; margin-right: 5px;"
                                                                         src='https://api.staging.signally.io/images//iconmonstr-facebook-4-48-1-61cc73165961b.png'
                                                                         alt='' /></a>
                                                             </td>
                                                             <td style="margin-right: 5px;">
-                                                                <a href="https://linkedin.com"><img height="24"
+                                                                <a href="https://www.linkedin.com/company/mama-shelter"><img height="24"
                                                                         width="24"
                                                                         style="vertical-align: middle; margin-right: 5px;"
                                                                         src='https://api.staging.signally.io/images//iconmonstr-linkedin-4-48-61cc7336e67e8.png'
                                                                         alt='' /></a>
                                                             </td>
                                                             <td style="margin-right: 5px;">
-                                                                <a href="https://twitter.com"><img height="24"
+                                                                <a href="https://twitter.com/mama_shelter/"><img height="24"
                                                                         width="24"
                                                                         style="vertical-align: middle; margin-right: 5px;"
                                                                         src='https://api.staging.signally.io/images//iconmonstr-twitter-4-48-61cc7355e7d05.png'
                                                                         alt='' /></a>
                                                             </td>
                                                             <td style="margin-right: 5px;">
-                                                                <a href="https://instagram.com">
+                                                                <a href="https://www.instagram.com/mamashelter/">
                                                                     <img src='https://api.staging.signally.io/images//iconmonstr-instagram-14-48-61cc732d0e0eb.png'
                                                                         style="vertical-align: middle; margin-right: 5px;"
                                                                         height="24" width="24" alt='' />
                                                                 </a>
                                                             </td>
                                                             <td style="margin-right: 5px;">
-                                                                <a href="https://snapchat.com">
+                                                                <a href="https://www.snapchat.com/add/mamashelter">
                                                                     <img src='https://api.staging.signally.io/images//iconmonstr-snapchat-4-48-61cc734da01ca.png'
                                                                         style="vertical-align: middle; margin-right: 5px;"
                                                                         height="24" width="24" alt='' />
                                                                 </a>
                                                             </td>
                                                             <td style="margin-right: 5px;">
-                                                                <a href="https://pinterest.com">
+                                                                <a href="https://www.pinterest.fr/mamashelter/">
                                                                     <img src='https://api.staging.signally.io/images//iconmonstr-pinterest-1-48-61cc73437269b.png'
                                                                         style="vertical-align: middle; margin-right: 5px;"
                                                                         height="24" width="24" alt='' />
                                                                 </a>
                                                             </td>
-
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -211,11 +210,11 @@ p img {vertical-align: middle !important;}
                         </tr>
                         <tr>
                             <td style="height: 8px;">
-                                <img style="margin: 0!important;padding:0; display: block;" src="https://api.beta.signally.io/images//black-left-lower-corner-61cda6aae6ac8.png" />
+                                <img style="margin: 0!important;padding:0; display: block;" src="https://api.staging.signally.io/images//black-left-lower-corner-61cf1f58cb3c6.png" />
                             </td>
                             <td style="background: #000; height: 8px;"></td>
                             <td style="height: 8px;">
-                                <img style="margin: 0!important;padding:0; display: block;" src="https://api.beta.signally.io/images//black-right-lower-corner-61cda6baa640b.png" />
+                                <img style="margin: 0!important;padding:0; display: block;" src="https://api.staging.signally.io/images//black-right-lower-corner-61cf1f6c064df.png" />
                             </td>
                         </tr>
                     </tbody>

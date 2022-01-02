@@ -55,8 +55,8 @@ export default function CreateEvent({ setDone, event }) {
                 await request.post(`events`, req).then((res) => {
                     notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> créé avec succès</>, status: "valid"})
                     setDone(false)
-                })
-            })
+                }).catch(() => notification({ content: <>Erreur lors de l'ajout de l'event.</>, status: "invalid" }))
+            }).catch((err) => notification({ content: <>Erreur lors de l'import de l'image.</>, status: "invalid" }))
             return false;
         }
         if (event) {
@@ -78,8 +78,8 @@ export default function CreateEvent({ setDone, event }) {
                     }).then((res) => {
                         setDone(false)
                         notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> modifié avec succès</>, status: "valid"})
-                    })
-                })
+                    }).catch(() => notification({ content: <>Erreur lors de l'édition de l'event.</>, status: "invalid" }))
+                }).catch(() => notification({ content: <>Erreur lors de l'ajout de l'image.</>, status: "invalid" }))
                 return false;
             }
             else {
@@ -93,7 +93,7 @@ export default function CreateEvent({ setDone, event }) {
                 }).then((res) => {
                     setDone(false)
                     notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> modifié avec succès</>, status: "valid"})
-                })
+                }).catch(() => notification({ content: <>Erreur lors de l'édition de l'event.</>, status: "invalid" }))
             }
         }
     }

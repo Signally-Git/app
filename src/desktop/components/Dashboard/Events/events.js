@@ -32,7 +32,7 @@ function Events() {
     }, [create, edit, preview])
 
     const handleDelete = async (id) => {
-        await request.delete(`events/${id}`)
+        await request.delete(`events/${id}`).catch((error) => notification({ content: <>Impossible de supprimer l'event.</>, status: "invalid" }))
         getData()
         setModal()
         setPreview()
@@ -45,7 +45,7 @@ function Events() {
                 <h4>Vous allez supprimer
                     <br /><span className={classes.orangeTxt}>{toDelete?.name}</span></h4>
                 <div>
-                    <Button color="orangeFill" onClick={() => setModal({ name: "", id: "" })}>Annuler</Button>
+                    <Button color="orangeFill" onClick={() => setModal()}>Annuler</Button>
                     <Button color="orange" onClick={() => handleDelete(toDelete?.id)}>Supprimer</Button>
                 </div>
             </div>)

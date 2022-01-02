@@ -52,7 +52,7 @@ function Team() {
             address: organisation?.address,
             mobile: "Mobile",
             phone: organisation?.phone_number,
-            event: `<img src="http://fakeimg.pl/380x126?font=noto&amp;font_size=14" style="margin-bottom: 12px; border-radius: 4px; max-width: 380px"/>`
+            event: `http://fakeimg.pl/380x126?font=noto&amp;font_size=14`
         })
     }, [user, template])
 
@@ -61,7 +61,7 @@ function Team() {
             (res) => {
                 notification({ content: <>La signature a été supprimée avec succès</>, status: "valid" })
                 setPreview([]); setDeleted(res.data)
-            })
+            }).catch((error) => notification({ content: <>Impossible de supprimer la signature.</>, status: "invalid" }))
 
     }
 

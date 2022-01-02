@@ -175,7 +175,6 @@
   position: absolute;
   border-radius: 10px;
   inset: auto 0;
-  bottom: 1rem;
   margin: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -226,7 +225,7 @@
 }
 
 .editing {
-  height: 12rem !important;
+  height: 14rem !important;
 }
 
 .actionsContainer,

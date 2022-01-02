@@ -5,13 +5,12 @@ import Create from '../Create/create'
 import { FiCheck, FiTrash } from 'react-icons/fi'
 import { AiOutlineEdit } from 'react-icons/ai'
 import Button from 'Utils/Button/btn'
-import axios from 'axios'
-import { API } from 'config'
 import { FaUser } from 'react-icons/fa'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Input from 'Utils/Input/input'
 import request from 'Utils/Request/request'
 import { useNotification } from 'Utils/Notifications/notifications'
+import UploadFile from 'Utils/Upload/uploadFile'
 
 // Displays the current list
 // Workplaces by default
@@ -30,6 +29,9 @@ export default function Tab({ tab, selected, setSelected }) {
     const [edit, setEdit] = useState()
     const [modal, setModal] = useState({ type: "", name: "", id: "" })
     const [modalContent, setModalContent] = useState()
+    const [workplaceName, setWorkplaceName] = useState('')
+    const [teamName, setTeamName] = useState('')
+    // const [userName, setUserName] = useState('')
     const [street, setStreet] = useState("")
     const [streetInfo, setStreetInfo] = useState("")
     const [mobile, setMobile] = useState("")
@@ -103,7 +105,7 @@ export default function Tab({ tab, selected, setSelected }) {
                 notification({ content: <><span style={{ color: "#FF7954" }}>{name}</span> supprimé avec succès</>, status: "valid" })
             }
 
-        )
+        ).catch((error) => notification({ content: <>Une erreur s'est produite. Impossible de supprimer <span style={{ color: "#FF7954" }}>{name}</span></>, status: "invalid" }))
         setModal({ type: "", name: "", id: "" })
     }
 
@@ -138,7 +140,6 @@ export default function Tab({ tab, selected, setSelected }) {
         notification({ content: <><span style={{ color: "#FF7954" }}>{type}</span> supprimé avec succès</>, status: "valid" })
         setModal({ type: "", name: "", id: "" })
     }
-
 
     // Modals confirmation
     useEffect(() => {
@@ -199,6 +200,7 @@ export default function Tab({ tab, selected, setSelected }) {
     const handleChangeWP = async (e, id) => {
         e.preventDefault()
         const req = {
+            name: workplaceName,
             address: {
                 street: street,
                 streetInfo: streetInfo
@@ -208,9 +210,19 @@ export default function Tab({ tab, selected, setSelected }) {
                 fax: fax
             }
         }
+        console.log("editing!", req)
         await request.patch(id, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         })
+        setEdit()
+    }
+
+    const handleChangeTeam = async (e, id) => {
+        e.preventDefault()
+        if (teamName.length > 0)
+            await request.patch(id, { name: teamName }, {
+                headers: { 'Content-Type': 'application/merge-patch+json' }
+            })
         setEdit()
     }
 
@@ -237,34 +249,37 @@ export default function Tab({ tab, selected, setSelected }) {
                 <span className={addedWorkplace.length > 0 ? classes.orangeTxt : ""}>{addedWorkplace.length > 0 ? addedWorkplace : `${workplaces.length} hotels`}</span>
                 <button onClick={() => setModal({ type: "allworkplaces" })}>Supprimer tout</button>
             </div>
+            
             <ul className={classes.itemsList}>
                 <form onChange={(e) => e.target.type === "radio" && setSelected(JSON.parse(e.target.value))}>
-                    {workplaces.map((workplace) => {
-                        if (workplace?.name?.toLowerCase().search(searchWorkplace) !== -1)
-                            return (
-                                <li key={workplace.id} className={`${edit === workplace ? classes.editing : ""} ${selected?.id === workplace.id && selected?.name === workplace?.name ? classes.selected : ""}`} >
-                                    <input className={classes.checkbox} defaultChecked={selected?.id === workplace.id && selected?.name === workplace?.name ? true : false} type="radio" name="workplace" value={JSON.stringify(workplace)} />
-                                    {edit === workplace ? <input className={classes.rename} ref={toFocus} type="text" defaultValue={workplace?.name} /> :
-                                        <input className={classes.rename} disabled type="text" defaultValue={workplace?.name} />}
-                                    <span></span>
-                                    <div className={classes.actionsContainer}>
-                                        {edit === workplace ? <FiCheck onClick={(e) => { handleChangeWP(e, workplace['@id']) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEdit(workplace) }} />}
-                                        <FiTrash onClick={() => setModal({ name: workplace?.name, id: workplace.id, type: "workplaces" })} />
-                                    </div>
-                                    {edit === workplace ? <>
-                                        <div className={classes.editDiv}>
-                                            <div className={classes.inputsContainer}>
-                                                <Input onChange={(e) => setStreet(e.target.value)} type="text" placeholder="Adresse" defaultValue={workplace.address.street} />
-                                                <Input onChange={(e) => setStreetInfo(e.target.value)} type="text" placeholder="Adresse 2" defaultValue={workplace.address.streetInfo} />
-                                            </div>
-                                            <div className={classes.inputsContainer}>
-                                                <Input onChange={(e) => setMobile(e.target.value)} type="tel" placeholder="Téléphone" defaultValue={workplace.digitalAddress.mobile} />
-                                                <Input onChange={(e) => setFax(e.target.value)} type="tel" placeholder="Fax" defaultValue={workplace.digitalAddress.fax} />
-                                            </div>
+                    {
+                        workplaces.map((workplace) => {
+                            if (workplace?.name?.toLowerCase().search(searchWorkplace) !== -1)
+                                return (
+                                    <li key={workplace.id} className={`${edit === workplace ? classes.editing : ""} ${selected?.id === workplace.id && selected?.name === workplace?.name ? classes.selected : ""}`} >
+                                        <input className={classes.checkbox} defaultChecked={selected?.id === workplace.id && selected?.name === workplace?.name ? true : false} type="radio" name="workplace" value={JSON.stringify(workplace)} />
+                                        {edit === workplace ? <input className={classes.rename} ref={toFocus} type="text" defaultValue={workplace?.name} onChange={(e) => setWorkplaceName(e.target.value)} /> :
+                                            <input className={classes.rename} disabled type="text" defaultValue={workplaceName || workplace?.name} />}
+                                        <span></span>
+                                        <div className={classes.actionsContainer}>
+                                            {edit === workplace ? <FiCheck onClick={(e) => { handleChangeWP(e, workplace['@id']) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEdit(workplace) }} />}
+                                            <FiTrash onClick={() => setModal({ name: workplace?.name, id: workplace.id, type: "workplaces" })} />
                                         </div>
-                                    </> : <></>}
-                                </li>)
-                    })}
+                                        {edit === workplace ? <>
+                                            <div className={classes.editDiv}>
+                                                <UploadFile placeholder="Importer une image" />
+                                                <div className={classes.inputsContainer}>
+                                                    <Input onLoad={() => setStreet(workplace.address.street)} onChange={(e) => setStreet(e.target.value)} type="text" placeholder="Adresse" defaultValue={workplace.address.street} />
+                                                    <Input onChange={(e) => setStreetInfo(e.target.value)} type="text" placeholder="Adresse 2" defaultValue={workplace.address.streetInfo} />
+                                                </div>
+                                                <div className={classes.inputsContainer}>
+                                                    <Input onChange={(e) => setMobile(e.target.value)} type="tel" placeholder="Téléphone" defaultValue={workplace.digitalAddress.mobile} />
+                                                    <Input onChange={(e) => setFax(e.target.value)} type="tel" placeholder="Fax" defaultValue={workplace.digitalAddress.fax} />
+                                                </div>
+                                            </div>
+                                        </> : <></>}
+                                    </li>)
+                        })}
                 </form>
             </ul>
         </div >)
@@ -299,7 +314,7 @@ export default function Tab({ tab, selected, setSelected }) {
                                         <span className={classes.groupName}>{team.workplace?.name}</span>
                                     </div>
                                     <div className={classes.actionsContainer}>
-                                        <AiOutlineEdit />
+                                    {edit === team ? <FiCheck onClick={(e) => { handleChangeTeam(e, team['@id']) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEdit(team) }} />}
                                         <FiTrash onClick={() => setModal({ name: team.name, id: team.id, type: "teams" })} />
                                     </div>
                                 </li>)
