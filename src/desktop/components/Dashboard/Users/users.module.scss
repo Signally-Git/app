@@ -143,8 +143,8 @@
                 content: "";
                 display: block;
                 left: -1em;
-                height: 4px;
-                width: 4px;
+                height: 8px;
+                width: 8px;
                 background: $signally-orange;
             }
         }
@@ -203,7 +203,8 @@
 
 .teamAssignment {
     flex-direction: row !important;
-    margin-top: 2rem;
+    height: 100%;
+    overflow: auto;
     ul {
         padding: 0;
     }
@@ -224,9 +225,9 @@
         display: block;
         position: absolute;
         left: -1em;
-        height: 5px;
+        height: 8px;
         border-radius: 50%;
-        width: 5px;
+        width: 8px;
         background: $signally-orange;
     }
 }

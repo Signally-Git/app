@@ -7,18 +7,23 @@ const request = axios.create({
 if (localStorage.getItem('token'))
     request.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
 
-axios.interceptors.response.use((response) => {
+request.interceptors.response.use((response) => {
     if (response.status === 401) {
         alert("You are not authorized");
     }
     return response;
 }, (error) => {
     if (error.response && error.response.data) {
-        // alert(error)
+        if (error.response.data.code === 401) {
+            axios.post(`${API}token/refresh`, { refresh_token: localStorage.getItem('refresh_token') }).then((res) => {
+                localStorage.setItem('token', res.data.token)
+                localStorage.setItem('refresh_token', res.data.refresh_token)
+            })
+
+        }
         return Promise.reject(error.response.data);
     }
     return Promise.reject(error.message);
 });
-// request.defaults.headers.common['Content-Type'] = 'application/merge-patch+json';
-// INTERCEPTORS
+
 export default request;

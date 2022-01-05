@@ -11,6 +11,9 @@ import Input from 'Utils/Input/input'
 import request from 'Utils/Request/request'
 import { useNotification } from 'Utils/Notifications/notifications'
 import UploadFile from 'Utils/Upload/uploadFile'
+import CreateTeam from '../Create/Team/createTeam'
+import CreateUser from '../Create/User/createUser'
+import CreateWorkplace from '../Create/Workplace/createWorkplace'
 
 // Displays the current list
 // Workplaces by default
@@ -41,35 +44,6 @@ export default function Tab({ tab, selected, setSelected }) {
 
     const notification = useNotification()
     // Variables for creation modals
-    const workplacesCreate = {
-        type: "workplaces",
-        firstCTA: "Ajouter un hotel",
-        subTxt: "Administrez les signatures de vos équipes par pays, villes, filiales, départements etc. selon la structure de votre organisation.",
-        import: true,
-        placeholder: "Nom de l'hotel",
-        placeholder2: "Adresse",
-        placeholder3: "(Adresse suite)",
-        placeholder4: "Téléphone",
-        placeholder5: "Fax",
-        secondCTA: "Valider",
-        thirdCTA: "Créer l'hotel",
-        fourthCTA: "Passer cette étape"
-    }
-    const teamsCreate = {
-        firstCTA: "Ajouter une équipe",
-        subTxt: "Créez vos équipes (Marketing, Vente, Corporate, Design, etc.). Ajoutez les membres de chaque équipe et associez leur une signature de mail spécifique.",
-        import: false,
-        placeholder: "Nom de l'équipe",
-        secondCTA: "Valider"
-    }
-    const usersCreate = {
-        type: "users",
-        firstCTA: "Ajouter un collaborateur",
-        subTxt: "Ajoutez l’ensemble de vos collaborateurs par l’import d’un simple fichier CSV ou manuellement.",
-        import: true,
-        placeholder: "Nom du collaborateur",
-        secondCTA: "Valider"
-    }
 
     // Gathering data
     const getDataWorkspace = async () => {
@@ -87,10 +61,13 @@ export default function Tab({ tab, selected, setSelected }) {
         setUsers(users.data["hydra:member"])
     }
 
-    const refreshData = () => {
-        getDataWorkspace()
-        getDataTeam()
-        getDataUser()
+    const refreshData = (type) => {
+        if (type === "workplace" || !type)
+            getDataWorkspace()
+        if (type === "teams" || !type)
+            getDataTeam()
+        if (type === "users" || !type)
+            getDataUser()
     }
 
     useEffect(() => {
@@ -101,7 +78,7 @@ export default function Tab({ tab, selected, setSelected }) {
     const handleDelete = (id, type, name) => {
         request.delete(`${type}/${id}`).then(
             () => {
-                refreshData()
+                refreshData(type)
                 notification({ content: <><span style={{ color: "#FF7954" }}>{name}</span> supprimé avec succès</>, status: "valid" })
             }
 
@@ -116,14 +93,14 @@ export default function Tab({ tab, selected, setSelected }) {
                 for (let index = 0; index < workplaces.length; index++) {
                     const element = workplaces[index];
                     await request.delete(`workplaces/${element.id}`).then(
-                        (res) => index === workplaces.length - 1 && refreshData())
+                        (res) => index === workplaces.length - 1 && refreshData(type))
                 }
                 break;
             case "teams":
                 for (let index = 0; index < teams.length; index++) {
                     const element = teams[index];
                     await request.delete(`teams/${element.id}`).then(
-                        (res) => index === teams.length - 1 && refreshData())
+                        (res) => index === teams.length - 1 && refreshData(type))
                 }
                 break;
             case "users":
@@ -131,7 +108,7 @@ export default function Tab({ tab, selected, setSelected }) {
                     const element = users[index];
                     if (element['@id'] !== (localStorage.getItem("user")['@id']))
                         await request.delete(`users/${element.id}`).then(
-                            (res) => index === users.length - 1 && refreshData())
+                            (res) => index === users.length - 1 && refreshData(type))
                 }
                 break;
             default:
@@ -197,21 +174,22 @@ export default function Tab({ tab, selected, setSelected }) {
         toFocus?.current?.focus();
     }, [edit])
 
-    const handleChangeWP = async (e, id) => {
+    const handleChangeWP = async (e, workplace) => {
+        // if ()
         e.preventDefault()
         const req = {
-            name: workplaceName,
+            name: workplaceName || workplace.name,
             address: {
-                street: street,
-                streetInfo: streetInfo
+                street: street || workplace.address.street,
+                streetInfo: streetInfo || workplace.address.streetInfo
             },
             digitalAddress: {
                 mobile: mobile,
                 fax: fax
             }
         }
-        console.log("editing!", req)
-        await request.patch(id, req, {
+        console.log("editing!", workplace)
+        await request.patch(workplace['@id'], req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         })
         setEdit()
@@ -249,7 +227,7 @@ export default function Tab({ tab, selected, setSelected }) {
                 <span className={addedWorkplace.length > 0 ? classes.orangeTxt : ""}>{addedWorkplace.length > 0 ? addedWorkplace : `${workplaces.length} hotels`}</span>
                 <button onClick={() => setModal({ type: "allworkplaces" })}>Supprimer tout</button>
             </div>
-            
+
             <ul className={classes.itemsList}>
                 <form onChange={(e) => e.target.type === "radio" && setSelected(JSON.parse(e.target.value))}>
                     {
@@ -262,7 +240,7 @@ export default function Tab({ tab, selected, setSelected }) {
                                             <input className={classes.rename} disabled type="text" defaultValue={workplaceName || workplace?.name} />}
                                         <span></span>
                                         <div className={classes.actionsContainer}>
-                                            {edit === workplace ? <FiCheck onClick={(e) => { handleChangeWP(e, workplace['@id']) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEdit(workplace) }} />}
+                                            {edit === workplace ? <FiCheck onClick={(e) => { handleChangeWP(e, workplace) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEdit(workplace) }} />}
                                             <FiTrash onClick={() => setModal({ name: workplace?.name, id: workplace.id, type: "workplaces" })} />
                                         </div>
                                         {edit === workplace ? <>
@@ -284,7 +262,7 @@ export default function Tab({ tab, selected, setSelected }) {
             </ul>
         </div >)
     if (tab === "create-workplace")
-        return (<Create fill={workplacesCreate} setState={setAddedWorkplace} />)
+        return (<CreateWorkplace />)
 
     if (tab === "teams")
         return (<div>{modal.type ? modalContent : ""}
@@ -314,7 +292,7 @@ export default function Tab({ tab, selected, setSelected }) {
                                         <span className={classes.groupName}>{team.workplace?.name}</span>
                                     </div>
                                     <div className={classes.actionsContainer}>
-                                    {edit === team ? <FiCheck onClick={(e) => { handleChangeTeam(e, team['@id']) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEdit(team) }} />}
+                                        {edit === team ? <FiCheck onClick={(e) => { handleChangeTeam(e, team['@id']) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEdit(team) }} />}
                                         <FiTrash onClick={() => setModal({ name: team.name, id: team.id, type: "teams" })} />
                                     </div>
                                 </li>)
@@ -323,10 +301,10 @@ export default function Tab({ tab, selected, setSelected }) {
             </ul>
         </div>)
     if (tab === "create-team")
-        return (<Create fill={teamsCreate} setState={setAddedWorkplace} />)
+        return (<CreateTeam />)
 
     if (tab === "create-user")
-        return (<Create fill={usersCreate} setState={setAddedWorkplace} />)
+        return (<CreateUser />)
     if (tab === "users")
         return (<div>{modal.type ? modalContent : ""}
             <Link to="create-user">
@@ -334,7 +312,7 @@ export default function Tab({ tab, selected, setSelected }) {
             </Link>
             <div className={classes.searchInput}>
                 <HiOutlineSearch />
-                <input className={classes.search} type="text" placeholder="Rechercher un collaborateur" />
+                <input className={classes.search} onChange={(e) => setSearchUser(e.target.value)} type="text" placeholder="Rechercher un collaborateur" />
             </div>
             <div className={classes.colheader}>
                 <span>{users.length < 2 ? `${users.length} collaborateur` : `${users.length} collaborateurs`}</span>
@@ -343,7 +321,8 @@ export default function Tab({ tab, selected, setSelected }) {
             <ul className={classes.itemsList}>
                 <form onChange={(e) => setSelected(JSON.parse(e.target.value))}>
                     {users.map((user) => {
-                        if (user.name?.toLowerCase().search(searchUser) !== -1)
+                        const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase() 
+                        if (fullName.search(searchUser.toLowerCase()) !== -1)
                             return (
                                 <li key={user.id} className={`${edit === user ? classes.editing : ""} ${selected?.id === user.id && selected?.name === user.name ? classes.selected : ""}`} >
                                     <input className={classes.checkbox} defaultChecked={selected?.id === user.id && selected?.name === user.name ? true : false} type="radio" name="user" value={JSON.stringify(user)} />

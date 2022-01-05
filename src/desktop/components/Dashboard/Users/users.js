@@ -6,11 +6,27 @@ import { HiOutlineSearch } from 'react-icons/hi'
 import Tab from './Tab/tab'
 import SignaturePreview from './SignaturePreview/signaturePreview'
 import { Link, useParams } from 'react-router-dom'
+import request from 'Utils/Request/request'
 
 function Team() {
     const [entity, setEntity] = useState()
     const { type } = useParams()
-    const [active, setActive] = useState(type)
+    const [users, setUsers] = useState([])
+    const [otherUser, setOtherUser] = useState("")
+    const [userList, setUserList] = useState([])
+    let test;
+
+    useEffect(async () => {
+        setUserList([])
+        const listUsers = await request.get('users')
+        setUsers(listUsers.data['hydra:member'])
+        // if (entity)
+        //     listUsers.data['hydra:member'].map((user) => {
+        //             test.push(entity.users.filter(val => user['@id'] !== (val['@id'])))
+        //     })
+        // console.log(listUsers.data['hydra:member'] = listUsers.data['hydra:member'].filter(val => !entity.users.includes(val['@id'])));
+
+    }, [entity])
 
     return (
         <div>
@@ -32,29 +48,33 @@ function Team() {
                 </div>
                 {entity ?
                     <div className={classes.overflow}>
-                        <div className={classes.signaturePreview}>
+                        {type === "users" ? <div className={classes.signaturePreview}>
                             <SignaturePreview show={entity} />
-                        </div>
-                        {entity.type === "team" ?
+                        </div> : ""}
+
+                        {type === "teams" ?
                             <div className={classes.teamAssignment}>
                                 <div className={classes.col}>
                                     <h2>Membres de l'équipe </h2>
-                                    <span>{entity.users} collaborateurs</span>
+                                    <span>{entity.users.length} collaborateurs</span>
                                     <ul className={`${classes.itemsList} ${classes.users}`}>
-                                        <li tabIndex="0">Sylvain</li>
-                                        <li tabIndex="0">Benjamin</li>
-                                        <li tabIndex="0">Sylvain</li>
+                                        {entity.users.map((user) => {
+                                            return <li tabIndex="0" key={user.id}>{user.firstName} {user.lastName}</li>
+                                        })}
                                     </ul>
                                 </div>
                                 <div className={classes.col}>
                                     <h2>Autres collaborateurs</h2>
                                     <div className={classes.searchInput}>
                                         <HiOutlineSearch />
-                                        <input className={classes.search} type="text" placeholder="Rechercher un collaborateur" />
+                                        <input className={classes.search} type="text" onChange={(e) => setOtherUser(e.target.value)} placeholder="Rechercher un collaborateur" />
                                     </div>
                                     <ul className={classes.itemsList}>
-                                        <li tabIndex="0">Sylvain</li>
-                                        <li tabIndex="0">Benjamin</li>
+                                        {users.map((user) => {
+                                            const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
+                                            if (fullName.search(otherUser.toLowerCase()) !== -1)
+                                                return <li tabIndex="0" key={user.id}>{user.firstName} {user.lastName}</li>
+                                        })}
                                     </ul>
                                 </div>
                             </div> : ""}

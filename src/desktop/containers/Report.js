@@ -40,7 +40,7 @@ export default function Report() {
                 </form>
                 <br />
                 <h4>{select}</h4>
-                <Input jsname="YPqjbf" placeholder="Bonjour, comme vous pouvez le voir sur cette image en PJ, le logo de l'entreprise ne s'affiche pas sur Outlook." style={{ height: "6rem", resize: "none" }} onChange={setBug} type="textarea" />
+                <Input jsname="YPqjbf" placeholder="Bonjour, comme vous pouvez le voir sur cette image en PJ, le logo de l'entreprise ne s'affiche pas sur Outlook." style={{ height: "6rem", resize: "none", width: '100%' }} onChange={setBug} type="textarea" />
                 <br />
                 <h4>Pièce jointe (capture d'écran, fichier d'import corrompu...)</h4>
                 <UploadFile

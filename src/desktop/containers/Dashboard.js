@@ -14,6 +14,7 @@ import CreateSignature from '../components/Dashboard/Signatures/create/createSig
 import { Link } from 'react-router-dom'
 import { UseEvents } from 'Utils/useEvents/useEvents'
 import ReadOnlyPreview from 'Desktop/components/Dashboard/Signatures/create/Preview/readOnlyPreview'
+import request from 'Utils/Request/request'
 
 let count = 0;
 
@@ -75,19 +76,12 @@ function Dashboard(props) {
     const [chartSeriesEvents, setChartSeriesEvents] = useState([{ name: 'CPM bannière', type: "line", data: [18, 24, 11, 14, 25, 22, 23] }])
 
     useEffect(async () => {
-        await axios.get(`${API}user/${userId}?access_token=${localStorage.getItem("token")}`).then(async (res) => {
+        await request.get(`users/${JSON.parse(localStorage.getItem('user')).id}`).then((res) => {
+            console.log(res.data)
             setUser(res.data)
-            if (res.data.signature)
-                await axios.get(`${API}template/${res.data?.signature?.id}?access_token=${localStorage.getItem("token")}`).then((res) => {
-                    setTemplate(res.data.signatureData)
-                    setTemplateName(res.data.name)
-                })
+            setTemplate(res.data.compiledSignature) 
+            setTemplateName(res.data.signature.name)
         })
-
-        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user"))?.organisation_id}?access_token=${localStorage.getItem("token")}`).then((res) => {
-            setOrganisation(res.data)
-        })
-
     }, [])
 
     useEffect(() => {
@@ -126,6 +120,7 @@ function Dashboard(props) {
                                         <div className={`${classes.signatureContainer} ${stat ? classes.open : classes.closed}`}>
                                             <div className={classes.signaturePreview}>
                                                 <h5>Signature active <Link to="/signatures">{templateName}</Link></h5>
+                                                <br />
                                                 <ReadOnlyPreview template={template} infos={data} />
                                             </div>
                                             {stat ?
@@ -140,7 +135,7 @@ function Dashboard(props) {
                                         <div className={`${classes.signatureContainer} ${stat ? classes.open : classes.closed}`}>
                                             <div className={classes.eventPreview}>
                                                 <h5>Event actif <Link to="/signatures">{activeEvents[0]?.name}</Link></h5>
-                                                <img className={classes.banner} src={API+activeEvents[0]?.imagePath} />
+                                                <img className={classes.banner} src={API + activeEvents[0]?.imagePath} />
                                                 <span className={classes.duration}>
                                                     <div className={`${classes.col} ${classes.bold}`}>
                                                         <span>{`du ${new Date(activeEvents[0]?.startAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>

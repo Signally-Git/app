@@ -75,6 +75,7 @@ const Login = () => {
 
         if (token) {
             localStorage.setItem('token', token.data.token)
+            localStorage.setItem('refresh_token', token.data.refresh_token)
             history.push('/dashboard')
         }
 
