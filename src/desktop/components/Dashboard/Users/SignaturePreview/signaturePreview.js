@@ -13,9 +13,8 @@ import UploadFile from 'Utils/Upload/uploadFile';
 import request from 'Utils/Request/request';
 import { useNotification } from 'Utils/Notifications/notifications';
 
-export default function SignaturePreview({ show }) {
+export default function SignaturePreview({ show, edit, setEdit }) {
     // console.log(show)
-    const [edit, setEdit] = useState(false)
     const [templates, setTemplates] = useState([])
     const [selectedTemplate, setSelectedTemplate] = useState()
     const [assignedTemplate, setAssignedTemplate] = useState()
@@ -50,13 +49,15 @@ export default function SignaturePreview({ show }) {
 
     // PREVIEW SIGNATURE
     useEffect(async () => {
-        if (type === "user") {
+        // if (type === "user") {
             const entity = await request.get(`${type}s/${show.id}`)
             setAssignedTemplate(entity.data.compiledSignature)
             const templates = await request.get('signatures')
             setSelectedTemplate(templates.data["hydra:member"][0])
             setTemplates(templates.data["hydra:member"])
-        }
+        // }
+        // if (!show.signature)
+        //     setEdit(true)
     }, [show, edit])
 
     // ASSIGNATION
@@ -78,7 +79,7 @@ export default function SignaturePreview({ show }) {
             (res) => {
                 console.log(element)
                 notification({ content: <>Signature de {type === "user" ? element.firstName + " " + element.lastName : type} modifiée</>, status: "valid" })
-                console.log(res); setEdit(false)
+                console.log(res); setEdit()
             }).catch (() => notification({ content: <>Impossible de modifier la signature.</>, status: "invalid" }))
     }
 
@@ -87,7 +88,6 @@ export default function SignaturePreview({ show }) {
             <div className={classes.front}>
                 <div className={classes.topLine}>
                     <h2>Signature active pour <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></h2>
-                    <AiOutlineEdit onClick={() => setEdit(!edit)} />
                 </div>
                 <div>
                     {assignedTemplate ?
@@ -99,7 +99,6 @@ export default function SignaturePreview({ show }) {
             <div className={classes.back}>
                 <div className={classes.topLine}>
                     <h2>Édition {show.name}</h2>
-                    <FiCheck onClick={() => setEdit(!edit)} />
                 </div>
                 <div className={classes.signatureContainer}>
                     <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>

@@ -8,7 +8,7 @@
     justify-content: center;
     background: #fff;
     border-radius: 20px;
-    width: 25%;
+    width: 20%;
     padding: 0 1rem 1rem;
     z-index: 3;
     left: 15%;
@@ -21,10 +21,18 @@
     h4 {
         line-height: 2rem;
     }
-    > div {
+    > div:first-child {
         display: flex;
         width: 70%;
     }
+    > span {
+        text-align: justify;
+    }
+    > div:last-child {
+        display: flex;
+        width: 100%;
+    }
+
 }
 
 .orangeTxt {
@@ -166,7 +174,7 @@
     bottom: auto;
     top: 1.5rem;
     z-index: 2;
-    width: 2.5rem;
+    width: 3.5rem;
     align-items: center;
     svg {
         color: $signally-brown;

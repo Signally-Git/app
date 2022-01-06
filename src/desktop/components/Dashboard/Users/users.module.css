@@ -246,6 +246,11 @@
   margin-top: 0;
 }
 
+.teamAssignment h2 span {
+  color: #FF7954 !important;
+  font-size: 1.2rem !important;
+}
+
 .teamAssignment > div {
   margin-bottom: 1rem;
 }
@@ -258,6 +263,47 @@
   color: grey;
   padding-top: 0.5rem;
   font-size: 0.8rem;
+}
+
+.assignItem {
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: normal !important;
+      -ms-flex-direction: row !important;
+          flex-direction: row !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+}
+
+.assignItem > span {
+  padding-top: 0 !important;
+  color: #402927 !important;
+}
+
+.assignItem button {
+  color: #FF7954;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background: none;
+  border: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.assignItem button:hover {
+  color: #402927;
 }
 
 .teamAssignment {

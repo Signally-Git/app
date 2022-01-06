@@ -29,6 +29,11 @@ const Login = () => {
     const history = useHistory()
     const query = useQuery()
 
+    useEffect(() => {
+        if (localStorage.getItem('token'))
+            history.push('/dashboard')
+    })
+
     useEffect(async () => {
         console.log(query.get('user'), decodeURI(encodeURI(query.get('user'))))
         if (query.get('user')) {
@@ -69,14 +74,14 @@ const Login = () => {
             password: code
         }
         
-        const token = await request.post(`token/auth`, req).catch((error) => {
+        const token = await request.post(`token/auth`, req).catch(() => {
             setError(<p>Impossible de se connecter.<br />Veuillez vérifier vos identifiants.</p>)
         });
 
         if (token) {
             localStorage.setItem('token', token.data.token)
             localStorage.setItem('refresh_token', token.data.refresh_token)
-            history.push('/dashboard')
+            history.go(0)
         }
 
     }

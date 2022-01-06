@@ -76,11 +76,11 @@ function Dashboard(props) {
     const [chartSeriesEvents, setChartSeriesEvents] = useState([{ name: 'CPM bannière', type: "line", data: [18, 24, 11, 14, 25, 22, 23] }])
 
     useEffect(async () => {
-        await request.get(`users/${JSON.parse(localStorage.getItem('user')).id}`).then((res) => {
+        await request.get(`users/${JSON.parse(localStorage.getItem('user'))?.id}`).then((res) => {
             console.log(res.data)
             setUser(res.data)
-            setTemplate(res.data.compiledSignature) 
-            setTemplateName(res.data.signature.name)
+            setTemplate(res.data?.compiledSignature) 
+            setTemplateName(res.data?.signature?.name)
         })
     }, [])
 
