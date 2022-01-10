@@ -1,0 +1,99 @@
+@import "../../../Assets/style/colors.scss";
+
+.desktop {
+    background-color: #E3D8D8;
+    height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
+    display: flex;
+    .desktopSubcontainer {
+        width: 95%;
+        height: 95%;
+        position: relative;
+        margin: auto;
+        border-radius: 40px;
+        display: flex;
+        flex-direction: column;
+        > div {
+            flex: 1;
+        }
+        background-color: #FBF8F7;
+        box-shadow: 0px 0px 15px 10px rgba(0,0,0,0.20);
+    }
+}
+
+.mainContent {
+    max-height: 100vh;
+    overflow: hidden;
+    height: 100%;
+    margin: 2rem;
+    margin-top: 0;
+    display: flex;
+    > ul {
+        padding: 5rem;
+    }
+    h5 {
+        font-size: 1.2rem;
+        margin: 0;
+    }
+}
+
+.menuContainer {
+    display: flex;
+    margin: 0 auto;
+    margin-right: 3rem;
+    max-height: 100vh;
+    min-height: 80vh;
+    justify-content: center;
+    margin-left: 1rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userInfos {
+    width: 100%;
+    font-size: 0.9rem;
+    text-align: center;
+    color: $signally-brown;
+    p {
+        line-height: 0.5rem;
+        margin-bottom: 0;
+    }
+    .capitalize {
+        font-weight: bold;
+        line-height: 1rem;
+        text-transform: uppercase;
+    }
+    > img {
+        max-width: 100px;
+        max-height: 100px;
+        width: auto;
+        height: auto;
+    }
+}
+
+.dashboardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-height: 100vh;
+    overflow: auto;
+    height: 100%;
+    padding: 2rem;
+    padding-top: 1rem;
+    background-color: #F4EEEF;
+    position: relative;
+    border-radius: 20px;
+    align-content: flex-start;
+    h1 {
+        flex: 100%;
+        color: $signally-brown;
+    }
+    .tilesContainer {
+        width: 26vw;
+    }
+    > div {
+        width: 100%;
+        height: 100%;
+    }
+}

@@ -1,0 +1,132 @@
+@media screen and (max-width: 680px) {
+  .container {
+    width: 95%;
+    margin: auto;
+    max-height: none;
+    margin-top: 0;
+    background: none;
+  }
+  .active,
+  .inactive,
+  .status {
+    display: block;
+  }
+  .previewContainer {
+    -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+            box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+    -webkit-transform: scale(1) translate(0);
+            transform: scale(1) translate(0);
+  }
+}
+
+.active,
+.inactive,
+.status {
+  display: none;
+}
+
+.container {
+  max-height: 20rem;
+  background-color: #fff;
+  color: #402a27;
+  width: 70%;
+  padding: 0.5rem;
+  border-radius: 30px;
+}
+
+.container h5 {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 0;
+}
+
+.active::before {
+  position: absolute;
+  content: " ";
+  width: 10px;
+  height: 10px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  left: -1rem;
+  border-radius: 50%;
+  background: #4aee6e;
+}
+
+.inactive::before {
+  position: absolute;
+  content: " ";
+  width: 10px;
+  height: 10px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  left: -1rem;
+  border-radius: 50%;
+  background: #c4c4c4;
+}
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.status {
+  margin-top: 5px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.previewContainer {
+  -webkit-transition: width 1s;
+  transition: width 1s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+}
+
+.previewContainer > div:first-child {
+  margin-right: auto;
+  margin-left: 0;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.previewContainer > div:first-child img {
+  padding: 1rem;
+  padding-top: 0;
+  margin-top: 0;
+  margin-bottom: auto;
+}
+
+.stats {
+  display: inline;
+}
+
+.signText * {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.signText p {
+  font-size: 0.8rem;
+}
+
+.orangeTxt {
+  color: #ff7954;
+}
