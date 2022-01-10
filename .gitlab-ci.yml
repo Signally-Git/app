@@ -18,3 +18,5 @@ deploy:
     url: https://beta.signally.io
   script:
     - bash devops/deploy/deploy.sh
+  only:
+    - beta
