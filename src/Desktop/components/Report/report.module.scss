@@ -1,21 +1,32 @@
+@import '../../../Assets/style/colors.scss';
+
 .container {
-    max-width: 65%;
+    p, input {
+        color: $signally-brown;
+    }
+    min-width: 55%;
     border-radius: 20px;
-    padding: 1rem 2rem;
+    padding: 5rem 2rem 1rem 2rem;
     display: flex;
     flex-direction: column;
+    overflow: auto;
     background-color: #fff;
     justify-content: space-around;
     .tagLine {
         text-align: center;
+
     }
     p {
         font-size: .75rem;
         text-align: justify;
     }
+    h3 {
+        color: $signally-orange
+    }
     h4 {
         font-size: 1rem;
         margin: 0;
+        color: $signally-orange;
     }
     h4 ~ div {
         margin-top: .5rem;
@@ -24,7 +35,7 @@
         transition: 0.2s;
         background: #fff;
         width: 55%;
-        border: 1px solid #f7f5f5;
+        border: 1px solid $signally-lightgrey;
         padding: 1rem;
         border-radius: 10px;
         margin: 0.5rem 0;
@@ -33,11 +44,24 @@
     }
 }
 
+.row
+{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    img {
+        width: auto;
+        height: 100%;
+        margin: auto;
+        padding-top: 5rem
+    }
+} 
+
 .actionsContainer {
     display: flex;
     justify-content: start;
     width: 60%;
-    margin-top: .5rem;
+    margin-top: 1rem!important;
     button {
         margin-left: 0;
     }

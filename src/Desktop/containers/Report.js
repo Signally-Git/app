@@ -4,6 +4,7 @@ import Input from "Utils/Input/input";
 import UploadFile from "Utils/Upload/uploadFile";
 import classes from "Desktop/components/Report/report.module.css"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import Noting from 'Assets/img/noting.png'
 
 export default function Report() {
     const [file, setFile] = useState()
@@ -13,6 +14,7 @@ export default function Report() {
     const [select, setSelect] = useState("Description du problème")
 
     return (<>
+        <div className={classes.row}>
         <div className={classes.container}>
             <div className={classes.tagLine}>
                 <h3>Bienvenue sur la Beta privée Signally !</h3>
@@ -53,6 +55,8 @@ export default function Report() {
                     <Button type="submit" width={"45%"} color="orange">Envoyer</Button>
                 </div>
             </form>
+        </div>
+        <img src={Noting} />
         </div>
     </>
     )

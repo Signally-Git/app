@@ -12,6 +12,7 @@ import Input from 'Utils/Input/input';
 import UploadFile from 'Utils/Upload/uploadFile';
 import request from 'Utils/Request/request';
 import { useNotification } from 'Utils/Notifications/notifications';
+import CopySignature from 'Desktop/components/CopySignature/CopySignature';
 
 export default function SignaturePreview({ show, edit, setEdit }) {
     // console.log(show)
@@ -97,6 +98,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                     <span className={classes.groupName}>{show?.group?.name}</span>}
             </div>
             <div className={classes.back}>
+            {edit === "copySign" ? <CopySignature signature={assignedTemplate} /> : <>
                 <div className={classes.topLine}>
                     <h2>Édition {show.name}</h2>
                 </div>
@@ -133,6 +135,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                     {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate?.html} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
                     <Button onClick={() => handleAssign(show)} color="orangeFill">Changer de signature</Button>
                 </div>
+            </>}
             </div>
         </div>
     </div>)

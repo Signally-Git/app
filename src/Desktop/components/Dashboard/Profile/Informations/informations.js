@@ -251,7 +251,7 @@ function Informations() {
                 </>
                 }
             </div>
-            <img src={Hello} style={{ height: "70%" }} />
+            <img src={Hello} />
         </div>
     )
 }

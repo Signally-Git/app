@@ -1,7 +1,7 @@
 .container {
-  max-width: 65%;
+  min-width: 55%;
   border-radius: 20px;
-  padding: 1rem 2rem;
+  padding: 5rem 2rem 1rem 2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -9,9 +9,14 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  overflow: auto;
   background-color: #fff;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+}
+
+.container p, .container input {
+  color: #402927;
 }
 
 .container .tagLine {
@@ -23,9 +28,14 @@
   text-align: justify;
 }
 
+.container h3 {
+  color: #FF7954;
+}
+
 .container h4 {
   font-size: 1rem;
   margin: 0;
+  color: #FF7954;
 }
 
 .container h4 ~ div {
@@ -45,6 +55,21 @@
   font-family: inherit;
 }
 
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.row img {
+  width: auto;
+  height: 100%;
+  margin: auto;
+  padding-top: 5rem;
+}
+
 .actionsContainer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -53,7 +78,7 @@
       -ms-flex-pack: start;
           justify-content: start;
   width: 60%;
-  margin-top: .5rem;
+  margin-top: 1rem !important;
 }
 
 .actionsContainer button {

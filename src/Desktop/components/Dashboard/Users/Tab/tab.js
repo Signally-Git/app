@@ -16,6 +16,7 @@ import CreateUser from '../Create/User/createUser'
 import CreateWorkplace from '../Create/Workplace/createWorkplace'
 import { BsCreditCard2Front } from 'react-icons/bs'
 import { GrUserSettings } from 'react-icons/gr'
+import { BiCopyAlt } from 'react-icons/bi'
 
 // Displays the current list
 // Workplaces by default
@@ -149,7 +150,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit }) {
                         <span>Les équipes <>Blabla</>, <>Blablou</></span>
                         <h4>Vous allez supprimer
                             <br /><span className={classes.orangeTxt}>{`${teams.length} équipes`}</span></h4>
-                            <br />
+                        <br />
                         <div>
                             <Button color="orangeFill" onClick={() => setModal({ type: "", name: "", id: "" })}>Annuler</Button>
                             <Button color="orange" onClick={() => handleDeleteAll("teams")}>Supprimer</Button>
@@ -250,7 +251,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit }) {
                             if (workplace?.name?.toLowerCase().search(searchWorkplace) !== -1)
                                 return (
                                     <li onMouseEnter={() => setSelected(workplace)} key={workplace.id} className={`${edit === workplace ? classes.editing : ""} ${selected?.id === workplace.id && selected?.name === workplace?.name ? classes.selected : ""}`} >
-                                        <input className={classes.checkbox} defaultChecked={selected?.id === workplace.id && selected?.name === workplace?.name ? true : false} type="radio" name="workplace" value={JSON.stringify(workplace)} />
+                                        <input onMouseEnter={() => selected?.id === workplace.id && selected?.name === workplace?.name ? true : false} className={classes.checkbox} defaultChecked={selected?.id === workplace.id && selected?.name === workplace?.name ? true : false} type="radio" name="workplace" value={JSON.stringify(workplace)} />
                                         {edit === workplace ? <input className={classes.rename} ref={toFocus} type="text" defaultValue={workplace?.name} onChange={(e) => setWorkplaceName(e.target.value)} /> :
                                             <input className={classes.rename} disabled type="text" defaultValue={workplaceName || workplace?.name} />}
                                         <span></span>
@@ -309,7 +310,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit }) {
                                         <span className={classes.groupName}>{team.workplace?.name}</span>
                                     </div>
                                     <div className={classes.actionsContainer}>
-                                    <AiOutlineEdit onClick={(e) => { setEdit('assign-team') }} />
+                                        <AiOutlineEdit onClick={(e) => { setEdit('assign-team') }} />
                                         {edit === team ? <FiCheck onClick={(e) => { handleChangeTeam(e, team['@id']) }} /> : <BsCreditCard2Front onClick={(e) => { e.preventDefault(); setEdit(team) }} />}
                                         <FiTrash onClick={() => setModal({ name: team.name, id: team.id, type: "teams" })} />
                                     </div>
@@ -343,7 +344,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit }) {
                         if (fullName.search(searchUser.toLowerCase()) !== -1)
                             return (
                                 <li onMouseEnter={() => setSelected(user)} key={user.id} className={`${edit === user ? classes.editing : ""} ${selected?.id === user.id && selected?.name === user.name ? classes.selected : ""}`} >
-                                    <input className={classes.checkbox} defaultChecked={selected?.id === user.id && selected?.name === user.name ? true : false} type="radio" name="user" value={JSON.stringify(user)} />
+                                    <input className={classes.checkbox} onChange={(e) => { e.preventDefault(); setEdit(user) }}  defaultChecked={selected?.id === user.id && selected?.name === user.name ? true : false} type="radio" name="user" value={JSON.stringify(user)} />
                                     {edit === user ? <input className={classes.rename} ref={toFocus} type="text" defaultValue={`${user.firstName} ${user.lastName}`} /> :
                                         <input className={classes.rename} disabled type="text" defaultValue={`${user.firstName} ${user.lastName}`} />}
                                     <span></span>
@@ -352,7 +353,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit }) {
                                             <Link to="/profile/informations"><FaUser /></Link>
                                         </div> :
                                         <div className={classes.actionsContainer}>
-                                           
+                                            <BiCopyAlt onClick={() => setEdit('copySign')} />
                                             {edit === user ? <FiCheck onClick={(e) => { handleChange(e, user['@id']) }} /> : <BsCreditCard2Front onClick={(e) => { e.preventDefault(); setEdit(user) }} />}
                                             <FiTrash onClick={() => setModal({ name: `${user.firstName} ${user.lastName}`, id: user.id, type: "users" })} />
                                         </div>}
