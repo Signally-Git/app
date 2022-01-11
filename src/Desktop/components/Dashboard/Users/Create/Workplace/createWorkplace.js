@@ -16,6 +16,7 @@ export default function CreateWorkplace() {
         {
             logos: [],
             name: "",
+            organisation: JSON.parse(localStorage.getItem('user')).organisation,
             address: {
                 street: "",
                 streetInfo: ""
@@ -27,14 +28,14 @@ export default function CreateWorkplace() {
 
     const handleCSV = async (file) => {
         const csv = new FormData()
-        const url = `import/organisation/users`
+        const url = `import/organisation/${JSON.parse(localStorage.getItem('user')).organisation.replace("/organisations/", "")}/workplaces`
 
         csv.append('file', file)
 
         await request.post(url, csv)
             .then((res) => {
                 // props.setState(`${res.data["hydra:totalItems"]} ${props.fill.type} ajoutés`)
-                history.push(`/teams/users`)
+                history.push(`/teams/workplaces`)
             }).catch(() => notification({ content: <>Une erreur s'est produite lors de l'import.</>, status: "invalid" }))
     }
 

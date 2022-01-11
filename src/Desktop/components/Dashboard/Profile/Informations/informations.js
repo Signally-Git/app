@@ -53,10 +53,11 @@ function Informations() {
         img.append('image', uploadedMedia)
         if (uploadedMedia)
             await request.post(`import/image`, img).then(async (res) => {
+                console.log(res)
                 const req = {
                     name: companyName,
                     websiteUrl: website,
-                    logos: [{ path: res.data.path }]
+                    logos: [res.data['@id']]
                 }
                 await request.patch(`organisations/${organisationId}`, req, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }

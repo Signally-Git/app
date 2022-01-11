@@ -12,6 +12,10 @@
           justify-content: space-between;
 }
 
+.topLine select {
+  outline: none;
+}
+
 .topLine svg {
   color: #402927;
 }
@@ -19,6 +23,17 @@
 .topLine svg:hover {
   cursor: pointer;
   color: #FF7954;
+}
+
+.topLine form {
+  width: 45%;
+}
+
+.topLine form select {
+  border-color: #FF7954;
+  color: #FF7954;
+  margin: 0;
+  width: 100%;
 }
 
 .orangeTxt {
@@ -36,14 +51,15 @@
   font-size: 0.6rem !important;
 }
 
-.signatureContainer > div {
+.signature {
   -webkit-transform: scale(0.5);
           transform: scale(0.5);
-  -webkit-transform-origin: top right;
-          transform-origin: top right;
-  position: absolute;
-  top: 4rem;
-  right: 3rem;
+  max-height: 22rem;
+  min-height: 20rem;
+  margin-bottom: -10rem;
+  overflow: auto;
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
 }
 
 .flipcontainer {
@@ -109,7 +125,7 @@
 
 .front > span,
 .back > span {
-  color: grey;
+  color: #402927;
   padding-top: 0.5rem;
   font-size: 0.8rem;
 }

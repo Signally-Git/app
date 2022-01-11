@@ -87,7 +87,7 @@ function Team() {
                                 <span>{templates.length} signatures</span>
                                 <ul className={classes.itemsList}>
                                     {templates.map((signature) => {
-                                        return (<li key={signature.id} tabIndex="0" onClick={() => setPreview(signature)}>
+                                        return (<li onMouseEnter={() => setPreview(signature)} key={signature.id}>
                                             <span>{signature.name}</span>
                                             <div className={classes.actionsContainer}>
                                                 {/* <AiOutlineEdit /> */}

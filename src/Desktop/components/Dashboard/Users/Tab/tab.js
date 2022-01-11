@@ -343,9 +343,9 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                         const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
                         if (fullName.search(searchUser.toLowerCase()) !== -1)
                             return (
-                                <li onMouseEnter={() => setSelected(user)} key={user.id} className={`${edit === user ? classes.editing : ""} ${selected?.id === user.id && selected?.name === user.name ? classes.selected : ""}`} >
+                                <li onMouseEnter={() => setSelected(user)} key={user.id} className={`${edit === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? classes.editing : ""} ${selected?.id === user.id && selected?.name === user.name ? classes.selected : ""}`} >
                                     <input className={classes.checkbox} onChange={(e) => { e.preventDefault(); setEdit(user) }}  defaultChecked={selected?.id === user.id && selected?.name === user.name ? true : false} type="radio" name="user" value={JSON.stringify(user)} />
-                                    {edit === user ? <input className={classes.rename} ref={toFocus} type="text" defaultValue={`${user.firstName} ${user.lastName}`} /> :
+                                    {edit === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <input className={classes.rename} ref={toFocus} type="text" defaultValue={`${user.firstName} ${user.lastName}`} /> :
                                         <input className={classes.rename} disabled type="text" defaultValue={`${user.firstName} ${user.lastName}`} />}
                                     <span></span>
                                     {user?.id === JSON.parse(localStorage.getItem("user"))?.id ?
@@ -357,7 +357,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                             {edit === user ? <FiCheck onClick={(e) => { handleChange(e, user['@id']) }} /> : <BsCreditCard2Front onClick={(e) => { e.preventDefault(); setEdit(user) }} />}
                                             <FiTrash onClick={() => setModal({ name: `${user.firstName} ${user.lastName}`, id: user.id, type: "users" })} />
                                         </div>}
-                                    {edit === user ? <>
+                                    {edit === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>
                                         <div className={classes.editDiv}>
                                             <Input type="text" placeholder="Adresse mail" defaultValue={user.email} />
                                             <div className={classes.inputsContainer}>

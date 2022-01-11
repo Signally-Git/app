@@ -724,7 +724,7 @@ input:checked + .slider:before {
   -webkit-transition: 0.2s;
   transition: 0.2s;
   background: #fff;
-  border: 1px solid #F1ECEA;
+  border: 1px solid #f7f5f5;
   padding: 1rem;
   padding-right: 5rem;
   border-radius: 10px;

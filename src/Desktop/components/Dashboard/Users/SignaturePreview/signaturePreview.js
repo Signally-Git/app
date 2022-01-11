@@ -102,7 +102,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
             <div className={classes.back}>
                 {edit === "copySign" ? <CopySignature signature={assignedTemplate} /> : <>
                     <div className={classes.topLine}>
-                        <h2>Édition <span className={classes.orangeTxt}>{show.name}</span></h2>
+                        <h2>Édition <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></h2>
                         <Select onChange={(e) => setEdit(e.target.value)} items={[{ name: "Modifier équipes" }, { name: "Modifier signature", '@id': "assign-workplace" }]} />
                     </div>
                     <div className={classes.signatureContainer}>
@@ -135,7 +135,9 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                             })}
                         </select>
                     </form> */}
+                    <div className={classes.signature}>
                         {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate?.html} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
+                    </div>
                         <Button onClick={() => handleAssign(show)} color="orangeFill">Changer de signature</Button>
                     </div>
                 </>}

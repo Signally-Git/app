@@ -53,13 +53,27 @@ function Events() {
         setModalContent(handleModal(modal))
     }, [modal, preview])
 
-
     const handleEvents = (status) => {
         const events = activeEvents.map((activeEvent, index) => {
             if (activeEvent?.name.toLowerCase().search(search.toLowerCase()) !== -1)
                 if ((status === "past" && new Date(activeEvent.endAt) < new Date()) || (new Date(activeEvent.startAt) < new Date() && status === "present" && new Date(activeEvent.endAt) > new Date()) || (status === "future" && new Date(activeEvent.startAt) > new Date())) {
                     return (
-                        <li key={index} className={`${status === "past" ? classes.pastEvent : ""}`} onClick={() => { setPreview({ activeEvent, past: status === "past", index }); setCreate(false); setEdit(false) }} tabIndex={index}>
+                        <li onClick={() => { setEdit(true); setPreview({ activeEvent, past: status === "past", index })}} key={index}
+                            className={`${preview?.activeEvent['@id'] === activeEvent['@id'] ? classes.selected : ""} ${status === "past" ? classes.pastEvent : ""}`}
+                            onMouseEnter={() => {
+                                if (!preview?.activeEvent['@id'] || preview?.activeEvent['@id'] !== activeEvent['@id']) {
+                                    setEdit(false)
+                                    if (edit)
+                                        setTimeout(() => {
+                                            setPreview({ activeEvent, past: status === "past", index })
+                                        }, 300);
+                                    else
+                                        setPreview({ activeEvent, past: status === "past", index })
+                                }
+                                setCreate(false);
+                                // setEdit(preview?.activeEvent['@id'] === activeEvent['@id'] ? edit : activeEvent)
+                            }}
+                        >
                             <img className={classes.bannerPreview} src={`${API}${activeEvent.imagePath}`} />
                             <div className={classes.eventText}>
                                 <span className={classes.active}>{activeEvent.name}</span>
@@ -141,7 +155,9 @@ function Events() {
                             <div className={classes.front}>
                                 <div className={`${classes.eventPreview} ${activeEvents[preview?.index].past ? classes.pastEvent : ""}`}>
                                     {/* <h3>Signature active</h3> */}
-                                    <h2><span className={classes.orangeTxt}>{activeEvents[preview?.index].name}</span><FiEdit onClick={() => setEdit(!edit)} /></h2>
+                                    <h2><span className={classes.orangeTxt}>{activeEvents[preview?.index].name}</span>
+                                        {/* <FiEdit onClick={() => setEdit(!edit)} /> */}
+                                    </h2>
                                     <img src={`${API}${activeEvents[preview?.index]?.imagePath}`} />
                                 </div>
                             </div>

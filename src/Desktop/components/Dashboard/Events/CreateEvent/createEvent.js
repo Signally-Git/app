@@ -17,16 +17,15 @@ export default function CreateEvent({ setDone, event }) {
     const [endDate, setEndDate] = useState(event?.endAt ? new Date(event?.endAt) : new Date())
     const [banner, setBanner] = useState()
     const [eventName, setEventName] = useState(event?.name || "")
-    const [eventNameDefault, setEventNameDefault] = useState()
 
     const notification = useNotification()
     const eventNameRef = useRef(null)
 
     useEffect(() => {
-        console.log(event)
-        setStartDate(event?.startAt)
-        setEndDate(event?.endAt)
-    }, [])
+        setEventName(event?.name)
+        setStartDate(new Date(event?.startAt))
+        setEndDate(new Date(event?.endAt))
+    }, [event])
 
     useEffect(() => {
         if (!event) {
@@ -100,7 +99,9 @@ export default function CreateEvent({ setDone, event }) {
 
     return (<div className={classes.container}>
         {event ? <>
-            <h2>Modifier event <span>{eventName}</span><FiEdit onClick={() => setDone(false)} /></h2>
+            <h2>Modifier event <span>{eventName}</span>
+            {/* <FiEdit onClick={() => setDone(false)} /> */}
+            </h2>
         </> : <>
             <h2>Créer un event</h2>
         </>}
@@ -114,7 +115,7 @@ export default function CreateEvent({ setDone, event }) {
                 <Datetime locale="fr-fr" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="D MMM YYYY" />
             </div>
         </div>
-        <Input required defaultValue={eventName} onChange={(e) => setEventName(e.target.value)} style={{ width: "100%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef}  />
+        <Input required value={eventName} onChange={(e) => setEventName(e.target.value)} style={{ width: "100%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef}  />
         <div className={classes.currentEventPreview}>
             {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={API + event.imagePath} title={event.banner?.name} /> : ""}
         </div>
