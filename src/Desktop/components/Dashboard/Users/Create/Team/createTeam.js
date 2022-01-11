@@ -44,8 +44,11 @@ export default function CreateTeam() {
     const getWorkplaces = async () => {
         console.log("here")
         const wps = await request.get('workplaces')
-        setWorkplaces(wps.data["hydra:member"])
-        setWorkplace(wps.data["hydra:member"][0]['@id'])
+        if (wps.data["hydra:member"].length > 0)
+        {
+            setWorkplaces(wps.data["hydra:member"])
+            setWorkplace(wps.data["hydra:member"][0]['@id'])
+        }
     }
 
     useEffect(() => {

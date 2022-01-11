@@ -55,8 +55,10 @@ export default function CreateUser() {
 
     const getTeams = async () => {
         const tms = await request.get('teams')
-        setTeams(tms.data["hydra:member"])
-        setTeam(tms.data["hydra:member"][0]['@id'])
+        if (tms.data["hydra:member"].length > 0) {
+            setTeams(tms.data["hydra:member"])
+            setTeam(tms.data["hydra:member"][0]['@id'])
+        }
     }
 
     useEffect(() => {
@@ -76,7 +78,7 @@ export default function CreateUser() {
                     type="file"
                     accept=".csv"
                     onChange={(e) => {
-                        handleSave()
+                        // handleSave()
                         handleCSV(e.target.files[0])
                     }}
                 />A partir d'un fichier .csv</Button>

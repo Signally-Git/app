@@ -7,12 +7,14 @@ import { API } from 'config';
 import Button from 'Utils/Button/btn';
 import { UseOrganizationInfos } from 'Utils/useOrganizationInfos/useOrganizationInfos';
 import ReadOnlyPreview from '../../Signatures/create/Preview/readOnlyPreview';
-import { AiOutlineEdit } from 'react-icons/ai';
+import { AiOutlineEdit, AiOutlineUsergroupAdd } from 'react-icons/ai';
 import Input from 'Utils/Input/input';
 import UploadFile from 'Utils/Upload/uploadFile';
 import request from 'Utils/Request/request';
 import { useNotification } from 'Utils/Notifications/notifications';
 import CopySignature from 'Desktop/components/CopySignature/CopySignature';
+import { BsCardHeading } from 'react-icons/bs';
+import Select from 'Utils/Select/select';
 
 export default function SignaturePreview({ show, edit, setEdit }) {
     // console.log(show)
@@ -51,11 +53,11 @@ export default function SignaturePreview({ show, edit, setEdit }) {
     // PREVIEW SIGNATURE
     useEffect(async () => {
         // if (type === "user") {
-            const entity = await request.get(`${type}s/${show.id}`)
-            setAssignedTemplate(entity.data.compiledSignature)
-            const templates = await request.get('signatures')
-            setSelectedTemplate(templates.data["hydra:member"][0])
-            setTemplates(templates.data["hydra:member"])
+        const entity = await request.get(`${type}s/${show.id}`)
+        setAssignedTemplate(entity.data.compiledSignature)
+        const templates = await request.get('signatures')
+        setSelectedTemplate(templates.data["hydra:member"][0])
+        setTemplates(templates.data["hydra:member"])
         // }
         // if (!show.signature)
         //     setEdit(true)
@@ -64,12 +66,12 @@ export default function SignaturePreview({ show, edit, setEdit }) {
     // ASSIGNATION
     const handleAssign = async (element) => {
         // console.log(selectedTemplate)
-        console.log("EVENT" , event)
+        console.log("EVENT", event)
         const req =
             event ? {
-                    signature: selectedTemplate["@id"],
-                    events: [event['@id']]
-                } :
+                signature: selectedTemplate["@id"],
+                events: [event['@id']]
+            } :
                 {
                     signature: selectedTemplate["@id"]
                 }
@@ -81,7 +83,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                 console.log(element)
                 notification({ content: <>Signature de {type === "user" ? element.firstName + " " + element.lastName : type} modifiée</>, status: "valid" })
                 console.log(res); setEdit()
-            }).catch (() => notification({ content: <>Impossible de modifier la signature.</>, status: "invalid" }))
+            }).catch(() => notification({ content: <>Impossible de modifier la signature.</>, status: "invalid" }))
     }
 
     return (<div className={classes.flipcontainer}>
@@ -98,32 +100,33 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                     <span className={classes.groupName}>{show?.group?.name}</span>}
             </div>
             <div className={classes.back}>
-            {edit === "copySign" ? <CopySignature signature={assignedTemplate} /> : <>
-                <div className={classes.topLine}>
-                    <h2>Édition {show.name}</h2>
-                </div>
-                <div className={classes.signatureContainer}>
-                    <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
-                        <select defaultValue={JSON.stringify(templates[0])}>
-                            {templates.map((template) => {
-                                return <option key={template.id} value={JSON.stringify(template)} template={template.html}>
-                                    {template.name}
-                                </option>
-                            })}
-                        </select>
-                    </form>
-                    {/* if event list events */}
-                    {events.length > 0 ?
-                        <form onChange={(e) => setEvent(JSON.parse(e.target.value))}>
-                            <select defaultValue={event[0]}>
-                                {events.map((event) => {
-                                    return <option key={event.id} value={JSON.stringify(event)}>
-                                        {event.name}
+                {edit === "copySign" ? <CopySignature signature={assignedTemplate} /> : <>
+                    <div className={classes.topLine}>
+                        <h2>Édition <span className={classes.orangeTxt}>{show.name}</span></h2>
+                        <Select onChange={(e) => setEdit(e.target.value)} items={[{ name: "Modifier équipes" }, { name: "Modifier signature", '@id': "assign-workplace" }]} />
+                    </div>
+                    <div className={classes.signatureContainer}>
+                        <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
+                            <select defaultValue={JSON.stringify(templates[0])}>
+                                {templates.map((template) => {
+                                    return <option key={template.id} value={JSON.stringify(template)} template={template.html}>
+                                        {template.name}
                                     </option>
                                 })}
                             </select>
-                        </form> : ""}
-                    {/* <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
+                        </form>
+                        {/* if event list events */}
+                        {events.length > 0 ?
+                            <form onChange={(e) => setEvent(JSON.parse(e.target.value))}>
+                                <select defaultValue={event[0]} multiple>
+                                    {events.map((event) => {
+                                        return <option key={event.id} value={JSON.stringify(event)}>
+                                            {event.name}
+                                        </option>
+                                    })}
+                                </select>
+                            </form> : ""}
+                        {/* <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
                         <select defaultValue={JSON.stringify(selectedTemplate)}>
                             {events.map((event) => {
                                 return <option key={event.id} value={JSON.stringify(template)} template={template.signatureData}>
@@ -132,10 +135,10 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                             })}
                         </select>
                     </form> */}
-                    {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate?.html} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
-                    <Button onClick={() => handleAssign(show)} color="orangeFill">Changer de signature</Button>
-                </div>
-            </>}
+                        {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate?.html} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
+                        <Button onClick={() => handleAssign(show)} color="orangeFill">Changer de signature</Button>
+                    </div>
+                </>}
             </div>
         </div>
     </div>)

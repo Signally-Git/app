@@ -70,7 +70,7 @@ export default function CreateWorkplace() {
                     type="file"
                     accept=".csv"
                     onChange={(e) => {
-                        handleSave()
+                        // handleSave()
                         handleCSV(e.target.files[0])
                     }}
                 />A partir d'un fichier .csv</Button>

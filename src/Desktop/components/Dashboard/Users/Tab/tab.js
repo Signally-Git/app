@@ -23,7 +23,7 @@ import { BiCopyAlt } from 'react-icons/bi'
 // Teams or Users
 // Assigns templates and structure
 
-export default function Tab({ tab, selected, setSelected, edit, setEdit }) {
+export default function Tab({ tab, selected, setSelected, edit, setEdit, editInfo, setEditInfo }) {
     const [addedWorkplace, setAddedWorkplace] = useState("")
     const [searchWorkplace, setSearchWorkplace] = useState("")
     const [searchTeam, setSearchTeam] = useState("")
@@ -250,18 +250,18 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit }) {
                         workplaces.map((workplace) => {
                             if (workplace?.name?.toLowerCase().search(searchWorkplace) !== -1)
                                 return (
-                                    <li onMouseEnter={() => setSelected(workplace)} key={workplace.id} className={`${edit === workplace ? classes.editing : ""} ${selected?.id === workplace.id && selected?.name === workplace?.name ? classes.selected : ""}`} >
+                                    <li onMouseEnter={() => setSelected(workplace)} onClick={(e) => { setEdit(workplace);}} key={workplace.id} className={`${editInfo === workplace ? classes.editing : ""} ${selected?.id === workplace.id && selected?.name === workplace?.name ? classes.selected : ""}`} >
                                         <input onMouseEnter={() => selected?.id === workplace.id && selected?.name === workplace?.name ? true : false} className={classes.checkbox} defaultChecked={selected?.id === workplace.id && selected?.name === workplace?.name ? true : false} type="radio" name="workplace" value={JSON.stringify(workplace)} />
-                                        {edit === workplace ? <input className={classes.rename} ref={toFocus} type="text" defaultValue={workplace?.name} onChange={(e) => setWorkplaceName(e.target.value)} /> :
+                                        {editInfo === workplace ? <input className={classes.rename} ref={toFocus} type="text" defaultValue={workplace?.name} onChange={(e) => setWorkplaceName(e.target.value)} /> :
                                             <input className={classes.rename} disabled type="text" defaultValue={workplaceName || workplace?.name} />}
                                         <span></span>
                                         <div className={classes.actionsContainer}>
                                             {/* <BsCreditCard2Front /> */}
-                                            <GrUserSettings onClick={(e) => { setEdit('assign-workplace') }} />
-                                            {edit === workplace ? <FiCheck onClick={(e) => { handleChangeWP(e, workplace) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEdit(workplace) }} />}
+                                            {/* <GrUserSettings onClick={(e) => { setEdit('assign-workplace') }} /> */}
+                                            {editInfo === workplace ? <FiCheck onClick={(e) => { handleChangeWP(e, workplace) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEditInfo(workplace) }} />}
                                             <FiTrash onClick={() => setModal({ name: workplace?.name, id: workplace.id, type: "workplaces" })} />
                                         </div>
-                                        {edit === workplace ? <>
+                                        {editInfo === workplace ? <>
                                             <div className={classes.editDiv}>
                                                 <UploadFile placeholder="Importer une image" />
                                                 <div className={classes.inputsContainer}>

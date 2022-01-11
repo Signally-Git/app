@@ -18,6 +18,7 @@ function Team() {
     const [teams, setTeams] = useState([])
     const [otherTeam, setOtherTeam] = useState("")
     const [edit, setEdit] = useState()
+    const [editInfo, setEditInfo] = useState()
     const [userList, setUserList] = useState([])
     let test;
     console.log(entity)
@@ -35,6 +36,10 @@ function Team() {
 
     }, [entity])
 
+    useEffect(() => {
+        console.log(edit)
+    }, [edit])
+    
     useEffect(() => {
         setEntity()
     }, [type])
@@ -55,7 +60,7 @@ function Team() {
                             <Link to="/teams/users">Collaborateurs</Link>
                         </li>
                     </ul>
-                    <Tab tab={type} selected={entity} setSelected={setEntity} edit={edit} setEdit={setEdit} />
+                    <Tab tab={type} selected={entity} setSelected={setEntity} edit={edit} setEdit={setEdit} editInfo={editInfo} setEditInfo={setEditInfo} />
                 </div>
                 {entity ?
                     <div className={classes.overflow}>
