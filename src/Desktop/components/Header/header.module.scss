@@ -248,11 +248,11 @@
         z-index: 3;
         background: #fbf8f7;
         padding: 0;
-        padding: 0.05rem 1rem;
+        padding: 0 1rem;
         border: 1px solid $signally-brown;
         border-radius: 20px;
         list-style: none;
-        max-height: 1.75rem;
+        max-height: 1.80rem;
         overflow: hidden;
         margin-right: 1rem;
         position: relative;
@@ -344,7 +344,7 @@
 @keyframes menuSlide {
     0% {
         top: 0;
-        max-height: 1.75rem;
+        max-height: 1.80rem;
     }
     99% {
         max-height: 5.4rem;

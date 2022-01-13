@@ -7,6 +7,7 @@
     h1 {
         width: 100%;
     }
+    color: $signally-brown
 }
 
 .infosContainer {
@@ -58,6 +59,9 @@
     margin: auto;
     &:hover {
         color: $signally-orange;
+    }
+    svg {
+        opacity: .6;
     }
 }
 

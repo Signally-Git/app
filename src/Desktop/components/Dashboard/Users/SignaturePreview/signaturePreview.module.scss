@@ -44,12 +44,26 @@
 }
 
 .signature {
-    transform: scale(0.5);
+    transform: scale(0.75);
     max-height: 22rem;
     min-height: 20rem;
     margin-bottom: -10rem;
+    width: 60%;
     overflow: auto;
     transform-origin: top left;
+    + button {
+        position: absolute;
+        bottom: 1rem;
+    }
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    div  {
+        width: 45%!important;
+    }
 }
 
 // .signatureContainer {
@@ -76,7 +90,7 @@
 .front,
 .back {
     min-width: 30rem;
-    min-height: 30rem;
+    min-height: 35rem;
     width: 100%;
     height: 100%;
 }
@@ -136,7 +150,7 @@
 .back {
     transform: rotateY(180deg);
     select {
-        width: 50%;
+        width: 100%;
         margin-bottom: 1rem;
         padding: 0.5rem;
         /* border: none; */

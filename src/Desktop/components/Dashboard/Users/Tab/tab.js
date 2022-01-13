@@ -208,7 +208,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         await request.patch(workplace['@id'], req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         })
-        setEdit()
+        setEditInfo()
     }
 
     const handleChangeTeam = async (e, id) => {
@@ -250,8 +250,8 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                         workplaces.map((workplace) => {
                             if (workplace?.name?.toLowerCase().search(searchWorkplace) !== -1)
                                 return (
-                                    <li onMouseEnter={() => setSelected(workplace)} onClick={(e) => { setEdit(workplace);}} key={workplace.id} className={`${editInfo === workplace ? classes.editing : ""} ${selected?.id === workplace.id && selected?.name === workplace?.name ? classes.selected : ""}`} >
-                                        <input onMouseEnter={() => selected?.id === workplace.id && selected?.name === workplace?.name ? true : false} className={classes.checkbox} defaultChecked={selected?.id === workplace.id && selected?.name === workplace?.name ? true : false} type="radio" name="workplace" value={JSON.stringify(workplace)} />
+                                    <li onMouseEnter={() => setSelected(workplace)} key={workplace.id} className={`${editInfo === workplace ? classes.editing : ""} ${selected?.id === workplace.id && selected?.name === workplace?.name ? classes.selected : ""}`} >
+                                        <input onChange={(e) => e.target.checked ? setEdit(workplace) : ""} onMouseEnter={() => selected?.id === workplace.id && selected?.name === workplace?.name ? true : false} className={classes.checkbox} defaultChecked={selected?.id === workplace.id && selected?.name === workplace?.name ? true : false} type="radio" name="workplace" value={JSON.stringify(workplace)} />
                                         {editInfo === workplace ? <input className={classes.rename} ref={toFocus} type="text" defaultValue={workplace?.name} onChange={(e) => setWorkplaceName(e.target.value)} /> :
                                             <input className={classes.rename} disabled type="text" defaultValue={workplaceName || workplace?.name} />}
                                         <span></span>

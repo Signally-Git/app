@@ -94,7 +94,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                 </div>
                 <div>
                     {assignedTemplate ?
-                        <ReadOnlyPreview template={assignedTemplate} infos={signatureInfos} /> 
+                        <ReadOnlyPreview template={assignedTemplate} infos={signatureInfos} />
                         : ""}
                 </div>
                 {show?.group?.name &&
@@ -106,29 +106,34 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                         <h2>Édition <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></h2>
                         {show.name ? <Select onChange={(e) => setEdit(e.target.value)} items={[{ name: "Modifier signature", '@id': "assign-signature" }, { name: "Modifier équipes", '@id': "assign-team" }]} /> : ""}
                     </div>
-                    <label>Choisissez votre signature</label>
-                    <div className={classes.signatureContainer}>
-                        <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
-                            <select defaultValue={JSON.stringify(templates[0])}>
-                                {templates.map((template) => {
-                                    return <option key={template.id} value={JSON.stringify(template)} template={template.html}>
-                                        {template.name}
-                                    </option>
-                                })}
-                            </select>
-                        </form>
-                        {/* if event list events */}
-                        {events.length > 0 ?
-                            <form onChange={(e) => setEvent(JSON.parse(e.target.value))}>
-                                <select defaultValue={event[0]}>
-                                    {events.map((event) => {
-                                        return <div key={event.id} value={JSON.stringify(event)}>
-                                            {event.name}
-                                        </div>
+                    <div className={classes.row}>
+
+                        <div>
+                            <label>Choisissez votre signature</label>
+                            <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
+                                <select defaultValue={JSON.stringify(templates[0])}>
+                                    {templates.map((template) => {
+                                        return <option key={template.id} value={JSON.stringify(template)} template={template.html}>
+                                            {template.name}
+                                        </option>
                                     })}
                                 </select>
-                            </form> : ""}
-                        {/* <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
+                            </form>
+                        </div>
+                        <div>
+                            {/* if event list events */}
+                            {events.length > 0 ? <>
+                                <label>Choisissez votre event</label>
+                                <form onChange={(e) => setEvent(JSON.parse(e.target.value))}>
+                                    <select defaultValue={event[0]}>
+                                        {events.map((event) => {
+                                            return <div key={event.id} value={JSON.stringify(event)}>
+                                                {event.name}
+                                            </div>
+                                        })}
+                                    </select>
+                                </form> </> : ""}
+                            {/* <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
                         <select defaultValue={JSON.stringify(selectedTemplate)}>
                             {events.map((event) => {
                                 return <option key={event.id} value={JSON.stringify(template)} template={template.signatureData}>
@@ -137,11 +142,13 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                             })}
                         </select>
                     </form> */}
+
+                        </div>
+                    </div>
                     <div className={classes.signature}>
                         {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate?.html} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
                     </div>
-                        <Button onClick={() => handleAssign(show)} color="orangeFill">Changer de signature</Button>
-                    </div>
+                    <Button onClick={() => handleAssign(show)} color="orangeFill">Changer de signature</Button>
                 </>}
             </div>
         </div>

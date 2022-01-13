@@ -5,6 +5,7 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   height: 70vh;
+  color: #402927;
 }
 
 .container h1 {
@@ -79,6 +80,10 @@
 
 .actionsContainer:hover {
   color: #FF7954;
+}
+
+.actionsContainer svg {
+  opacity: .6;
 }
 
 .menu {
