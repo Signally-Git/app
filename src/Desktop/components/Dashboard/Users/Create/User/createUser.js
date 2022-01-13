@@ -105,7 +105,7 @@ export default function CreateUser() {
                         <Button width={width} color="orange" className={`${classes.btn}`} onClick={(e) => handleSlide(e, 2)}>Retour</Button>
                         <Button disabled={user.position.length < 1 || user.email.length < 1}
                             width={width} color={user.position.length < 1 || user.email.length < 1 ? "orange" : "orangeFill"}
-                            onClick={(e) => { handleSlide(e, 4) }} className={`${classes.btn}`}>Valider</Button>
+                            onClick={(e) => { handleSave(); handleSlide(e, 4) }} className={`${classes.btn}`}>Valider</Button>
                     </div>
                 </div>
             </div>

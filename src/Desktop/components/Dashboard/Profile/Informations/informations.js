@@ -53,17 +53,24 @@ function Informations() {
         img.append('image', uploadedMedia)
         if (uploadedMedia)
             await request.post(`import/image`, img).then(async (res) => {
-                console.log(res)
+                const requestLogo = {
+                    name: "",
+                    path: res.data.path,
+                    organisation: JSON.parse(localStorage.getItem('user')).organisation
+                }
+                await request.post('logos', requestLogo).then((res) => {
+                    console.log(res.data)
+                });
                 const req = {
                     name: companyName,
                     websiteUrl: website,
                     logos: [res.data['@id']]
                 }
-                await request.patch(`organisations/${organisationId}`, req, {
-                    headers: { 'Content-Type': 'application/merge-patch+json' }
-                }).then((res) => {
-                    history.goBack()
-                })
+                // await request.patch(`organisations/${organisationId}`, req, {
+                //     headers: { 'Content-Type': 'application/merge-patch+json' }
+                // }).then((res) => {
+                //     history.goBack()
+                // })
             })
         else {
             const req = {

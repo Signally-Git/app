@@ -15,6 +15,7 @@ import { useNotification } from 'Utils/Notifications/notifications';
 import CopySignature from 'Desktop/components/CopySignature/CopySignature';
 import { BsCardHeading } from 'react-icons/bs';
 import Select from 'Utils/Select/select';
+import CustomSelect from 'Utils/CustomSelect/customselect';
 
 export default function SignaturePreview({ show, edit, setEdit }) {
     // console.log(show)
@@ -56,6 +57,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
         const entity = await request.get(`${type}s/${show.id}`)
         setAssignedTemplate(entity.data.compiledSignature)
         const templates = await request.get('signatures')
+        console.log(templates)
         setSelectedTemplate(templates.data["hydra:member"][0])
         setTemplates(templates.data["hydra:member"])
         // }
@@ -124,6 +126,10 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                             {/* if event list events */}
                             {events.length > 0 ? <>
                                 <label>Choisissez votre event</label>
+                                <CustomSelect items={events} multiple />
+                              </> : ""}
+                            {/* {events.length > 0 ? <>
+                                <label>Choisissez votre event</label>
                                 <form onChange={(e) => setEvent(JSON.parse(e.target.value))}>
                                     <select defaultValue={event[0]}>
                                         {events.map((event) => {
@@ -132,7 +138,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                                             </div>
                                         })}
                                     </select>
-                                </form> </> : ""}
+                                </form> </> : ""} */}
                             {/* <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
                         <select defaultValue={JSON.stringify(selectedTemplate)}>
                             {events.map((event) => {
@@ -148,7 +154,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                     <div className={classes.signature}>
                         {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate?.html} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
                     </div>
-                    <Button onClick={() => handleAssign(show)} color="orangeFill">Changer de signature</Button>
+                    <Button onClick={() => handleAssign(show)} color="orangeFill">Sauvegarder</Button>
                 </>}
             </div>
         </div>
