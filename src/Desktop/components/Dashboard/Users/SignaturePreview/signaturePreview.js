@@ -94,7 +94,8 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                 </div>
                 <div>
                     {assignedTemplate ?
-                        <ReadOnlyPreview template={assignedTemplate} infos={signatureInfos} /> : ""}
+                        <ReadOnlyPreview template={assignedTemplate} infos={signatureInfos} /> 
+                        : ""}
                 </div>
                 {show?.group?.name &&
                     <span className={classes.groupName}>{show?.group?.name}</span>}
@@ -103,8 +104,9 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                 {edit === "copySign" ? <CopySignature signature={assignedTemplate} /> : <>
                     <div className={classes.topLine}>
                         <h2>Édition <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></h2>
-                        <Select onChange={(e) => setEdit(e.target.value)} items={[{ name: "Modifier équipes" }, { name: "Modifier signature", '@id': "assign-workplace" }]} />
+                        {show.name ? <Select onChange={(e) => setEdit(e.target.value)} items={[{ name: "Modifier signature", '@id': "assign-signature" }, { name: "Modifier équipes", '@id': "assign-team" }]} /> : ""}
                     </div>
+                    <label>Choisissez votre signature</label>
                     <div className={classes.signatureContainer}>
                         <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
                             <select defaultValue={JSON.stringify(templates[0])}>
@@ -118,11 +120,11 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                         {/* if event list events */}
                         {events.length > 0 ?
                             <form onChange={(e) => setEvent(JSON.parse(e.target.value))}>
-                                <select defaultValue={event[0]} multiple>
+                                <select defaultValue={event[0]}>
                                     {events.map((event) => {
-                                        return <option key={event.id} value={JSON.stringify(event)}>
+                                        return <div key={event.id} value={JSON.stringify(event)}>
                                             {event.name}
-                                        </option>
+                                        </div>
                                     })}
                                 </select>
                             </form> : ""}

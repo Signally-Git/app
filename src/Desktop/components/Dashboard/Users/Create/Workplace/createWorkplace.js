@@ -8,10 +8,12 @@ import request from 'Utils/Request/request'
 import Select from 'Utils/Select/select'
 import { useNotification } from 'Utils/Notifications/notifications'
 import { Box } from 'Assets/img/KUKLA/illustrations'
+import UploadFile from 'Utils/Upload/uploadFile'
 
 export default function CreateWorkplace() {
     const slide = useRef(null)
-    const width = "15rem"
+    const [file, setFile] = useState()
+    const width = "12rem"
     const [workplace, setWorkplace] = useState(
         {
             logos: [],
@@ -21,7 +23,7 @@ export default function CreateWorkplace() {
                 street: "",
                 streetInfo: ""
             },
-            digitalAddress: { phone: "" }
+            digitalAddress: { mobile: "" }
         })
     const history = useHistory()
     const notification = useNotification()
@@ -77,13 +79,27 @@ export default function CreateWorkplace() {
                 />A partir d'un fichier .csv</Button>
             </div>
             <div className={classes.slide}>
-                <div>
+                <div className={classes.inputsContainer}>
                     <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, name: e.target.value })} type="text" placeholder="Nom du workplace" />
+                    <UploadFile placeholder="Importer un logo" setFile={setFile} />
+                    <div className={classes.btnsContainer}>
+                        <Button width={width} color="orange" className={`${classes.btn}`} onClick={(e) => handleSlide(e, 1)}>Retour</Button>
+                        <Button disabled={workplace.name.length < 1} width={width} color={workplace.name.length < 1 ? "orange" : "orangeFill"} arrow={true} onClick={(e) => { handleSlide(e, 4) }} className={`${classes.btn}`}>Valider</Button>
+                    </div>
+                </div>
+            </div>
+            <div className={classes.slide}>
+                <div className={classes.inputsContainer}>
                     <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, address: { ...workplace.address, street: e.target.value } })} type="text" placeholder="Adresse" />
                     <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, address: { ...workplace.address, streetInfo: e.target.value } })} type="text" placeholder="Adresse 2" />
-                    <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, digitalAddress: { phone: e.target.value } })} type="text" placeholder="Téléphone" />
-                    <Button width={width} color="orangeFill" arrow={true} onClick={(e) => { handleSave(); handleSlide(e, 3) }} className={`${classes.btn} ${workplace.name < 1 ? classes.disabled : ""}`}>Valider</Button>
-                    <button className={`${classes.btn} ${classes.back}`} onClick={(e) => handleSlide(e, 1)}>Retour</button>
+                    <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, digitalAddress: { mobile: e.target.value } })} type="text" placeholder="Téléphone" />
+                    <div className={classes.btnsContainer}>
+                        <Button width={width} color="orange" className={`${classes.btn}`} onClick={(e) => handleSlide(e, 2)}>Retour</Button>
+                        <Button width={width} color="orangeFill"
+                        color={workplace.address.street.length < 5 || workplace.digitalAddress.mobile.length < 9 ? "orange" : "orangeFill"}
+                        onClick={(e) => { handleSave(); handleSlide(e, 3) }} 
+                        className={`${classes.btn} ${workplace.name < 1 ? classes.disabled : ""}`}>Valider</Button>
+                    </div>
                 </div>
             </div>
         </div>

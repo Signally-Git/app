@@ -1,7 +1,7 @@
 .container {
   width: auto;
   position: relative;
-  border: 1px solid #f7f5f5;
+  border: 1px solid #f0e9e9;
   border-radius: 10px;
   padding: 0.5rem;
   -webkit-transition: border-color .3s, -webkit-box-shadow .3s;

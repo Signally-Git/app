@@ -130,6 +130,14 @@
   font-size: 0.8rem;
 }
 
+.front label,
+.back label {
+  margin-top: 2rem;
+  font-size: .9rem;
+  margin-bottom: .75rem;
+  display: block;
+}
+
 /* front pane, placed above back */
 .front {
   z-index: 2;

@@ -157,7 +157,7 @@
   font-size: 0.85rem;
   font-weight: 600;
   position: relative;
-  background: #f0e9e9;
+  background: #f7f5f5;
   border-radius: 10px;
 }
 
@@ -367,7 +367,7 @@
   border: 1px solid transparent;
   margin: 1rem 0;
   padding: 0.5rem;
-  background: #f0e9e9;
+  background: #f7f5f5;
   display: block;
   -webkit-transition: 0.2s;
   transition: 0.2s;

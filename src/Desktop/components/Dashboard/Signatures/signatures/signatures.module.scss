@@ -116,7 +116,7 @@
         font-size: 0.85rem;
         font-weight: 600;
         position: relative;
-        background: $signally-lightgrey;
+        background: $signally-grey;
         border-radius: 10px;
         &::before {
             content: "";
@@ -194,7 +194,7 @@
     border: 1px solid transparent;
     margin: 1rem 0;
     padding: 0.5rem;
-    background: $signally-lightgrey;
+    background: $signally-grey;
     display: block;
     transition: 0.2s;
     &:focus {
@@ -285,7 +285,7 @@
     position: absolute;
     right: 1rem;
     z-index: 2;
-    width: 2.5rem;
+    width: 1.5rem;
     justify-content: center;
     align-items: center;
     svg {

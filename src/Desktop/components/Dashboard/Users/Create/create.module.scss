@@ -8,10 +8,10 @@
     flex-direction: column;
     flex-wrap: nowrap;
     margin: auto;
-    flex-direction: row; 
+    flex-direction: row;
     > svg {
         height: auto;
-        max-height: 45%;
+        max-height: 40%;
         width: 100%;
     }
 }
@@ -20,7 +20,7 @@
     display: flex;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow-x: hidden;
 }
 
 .slide {
@@ -33,7 +33,7 @@
     padding: 1rem;
     height: 100%;
     > button {
-        margin: .5rem auto;
+        margin: 0.5rem auto;
         position: relative;
     }
     p {
@@ -41,7 +41,7 @@
         width: 100%;
         text-align: center;
         margin: 0 auto;
-        font-size: .85rem;
+        font-size: 0.85rem;
         font-weight: 600;
     }
     input[type="file"] {
@@ -62,7 +62,7 @@
 }
 
 .back {
-   margin-top: 5rem!important;
+    margin-top: 5rem !important;
 }
 
 .row {
@@ -71,6 +71,18 @@
     input {
         max-width: 48%;
     }
+}
+
+.btnsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    margin: auto;
+    inset: 0;
+    top: auto;
+    bottom: 1rem;
 }
 
 .btn {
@@ -86,8 +98,10 @@
     }
 }
 
-.disabled {
-    cursor: not-allowed!important;
-    pointer-events: none;
-    opacity: 0;
+
+
+.inputsContainer {
+    > div {
+        margin-bottom: 0.5rem;
+    }
 }

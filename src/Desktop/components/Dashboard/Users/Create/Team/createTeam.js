@@ -12,7 +12,7 @@ import { Box } from 'Assets/img/KUKLA/illustrations'
 export default function CreateTeam() {
     const slide = useRef(null)
     const focus = useRef(null)
-    const width = "15rem"
+    const width = "12rem"
     const [workplaces, setWorkplaces] = useState([])
     const [workplace, setWorkplace] = useState("")
     const [teamName, setTeamName] = useState("")
@@ -20,13 +20,15 @@ export default function CreateTeam() {
     const notification = useNotification()
 
     const handleSave = async () => {
-        const req = {
+
+
+        const req = workplace !== "Aucun" ? {
             workplace: workplace,
             name: teamName
-        }
+        } : { name: teamName }
         const create = await request.post('teams', req).catch(
             () => notification({ content: <>La team <span style={{ color: "#FF7954" }}>{teamName}</span> n'a pas pu être créée.</>, status: "invalid" }))
-            console.log(create)
+        console.log(create)
         create.data && notification({ content: <>La team <span style={{ color: "#FF7954" }}>{teamName}</span> a été créée avec succès.</>, status: "valid" })
         history.push('/teams/teams')
     }
@@ -42,12 +44,11 @@ export default function CreateTeam() {
 
 
     const getWorkplaces = async () => {
-        console.log("here")
         const wps = await request.get('workplaces')
-        if (wps.data["hydra:member"].length > 0)
-        {
+        if (wps.data["hydra:member"].length > 0) {
+            wps.data["hydra:member"].unshift({ value: "Aucun", name: "Aucun", selected: false })
             setWorkplaces(wps.data["hydra:member"])
-            setWorkplace(wps.data["hydra:member"][0]['@id'])
+            setWorkplace(wps.data["hydra:member"][1]['@id'])
         }
     }
 
@@ -64,10 +65,16 @@ export default function CreateTeam() {
             </div>
             <div className={classes.slide}>
                 <div>
-                    <Select items={workplaces} onChange={(e) => { setWorkplace(e.target?.value); focus.current.focus() }} onSubmit={(e) => console.log(e)} />
+                    {workplaces.length > 0 && <Select defaultValue={workplace} items={workplaces} onChange={(e) => { setWorkplace(e.target?.value); focus.current.focus() }} onSubmit={(e) => console.log(e)} />}
                     <Input style={{ width: "100%" }} ref={focus} onChange={(e) => setTeamName(e.target.value)} type="text" placeholder="Nom de l'équipe" />
-                    <Button width={width} color="orangeFill" arrow={true} onClick={(e) => { handleSave(); handleSlide(e, 3) }} className={`${classes.btn} ${teamName.length < 1 ? classes.disabled : ""}`}>Valider</Button>
-                    <button className={`${classes.btn} ${classes.back}`} onClick={(e) => handleSlide(e, 1)}>Retour</button>
+
+                    <div className={classes.btnsContainer}>
+                        <Button width={width} color="orange" className={`${classes.btn}`} onClick={(e) => handleSlide(e, 2)}>Retour</Button>
+                        <Button width={width} color="orangeFill"
+                            color={teamName.length < 1 ? "orange" : "orangeFill"}
+                            onClick={(e) => { handleSave(); handleSlide(e, 3) }}
+                            className={`${classes.btn} ${teamName.length < 1 ? classes.disabled : ""}`}>Valider</Button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@ import { Box } from 'Assets/img/KUKLA/illustrations'
 export default function CreateUser() {
     const slide = useRef(null)
     const focus = useRef(null)
-    const width = "15rem"
+    const width = "12rem"
     const [teams, setTeams] = useState([])
     const [team, setTeam] = useState("")
     const [user, setUser] = useState({ firstName: "", lastName: "", position: "", email: "", phone: "" })
@@ -33,10 +33,10 @@ export default function CreateUser() {
     }
 
     const handleSave = async () => {
-        const req = {
+        const req = team !== "Aucun" ? {
             team: team,
             ...user
-        }
+        } : { ...user }
         const create = await request.post('users', req).catch(
             () => notification({ content: <>Le collaborateur <span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> n'a pas pu être créé.</>, status: "invalid" }))
         create.data && notification({ content: <>Le collaborateur <span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> a été créé avec succès.</>, status: "valid" })
@@ -56,8 +56,9 @@ export default function CreateUser() {
     const getTeams = async () => {
         const tms = await request.get('teams')
         if (tms.data["hydra:member"].length > 0) {
+            tms.data["hydra:member"].unshift({ value: "Aucun", name: "Aucun", selected: false })
             setTeams(tms.data["hydra:member"])
-            setTeam(tms.data["hydra:member"][0]['@id'])
+            setTeam(tms.data["hydra:member"][1]['@id'])
         }
     }
 
@@ -85,14 +86,27 @@ export default function CreateUser() {
             </div>
             <div className={classes.slide}>
                 <div>
-                    <Select items={teams} onChange={(e) => { setTeam(e.target?.value); focus.current.focus() }} onSubmit={(e) => console.log(e)} />
-                    <Input style={{ width: "100%" }} ref={focus} onChange={(e) => setUser({...user, firstName: e.target.value})} type="text" placeholder="Prénom du collaborateur" />
-                    <Input style={{ width: "100%" }} onChange={(e) => setUser({...user, lastName: e.target.value })} type="text" placeholder="Nom du collaborateur" />
-                    <Input style={{ width: "100%" }} onChange={(e) => setUser({...user, position: e.target.value })} type="text" placeholder="Poste" />
-                    <Input style={{ width: "100%" }} onChange={(e) => setUser({...user, email: e.target.value })} type="text" placeholder="Adresse mail" />
-                    <Input style={{ width: "100%" }} onChange={(e) => setUser({...user, phone: e.target.value })} type="text" placeholder="Téléphone" />
-                    <Button width={width} color="orangeFill" arrow={true} onClick={(e) => { handleSave(); handleSlide(e, 3) }} className={`${classes.btn} ${user.firstName.length < 1 ? classes.disabled : ""}`}>Valider</Button>
-                    <button className={`${classes.btn} ${classes.back}`} onClick={(e) => handleSlide(e, 1)}>Retour</button>
+                    {teams.length > 0 &&
+                        <Select items={teams} defaultValue={team} onChange={(e) => { setTeam(e.target?.value); focus.current.focus() }} onSubmit={(e) => console.log(e)} />}
+                    <Input style={{ width: "100%" }} ref={focus} onChange={(e) => setUser({ ...user, firstName: e.target.value })} type="text" placeholder="Prénom" />
+                    <Input style={{ width: "100%" }} onChange={(e) => setUser({ ...user, lastName: e.target.value })} type="text" placeholder="Nom" />
+                    <div className={classes.btnsContainer}>
+                        <Button width={width} color="orange" className={`${classes.btn}`} onClick={(e) => handleSlide(e, 1)}>Retour</Button>
+                        <Button disabled={user.firstName.length < 1 || user.lastName.length < 1} width={width} color={user.firstName.length < 1 || user.lastName.length < 1 ? "orange" : "orangeFill"} arrow={true} onClick={(e) => { handleSlide(e, 4) }} className={`${classes.btn}`}>Valider</Button>
+                    </div>
+                </div>
+            </div>
+            <div className={classes.slide}>
+                <div>
+                    <Input style={{ width: "100%" }} onChange={(e) => setUser({ ...user, position: e.target.value })} type="text" placeholder="Poste" />
+                    <Input style={{ width: "100%" }} onChange={(e) => setUser({ ...user, email: e.target.value })} type="text" placeholder="Adresse mail" />
+                    <Input style={{ width: "100%" }} onChange={(e) => setUser({ ...user, phone: e.target.value })} type="text" placeholder="Téléphone" />
+                    <div className={classes.btnsContainer}>
+                        <Button width={width} color="orange" className={`${classes.btn}`} onClick={(e) => handleSlide(e, 2)}>Retour</Button>
+                        <Button disabled={user.position.length < 1 || user.email.length < 1}
+                            width={width} color={user.position.length < 1 || user.email.length < 1 ? "orange" : "orangeFill"}
+                            onClick={(e) => { handleSlide(e, 4) }} className={`${classes.btn}`}>Valider</Button>
+                    </div>
                 </div>
             </div>
         </div>

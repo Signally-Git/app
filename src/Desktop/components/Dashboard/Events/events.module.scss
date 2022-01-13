@@ -186,7 +186,7 @@
         font-size: 0.85rem;
         font-weight: 600;
         position: relative;
-        background: $signally-lightgrey;
+        background: $signally-grey;
         border-radius: 10px;
         &::before {
             content: "";
@@ -246,7 +246,7 @@
     border: 1px solid transparent;
     margin: 1rem 0;
     padding: 0.5rem;
-    background: $signally-lightgrey;
+    background: $signally-grey;
     display: block;
     transition: 0.2s;
     &:focus {

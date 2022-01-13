@@ -306,12 +306,11 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                     <div>
                                         <span>{team.name}</span>
                                     </div>
-                                    <div className={classes.infos}>
+                                    {team.workplace?.name?.length > 0 ? <div className={classes.infos}>
                                         <span className={classes.groupName}>{team.workplace?.name}</span>
-                                    </div>
+                                    </div> : "" }
                                     <div className={classes.actionsContainer}>
                                         <AiOutlineEdit onClick={(e) => { setEdit('assign-team') }} />
-                                        {edit === team ? <FiCheck onClick={(e) => { handleChangeTeam(e, team['@id']) }} /> : <BsCreditCard2Front onClick={(e) => { e.preventDefault(); setEdit(team) }} />}
                                         <FiTrash onClick={() => setModal({ name: team.name, id: team.id, type: "teams" })} />
                                     </div>
                                 </li>)
@@ -353,7 +352,6 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                             <Link to="/profile/informations"><FaUser /></Link>
                                         </div> :
                                         <div className={classes.actionsContainer}>
-                                            <BiCopyAlt onClick={() => setEdit('copySign')} />
                                             {edit === user ? <FiCheck onClick={(e) => { handleChange(e, user['@id']) }} /> : <BsCreditCard2Front onClick={(e) => { e.preventDefault(); setEdit(user) }} />}
                                             <FiTrash onClick={() => setModal({ name: `${user.firstName} ${user.lastName}`, id: user.id, type: "users" })} />
                                         </div>}
