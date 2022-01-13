@@ -77,7 +77,6 @@ function Dashboard(props) {
 
     useEffect(async () => {
         await request.get(`users/${JSON.parse(localStorage.getItem('user'))?.id}`).then((res) => {
-            console.log(res.data)
             setUser(res.data)
             setTemplate(res.data?.compiledSignature) 
             setTemplateName(res.data?.signature?.name)

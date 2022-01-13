@@ -104,7 +104,7 @@ function Informations() {
         console.log(organisation)
         organisation = organisation.data
         setOrganisationId(organisation.id)
-        setLogo(organisation.logos[0])
+        // setLogo(organisation.logos[0])
         setCompanyName(organisation.name)
         setCompanyAddress(organisation.address.street)
         setWebsite(organisation.websiteUrl)
