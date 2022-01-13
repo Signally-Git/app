@@ -239,6 +239,10 @@
   height: 14rem !important;
 }
 
+.editing .actionsContainer {
+  top: 1.40rem;
+}
+
 .actionsContainer,
 .actionsContainerAdmin {
   -webkit-transition: 0.2s;

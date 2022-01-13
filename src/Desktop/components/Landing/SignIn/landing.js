@@ -70,7 +70,7 @@ const Login = () => {
         setError('')
         e.preventDefault()
         const req = {
-            username: email,
+            username: email.toLowerCase(),
             password: code
         }
         
