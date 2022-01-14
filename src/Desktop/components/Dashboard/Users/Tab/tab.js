@@ -1,7 +1,6 @@
 import { HiOutlineSearch } from 'react-icons/hi'
 import { useEffect, useRef, useState } from 'react'
 import classes from './tab.module.css'
-import Create from '../Create/create'
 import { FiCheck, FiTrash } from 'react-icons/fi'
 import { AiOutlineEdit } from 'react-icons/ai'
 import Button from 'Utils/Button/btn'
@@ -59,6 +58,10 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     }
 
     const getDataUser = async () => {
+        const es = new EventSource('https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users')
+        es.onmessage = function (e) {
+            console.log("SSE", JSON.parse(e.data))
+        }
         const users = await request.get(`users`)
         setUsers(users.data["hydra:member"])
     }

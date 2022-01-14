@@ -32,7 +32,7 @@ function Events() {
     }, [create, edit, preview])
 
     const handleDelete = async (id) => {
-        await request.delete(`events/${id}`).catch((error) => notification({ content: <>Impossible de supprimer l'event.</>, status: "invalid" }))
+        await request.delete(`events/${id}`).catch((error) => notification({ content: <>Impossible de supprimer l'event</>, status: "invalid" }))
         getData()
         setModal()
         setPreview()

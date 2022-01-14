@@ -38,7 +38,7 @@ export default function CreateWorkplace() {
             .then((res) => {
                 // props.setState(`${res.data["hydra:totalItems"]} ${props.fill.type} ajoutés`)
                 history.push(`/teams/workplaces`)
-            }).catch(() => notification({ content: <>Une erreur s'est produite lors de l'import.</>, status: "invalid" }))
+            }).catch(() => notification({ content: <>Une erreur s'est produite lors de l'import</>, status: "invalid" }))
     }
 
     const handleSave = async () => {
@@ -46,8 +46,8 @@ export default function CreateWorkplace() {
             ...workplace
         }
         const create = await request.post('workplaces', req).catch(
-            () => notification({ content: <>Le workplace <span style={{ color: "#FF7954" }}>{workplace.name}</span> n'a pas pu être créé.</>, status: "invalid" }))
-        create.data && notification({ content: <>Le workplace <span style={{ color: "#FF7954" }}>{workplace.name}</span> a été créé avec succès.</>, status: "valid" })
+            () => notification({ content: <>Le workplace <span style={{ color: "#FF7954" }}>{workplace.name}</span> n'a pas pu être créé</>, status: "invalid" }))
+        create.data && notification({ content: <>Le workplace <span style={{ color: "#FF7954" }}>{workplace.name}</span> a été créé avec succès</>, status: "valid" })
         history.push('/teams/workplaces')
     }
 
@@ -63,10 +63,11 @@ export default function CreateWorkplace() {
     return (<div className={classes.container}>
         {Box}
         <div className={classes.slidesContainer} ref={slide}>
+        {!localStorage.getItem("understand_workplace") ? 
             <div className={`${classes.slide} ${classes.space}`}>
                 <p>Administrez les signatures de vos équipes par pays, villes, filiales, départements etc. selon la structure de votre organisation.</p>
-                <Button width="15rem" color="orange" arrow={true} onClick={(e) => handleSlide(e, 1)}>Ajouter un workplace</Button>
-            </div>
+                <Button width="15rem" color="orange" arrow={true} onClick={(e) => {handleSlide(e, 1); localStorage.setItem('understand_workplace', true)}}>J'ai compris</Button>
+            </div> : "" }
             <div className={classes.slide}>
                 <Button width={width} color="orangeFill" arrow={true} className={classes.btn} onClick={(e) => handleSlide(e, 2)}>Manuellement</Button>
                 <Button width={width} color="brown" className={classes.btn}> <input

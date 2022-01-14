@@ -27,9 +27,9 @@ export default function Report() {
             subject: select,
             description: bug
         }
-        const feedback = await request.post('feedback', req).catch(() => notification({ content: <>Une erreur s'est produite lors de l'envoi du formulaire.</>, status: "invalid" }))
+        const feedback = await request.post('feedback', req).catch(() => notification({ content: <>Une erreur s'est produite lors de l'envoi du formulaire</>, status: "invalid" }))
         if (feedback?.data) {
-            notification({ content: <>Votre formulaire a bien été envoyé !</>, status: "valid" })
+            notification({ content: <>Votre formulaire a bien été envoyé</>, status: "valid" })
             history.push('/dashboard')
         }
 
@@ -51,8 +51,8 @@ export default function Report() {
                         <br /><br />
                         Comme nous sommes en version Beta, tout n’est pas encore parfait !
                         <br /><br />
-                        Néanmoins, grâce à vous, nous allons pouvoir faire de Signally la plateforme la plus performante et la plus facile à utiliser pour créer et gérer l’ensemble de vos signatures de mails.
-                        Le formulaire ci-dessous est à votre disposition pour tout problème rencontré ou bien tout simplement pour nous faire part de vos commentaires ou suggestions.
+                        Néanmoins, grâce à vous, nous pourrons rendre la plateforme de plus en plus performante et encore plus simple à utiliser.
+                        <br />Le formulaire ci-dessous est à votre disposition pour tout problème rencontré ou bien tout simplement pour nous faire part de vos commentaires ou suggestions.
                         <br /><br />
                         Un grand merci pour votre aide.</p><br />
                 </div>
@@ -60,7 +60,7 @@ export default function Report() {
                     <h4>Type du problème, commentaire, suggestion</h4>
                     <form onChange={(e) => setSelect(e.target.value)}>
                         <select>
-                            <option value="SIGNALLY_APP">Application signally.io</option>
+                            <option value="SIGNALLY_APP">Problème rencontré sur l'application</option>
                             <option value="OUTLOOK_DISPLAY">Problème d'affichage de la signature dans Outlook</option>
                             <option value="COMMENTS">Commentaire</option>
                             <option value="RECOMMENDATIONS">Suggestion</option>

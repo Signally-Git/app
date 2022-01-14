@@ -37,10 +37,12 @@ export default function CreateUser() {
             team: team,
             ...user
         } : { ...user }
-        const create = await request.post('users', req).catch(
-            () => notification({ content: <>Le collaborateur <span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> n'a pas pu être créé.</>, status: "invalid" }))
-        create.data && notification({ content: <>Le collaborateur <span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> a été créé avec succès.</>, status: "valid" })
-        history.push('/teams/users')
+        await request.post('users', req).then((res) => {
+            notification({ content: <>Le collaborateur <span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> a été créé avec succès</>, status: "valid" })
+            history.push('/teams/users')
+        }).catch(
+            (err) => err.violations[0].code === '23bd9dbf-6b9b-41cd-a99e-4844bcf3077f' ?
+                notification({ content: <><span style={{ color: "#FF7954" }}>{user.email}</span> a déjà été créé</>, status: "invalid" }) : notification({ content: <><span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> n'a pas pu être créé</>, status: "invalid" }))
     }
 
     const handleSlide = async (e, multiple) => {
@@ -69,10 +71,11 @@ export default function CreateUser() {
     return (<div className={classes.container}>
         {Box}
         <div className={classes.slidesContainer} ref={slide}>
+            {!localStorage.getItem("understand_user") ? 
             <div className={`${classes.slide} ${classes.space}`}>
                 <p>Ajoutez l’ensemble de vos collaborateurs par l’import d’un simple fichier CSV ou manuellement.</p>
-                <Button width="15rem" color="orange" arrow={true} onClick={(e) => handleSlide(e, 1)}>Ajouter un collaborateur</Button>
-            </div>
+                <Button width="15rem" color="orange" arrow={true} onClick={(e) => {handleSlide(e, 1); localStorage.setItem('understand_user', true)}}>J'ai compris</Button>
+            </div> : ""}
             <div className={classes.slide}>
                 <Button width={width} color="orangeFill" arrow={true} className={classes.btn} onClick={(e) => handleSlide(e, 2)}>Manuellement</Button>
                 <Button width={width} color="brown" className={classes.btn}> <input

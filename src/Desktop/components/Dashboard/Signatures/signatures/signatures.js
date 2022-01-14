@@ -61,7 +61,7 @@ function Team() {
             (res) => {
                 notification({ content: <>La signature a été supprimée avec succès</>, status: "valid" })
                 setPreview([]); setDeleted(res.data)
-            }).catch((error) => notification({ content: <>Impossible de supprimer la signature.</>, status: "invalid" }))
+            }).catch((error) => notification({ content: <>Impossible de supprimer la signature</>, status: "invalid" }))
 
     }
 

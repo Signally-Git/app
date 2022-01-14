@@ -1,7 +1,9 @@
 .container {
+  margin-top: auto;
   min-width: 55%;
   border-radius: 20px;
-  padding: 5rem 2rem 1rem 2rem;
+  padding: 10rem 2rem 1rem 2rem;
+  max-height: 95%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

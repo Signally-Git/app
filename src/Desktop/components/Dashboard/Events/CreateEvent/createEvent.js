@@ -7,7 +7,6 @@ import Button from 'Utils/Button/btn';
 import { useEffect, useRef, useState } from 'react';
 import moment from 'moment';
 import UploadFile from 'Utils/Upload/uploadFile';
-import { FiEdit } from 'react-icons/fi';
 import { useNotification } from 'Utils/Notifications/notifications';
 import request from 'Utils/Request/request';
 import { API } from 'config';
@@ -36,7 +35,7 @@ export default function CreateEvent({ setDone, event }) {
     const saveEvent = async (e) => {
         e.preventDefault()
         if (!eventName) {
-            notification({ content: <>Veuillez remplir le nom de l'event.</>, status: "invalid"})
+            notification({ content: <>Veuillez remplir le nom de l'event</>, status: "invalid"})
             return false;
         }
         const start = (moment(startDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss') 
@@ -54,8 +53,8 @@ export default function CreateEvent({ setDone, event }) {
                 await request.post(`events`, req).then((res) => {
                     notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> créé avec succès</>, status: "valid"})
                     setDone(false)
-                }).catch(() => notification({ content: <>Erreur lors de l'ajout de l'event.</>, status: "invalid" }))
-            }).catch((err) => notification({ content: <>Erreur lors de l'import de l'image.</>, status: "invalid" }))
+                }).catch(() => notification({ content: <>Erreur lors de l'ajout de l'event</>, status: "invalid" }))
+            }).catch((err) => notification({ content: <>Erreur lors de l'import de l'image</>, status: "invalid" }))
             return false;
         }
         if (event) {
@@ -77,8 +76,8 @@ export default function CreateEvent({ setDone, event }) {
                     }).then((res) => {
                         setDone(false)
                         notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> modifié avec succès</>, status: "valid"})
-                    }).catch(() => notification({ content: <>Erreur lors de l'édition de l'event.</>, status: "invalid" }))
-                }).catch(() => notification({ content: <>Erreur lors de l'ajout de l'image.</>, status: "invalid" }))
+                    }).catch(() => notification({ content: <>Erreur lors de l'édition de l'event</>, status: "invalid" }))
+                }).catch(() => notification({ content: <>Erreur lors de l'ajout de l'image</>, status: "invalid" }))
                 return false;
             }
             else {
@@ -92,7 +91,7 @@ export default function CreateEvent({ setDone, event }) {
                 }).then((res) => {
                     setDone(false)
                     notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> modifié avec succès</>, status: "valid"})
-                }).catch(() => notification({ content: <>Erreur lors de l'édition de l'event.</>, status: "invalid" }))
+                }).catch(() => notification({ content: <>Erreur lors de l'édition de l'event</>, status: "invalid" }))
             }
         }
     }

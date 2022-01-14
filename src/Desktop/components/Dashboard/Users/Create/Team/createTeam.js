@@ -27,9 +27,9 @@ export default function CreateTeam() {
             name: teamName
         } : { name: teamName }
         const create = await request.post('teams', req).catch(
-            () => notification({ content: <>La team <span style={{ color: "#FF7954" }}>{teamName}</span> n'a pas pu être créée.</>, status: "invalid" }))
+            () => notification({ content: <>La team <span style={{ color: "#FF7954" }}>{teamName}</span> n'a pas pu être créée</>, status: "invalid" }))
         console.log(create)
-        create.data && notification({ content: <>La team <span style={{ color: "#FF7954" }}>{teamName}</span> a été créée avec succès.</>, status: "valid" })
+        create.data && notification({ content: <>La team <span style={{ color: "#FF7954" }}>{teamName}</span> a été créée avec succès</>, status: "valid" })
         history.push('/teams/teams')
     }
 
@@ -59,10 +59,11 @@ export default function CreateTeam() {
     return (<div className={classes.container}>
         {Box}
         <div className={classes.slidesContainer} ref={slide}>
+        {!localStorage.getItem("understand_team") ? 
             <div className={`${classes.slide} ${classes.space}`}>
                 <p>Créez vos équipes (Marketing, Vente, Corporate, Design, etc.). Ajoutez les membres de chaque équipe et associez leur une signature de mail spécifique.</p>
-                <Button width="15rem" color="orange" arrow={true} onClick={(e) => handleSlide(e, 1)}>Ajouter une équipe</Button>
-            </div>
+                <Button width="15rem" color="orange" arrow={true} onClick={(e) => {handleSlide(e, 1); localStorage.setItem('understand_team', true)}}>J'ai compris</Button>
+            </div> : "" }
             <div className={classes.slide}>
                 <div>
                     {workplaces.length > 0 && <Select defaultValue={workplace} items={workplaces} onChange={(e) => { setWorkplace(e.target?.value); focus.current.focus() }} onSubmit={(e) => console.log(e)} />}

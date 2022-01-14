@@ -85,7 +85,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                 console.log(element)
                 notification({ content: <>Signature de {type === "user" ? element.firstName + " " + element.lastName : type} modifiée</>, status: "valid" })
                 console.log(res); setEdit()
-            }).catch(() => notification({ content: <>Impossible de modifier la signature.</>, status: "invalid" }))
+            }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
     }
 
     return (<div className={classes.flipcontainer}>
