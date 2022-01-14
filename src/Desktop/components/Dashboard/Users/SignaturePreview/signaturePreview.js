@@ -18,6 +18,8 @@ import Select from 'Utils/Select/select';
 import CustomSelect from 'Utils/CustomSelect/customselect';
 
 export default function SignaturePreview({ show, edit, setEdit }) {
+    const today = new Date()
+
     // console.log(show)
     const [templates, setTemplates] = useState([])
     const [selectedTemplate, setSelectedTemplate] = useState()
@@ -106,7 +108,8 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                 {edit === "copySign" ? <CopySignature signature={assignedTemplate} /> : <>
                     <div className={classes.topLine}>
                         <h2>Édition <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></h2>
-                        {show.name ? <Select onChange={(e) => setEdit(e.target.value)} items={[{ name: "Modifier signature", '@id': "assign-signature" }, { name: "Modifier équipes", '@id': "assign-team" }]} /> : ""}
+                        <Button color="brown">Modifier équipes</Button>
+                        {/* {show.name ? <Select onChange={(e) => setEdit(e.target.value)} items={[{ name: "Modifier signature", '@id': "assign-signature" }, { name: "Modifier équipes", '@id': "assign-team" }]} /> : ""} */}
                     </div>
                     <div className={classes.row}>
 
@@ -121,13 +124,26 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                                     })}
                                 </select>
                             </form>
+                            <div className={classes.signature}>
+                                {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate?.html} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
+                            </div>
                         </div>
                         <div>
                             {/* if event list events */}
                             {events.length > 0 ? <>
-                                <label>Choisissez votre event</label>
-                                <CustomSelect items={events} multiple />
-                              </> : ""}
+                                <label>Choisissez votre event actuel</label>
+                                <CustomSelect items={events} />
+                                <Button style={{ height: '2.5rem', marginRight: '0', borderRadius: '100px' }} color="brown">Programmation<div className={classes.event}>
+                                    <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="2.99625" y="2.99625" width="18.0075" height="18.0075" rx="3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                        <path d="M7.99833 6.99792H16.0017" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
+                                    <span>{String(today.getDate()).padStart(2, '0')}</span>
+                                </div></Button>
+                                {/* <label>Programmation à venir</label>
+                                
+                                <CustomSelect items={events} multiple /> */}
+                            </> : ""}
                             {/* {events.length > 0 ? <>
                                 <label>Choisissez votre event</label>
                                 <form onChange={(e) => setEvent(JSON.parse(e.target.value))}>
@@ -149,10 +165,8 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                         </select>
                     </form> */}
 
+
                         </div>
-                    </div>
-                    <div className={classes.signature}>
-                        {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate?.html} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
                     </div>
                     <Button onClick={() => handleAssign(show)} color="orangeFill">Sauvegarder</Button>
                 </>}

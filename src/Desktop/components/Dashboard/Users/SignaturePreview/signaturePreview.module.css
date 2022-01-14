@@ -12,6 +12,11 @@
           justify-content: space-between;
 }
 
+.topLine button {
+  margin-left: auto;
+  margin-right: 0;
+}
+
 .topLine select {
   outline: none;
 }
@@ -54,10 +59,8 @@
 .signature {
   -webkit-transform: scale(0.75);
           transform: scale(0.75);
-  max-height: 22rem;
-  min-height: 20rem;
-  margin-bottom: -10rem;
-  width: 60%;
+  width: 150%;
+  margin-bottom: -25%;
   overflow: auto;
   -webkit-transform-origin: top left;
           transform-origin: top left;
@@ -78,7 +81,7 @@
   width: 100%;
 }
 
-.row div {
+.row > div {
   width: 45% !important;
 }
 
@@ -153,8 +156,8 @@
 .front label,
 .back label {
   margin-top: 2rem;
-  font-size: .9rem;
-  margin-bottom: .75rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
   display: block;
 }
 
@@ -180,7 +183,7 @@
   border-radius: 10px;
 }
 
-.back button {
+.back > button:last-child {
   margin-right: auto;
   margin-left: 0;
 }
@@ -206,7 +209,42 @@
           justify-content: space-between;
 }
 
-.entityEdit > div > div, .entityEdit > div input {
+.entityEdit > div > div,
+.entityEdit > div input {
   width: 48%;
   height: 2rem;
+}
+
+.event {
+  height: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+}
+
+.event :hover span {
+  color: #66433e;
+}
+
+.event span {
+  width: 0.35rem;
+  font-weight: 600;
+  text-align: center;
+  right: 0;
+  left: 0;
+  bottom: 0.35rem;
+  margin: auto;
+  font-size: 0.7rem;
+  position: absolute;
 }

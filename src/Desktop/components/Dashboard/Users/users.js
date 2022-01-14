@@ -39,7 +39,7 @@ function Team() {
     useEffect(() => {
         console.log(edit)
     }, [edit])
-    
+
     useEffect(() => {
         setEntity()
     }, [type])
@@ -69,11 +69,11 @@ function Team() {
                                 <div className={classes.col}>
                                     <h2>Équipes de <span className={classes.orangeTxt}>{entity?.name}</span></h2>
                                     {entity?.teams ? <><span>{entity?.teams?.length} équipes</span>
-                                    <ul className={`${classes.itemsList} ${classes.users}`}>
-                                        {entity?.teams?.map((team) => {
-                                            return <li tabIndex="0" key={team.id}>{team.name}</li>
-                                        })}
-                                    </ul></> : "Aucune équipe associée"}
+                                        <ul className={`${classes.itemsList} ${classes.users}`}>
+                                            {entity?.teams?.map((team) => {
+                                                return <li tabIndex="0" key={team.id}>{team.name}</li>
+                                            })}
+                                        </ul></> : "Aucune équipe associée"}
                                 </div>
                                 <div className={classes.col}>
                                     <h2>Autres équipes</h2>
@@ -89,34 +89,38 @@ function Team() {
                                     </ul>
                                 </div>
                             </div> : edit === "assign-team" ?
-                            <div className={classes.teamAssignment}>
-                                <div className={classes.col}>
-                                    <h2>Membres de l'équipe <span className={classes.orangeTxt}>{entity?.name}</span></h2>
-                                    <span>{entity?.users?.length} collaborateurs</span>
-                                    <ul className={`${classes.itemsList} ${classes.users}`}>
-                                        {entity?.users?.map((user) => {
-                                            return <li tabIndex="0" key={user.id} className={classes.assignItem}><span>{user.firstName} {user.lastName}</span><button><BiMinusCircle /></button></li>
-                                        })}
-                                    </ul>
-                                </div>
-                                <div className={classes.col}>
-                                    <h2>Autres collaborateurs</h2>
-                                    <div className={classes.searchInput}>
-                                        <HiOutlineSearch />
-                                        <input className={classes.search} type="text" onChange={(e) => setOtherUser(e.target.value)} placeholder="Rechercher un collaborateur" />
+                                <div className={classes.teamAssignment}>
+                                    <div className={classes.col}>
+                                        <h2>Membres de l'équipe <span className={classes.orangeTxt}>{entity?.name}</span></h2>
+                                        <span>{entity?.users?.length} collaborateurs</span>
+                                        <ul className={`${classes.itemsList} ${classes.users}`}>
+                                            {entity?.users?.map((user) => {
+                                                return <li tabIndex="0" key={user.id} className={classes.assignItem}><span>{user.firstName} {user.lastName}</span><button><BiMinusCircle /></button></li>
+                                            })}
+                                        </ul>
                                     </div>
-                                    <ul className={classes.itemsList}>
-                                        {users.map((user) => {
-                                            const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
-                                            if (fullName.search(otherUser.toLowerCase()) !== -1)
-                                                return <li tabIndex="0" key={user.id} className={classes.assignItem}><span>{user.firstName} {user.lastName}</span><button><BiPlusCircle /></button></li>
-                                        })}
-                                    </ul>
-                                </div>
-                            </div> : 
-                        <div className={classes.signaturePreview}>
-                            <SignaturePreview show={entity} edit={edit} setEdit={setEdit} />
-                        </div>}
+                                    <div className={classes.col}>
+                                        <h2>Autres collaborateurs</h2>
+                                        <div className={classes.searchInput}>
+                                            <HiOutlineSearch />
+                                            <input className={classes.search} type="text" onChange={(e) => setOtherUser(e.target.value)} placeholder="Rechercher un collaborateur" />
+                                        </div>
+                                        <ul className={classes.itemsList}>
+                                            {users.sort(function (a, b) {
+                                                if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) { return -1; }
+                                                if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) { return 1; }
+                                                return 0
+                                            }).map((user) => {
+                                                const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
+                                                if (fullName.search(otherUser.toLowerCase()) !== -1)
+                                                    return <li tabIndex="0" key={user.id} className={classes.assignItem}><span>{user.firstName} {user.lastName}</span><button><BiPlusCircle /></button></li>
+                                            })}
+                                        </ul>
+                                    </div>
+                                </div> :
+                                <div className={classes.signaturePreview}>
+                                    <SignaturePreview show={entity} edit={edit} setEdit={setEdit} />
+                                </div>}
                     </div> : ""}
             </div>
         </div>)

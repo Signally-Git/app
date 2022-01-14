@@ -15,6 +15,7 @@ export default function Frame(props) {
             // console.log(logUser)
             setUser(logUser.data)
             const organisation = await request.get(logUser.data.organisation)
+            console.log(organisation)
             setOrganisation(organisation.data)
         }
 

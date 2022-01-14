@@ -178,11 +178,54 @@
   font-size: 0.75rem;
 }
 
+.renameContainer {
+  margin-bottom: auto;
+  max-width: 85%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.renameContainer .rename {
+  max-width: 48%;
+}
+
+.teamList .editing {
+  height: 6rem !important;
+}
+
+.teamList .editing .rename {
+  padding: .5rem 1rem;
+  margin: .5rem 0 0;
+}
+
+.teamList .rename {
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.usersList .editing {
+  height: 9.5rem !important;
+}
+
+.usersList .editing .editDiv {
+  bottom: 0.5rem;
+}
+
+.usersList .editDiv {
+  top: auto;
+  bottom: 1rem;
+}
+
 .editDiv {
   -webkit-animation: fadeIn .2s forwards;
           animation: fadeIn .2s forwards;
-  background-color: rgba(255, 255, 255, 0.5);
-  padding: .5rem;
+  padding: 1rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   position: absolute;
   border-radius: 10px;
   inset: auto 0;
@@ -194,12 +237,16 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 90%;
+  width: 100%;
+  min-height: 70%;
+  max-height: 70%;
+  bottom: 1rem;
 }
 
 .editDiv input {
   height: 1rem;
   font-size: .75rem;
+  margin: .5rem 0 0 0;
 }
 
 .editDiv .inputsContainer {
@@ -214,6 +261,7 @@
 }
 
 .editDiv .inputsContainer input {
+  min-width: 48%;
   max-width: 48%;
 }
 
@@ -236,7 +284,7 @@
 }
 
 .editing {
-  height: 14rem !important;
+  height: 13rem !important;
 }
 
 .editing .actionsContainer {

@@ -5,12 +5,14 @@ import classes from './customselect.module.css'
 
 export default function CustomSelect({ items, multiple, defaultValue }) {
     const [value, setValue] = useState([])
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
         <>
-            <div className={classes.container}>
-                <Input type="text" disabled value={value.toString()} />
-                <form onChange={(e) => multiple ? e.target.checked ? setValue([...value, e.target.value]) : setValue(value.filter((val) => val !== e.target.value)) : setValue([e.target.value])}>
+            <div className={classes.container} >
+                <Input onMouseEnter={() => setIsOpen(!isOpen)} type="text" disabled value={value.length > 1 ? `${value.length} évènements` : value.toString()} />
+                <form onChange={(e) => { multiple ? e.target.checked ? setValue([...value, e.target.value]) : setValue(value.filter((val) => val !== e.target.value)) : setValue([e.target.value])}}>
+                    {isOpen ? 
                 <ul className={classes.list}>
                     {items.map((item) => {
                         return <li className={classes.element}>
@@ -19,7 +21,7 @@ export default function CustomSelect({ items, multiple, defaultValue }) {
                             {item.name}
                         </li>
                     })}
-                </ul>
+                </ul> : " " }
                 </form>
             </div>
         </>

@@ -16,6 +16,8 @@ import CreateWorkplace from '../Create/Workplace/createWorkplace'
 import { BsCreditCard2Front } from 'react-icons/bs'
 import { GrUserSettings } from 'react-icons/gr'
 import { BiCopyAlt } from 'react-icons/bi'
+import { fetchEventSource } from "@microsoft/fetch-event-source";
+import { NativeEventSource, EventSourcePolyfill } from 'event-source-polyfill';
 
 // Displays the current list
 // Workplaces by default
@@ -42,6 +44,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     const [fax, setFax] = useState("")
     const [mobileUser, setMobileUser] = useState("")
     const [poste, setPoste] = useState("")
+    const [mail, setMail] = useState("")
 
     const notification = useNotification()
     // Variables for creation modals
@@ -58,7 +61,11 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     }
 
     const getDataUser = async () => {
+        const options = { headers: { Authorization: '!ChangeMe!' } };
+        document.cookie = `mercureAuthorization=!ChangeMe!`
+
         const es = new EventSource('https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users')
+       
         es.onmessage = function (e) {
             console.log("SSE", JSON.parse(e.data))
         }
@@ -87,7 +94,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 notification({ content: <><span style={{ color: "#FF7954" }}>{name}</span> supprimé avec succès</>, status: "valid" })
             }
 
-        ).catch((error) => notification({ content: <>Une erreur s'est produite. Impossible de supprimer <span style={{ color: "#FF7954" }}>{name}</span></>, status: "invalid" }))
+        ).catch(() => notification({ content: <>Une erreur s'est produite. Impossible de supprimer <span style={{ color: "#FF7954" }}>{name}</span></>, status: "invalid" }))
         setModal({ type: "", name: "", id: "" })
     }
 
@@ -100,7 +107,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 for (let index = 0; index < workplaces.length; index++) {
                     const element = workplaces[index];
                     await request.delete(`workplaces/${element.id}`).then(
-                        (res) => {
+                        () => {
                             index === workplaces.length - 1 && refreshData(type)
                             count++;
                         }).catch(() => notification({ content: <>Impossible de supprimer <span style={{ color: "#FF7954" }}>{element.name}</span></>, status: "invalid" }))
@@ -214,20 +221,21 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         setEditInfo()
     }
 
-    const handleChangeTeam = async (e, id) => {
+    const handleChangeTeam = async (e, team) => {
         e.preventDefault()
         if (teamName.length > 0)
-            await request.patch(id, { name: teamName }, {
+            await request.patch(team['@id'], { name: teamName }, {
                 headers: { 'Content-Type': 'application/merge-patch+json' }
-            })
-        setEdit()
+            }).then(() => notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> modifié avec succès</>, status: "valid" })).catch(() => notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> n'a pas pu être modifié</>, status: "invalid" }))
+        setEditInfo()
     }
 
     const handleChange = async (e, id) => {
         e.preventDefault()
         const req = {
             mobilePhone: mobileUser,
-            position: poste
+            position: poste,
+            mail: mail
         }
         await request.patch(id, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
@@ -266,7 +274,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                         </div>
                                         {editInfo === workplace ? <>
                                             <div className={classes.editDiv}>
-                                                <UploadFile placeholder="Importer une image" />
+                                                <UploadFile placeholder="Importer un logo" style={{ background: '#FFF', marginBottom: '.2rem' }} />
                                                 <div className={classes.inputsContainer}>
                                                     <Input onLoad={() => setStreet(workplace.address.street)} onChange={(e) => setStreet(e.target.value)} type="text" placeholder="Adresse" defaultValue={workplace.address.street} />
                                                     <Input onChange={(e) => setStreetInfo(e.target.value)} type="text" placeholder="Adresse 2" defaultValue={workplace.address.streetInfo} />
@@ -298,22 +306,21 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 <span>{teams.length} équipes</span>
                 <button onClick={() => setModal({ type: "allteams" })}>Supprimer tout</button>
             </div>
-            <ul className={classes.itemsList}>
-                <form onChange={(e) => setSelected(JSON.parse(e.target.value))}>
+            <ul className={`${classes.itemsList} ${classes.teamList}`}>
+                <form onChange={(e) => e.target.type === "radio" && setSelected(JSON.parse(e.target.value))}>
                     {teams.map((team) => {
                         if (team.name?.toLowerCase().search(searchTeam) !== -1 || team.workplace?.name?.toLowerCase().search(searchTeam) !== -1)
                             return (
-                                <li onMouseEnter={() => setSelected(team)} key={team.id} className={selected?.id === team.id && selected?.name === team.name ? classes.selected : ""} >
-                                    <input className={classes.checkbox} defaultChecked={selected === team.name ? true : false} type="radio" name="workplace" value={JSON.stringify(team)} />
-                                    <span></span>
-                                    <div>
-                                        <span>{team.name}</span>
-                                    </div>
+                                <li onMouseEnter={() => setSelected(team)} key={team.id} className={`${editInfo === team && classes.editing} ${selected?.id === team.id && selected?.name === team.name ? classes.selected : ""}`} >
+                                    <input onChange={(e) => { e.preventDefault(); setEdit(team) }} className={classes.checkbox} defaultChecked={selected === team.name ? true : false} type="radio" name="team" value={JSON.stringify(team)} />
+                                    {editInfo === team ? <input autoFocus className={classes.rename} ref={toFocus} type="text" defaultValue={team?.name} onChange={(e) => setTeamName(e.target.value)} /> :
+                                        <input className={classes.rename} disabled type="text" defaultValue={teamName || team?.name} />}
                                     {team.workplace?.name?.length > 0 ? <div className={classes.infos}>
                                         <span className={classes.groupName}>{team.workplace?.name}</span>
-                                    </div> : "" }
+                                    </div> : ""}
                                     <div className={classes.actionsContainer}>
-                                        <AiOutlineEdit onClick={(e) => { setEdit('assign-team') }} />
+                                        {editInfo === team ? <FiCheck onClick={(e) => { handleChangeTeam(e, team) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEditInfo(team) }} />}
+                                        {/* <AiOutlineEdit onClick={(e) => { setEdit('assign-team') }} /> */}
                                         <FiTrash onClick={() => setModal({ name: team.name, id: team.id, type: "teams" })} />
                                     </div>
                                 </li>)
@@ -339,19 +346,25 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 <span>{users.length < 2 ? `${users.length} collaborateur` : `${users.length} collaborateurs`}</span>
                 <button onClick={() => setModal({ type: "allusers" })}>Supprimer tout</button>
             </div>
-            <ul className={classes.itemsList}>
-                <form onChange={(e) => setSelected(JSON.parse(e.target.value))}>
-                    {users.map((user) => {
+            <ul className={`${classes.itemsList} ${classes.usersList}`}>
+                <form onChange={(e) => e.target.type === "radio" && setSelected(JSON.parse(e.target.value))}>
+                    {users.sort((function (a, b) {
+                        if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) { return -1; }
+                        if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) { return 1; }
+                        return 0
+                    })).map((user) => {
                         const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
                         if (fullName.search(searchUser.toLowerCase()) !== -1)
                             return (
-                                <li onMouseEnter={() => setSelected(user)} key={user.id} className={`${edit === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? classes.editing : ""} ${selected?.id === user.id && selected?.name === user.name ? classes.selected : ""}`} >
-                                    <input className={classes.checkbox} onChange={(e) => { e.preventDefault(); setEdit(user) }}  defaultChecked={selected?.id === user.id && selected?.name === user.name ? true : false} type="radio" name="user" value={JSON.stringify(user)} />
-                                    {edit === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>
-                                    <input className={classes.rename} ref={toFocus} type="text" defaultValue={`${user.firstName}`} /> 
-                                    <input className={classes.rename} ref={toFocus} type="text" defaultValue={`${user.lastName}`} /> 
+                                <li onMouseEnter={() => setSelected(user)} key={user.id} className={`${editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? classes.editing : ""} ${selected?.id === user.id && selected?.name === user.name ? classes.selected : ""}`} >
+                                    <input className={classes.checkbox} onChange={(e) => { e.preventDefault(); setEdit(user) }} defaultChecked={selected?.id === user.id && selected?.name === user.name ? true : false} type="radio" name="user" value={JSON.stringify(user)} />
+                                    {editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>
+                                        <div className={classes.renameContainer}>
+                                            <input placeholder='Prénom' className={classes.rename} ref={toFocus} type="text" defaultValue={`${user.firstName}`} />
+                                            <input placeholder='Nom' className={classes.rename} ref={toFocus} type="text" defaultValue={`${user.lastName}`} />
+                                        </div>
                                     </>
-                                    :
+                                        :
                                         <input className={classes.rename} disabled type="text" defaultValue={`${user.firstName} ${user.lastName}`} />}
                                     <span></span>
                                     {user?.id === JSON.parse(localStorage.getItem("user"))?.id ?
@@ -359,12 +372,12 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                             <Link to="/profile/informations"><FaUser /></Link>
                                         </div> :
                                         <div className={classes.actionsContainer}>
-                                            {edit === user ? <FiCheck onClick={(e) => { handleChange(e, user['@id']) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEdit(user) }} />}
+                                            {editInfo === user ? <FiCheck onClick={(e) => { handleChange(e, user['@id']) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEditInfo(user) }} />}
                                             <FiTrash onClick={() => setModal({ name: `${user.firstName} ${user.lastName}`, id: user.id, type: "users" })} />
                                         </div>}
-                                    {edit === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>
+                                    {editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>
                                         <div className={classes.editDiv}>
-                                            <Input type="text" placeholder="Adresse mail" defaultValue={user.email} />
+                                            <Input type="text" placeholder="Adresse mail" defaultValue={user.email} onChange={(e) => setMail(e.target.value)} />
                                             <div className={classes.inputsContainer}>
                                                 <Input type="text" placeholder="Poste" defaultValue={user.position} onChange={(e) => setPoste(e.target.value)} />
                                                 <Input type="tel" placeholder="Mobile" defaultValue={user.phone} onChange={(e) => setMobileUser(e.target.value)} />

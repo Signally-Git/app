@@ -10,6 +10,7 @@ import { useNotification } from 'Utils/Notifications/notifications'
 import { Box } from 'Assets/img/KUKLA/illustrations'
 
 export default function CreateUser() {
+    const number = !localStorage.getItem("understand_user") ? 0 : 1;
     const slide = useRef(null)
     const focus = useRef(null)
     const width = "12rem"
@@ -49,7 +50,7 @@ export default function CreateUser() {
         e.preventDefault()
         slide.current.scrollTo({
             top: 0,
-            left: slide.current.offsetWidth * multiple,
+            left: slide.current.offsetWidth * (multiple - number),
             behavior: 'smooth'
         })
     }

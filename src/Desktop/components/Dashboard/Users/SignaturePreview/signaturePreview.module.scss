@@ -6,6 +6,10 @@
     width: 100%;
     align-items: baseline;
     justify-content: space-between;
+    button {
+        margin-left: auto;
+        margin-right: 0;
+    }
     select {
         outline: none;
     }
@@ -45,10 +49,10 @@
 
 .signature {
     transform: scale(0.75);
-    max-height: 22rem;
-    min-height: 20rem;
-    margin-bottom: -10rem;
-    width: 60%;
+    // max-height: 22rem;
+    width: 150%;
+    // min-height: 20rem;
+    margin-bottom: -25%;
     overflow: auto;
     transform-origin: top left;
     + button {
@@ -61,8 +65,8 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    div  {
-        width: 45%!important;
+    > div {
+        width: 45% !important;
     }
 }
 
@@ -130,8 +134,8 @@
     }
     label {
         margin-top: 2rem;
-        font-size: .9rem;
-        margin-bottom: .75rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
         display: block;
     }
     position: absolute;
@@ -156,7 +160,7 @@
         /* border: none; */
         border-radius: 10px;
     }
-    button {
+    > button:last-child {
         margin-right: auto;
         margin-left: 0;
     }
@@ -170,9 +174,33 @@
         display: flex;
         width: 100%;
         justify-content: space-between;
-        > div, input {
+        > div,
+        input {
             width: 48%;
             height: 2rem;
         }
+    }
+}
+
+.event {
+    height: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    & :hover span {
+        color: #66433e;
+    }
+    span {
+        width: 0.35rem;
+        font-weight: 600;
+        text-align: center;
+        right: 0;
+        left: 0;
+        bottom: 0.35rem;
+        margin: auto;
+        font-size: 0.7rem;
+        position: absolute;
     }
 }

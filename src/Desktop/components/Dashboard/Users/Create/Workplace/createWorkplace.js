@@ -11,6 +11,7 @@ import { Box } from 'Assets/img/KUKLA/illustrations'
 import UploadFile from 'Utils/Upload/uploadFile'
 
 export default function CreateWorkplace() {
+    const number = !localStorage.getItem("understand_workplace") ? 0 : 1;
     const slide = useRef(null)
     const [file, setFile] = useState()
     const width = "12rem"
@@ -55,7 +56,7 @@ export default function CreateWorkplace() {
         e.preventDefault()
         slide.current.scrollTo({
             top: 0,
-            left: slide.current.offsetWidth * multiple,
+            left: slide.current.offsetWidth * (multiple - number),
             behavior: 'smooth'
         })
     }
@@ -63,7 +64,7 @@ export default function CreateWorkplace() {
     return (<div className={classes.container}>
         {Box}
         <div className={classes.slidesContainer} ref={slide}>
-        {!localStorage.getItem("understand_workplace") ? 
+            {!localStorage.getItem("understand_workplace") ? 
             <div className={`${classes.slide} ${classes.space}`}>
                 <p>Administrez les signatures de vos équipes par pays, villes, filiales, départements etc. selon la structure de votre organisation.</p>
                 <Button width="15rem" color="orange" arrow={true} onClick={(e) => {handleSlide(e, 1); localStorage.setItem('understand_workplace', true)}}>J'ai compris</Button>

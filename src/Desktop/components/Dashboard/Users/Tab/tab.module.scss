@@ -127,26 +127,69 @@
     }
 }
 
+.renameContainer {
+    margin-bottom: auto;
+    max-width: 85%;
+    display: flex;
+    justify-content: space-between;
+    .rename {
+        max-width: 48%;
+    }
+}
+
+.teamList {
+    .editing {
+        height: 6rem!important;
+    }
+    .editing .rename{
+        padding: .5rem 1rem;
+        margin: .5rem 0 0;
+    }
+    .rename {
+        margin-bottom: 0;
+        padding: 0;
+    }
+}
+
+.usersList {
+    .editing {
+        height: 9.5rem!important;
+        .editDiv {
+            bottom: 0.5rem;
+        }
+    }
+    .editDiv {
+        top: auto;
+        bottom: 1rem;
+    }
+}
+
 .editDiv {
     animation: fadeIn .2s forwards;
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: .5rem;
+    // background-color: rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+    box-sizing: border-box;
     position: absolute;
     border-radius: 10px;
     inset: auto 0;
     margin: auto;
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 100%;
+    min-height: 70%;
+    max-height: 70%;
+    bottom: 1rem;
     input {
         height: 1rem;
         font-size: .75rem;
+        margin: .5rem 0 0 0;
     }
     .inputsContainer {
         width: 100%;
         display: flex;
         justify-content: space-between;
         input {
+            min-width: 48%;
             max-width: 48%;
         }
         z-index: 5;
@@ -163,7 +206,7 @@
 }
 
 .editing {
-    height: 14rem!important;
+    height: 13rem!important;
     .actionsContainer {top: 1.40rem;}
 }
 
