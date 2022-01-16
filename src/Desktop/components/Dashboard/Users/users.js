@@ -21,7 +21,7 @@ function Team() {
     const [editInfo, setEditInfo] = useState()
     const [userList, setUserList] = useState([])
     let test;
-    console.log(entity)
+    // console.log(entity)
     useEffect(async () => {
         setUserList([])
         const listUsers = await request.get('users')
@@ -37,7 +37,7 @@ function Team() {
     }, [entity])
 
     useEffect(() => {
-        console.log(edit)
+        // console.log(edit)
     }, [edit])
 
     useEffect(() => {

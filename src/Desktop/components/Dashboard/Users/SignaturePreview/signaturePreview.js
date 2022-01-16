@@ -133,13 +133,19 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                             {events.length > 0 ? <>
                                 <label>Choisissez votre event actuel</label>
                                 <CustomSelect items={events} />
-                                <Button style={{ height: '2.5rem', marginRight: '0', borderRadius: '100px' }} color="brown">Programmation<div className={classes.event}>
+                                <div title='Cette fonctionnalité arrive très prochainement'>
+
+                                <div className="disabled" title='Cette fonctionnalité arrive très prochainement' alt='Cette fonctionnalité arrive très prochainement'>
+
+                                <Button  style={{ height: '2.5rem', marginRight: '0', borderRadius: '100px' }} color="orange">Programmation<div className={classes.event}>
                                     <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect x="2.99625" y="2.99625" width="18.0075" height="18.0075" rx="3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                         <path d="M7.99833 6.99792H16.0017" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
                                     <span>{String(today.getDate()).padStart(2, '0')}</span>
                                 </div></Button>
+                                </div>
+                                </div>
                                 {/* <label>Programmation à venir</label>
                                 
                                 <CustomSelect items={events} multiple /> */}

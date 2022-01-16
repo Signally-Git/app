@@ -64,7 +64,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         const options = { headers: { Authorization: '!ChangeMe!' } };
         document.cookie = `mercureAuthorization=!ChangeMe!`
 
-        const es = new EventSource('https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users')
+        const es = new EventSource('https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users', options)
        
         es.onmessage = function (e) {
             console.log("SSE", JSON.parse(e.data))
