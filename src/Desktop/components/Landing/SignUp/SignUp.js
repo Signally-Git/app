@@ -2,6 +2,7 @@ import Header from 'Desktop/components/Header/Header';
 import React, { useEffect, useState } from 'react';
 import Button from 'Utils/Button/btn';
 import Input from 'Utils/Input/input';
+import CustomSelect from 'Utils/CustomSelect/customselect'
 import request from 'Utils/Request/request';
 import Takeoff from 'Assets/img/takeoff.png'
 
@@ -27,6 +28,14 @@ const Signup = () => {
   const [valid, setValid] = useState(false)
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const nbs = [
+    { name: "1 à 5" },
+    { name: "5 à 20" },
+    { name: "20 à 50" },
+    { name: "50 à 100" },
+    { name: "100+" }
+  ]
 
   function validateSiret(siret) {
     var isValid = true;
@@ -181,24 +190,25 @@ const Signup = () => {
                       <label className={classes.inputTitle}>Société</label>
                       <Input required autoComplete="organization" placeholder='Signally' onChange={(e) => setSocietyName(e.target.value)} value={societyName} type="text" />
                       <div className={classes.spacing}></div>
-                      <label className={classes.inputTitle}>Nombre de collaborateurs</label>
-                      <div style={{ position: 'relative', display: 'flex', marginTop: 15, marginBottom: 15 }}>
-                        <form onChange={(e) => setNbPerson(e.target.value)}>
+                      <label className={classes.inputTitle}>SIRET</label>
+                      <div style={{ position: 'relative', display: 'flex', marginBottom: 15 }}>
+                      <Input required placeholder='44306184100047' onChange={(e) => setSiret(e.target.value)} value={siret} type="text" />
+                        {/* <form onChange={(e) => setNbPerson(e.target.value)}>
                           <select>
-                            <option value="1 à 5" selected>1 à 5</option>
-                            <option value="5 à 20">5 à 20</option>
-                            <option value="20 à 50">20 à 50</option>
-                            <option value="50 à 100">50 à 100</option>
-                            <option value="100+">100+</option>
+                          <option value="1 à 5" selected>1 à 5</option>
+                          <option value="5 à 20">5 à 20</option>
+                          <option value="20 à 50">20 à 50</option>
+                          <option value="50 à 100">50 à 100</option>
+                          <option value="100+">100+</option>
                           </select>
-                        </form>
+                        </form> */}
 
                       </div>
                     </div>
                     <div className={classes.inputContainer}>
-                      <label className={classes.inputTitle}>SIRET</label>
+                        <label className={classes.inputTitle}>Nombre de collaborateurs</label>
                       <div style={{ position: 'relative', display: 'flex' }}>
-                        <Input required placeholder='44306184100047' onChange={(e) => setSiret(e.target.value)} value={siret} type="text" />
+                      <CustomSelect onChange={(e) => setNbPerson(e.target.value)} items={nbs} getValue={'name'} display={'name'} defaultValue={nbs[0]} />
                       </div>
                     </div>
                   </div>

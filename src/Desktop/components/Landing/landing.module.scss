@@ -38,9 +38,9 @@
         box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
         border-color: $signally-orange;
     }
-    select{
-        padding: .90rem;
-        margin-top: -.35rem;
+    select {
+        padding: 0.9rem;
+        margin-top: -0.35rem;
         outline: none;
         border-radius: 10px;
         width: 100%;
@@ -65,7 +65,20 @@
     }
 }
 
-.registerContainer {
+.logInContainer {
+    margin: auto;
+    align-items: center;
+    min-width: 40%;
+    h2 {
+        margin-bottom: 2rem;
+    }
+    > .slider > .formContainer button {
+        margin-top: 2rem;
+    }
+}
+
+.registerContainer,
+.logInContainer {
     display: flex;
     max-height: 100%;
     max-width: 100vw;
@@ -77,6 +90,7 @@
     }
     input {
         width: 100%;
+        font-weight: bold;
     }
     .inputContainer {
         > div {
@@ -92,8 +106,8 @@
     height: 1rem;
 }
 
-.error p{
-    font-size: .7rem;
+.error p {
+    font-size: 0.7rem;
     margin-top: 1rem;
     text-align: center;
 }
@@ -129,7 +143,7 @@
 
 .slider {
     display: flex;
-    width: 35%;
+    width: 40%;
     overflow: hidden;
     justify-content: space-between;
 }
@@ -156,6 +170,13 @@
     display: flex;
     flex-direction: row-reverse;
     width: 100%;
+    padding: 0 2rem;
+    margin: auto;
+    justify-content: space-around;
+    button {
+        margin: 0;
+        margin-top: 2rem;
+    }
     button:last-child:not(:hover) {
         background: none;
     }
@@ -170,22 +191,6 @@
     input {
         width: 100%;
     }
-    // input {
-    //     transition: 0.2s;
-    //     width: 3rem;
-    //     border-radius: 10px;
-    //     padding: .5rem 0;
-    //     display: flex;
-    //     text-align: center;
-    //     align-items: center;
-    //     justify-content: center;
-    //     margin-bottom: 1.5rem;
-    //     border: 1px solid $signally-grey;
-    //     background-color: none;
-    //     outline: none;
-    //     box-shadow: none;
-    //     font-size: 2rem;
-    // }
 }
 
 .formContainer h2 {
@@ -198,7 +203,6 @@
 
 .formContainer h2 span {
     color: $signally-orange;
-    text-decoration: underline;
 }
 
 .textIllustration {
@@ -229,39 +233,10 @@
     margin-left: -45px;
 }
 
-.slogan {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.footerSlogan {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.footer__logo {
-    height: 20px;
-    width: 20px;
-    // background-color: colors.$yellow;
-    border-radius: 6px;
-    padding: 6px;
-    display: flex;
-    margin-right: 6px;
-    align-items: center;
-    justify-content: center;
-}
-
-.footer__logo img {
-    margin: 0 !important;
-}
-
 .congrats {
     width: 100%;
     margin: auto;
-    max-width: 30%; 
+    max-width: 30%;
     font-size: 1.25rem;
     * {
         opacity: 0;
@@ -271,16 +246,16 @@
     }
     p {
         font-size: 1.15rem;
-        animation-delay: .5s;
+        animation-delay: 0.75s;
     }
     h2 {
-        color: $signally-orange
+        color: $signally-orange;
     }
 }
 
 .disappear {
     opacity: 1;
-    animation: fadeOut ease .5s;
+    animation: fadeOut ease 0.25s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
@@ -290,15 +265,53 @@
         opacity: 1;
     }
     100% {
-        opacity: 0
+        opacity: 0;
     }
 }
 
 @keyframes fadeIn {
     0% {
-        opacity: 0
+        opacity: 0;
     }
     100% {
         opacity: 1;
+    }
+}
+
+.forgot {
+    font-size: .8rem;
+    margin-left: auto;
+    padding-right: .5rem;
+    text-align: right;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    cursor: pointer;
+    color: $signally-brown;
+    &:hover {
+        color: $signally-orange;
+    }
+}
+
+.modal {
+    padding: 2rem;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 40px rgba($signally-brown, 0.3);
+    border-radius: 20px;
+    inset: 0;
+    width: 25rem;
+    height: 15rem;
+    z-index: 10;
+    margin: auto;
+    background: #FFF;
+    .btnsContainer {
+        margin-top: 0rem;
+        button {
+            margin-top: 1rem;
+        }
     }
 }

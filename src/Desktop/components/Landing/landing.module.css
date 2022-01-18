@@ -47,8 +47,8 @@
 }
 
 .container select {
-  padding: .90rem;
-  margin-top: -.35rem;
+  padding: 0.9rem;
+  margin-top: -0.35rem;
   outline: none;
   border-radius: 10px;
   width: 100%;
@@ -78,7 +78,24 @@
   width: 48%;
 }
 
-.registerContainer {
+.logInContainer {
+  margin: auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-width: 40%;
+}
+
+.logInContainer h2 {
+  margin-bottom: 2rem;
+}
+
+.logInContainer > .slider > .formContainer button {
+  margin-top: 2rem;
+}
+
+.registerContainer,
+.logInContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -89,21 +106,26 @@
           justify-content: space-between;
 }
 
-.registerContainer > .formContainer {
+.registerContainer > .formContainer,
+.logInContainer > .formContainer {
   min-width: 40% !important;
   max-width: 48%;
   margin: 0;
 }
 
-.registerContainer input {
+.registerContainer input,
+.logInContainer input {
   width: 100%;
+  font-weight: bold;
 }
 
-.registerContainer .inputContainer > div {
+.registerContainer .inputContainer > div,
+.logInContainer .inputContainer > div {
   position: relative;
 }
 
-.registerContainer .textIllustration {
+.registerContainer .textIllustration,
+.logInContainer .textIllustration {
   margin: 0;
 }
 
@@ -112,7 +134,7 @@
 }
 
 .error p {
-  font-size: .7rem;
+  font-size: 0.7rem;
   margin-top: 1rem;
   text-align: center;
 }
@@ -160,7 +182,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 35%;
+  width: 40%;
   overflow: hidden;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
@@ -202,6 +224,15 @@
       -ms-flex-direction: row-reverse;
           flex-direction: row-reverse;
   width: 100%;
+  padding: 0 2rem;
+  margin: auto;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.btnsContainer button {
+  margin: 0;
+  margin-top: 2rem;
 }
 
 .btnsContainer button:last-child:not(:hover) {
@@ -232,7 +263,6 @@
 
 .formContainer h2 span {
   color: #FF7954;
-  text-decoration: underline;
 }
 
 .textIllustration {
@@ -269,56 +299,6 @@
   margin-left: -45px;
 }
 
-.slogan {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
-
-.footerSlogan {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.footer__logo {
-  height: 20px;
-  width: 20px;
-  border-radius: 6px;
-  padding: 6px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin-right: 6px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.footer__logo img {
-  margin: 0 !important;
-}
-
 .congrats {
   width: 100%;
   margin: auto;
@@ -338,8 +318,8 @@
 
 .congrats p {
   font-size: 1.15rem;
-  -webkit-animation-delay: .5s;
-          animation-delay: .5s;
+  -webkit-animation-delay: 0.75s;
+          animation-delay: 0.75s;
 }
 
 .congrats h2 {
@@ -348,8 +328,8 @@
 
 .disappear {
   opacity: 1;
-  -webkit-animation: fadeOut ease .5s;
-          animation: fadeOut ease .5s;
+  -webkit-animation: fadeOut ease 0.25s;
+          animation: fadeOut ease 0.25s;
   -webkit-animation-iteration-count: 1;
           animation-iteration-count: 1;
   -webkit-animation-fill-mode: forwards;
@@ -390,4 +370,59 @@
   100% {
     opacity: 1;
   }
+}
+
+.forgot {
+  font-size: .8rem;
+  margin-left: auto;
+  padding-right: .5rem;
+  text-align: right;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+  cursor: pointer;
+  color: #402927;
+}
+
+.forgot:hover {
+  color: #FF7954;
+}
+
+.modal {
+  padding: 2rem;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-shadow: 0 0 40px rgba(64, 41, 39, 0.3);
+          box-shadow: 0 0 40px rgba(64, 41, 39, 0.3);
+  border-radius: 20px;
+  inset: 0;
+  width: 25rem;
+  height: 15rem;
+  z-index: 10;
+  margin: auto;
+  background: #FFF;
+}
+
+.modal .btnsContainer {
+  margin-top: 0rem;
+}
+
+.modal .btnsContainer button {
+  margin-top: 1rem;
 }

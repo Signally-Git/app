@@ -1,22 +1,19 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import classes from '../landing.module.css';
 
-import Illustration from 'Assets/img/takeoff.png'
-import Logo from "Assets/img/logo-full.svg";
+import Takeoff from 'Assets/img/takeoff.png'
 import Button from 'Utils/Button/btn';
 import Input from 'Utils/Input/input';
-import AuthCode from 'react-auth-code-input';
-import { API } from 'config';
-import { useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import request from 'Utils/Request/request';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { useNotification } from 'Utils/Notifications/notifications';
 
 function useQuery() {
     const { search } = useLocation();
 
     return useMemo(() => new URLSearchParams(search), [search]);
 }
-
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -25,6 +22,9 @@ const Login = () => {
     const [showPassword, setShowPass] = useState(false)
     const slider = useRef(null)
     const toFocus = useRef(null)
+    const notification = useNotification()
+
+    const [modal, setModal] = useState(false)
 
     const [error, setError] = useState('')
 
@@ -55,21 +55,18 @@ const Login = () => {
         });
         setTimeout(() => {
             setLogging(false)
-            setError('')
         }, 300)
     }
 
     const handleSubmit = (e) => {
-        handleScroll(e, 1000)
+        handleScroll(e, 2000)
         setTimeout(() => {
             setLogging(true)
-            setError('')
             toFocus.current.focus()
-        }, 300)
+        }, 400)
     }
 
     const handleLogIn = async (e) => {
-        setError('')
         e.preventDefault()
         const req = {
             username: email.toLowerCase(),
@@ -77,7 +74,7 @@ const Login = () => {
         }
 
         const token = await request.post(`token/auth`, req).catch(() => {
-            setError(<p>Impossible de se connecter.<br />Veuillez vérifier vos identifiants.</p>)
+            notification({ content: <>Email ou mot de passe incorrect</>, status: "invalid" })
         });
 
         if (token) {
@@ -85,48 +82,69 @@ const Login = () => {
             localStorage.setItem('refresh_token', token.data.refresh_token)
             history.go(0)
         }
-
     }
 
-    return (<div className={classes.container}>
-        <div className={classes.slider} ref={slider}>
-            <div className={classes.formContainer}>
-                <h2>Se connecter sur <span>Signally</span> pour accéder à l'espace bêta.</h2>
-                <form onSubmit={(e) => handleSubmit(e)}>
-                    <div className={classes.inputContainer}>
-                        <label className={classes.inputTitle}>Adresse e-mail</label>
-                        <div style={{ position: 'relative', display: 'flex' }}>
-                            <Input style={{ width: "100%" }} placeholder='xyrn@gmail.com' onChange={(e) => setEmail(e.target.value)} value={email} type="text" />
-                        </div>
+    return (<div style={{ background: "#FFF", overflow: 'hidden', height: "100vh" }}>
+        {modal ?
+            <div className={classes.modal}>
+                <h3>Réinitialiser mon mot de passe</h3>
+                <Input defaultValue={email} type="mail" style={{ width: '100%' }} autoComplete="email" placeholder="Email" />
+                <div className={classes.btnsContainer}>
+                    <Button color={"orange"} width={'40%'} onClick={() => setModal(false)}>Envoyer</Button>
+                    <Button color={"brown"} width={'40%'} onClick={() => setModal(false)}>Annuler</Button>
+                </div>
+            </div> : ""}
+        <div className={classes.container}>
+            <div className={classes.logInContainer}>
+                <div className={classes.textIllustration}>
+                    <img src={Takeoff} />
+                    <div className={classes.descriptionBeta}>
+                        <h1>Bienvenue sur la Beta privée Signally !</h1>
+                        <p>Nous sommes très heureux de vous compter parmi les tous premiers utilisateurs.</p>
+                        <p>Avec vous, nous souhaitons faire de Signally, l’application la plus intuitive et la plus innovante du marché tout en répondant au mieux à vos
+                            objectifs de communication et de marketing.</p>
+                        <p>Comme nous sommes en version Beta, tout n’est pas encore parfait !</p>
+                        <p>Néanmoins, grâce à vous, nous pourrons rendre la plateforme de plus en plus performante et encore plus simple à utiliser.</p>
+                        <p>Un grand merci pour votre aide.</p><br />
                     </div>
-                    <Button width={"50%"} color="orangeFill" type="submit">Connexion</Button>
-                </form>
-            </div>
-            <div className={classes.formContainer}>
-                <h2>Entrez votre mot de passe.</h2>
-                <form onSubmit={(e) => handleLogIn(e)}>
-                    <div className={classes.codeContainer}>
-                        {
-                            logging ?
-                                // <AuthCode
-                                //     autoFocus={false}
-                                //     characters={9}
-                                //     onChange={setCode}
-                                // /> 
-                                <> <div style={{ position: 'relative', display: 'flex' }}>
-                                    <Input defaultValue={code} ref={toFocus} placeholder="Mot de passe" type={showPassword ? "text" : "password"} onChange={(e) => setCode(e.target.value)} />
-                                    <div className={classes.showPassword} onClick={() => setShowPass(!showPassword)}>
-                                        {showPassword ?
-                                            <FiEyeOff />
-                                            :
-                                            <FiEye />
-                                        }
-                                    </div>
+                </div>
+                <div className={classes.slider} ref={slider}>
+                    <div className={classes.formContainer}>
+                        <h2>Connectez-vous à votre espace <span>Signally</span></h2>
+                        <form onSubmit={(e) => handleSubmit(e)}>
+                            <div className={classes.inputContainer}>
+                                <div style={{ position: 'relative', display: 'flex' }}>
+                                    <Input autoComplete="email" style={{ width: "100%" }} placeholder='Email' onChange={(e) => setEmail(e.target.value)} value={email} type="text" />
                                 </div>
-                                </>
-                                : <>
-                                    <Input defaultValue={code} placeholder="Mot de passe" type="password" onChange={(e) => setCode(e.target.value)} />
-                                    {/* <div>
+                            </div>
+                            <Button width={"30%"} color="orangeFill" type="submit" arrow>Connexion</Button>
+                        </form>
+                    </div>
+                    <div className={classes.formContainer}>
+                        <h2>Entrez votre mot de passe</h2>
+                        <form onSubmit={(e) => handleLogIn(e)}>
+                            <div className={classes.codeContainer}>
+                                {
+                                    logging ?
+                                        // <AuthCode
+                                        //     autoFocus={false}
+                                        //     characters={9}
+                                        //     onChange={setCode}
+                                        // /> 
+                                        <> <div style={{ position: 'relative', display: 'flex' }}>
+                                            <Input autoComplete="current-password" defaultValue={code} ref={toFocus} placeholder="Mot de passe" type={showPassword ? "text" : "password"} onChange={(e) => setCode(e.target.value)} />
+                                            <div className={classes.showPassword} onClick={() => setShowPass(!showPassword)}>
+                                                {showPassword ?
+                                                    <FiEyeOff />
+                                                    :
+                                                    <FiEye />
+                                                }
+                                            </div>
+                                        </div>
+                                        </>
+                                        : <>
+                                            <Input defaultValue={code} placeholder="Mot de passe" type="password" onChange={(e) => setCode(e.target.value)} />
+                                            {/* <div>
                                         <input />
                                         <input />
                                         <input />
@@ -137,29 +155,15 @@ const Login = () => {
                                         <input />
                                         <input />
                                     </div> */}
-                                </>}
+                                        </>}
+                            </div>
+                            <span onClick={() => setModal(true)} className={classes.forgot}>Mot de passe oublié</span>
+                            <div className={classes.btnsContainer}>
+                                <Button width={"30%"} color="orangeFill" type="submit">Connexion</Button>
+                                <Button width={"30%"} color="orange" onClick={(e) => { handleScroll(e, 0) }}>Annuler</Button>
+                            </div>
+                        </form>
                     </div>
-                    <div className={classes.btnsContainer}>
-                        <Button width={"40%"} color="orangeFill" type="submit">Connexion</Button>
-                        <Button width={"40%"} color="orange" onClick={(e) => { handleScroll(e, 0) }}>Annuler</Button>
-                    </div>
-                </form>
-                <span className={classes.error}>
-                    {error}
-                </span>
-            </div>
-        </div>
-        <div className={classes.textIllustration}>
-            <div className={classes.Illustration} style={{ flexDirection: 'row', display: 'flex' }}>
-                <img src={Illustration} alt="" />
-                <div>
-                    <h1>Bienvenue sur la Beta privée Signally !</h1>
-                    <p>Nous sommes très heureux de vous compter parmi les tous premiers utilisateurs.</p>
-                    <p>Avec vous, nous souhaitons faire de Signally, l’application la plus intuitive et la plus innovante du marché tout en répondant au mieux à vos
-                        objectifs de communication et de marketing.</p>
-                    <p>Comme nous sommes en version Beta, tout n’est pas encore parfait !</p>
-                    <p>Néanmoins, grâce à vous, nous pourrons rendre la plateforme de plus en plus performante et encore plus simple à utiliser.</p>
-                    <p>Un grand merci pour votre aide.</p><br />
                 </div>
             </div>
         </div>

@@ -30,13 +30,18 @@
 }
 
 
-.landing {
+.signup {
     top: 2.75rem;
     right: auto;
     bottom: 1.25rem;
     left: 58.5%;
 }
 
+.login {
+    left: auto;
+    right: 20%;
+    top: 30%;
+}
 
 @keyframes fadeInLeft {
     0% {
@@ -64,6 +69,21 @@
     }
     100% {
         top: .5rem;
+        opacity: 0;
+    }
+}
+
+.login.fadeOut {
+    animation: fadeOutAnimateLogin 1s forwards ease-out!important;
+}
+
+@keyframes fadeOutAnimateLogin {
+    0% {
+        top: 30%;
+        opacity: 1;
+    }
+    100% {
+        top: 25%;
         opacity: 0;
     }
 }

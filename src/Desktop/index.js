@@ -23,15 +23,19 @@ export default function DesktopRoutes() {
     return (
         <Switch>
             <Route exact path="/">
+            <NotificationProvider login>
                 <Home />
+            </NotificationProvider>
             </Route>
 
             <Route exact path="/sign-in">
+            <NotificationProvider login>
                 <Home />
+            </NotificationProvider>
             </Route>
 
             <Route exact path="/sign-up">
-            <NotificationProvider landing>
+            <NotificationProvider signup>
                 <Signup />
             </NotificationProvider>
             </Route>

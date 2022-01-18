@@ -122,14 +122,14 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                 {edit === "copySign" ? <CopySignature signature={assignedTemplate} /> : <>
                     <div className={classes.topLine}>
                         <h2>Édition <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></h2>
-                        <Button color="brown">Modifier équipes</Button>
+                        <Button color="brown" onClick={() => {setEdit('assign-team')}}>Modifier équipes</Button>
                         {/* {show.name ? <Select onChange={(e) => setEdit(e.target.value)} items={[{ name: "Modifier signature", '@id': "assign-signature" }, { name: "Modifier équipes", '@id': "assign-team" }]} /> : ""} */}
                     </div>
                     <div className={classes.row}>
                         <div>
                             <label>Choisissez votre signature</label>
-                            <CustomSelect onChange={(e) => setSelectedTemplate((e.target.value))} items={templates} defaultValue={templates[0]} />
-                            {/* <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
+                            {/* <CustomSelect onChange={(e) => setSelectedTemplate((e.target.value))} display="name" getValue="name" items={templates} defaultValue={templates[0]} /> */}
+                            <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
                                 <select defaultValue={JSON.stringify(templates[0])}>
                                     {templates.map((template) => {
                                         return <option key={template.id} value={JSON.stringify(template)} template={template.html}>
@@ -137,7 +137,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                                         </option>
                                     })}
                                 </select>
-                            </form> */}
+                            </form>
                             <div className={classes.signature}>
                                 {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate?.html} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
                             </div>
@@ -146,7 +146,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                             {/* if event list events */}
                             {events.length > 0 ? <>
                                 <label>Choisissez votre event actuel</label>
-                                <CustomSelect items={events} defaultValue={events[0]} />
+                                <CustomSelect display="name" getValue="name" items={events} defaultValue={events[0]} />
                                 {/* <div title='Cette fonctionnalité arrive très prochainement'>
 
                                     <div className="disabled" title='Cette fonctionnalité arrive très prochainement' alt='Cette fonctionnalité arrive très prochainement'>
