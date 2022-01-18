@@ -100,7 +100,11 @@ const Signup = () => {
     }
     if (valid) {
       setLoading(true)
-      const signup = await axios.post(API + 'register', req)
+      const signup = await axios.post(API + 'register', req).catch((err) => { 
+        notification({ content: <>Erreur lors de la création</>, status: "invalid" }) 
+        setLoading(false);
+        return;
+      })
       console.log(signup)
       if (signup.data) {
         setSent(true)
@@ -127,30 +131,30 @@ const Signup = () => {
           </div>
           {
             sent ? <><div className={classes.congrats}>
-              <h2>Félicitations.</h2> 
+              <h2>Félicitations.</h2>
               <p>Votre compte a bien été créé.</p>
               <p>Veuillez maintenant consulter votre boite mail et cliquer sur le lien de connexion.</p>
-              </div></> :
+            </div></> :
               <div className={`${classes.formContainer} ${loading ? classes.disappear : ""}`}>
                 <form onSubmit={(e) => handleSignUp(e)}>
                   <div className={classes.inputs}>
                     <div className={classes.inputContainer}>
                       <label className={classes.inputTitle}>Prénom</label>
                       <div style={{ position: 'relative', display: 'flex' }}>
-                        <Input required placeholder='Jean' onChange={(e) => setFirstname(e.target.value)} value={firstname} type='text' />
+                        <Input required autoComplete="given-name" placeholder='Jean' onChange={(e) => setFirstname(e.target.value)} value={firstname} type='text' />
                       </div>
                     </div>
                     <div className={classes.inputContainer}>
                       <label className={classes.inputTitle}>Nom</label>
                       <div style={{ position: 'relative', display: 'flex' }}>
-                        <Input required placeholder='Dupont' onChange={(e) => setLastname(e.target.value)} value={lastname} type='text' />
+                        <Input required autoComplete="family-name" placeholder='Dupont' onChange={(e) => setLastname(e.target.value)} value={lastname} type='text' />
                       </div>
                     </div>
                   </div>
                   <div className={classes.inputContainer}>
                     <label className={classes.inputTitle}>Position</label>
                     <div style={{ position: 'relative', display: 'flex' }}>
-                      <Input required placeholder='CEO' onChange={(e) => setPosition(e.target.value)} value={position} type="text" />
+                      <Input required autoComplete="organization-title" placeholder='CEO' onChange={(e) => setPosition(e.target.value)} value={position} type="text" />
                     </div>
                   </div>
                   <div className={classes.inputContainer}>
@@ -175,7 +179,7 @@ const Signup = () => {
                   <div className={classes.inputs}>
                     <div className={classes.inputContainer}>
                       <label className={classes.inputTitle}>Société</label>
-                      <Input required placeholder='Signally' onChange={(e) => setSocietyName(e.target.value)} value={societyName} type="text" />
+                      <Input required autoComplete="organization" placeholder='Signally' onChange={(e) => setSocietyName(e.target.value)} value={societyName} type="text" />
                       <div className={classes.spacing}></div>
                       <label className={classes.inputTitle}>Nombre de collaborateurs</label>
                       <div style={{ position: 'relative', display: 'flex', marginTop: 15, marginBottom: 15 }}>

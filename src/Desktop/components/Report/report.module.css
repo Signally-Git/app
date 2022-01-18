@@ -2,7 +2,7 @@
   margin-top: auto;
   min-width: 55%;
   border-radius: 20px;
-  padding: 10rem 2rem 1rem 2rem;
+  padding: 1rem 2rem 1rem 2rem;
   max-height: 95%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -13,8 +13,6 @@
           flex-direction: column;
   overflow: auto;
   background-color: #fff;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
 }
 
 .container p, .container input {
@@ -42,6 +40,7 @@
 
 .container h4 ~ div {
   margin-top: .5rem;
+  max-width: 55%;
 }
 
 .container select {
@@ -76,6 +75,10 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: start;
