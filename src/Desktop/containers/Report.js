@@ -14,12 +14,6 @@ export default function Report() {
     const [bug, setBug] = useState("")
     const history = useHistory()
     const [select, setSelect] = useState("SIGNALLY_APP")
-    const options = [
-        { name: "SIGNALLY_APP" },
-        { name: "OUTLOOK_DISPLAY" },
-        { name: "COMMENTS" },
-        { name: "RECOMMENDATIONS" }
-    ]
     const table = [
         { key: "SIGNALLY_APP", name: "Problème rencontré sur l'application" },
         { key: "OUTLOOK_DISPLAY", name: "Problème d'affichage de la signature dans Outlook" },
@@ -48,7 +42,7 @@ export default function Report() {
     }
 
     useEffect(() => {
-        console.log(table.filter((entry) => entry.key === select))
+        console.log(select)
     }, [select])
 
     return (<>
@@ -65,7 +59,7 @@ export default function Report() {
                 </div>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <h4>Type du problème, commentaire, suggestion</h4>
-                    <CustomSelect onChange={(e) => setSelect((e.target.value))} items={table} getValue={'key'} display={'name'} defaultValue={table[0]} />
+                    <CustomSelect onChange={(e) => setSelect(e.target.value)} display="name" getValue="key" items={table} defaultValue={table[0].key} />
                     {/* <form onChange={(e) => setSelect(e.target.value)}>
                         <select>
                             <option value="SIGNALLY_APP">Problème rencontré sur l'application</option>
@@ -75,7 +69,7 @@ export default function Report() {
                         </select>
                     </form> */}
                     <br />
-                    {/* <h4>{table.filter((entry) => entry.key === select)[0].name}</h4> */}
+                    <h4>{table.filter((entry) => entry.key === select)[0].name}</h4>
                     <Input placeholder="Bonjour, comme vous pouvez le voir sur cette image en PJ, le logo de l'entreprise ne s'affiche pas sur Outlook."
                         style={{ height: "4.5rem", resize: "none", width: '100%' }}
                         onChange={(e) => setBug(e.target.value)} type="textarea" />

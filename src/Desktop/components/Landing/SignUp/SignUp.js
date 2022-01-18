@@ -74,11 +74,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (firstname.length > 0 && lastname.length > 0 && position.length > 0 && password.length > 0 && societyName.length > 0) {
-      console.log('true vite fait')
-      console.log(email, validateEmail(email))
-      console.log(siret, validateSiret(siret))
       if (validateEmail(email) && validateSiret(siret)) {
-        console.log('true')
         setValid(true)
       }
       else {
@@ -109,8 +105,8 @@ const Signup = () => {
     }
     if (valid) {
       setLoading(true)
-      const signup = await axios.post(API + 'register', req).catch((err) => { 
-        notification({ content: <>Erreur lors de la création</>, status: "invalid" }) 
+      const signup = await axios.post(API + 'register', req).catch((err) => {
+        notification({ content: <>Erreur lors de la création</>, status: "invalid" })
         setLoading(false);
         return;
       })
@@ -192,23 +188,13 @@ const Signup = () => {
                       <div className={classes.spacing}></div>
                       <label className={classes.inputTitle}>SIRET</label>
                       <div style={{ position: 'relative', display: 'flex', marginBottom: 15 }}>
-                      <Input required placeholder='44306184100047' onChange={(e) => setSiret(e.target.value)} value={siret} type="text" />
-                        {/* <form onChange={(e) => setNbPerson(e.target.value)}>
-                          <select>
-                          <option value="1 à 5" selected>1 à 5</option>
-                          <option value="5 à 20">5 à 20</option>
-                          <option value="20 à 50">20 à 50</option>
-                          <option value="50 à 100">50 à 100</option>
-                          <option value="100+">100+</option>
-                          </select>
-                        </form> */}
-
+                        <Input required placeholder='44306184100047' onChange={(e) => setSiret(e.target.value)} value={siret} type="text" />
                       </div>
                     </div>
                     <div className={classes.inputContainer}>
-                        <label className={classes.inputTitle}>Nombre de collaborateurs</label>
+                      <label className={classes.inputTitle}>Nombre de collaborateurs</label>
                       <div style={{ position: 'relative', display: 'flex' }}>
-                      <CustomSelect onChange={(e) => setNbPerson(e.target.value)} items={nbs} getValue={'name'} display={'name'} defaultValue={nbs[0]} />
+                        <CustomSelect onChange={(e) => setNbPerson(e.target.value)} items={nbs} getValue={'name'} display={'name'}/>
                       </div>
                     </div>
                   </div>

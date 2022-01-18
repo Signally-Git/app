@@ -38,9 +38,9 @@ export default function SignaturePreview({ show, edit, setEdit }) {
     useEffect(async () => {
         setEntity(await request.get(`${type}s/${show.id}`))
         // console.log(selectedTemplate)
-        console.log(event)
-        const isEvent = selectedTemplate?.html !== undefined ? selectedTemplate.html : "asd"
-        if (isEvent.includes("PLACEHOLDER_EVENT_BANNER") === true) {
+        const isEvent = selectedTemplate?.html || ""
+        // if (isEvent.toString().includes(`event`) === true) {
+        // if (isEvent) {
             const events = await request.get('events');
             setEvents(events.data["hydra:member"].filter((data) => (new Date(data.startAt) < new Date()) && (new Date(data.endAt) > new Date())).sort(function (a, b) {
                 if (a.startAt < b.startAt) { return -1; }
@@ -48,10 +48,10 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                 return 0
             }))
             setEvent(events.data["hydra:member"][0])
-        }
-        else {
-            setEvents([])
-        }
+        // }
+        // else {
+        //     setEvents([])
+        // }
     }, [selectedTemplate])
 
     useEffect(() => {
@@ -65,7 +65,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
         setAssignedTemplate(entity.data.compiledSignature)
         const templates = await request.get('signatures')
         console.log(templates)
-        setSelectedTemplate(templates.data["hydra:member"][0])
+        setSelectedTemplate(templates.data["hydra:member"][0].html)
         setTemplates(templates.data["hydra:member"])
         // }
         // if (!show.signature)
@@ -128,25 +128,18 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                     <div className={classes.row}>
                         <div>
                             <label>Choisissez votre signature</label>
-                            {/* <CustomSelect onChange={(e) => setSelectedTemplate((e.target.value))} display="name" getValue="name" items={templates} defaultValue={templates[0]} /> */}
-                            <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
-                                <select defaultValue={JSON.stringify(templates[0])}>
-                                    {templates.map((template) => {
-                                        return <option key={template.id} value={JSON.stringify(template)} template={template.html}>
-                                            {template.name}
-                                        </option>
-                                    })}
-                                </select>
-                            </form>
+                            {templates.length > 0 && 
+                            <CustomSelect onChange={(e) => setSelectedTemplate(e.target.value)} display="name" getValue="html" items={templates} />}
                             <div className={classes.signature}>
-                                {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate?.html} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
+                                {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
                             </div>
                         </div>
                         <div>
                             {/* if event list events */}
                             {events.length > 0 ? <>
                                 <label>Choisissez votre event actuel</label>
-                                <CustomSelect display="name" getValue="name" items={events} defaultValue={events[0]} />
+                                <CustomSelect onChange={(e) => setEvent(e.target.value)} display="name" getValue="@id" items={events} />
+                                {/* <CustomSelect display="name" getValue="name" items={events} defaultValue={events[0]} /> */}
                                 {/* <div title='Cette fonctionnalité arrive très prochainement'>
 
                                     <div className="disabled" title='Cette fonctionnalité arrive très prochainement' alt='Cette fonctionnalité arrive très prochainement'>
