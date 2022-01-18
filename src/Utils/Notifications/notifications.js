@@ -4,7 +4,7 @@ import * as React from 'react'
 
 const NotificationContext = React.createContext()
 
-function NotificationProvider({ children }) {
+function NotificationProvider({ children, landing }) {
     const [message, setMessage] = React.useState()
 
     React.useEffect(() => {
@@ -16,7 +16,7 @@ function NotificationProvider({ children }) {
     }, [message])
 
     return <NotificationContext.Provider value={setMessage}>
-        {message && <div className={`${classes[message.status]} ${classes.container} ${message.disappear ? classes.fadeOut : ""}`}>
+        {message && <div className={`${landing ? classes.landing : ""} ${classes[message.status]} ${classes.container} ${message.disappear ? classes.fadeOut : ""}`}>
             <p>{message.content}</p>
             {message.status === "valid" ?
                 <ImCheckmark /> :

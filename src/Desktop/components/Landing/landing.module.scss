@@ -8,7 +8,6 @@
 .container {
     display: flex;
     flex-direction: row-reverse;
-    padding-top: 5rem;
     // min-height: 70vh;
     height: 70vh;
     max-width: 95%;
@@ -16,12 +15,15 @@
     margin: auto;
     align-items: center;
     position: relative;
+    h1 {
+        font-size: 1.8rem;
+    }
     p,
     label {
         font-size: 0.9rem;
     }
     img {
-        max-width: 25rem;
+        max-width: 27rem;
         margin-right: 1rem;
     }
     form {
@@ -42,6 +44,13 @@
         border-radius: 10px;
         width: 100%;
         border-color: transparent;
+    }
+}
+
+.descriptionBeta {
+    max-width: 60%;
+    p {
+        font-size: 1.1rem;
     }
 }
 
@@ -74,10 +83,11 @@
     }
     .textIllustration {
         margin: 0;
-        max-width: 55%;
-        flex-direction: column-reverse;
-        margin-bottom: 5rem;
     }
+}
+
+.spacing {
+    height: 1rem;
 }
 
 .error p{
@@ -241,4 +251,49 @@
 
 .footer__logo img {
     margin: 0 !important;
+}
+
+.congrats {
+    width: 100%;
+    margin: auto;
+    max-width: 30%; 
+    font-size: 1.25rem;
+    * {
+        opacity: 0;
+        animation: fadeIn ease 2s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+    p {
+        font-size: 1.15rem;
+        animation-delay: .5s;
+    }
+    h2 {
+        color: $signally-orange
+    }
+}
+
+.disappear {
+    opacity: 1;
+    animation: fadeOut ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1;
+    }
 }

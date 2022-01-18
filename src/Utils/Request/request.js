@@ -7,7 +7,7 @@ const request = axios.create({
     baseURL: API
 });
 if (localStorage.getItem('token'))
-request.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+    request.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
 
 request.interceptors.response.use((response) => {
     if (response.status === 401) {
@@ -21,7 +21,7 @@ request.interceptors.response.use((response) => {
                 localStorage.setItem('token', res.data.token)
                 localStorage.setItem('refresh_token', res.data.refresh_token)
                 window.location.replace('/')
-            })
+            }).catch(() => { localStorage.removeItem('token'); localStorage.removeItem('refresh_token') })
 
         }
         return Promise.reject(error.response.data);

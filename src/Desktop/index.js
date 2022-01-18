@@ -15,6 +15,7 @@ import Store from './containers/Store'
 import Billing from './containers/Billing'
 import Report from './containers/Report'
 import Signup from './components/Landing/SignUp/SignUp'
+import { NotificationProvider } from 'Utils/Notifications/notifications'
 
 // Routing for desktop view
 
@@ -30,7 +31,9 @@ export default function DesktopRoutes() {
             </Route>
 
             <Route exact path="/sign-up">
+            <NotificationProvider landing>
                 <Signup />
+            </NotificationProvider>
             </Route>
 
             <PrivateRoute exact path="/dashboard" page="home" component={Dashboard} />

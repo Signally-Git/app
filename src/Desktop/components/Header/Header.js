@@ -6,6 +6,8 @@ import { useState } from "react"
 
 const soon = "Cette fonctionnalité arrive très prochainement !"
 
+// DATA ATTRIBUTES
+
 // Desktop header 
 // containing font logo
 // studio / store buttons
@@ -17,17 +19,17 @@ function Header(props) {
     let history = useHistory()
 
     return (
-        <div className={classes.dashboardContainer}>
+        <div className={`${classes.dashboardContainer} ${props.landing ? classes.landing : ""}`}>
             <div onClick={() => setNotif(!notif)} className={classes.logoContainer}>
                 <Logo />
-                <Link to="/report" className={classes.reportContainer}>
+                {!props.landing ? <Link to="/report" className={classes.reportContainer}>
                     <div>
                         <span title="Signaler un bug" className={classes.beta}>
-                            Bêta privée
+                            Beta privée
                         </span>
                         {props.landing !== true && <button>Signaler un problème</button>}
                     </div>
-                </Link>
+                </Link> : ""}
             </div>
             {props.landing !== true ? <>
                 <div className={classes.rightSide}>
@@ -51,7 +53,7 @@ function Header(props) {
                     </div>
                 </div>
             </> : <>
-                <ul className={classes.nonLogged}>
+                <ul className={`${classes.nonLogged}`}>
                     <li><Link to="/dashboard">Connexion</Link></li>
                     <li><Link to="/sign-up">Inscription</Link></li>
                 </ul></>}

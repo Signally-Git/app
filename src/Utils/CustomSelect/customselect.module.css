@@ -23,6 +23,43 @@
   cursor: pointer;
 }
 
+.open input {
+  border-radius: 10px 10px 0 0;
+}
+
+.open .inputContainer > svg {
+  -webkit-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+}
+
+.inputContainer {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.inputContainer input[type="text"] {
+  z-index: 6;
+  width: 100%;
+  font-weight: bold;
+  color: #402927;
+}
+
+.inputContainer svg {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  cursor: pointer;
+  z-index: 7;
+  right: 1rem;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  position: absolute;
+  color: #402927;
+}
+
 .splitter {
   font-size: .8rem;
   color: #FF7954;
@@ -31,21 +68,50 @@
 
 .list {
   position: absolute;
-  top: 3.5rem;
+  top: 1rem;
   left: 0;
-  margin: 0;
+  right: 0;
+  z-index: 5;
+  margin: 0 auto;
+  border: 1px solid #EBE4E1;
   width: 100%;
-  background-color: #f0e9e9;
-  padding: .5rem;
+  background-color: #FFF;
+  -webkit-box-shadow: 0 20px 30px #EBE4E1;
+          box-shadow: 0 20px 30px #EBE4E1;
+  border-radius: 0 0 10px 10px;
+  padding: 0;
+  padding-top: 2.65rem;
   list-style: none;
+  overflow: hidden;
+  opacity: 0;
+  -webkit-animation: dropDown 1s;
+          animation: dropDown 1s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 .list li {
-  margin: .5rem 0;
+  margin: 0;
+  padding: 1rem 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: .9rem;
+  font-weight: normal;
+  color: #402927;
 }
 
 .list li input, .list li input + svg {
   opacity: 0;
+  color: #FF7954;
 }
 
 .list li input:checked + svg {
@@ -53,5 +119,36 @@
 }
 
 .list li:hover {
-  opacity: .5;
+  -webkit-transition: .2s;
+  transition: .2s;
+  color: #402927;
+  background-color: #F4EEEF;
+}
+
+@-webkit-keyframes dropDown {
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    max-height: 100vh;
+  }
+}
+
+@keyframes dropDown {
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    max-height: 100vh;
+  }
 }

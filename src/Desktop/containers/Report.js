@@ -7,12 +7,19 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Noting from 'Assets/img/noting.png'
 import request from "Utils/Request/request";
 import { useNotification } from "Utils/Notifications/notifications";
+import CustomSelect from "Utils/CustomSelect/customselect";
 
 export default function Report() {
     const [file, setFile] = useState()
     const [bug, setBug] = useState("")
     const history = useHistory()
     const [select, setSelect] = useState("SIGNALLY_APP")
+    const options = [
+        { name: "SIGNALLY_APP" },
+        { name: "OUTLOOK_DISPLAY" },
+        { name: "COMMENTS" },
+        { name: "RECOMMENDATIONS" }
+    ]
     const table = [
         { key: "SIGNALLY_APP", name: "Application signally.io" },
         { key: "OUTLOOK_DISPLAY", name: "Problème d'affichage de la signature dans Outlook" },
@@ -58,14 +65,15 @@ export default function Report() {
                 </div>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <h4>Type du problème, commentaire, suggestion</h4>
-                    <form onChange={(e) => setSelect(e.target.value)}>
+                    <CustomSelect onChange={(e) => setSelect((e.target.value))} items={table} defaultValue={table[0]} />
+                    {/* <form onChange={(e) => setSelect(e.target.value)}>
                         <select>
                             <option value="SIGNALLY_APP">Problème rencontré sur l'application</option>
                             <option value="OUTLOOK_DISPLAY">Problème d'affichage de la signature dans Outlook</option>
                             <option value="COMMENTS">Commentaire</option>
                             <option value="RECOMMENDATIONS">Suggestion</option>
                         </select>
-                    </form>
+                    </form> */}
                     <br />
                     <h4>{table.filter((entry) => entry.key === select)[0].name}</h4>
                     <Input placeholder="Bonjour, comme vous pouvez le voir sur cette image en PJ, le logo de l'entreprise ne s'affiche pas sur Outlook."

@@ -32,6 +32,10 @@
   z-index: 5;
 }
 
+.landing .logoContainer {
+  margin-top: 0;
+}
+
 .container {
   position: fixed;
   -webkit-box-sizing: border-box;
@@ -76,13 +80,28 @@
   -webkit-transition: 0.2s;
   transition: 0.2s;
   font-size: .95rem;
-  padding: .5rem 1rem;
 }
 
 .nonLogged li a {
+  font-weight: 600;
+  margin-right: 1rem;
+  padding: 0.25rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #402927;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-  color: #65443E;
+}
+
+.nonLogged li:last-child a {
+  border: 1px solid #FF7954;
+  color: #FF7954;
+}
+
+.nonLogged li:last-child a:hover {
+  border-color: #FF7954;
+  background: #FF7954;
+  color: #FFF;
 }
 
 .nonLogged li:hover {
@@ -90,21 +109,6 @@
 }
 
 .nonLogged li:hover a {
-  color: #FF7954;
-}
-
-.nonLogged li:last-child {
-  border: 1px solid #65443E;
-  border-radius: 100px;
-}
-
-.nonLogged li:last-child:hover {
-  cursor: pointer;
-  opacity: 1;
-  border-color: #FF7954;
-}
-
-.nonLogged li:last-child:hover a {
   color: #FF7954;
 }
 

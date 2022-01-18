@@ -9,6 +9,7 @@ import AuthCode from 'react-auth-code-input';
 import { API } from 'config';
 import { useHistory, useLocation } from 'react-router-dom';
 import request from 'Utils/Request/request';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 function useQuery() {
     const { search } = useLocation();
@@ -21,6 +22,7 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [code, setCode] = useState('')
     const [logging, setLogging] = useState(false)
+    const [showPassword, setShowPass] = useState(false)
     const slider = useRef(null)
     const toFocus = useRef(null)
 
@@ -56,7 +58,7 @@ const Login = () => {
             setError('')
         }, 300)
     }
-    
+
     const handleSubmit = (e) => {
         handleScroll(e, 1000)
         setTimeout(() => {
@@ -65,7 +67,7 @@ const Login = () => {
             toFocus.current.focus()
         }, 300)
     }
-    
+
     const handleLogIn = async (e) => {
         setError('')
         e.preventDefault()
@@ -73,7 +75,7 @@ const Login = () => {
             username: email.toLowerCase(),
             password: code
         }
-        
+
         const token = await request.post(`token/auth`, req).catch(() => {
             setError(<p>Impossible de se connecter.<br />Veuillez vérifier vos identifiants.</p>)
         });
@@ -101,7 +103,7 @@ const Login = () => {
                 </form>
             </div>
             <div className={classes.formContainer}>
-                <h2>Entrez le code reçu par mail.</h2>
+                <h2>Entrez votre mot de passe.</h2>
                 <form onSubmit={(e) => handleLogIn(e)}>
                     <div className={classes.codeContainer}>
                         {
@@ -111,9 +113,19 @@ const Login = () => {
                                 //     characters={9}
                                 //     onChange={setCode}
                                 // /> 
-                                <Input defaultValue={code} ref={toFocus} placeholder="Password" type="password" onChange={(e) => setCode(e.target.value)} />
+                                <> <div style={{ position: 'relative', display: 'flex' }}>
+                                    <Input defaultValue={code} ref={toFocus} placeholder="Mot de passe" type={showPassword ? "text" : "password"} onChange={(e) => setCode(e.target.value)} />
+                                    <div className={classes.showPassword} onClick={() => setShowPass(!showPassword)}>
+                                        {showPassword ?
+                                            <FiEyeOff />
+                                            :
+                                            <FiEye />
+                                        }
+                                    </div>
+                                </div>
+                                </>
                                 : <>
-                                    <Input defaultValue={code} placeholder="Password" type="password" onChange={(e) => setCode(e.target.value)} />
+                                    <Input defaultValue={code} placeholder="Mot de passe" type="password" onChange={(e) => setCode(e.target.value)} />
                                     {/* <div>
                                         <input />
                                         <input />
@@ -141,15 +153,13 @@ const Login = () => {
             <div className={classes.Illustration} style={{ flexDirection: 'row', display: 'flex' }}>
                 <img src={Illustration} alt="" />
                 <div>
-                    <h1>À propos de la bêta</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. <span>Tempore</span> molestias animi, illum iusto, cumque, laudantium a consectetur fugiat ex nisi ipsa. Consequuntur dolorum obcaecati magni perspiciatis ipsam necessitatibus, sequi quasi?
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore molestias animi, illum iusto, cumque, <span>laudantium</span> a consectetur fugiat ex nisi ipsa. Consequuntur dolorum obcaecati magni <span>perspiciatis</span> ipsam necessitatibus, sequi quasi?
-                    </p>
-                    <br />
-                    <p>*Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+                    <h1>Bienvenue sur la Beta privée Signally !</h1>
+                    <p>Nous sommes très heureux de vous compter parmi les tous premiers utilisateurs.</p>
+                    <p>Avec vous, nous souhaitons faire de Signally, l’application la plus intuitive et la plus innovante du marché tout en répondant au mieux à vos
+                        objectifs de communication et de marketing.</p>
+                    <p>Comme nous sommes en version Beta, tout n’est pas encore parfait !</p>
+                    <p>Néanmoins, grâce à vous, nous pourrons rendre la plateforme de plus en plus performante et encore plus simple à utiliser.</p>
+                    <p>Un grand merci pour votre aide.</p><br />
                 </div>
             </div>
         </div>

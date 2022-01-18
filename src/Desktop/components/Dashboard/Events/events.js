@@ -23,7 +23,11 @@ function Events() {
 
     const getData = async () => {
         const events = await request.get(`events`)
-        setActiveEvents(events.data["hydra:member"])
+        setActiveEvents(events.data["hydra:member"].sort(function (a, b) {
+            if (a.startAt < b.startAt) { return -1; }
+            if (a.startAt > b.startAt) { return 1; }
+            return 0
+        }))
     }
 
     useEffect(() => {

@@ -34,15 +34,15 @@ export default function CreateUser() {
     }
 
     const handleSave = async () => {
-        const req = team !== "Aucun" ? {
+        const req = team === "Aucun" || !team ?  { ...user } : {
             team: team,
             ...user
-        } : { ...user }
+        }
         await request.post('users', req).then((res) => {
             notification({ content: <>Le collaborateur <span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> a été créé avec succès</>, status: "valid" })
             history.push('/teams/users')
         }).catch(
-            (err) => err.violations[0].code === '23bd9dbf-6b9b-41cd-a99e-4844bcf3077f' ?
+            (err) => err?.violations[0]?.code === '23bd9dbf-6b9b-41cd-a99e-4844bcf3077f' ?
                 notification({ content: <><span style={{ color: "#FF7954" }}>{user.email}</span> a déjà été créé</>, status: "invalid" }) : notification({ content: <><span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> n'a pas pu être créé</>, status: "invalid" }))
     }
 

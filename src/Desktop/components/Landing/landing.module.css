@@ -6,7 +6,6 @@
   -webkit-box-direction: reverse;
       -ms-flex-direction: row-reverse;
           flex-direction: row-reverse;
-  padding-top: 5rem;
   height: 70vh;
   max-width: 95%;
   -webkit-box-pack: center;
@@ -19,13 +18,17 @@
   position: relative;
 }
 
+.container h1 {
+  font-size: 1.8rem;
+}
+
 .container p,
 .container label {
   font-size: 0.9rem;
 }
 
 .container img {
-  max-width: 25rem;
+  max-width: 27rem;
   margin-right: 1rem;
 }
 
@@ -49,6 +52,14 @@
   border-radius: 10px;
   width: 100%;
   border-color: transparent;
+}
+
+.descriptionBeta {
+  max-width: 60%;
+}
+
+.descriptionBeta p {
+  font-size: 1.1rem;
 }
 
 .inputs {
@@ -92,12 +103,10 @@
 
 .registerContainer .textIllustration {
   margin: 0;
-  max-width: 55%;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: column-reverse;
-          flex-direction: column-reverse;
-  margin-bottom: 5rem;
+}
+
+.spacing {
+  height: 1rem;
 }
 
 .error p {
@@ -303,4 +312,77 @@
 
 .footer__logo img {
   margin: 0 !important;
+}
+
+.congrats {
+  width: 100%;
+  margin: auto;
+  max-width: 30%;
+  font-size: 1.25rem;
+}
+
+.congrats * {
+  opacity: 0;
+  -webkit-animation: fadeIn ease 2s;
+          animation: fadeIn ease 2s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.congrats p {
+  font-size: 1.15rem;
+  -webkit-animation-delay: .5s;
+          animation-delay: .5s;
+}
+
+.congrats h2 {
+  color: #FF7954;
+}
+
+.disappear {
+  opacity: 1;
+  -webkit-animation: fadeOut ease 2s;
+          animation: fadeOut ease 2s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

@@ -1,0 +1,29 @@
+@import '../../Assets/style/colors.scss';
+
+.container {
+    background: #FFF;
+    box-shadow: 0 0 40px $signally-darkgrey;
+    width: 60%;
+    max-height: 15rem;
+    border-radius: 20px;
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    left: -100%;
+    top: -25%;
+    align-items: center;
+    justify-content: space-evenly;
+    h3 {
+        margin: 0;
+        text-align: center;
+    }
+}
+
+.btnsContainer {
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+}

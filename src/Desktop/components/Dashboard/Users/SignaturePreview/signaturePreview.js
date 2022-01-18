@@ -16,6 +16,7 @@ import CopySignature from 'Desktop/components/CopySignature/CopySignature';
 import { BsCardHeading } from 'react-icons/bs';
 import Select from 'Utils/Select/select';
 import CustomSelect from 'Utils/CustomSelect/customselect';
+import Modal from 'Utils/Modals/modal';
 
 export default function SignaturePreview({ show, edit, setEdit }) {
     const today = new Date()
@@ -41,7 +42,11 @@ export default function SignaturePreview({ show, edit, setEdit }) {
         const isEvent = selectedTemplate?.html !== undefined ? selectedTemplate.html : "asd"
         if (isEvent.includes("PLACEHOLDER_EVENT_BANNER") === true) {
             const events = await request.get('events');
-            setEvents(events.data["hydra:member"])
+            setEvents(events.data["hydra:member"].filter((data) => (new Date(data.startAt) < new Date()) && (new Date(data.endAt) > new Date())).sort(function (a, b) {
+                if (a.startAt < b.startAt) { return -1; }
+                if (a.startAt > b.startAt) { return 1; }
+                return 0
+            }))
             setEvent(events.data["hydra:member"][0])
         }
         else {
@@ -67,6 +72,12 @@ export default function SignaturePreview({ show, edit, setEdit }) {
         //     setEdit(true)
     }, [show, edit])
 
+    // Modal
+    const [modal, setModal] = useState(false)
+    const handleSubmit = ((e) => {
+        setModal(true)
+    })
+
     // ASSIGNATION
     const handleAssign = async (element) => {
         // console.log(selectedTemplate)
@@ -91,6 +102,9 @@ export default function SignaturePreview({ show, edit, setEdit }) {
     }
 
     return (<div className={classes.flipcontainer}>
+        {modal ? <Modal title={<>Vous allez mettre en ligne <br />la signature <span className={classes.orangeTxt}>{selectedTemplate.name}</span> <br />pour <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></>}
+            cancel="Annuler"
+            validate="Confirmer" onCancel={() => setModal(false)} onConfirm={() => { handleAssign(show); setModal(false) }} /> : ""}
         <div className={`${classes.flipper} ${edit ? classes.flip : ""}`}>
             <div className={classes.front}>
                 <div className={classes.topLine}>
@@ -112,10 +126,10 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                         {/* {show.name ? <Select onChange={(e) => setEdit(e.target.value)} items={[{ name: "Modifier signature", '@id': "assign-signature" }, { name: "Modifier équipes", '@id': "assign-team" }]} /> : ""} */}
                     </div>
                     <div className={classes.row}>
-
                         <div>
                             <label>Choisissez votre signature</label>
-                            <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
+                            <CustomSelect onChange={(e) => setSelectedTemplate((e.target.value))} items={templates} defaultValue={templates[0]} />
+                            {/* <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
                                 <select defaultValue={JSON.stringify(templates[0])}>
                                     {templates.map((template) => {
                                         return <option key={template.id} value={JSON.stringify(template)} template={template.html}>
@@ -123,7 +137,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                                         </option>
                                     })}
                                 </select>
-                            </form>
+                            </form> */}
                             <div className={classes.signature}>
                                 {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate?.html} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
                             </div>
@@ -132,20 +146,20 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                             {/* if event list events */}
                             {events.length > 0 ? <>
                                 <label>Choisissez votre event actuel</label>
-                                <CustomSelect items={events} />
-                                <div title='Cette fonctionnalité arrive très prochainement'>
+                                <CustomSelect items={events} defaultValue={events[0]} />
+                                {/* <div title='Cette fonctionnalité arrive très prochainement'>
 
-                                <div className="disabled" title='Cette fonctionnalité arrive très prochainement' alt='Cette fonctionnalité arrive très prochainement'>
+                                    <div className="disabled" title='Cette fonctionnalité arrive très prochainement' alt='Cette fonctionnalité arrive très prochainement'>
 
-                                <Button  style={{ height: '2.5rem', marginRight: '0', borderRadius: '100px' }} color="orange">Programmation<div className={classes.event}>
-                                    <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect x="2.99625" y="2.99625" width="18.0075" height="18.0075" rx="3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M7.99833 6.99792H16.0017" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                    <span>{String(today.getDate()).padStart(2, '0')}</span>
-                                </div></Button>
-                                </div>
-                                </div>
+                                        <Button style={{ height: '2.5rem', marginRight: '0', borderRadius: '100px' }} color="orange">Programmation<div className={classes.event}>
+                                            <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="2.99625" y="2.99625" width="18.0075" height="18.0075" rx="3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                                <path d="M7.99833 6.99792H16.0017" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                            <span>{String(today.getDate()).padStart(2, '0')}</span>
+                                        </div></Button>
+                                    </div>
+                                </div> */}
                                 {/* <label>Programmation à venir</label>
                                 
                                 <CustomSelect items={events} multiple /> */}
@@ -174,7 +188,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
 
                         </div>
                     </div>
-                    <Button onClick={() => handleAssign(show)} color="orangeFill">Sauvegarder</Button>
+                    <Button onClick={() => handleSubmit()} color="orangeFill">Sauvegarder</Button>
                 </>}
             </div>
         </div>
