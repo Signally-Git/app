@@ -45,6 +45,7 @@
   width: 100%;
   font-weight: bold;
   color: #402927;
+  padding: .65rem 1rem;
 }
 
 .inputContainer svg {

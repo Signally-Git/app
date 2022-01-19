@@ -7,6 +7,7 @@ import { FiEdit, FiTrash } from 'react-icons/fi'
 import { useNotification } from 'Utils/Notifications/notifications'
 import request from 'Utils/Request/request'
 import { API } from 'config'
+import Modal from 'Utils/Modals/modal'
 
 function Events() {
     const [active, setActive] = useState("present")
@@ -45,14 +46,10 @@ function Events() {
 
     useEffect(() => {
         const handleModal = (toDelete) => {
-            return (<div className={classes.modal}>
-                <h4>Vous allez supprimer
-                    <br /><span className={classes.orangeTxt}>{toDelete?.name}</span></h4>
-                <div>
-                    <Button color="orangeFill" onClick={() => setModal()}>Annuler</Button>
-                    <Button color="orange" onClick={() => handleDelete(toDelete?.id)}>Supprimer</Button>
-                </div>
-            </div>)
+            return (
+            <Modal style={{width: '20rem', height: '11rem'}} title={<>Vous allez supprimer <br /><span className={classes.orangeTxt}>{toDelete?.name}</span></>} cancel="Annuler"
+            validate="Confirmer" onCancel={() => setModal()} onConfirm={() => { handleDelete(toDelete?.id) }} />
+            )
         }
         setModalContent(handleModal(modal))
     }, [modal, preview])
@@ -106,10 +103,10 @@ function Events() {
         <div onDragEnter={() => setDrag(true)}
 
         >
-            {modal ? modalContent : ""}
             <div className={classes.container}>
                 <h1>Events</h1>
                 <div className={classes.eventsContainer}>
+
                     <ul className={classes.menu}>
                         <li onClick={() => setActive("past")} className={active === "past" ? classes.active : ""}>Passés</li>
                         <li onClick={() => setActive("present")} className={active === "present" ? classes.active : ""}>En cours</li>
@@ -155,6 +152,7 @@ function Events() {
                 </div> : ""}
                 {preview ?
                     <div className={classes.flipcontainer}>
+                        {modal ? modalContent : ""}
                         <div className={`${classes.flipper} ${edit ? classes.flip : ""}`}>
                             <div className={classes.front}>
                                 <div className={`${classes.eventPreview} ${activeEvents[preview?.index].past ? classes.pastEvent : ""}`}>

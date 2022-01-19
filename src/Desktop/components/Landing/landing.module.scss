@@ -5,6 +5,8 @@
 // @import url('../../themes/_form.scss');
 // @import '../../themes/mixins';
 
+
+
 .container {
     display: flex;
     flex-direction: row-reverse;
@@ -23,7 +25,11 @@
     label {
         font-size: 0.9rem;
     }
-    img {
+    .plugins {
+        max-width: 40%;
+        margin-left: -2px;
+    }
+    .takeoff {
         max-width: 25vw;
         margin-right: 1rem;
     }
@@ -53,6 +59,13 @@
     overflow: auto;
     p {
         font-size: 1.1rem;
+    }
+    div {
+        display: flex;
+        flex-direction: column;
+        img:first-child{
+            margin-bottom: .5rem;
+        }
     }
 }
 
@@ -228,7 +241,7 @@
     font-weight: bold;
 }
 
-.textIllustration img {
+.textIllustration .takeoff {
     height: auto;
     margin-left: -45px;
 }

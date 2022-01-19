@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import Button from 'Utils/Button/btn';
 import Input from 'Utils/Input/input';
 import CustomSelect from 'Utils/CustomSelect/customselect'
+import PluginsOutlook from 'Assets/img/Plugins-Outlook.png'
+import PluginsSoon from 'Assets/img/Plugins-GA.png'
 import request from 'Utils/Request/request';
 import Takeoff from 'Assets/img/takeoff.png'
 
@@ -123,7 +125,7 @@ const Signup = () => {
       <div className={classes.container}>
         <div className={classes.registerContainer}>
           <div className={classes.textIllustration}>
-            <img src={Takeoff} />
+            <img className={classes.takeoff} src={Takeoff} />
             <div className={classes.descriptionBeta}>
               <h1>Bienvenue sur la Beta privée Signally !</h1>
               <p>Nous sommes très heureux de vous compter parmi les tous premiers utilisateurs.</p>
@@ -132,6 +134,10 @@ const Signup = () => {
               <p>Comme nous sommes en version Beta, tout n’est pas encore parfait !</p>
               <p>Néanmoins, grâce à vous, nous pourrons rendre la plateforme de plus en plus performante et encore plus simple à utiliser.</p>
               <p>Un grand merci pour votre aide.</p><br />
+              <div>
+                            <img className={classes.plugins} src={PluginsOutlook} />
+                            <img className={classes.plugins} src={PluginsSoon} />
+                        </div>
             </div>
           </div>
           {

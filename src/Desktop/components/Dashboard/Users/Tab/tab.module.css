@@ -158,6 +158,8 @@
 
 .itemsList li:hover {
   width: 95%;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
   cursor: pointer;
 }
 

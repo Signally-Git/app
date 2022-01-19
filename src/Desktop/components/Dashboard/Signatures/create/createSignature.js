@@ -200,7 +200,9 @@ function CreateSignatureComponent() {
 
         history.push('/signatures')
       }
-    )
+    ).catch(() => {
+      notification({ content: <>Une erreur s'est produite. Veuillez réessayer</>, status: "invalid" })
+    })
 
   }
 

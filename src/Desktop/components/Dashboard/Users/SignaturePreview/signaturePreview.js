@@ -64,7 +64,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
         const entity = await request.get(`${type}s/${show.id}`)
         setAssignedTemplate(entity.data.compiledSignature)
         const templates = await request.get('signatures')
-        console.log(templates)
+        // console.log(templates)
         setSelectedTemplate(templates.data["hydra:member"][0].html)
         setTemplates(templates.data["hydra:member"])
         // }
@@ -81,7 +81,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
     // ASSIGNATION
     const handleAssign = async (element) => {
         // console.log(selectedTemplate)
-        console.log("EVENT", event)
+        // console.log("EVENT", event)
         const req =
             event ? {
                 signature: selectedTemplate["@id"],
@@ -90,19 +90,20 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                 {
                     signature: selectedTemplate["@id"]
                 }
-        console.log(req)
+        // console.log(req)
         await request.patch(`${type}s/${element.id}`, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(
             (res) => {
-                console.log(element)
+                // console.log(element)
                 notification({ content: <>Signature de {type === "user" ? element.firstName + " " + element.lastName : type} modifiée</>, status: "valid" })
-                console.log(res); setEdit()
+                // console.log(res); 
+                setEdit()
             }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
     }
 
     return (<div className={classes.flipcontainer}>
-        {modal ? <Modal title={<>Vous allez mettre en ligne <br />la signature <span className={classes.orangeTxt}>{selectedTemplate.name}</span> <br />pour <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></>}
+        {modal ? <Modal title={<>Vous allez mettre en ligne <br />la signature <span className={classes.orangeTxt}>{Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.name}</span> <br /><br />pour <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></>}
             cancel="Annuler"
             validate="Confirmer" onCancel={() => setModal(false)} onConfirm={() => { handleAssign(show); setModal(false) }} /> : ""}
         <div className={`${classes.flipper} ${edit ? classes.flip : ""}`}>
@@ -122,7 +123,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                 {edit === "copySign" ? <CopySignature signature={assignedTemplate} /> : <>
                     <div className={classes.topLine}>
                         <h2>Édition <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></h2>
-                        <Button color="brown" onClick={() => {setEdit('assign-team')}}>Modifier équipes</Button>
+                        {show.name ? <Button color="brown" onClick={() => {setEdit('assign-team')}}>Modifier équipes</Button> : ""}
                         {/* {show.name ? <Select onChange={(e) => setEdit(e.target.value)} items={[{ name: "Modifier signature", '@id': "assign-signature" }, { name: "Modifier équipes", '@id': "assign-team" }]} /> : ""} */}
                     </div>
                     <div className={classes.row}>

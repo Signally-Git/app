@@ -28,7 +28,12 @@
   font-size: 0.9rem;
 }
 
-.container img {
+.container .plugins {
+  max-width: 40%;
+  margin-left: -2px;
+}
+
+.container .takeoff {
   max-width: 25vw;
   margin-right: 1rem;
 }
@@ -62,6 +67,20 @@
 
 .descriptionBeta p {
   font-size: 1.1rem;
+}
+
+.descriptionBeta div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.descriptionBeta div img:first-child {
+  margin-bottom: .5rem;
 }
 
 .inputs {
@@ -294,7 +313,7 @@
   font-weight: bold;
 }
 
-.textIllustration img {
+.textIllustration .takeoff {
   height: auto;
   margin-left: -45px;
 }

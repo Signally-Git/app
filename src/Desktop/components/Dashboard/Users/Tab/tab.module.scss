@@ -112,7 +112,9 @@
         }
         &:hover {
             width: 95%;
+            transition: 0.3s;
             cursor: pointer;
+            // background: rgba($signally-orange, 0.3);
         }
         > div {
             display: flex;

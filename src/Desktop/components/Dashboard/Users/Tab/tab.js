@@ -45,6 +45,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     const [mobileUser, setMobileUser] = useState("")
     const [poste, setPoste] = useState("")
     const [mail, setMail] = useState("")
+    let time;
 
     const notification = useNotification()
     // Variables for creation modals
@@ -61,11 +62,11 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     }
 
     const getDataUser = async () => {
-        const options = { headers: { Authorization: '!ChangeMe!' } };
-        document.cookie = `mercureAuthorization=!ChangeMe!`
+        // const options = { headers: { Authorization: '!ChangeMe!' } };
+        // document.cookie = `mercureAuthorization=!ChangeMe!`
 
-        const es = new EventSource('https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users', options)
-       
+        const es = new EventSource('https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/usersqwe')
+
         es.onmessage = function (e) {
             console.log("SSE", JSON.parse(e.data))
         }
@@ -151,8 +152,8 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                         <h4>Vous allez supprimer
                             <br /><span className={classes.orangeTxt}>{`${workplaces.length} hotels`}</span></h4>
                         <div>
-                            <Button color="orangeFill" onClick={() => setModal({ type: "", name: "", id: "" })}>Annuler</Button>
-                            <Button color="orange" onClick={() => handleDeleteAll("workplace")}>Supprimer</Button>
+                            <Button color="orange" onClick={() => setModal({ type: "", name: "", id: "" })}>Annuler</Button>
+                            <Button color="orangeFill" onClick={() => handleDeleteAll("workplace")}>Supprimer</Button>
                         </div>
                     </div>)
                 case "allteams":
@@ -162,8 +163,8 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                             <br /><span className={classes.orangeTxt}>{`${teams.length} équipes`}</span></h4>
                         <br />
                         <div>
-                            <Button color="orangeFill" onClick={() => setModal({ type: "", name: "", id: "" })}>Annuler</Button>
-                            <Button color="orange" onClick={() => handleDeleteAll("teams")}>Supprimer</Button>
+                            <Button color="orange" onClick={() => setModal({ type: "", name: "", id: "" })}>Annuler</Button>
+                            <Button color="orangeFill" onClick={() => handleDeleteAll("teams")}>Supprimer</Button>
                         </div>
                     </div>)
                 case "allusers":
@@ -171,8 +172,8 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                         <h4>Vous allez supprimer
                             <br /><span className={classes.orangeTxt}>{`${users.length} collaborateurs`}</span></h4>
                         <div>
-                            <Button color="orangeFill" onClick={() => setModal({ type: "", name: "", id: "" })}>Annuler</Button>
-                            <Button color="orange" onClick={() => handleDeleteAll("users")}>Supprimer</Button>
+                            <Button color="orange" onClick={() => setModal({ type: "", name: "", id: "" })}>Annuler</Button>
+                            <Button color="orangeFill" onClick={() => handleDeleteAll("users")}>Supprimer</Button>
                         </div>
                     </div>)
                 default:
@@ -180,8 +181,8 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                         <h4>Vous allez supprimer
                             <br /><span className={classes.orangeTxt}>{toDelete?.name}</span></h4>
                         <div>
-                            <Button color="orangeFill" onClick={() => setModal({ type: "", name: "", id: "" })}>Annuler</Button>
-                            <Button color="orange" onClick={() => handleDelete(toDelete?.id, toDelete?.type, toDelete?.name)}>Supprimer</Button>
+                            <Button color="orange" onClick={() => setModal({ type: "", name: "", id: "" })}>Annuler</Button>
+                            <Button color="orangeFill" onClick={() => handleDelete(toDelete?.id, toDelete?.type, toDelete?.name)}>Supprimer</Button>
                         </div>
                     </div>)
             }
@@ -356,7 +357,14 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                         const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
                         if (fullName.search(searchUser.toLowerCase()) !== -1)
                             return (
-                                <li onMouseEnter={() => setSelected(user)} key={user.id} className={`${editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? classes.editing : ""} ${selected?.id === user.id && selected?.name === user.name ? classes.selected : ""}`} >
+                                <li onMouseMove={() => 
+                                    { 
+                                        clearTimeout(time)
+                                        time = setTimeout(() => {
+                                            setSelected(user)
+                                        }, 500)
+                                    }} 
+                                key={user.id} className={`${editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? classes.editing : ""} ${selected?.id === user.id && selected?.name === user.name ? classes.selected : ""}`} >
                                     <input className={classes.checkbox} onChange={(e) => { e.preventDefault(); setEdit(user) }} defaultChecked={selected?.id === user.id && selected?.name === user.name ? true : false} type="radio" name="user" value={JSON.stringify(user)} />
                                     {editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>
                                         <div className={classes.renameContainer}>

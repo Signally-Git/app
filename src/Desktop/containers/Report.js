@@ -16,7 +16,7 @@ export default function Report() {
     const [select, setSelect] = useState("SIGNALLY_APP")
     const table = [
         { key: "SIGNALLY_APP", name: "Problème rencontré sur l'application" },
-        { key: "OUTLOOK_DISPLAY", name: "Problème d'affichage de la signature dans Outlook" },
+        { key: "OUTLOOK_DISPLAY", name: "Affichage de la signature dans Outlook" },
         { key: "COMMENTS", name: "Commentaire" },
         { key: "RECOMMENDATIONS", name: "Suggestion" },
     ]
@@ -24,7 +24,7 @@ export default function Report() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if (bug.length > 20) {
+        if (bug.length > 3) {
             const req = {
                 subject: select,
                 description: bug
@@ -71,9 +71,8 @@ export default function Report() {
                     <br />
                     <h4>{table.filter((entry) => entry.key === select)[0].name}</h4>
                     <Input placeholder="Bonjour, comme vous pouvez le voir sur cette image en PJ, le logo de l'entreprise ne s'affiche pas sur Outlook."
-                        style={{ height: "4.5rem", resize: "none", width: '100%' }}
+                        style={{ height: "4.5rem", resize: "none", width: '100%', marginBottom: '1.5rem' }}
                         onChange={(e) => setBug(e.target.value)} type="textarea" />
-                    <br />
                     <br />
                     <h4>Pièce jointe (capture d'écran, fichier d'import corrompu...)</h4>
                     <UploadFile

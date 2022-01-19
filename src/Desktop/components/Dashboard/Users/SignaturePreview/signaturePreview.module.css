@@ -2,19 +2,29 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 2rem;
   width: 100%;
-  -webkit-box-align: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
 }
 
 .topLine button {
   margin-left: auto;
   margin-right: 0;
+  right: 2rem;
+  left: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: absolute;
+}
+
+.topLine h2 {
+  margin-bottom: 0 !important;
 }
 
 .topLine select {
@@ -57,6 +67,7 @@
 }
 
 .signature {
+  margin-top: 1.5rem;
   -webkit-transform: scale(0.75);
           transform: scale(0.75);
   width: 150%;
@@ -64,11 +75,6 @@
   overflow: auto;
   -webkit-transform-origin: top left;
           transform-origin: top left;
-}
-
-.signature + button {
-  position: absolute;
-  bottom: 1rem;
 }
 
 .row {
@@ -83,6 +89,11 @@
 
 .row > div {
   width: 45% !important;
+}
+
+.row + button {
+  position: absolute;
+  bottom: 1rem;
 }
 
 .flipcontainer {

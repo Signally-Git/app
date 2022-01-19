@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import classes from '../landing.module.css';
 
 import Takeoff from 'Assets/img/takeoff.png'
+import PluginsOutlook from 'Assets/img/Plugins-Outlook.png'
+import PluginsSoon from 'Assets/img/Plugins-GA.png'
 import Button from 'Utils/Button/btn';
 import Input from 'Utils/Input/input';
 import { Link, useHistory, useLocation } from 'react-router-dom';
@@ -23,7 +25,6 @@ const Login = () => {
     const slider = useRef(null)
     const toFocus = useRef(null)
     const notification = useNotification()
-
     const [modal, setModal] = useState(false)
 
     const [error, setError] = useState('')
@@ -97,7 +98,7 @@ const Login = () => {
         <div className={classes.container}>
             <div className={classes.logInContainer}>
                 <div className={classes.textIllustration}>
-                    <img src={Takeoff} />
+                    <img className={classes.takeoff} src={Takeoff} />
                     <div className={classes.descriptionBeta}>
                         <h1>Bienvenue sur la Beta privée Signally !</h1>
                         <p>Nous sommes très heureux de vous compter parmi les tous premiers utilisateurs.</p>
@@ -106,6 +107,10 @@ const Login = () => {
                         <p>Comme nous sommes en version Beta, tout n’est pas encore parfait !</p>
                         <p>Néanmoins, grâce à vous, nous pourrons rendre la plateforme de plus en plus performante et encore plus simple à utiliser.</p>
                         <p>Un grand merci pour votre aide.</p><br />
+                        <div>
+                            <img className={classes.plugins} src={PluginsOutlook} />
+                            <img className={classes.plugins} src={PluginsSoon} />
+                        </div>
                     </div>
                 </div>
                 <div className={classes.slider} ref={slider}>

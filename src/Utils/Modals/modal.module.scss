@@ -25,5 +25,8 @@
 .btnsContainer {
     display: flex;
     width: 60%;
-    justify-content: space-between;
+    justify-content: space-around;
+    button {
+        margin: 0 .75rem;
+    }
 }

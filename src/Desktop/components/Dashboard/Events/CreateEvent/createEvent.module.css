@@ -104,6 +104,10 @@
   max-width: 100%;
 }
 
+.currentEventPreview + div {
+  width: 48%;
+}
+
 .eventName {
   margin-top: 1rem;
   width: 100%;

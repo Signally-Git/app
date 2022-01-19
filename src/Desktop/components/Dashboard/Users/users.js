@@ -108,7 +108,7 @@ function Team() {
                                     <div className={classes.slider} ref={slider}>
                                         <div className={classes.col}>
                                             <div className={classes.tagline}>
-                                                <h2><span className={classes.orangeTxt}>{entity?.users?.length}</span> membres de l'équipe <span className={classes.orangeTxt}>{entity?.name}</span></h2>
+                                                <h2><span className={classes.orangeTxt}>{entity?.users?.length || 0}</span> membre(s) <span className={classes.orangeTxt}>{entity?.name}</span></h2>
                                                 <Button color="brown" onClick={() => { setEdit('assign-signature') }}>Modifier signature</Button>
                                             </div>
                                             <br />
@@ -122,7 +122,7 @@ function Team() {
                                                     if (fullName.search(currentUsers.toLowerCase()) !== -1)
                                                         return <li tabIndex="0" key={user.id} className={`${classes.assignItem} ${transition === user['@id'] ? classes.transitionRemove : ""}`}>
                                                             <span>{user.firstName} {user.lastName}</span>
-                                                            {transition === user['@id'] ? <span className={classes.added}>Retiré</span> : <button><BiMinusCircle onClick={() => setTransition(user['@id'])} /></button>}
+                                                            {transition === user['@id'] ? <span className={classes.added}>Retiré</span> : <button><BiMinusCircle title={`Retirer ${user.firstName} ${user.lastName} dans ${entity?.name}`} onClick={() => setTransition(user['@id'])} /></button>}
                                                         </li>
                                                 })}
                                             </ul>
@@ -147,7 +147,7 @@ function Team() {
                                                     if (fullName.search(otherUser.toLowerCase()) !== -1)
                                                         return <li tabIndex="0" key={user.id} className={`${classes.assignItem} ${transition === user['@id'] ? classes.transition : ""}`}>
                                                             <span>{user.firstName} {user.lastName}</span>
-                                                            {transition === user['@id'] ? <span className={classes.added}>Ajouté</span> : <button><BiPlusCircle onClick={() => setTransition(user['@id'])} /></button>}
+                                                            {transition === user['@id'] ? <span className={classes.added}>Ajouté</span> : <button><BiPlusCircle title={`Ajouter ${user.firstName} ${user.lastName} dans ${entity?.name}`} onClick={() => setTransition(user['@id'])} /></button>}
 
                                                         </li>
                                                 })}
