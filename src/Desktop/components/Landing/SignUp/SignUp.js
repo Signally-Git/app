@@ -194,13 +194,13 @@ const Signup = () => {
                       <div className={classes.spacing}></div>
                       <label className={classes.inputTitle}>SIRET</label>
                       <div style={{ position: 'relative', display: 'flex', marginBottom: 15 }}>
-                        <Input required placeholder='44306184100047' onChange={(e) => setSiret(e.target.value)} value={siret} type="text" />
+                        <Input required placeholder='44306184100047' onClick={() => setSiret('44306184100047')} onChange={(e) => setSiret(e.target.value)} value={siret} type="text" />
                       </div>
                     </div>
                     <div className={classes.inputContainer}>
                       <label className={classes.inputTitle}>Nombre de collaborateurs</label>
                       <div style={{ position: 'relative', display: 'flex' }}>
-                        <CustomSelect styleList={{height: '9.5rem'}} onChange={(e) => setNbPerson(e)} items={nbs} getValue={'name'} display={'name'}/>
+                        <CustomSelect styleList={{height: '10.5rem'}} onChange={(e) => setNbPerson(e)} items={nbs} getValue={'name'} display={'name'}/>
                       </div>
                     </div>
                   </div>
