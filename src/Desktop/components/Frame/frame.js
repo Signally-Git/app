@@ -27,7 +27,7 @@ export default function Frame(props) {
     }, [])
 
     useEffect(() => {
-        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${JSON.parse(localStorage.getItem('user')).organisation}`);
+        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${JSON.parse(localStorage.getItem('user'))?.organisation}`);
         function getRealtimeData(data) {
             setOrganisation(data)
         }

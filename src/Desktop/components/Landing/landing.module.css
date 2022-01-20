@@ -42,6 +42,22 @@
   width: 100%;
 }
 
+.container input::-webkit-input-placeholder {
+  opacity: 0.25;
+}
+
+.container input:-ms-input-placeholder {
+  opacity: 0.25;
+}
+
+.container input::-ms-input-placeholder {
+  opacity: 0.25;
+}
+
+.container input::placeholder {
+  opacity: 0.25;
+}
+
 .container input[type="text"]:focus,
 .container input[type="email"]:focus,
 .container input[type="password"]:focus,

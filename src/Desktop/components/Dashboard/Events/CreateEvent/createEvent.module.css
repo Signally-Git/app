@@ -108,6 +108,17 @@
   width: 48%;
 }
 
+.btnsContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 50%;
+}
+
 .eventName {
   margin-top: 1rem;
   width: 100%;

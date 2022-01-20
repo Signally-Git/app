@@ -35,11 +35,11 @@ export default function CreateEvent({ setDone, event }) {
     const saveEvent = async (e) => {
         e.preventDefault()
         if (!eventName) {
-            notification({ content: <>Veuillez remplir le nom de l'event</>, status: "invalid"})
+            notification({ content: <>Veuillez remplir le nom de l'event</>, status: "invalid" })
             return false;
         }
-        const start = (moment(startDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss') 
-        const end = (moment(endDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss')
+        const start = (moment(startDate).subtract({ hour: 1 })).format('D-MM-YYYYHH:mm:ss')
+        const end = (moment(endDate).subtract({ hour: 1 })).format('D-MM-YYYYHH:mm:ss')
         const image = new FormData()
         image.append('image', banner)
         if (!event && banner) {
@@ -51,20 +51,20 @@ export default function CreateEvent({ setDone, event }) {
                     endAt: end,
                 }
                 await request.post(`events`, req).then((res) => {
-                    notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> créé avec succès</>, status: "valid"})
+                    notification({ content: <><span style={{ color: "#FF7954" }}>{eventName}</span> créé avec succès</>, status: "valid" })
                     setDone(false)
                 }).catch(() => notification({ content: <>Erreur lors de l'ajout de l'event</>, status: "invalid" }))
             }).catch((err) => notification({ content: <>Erreur lors de l'import de l'image</>, status: "invalid" }))
             return false;
         }
         if (event) {
-            const start = (moment(startDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss') 
-            const end = (moment(endDate).subtract({hour: 1})).format('D-MM-YYYYHH:mm:ss')
+            const start = (moment(startDate).subtract({ hour: 1 })).format('D-MM-YYYYHH:mm:ss')
+            const end = (moment(endDate).subtract({ hour: 1 })).format('D-MM-YYYYHH:mm:ss')
             const image = new FormData()
 
             if (banner) {
                 image.append('image', banner)
-                await request.post(`import/image`, image ).then(async (res) => {
+                await request.post(`import/image`, image).then(async (res) => {
                     const req = {
                         name: eventName,
                         startAt: start,
@@ -75,14 +75,14 @@ export default function CreateEvent({ setDone, event }) {
                         headers: { 'Content-Type': 'application/merge-patch+json' }
                     }).then((res) => {
                         setDone(false)
-                        notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> modifié avec succès</>, status: "valid"})
+                        notification({ content: <><span style={{ color: "#FF7954" }}>{eventName}</span> modifié avec succès</>, status: "valid" })
                     }).catch(() => notification({ content: <>Erreur lors de l'édition de l'event</>, status: "invalid" }))
                 }).catch(() => notification({ content: <>Erreur lors de l'ajout de l'image</>, status: "invalid" }))
                 return false;
             }
             else {
                 const req = {
-                    name: eventName ,
+                    name: eventName,
                     startAt: start,
                     endAt: end,
                 }
@@ -90,7 +90,7 @@ export default function CreateEvent({ setDone, event }) {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
                 }).then((res) => {
                     setDone(false)
-                    notification({ content: <><span style={{color: "#FF7954"}}>{eventName}</span> modifié avec succès</>, status: "valid"})
+                    notification({ content: <><span style={{ color: "#FF7954" }}>{eventName}</span> modifié avec succès</>, status: "valid" })
                 }).catch(() => notification({ content: <>Erreur lors de l'édition de l'event</>, status: "invalid" }))
             }
         }
@@ -99,7 +99,7 @@ export default function CreateEvent({ setDone, event }) {
     return (<div className={classes.container}>
         {event ? <>
             <h2>Modifier event <span>{eventName}</span>
-            {/* <FiEdit onClick={() => setDone(false)} /> */}
+                {/* <FiEdit onClick={() => setDone(false)} /> */}
             </h2>
         </> : <>
             <h2>Créer un event</h2>
@@ -114,7 +114,7 @@ export default function CreateEvent({ setDone, event }) {
                 <Datetime locale="fr-fr" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="D MMM YYYY" timeFormat="HH mm ss" />
             </div>
         </div>
-        <Input required value={eventName} onChange={(e) => setEventName(e.target.value)} style={{ width: "100%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef}  />
+        <Input required value={eventName} onChange={(e) => setEventName(e.target.value)} style={{ width: "100%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef} />
         <div className={classes.currentEventPreview}>
             {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={API + event.imagePath} title={event.banner?.name} /> : ""}
         </div>
@@ -125,8 +125,9 @@ export default function CreateEvent({ setDone, event }) {
             setFile={setBanner}
         />
         <form>
-            <div className={classes.eventName}>
-                <Button type="submit" color="orange" onClick={(e) => saveEvent(e)}>Sauvegarder</Button>
+            <div className={classes.btnsContainer}>
+                <Button color="orange" onClick={(e) => { e.preventDefault(); setDone(false) }}>Annuler</Button>
+                <Button type="submit" color="orangeFill" onClick={(e) => saveEvent(e)}>Sauvegarder</Button>
             </div>
         </form>
     </div>)

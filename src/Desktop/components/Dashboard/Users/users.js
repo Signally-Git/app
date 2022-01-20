@@ -39,12 +39,55 @@ function Team() {
         //             test.push(entity.users.filter(val => user['@id'] !== (val['@id'])))
         //     })
         // console.log(listUsers.data['hydra:member'] = listUsers.data['hydra:member'].filter(val => !entity.users.includes(val['@id'])));
+        // console.log(edit)
 
     }, [entity])
 
     useEffect(() => {
-        // console.log(edit)
-    }, [edit])
+        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${entity?.['@id']}`);
+        function getRealtimeData(data) {
+            setEntity(data)
+        }
+        sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
+        // sse.onerror = () => {
+        //     sse.close();
+        // }
+        return () => {
+            sse.close();
+        };
+    }, [])
+
+    const handleUpdate = (user, action) => {
+        const req = []
+        switch (action) {
+            case 'remove':
+                entity.users.filter((userCheck) => userCheck['@id'] !== user['@id']).map((userToCheck) => {
+                    req.push(Object.values(userToCheck)[0])
+                    // req.push(userToCheck)
+                    return ;
+                })
+              
+                request.patch(entity?.['@id'], { users: req }, {
+                    headers: { 'Content-Type': 'application/merge-patch+json' }});
+                setTransition(user['@id'])
+                break;
+
+            case 'add':
+                entity.users.map((userToCheck) => {
+                    req.push(Object.values(userToCheck)[0])
+                    // req.push(userToCheck)
+                    return ;
+                })
+                req.push(user['@id'])
+                request.patch(entity?.['@id'], { users: req }, {
+                    headers: { 'Content-Type': 'application/merge-patch+json' }});
+                setTransition(user['@id'])
+                break;
+
+            default:
+                break;
+        }
+    }
 
     useEffect(() => {
         setEntity()
@@ -122,7 +165,9 @@ function Team() {
                                                     if (fullName.search(currentUsers.toLowerCase()) !== -1)
                                                         return <li tabIndex="0" key={user.id} className={`${classes.assignItem} ${transition === user['@id'] ? classes.transitionRemove : ""}`}>
                                                             <span>{user.firstName} {user.lastName}</span>
-                                                            {transition === user['@id'] ? <span className={classes.added}>Retiré</span> : <button><BiMinusCircle title={`Retirer ${user.firstName} ${user.lastName} dans ${entity?.name}`} onClick={() => setTransition(user['@id'])} /></button>}
+                                                            {transition === user['@id'] ? <span className={classes.added}>Retiré</span> : <button>
+                                                                <BiMinusCircle title={`Retirer ${user.firstName} ${user.lastName} dans ${entity?.name}`} onClick={() => handleUpdate(user, 'remove')} />
+                                                            </button>}
                                                         </li>
                                                 })}
                                             </ul>
@@ -147,7 +192,10 @@ function Team() {
                                                     if (fullName.search(otherUser.toLowerCase()) !== -1)
                                                         return <li tabIndex="0" key={user.id} className={`${classes.assignItem} ${transition === user['@id'] ? classes.transition : ""}`}>
                                                             <span>{user.firstName} {user.lastName}</span>
-                                                            {transition === user['@id'] ? <span className={classes.added}>Ajouté</span> : <button><BiPlusCircle title={`Ajouter ${user.firstName} ${user.lastName} dans ${entity?.name}`} onClick={() => setTransition(user['@id'])} /></button>}
+                                                            {transition === user['@id'] ? <span className={classes.added}>Ajouté</span> : 
+                                                            <button>
+                                                                <BiPlusCircle title={`Ajouter ${user.firstName} ${user.lastName} dans ${entity?.name}`} 
+                                                                onClick={() => handleUpdate(user, 'add')} /></button>}
 
                                                         </li>
                                                 })}

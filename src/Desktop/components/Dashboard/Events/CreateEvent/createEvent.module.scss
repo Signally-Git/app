@@ -81,6 +81,12 @@
     }
 }
 
+.btnsContainer {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}
+
 .eventName {
     margin-top: 1rem;
     width: 100%;

@@ -60,7 +60,7 @@ function Events() {
                 if ((status === "past" && new Date(activeEvent.endAt) < new Date()) || (new Date(activeEvent.startAt) < new Date() && status === "present" && new Date(activeEvent.endAt) > new Date()) || (status === "future" && new Date(activeEvent.startAt) > new Date())) {
                     return (
                         <li onClick={() => { setEdit(true); setPreview({ activeEvent, past: status === "past", index })}} key={index}
-                            className={`${preview.activeEvent['@id'] === activeEvent['@id'] ? edit ? classes.selected : classes.preview  : ""} ${status === "past" ? classes.pastEvent : ""}`}
+                            className={`${preview?.activeEvent['@id'] === activeEvent['@id'] ? edit ? classes.selected : classes.preview  : ""} ${status === "past" ? classes.pastEvent : ""}`}
                             onMouseEnter={() => {
 
                                 // if (!preview?.activeEvent['@id'] || preview?.activeEvent['@id'] !== activeEvent['@id']) {

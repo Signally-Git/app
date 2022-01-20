@@ -200,7 +200,7 @@ const Signup = () => {
                     <div className={classes.inputContainer}>
                       <label className={classes.inputTitle}>Nombre de collaborateurs</label>
                       <div style={{ position: 'relative', display: 'flex' }}>
-                        <CustomSelect onChange={(e) => setNbPerson(e.target.value)} items={nbs} getValue={'name'} display={'name'}/>
+                        <CustomSelect styleList={{height: '9.5rem'}} onChange={(e) => setNbPerson(e)} items={nbs} getValue={'name'} display={'name'}/>
                       </div>
                     </div>
                   </div>
