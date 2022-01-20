@@ -357,15 +357,14 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                         const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
                         if (fullName.search(searchUser.toLowerCase()) !== -1)
                             return (
-                                <li onMouseMove={() => 
-                                    { 
-                                        clearTimeout(time)
-                                        time = setTimeout(() => {
-                                            setSelected(user)
-                                        }, 500)
-                                    }} 
+                                <li onMouseMove={() => {
+                                        if (!edit) {
+                                            clearTimeout(time)
+                                            time = setTimeout(() => {
+                                                setSelected(user)
+                                            }, 200)}}} 
                                 key={user.id} className={`${editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? classes.editing : ""} ${selected?.id === user.id && selected?.name === user.name ? classes.selected : ""}`} >
-                                    <input className={classes.checkbox} onChange={(e) => { e.preventDefault(); setEdit(user) }} defaultChecked={selected?.id === user.id && selected?.name === user.name ? true : false} type="radio" name="user" value={JSON.stringify(user)} />
+                                    <input className={classes.checkbox} onChange={(e) => { setEdit(user); setSelected(user) }} checked={edit?.id === user.id && edit?.name === user.name ? true : false} type="radio" name="user" value={JSON.stringify(user)} />
                                     {editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>
                                         <div className={classes.renameContainer}>
                                             <input placeholder='Prénom' className={classes.rename} ref={toFocus} type="text" defaultValue={`${user.firstName}`} />

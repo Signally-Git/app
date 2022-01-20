@@ -5,7 +5,7 @@ import classes from '../create.module.css'
 
 import { useHistory } from 'react-router-dom'
 import request from 'Utils/Request/request'
-import Select from 'Utils/Select/select'
+import CustomSelect from 'Utils/CustomSelect/customselect'
 import { useNotification } from 'Utils/Notifications/notifications'
 import { Box } from 'Assets/img/KUKLA/illustrations'
 
@@ -38,7 +38,7 @@ export default function CreateUser() {
             team: team,
             ...user
         }
-        await request.post('users', req).then((res) => {
+        await request.post('users', req).then(() => {
             notification({ content: <>Le collaborateur <span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> a été créé avec succès</>, status: "valid" })
             history.push('/teams/users')
         }).catch(
@@ -59,7 +59,7 @@ export default function CreateUser() {
     const getTeams = async () => {
         const tms = await request.get('teams')
         if (tms.data["hydra:member"].length > 0) {
-            tms.data["hydra:member"].unshift({ value: "Aucun", name: "Aucun", selected: false })
+            tms.data["hydra:member"].unshift({ '@id': "Aucun", name: "Aucun", style: {marginTop: '2.5rem'} })
             setTeams(tms.data["hydra:member"])
             setTeam(tms.data["hydra:member"][1]['@id'])
         }
@@ -91,7 +91,9 @@ export default function CreateUser() {
             <div className={classes.slide}>
                 <div>
                     {teams.length > 0 &&
-                        <Select items={teams} defaultValue={team} onChange={(e) => { setTeam(e.target?.value); focus.current.focus() }} onSubmit={(e) => console.log(e)} />}
+                    <CustomSelect display="name" getValue="@id" 
+                    styleList={{ height: '15rem'}}
+                    items={teams} onChange={(e) => { setTeam(e); focus.current.focus() }} />}
                     <Input style={{ width: "100%" }} ref={focus} onChange={(e) => setUser({ ...user, firstName: e.target.value })} type="text" placeholder="Prénom" />
                     <Input style={{ width: "100%" }} onChange={(e) => setUser({ ...user, lastName: e.target.value })} type="text" placeholder="Nom" />
                     <div className={classes.btnsContainer}>

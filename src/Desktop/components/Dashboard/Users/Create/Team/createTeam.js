@@ -5,9 +5,9 @@ import classes from '../create.module.css'
 
 import { useHistory } from 'react-router-dom'
 import request from 'Utils/Request/request'
-import Select from 'Utils/Select/select'
 import { useNotification } from 'Utils/Notifications/notifications'
 import { Box } from 'Assets/img/KUKLA/illustrations'
+import CustomSelect from 'Utils/CustomSelect/customselect'
 
 export default function CreateTeam() {
     const slide = useRef(null)
@@ -46,9 +46,9 @@ export default function CreateTeam() {
     const getWorkplaces = async () => {
         const wps = await request.get('workplaces')
         if (wps.data["hydra:member"].length > 0) {
-            wps.data["hydra:member"].unshift({ value: "Aucun", name: "Aucun", selected: false })
-            setWorkplaces(wps.data["hydra:member"])
+            wps.data["hydra:member"].unshift({ '@id': "Aucun", name: "Aucun", style: {marginTop: '2.5rem'} })
             setWorkplace(wps.data["hydra:member"][1]['@id'])
+            setWorkplaces(wps.data["hydra:member"])
         }
     }
 
@@ -66,7 +66,10 @@ export default function CreateTeam() {
             </div> : "" }
             <div className={classes.slide}>
                 <div>
-                    {workplaces.length > 0 && <Select defaultValue={workplace} items={workplaces} onChange={(e) => { setWorkplace(e.target?.value); focus.current.focus() }} onSubmit={(e) => console.log(e)} />}
+                    {workplaces.length > 0 && 
+                    <CustomSelect display="name" getValue="@id" 
+                    styleList={{ height: '15rem'}}
+                    items={workplaces} onChange={(e) => { setWorkplace(e); focus.current.focus() }} />}
                     <Input style={{ width: "100%" }} ref={focus} onChange={(e) => setTeamName(e.target.value)} type="text" placeholder="Nom de l'équipe" />
 
                     <div className={classes.btnsContainer}>

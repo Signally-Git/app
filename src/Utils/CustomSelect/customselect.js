@@ -4,7 +4,7 @@ import Input from 'Utils/Input/input'
 import classes from './customselect.module.css'
 import { ImCheckmark } from 'react-icons/im'
 
-export default function CustomSelect({ items, display, getValue, multiple, defaultValue, onChange }) {
+export default function CustomSelect({ items, display, getValue, multiple, defaultValue, onChange, styleList }) {
     const [value, setValue] = useState([defaultValue || items[0]?.[getValue] || items[0][display]])
     const click = useRef(null)
     const [isOpen, setIsOpen] = useState(false)
@@ -36,11 +36,11 @@ export default function CustomSelect({ items, display, getValue, multiple, defau
                             Object?.values(items)?.find((obj) => { return obj[getValue] == value })?.[display]} />
                     <VscTriangleDown />
                 </div>
-                <form onChange={(e) => { onChange(e); multiple ? e.target.checked ? setValue([...value, e.target.value]) : setValue(value.filter((val) => val !== e.target.value)) : setValue([e.target.value]) }}>
+                <form onChange={(e) => { onChange(e.target.value); multiple ? e.target.checked ? setValue([...value, e.target.value]) : setValue(value.filter((val) => val !== e.target.value)) : setValue([e.target.value]) }}>
                     {isOpen ?
-                        <ul className={classes.list}>
+                        <ul className={classes.list} style={styleList} >
                             {items.map((item, index) => {
-                                return <li className={classes.element} key={index}>
+                                return <li className={classes.element} key={index} style={{...item?.style}}>
                                     <input defaultChecked={item[getValue] === value[0] ? true : false} name="item" value={item[getValue]} type={multiple ? "checkbox" : "radio"} />
                                     {item[display]}
                                     <ImCheckmark className={classes.checkmark} />

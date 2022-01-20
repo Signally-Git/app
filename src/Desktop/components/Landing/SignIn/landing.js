@@ -91,8 +91,8 @@ const Login = () => {
                 <h3>Réinitialiser mon mot de passe</h3>
                 <Input defaultValue={email} type="mail" style={{ width: '100%' }} autoComplete="email" placeholder="Email" />
                 <div className={classes.btnsContainer}>
-                    <Button color={"orange"} width={'40%'} onClick={() => setModal(false)}>Envoyer</Button>
-                    <Button color={"brown"} width={'40%'} onClick={() => setModal(false)}>Annuler</Button>
+                    <Button color={"orangeFill"} width={'40%'} onClick={() => setModal(false)}>Envoyer</Button>
+                    <Button color={"orange"} width={'40%'} onClick={() => setModal(false)}>Annuler</Button>
                 </div>
             </div> : ""}
         <div className={classes.container}>

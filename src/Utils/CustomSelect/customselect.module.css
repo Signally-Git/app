@@ -70,6 +70,8 @@
 .list {
   position: absolute;
   top: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
   left: 0;
   right: 0;
   z-index: 5;
@@ -83,7 +85,6 @@
   padding: 0;
   padding-top: 2.65rem;
   list-style: none;
-  overflow: hidden;
   opacity: 0;
   -webkit-animation: dropDown 1s;
           animation: dropDown 1s;

@@ -1,75 +1,58 @@
 import classes from './signaturePreview.module.css'
-import { FiCheck, FiEdit } from "react-icons/fi";
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import parse from 'html-react-parser'
 import { API } from 'config';
 import Button from 'Utils/Button/btn';
-import { UseOrganizationInfos } from 'Utils/useOrganizationInfos/useOrganizationInfos';
 import ReadOnlyPreview from '../../Signatures/create/Preview/readOnlyPreview';
-import { AiOutlineEdit, AiOutlineUsergroupAdd } from 'react-icons/ai';
-import Input from 'Utils/Input/input';
-import UploadFile from 'Utils/Upload/uploadFile';
 import request from 'Utils/Request/request';
 import { useNotification } from 'Utils/Notifications/notifications';
 import CopySignature from 'Desktop/components/CopySignature/CopySignature';
-import { BsCardHeading } from 'react-icons/bs';
-import Select from 'Utils/Select/select';
 import CustomSelect from 'Utils/CustomSelect/customselect';
 import Modal from 'Utils/Modals/modal';
 
 export default function SignaturePreview({ show, edit, setEdit }) {
     const today = new Date()
 
-    // console.log(show)
     const [templates, setTemplates] = useState([])
     const [selectedTemplate, setSelectedTemplate] = useState()
     const [assignedTemplate, setAssignedTemplate] = useState()
     const [signatureInfos, setSignatureInfos] = useState()
     const defaultUser = localStorage.getItem("user")
-    const [user, setUser] = useState(JSON.parse(defaultUser))
     const [entity, setEntity] = useState()
     const [event, setEvent] = useState("")
     const [events, setEvents] = useState([])
+    const [incomingEvents, setIncEvents] = useState([])
+    const [choosePlaylist, setChoosePlaylist] = useState(false)
+    const [playlist, setPlaylist] = useState([])
     const type = show["@type"].toLowerCase()
     const notification = useNotification()
 
     //  PREVIEW EVENT
     useEffect(async () => {
         setEntity(await request.get(`${type}s/${show.id}`))
-        // console.log(selectedTemplate)
         const isEvent = selectedTemplate?.html || ""
-        // if (isEvent.toString().includes(`event`) === true) {
-        // if (isEvent) {
-            const events = await request.get('events');
-            setEvents(events.data["hydra:member"].filter((data) => (new Date(data.startAt) < new Date()) && (new Date(data.endAt) > new Date())).sort(function (a, b) {
-                if (a.startAt < b.startAt) { return -1; }
-                if (a.startAt > b.startAt) { return 1; }
-                return 0
-            }))
-            setEvent(events.data["hydra:member"][0])
-        // }
-        // else {
-        //     setEvents([])
-        // }
-    }, [selectedTemplate])
+        const events = await request.get('events');
+        const toPush = events.data["hydra:member"].filter((data) => (new Date(data.startAt) < new Date()) && (new Date(data.endAt) > new Date())).sort(function (a, b) {
+            if (a.startAt < b.startAt) { return -1; }
+            if (a.startAt > b.startAt) { return 1; }
+            return 0
+        })
+        setIncEvents(events.data["hydra:member"].filter((data) => (new Date(data.startAt) > new Date())).sort(function (a, b) {
+            if (a.startAt < b.startAt) { return -1; }
+            if (a.startAt > b.startAt) { return 1; }
+            return 0
+        }))
+        setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', style: { fontWeight: 'bold', color: `#FF7954` } }])
+        setEvent(events.data["hydra:member"][0])
 
-    useEffect(() => {
-        // console.log(show)
-    }, [event])
+    }, [selectedTemplate])
 
     // PREVIEW SIGNATURE
     useEffect(async () => {
-        // if (type === "user") {
         const entity = await request.get(`${type}s/${show.id}`)
         setAssignedTemplate(entity.data.compiledSignature)
         const templates = await request.get('signatures')
-        // console.log(templates)
         setSelectedTemplate(templates.data["hydra:member"][0].html)
         setTemplates(templates.data["hydra:member"])
-        // }
-        // if (!show.signature)
-        //     setEdit(true)
     }, [show, edit])
 
     // Modal
@@ -80,8 +63,6 @@ export default function SignaturePreview({ show, edit, setEdit }) {
 
     // ASSIGNATION
     const handleAssign = async (element) => {
-        // console.log(selectedTemplate)
-        // console.log("EVENT", event)
         const req =
             event ? {
                 signature: selectedTemplate["@id"],
@@ -90,19 +71,50 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                 {
                     signature: selectedTemplate["@id"]
                 }
-        // console.log(req)
         await request.patch(`${type}s/${element.id}`, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(
             (res) => {
-                // console.log(element)
                 notification({ content: <>Signature de {type === "user" ? element.firstName + " " + element.lastName : type} modifiée</>, status: "valid" })
-                // console.log(res); 
                 setEdit()
             }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
     }
 
     return (<div className={classes.flipcontainer}>
+        {choosePlaylist ? <div className={classes.playlistmodal}>
+            <div>
+                <h3>Programmer la diffusion de plusieurs events</h3>
+                <ul>
+                    {events.map((event) => {
+                        return <li key={event['@id']}>
+
+                            <img className={classes.bannerPreview} src={`${API}${event.imagePath}`} />
+                            <div className={classes.eventText}>
+                                <span className={classes.active}>{event.name}</span>
+                                <span className={classes.duration}>
+                                    <div className={`${classes.col} ${classes.bold}`}>
+                                        <span>{`du ${new Date(event?.startAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
+                                        <span>{`au ${new Date(event?.endAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
+                                    </div>
+                                    <div className={classes.col}>
+                                        <span>{`${new Date(event?.startAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
+                                        <span>{`${new Date(event?.endAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
+                                    </div>
+                                </span>
+                            </div>
+                            <label>
+                                <input type="checkbox" value={event['@id']} />
+                                <span></span>
+                            </label>
+                        </li>
+                    })}
+                </ul>
+            </div>
+            <div className={classes.btnsContainer}>
+                <Button color="orange" width={'30%'} onClick={() => setChoosePlaylist(false)}>Annuler</Button>
+                <Button color="orangeFill" width={'50%'} onClick={() => setChoosePlaylist(false)}>Enregistrer</Button>
+            </div>
+        </div> : ""}
         {modal ? <Modal title={<>Vous allez mettre en ligne <br />la signature <span className={classes.orangeTxt}>{Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.name}</span> <br /><br />pour <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></>}
             cancel="Annuler"
             validate="Confirmer" onCancel={() => setModal(false)} onConfirm={() => { handleAssign(show); setModal(false) }} /> : ""}
@@ -123,14 +135,14 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                 {edit === "copySign" ? <CopySignature signature={assignedTemplate} /> : <>
                     <div className={classes.topLine}>
                         <h2>Édition <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></h2>
-                        {show.name ? <Button color="brown" onClick={() => {setEdit('assign-team')}}>Modifier équipes</Button> : ""}
-                        {/* {show.name ? <Select onChange={(e) => setEdit(e.target.value)} items={[{ name: "Modifier signature", '@id': "assign-signature" }, { name: "Modifier équipes", '@id': "assign-team" }]} /> : ""} */}
+                        {show.name ? <Button color="brown" onClick={() => { setEdit('assign-team') }}>Modifier équipes</Button> : ""}
+
                     </div>
                     <div className={classes.row}>
                         <div>
-                            <label>Choisissez votre signature</label>
-                            {templates.length > 0 && 
-                            <CustomSelect onChange={(e) => setSelectedTemplate(e.target.value)} display="name" getValue="html" items={templates} />}
+                            <label>Choisissez une signature</label>
+                            {templates.length > 0 &&
+                                <CustomSelect onChange={(e) => { setSelectedTemplate(e) }} display="name" getValue="html" items={templates} />}
                             <div className={classes.signature}>
                                 {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
                             </div>
@@ -138,51 +150,15 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                         <div>
                             {/* if event list events */}
                             {events.length > 0 ? <>
-                                <label>Choisissez votre event actuel</label>
-                                <CustomSelect onChange={(e) => setEvent(e.target.value)} display="name" getValue="@id" items={events} />
-                                {/* <CustomSelect display="name" getValue="name" items={events} defaultValue={events[0]} /> */}
-                                {/* <div title='Cette fonctionnalité arrive très prochainement'>
-
-                                    <div className="disabled" title='Cette fonctionnalité arrive très prochainement' alt='Cette fonctionnalité arrive très prochainement'>
-
-                                        <Button style={{ height: '2.5rem', marginRight: '0', borderRadius: '100px' }} color="orange">Programmation<div className={classes.event}>
-                                            <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <rect x="2.99625" y="2.99625" width="18.0075" height="18.0075" rx="3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                                <path d="M7.99833 6.99792H16.0017" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
-                                            <span>{String(today.getDate()).padStart(2, '0')}</span>
-                                        </div></Button>
-                                    </div>
-                                </div> */}
-                                {/* <label>Programmation à venir</label>
-                                
-                                <CustomSelect items={events} multiple /> */}
+                                <label>Ajouter un event ou une playlist</label>
+                                <CustomSelect onChange={(e) => e === 'playlist' ? setChoosePlaylist(true) : setEvent(e)} display="name" getValue="@id" items={events} />
                             </> : ""}
-                            {/* {events.length > 0 ? <>
-                                <label>Choisissez votre event</label>
-                                <form onChange={(e) => setEvent(JSON.parse(e.target.value))}>
-                                    <select defaultValue={event[0]}>
-                                        {events.map((event) => {
-                                            return <div key={event.id} value={JSON.stringify(event)}>
-                                                {event.name}
-                                            </div>
-                                        })}
-                                    </select>
-                                </form> </> : ""} */}
-                            {/* <form onChange={(e) => setSelectedTemplate(JSON.parse(e.target.value))}>
-                        <select defaultValue={JSON.stringify(selectedTemplate)}>
-                            {events.map((event) => {
-                                return <option key={event.id} value={JSON.stringify(template)} template={template.signatureData}>
-                                    {template.name}
-                                </option>
-                            })}
-                        </select>
-                    </form> */}
-
-
                         </div>
                     </div>
+                    <div className={classes.btnsContainer}>
+                    <Button onClick={() => setEdit()} color="orange">Annuler</Button>
                     <Button onClick={() => handleSubmit()} color="orangeFill">Sauvegarder</Button>
+                    </div>
                 </>}
             </div>
         </div>
