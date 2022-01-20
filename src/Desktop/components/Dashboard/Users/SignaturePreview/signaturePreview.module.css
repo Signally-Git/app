@@ -281,12 +281,21 @@
   position: absolute;
 }
 
+.modalContainer {
+  position: absolute;
+  z-index: 10;
+  width: 210%;
+  height: 135%;
+  inset: 0;
+  left: -100%;
+  top: -25%;
+}
+
 .playlistmodal {
   position: absolute;
   inset: 0;
   margin: auto;
   z-index: 10;
-  left: -100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -297,14 +306,13 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  top: -25%;
   -webkit-box-shadow: 0 0 30px rgba(64, 41, 39, 0.4);
           box-shadow: 0 0 30px rgba(64, 41, 39, 0.4);
-  width: 30rem;
-  background-color: #FFF;
+  width: 35rem;
+  background-color: #fff;
   border-radius: 20px;
-  height: 30rem;
-  padding: 1rem;
+  height: 40rem;
+  padding: 1rem 2rem;
 }
 
 .playlistmodal h3 {
@@ -314,7 +322,7 @@
 
 .playlistmodal ul {
   overflow: auto;
-  max-height: 65%;
+  max-height: 60%;
   list-style: none;
   padding: 0;
   display: -webkit-box;
@@ -352,20 +360,19 @@
   position: relative;
   background: #f7f5f5;
   border-radius: 10px;
-  position: relative;
 }
 
 .playlistmodal ul li label {
   display: block;
   position: relative;
   padding-left: 35px;
-  margin-bottom: 12px;
   cursor: pointer;
   font-size: 22px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  line-height: 25px;
 }
 
 .playlistmodal ul li label input {
@@ -384,22 +391,26 @@
 
 .playlistmodal ul li label span {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
+  margin: auto;
   border-radius: 50%;
   height: 25px;
   width: 25px;
-  border: 1px solid #FF7954;
+  border: 1px solid #402927;
 }
 
 .playlistmodal ul li label span:after {
-  content: "";
+  content: " ";
   position: absolute;
   display: none;
-  background: #FF7954;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background: #402927;
   border-radius: 50%;
-  height: 80%;
-  width: 80%;
+  padding: 0;
+  height: 15px;
+  width: 15px;
   inset: 0;
   margin: auto;
 }
@@ -444,9 +455,48 @@
   height: auto;
 }
 
+.playlistmodal .searchContainer {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.playlistmodal .searchContainer img {
+  position: absolute;
+  top: 40%;
+  left: 1rem;
+  -webkit-transform: translateY(-20%);
+          transform: translateY(-20%);
+}
+
+.playlistmodal .searchInput {
+  color: #402a27;
+  width: 100%;
+  font-family: "Montserrat";
+  text-indent: 2.5rem;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  padding: 0.75rem;
+  border-radius: 30px;
+  background: #f7f5f5;
+  border: 1px solid transparent;
+  outline: none;
+  margin: 1rem 0;
+}
+
+.playlistmodal .searchInput:focus {
+  background: #fff;
+  border: 1px solid #FF7954;
+  -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+          box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+}
+
 .playlistmodal .bannerPreview {
   height: auto;
-  width: 40%;
+  width: 30%;
+  max-height: 3rem;
   padding: 0.5rem;
   margin: auto;
 }
@@ -490,14 +540,14 @@
 
 .playlistmodal .btnsContainer {
   position: absolute;
-  bottom: 1rem;
+  bottom: 1.5rem;
   left: 0;
   right: 0;
   margin: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 100%;
+  width: 70%;
   -ms-flex-pack: distribute;
       justify-content: space-around;
 }

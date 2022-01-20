@@ -1,6 +1,6 @@
 import Menu from "Desktop/components/Menu/Menu";
 import Header from "Desktop/components/Header/Header";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import classes from "./frame.module.scss";
 import request from "Utils/Request/request";
 import { API } from "config";
@@ -8,19 +8,37 @@ import { API } from "config";
 export default function Frame(props) {
     const [user, setUser] = useState()
     const [organisation, setOrganisation] = useState()
+    const [update, setUpdate] = useState()
+
+
+    // const es = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${JSON.parse(localStorage.getItem('user')).organisation}`)
+
+    // es.onmessage = function (e) {
+    //     setUpdate(JSON.parse(e.data))
+    // }
+
+    useEffect(async () => {
+        const logUser = await request.get('whoami')
+        setUser(logUser.data)
+        const organisation = await request.get(logUser.data.organisation)
+
+        console.log(organisation)
+        setOrganisation(organisation.data)
+    }, [])
 
     useEffect(() => {
-        const getUser = async () => {
-            const logUser = await request.get('whoami')
-            // console.log(logUser)
-            setUser(logUser.data)
-            const organisation = await request.get(logUser.data.organisation)
-            console.log(organisation)
-            setOrganisation(organisation.data)
+        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${JSON.parse(localStorage.getItem('user')).organisation}`);
+        function getRealtimeData(data) {
+            setOrganisation(data)
         }
-
-        getUser()
-    }, [])
+        sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
+        // sse.onerror = () => {
+        //     sse.close();
+        // }
+        return () => {
+            sse.close();
+        };
+    }, [update])
 
     return (<>
         <div className={classes.desktop}>
@@ -29,7 +47,7 @@ export default function Frame(props) {
                 <div className={classes.mainContent}>
                     <div className={classes.menuContainer}>
                         <div className={classes.userInfos}>
-                            {/* <img src={organisation?.logos[0]?.path ? (API + organisation?.logos[0]?.path) : 'https://dummyimage.com/108/f4eeef.png'} alt='' /> */}
+                            <img src={organisation?.logo ? (API + organisation?.logo.path) : 'https://dummyimage.com/108/f4eeef.png'} alt='' />
                             <p className={classes.capitalize}>{organisation?.name}</p>
                         </div>
                         <Menu className={classes.menu} page={props.path} />

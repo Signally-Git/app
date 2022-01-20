@@ -4,33 +4,28 @@ import Input from 'Utils/Input/input'
 import classes from './customselect.module.css'
 import { ImCheckmark } from 'react-icons/im'
 
-export default function CustomSelect({ items, display, getValue, multiple, defaultValue, onChange, styleList }) {
+export default function CustomSelect({ items, display, displayInList, getValue, multiple, defaultValue, onChange, styleList, callback }) {
     const [value, setValue] = useState([defaultValue || items[0]?.[getValue] || items[0][display]])
     const click = useRef(null)
     const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
         function handleClickOutside(event) {
             if (click.current && !click.current.contains(event.target)) {
                 setIsOpen(false)
             }
         }
-        // Bind the event listener
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
-            // Unbind the event listener on clean up
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [value]);
 
     return (
         <>
-            <div ref={click} className={`${classes.container} ${isOpen ? classes.open : ""}`} onClick={(e) => { setIsOpen(!isOpen); }}>
+            <div ref={click} className={`${classes.container} ${isOpen ? classes.open : ""}`} onClick={() => { setIsOpen(!isOpen); }}>
                 <div className={classes.inputContainer}>
-                    <Input type="text" disabled
+                    <Input type="text" disabled style={Object?.values(items)?.find((obj) => { return obj[getValue] == value })?.['style']}
                         value={value.length > 1 ?
                             `${value.length} évènements` :
                             Object?.values(items)?.find((obj) => { return obj[getValue] == value })?.[display]} />
@@ -40,9 +35,11 @@ export default function CustomSelect({ items, display, getValue, multiple, defau
                     {isOpen ?
                         <ul className={classes.list} style={styleList} >
                             {items.map((item, index) => {
-                                return <li className={classes.element} key={index} style={{...item?.style}}>
-                                    <input defaultChecked={item[getValue] === value[0] ? true : false} name="item" value={item[getValue]} type={multiple ? "checkbox" : "radio"} />
-                                    {item[display]}
+                                return <li className={classes.element} key={index} style={{...item?.style}} 
+                                onClick={item?.callback ? () => item?.callback(true) : ""} >
+                                    <input defaultChecked={item[getValue] === value[0] ? true : false} name="item" 
+                                    value={item[getValue]} type={multiple ? "checkbox" : "radio"} />
+                                    {item[displayInList] || item[display]}
                                     <ImCheckmark className={classes.checkmark} />
                                 </li>
                             })}

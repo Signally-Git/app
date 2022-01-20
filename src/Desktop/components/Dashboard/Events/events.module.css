@@ -220,20 +220,6 @@
   font-weight: bold;
 }
 
-.selected {
-  width: 95%;
-  cursor: pointer;
-}
-
-.selected::before {
-  content: "";
-  display: block;
-  left: -1rem;
-  height: 8px;
-  width: 8px;
-  background: #FF7954;
-}
-
 .itemsList {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -265,6 +251,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  cursor: pointer;
   font-size: 0.85rem;
   font-weight: 600;
   position: relative;
@@ -310,6 +297,19 @@
 
 .itemsList li > div img {
   height: auto;
+}
+
+.selected, .preview {
+  width: 95% !important;
+}
+
+.selected::before {
+  content: "";
+  display: block !important;
+  left: -1rem !important;
+  height: 8px !important;
+  width: 8px !important;
+  background: #FF7954 !important;
 }
 
 .infos {

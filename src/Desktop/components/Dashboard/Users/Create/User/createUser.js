@@ -34,7 +34,7 @@ export default function CreateUser() {
     }
 
     const handleSave = async () => {
-        const req = team === "Aucun" || !team ?  { ...user } : {
+        const req = team === "Aucune équipe" || !team ?  { ...user } : {
             team: team,
             ...user
         }
@@ -59,7 +59,7 @@ export default function CreateUser() {
     const getTeams = async () => {
         const tms = await request.get('teams')
         if (tms.data["hydra:member"].length > 0) {
-            tms.data["hydra:member"].unshift({ '@id': "Aucun", name: "Aucun", style: {marginTop: '2.5rem'} })
+            tms.data["hydra:member"].unshift({ '@id': "Aucune équipe", name: "Aucune équipe"})
             setTeams(tms.data["hydra:member"])
             setTeam(tms.data["hydra:member"][1]['@id'])
         }
@@ -92,7 +92,7 @@ export default function CreateUser() {
                 <div>
                     {teams.length > 0 &&
                     <CustomSelect display="name" getValue="@id" 
-                    styleList={{ height: '15rem'}}
+                    styleList={{ height: '15rem', paddingTop: '2.5rem'}}
                     items={teams} onChange={(e) => { setTeam(e); focus.current.focus() }} />}
                     <Input style={{ width: "100%" }} ref={focus} onChange={(e) => setUser({ ...user, firstName: e.target.value })} type="text" placeholder="Prénom" />
                     <Input style={{ width: "100%" }} onChange={(e) => setUser({ ...user, lastName: e.target.value })} type="text" placeholder="Nom" />

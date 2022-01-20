@@ -6,6 +6,7 @@ import ReadOnlyPreview from '../../Signatures/create/Preview/readOnlyPreview';
 import request from 'Utils/Request/request';
 import { useNotification } from 'Utils/Notifications/notifications';
 import CopySignature from 'Desktop/components/CopySignature/CopySignature';
+import Search from "Assets/icons/search.svg"
 import CustomSelect from 'Utils/CustomSelect/customselect';
 import Modal from 'Utils/Modals/modal';
 
@@ -23,6 +24,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
     const [incomingEvents, setIncEvents] = useState([])
     const [choosePlaylist, setChoosePlaylist] = useState(false)
     const [playlist, setPlaylist] = useState([])
+    const [searchQuery, setSearchQuery] = useState("")
     const type = show["@type"].toLowerCase()
     const notification = useNotification()
 
@@ -41,7 +43,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
             if (a.startAt > b.startAt) { return 1; }
             return 0
         }))
-        setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', style: { fontWeight: 'bold', color: `#FF7954` } }])
+        setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event !== "playlist" ? "Playlist" : "Modifier la playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
         setEvent(events.data["hydra:member"][0])
 
     }, [selectedTemplate])
@@ -60,6 +62,13 @@ export default function SignaturePreview({ show, edit, setEdit }) {
     const handleSubmit = ((e) => {
         setModal(true)
     })
+
+    useEffect(() => {
+        if (event === 'playlist') {
+            events.pop()
+            setEvents([...events, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event !== "playlist" ? "Playlist" : "Modifier la playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
+        }
+    }, [event])
 
     // ASSIGNATION
     const handleAssign = async (element) => {
@@ -81,39 +90,45 @@ export default function SignaturePreview({ show, edit, setEdit }) {
     }
 
     return (<div className={classes.flipcontainer}>
-        {choosePlaylist ? <div className={classes.playlistmodal}>
+        {choosePlaylist ? <div className={classes.modalContainer}> <div className={classes.playlistmodal}>
             <div>
                 <h3>Programmer la diffusion de plusieurs events</h3>
+                <div className={classes.searchContainer}>
+                    <img src={Search} alt="search" />
+                    <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className={classes.searchInput} placeholder="Rechercher un event" />
+                </div>
                 <ul>
                     {events.map((event) => {
-                        return <li key={event['@id']}>
+                        if (event.name.toLowerCase().search(searchQuery?.toLowerCase()) >= 0)
+                            return <li key={event['@id']}>
 
-                            <img className={classes.bannerPreview} src={`${API}${event.imagePath}`} />
-                            <div className={classes.eventText}>
-                                <span className={classes.active}>{event.name}</span>
-                                <span className={classes.duration}>
-                                    <div className={`${classes.col} ${classes.bold}`}>
-                                        <span>{`du ${new Date(event?.startAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
-                                        <span>{`au ${new Date(event?.endAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
-                                    </div>
-                                    <div className={classes.col}>
-                                        <span>{`${new Date(event?.startAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
-                                        <span>{`${new Date(event?.endAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
-                                    </div>
-                                </span>
-                            </div>
-                            <label>
-                                <input type="checkbox" value={event['@id']} />
-                                <span></span>
-                            </label>
-                        </li>
+                                <img className={classes.bannerPreview} src={`${API}${event.imagePath}`} />
+                                <div className={classes.eventText}>
+                                    <span className={classes.active}>{event.name}</span>
+                                    <span className={classes.duration}>
+                                        <div className={`${classes.col} ${classes.bold}`}>
+                                            <span>{`du ${new Date(event?.startAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
+                                            <span>{`au ${new Date(event?.endAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
+                                        </div>
+                                        <div className={classes.col}>
+                                            <span>{`${new Date(event?.startAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
+                                            <span>{`${new Date(event?.endAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
+                                        </div>
+                                    </span>
+                                </div>
+                                <label>
+                                    <input type="checkbox" value={event['@id']} />
+                                    <span></span>
+                                </label>
+                            </li>
                     })}
                 </ul>
             </div>
             <div className={classes.btnsContainer}>
-                <Button color="orange" width={'30%'} onClick={() => setChoosePlaylist(false)}>Annuler</Button>
-                <Button color="orangeFill" width={'50%'} onClick={() => setChoosePlaylist(false)}>Enregistrer</Button>
+                <Button color="orange" width={'40%'} onClick={() => setChoosePlaylist(false)}>Annuler</Button>
+                <Button color="orangeFill" width={'40%'} onClick={() => setChoosePlaylist(false)}>Enregistrer</Button>
             </div>
+        </div>
         </div> : ""}
         {modal ? <Modal title={<>Vous allez mettre en ligne <br />la signature <span className={classes.orangeTxt}>{Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.name}</span> <br /><br />pour <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></>}
             cancel="Annuler"
@@ -142,7 +157,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                         <div>
                             <label>Choisissez une signature</label>
                             {templates.length > 0 &&
-                                <CustomSelect onChange={(e) => { setSelectedTemplate(e) }} display="name" getValue="html" items={templates} />}
+                                <CustomSelect onChange={(e) => { setSelectedTemplate(e) }} callback="callback" display="name" getValue="html" items={templates} />}
                             <div className={classes.signature}>
                                 {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
                             </div>
@@ -151,13 +166,16 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                             {/* if event list events */}
                             {events.length > 0 ? <>
                                 <label>Ajouter un event ou une playlist</label>
-                                <CustomSelect onChange={(e) => e === 'playlist' ? setChoosePlaylist(true) : setEvent(e)} display="name" getValue="@id" items={events} />
+                                <CustomSelect onChange={(e) => {
+                                    if (e === 'playlist') { setChoosePlaylist(true); setEvent(e) } else setEvent(e)
+                                }}
+                                    display="name" displayInList="listName" getValue="@id" items={events} />
                             </> : ""}
                         </div>
                     </div>
                     <div className={classes.btnsContainer}>
-                    <Button onClick={() => setEdit()} color="orange">Annuler</Button>
-                    <Button onClick={() => handleSubmit()} color="orangeFill">Sauvegarder</Button>
+                        <Button onClick={() => setEdit()} color="orange">Annuler</Button>
+                        <Button onClick={() => handleSubmit()} color="orangeFill">Sauvegarder</Button>
                     </div>
                 </>}
             </div>

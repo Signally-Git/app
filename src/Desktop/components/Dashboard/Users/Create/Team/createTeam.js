@@ -22,10 +22,11 @@ export default function CreateTeam() {
     const handleSave = async () => {
 
 
-        const req = workplace !== "Aucun" ? {
+        const req = workplace !== "Aucun groupe" && workplace !== "" ? {
             workplace: workplace,
-            name: teamName
-        } : { name: teamName }
+            name: teamName,
+            organisation: JSON.parse(localStorage.getItem('user')).organisation
+        } : { name: teamName, organisation: JSON.parse(localStorage.getItem('user')).organisation }
         const create = await request.post('teams', req).catch(
             () => notification({ content: <>La team <span style={{ color: "#FF7954" }}>{teamName}</span> n'a pas pu être créée</>, status: "invalid" }))
         console.log(create)
@@ -46,7 +47,7 @@ export default function CreateTeam() {
     const getWorkplaces = async () => {
         const wps = await request.get('workplaces')
         if (wps.data["hydra:member"].length > 0) {
-            wps.data["hydra:member"].unshift({ '@id': "Aucun", name: "Aucun", style: {marginTop: '2.5rem'} })
+            wps.data["hydra:member"].unshift({ '@id': "Aucun groupe", name: "Aucun groupe" })
             setWorkplace(wps.data["hydra:member"][1]['@id'])
             setWorkplaces(wps.data["hydra:member"])
         }
@@ -68,7 +69,7 @@ export default function CreateTeam() {
                 <div>
                     {workplaces.length > 0 && 
                     <CustomSelect display="name" getValue="@id" 
-                    styleList={{ height: '15rem'}}
+                    styleList={{ height: '15rem', paddingTop: '2.5rem'}}
                     items={workplaces} onChange={(e) => { setWorkplace(e); focus.current.focus() }} />}
                     <Input style={{ width: "100%" }} ref={focus} onChange={(e) => setTeamName(e.target.value)} type="text" placeholder="Nom de l'équipe" />
 

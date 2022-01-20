@@ -262,8 +262,16 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                         workplaces.map((workplace) => {
                             if (workplace?.name?.toLowerCase().search(searchWorkplace) !== -1)
                                 return (
-                                    <li onMouseEnter={() => setSelected(workplace)} key={workplace.id} className={`${editInfo === workplace ? classes.editing : ""} ${selected?.id === workplace.id && selected?.name === workplace?.name ? classes.selected : ""}`} >
-                                        <input onChange={(e) => e.target.checked ? setEdit(workplace) : ""} onMouseEnter={() => selected?.id === workplace.id && selected?.name === workplace?.name ? true : false} className={classes.checkbox} defaultChecked={selected?.id === workplace.id && selected?.name === workplace?.name ? true : false} type="radio" name="workplace" value={JSON.stringify(workplace)} />
+                                    <li onMouseMove={() => {
+                                        if (!edit) {
+                                            clearTimeout(time)
+                                            time = setTimeout(() => {
+                                                setSelected(workplace)
+                                            }, 200)}}} 
+                                            key={workplace.id} className={`${editInfo === workplace ? classes.editing : ""} ${selected?.id === workplace.id && selected?.name === workplace?.name ? classes.selected : ""}`} >
+                                        <input onChange={(e) => {if (e.target.checked){ setEdit(workplace); setSelected(workplace)} }} 
+                                         className={classes.checkbox} 
+                                        checked={edit?.id === workplace.id && edit?.name === workplace?.name ? true : false} type="radio" name="workplace" value={JSON.stringify(workplace)} />
                                         {editInfo === workplace ? <input className={classes.rename} ref={toFocus} type="text" defaultValue={workplace?.name} onChange={(e) => setWorkplaceName(e.target.value)} /> :
                                             <input className={classes.rename} disabled type="text" defaultValue={workplaceName || workplace?.name} />}
                                         <span></span>
@@ -312,8 +320,17 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                     {teams.map((team) => {
                         if (team.name?.toLowerCase().search(searchTeam) !== -1 || team.workplace?.name?.toLowerCase().search(searchTeam) !== -1)
                             return (
-                                <li onMouseEnter={() => setSelected(team)} key={team.id} className={`${editInfo === team && classes.editing} ${selected?.id === team.id && selected?.name === team.name ? classes.selected : ""}`} >
-                                    <input onChange={(e) => { e.preventDefault(); setEdit(team) }} className={classes.checkbox} defaultChecked={selected === team.name ? true : false} type="radio" name="team" value={JSON.stringify(team)} />
+                                <li onMouseMove={() => {
+                                    if (!edit) {
+                                        clearTimeout(time)
+                                        time = setTimeout(() => {
+                                            setSelected(team)
+                                        }, 200)}}}  key={team.id} className={`${editInfo === team ? classes.editing : ""} ${selected?.id === team.id && selected?.name === team.name ? classes.selected : ""}`} >
+                                             <input onChange={(e) => {if (e.target.checked){ setEdit(team); setSelected(team)} }} 
+                                         className={classes.checkbox} 
+                                        checked={edit?.id === team.id && edit?.name === team?.name ? true : false} type="radio" name="team" value={JSON.stringify(team)} />
+                                    {/* <input onChange={(e) => { setEdit(team); setSelected(team) }} className={classes.checkbox} checked={edit?.id === team.id && edit?.name === team.name ? true : false} type="radio" name="team" value={JSON.stringify(team)} /> */}
+                                    <span></span>
                                     {editInfo === team ? <input autoFocus className={classes.rename} ref={toFocus} type="text" defaultValue={team?.name} onChange={(e) => setTeamName(e.target.value)} /> :
                                         <input className={classes.rename} disabled type="text" defaultValue={teamName || team?.name} />}
                                     {team.workplace?.name?.length > 0 ? <div className={classes.infos}>
