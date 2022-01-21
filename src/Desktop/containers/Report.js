@@ -59,7 +59,7 @@ export default function Report() {
                 </div>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <h4>Type du problème, commentaire, suggestion</h4>
-                    <CustomSelect onChange={(e) => setSelect(e.target.value)} display="name" getValue="key" items={table} defaultValue={table[0].key} />
+                    <CustomSelect onChange={(e) => setSelect(e)} display="name" getValue="key" items={table} defaultValue={table[0].key} />
                     {/* <form onChange={(e) => setSelect(e.target.value)}>
                         <select>
                             <option value="SIGNALLY_APP">Problème rencontré sur l'application</option>

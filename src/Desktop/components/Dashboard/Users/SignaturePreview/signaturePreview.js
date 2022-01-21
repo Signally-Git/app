@@ -43,10 +43,16 @@ export default function SignaturePreview({ show, edit, setEdit }) {
             if (a.startAt > b.startAt) { return 1; }
             return 0
         }))
-        setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event !== "playlist" ? "Playlist" : "Modifier la playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
-        setEvent(events.data["hydra:member"][0])
-
+        setEvent(events.data["hydra:member"][0] || { '@id': "playlist" })
+        console.log(event)
+        setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event['@id'] === "playlist" ? "Modifier la playlist" : "Playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
     }, [selectedTemplate])
+
+    useEffect(() => {
+        const tmp = templates;
+        setTemplates([])
+        //    setTemplates(tmp)
+    }, [edit])
 
     // PREVIEW SIGNATURE
     useEffect(async () => {
@@ -64,7 +70,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
     })
 
     useEffect(() => {
-        if (event === 'playlist') {
+        if (event['@id'] === 'playlist' || events['@id'] === 'playlist') {
             events.pop()
             setEvents([...events, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event !== "playlist" ? "Playlist" : "Modifier la playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
         }
@@ -83,7 +89,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
         await request.patch(`${type}s/${element.id}`, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(
-            (res) => {
+            () => {
                 notification({ content: <>Signature de {type === "user" ? element.firstName + " " + element.lastName : type} modifiée</>, status: "valid" })
                 setEdit()
             }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
@@ -98,7 +104,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                     <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className={classes.searchInput} placeholder="Rechercher un event" />
                 </div>
                 <ul>
-                    {events.map((event) => {
+                    {incomingEvents.map((event) => {
                         if (event.name.toLowerCase().search(searchQuery?.toLowerCase()) >= 0)
                             return <li key={event['@id']}>
 
@@ -164,13 +170,20 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                         </div>
                         <div>
                             {/* if event list events */}
-                            {events.length > 0 ? <>
+                            {events.length > 1 ? <>
                                 <label>Ajouter un event ou une playlist</label>
                                 <CustomSelect onChange={(e) => {
                                     if (e === 'playlist') { setChoosePlaylist(true); setEvent(e) } else setEvent(e)
                                 }}
-                                    display="name" displayInList="listName" getValue="@id" items={events} />
-                            </> : ""}
+                                    display="name" displayInList="listName" getValue="@id" items={events} defaultValue={event} />
+                            </> :
+                                <>
+                                    <label>Programmez vos events à venir</label>
+                                    <Button onClick={(e) => { setChoosePlaylist(true); }}
+                                        color="orange" style={{borderRadius: '10px', margin: 0, marginTop: '1.285rem', height: '2.55rem', width: '100%'}} display="name" displayInList="listName" getValue="@id" items={events} defaultValue={event}>
+                                        Ajouter une playlist
+                                    </Button>
+                                </>}
                         </div>
                     </div>
                     <div className={classes.btnsContainer}>

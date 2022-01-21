@@ -38,7 +38,7 @@
         margin-right: auto;
         width: 100%;
     }
-    button {
+    > button {
         cursor: pointer;
         margin-right: auto;
         margin-left: 0;
@@ -164,7 +164,6 @@
         padding: 0;
         list-style: none;
         width: 100%;
-        height: 100%;
         display: flex;
         flex-wrap: wrap;
         input {
@@ -281,4 +280,10 @@
     height: 0.5rem;
     border-radius: 50%;
     background: $signally-brown;
+}
+
+.btnContainer button{
+    margin-right: auto;
+    margin-left: 0rem;
+    margin-top: 3rem;
 }

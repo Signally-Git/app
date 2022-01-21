@@ -12,6 +12,7 @@
       flex-wrap: wrap;
   background: #fff;
   border-radius: 20px;
+  position: relative;
   padding: 2rem;
 }
 
@@ -112,11 +113,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  width: 50%;
+  width: 43%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .eventName {

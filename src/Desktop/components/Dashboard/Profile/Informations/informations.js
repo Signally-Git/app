@@ -9,6 +9,8 @@ import {
     FaFacebookF,
     FaTwitter,
     FaLinkedinIn,
+    FaSnapchat,
+    FaPinterest,
 } from "react-icons/fa";
 import axios from 'axios';
 import { API } from 'config';
@@ -150,6 +152,18 @@ function Informations() {
         }
 
         if (string) {
+            if (string.search(/snapchat/i) !== -1) {
+                icon[index] = <FaSnapchat />
+                setIcon([...icon])
+                setSocials({ ...socials, snapchat: string })
+                return
+            }
+            if (string.search(/pinterest/i) !== -1) {
+                icon[index] = <FaPinterest />
+                setIcon([...icon])
+                setSocials({ ...socials, pinterest: string })
+                return
+            }
             if (string.search(/twitter/i) !== -1) {
                 icon[index] = <FaTwitter />
                 setIcon([...icon])
@@ -215,9 +229,9 @@ function Informations() {
                             <label>Téléphone fixe</label>
                             <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
                         </div>
-                        {/* <div className={classes.iconsContainer}>
+                        <div className={classes.iconsContainer} style={{padding: '1rem 0'}}>
                             <label htmlFor="socials">Réseaux sociaux</label>
-                            <AiOutlinePlusCircle onClick={() => { setSocial(social.concat("")); setIcon(icon.concat(<FaLink />)) }} />
+                            <AiOutlinePlusCircle fontSize={'1.5rem'} onClick={() => { setSocial(social.concat("")); setIcon(icon.concat(<FaLink />)) }} />
                         </div>
                         {
                             social?.map((rs, index) => {
@@ -227,9 +241,12 @@ function Informations() {
                                         <Input style={{ textIndent: "2rem", width: "100%" }} autoFocus={rs.length === 0 && icon[index] && icon[index] !== <FaLink />} type="text" placeholder="URL" value={rs} onChange={(e) => handleSocial(e.target.value, index)} />
                                     </div>)
                             })
-                        } */}
+                        }
                     </div>
-                    <Button width="40%" color="orangeFill" onClick={() => handleSaveCompany()}>Sauvegarder</Button>
+                    <div className={classes.btnsContainer}>
+                        <Button color="orange" onClick={() => history.goBack()}>Annuler</Button>
+                        <Button color="orangeFill" onClick={() => handleSaveCompany()}>Sauvegarder</Button>
+                    </div>
                 </> : <>
                     <div className={classes.inputsContainer}>
                         <div>
@@ -255,7 +272,10 @@ function Informations() {
                             </div>
                         </div>
                     </div>
-                    <Button width="40%" color="orangeFill" onClick={() => handleSavePersonal()}>Sauvegarder</Button>
+                    <div className={classes.btnsContainer}>
+                        <Button color="orange" onClick={() => history.goBack()}>Annuler</Button>
+                        <Button color="orangeFill" onClick={() => handleSavePersonal()}>Sauvegarder</Button>
+                    </div>
                 </>
                 }
             </div>

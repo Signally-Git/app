@@ -186,3 +186,14 @@
   bottom: 0;
   margin: auto;
 }
+
+.btnsContainer {
+  margin-top: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 43%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-right: auto;
+}

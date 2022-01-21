@@ -8,6 +8,7 @@
     flex-wrap: wrap;
     background: #fff;
     border-radius: 20px;
+    position: relative;
     padding: 2rem;
     h2 {
         width: 100%;
@@ -83,8 +84,8 @@
 
 .btnsContainer {
     display: flex;
-    flex-direction: row;
-    width: 50%;
+    width: 43%;
+    justify-content: space-around;
 }
 
 .eventName {

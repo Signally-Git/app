@@ -10,6 +10,9 @@
 }
 
 .desktop .desktopSubcontainer {
+  opacity: 0;
+  -webkit-animation: fadeIn 1s .5s forwards;
+          animation: fadeIn 1s .5s forwards;
   width: 95%;
   height: 95%;
   position: relative;
@@ -31,6 +34,24 @@
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .mainContent {

@@ -2,6 +2,7 @@ import classes from './templateSelect.module.css'
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { useState } from 'react';
 import Template from './template';
+import Button from 'Utils/Button/btn';
 
 // Displaying the list of bought and free templates (Studio, Store) and allows to select one to create custom signature
 
@@ -272,14 +273,17 @@ export default function TemplateSelection(props) {
                                 </li>)
                             }
                         }
-                            else
-                                return (<li key={template.id}>
-                                    <input type="radio" name="template" value={template.html} />
-                                    <Template template={template.html} socials={props.icons} />
-                                </li>)
+                        else
+                            return (<li key={template.id}>
+                                <input type="radio" name="template" value={template.html} />
+                                <Template template={template.html} socials={props.icons} />
+                            </li>)
                 })}
                 {!tag ? <li style={{ width: "412px", height: "220px" }}></li> : ""}
             </ul>
+            <div className={classes.btnContainer}>
+                <Button color="orange" width={'5rem'} onClick={(e) => { e.preventDefault(); props.showFunction() }}>Annuler</Button>
+            </div>
         </form>
     </div>)
 }

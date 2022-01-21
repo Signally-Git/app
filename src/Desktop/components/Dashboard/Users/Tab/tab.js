@@ -267,7 +267,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                             clearTimeout(time)
                                             time = setTimeout(() => {
                                                 setSelected(workplace)
-                                            }, 200)}}} 
+                                            }, 100)}}} 
                                             key={workplace.id} className={`${editInfo === workplace ? classes.editing : ""} ${selected?.id === workplace.id && selected?.name === workplace?.name ? classes.selected : ""}`} >
                                         <input onChange={(e) => {if (e.target.checked){ setEdit(workplace); setSelected(workplace)} }} 
                                          className={classes.checkbox} 
@@ -325,7 +325,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                         clearTimeout(time)
                                         time = setTimeout(() => {
                                             setSelected(team)
-                                        }, 200)}}}  key={team.id} className={`${editInfo === team ? classes.editing : ""} ${selected?.id === team.id && selected?.name === team.name ? classes.selected : ""}`} >
+                                        }, 100)}}}  key={team.id} className={`${editInfo === team ? classes.editing : ""} ${selected?.id === team.id && selected?.name === team.name ? classes.selected : ""}`} >
                                              <input onChange={(e) => {if (e.target.checked){ setEdit(team); setSelected(team)} }} 
                                          className={classes.checkbox} 
                                         checked={edit?.id === team.id && edit?.name === team?.name ? true : false} type="radio" name="team" value={JSON.stringify(team)} />
@@ -379,7 +379,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                             clearTimeout(time)
                                             time = setTimeout(() => {
                                                 setSelected(user)
-                                            }, 200)}}} 
+                                            }, 100)}}} 
                                 key={user.id} className={`${editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? classes.editing : ""} ${selected?.id === user.id && selected?.name === user.name ? classes.selected : ""}`} >
                                     <input className={classes.checkbox} onChange={(e) => { setEdit(user); setSelected(user) }} checked={edit?.id === user.id && edit?.name === user.name ? true : false} type="radio" name="user" value={JSON.stringify(user)} />
                                     {editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>

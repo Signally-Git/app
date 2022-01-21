@@ -45,43 +45,50 @@ function Team() {
 
     useEffect(() => {
         const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${entity?.['@id']}`);
+        if (edit === 'assign-team')
+        {
+            sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
+        }
         function getRealtimeData(data) {
             setEntity(data)
         }
-        sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
         // sse.onerror = () => {
         //     sse.close();
         // }
         return () => {
             sse.close();
         };
-    }, [])
+    }, [edit])
 
     const handleUpdate = (user, action) => {
+        console.log(user)
         const req = []
         switch (action) {
             case 'remove':
-                entity.users.filter((userCheck) => userCheck['@id'] !== user['@id']).map((userToCheck) => {
-                    req.push(Object.values(userToCheck)[0])
-                    // req.push(userToCheck)
-                    return ;
-                })
+                // entity.users.filter((userCheck) => userCheck['@id'] !== user['@id']).map((userToCheck) => {
+                //     req.push(Object.values(userToCheck)[0])
+                //     // req.push(userToCheck)
+                //     return ;
+                // })
               
-                request.patch(entity?.['@id'], { users: req }, {
+                request.patch(user['@id'], { team: null }, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }});
                 setTransition(user['@id'])
                 break;
 
             case 'add':
-                entity.users.map((userToCheck) => {
-                    req.push(Object.values(userToCheck)[0])
-                    // req.push(userToCheck)
-                    return ;
-                })
-                req.push(user['@id'])
-                request.patch(entity?.['@id'], { users: req }, {
+                // entity.users.map((userToCheck) => {
+                //     req.push(Object.values(userToCheck)[0])
+                //     // req.push(userToCheck)
+                //     return ;
+                // })
+                // req.push(user['@id'])
+                // request.patch(entity?.['@id'], { users: req }, {
+                //     headers: { 'Content-Type': 'application/merge-patch+json' }});
+                request.patch(user['@id'], { team: entity?.['@id'] }, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }});
                 setTransition(user['@id'])
+                // setTransition(user['@id'])
                 break;
 
             default:
