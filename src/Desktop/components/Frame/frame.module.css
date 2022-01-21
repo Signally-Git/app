@@ -1,4 +1,6 @@
 .desktop {
+  -webkit-animation: fadeIn .5s forwards;
+          animation: fadeIn .5s forwards;
   background-color: #E3D8D8;
   height: 100vh;
   margin: 0;
