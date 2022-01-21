@@ -23,7 +23,7 @@ import request from 'Utils/Request/request';
 
 function Informations() {
     const [active, setActive] = useState("company")
-    const [social, setSocial] = useState([])
+    const [social, setSocial] = useState([' '])
     const [icon, setIcon] = useState([<FaLink />])
     const [logo, setLogo] = useState()
     const [organisationId, setOrganisationId] = useState()
@@ -48,7 +48,11 @@ function Informations() {
             setMobile(res.data.phone)
         })
     }, [])
+    
+    useEffect(() => {
 
+        console.log(social)
+    }, [social])
 
     const handleSaveCompany = async () => {
         const img = new FormData()
@@ -110,7 +114,6 @@ function Informations() {
     useEffect(async () => {
         handleSocial()
         let organisation = await request.get(JSON.parse(localStorage.getItem('user')).organisation)
-        console.log(organisation)
         organisation = organisation.data
         setOrganisationId(organisation.id)
         // setLogo(organisation.logos[0])
@@ -206,31 +209,36 @@ function Informations() {
                 </ul>
                 {active === "personal" ? <>
                     <div className={classes.inputsContainer}>
-                        <div className={classes.inputContainer}>
-                            <label>Logo de l'entreprise</label>
-                            <UploadFile file={uploadedMedia}
-                                setFile={(e) => setUploadedMedia(e)}
-                                placeholder="Importer une image"
-                                type="image/*" />
+                        <div className={classes.row}>
+                            <div className={classes.inputContainer}>
+                                <label>Nom société</label>
+                                <Input type="text" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <label>Logo de l'entreprise</label>
+                                <UploadFile file={uploadedMedia}
+                                    setFile={(e) => setUploadedMedia(e)}
+                                    placeholder="Importer une image"
+                                    style={{paddingTop: '.8rem', paddingBottom: '.8rem'}}
+                                    type="image/*" />
+                            </div>
                         </div>
-                        <div className={classes.inputContainer}>
-                            <label>Nom société</label>
-                            <Input type="text" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
-                        </div>
-                        <div className={classes.inputContainer}>
-                            <label>Adresse</label>
-                            <Input type="text" value={companyAddress} onChange={(e) => setCompanyAddress(e.target.value)} />
+                        <div className={classes.row}>
+                            <div className={classes.inputContainer}>
+                                <label>Adresse</label>
+                                <Input type="text" value={companyAddress} onChange={(e) => setCompanyAddress(e.target.value)} />
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <label>Téléphone fixe</label>
+                                <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                            </div>
                         </div>
                         <div className={classes.inputContainer}>
                             <label>Site web</label>
                             <Input type="text" value={website} onChange={(e) => setWebsite(e.target.value)} />
                         </div>
-                        <div className={classes.inputContainer}>
-                            <label>Téléphone fixe</label>
-                            <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
-                        </div>
-                        <div className={classes.iconsContainer} style={{padding: '1rem 0'}}>
-                            <label htmlFor="socials">Réseaux sociaux</label>
+                        <div className={classes.socialsContainer}>
+                            <label htmlFor="socials" className={classes.orangeTxt}>Réseaux sociaux</label>
                             <AiOutlinePlusCircle fontSize={'1.5rem'} onClick={() => { setSocial(social.concat("")); setIcon(icon.concat(<FaLink />)) }} />
                         </div>
                         {
@@ -250,25 +258,29 @@ function Informations() {
                 </> : <>
                     <div className={classes.inputsContainer}>
                         <div>
-                            <div className={classes.inputContainer}>
-                                <label>Prénom</label>
-                                <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} type="text" />
+                            <div className={classes.row}>
+                                <div className={classes.inputContainer}>
+                                    <label>Prénom</label>
+                                    <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} type="text" />
+                                </div>
+                                <div className={classes.inputContainer}>
+                                    <label>Nom</label>
+                                    <Input value={lastName} onChange={(e) => setLastName(e.target.value)} type="text" />
+                                </div>
                             </div>
-                            <div className={classes.inputContainer}>
-                                <label>Nom</label>
-                                <Input value={lastName} onChange={(e) => setLastName(e.target.value)} type="text" />
-                            </div>
-                            <div className={classes.inputContainer}>
-                                <label>Poste / Fonction</label>
-                                <Input value={position} onChange={(e) => setPosition(e.target.value)} type="text" />
+                            <div className={classes.row}>
+                                <div className={classes.inputContainer}>
+                                    <label>Poste / Fonction</label>
+                                    <Input value={position} onChange={(e) => setPosition(e.target.value)} type="text" />
+                                </div>
+                                <div className={classes.inputContainer}>
+                                    <label>Téléphone mobile</label>
+                                    <Input value={mobile} onChange={(e) => setMobile(e.target.value)} type="tel" />
+                                </div>
                             </div>
                             <div className={classes.inputContainer}>
                                 <label>Email</label>
                                 <Input disabled defaultValue={JSON.parse(localStorage.getItem("user"))?.email} type="mail" />
-                            </div>
-                            <div className={classes.inputContainer}>
-                                <label>Téléphone mobile</label>
-                                <Input value={mobile} onChange={(e) => setMobile(e.target.value)} type="tel" />
                             </div>
                         </div>
                     </div>

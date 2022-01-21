@@ -39,6 +39,20 @@
           align-items: center;
 }
 
+.row {
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.row > div {
+  width: 48%;
+}
+
 .menu {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -165,6 +179,27 @@
 
 .iconsContainer svg {
   cursor: pointer;
+}
+
+.socialsContainer {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #FF7954;
+}
+
+.socialsContainer label {
+  font-size: .9rem;
+  color: #FF7954;
+}
+
+.socialsContainer svg {
+  cursor: pointer;
+  margin-left: .5rem;
 }
 
 .iconInput {

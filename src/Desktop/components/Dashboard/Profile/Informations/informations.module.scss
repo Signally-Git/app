@@ -26,6 +26,15 @@
     align-items: center;
 }
 
+.row {
+    width: 100%;
+    // align-items: center;
+    justify-content: space-between;
+    display: flex;
+    > div {
+        width: 48%;
+    }
+}
 
 .menu {
     display: flex;
@@ -117,6 +126,21 @@
     }
     svg {
         cursor: pointer;
+    }
+}
+
+.socialsContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: $signally-orange;
+    label {
+        font-size: .9rem;
+        color: $signally-orange;
+    }
+    svg {
+        cursor: pointer;
+        margin-left: .5rem;
     }
 }
 

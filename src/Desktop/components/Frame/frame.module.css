@@ -13,8 +13,8 @@
 
 .desktop .desktopSubcontainer {
   opacity: 0;
-  -webkit-animation: fadeIn 1s .5s forwards;
-          animation: fadeIn 1s .5s forwards;
+  -webkit-animation: fadeIn .5s forwards;
+          animation: fadeIn .5s forwards;
   width: 95%;
   height: 95%;
   position: relative;
@@ -81,6 +81,9 @@
   display: -ms-flexbox;
   display: flex;
   margin: 0 auto;
+  opacity: 0;
+  -webkit-animation: fadeIn 1s .5s forwards;
+          animation: fadeIn 1s .5s forwards;
   margin-right: 3rem;
   max-height: 100vh;
   min-height: 80vh;
@@ -139,6 +142,9 @@
   border-radius: 20px;
   -ms-flex-line-pack: start;
       align-content: flex-start;
+  opacity: 0;
+  -webkit-animation: fadeIn 1s 1s forwards;
+          animation: fadeIn 1s 1s forwards;
 }
 
 .dashboardContainer h1 {

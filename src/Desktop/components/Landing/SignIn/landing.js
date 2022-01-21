@@ -34,6 +34,14 @@ const Login = () => {
     const history = useHistory()
     const query = useQuery()
 
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
+
     useEffect(() => {
         if (localStorage.getItem('token'))
             history.push('/dashboard')
@@ -62,11 +70,18 @@ const Login = () => {
     }
 
     const handleSubmit = (e) => {
-        handleScroll(e, 2000)
-        setTimeout(() => {
-            setLogging(true)
-            toFocus.current.focus()
-        }, 400)
+        e.preventDefault()
+        if (validateEmail(email))
+        {
+            handleScroll(e, 2000)
+            setTimeout(() => {
+                setLogging(true)
+                toFocus.current.focus()
+            }, 400)
+        }
+        else {
+            notification({ content: <>Le format d'email n'est pas valide</>, status: "invalid" })
+        }
     }
 
     const handleLogIn = async (e) => {
@@ -135,11 +150,6 @@ const Login = () => {
                             <div className={classes.codeContainer}>
                                 {
                                     logging ?
-                                        // <AuthCode
-                                        //     autoFocus={false}
-                                        //     characters={9}
-                                        //     onChange={setCode}
-                                        // /> 
                                         <> <div style={{ position: 'relative', display: 'flex' }}>
                                             <Input autoComplete="current-password" defaultValue={code} ref={toFocus} placeholder="Mot de passe" type={showPassword ? "text" : "password"} onChange={(e) => setCode(e.target.value)} />
                                             <div className={classes.showPassword} onClick={() => setShowPass(!showPassword)}>
@@ -150,20 +160,8 @@ const Login = () => {
                                                 }
                                             </div>
                                         </div>
-                                        </>
-                                        : <>
+                                        </> : <>
                                             <Input defaultValue={code} placeholder="Mot de passe" type="password" onChange={(e) => setCode(e.target.value)} />
-                                            {/* <div>
-                                        <input />
-                                        <input />
-                                        <input />
-                                        <input />
-                                        <input />
-                                        <input />
-                                        <input />
-                                        <input />
-                                        <input />
-                                    </div> */}
                                         </>}
                             </div>
                             <span onClick={() => setModal(true)} className={classes.forgot}>Mot de passe oublié</span>
