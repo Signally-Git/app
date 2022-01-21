@@ -10,6 +10,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import request from 'Utils/Request/request';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useNotification } from 'Utils/Notifications/notifications';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 function useQuery() {
     const { search } = useLocation();
@@ -25,6 +26,7 @@ const Login = () => {
     const slider = useRef(null)
     const toFocus = useRef(null)
     const notification = useNotification()
+    const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
 
     const [error, setError] = useState('')
@@ -69,6 +71,7 @@ const Login = () => {
 
     const handleLogIn = async (e) => {
         e.preventDefault()
+        setLoading(true)
         const req = {
             username: email.toLowerCase(),
             password: code
@@ -76,6 +79,7 @@ const Login = () => {
 
         const token = await request.post(`token/auth`, req).catch(() => {
             notification({ content: <>Email ou mot de passe incorrect</>, status: "invalid" })
+            setLoading(false)
         });
 
         if (token) {
@@ -164,7 +168,7 @@ const Login = () => {
                             </div>
                             <span onClick={() => setModal(true)} className={classes.forgot}>Mot de passe oublié</span>
                             <div className={classes.btnsContainer}>
-                                <Button width={"30%"} color="orangeFill" type="submit">Connexion</Button>
+                                <Button width={"30%"} color="orangeFill" type="submit">{loading ? <AiOutlineLoading3Quarters stroke-width="1" stroke='2px' fontWeight={'bolder'} className={classes.loading} /> : "Connexion"}</Button>
                                 <Button width={"30%"} color="orange" onClick={(e) => { handleScroll(e, 0) }}>Annuler</Button>
                             </div>
                         </form>

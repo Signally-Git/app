@@ -1,3 +1,31 @@
+.loading {
+  -webkit-animation: spin 1s 0s infinite linear forwards;
+          animation: spin 1s 0s infinite linear forwards;
+  stroke-width: 55px !important;
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
 .container {
   display: -webkit-box;
   display: -ms-flexbox;
