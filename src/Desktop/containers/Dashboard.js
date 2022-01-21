@@ -21,7 +21,6 @@ let count = 0;
 function Dashboard(props) {
     const [isHeader, setIsHeader] = useState("")
     const [createEvent, setCreateEvent] = useState(null)
-    const userId = JSON.parse(localStorage.getItem("user"))?.id
     const [user, setUser] = useState()
     const [template, setTemplate] = useState()
     const [templateName, setTemplateName] = useState()
@@ -76,9 +75,9 @@ function Dashboard(props) {
     const [chartSeriesEvents, setChartSeriesEvents] = useState([{ name: 'CPM bannière', type: "line", data: [18, 24, 11, 14, 25, 22, 23] }])
 
     useEffect(async () => {
-        await request.get(`users/${JSON.parse(localStorage.getItem('user'))?.id}`).then((res) => {
+        await request.get(`whoami`).then((res) => {
             setUser(res.data)
-            setTemplate(res.data?.compiledSignature) 
+            setTemplate(res.data?.signature.html) 
             setTemplateName(res.data?.signature?.name)
         })
     }, [])
@@ -103,7 +102,7 @@ function Dashboard(props) {
             mobile: user?.phone_number,
             phone: organisation?.phone_number
         })
-    }, [user, template, organisation])
+    }, [])
 
     return (
         <>
