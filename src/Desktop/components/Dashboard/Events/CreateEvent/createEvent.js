@@ -107,11 +107,11 @@ export default function CreateEvent({ setDone, event }) {
         <div className={classes.datePick}>
             <div>
                 <label>Date et heure de début</label>
-                <Datetime locale="fr-fr" value={startDate} onChange={setStartDate} closeOnSelect={true} dateFormat="D MMM YYYY" timeFormat="HH mm ss" />
+                <Datetime locale="fr-fr" value={startDate} onChange={setStartDate} closeOnSelect={true} dateFormat="D MMM YYYY" />
             </div>
             <div>
                 <label>Date et heure de fin</label>
-                <Datetime locale="fr-fr" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="D MMM YYYY" timeFormat="HH mm ss" />
+                <Datetime locale="fr-fr" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="D MMM YYYY" />
             </div>
         </div>
         <Input required value={eventName} onChange={(e) => setEventName(e.target.value)} style={{ width: "100%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef} />

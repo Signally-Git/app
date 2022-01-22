@@ -75,9 +75,8 @@ function Informations() {
                 }
                 await request.patch(organisationIRI, req, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
-                }).then((res) => {
-                    // history.goBack()
-                    console.log(res)
+                }).then(() => {
+                    history.goBack()
                 })
             })
         else {
