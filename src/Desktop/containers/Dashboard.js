@@ -77,7 +77,7 @@ function Dashboard(props) {
     useEffect(async () => {
         await request.get(`whoami`).then((res) => {
             setUser(res.data)
-            setTemplate(res.data?.signature.html) 
+            setTemplate(res.data?.compiledSignature) 
             setTemplateName(res.data?.signature?.name)
         })
     }, [])

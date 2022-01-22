@@ -16,6 +16,7 @@ import Billing from './containers/Billing'
 import Report from './containers/Report'
 import Signup from './components/Landing/SignUp/SignUp'
 import { NotificationProvider } from 'Utils/Notifications/notifications'
+import ResetPassword from './containers/ResetPassword'
 
 // Routing for desktop view
 
@@ -38,6 +39,10 @@ export default function DesktopRoutes() {
             <NotificationProvider signup>
                 <Signup />
             </NotificationProvider>
+            </Route>
+
+            <Route path="/reset-password">
+                <ResetPassword />
             </Route>
 
             <PrivateRoute exact path="/dashboard" page="home" component={Dashboard} />

@@ -27,6 +27,7 @@ function Informations() {
     const [icon, setIcon] = useState([<FaLink />])
     const [logo, setLogo] = useState()
     const [organisationId, setOrganisationId] = useState()
+    const [organisationIRI, setOrganisationIRI] = useState()
     const [uploadedMedia, setUploadedMedia] = useState()
     const [companyName, setCompanyName] = useState("")
     const [companyAddress, setCompanyAddress] = useState("")
@@ -61,22 +62,23 @@ function Informations() {
             await request.post(`import/image`, img).then(async (res) => {
                 const requestLogo = {
                     name: "test",
-                    path: res.data.path
+                    path: res.data.path,
+                    organisation: organisationIRI
                 }
                 await request.post('logos', requestLogo).then((res) => {
                     console.log(res.data)
                 });
-                // const req = {
-                //     name: companyName,
-                //     websiteUrl: website,
-                //     logo: res.data['@id']
-                // }
-                // await request.patch(`organisations/${organisationId}`, req, {
-                //     headers: { 'Content-Type': 'application/merge-patch+json' }
-                // }).then((res) => {
-                //     // history.goBack()
-                //     console.log(res)
-                // })
+                const req = {
+                    name: companyName,
+                    websiteUrl: website,
+                    logo: res.data['@id']
+                }
+                await request.patch(organisationIRI, req, {
+                    headers: { 'Content-Type': 'application/merge-patch+json' }
+                }).then((res) => {
+                    // history.goBack()
+                    console.log(res)
+                })
             })
         else {
             const req = {
@@ -116,6 +118,7 @@ function Informations() {
         let organisation = await request.get(JSON.parse(localStorage.getItem('user')).organisation)
         organisation = organisation.data
         setOrganisationId(organisation.id)
+        setOrganisationIRI(organisation['@id'])
         // setLogo(organisation.logos[0])
         setCompanyName(organisation.name)
         setCompanyAddress(organisation.address.street)
