@@ -24,6 +24,7 @@ export default function CreateEvent({ setDone, event }) {
         setEventName(event?.name)
         setStartDate(new Date(event?.startAt))
         setEndDate(new Date(event?.endAt))
+        console.log((moment(startDate).subtract({ hour: 1 })).format('D-MM-YYYYHH:mm:ss'), endDate)
     }, [event])
 
     useEffect(() => {
@@ -107,11 +108,11 @@ export default function CreateEvent({ setDone, event }) {
         <div className={classes.datePick}>
             <div>
                 <label>Date et heure de début</label>
-                <Datetime locale="fr-fr" value={startDate} onChange={setStartDate} closeOnSelect={true} dateFormat="D MMM YYYY" />
+                <Datetime locale="fr-fr" value={startDate} onChange={setStartDate} closeOnSelect={true} dateFormat="D MMM YYYY" timeFormat="HH mm ss" />
             </div>
             <div>
                 <label>Date et heure de fin</label>
-                <Datetime locale="fr-fr" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="D MMM YYYY" />
+                <Datetime locale="fr-fr" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="D MMM YYYY" timeFormat="HH mm ss" />
             </div>
         </div>
         <Input required value={eventName} onChange={(e) => setEventName(e.target.value)} style={{ width: "100%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef} />

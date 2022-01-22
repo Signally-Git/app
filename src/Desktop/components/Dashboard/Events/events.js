@@ -47,8 +47,8 @@ function Events() {
     useEffect(() => {
         const handleModal = (toDelete) => {
             return (
-            <Modal style={{width: '20rem', height: '11rem'}} title={<>Vous allez supprimer <br /><span className={classes.orangeTxt}>{toDelete?.name}</span></>} cancel="Annuler"
-            validate="Confirmer" onCancel={() => setModal()} onConfirm={() => { handleDelete(toDelete?.id) }} />
+                <Modal style={{ width: '20rem', height: '11rem' }} title={<>Vous allez supprimer <br /><span className={classes.orangeTxt}>{toDelete?.name}</span></>} cancel="Annuler"
+                    validate="Confirmer" onCancel={() => setModal()} onConfirm={() => { handleDelete(toDelete?.id) }} />
             )
         }
         setModalContent(handleModal(modal))
@@ -59,23 +59,12 @@ function Events() {
             if (activeEvent?.name.toLowerCase().search(search.toLowerCase()) !== -1)
                 if ((status === "past" && new Date(activeEvent.endAt) < new Date()) || (new Date(activeEvent.startAt) < new Date() && status === "present" && new Date(activeEvent.endAt) > new Date()) || (status === "future" && new Date(activeEvent.startAt) > new Date())) {
                     return (
-                        <li onClick={() => { setEdit(true); setPreview({ activeEvent, past: status === "past", index })}} key={index}
-                            className={`${preview?.activeEvent['@id'] === activeEvent['@id'] ? edit ? classes.selected : classes.preview  : ""} ${status === "past" ? classes.pastEvent : ""}`}
+                        <li onClick={() => { setEdit(true); setPreview({ activeEvent, past: status === "past", index }) }} key={index}
+                            className={`${preview?.activeEvent['@id'] === activeEvent['@id'] ? edit ? classes.selected : classes.preview : ""} ${status === "past" ? classes.pastEvent : ""}`}
                             onMouseEnter={() => {
+                                if (!edit && !create)
+                                    setPreview({ activeEvent, past: status === "past", index })
 
-                                // if (!preview?.activeEvent['@id'] || preview?.activeEvent['@id'] !== activeEvent['@id']) {
-                                //     setEdit(false)
-                                //     if (edit)
-                                //         setTimeout(() => {
-                                //             setPreview({ activeEvent, past: status === "past", index })
-                                //         }, 300);
-                                //     else
-                                //         setPreview({ activeEvent, past: status === "past", index })
-                                // }
-                                // setCreate(false);
-                                if (!edit)
-                                setPreview({ activeEvent, past: status === "past", index })
-                                    // setEdit(preview?.activeEvent['@id'] === activeEvent['@id'] ? edit : activeEvent)
                             }}
                         >
                             <img className={classes.bannerPreview} src={`${API}${activeEvent.imagePath}`} />
