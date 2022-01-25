@@ -51,7 +51,9 @@ function Team() {
         }
         function getRealtimeData(data) {
             // setCurrentUsers(data)
-           setEntity({...entity, users: data.users})
+            setTimeout(() => {
+                setEntity({...entity, users: data.users})
+            }, 1100);
             // setEntity({...entity, users: data})
             // console.log("SECOND", entity, data)
         }
@@ -200,7 +202,7 @@ function Team() {
                                                     return 0
                                                 }).map((user) => {
                                                     const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
-                                                    if (fullName.search(otherUser.toLowerCase()) !== -1)
+                                                    if (fullName.search(otherUser.toLowerCase()) !== -1 && !user.team)
                                                         return <li tabIndex="0" key={user.id} className={`${classes.assignItem} ${transition === user['@id'] ? classes.transition : ""}`}>
                                                             <span>{user.firstName} {user.lastName}</span>
                                                             {transition === user['@id'] ? <span className={classes.added}>Ajouté</span> : 

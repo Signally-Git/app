@@ -2,12 +2,15 @@ import React from 'react'
 import { FaFacebook, FaInstagram, FaLinkedin, FaPinterest, FaSnapchat, FaTwitter } from 'react-icons/fa'
 import Input from 'Utils/Input/input'
 import classes from './defineSocials.module.css'
-import Button from '../../../Utils/Button/btn';
+import { BiPlusCircle, BiMinusCircle } from 'react-icons/bi';
+import { useNotification } from 'Utils/Notifications/notifications';
 
 export default function DefineSocials() {
-    const [socials, setSocials] = React.useState([])
-    const [value, setValue] = React.useState("")
+    const [socials, setSocials] = React.useState([{ url: "", type: "" }])
     const [select, setSelect] = React.useState(0)
+    const [value, setValue] = React.useState("")
+    const socialLink = React.useRef(null)
+    const notification = useNotification()
 
     const socialIcons = {
         FACEBOOK: <FaFacebook />,
@@ -19,22 +22,50 @@ export default function DefineSocials() {
     }
 
     const renderSocial = (social) => {
-        const Component = socialIcons[social.type]
+        const Component = socialIcons[social.type.toUpperCase()]
         return Component
     }
 
-    const handleChange = (e) => {
-        socials[select] = { url: e.target.value, type: e.target.value }; 
-        if (new URL(e.target.value))
-            {
-                console.log(new URL(e.target.value)).hostname.replace('www.','').replace('.com','').replace(`^(?:.*://)?(?:.*?\.)?([^:/]*?\.[^:/]*).*$`, '')
-            }
-        setValue(e.target.value)
+    const getType = (string) => {
+        let type;
+        try {
+            type = new URL((string)).hostname.replace('www.', '').replace('.com', '').replace(`^(?:.*://)?(?:.*?\.)?([^:/]*?\.[^:/]*).*$`, '');
+            return type
+        } catch (_) {
+            return false;
+        }
+    }
+
+    const handleChange = React.useCallback((e) => {
+        e.preventDefault()
+        const type = getType(e.target.value)
+        let newArr = [...socials];
+        newArr[select] = { url: e.target.value, type: type };
+        setSocials(newArr);
+        setValue(e.target.value || "")
+    })
+
+    const handleSwap = (social) => {
+        setSelect(socials.findIndex(x => x === social))
+        setValue(socials[socials.findIndex(x => x === social)]?.url || "")
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setSelect(select + 1)
+        if (socials.filter((social) => getType(value) === social?.type).length === 1) {
+            setSelect(socials.length)
+            setValue("")
+            socialLink.current.focus()
+        }
+        else {
+            notification({ content: <>Il existe déjà un réseau social {getType(value)}</>, status: 'invalid'})
+        }
+    }
+
+    const handleRemove = () => {
+        socials.splice(socials.findIndex(x => x?.url === value), 1)
+        setValue("")
+        setSelect(socials.length)
     }
 
     return (
@@ -43,9 +74,9 @@ export default function DefineSocials() {
                 <div>
                     <label>Réseaux sociaux</label>
                     <ul className={classes.socialsList}>
-                        {socials.map((social) => {
-                            return <li title={social.url} onClick={() => setSelect(socials.findIndex(x => x === social))}>
-                                {renderSocial(social)}
+                        {socials?.map((social, index) => {
+                            return <li key={index} title={social?.url} onClick={() => handleSwap(social)}>
+                                {social?.type ? renderSocial(social) : ""}
                             </li>
                         })}
                         <li>
@@ -53,9 +84,9 @@ export default function DefineSocials() {
                     </ul>
                 </div>
                 <div>
-                <Input style={{ width: '20rem' }} value={socials[select]?.url} onChange={(e) => handleChange(e)} type="text" placeholder="URL" />
-                            <Button type='submit' color="brown" onClick={() => { return; }}>-</Button>
-                            <Button type='submit' color="brown" onClick={() => { return; }}>+</Button>
+                    <Input ref={socialLink} style={{ width: '20rem' }} value={value} onChange={(e) => handleChange(e)} type="text" placeholder="URL" />
+                    <BiPlusCircle onClick={(e) => handleSubmit(e)} />
+                    <BiMinusCircle onClick={(e) => handleRemove()} />
                 </div>
             </form>
         </div>
