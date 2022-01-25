@@ -9,7 +9,6 @@ import request from 'Utils/Request/request';
 import Takeoff from 'Assets/img/takeoff.png'
 
 import classes from '../landing.module.css'
-import { AiFillEyeInvisible } from 'react-icons/ai';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useNotification } from 'Utils/Notifications/notifications';
 import axios from 'axios';
@@ -42,7 +41,6 @@ const Signup = () => {
   function validateSiret(siret) {
     var isValid = true;
     siret = siret.replace(/[^\d.-]/g, '')
-    console.log(siret.length)
     if ((siret.length != 14) || (isNaN(siret)))
       isValid = false;
     return isValid;
@@ -107,15 +105,19 @@ const Signup = () => {
     }
     if (valid) {
       setLoading(true)
-      const signup = await axios.post(API + 'register', req).catch((err) => {
-        notification({ content: <>Erreur lors de la création</>, status: "invalid" })
+      await axios.post(API + 'register', req).catch((err) => {
+        if (err.response.data.detail === 'organisation.organisation_with_same_siret_already_exists')
+        notification({ content: <>Cette société est déjà enregistrée sur Signally</>, status: "invalid" })
+        if (err.response.data.detail === 'user.user_with_same_email_already_exists')
+        notification({ content: <>Cet utilisateur est déjà enregistré sur Signally</>, status: "invalid" })
+        console.log(err.response.data.detail)
+        // notification({ content: <>Erreur lors de la création</>, status: "invalid" })
         setLoading(false);
         return;
       })
-      console.log(signup)
-      if (signup.data) {
-        setSent(true)
-      }
+      // if (signup?.data) {
+      //   setSent(true)
+      // }
     }
   }
 
@@ -135,9 +137,9 @@ const Signup = () => {
               <p>Néanmoins, grâce à vous, nous pourrons rendre la plateforme de plus en plus performante et encore plus simple à utiliser.</p>
               <p>Un grand merci pour votre aide.</p><br />
               <div>
-                            <img className={classes.plugins} src={PluginsOutlook} />
-                            <img className={classes.plugins} src={PluginsSoon} />
-                        </div>
+                <img className={classes.plugins} src={PluginsOutlook} />
+                <img className={classes.plugins} src={PluginsSoon} />
+              </div>
             </div>
           </div>
           {
@@ -200,7 +202,7 @@ const Signup = () => {
                     <div className={classes.inputContainer}>
                       <label className={classes.inputTitle}>Nombre de collaborateurs</label>
                       <div style={{ position: 'relative', display: 'flex' }}>
-                        <CustomSelect styleList={{height: '10.5rem'}} onChange={(e) => setNbPerson(e)} items={nbs} getValue={'name'} display={'name'}/>
+                        <CustomSelect styleList={{ height: '10.5rem' }} onChange={(e) => setNbPerson(e)} items={nbs} getValue={'name'} display={'name'} />
                       </div>
                     </div>
                   </div>

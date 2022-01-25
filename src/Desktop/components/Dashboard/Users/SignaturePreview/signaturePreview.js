@@ -43,8 +43,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
             if (a.startAt > b.startAt) { return 1; }
             return 0
         }))
-        setEvent(events.data["hydra:member"][0] || { '@id': "playlist" })
-        console.log(event)
+        setEvent(toPush[0] || { '@id': "playlist" })
         setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event['@id'] === "playlist" ? "Modifier la playlist" : "Playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
     }, [selectedTemplate])
 
@@ -70,7 +69,12 @@ export default function SignaturePreview({ show, edit, setEdit }) {
     })
 
     useEffect(() => {
-        if (event['@id'] === 'playlist' || events['@id'] === 'playlist') {
+        if (event === 'playlist' || events === 'playlist') {
+            events.pop()
+            setEvents([...events, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event !== "playlist" ? "Playlist" : "Modifier la playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
+        }
+        if (event !== 'playlist' && events.length > 1)
+        {
             events.pop()
             setEvents([...events, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event !== "playlist" ? "Playlist" : "Modifier la playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
         }
@@ -175,7 +179,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
                                 <CustomSelect onChange={(e) => {
                                     if (e === 'playlist') { setChoosePlaylist(true); setEvent(e) } else setEvent(e)
                                 }}
-                                    display="name" displayInList="listName" getValue="@id" items={events} defaultValue={event} />
+                                    display="name" displayInList="listName" getValue="@id" items={events} defaultValue={event['@id']} />
                             </> :
                                 <>
                                     <label>Programmez vos events à venir</label>

@@ -6,11 +6,13 @@ import PluginsOutlook from 'Assets/img/Plugins-Outlook.png'
 import PluginsSoon from 'Assets/img/Plugins-GA.png'
 import Button from 'Utils/Button/btn';
 import Input from 'Utils/Input/input';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import request from 'Utils/Request/request';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useNotification } from 'Utils/Notifications/notifications';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { API } from 'config';
+import axios from 'axios';
 
 function useQuery() {
     const { search } = useLocation();
@@ -28,8 +30,6 @@ const Login = () => {
     const notification = useNotification()
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
-
-    const [error, setError] = useState('')
 
     const history = useHistory()
     const query = useQuery()
@@ -69,6 +69,14 @@ const Login = () => {
         }, 300)
     }
 
+    const handleForgotSubmit = (e) => {
+        e.preventDefault()
+        axios.post(`${API}reset-password`, {email: email}).then(() => {
+            setModal(false)
+            notification({ content: <>Si un compte avec votre adresse mail existe,<br /> un message vous a été envoyé avec un lien pour réinitialiser votre mot de passe.</>, status: "valid" })
+        })
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         if (validateEmail(email))
@@ -106,14 +114,14 @@ const Login = () => {
 
     return (<div style={{ background: "#FFF", overflow: 'hidden', height: "100vh" }}>
         {modal ?
-            <div className={classes.modal}>
+            <form onSubmit={(e) => handleForgotSubmit(e)} className={classes.modal}>
                 <h3>Réinitialiser mon mot de passe</h3>
                 <Input defaultValue={email} type="mail" style={{ width: '100%' }} autoComplete="email" placeholder="Email" />
                 <div className={classes.btnsContainer}>
-                    <Button color={"orangeFill"} width={'40%'} onClick={() => setModal(false)}>Envoyer</Button>
-                    <Button color={"orange"} width={'40%'} onClick={() => setModal(false)}>Annuler</Button>
+                    <Button type="submit" color={"orangeFill"} width={'40%'}>Envoyer</Button>
+                    <Button type="button" color={"orange"} width={'40%'} onClick={() => setModal(false)}>Annuler</Button>
                 </div>
-            </div> : ""}
+            </form> : ""}
         <div className={classes.container}>
             <div className={classes.logInContainer}>
                 <div className={classes.textIllustration}>

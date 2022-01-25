@@ -1,0 +1,49 @@
+@import '../../../Assets/style/colors';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    form {
+        display: flex;
+        flex-direction: column;
+        > div {
+            align-items: center;
+            display: flex;
+            & ~ input {
+                margin-right: auto;
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+.socialsList {
+    list-style: none;
+    margin-left: 1rem;
+    padding: 0;
+    height: auto;
+    display: flex;
+    align-items: center;
+    li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    li {
+        &:last-child {
+            height: auto;
+            button {
+                margin: 0 0 0 1rem;
+            }
+        }
+        &:hover svg{
+            transition: color 0.3s;
+            color: $signally-orange;
+        }
+        svg {
+            height: 2rem;
+            color: $signally-brown;
+        }
+    } 
+   
+}

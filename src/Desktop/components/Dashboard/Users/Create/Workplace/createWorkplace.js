@@ -10,7 +10,7 @@ import { useNotification } from 'Utils/Notifications/notifications'
 import { Box } from 'Assets/img/KUKLA/illustrations'
 import UploadFile from 'Utils/Upload/uploadFile'
 
-export default function CreateWorkplace() {
+export default function CreateWorkplace({ setDone }) {
     const number = !localStorage.getItem("understand_workplace") ? 0 : 1;
     const slide = useRef(null)
     const [file, setFile] = useState()
@@ -38,6 +38,7 @@ export default function CreateWorkplace() {
         await request.post(url, csv)
             .then((res) => {
                 // props.setState(`${res.data["hydra:totalItems"]} ${props.fill.type} ajoutés`)
+                setDone(true)
                 history.push(`/teams/workplaces`)
             }).catch(() => notification({ content: <>Une erreur s'est produite lors de l'import</>, status: "invalid" }))
     }
@@ -49,6 +50,7 @@ export default function CreateWorkplace() {
         const create = await request.post('workplaces', req).catch(
             () => notification({ content: <>Le workplace <span style={{ color: "#FF7954" }}>{workplace.name}</span> n'a pas pu être créé</>, status: "invalid" }))
         create.data && notification({ content: <>Le workplace <span style={{ color: "#FF7954" }}>{workplace.name}</span> a été créé avec succès</>, status: "valid" })
+        setDone(true)
         history.push('/teams/workplaces')
     }
 

@@ -34,8 +34,8 @@ function Header(props) {
             {props.landing !== true ? <>
                 <div className={classes.rightSide}>
                     <div className={classes.btnsContainer} title={soon}>
-                        {props.page !== "/studio" ? <Link className={`${classes.studio} disabled`}>STUDIO</Link> : <Link className={classes.studio} onClick={() => history.goBack()}>QUITTER LE STUDIO</Link>}
-                        {props.page !== "/store" ? <Link className={`${classes.store} ${notif ? classes.notif : ""} disabled`} to="/store">STORE</Link> : <Link className={classes.store} onClick={() => history.goBack()}>QUITTER LE STORE</Link>}
+                        {props.page !== "/studio" ? <Link to="#" className={`${classes.studio} disabled`}>STUDIO</Link> : <Link  to="#" className={classes.studio} onClick={() => history.goBack()}>QUITTER LE STUDIO</Link>}
+                        {props.page !== "/store" ? <Link to="#" className={`${classes.store} ${notif ? classes.notif : ""} disabled`} to="/store">STORE</Link> : <Link  to="#" className={classes.store} onClick={() => history.goBack()}>QUITTER LE STORE</Link>}
                     </div>
                     <div className={classes.name}>
                         <ul

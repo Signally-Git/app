@@ -1,0 +1,77 @@
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container form > div {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container form > div ~ input {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.socialsList {
+  list-style: none;
+  margin-left: 1rem;
+  padding: 0;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.socialsList li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.socialsList li:last-child {
+  height: auto;
+}
+
+.socialsList li:last-child button {
+  margin: 0 0 0 1rem;
+}
+
+.socialsList li:hover svg {
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+  color: #FF7954;
+}
+
+.socialsList li svg {
+  height: 2rem;
+  color: #402927;
+}

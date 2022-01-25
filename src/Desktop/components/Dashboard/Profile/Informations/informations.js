@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import classes from './informations.module.css'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
-import { IoMdClose } from "react-icons/io";
-import { BsUpload } from "react-icons/bs";
 import {
     FaLink,
     FaInstagram,
@@ -12,14 +10,14 @@ import {
     FaSnapchat,
     FaPinterest,
 } from "react-icons/fa";
-import axios from 'axios';
-import { API } from 'config';
 import { useHistory } from 'react-router-dom';
 import Hello from 'Assets/img/hi.svg';
 import Button from 'Utils/Button/btn';
 import Input from 'Utils/Input/input';
 import UploadFile from 'Utils/Upload/uploadFile';
 import request from 'Utils/Request/request';
+import { useNotification } from 'Utils/Notifications/notifications';
+import DefineSocials from 'Desktop/components/defineSocials/defineSocials';
 
 function Informations() {
     const [active, setActive] = useState("company")
@@ -39,6 +37,8 @@ function Informations() {
     const [mobile, setMobile] = useState("")
     const [socials, setSocials] = useState({})
 
+    const notification = useNotification()
+
     let history = useHistory()
     useEffect(async () => {
         await request.get(`whoami`).then((res) => {
@@ -49,7 +49,7 @@ function Informations() {
             setMobile(res.data.phone)
         })
     }, [])
-    
+
     useEffect(() => {
 
         console.log(social)
@@ -76,8 +76,9 @@ function Informations() {
                 await request.patch(organisationIRI, req, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
                 }).then(() => {
+                    notification({ content: <><span style={{ color: "#FF7954" }}>{companyName}</span> édité avec succès</>, status: "valid" })
                     history.goBack()
-                })
+                }).catch(() => notification({ content: <>Impossible de modifier <span style={{ color: "#FF7954" }}>{companyName}</span></>, status: "invalid" }))
             })
         else {
             const req = {
@@ -94,6 +95,7 @@ function Informations() {
             await request.patch(`organisations/${organisationId}`, req, {
                 headers: { 'Content-Type': 'application/merge-patch+json' }
             }).then((res) => {
+                notification({ content: <><span style={{ color: "#FF7954" }}>{companyName}</span> édité avec succès</>, status: "valid" })
                 history.goBack()
             })
         }
@@ -108,8 +110,12 @@ function Informations() {
         }
         await request.patch(`users/${JSON.parse(localStorage.getItem('user')).id}`, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
+        }).then(() => {
+            notification({ content: <><span style={{ color: "#FF7954" }}>{firstName} {lastName}</span> édité avec succès</>, status: "valid" })
+            history.goBack()
+        }).catch(() => {
+            notification({ content: <><span style={{ color: "#FF7954" }}>{firstName} {lastName}</span> n'a pas pu être modifié</>, status: "invalid" })
         })
-        history.goBack()
     }
 
     useEffect(async () => {
@@ -221,7 +227,7 @@ function Informations() {
                                 <UploadFile file={uploadedMedia}
                                     setFile={(e) => setUploadedMedia(e)}
                                     placeholder="Importer une image"
-                                    style={{paddingTop: '.8rem', paddingBottom: '.8rem'}}
+                                    style={{ paddingTop: '.8rem', paddingBottom: '.8rem' }}
                                     type="image/*" />
                             </div>
                         </div>
@@ -240,10 +246,12 @@ function Informations() {
                             <Input type="text" value={website} onChange={(e) => setWebsite(e.target.value)} />
                         </div>
                         <div className={classes.socialsContainer}>
-                            <label htmlFor="socials" className={classes.orangeTxt}>Réseaux sociaux</label>
-                            <AiOutlinePlusCircle fontSize={'1.5rem'} onClick={() => { setSocial(social.concat("")); setIcon(icon.concat(<FaLink />)) }} />
+                            <DefineSocials />
+                            {/* <label htmlFor="socials" className={classes.orangeTxt}>Réseaux sociaux</label>
+                            
+                            <AiOutlinePlusCircle fontSize={'1.5rem'} onClick={() => { setSocial(social.concat("")); setIcon(icon.concat(<FaLink />)) }} /> */}
                         </div>
-                        {
+                        {/* {
                             social?.map((rs, index) => {
                                 return (
                                     <div className={classes.iconInput} key={index}>
@@ -251,7 +259,7 @@ function Informations() {
                                         <Input style={{ textIndent: "2rem", width: "100%" }} autoFocus={rs.length === 0 && icon[index] && icon[index] !== <FaLink />} type="text" placeholder="URL" value={rs} onChange={(e) => handleSocial(e.target.value, index)} />
                                     </div>)
                             })
-                        }
+                        } */}
                     </div>
                     <div className={classes.btnsContainer}>
                         <Button color="orange" onClick={() => history.goBack()}>Annuler</Button>

@@ -32,7 +32,6 @@
         display: flex;
         width: 100%;
     }
-
 }
 
 .orangeTxt {
@@ -141,22 +140,32 @@
 }
 
 .teamList {
-    .editing {
-        height: 6rem!important;
+    .teamWithWP.editing {
+        height: 6rem !important;
+        .rename {
+            margin-bottom: .25rem;
+        }
     }
-    .editing .rename{
-        padding: .5rem 1rem;
-        margin: .5rem 0 0;
+    .editing {
+        height: 3.5rem !important;
+    }
+
+    .editing .rename {
+        padding: 0.5rem 1rem;
+        margin: 0 0 0 0;
+        border-radius: 20px;
     }
     .rename {
         margin-bottom: 0;
         padding: 0;
+        border-radius: 0;
+        // text-indent: .2rem;
     }
 }
 
 .usersList {
     .editing {
-        height: 9.5rem!important;
+        height: 9.5rem !important;
         .editDiv {
             bottom: 0.5rem;
         }
@@ -168,7 +177,7 @@
 }
 
 .editDiv {
-    animation: fadeIn .2s forwards;
+    animation: fadeIn 0.2s forwards;
     // background-color: rgba(255, 255, 255, 0.5);
     padding: 1rem;
     box-sizing: border-box;
@@ -184,8 +193,8 @@
     bottom: 1rem;
     input {
         height: 1rem;
-        font-size: .75rem;
-        margin: .5rem 0 0 0;
+        font-size: 0.75rem;
+        margin: 0.5rem 0 0 0;
     }
     .inputsContainer {
         width: 100%;
@@ -200,7 +209,7 @@
 }
 
 @keyframes fadeIn {
-    0%{
+    0% {
         height: 0;
     }
     100% {
@@ -209,8 +218,10 @@
 }
 
 .editing {
-    height: 13rem!important;
-    .actionsContainer {top: 1.40rem;}
+    height: 13rem !important;
+    .actionsContainer {
+        top: 1.4rem;
+    }
 }
 
 .actionsContainer,
@@ -294,7 +305,7 @@
     outline: none;
     border: 1px solid transparent;
     margin: 1rem 0;
-    padding: .75rem 0.5rem;
+    padding: 0.75rem 0.5rem;
     background: $signally-grey;
     display: block;
     transition: 0.2s;

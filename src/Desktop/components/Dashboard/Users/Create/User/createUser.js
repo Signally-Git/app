@@ -9,7 +9,7 @@ import CustomSelect from 'Utils/CustomSelect/customselect'
 import { useNotification } from 'Utils/Notifications/notifications'
 import { Box } from 'Assets/img/KUKLA/illustrations'
 
-export default function CreateUser() {
+export default function CreateUser( { setDone }) {
     const number = !localStorage.getItem("understand_user") ? 0 : 1;
     const slide = useRef(null)
     const focus = useRef(null)
@@ -20,6 +20,38 @@ export default function CreateUser() {
     const history = useHistory()
     const notification = useNotification()
 
+    function debounce(fn, ms) {
+        let timer
+        return _ => {
+            clearTimeout(timer)
+            timer = setTimeout(_ => {
+                timer = null
+                fn.apply(this, arguments)
+            }, ms)
+        };
+    }
+    const [dimensions, setDimensions] = useState({
+        height: window.innerHeight,
+        width: window.innerWidth
+    })
+
+    useEffect(() => {
+        const debouncedHandleResize = debounce(function handleResize() {
+            setDimensions({
+                height: window.innerHeight,
+                width: window.innerWidth
+            })
+        }, 1000)
+
+        window.addEventListener('resize', debouncedHandleResize)
+
+        console.log(dimensions)
+        return _ => {
+            window.removeEventListener('resize', debouncedHandleResize)
+
+        }
+    })
+
     const handleCSV = async (file) => {
         const csv = new FormData()
         const url = `import/organisation/users`
@@ -27,10 +59,13 @@ export default function CreateUser() {
         csv.append('file', file)
 
         await request.post(url, csv)
-            .then((res) => {
+            .then(() => {
+                // console.log("RESYLT", res.data)
+                notification({ content: <>Votre import a été effectué avec succès</>, status: "valid" })
+                setDone(true)
                 // props.setState(`${res.data["hydra:totalItems"]} ${props.fill.type} ajoutés`)
                 history.push(`/teams/users`)
-            }).catch(() => notification({ content: <>Une erreur s'est produite lors de l'import.</>, status: "invalid" }))
+            }).catch(() => notification({ content: <>Une erreur s'est produite lors de l'import</>, status: "invalid" }))
     }
 
     const handleSave = async () => {
@@ -40,6 +75,7 @@ export default function CreateUser() {
         }
         await request.post('users', req).then(() => {
             notification({ content: <>Le collaborateur <span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> a été créé avec succès</>, status: "valid" })
+            setDone(true)
             history.push('/teams/users')
         }).catch(
             (err) => err?.violations[0]?.code === '23bd9dbf-6b9b-41cd-a99e-4844bcf3077f' ?
@@ -75,7 +111,7 @@ export default function CreateUser() {
             {!localStorage.getItem("understand_user") ? 
             <div className={`${classes.slide} ${classes.space}`}>
                 <p>Ajoutez l’ensemble de vos collaborateurs par l’import d’un simple fichier CSV ou manuellement.</p>
-                <Button width="15rem" color="orange" arrow={true} onClick={(e) => {handleSlide(e, 1); localStorage.setItem('understand_user', true)}}>J'ai compris</Button>
+                <Button width="15rem" color="orange" arrow={true} onClick={(e) => { handleSlide(e, 1); localStorage.setItem('understand_user', true)}}>J'ai compris</Button>
             </div> : ""}
             <div className={classes.slide}>
                 <Button width={width} color="orangeFill" arrow={true} className={classes.btn} onClick={(e) => handleSlide(e, 2)}>Manuellement</Button>

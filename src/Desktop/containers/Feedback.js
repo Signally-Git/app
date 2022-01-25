@@ -23,9 +23,19 @@ export default function Report() {
     const notification = useNotification()
 
     const handleSubmit = async (e) => {
+        let req = {};
         e.preventDefault()
+        const img = new FormData()
+        if (file){
+            img.append('image', file)
+            await request.post(`import/image`, img).then ((res) => {
+                req = {fileUrl: res.data.path}
+            })
+        }
+        
         if (bug.length > 3) {
-            const req = {
+            req = {
+                ...req,
                 subject: select,
                 description: bug
             }

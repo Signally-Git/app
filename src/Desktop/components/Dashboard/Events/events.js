@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import Button from 'Utils/Button/btn'
 import CreateEvent from './CreateEvent/createEvent'
-import { FiEdit, FiTrash } from 'react-icons/fi'
+import { FiTrash } from 'react-icons/fi'
 import { useNotification } from 'Utils/Notifications/notifications'
 import request from 'Utils/Request/request'
 import { API } from 'config'
@@ -59,7 +59,7 @@ function Events() {
             if (activeEvent?.name.toLowerCase().search(search.toLowerCase()) !== -1)
                 if ((status === "past" && new Date(activeEvent.endAt) < new Date()) || (new Date(activeEvent.startAt) < new Date() && status === "present" && new Date(activeEvent.endAt) > new Date()) || (status === "future" && new Date(activeEvent.startAt) > new Date())) {
                     return (
-                        <li onClick={() => { setEdit(true); setPreview({ activeEvent, past: status === "past", index }) }} key={index}
+                        <li key={index}
                             className={`${preview?.activeEvent['@id'] === activeEvent['@id'] ? edit ? classes.selected : classes.preview : ""} ${status === "past" ? classes.pastEvent : ""}`}
                             onMouseEnter={() => {
                                 if (!edit && !create)
@@ -67,6 +67,7 @@ function Events() {
 
                             }}
                         >
+                            <input type="radio" name="events" className={classes.checkbox} onChange={() => { setEdit(true); setPreview({ activeEvent, past: status === "past", index }) }} />
                             <img className={classes.bannerPreview} src={`${API}${activeEvent.imagePath}`} />
                             <div className={classes.eventText}>
                                 <span className={classes.active}>{activeEvent.name}</span>

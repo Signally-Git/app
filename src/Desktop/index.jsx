@@ -13,10 +13,10 @@ import ImgUploader from './components/imgUploader/imgUploader'
 import Studio from './containers/Studio'
 import Store from './containers/Store'
 import Billing from './containers/Billing'
-import Report from './containers/Report'
+import Report from './containers/Feedback'
 import Signup from './components/Landing/SignUp/SignUp'
 import { NotificationProvider } from 'Utils/Notifications/notifications'
-import ResetPassword from './containers/ResetPassword'
+import ResetPassword from './containers/ResetPassword/ResetPassword.jsx'
 
 // Routing for desktop view
 

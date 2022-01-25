@@ -50,7 +50,10 @@ function Team() {
             sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
         }
         function getRealtimeData(data) {
-            setEntity(data)
+            // setCurrentUsers(data)
+           setEntity({...entity, users: data.users})
+            // setEntity({...entity, users: data})
+            // console.log("SECOND", entity, data)
         }
         // sse.onerror = () => {
         //     sse.close();
@@ -88,6 +91,7 @@ function Team() {
                 request.patch(user['@id'], { team: entity?.['@id'] }, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }});
                 setTransition(user['@id'])
+                
                 // setTransition(user['@id'])
                 break;
 

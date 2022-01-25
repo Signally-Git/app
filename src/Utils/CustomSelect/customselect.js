@@ -36,7 +36,7 @@ export default function CustomSelect({ items, display, displayInList, getValue, 
                         <ul className={classes.list} style={styleList} >
                             {items.map((item, index) => {
                                 return <li className={classes.element} key={index} style={{...item?.style}} 
-                                onClick={item?.callback ? () => item?.callback(true) : ""} >
+                                onClick={item?.callback ? () => item?.callback(true) : () => {}} >
                                     <input defaultChecked={item[getValue] === value[0] ? true : false} name="item" 
                                     value={item[getValue]} type={multiple ? "checkbox" : "radio"} />
                                     {item[displayInList] || item[display]}

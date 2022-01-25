@@ -22,9 +22,8 @@ export default function CreateEvent({ setDone, event }) {
 
     useEffect(() => {
         setEventName(event?.name)
-        setStartDate(new Date(event?.startAt))
-        setEndDate(new Date(event?.endAt))
-        console.log((moment(startDate).subtract({ hour: 1 })).format('D-MM-YYYYHH:mm:ss'), endDate)
+        setStartDate(new Date(event?.startAt ? new Date(event?.startAt) : new Date()))
+        setEndDate(new Date(event?.endAt ? new Date(event?.endAt) : new Date()))
     }, [event])
 
     useEffect(() => {

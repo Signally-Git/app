@@ -9,7 +9,7 @@ import { useNotification } from 'Utils/Notifications/notifications'
 import { Box } from 'Assets/img/KUKLA/illustrations'
 import CustomSelect from 'Utils/CustomSelect/customselect'
 
-export default function CreateTeam() {
+export default function CreateTeam({ setDone }) {
     const slide = useRef(null)
     const focus = useRef(null)
     const width = "12rem"
@@ -31,6 +31,7 @@ export default function CreateTeam() {
             () => notification({ content: <>La team <span style={{ color: "#FF7954" }}>{teamName}</span> n'a pas pu être créée</>, status: "invalid" }))
         console.log(create)
         create.data && notification({ content: <>La team <span style={{ color: "#FF7954" }}>{teamName}</span> a été créée avec succès</>, status: "valid" })
+        setDone(true)
         history.push('/teams/teams')
     }
 
