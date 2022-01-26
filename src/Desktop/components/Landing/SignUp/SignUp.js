@@ -105,19 +105,16 @@ const Signup = () => {
     }
     if (valid) {
       setLoading(true)
-      await axios.post(API + 'register', req).catch((err) => {
+      await axios.post(API + 'register', req).then(() => {
+        setSent(true)
+      }).catch((err) => {
         if (err.response.data.detail === 'organisation.organisation_with_same_siret_already_exists')
         notification({ content: <>Cette société est déjà enregistrée sur Signally</>, status: "invalid" })
         if (err.response.data.detail === 'user.user_with_same_email_already_exists')
         notification({ content: <>Cet utilisateur est déjà enregistré sur Signally</>, status: "invalid" })
-        console.log(err.response.data.detail)
-        // notification({ content: <>Erreur lors de la création</>, status: "invalid" })
         setLoading(false);
         return;
       })
-      // if (signup?.data) {
-      //   setSent(true)
-      // }
     }
   }
 
