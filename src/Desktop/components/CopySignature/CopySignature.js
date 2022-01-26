@@ -5,7 +5,7 @@ import React from 'react';
 const { ClipboardItem } = window;
 
 export default function CopySignature({ signature }) {
-    const [btnText, setBtnText] = React.useState('Copier la signature')
+    const [btnText, setBtnText] = React.useState('Copier')
 
     const handleCopy = async (e) => {
         e.preventDefault()
@@ -16,7 +16,10 @@ export default function CopySignature({ signature }) {
         navigator.clipboard.write(data).then(
             function () {
             /* success */
-            setBtnText('Copié !')
+            setBtnText('Signature copiée')
+            setTimeout(() => {
+                setBtnText("Copier")
+            }, 2000);
             },
             function () {
             /* failure */
@@ -27,7 +30,7 @@ export default function CopySignature({ signature }) {
     return (<>
         <div className={classes.container}>
             {signature?.length > 0 && parse(signature)}
-            <Button onClick={(e) => handleCopy(e)} color="orange">{btnText}</Button>
+            <Button onClick={(e) => handleCopy(e)} disabled={btnText === 'Signature copiée'} color={btnText === 'Signature copiée' ? "orangeFill" : "orange"}>{btnText}</Button>
         </div>
     </>)
 }
