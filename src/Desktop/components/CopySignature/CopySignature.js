@@ -1,9 +1,12 @@
 import Button from 'Utils/Button/btn'
 import classes from './CopySignature.module.css'
 import parse from 'html-react-parser'
+import React from 'react';
 const { ClipboardItem } = window;
 
 export default function CopySignature({ signature }) {
+    const [btnText, setBtnText] = React.useState('Copier la signature')
+
     const handleCopy = async (e) => {
         e.preventDefault()
         var type = "text/html";
@@ -13,6 +16,7 @@ export default function CopySignature({ signature }) {
         navigator.clipboard.write(data).then(
             function () {
             /* success */
+            setBtnText('Copié !')
             },
             function () {
             /* failure */
@@ -22,8 +26,8 @@ export default function CopySignature({ signature }) {
     
     return (<>
         <div className={classes.container}>
-            {parse(signature)}
-            <Button onClick={(e) => handleCopy(e)} color="orange">Copier la signature</Button>
+            {signature?.length > 0 && parse(signature)}
+            <Button onClick={(e) => handleCopy(e)} color="orange">{btnText}</Button>
         </div>
     </>)
 }

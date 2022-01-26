@@ -1,5 +1,5 @@
 import { HiOutlineSearch } from 'react-icons/hi'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import classes from './tab.module.css'
 import { FiCheck, FiTrash } from 'react-icons/fi'
 import { AiOutlineEdit } from 'react-icons/ai'
@@ -44,6 +44,18 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     const [mail, setMail] = useState("")
     const [done, setDone] = useState(false)
     let time;
+
+    const sortUsers = (users) => {
+        setUsers(users.sort((function (a, b) {
+            if (a.firstName.toLowerCase() < b.firstName.toLowerCase() || a['@id'] === JSON.parse(localStorage.getItem('user'))['@id']) { return -1; }
+            if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) { return 1; }
+            return 0
+        })))
+    }
+
+    React.useMemo(() => {
+        sortUsers(users)
+    }, [users])
 
     const notification = useNotification()
     // Variables for creation modals
@@ -371,11 +383,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
             </div>
             <ul className={`${classes.itemsList} ${classes.usersList}`}>
                 <form onChange={(e) => e.target.type === "radio" && setSelected(JSON.parse(e.target.value))}>
-                    {users.sort((function (a, b) {
-                        if (a.firstName.toLowerCase() < b.firstName.toLowerCase() || a['@id'] === JSON.parse(localStorage.getItem('user'))['@id']) { return -1; }
-                        if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) { return 1; }
-                        return 0
-                    })).map((user) => {
+                    {users.map((user) => {
                         const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
                         if (fullName.search(searchUser.toLowerCase()) !== -1)
                             return (

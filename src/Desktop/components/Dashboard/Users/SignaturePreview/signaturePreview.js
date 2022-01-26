@@ -58,7 +58,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
         const entity = await request.get(`${type}s/${show.id}`)
         setAssignedTemplate(entity.data.compiledSignature)
         const templates = await request.get('signatures')
-        setSelectedTemplate(templates.data["hydra:member"][0].html)
+        setSelectedTemplate(templates.data["hydra:member"][0]?.html)
         setTemplates(templates.data["hydra:member"])
     }, [show, edit])
 

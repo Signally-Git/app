@@ -15,6 +15,24 @@
             }
         }
     }
+    label {
+        color: $signally-brown;
+        font-weight: bold;
+        font-size: .85rem;
+    }
+    .editSocials {
+        svg {
+            color: $signally-brown;
+            font-size: 1.5rem;
+            transition: color .3s;
+            &:first-of-type {
+                margin-left: 1rem;
+            }
+            &:hover {
+                color: $signally-orange
+            }
+        }
+    }
 }
 
 .socialsList {
@@ -28,6 +46,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        margin: 0 .25rem;
     }
     li {
         &:last-child {
@@ -37,13 +56,18 @@
             }
         }
         &:hover svg{
-            transition: color 0.3s;
+            transition: color 0.3s, border-color .3s;
             color: $signally-orange;
+            border-color: $signally-orange;
         }
         svg {
             height: 2rem;
+            width: 2rem;
+            font-size: 1.5rem;
             color: $signally-brown;
+            border-radius: 50%;
+            border: 1px solid $signally-brown;
+            background-color: #FFF;
         }
     } 
-   
 }

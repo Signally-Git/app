@@ -17,6 +17,7 @@ import Report from './containers/Feedback'
 import Signup from './components/Landing/SignUp/SignUp'
 import { NotificationProvider } from 'Utils/Notifications/notifications'
 import ResetPassword from './containers/ResetPassword/ResetPassword.jsx'
+import CopySignature from './views/CopySignature/CopySignature'
 
 // Routing for desktop view
 
@@ -33,6 +34,10 @@ export default function DesktopRoutes() {
             <NotificationProvider login>
                 <Home />
             </NotificationProvider>
+            </Route>
+
+            <Route exact path="/getsignature">
+                <CopySignature />
             </Route>
 
             <Route exact path="/sign-up">

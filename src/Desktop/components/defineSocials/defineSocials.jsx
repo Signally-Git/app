@@ -1,9 +1,12 @@
 import React from 'react'
-import { FaFacebook, FaInstagram, FaLinkedin, FaPinterest, FaSnapchat, FaTwitter } from 'react-icons/fa'
 import Input from 'Utils/Input/input'
 import classes from './defineSocials.module.css'
 import { BiPlusCircle, BiMinusCircle } from 'react-icons/bi';
 import { useNotification } from 'Utils/Notifications/notifications';
+import { TiSocialLinkedin, TiSocialPinterest } from 'react-icons/ti';
+import { GrFacebookOption } from 'react-icons/gr';
+import { AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai';
+import { BsSnapchat } from 'react-icons/bs';
 
 export default function DefineSocials() {
     const [socials, setSocials] = React.useState([{ url: "", type: "" }])
@@ -13,12 +16,12 @@ export default function DefineSocials() {
     const notification = useNotification()
 
     const socialIcons = {
-        FACEBOOK: <FaFacebook />,
-        INSTAGRAM: <FaInstagram />,
-        LINKEDIN: <FaLinkedin />,
-        PINTEREST: <FaPinterest />,
-        SNAPCHAT: <FaSnapchat />,
-        TWITTER: <FaTwitter />
+        FACEBOOK: <GrFacebookOption style={{ padding: '5px'}} />,
+        INSTAGRAM: <AiOutlineInstagram style={{ padding: '4px'}} />,
+        LINKEDIN: <TiSocialLinkedin style={{ padding: '1px'}} />,
+        PINTEREST: <TiSocialPinterest />,
+        SNAPCHAT: <BsSnapchat style={{ padding: '6px'}} />,
+        TWITTER: <AiOutlineTwitter style={{ padding: '4px'}} />
     }
 
     const renderSocial = (social) => {
@@ -58,7 +61,7 @@ export default function DefineSocials() {
             socialLink.current.focus()
         }
         else {
-            notification({ content: <>Il existe déjà un réseau social {getType(value)}</>, status: 'invalid'})
+            notification({ content: <>Il existe déjà un réseau social {getType(value)}</>, status: 'invalid' })
         }
     }
 
@@ -79,14 +82,12 @@ export default function DefineSocials() {
                                 {social?.type ? renderSocial(social) : ""}
                             </li>
                         })}
-                        <li>
-                        </li>
                     </ul>
                 </div>
-                <div>
+                <div className={classes.editSocials}>
                     <Input ref={socialLink} style={{ width: '20rem' }} value={value} onChange={(e) => handleChange(e)} type="text" placeholder="URL" />
+                    {socials.length > 1 && <BiMinusCircle title={`Supprimer ${socials[socials.findIndex(x => x?.url === value)]}`} onClick={() => handleRemove()} />}
                     <BiPlusCircle onClick={(e) => handleSubmit(e)} />
-                    <BiMinusCircle onClick={(e) => handleRemove()} />
                 </div>
             </form>
         </div>
