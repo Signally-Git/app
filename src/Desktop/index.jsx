@@ -36,10 +36,6 @@ export default function DesktopRoutes() {
             </NotificationProvider>
             </Route>
 
-            <Route exact path="/getsignature">
-                <CopySignature />
-            </Route>
-
             <Route exact path="/sign-up">
             <NotificationProvider signup>
                 <Signup />
