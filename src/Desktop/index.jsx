@@ -17,7 +17,6 @@ import Report from './containers/Feedback'
 import Signup from './components/Landing/SignUp/SignUp'
 import { NotificationProvider } from 'Utils/Notifications/notifications'
 import ResetPassword from './containers/ResetPassword/ResetPassword.jsx'
-import CopySignature from './views/CopySignature/CopySignature'
 
 // Routing for desktop view
 

@@ -16,6 +16,7 @@ export default function CreateTeam({ setDone }) {
     const [workplaces, setWorkplaces] = useState([])
     const [workplace, setWorkplace] = useState("")
     const [teamName, setTeamName] = useState("")
+    const [hide, setHide] = useState(false)
     const history = useHistory()
     const notification = useNotification()
 
@@ -58,20 +59,32 @@ export default function CreateTeam({ setDone }) {
         getWorkplaces()
     }, [])
 
+    const handleAccept = async (e) => {
+        handleSlide(e, 1);
+        setTimeout(() => {
+            setHide(true);
+            slide.current.scrollTo({
+                top: 0,
+                left: 0,
+            })
+        }, 1000);
+        localStorage.setItem('understand_team', true)
+    }
+
     return (<div className={classes.container}>
         {Box}
         <div className={classes.slidesContainer} ref={slide}>
-        {!localStorage.getItem("understand_team") ? 
-            <div className={`${classes.slide} ${classes.space}`}>
-                <p>Créez vos équipes (Marketing, Vente, Corporate, Design, etc.). Ajoutez les membres de chaque équipe et associez leur une signature de mail spécifique.</p>
-                <Button width="15rem" color="orange" arrow={true} onClick={(e) => {handleSlide(e, 1); localStorage.setItem('understand_team', true)}}>J'ai compris</Button>
-            </div> : "" }
+            {!localStorage.getItem("understand_team") && hide === false ?
+                <div className={`${classes.slide} ${classes.space}`}>
+                    <p>Créez vos équipes (Marketing, Vente, Corporate, Design, etc.). Ajoutez les membres de chaque équipe et associez leur une signature de mail spécifique.</p>
+                    <Button width="15rem" color="orange" arrow={true} onClick={(e) => { handleAccept(e) }}>J'ai compris</Button>
+                </div> : ""}
             <div className={classes.slide}>
                 <div>
-                    {workplaces.length > 0 && 
-                    <CustomSelect display="name" getValue="@id" 
-                    styleList={{ height: '15rem', paddingTop: '2.5rem'}}
-                    items={workplaces} onChange={(e) => { setWorkplace(e); focus.current.focus() }} />}
+                    {workplaces.length > 0 &&
+                        <CustomSelect display="name" getValue="@id"
+                            styleList={{ maxHeight: '15rem', paddingTop: '2.5rem' }}
+                            items={workplaces} onChange={(e) => { setWorkplace(e); focus.current.focus() }} />}
                     <Input style={{ width: "100%" }} ref={focus} onChange={(e) => setTeamName(e.target.value)} type="text" placeholder="Nom de l'équipe" />
 
                     <div className={classes.btnsContainer}>

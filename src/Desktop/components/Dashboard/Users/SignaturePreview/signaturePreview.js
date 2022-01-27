@@ -20,6 +20,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
     const defaultUser = localStorage.getItem("user")
     const [entity, setEntity] = useState()
     const [event, setEvent] = useState("")
+    const [multiEvents, setMultiEvents] = useState([])
     const [events, setEvents] = useState([])
     const [incomingEvents, setIncEvents] = useState([])
     const [choosePlaylist, setChoosePlaylist] = useState(false)
@@ -81,11 +82,23 @@ export default function SignaturePreview({ show, edit, setEdit }) {
     }, [event])
 
     // ASSIGNATION
+    const handleProgram = () => {
+        var markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');  
+        var tmp = []
+        for (var checkbox of markedCheckbox) {  
+            tmp.push(checkbox.value)
+        }  
+        setMultiEvents(tmp)
+        setChoosePlaylist(false)
+    }
+     
     const handleAssign = async (element) => {
+        console.log(element, event)
+        console.log(multiEvents)
         const req =
             event ? {
-                signature: selectedTemplate["@id"],
-                events: [event['@id']]
+                // signature: selectedTemplate["@id"],
+                events: event === 'playlist' ? multiEvents : [event['@id']]
             } :
                 {
                     signature: selectedTemplate["@id"]
@@ -136,7 +149,7 @@ export default function SignaturePreview({ show, edit, setEdit }) {
             </div>
             <div className={classes.btnsContainer}>
                 <Button color="orange" width={'40%'} onClick={() => setChoosePlaylist(false)}>Annuler</Button>
-                <Button color="orangeFill" width={'40%'} onClick={() => setChoosePlaylist(false)}>Enregistrer</Button>
+                <Button color="orangeFill" width={'40%'} onClick={() => handleProgram()}>Enregistrer</Button>
             </div>
         </div>
         </div> : ""}

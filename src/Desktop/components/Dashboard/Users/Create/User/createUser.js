@@ -9,7 +9,7 @@ import CustomSelect from 'Utils/CustomSelect/customselect'
 import { useNotification } from 'Utils/Notifications/notifications'
 import { Box } from 'Assets/img/KUKLA/illustrations'
 
-export default function CreateUser( { setDone }) {
+export default function CreateUser({ setDone }) {
     const number = !localStorage.getItem("understand_user") ? 0 : 1;
     const slide = useRef(null)
     const focus = useRef(null)
@@ -17,6 +17,7 @@ export default function CreateUser( { setDone }) {
     const [teams, setTeams] = useState([])
     const [team, setTeam] = useState("")
     const [user, setUser] = useState({ firstName: "", lastName: "", position: "", email: "", phone: "" })
+    const [hide, setHide] = useState(false)
     const history = useHistory()
     const notification = useNotification()
 
@@ -69,7 +70,7 @@ export default function CreateUser( { setDone }) {
     }
 
     const handleSave = async () => {
-        const req = team === "Aucune équipe" || !team ?  { ...user } : {
+        const req = team === "Aucune équipe" || !team ? { ...user } : {
             team: team,
             ...user
         }
@@ -77,9 +78,17 @@ export default function CreateUser( { setDone }) {
             notification({ content: <>Le collaborateur <span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> a été créé avec succès</>, status: "valid" })
             setDone(true)
             history.push('/teams/users')
-        }).catch(
-            (err) => err?.violations[0]?.code === '23bd9dbf-6b9b-41cd-a99e-4844bcf3077f' ?
-                notification({ content: <><span style={{ color: "#FF7954" }}>{user.email}</span> a déjà été créé</>, status: "invalid" }) : notification({ content: <><span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> n'a pas pu être créé</>, status: "invalid" }))
+        }).catch((err) => {
+            // notification({ content: <><span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> n'a pas pu être créé</>, status: "invalid" }))
+            if (err?.violations[0]?.code === '23bd9dbf-6b9b-41cd-a99e-4844bcf3077f')
+                notification({ content: <><span style={{ color: "#FF7954" }}>{user.email}</span> a déjà été créé</>, status: "invalid" })
+            else {
+                console.log(err);
+                notification({
+                    content: <><span style={{ color: "#FF7954" }}>{err}</span></>, status: "invalid"
+                })
+            }
+        })
     }
 
     const handleSlide = async (e, multiple) => {
@@ -95,10 +104,22 @@ export default function CreateUser( { setDone }) {
     const getTeams = async () => {
         const tms = await request.get('teams')
         if (tms.data["hydra:member"].length > 0) {
-            tms.data["hydra:member"].unshift({ '@id': "Aucune équipe", name: "Aucune équipe"})
+            tms.data["hydra:member"].unshift({ '@id': "Aucune équipe", name: "Aucune équipe" })
             setTeams(tms.data["hydra:member"])
             setTeam(tms.data["hydra:member"][1]['@id'])
         }
+    }
+
+    const handleAccept = async (e) => {
+        handleSlide(e, 1);
+        setTimeout(() => {
+            setHide(true);
+            slide.current.scrollTo({
+                top: 0,
+                left: 0,
+            })
+        }, 1000);
+        localStorage.setItem('understand_user', true)
     }
 
     useEffect(() => {
@@ -108,11 +129,11 @@ export default function CreateUser( { setDone }) {
     return (<div className={classes.container}>
         {Box}
         <div className={classes.slidesContainer} ref={slide}>
-            {!localStorage.getItem("understand_user") ? 
-            <div className={`${classes.slide} ${classes.space}`}>
-                <p>Ajoutez l’ensemble de vos collaborateurs par l’import d’un simple fichier CSV ou manuellement.</p>
-                <Button width="15rem" color="orange" arrow={true} onClick={(e) => { handleSlide(e, 1); localStorage.setItem('understand_user', true)}}>J'ai compris</Button>
-            </div> : ""}
+            {!localStorage.getItem("understand_user") && hide === false ?
+                <div className={`${classes.slide} ${classes.space}`}>
+                    <p>Ajoutez l’ensemble de vos collaborateurs par l’import d’un simple fichier CSV ou manuellement.</p>
+                    <Button width="15rem" color="orange" arrow={true} onClick={(e) => { handleAccept(e) }}>J'ai compris</Button>
+                </div> : ""}
             <div className={classes.slide}>
                 <Button width={width} color="orangeFill" arrow={true} className={classes.btn} onClick={(e) => handleSlide(e, 2)}>Manuellement</Button>
                 <Button width={width} color="brown" className={classes.btn}> <input
@@ -127,9 +148,9 @@ export default function CreateUser( { setDone }) {
             <div className={classes.slide}>
                 <div>
                     {teams.length > 0 &&
-                    <CustomSelect display="name" getValue="@id" 
-                    styleList={{ height: '15rem', paddingTop: '2.5rem'}}
-                    items={teams} onChange={(e) => { setTeam(e); focus.current.focus() }} />}
+                        <CustomSelect display="name" getValue="@id"
+                            styleList={{ height: '15rem', paddingTop: '2.5rem' }}
+                            items={teams} onChange={(e) => { setTeam(e); focus.current.focus() }} />}
                     <Input style={{ width: "100%" }} ref={focus} onChange={(e) => setUser({ ...user, firstName: e.target.value })} type="text" placeholder="Prénom" />
                     <Input style={{ width: "100%" }} onChange={(e) => setUser({ ...user, lastName: e.target.value })} type="text" placeholder="Nom" />
                     <div className={classes.btnsContainer}>

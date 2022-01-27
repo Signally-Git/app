@@ -67,7 +67,7 @@ function Events() {
 
                             }}
                         >
-                            <input type="radio" name="events" className={classes.checkbox} onChange={() => { setEdit(true); setPreview({ activeEvent, past: status === "past", index }) }} />
+                            <input type="checkbox" name="events" className={classes.checkbox} defaultChecked={edit} onChange={() => { setEdit(true); setPreview({ activeEvent, past: status === "past", index }) }} />
                             <img className={classes.bannerPreview} src={`${API}${activeEvent.imagePath}`} />
                             <div className={classes.eventText}>
                                 <span className={classes.active}>{activeEvent.name}</span>

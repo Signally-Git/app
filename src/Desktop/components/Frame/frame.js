@@ -27,11 +27,17 @@ export default function Frame(props) {
     }, [])
 
     useEffect(() => {
+        const sseUser = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${JSON.parse(localStorage.getItem('user'))?.['@id']}`);
         const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${JSON.parse(localStorage.getItem('user'))?.organisation}`);
         function getRealtimeData(data) {
             setOrganisation(data)
         }
         sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
+
+        function getRealtimeData(data) {
+            setUser(data)
+        }
+        sseUser.onmessage = e => getRealtimeData(JSON.parse(e.data));
         // sse.onerror = () => {
         //     sse.close();
         // }

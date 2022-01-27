@@ -13,6 +13,7 @@ import UploadFile from 'Utils/Upload/uploadFile'
 export default function CreateWorkplace({ setDone }) {
     const number = !localStorage.getItem("understand_workplace") ? 0 : 1;
     const slide = useRef(null)
+    const [hide, setHide] = useState(false)
     const [file, setFile] = useState()
     const width = "12rem"
     const [workplace, setWorkplace] = useState(
@@ -63,14 +64,26 @@ export default function CreateWorkplace({ setDone }) {
         })
     }
 
+    const handleAccept = async (e) => {
+        handleSlide(e, 1);
+        setTimeout(() => {
+            setHide(true);
+            slide.current.scrollTo({
+                top: 0,
+                left: 0,
+            })
+        }, 1000);
+        localStorage.setItem('understand_workplace', true)
+    }
+
     return (<div className={classes.container}>
         {Box}
         <div className={classes.slidesContainer} ref={slide}>
-            {!localStorage.getItem("understand_workplace") ? 
-            <div className={`${classes.slide} ${classes.space}`}>
-                <p>Administrez les signatures de vos équipes par pays, villes, filiales, départements etc. selon la structure de votre organisation.</p>
-                <Button width="15rem" color="orange" arrow={true} onClick={(e) => {handleSlide(e, 1); localStorage.setItem('understand_workplace', true)}}>J'ai compris</Button>
-            </div> : "" }
+            {!localStorage.getItem("understand_workplace") && hide === false ?
+                <div className={`${classes.slide} ${classes.space}`}>
+                    <p>Administrez les signatures de vos équipes par pays, villes, filiales, départements etc. selon la structure de votre organisation.</p>
+                    <Button width="15rem" color="orange" arrow={true} onClick={(e) => { handleAccept(e) }}>J'ai compris</Button>
+                </div> : ""}
             <div className={classes.slide}>
                 <Button width={width} color="orangeFill" arrow={true} className={classes.btn} onClick={(e) => handleSlide(e, 2)}>Manuellement</Button>
                 <Button width={width} color="brown" className={classes.btn}> <input
@@ -100,9 +113,9 @@ export default function CreateWorkplace({ setDone }) {
                     <div className={classes.btnsContainer}>
                         <Button width={width} color="orange" className={`${classes.btn}`} onClick={(e) => handleSlide(e, 2)}>Retour</Button>
                         <Button width={width} color="orangeFill"
-                        color={workplace.address.street.length < 5 || workplace.digitalAddress.mobile.length < 9 ? "orange" : "orangeFill"}
-                        onClick={(e) => { handleSave(); handleSlide(e, 3) }} 
-                        className={`${classes.btn} ${workplace.name < 1 ? classes.disabled : ""}`}>Valider</Button>
+                            color={workplace.address.street.length < 5 || workplace.digitalAddress.mobile.length < 9 ? "orange" : "orangeFill"}
+                            onClick={(e) => { handleSave(); handleSlide(e, 3) }}
+                            className={`${classes.btn} ${workplace.name < 1 ? classes.disabled : ""}`}>Valider</Button>
                     </div>
                 </div>
             </div>

@@ -86,7 +86,7 @@ export default function DefineSocials() {
                 </div>
                 <div className={classes.editSocials}>
                     <Input ref={socialLink} style={{ width: '20rem' }} value={value} onChange={(e) => handleChange(e)} type="text" placeholder="URL" />
-                    {socials.length > 1 && <BiMinusCircle title={`Supprimer ${socials[socials.findIndex(x => x?.url === value)]}`} onClick={() => handleRemove()} />}
+                    {socials[0]?.url?.length > 1 && <BiMinusCircle title={`Supprimer ${socials[select]?.url || socials[select - 1].url}`} onClick={() => handleRemove()} />}
                     <BiPlusCircle onClick={(e) => handleSubmit(e)} />
                 </div>
             </form>
