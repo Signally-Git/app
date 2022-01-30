@@ -29,9 +29,11 @@ function Team() {
     const slider = useRef(null)
     // console.log(entity)
     useEffect(async () => {
-        setUserList([])
         const listUsers = await request.get('users')
         setUsers(listUsers.data['hydra:member'])
+    }, [])
+
+    useEffect(async () => {
         const listTeams = await request.get('teams')
         setTeams(listTeams.data['hydra:member'])
         // if (entity)
@@ -42,33 +44,40 @@ function Team() {
         // console.log(edit)
 
     }, [entity])
-// users/users-without-team
+    // users/users-without-team
     useEffect(() => {
         const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${entity?.['@id']}`);
         if (edit === 'assign-team') {
             sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
         }
         function getRealtimeData(data) {
-            // setCurrentUsers(data)
             setTimeout(() => {
                 setEntity({ ...entity, users: data.users })
             }, 1100);
-            // setEntity({...entity, users: data})
-            // console.log("SECOND", entity, data)
         }
 
-        const sseWoutTeams = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users/users-without-team}`);
-        sseWoutTeams.onmessage = e => getRealtimeDataWOutTeam(JSON.parse(e.data));
-        function getRealtimeDataWOutTeam(data) {
-            setUsers()
-        }
-        // sse.onerror = () => {
-        //     sse.close();
+        // const sseWoutTeams = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users/users-without-team`);
+        // sseWoutTeams.onmessage = e => getRealtimeDataWOutTeam(JSON.parse(e.data));
+        // function getRealtimeDataWOutTeam(data) {
+        //     setUsers(data)
         // }
+
         return () => {
             sse.close();
         };
     }, [edit])
+
+    useEffect(() => {
+        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users/users-without-team`);
+        sse.onmessage = e => getRealtimeDataWOutTeam(JSON.parse(e.data));
+        function getRealtimeDataWOutTeam(data) {
+            setTimeout(() => {
+                console.log(data)
+                if (data.length)
+                    setUsers(data)
+            }, 1100);
+        }
+    }, [transition])
 
     const handleUpdate = (user, action) => {
         switch (action) {
@@ -80,25 +89,24 @@ function Team() {
                     setTransition(user['@id'])
                     setTimeout(() => {
                         setEntity({ ...entity, users: removedUsers })
-                        setTransition()
+                        setTransition('done')
                     }, 1500);
                 });
                 break;
 
             case 'add':
-                
+
                 request.patch(user['@id'], { team: entity?.['@id'] }, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
                 }).then(() => setTransition(user['@id']));
                 setTimeout(() => {
-                    setTransition() 
+                    setTransition('done')
                 }, 1500);
                 break;
             default:
                 break;
         }
-        console.log("done", transition)
-        
+
     }
 
     useEffect(() => {
@@ -195,7 +203,17 @@ function Team() {
                                                 <input className={classes.search} type="text" onChange={(e) => setOtherUser(e.target.value)} placeholder="Rechercher un collaborateur" />
                                             </div>
                                             <ul className={classes.itemsList}>
-                                                {users.sort(function (a, b) {
+                                                {users.map((user) => {
+                                                    const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
+                                                    if (fullName.search(currentUsers.toLowerCase()) !== -1)
+                                                        return <li key={user.id} className={`${classes.assignItem} ${transition === user['@id'] ? classes.transition : ""}`}>
+                                                            <span>{user.firstName} {user.lastName}</span>
+                                                            {transition === user['@id'] ? <span className={classes.added}>Ajouté</span> : <button>
+                                                                <BiPlusCircle title={`Ajouter ${user.firstName} ${user.lastName} dans ${entity?.name}`} onClick={() => handleUpdate(user, 'add')} />
+                                                            </button>}
+                                                        </li>
+                                                })}
+                                                {/* {userList.length > 0 ? userList?.sort(function (a, b) {
                                                     if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) { return -1; }
                                                     if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) { return 1; }
                                                     return 0
@@ -210,7 +228,22 @@ function Team() {
                                                                         onClick={() => handleUpdate(user, 'add')} /></button>}
 
                                                         </li>
-                                                })}
+                                                }) : users?.sort(function (a, b) {
+                                                    if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) { return -1; }
+                                                    if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) { return 1; }
+                                                    return 0
+                                                }).map((user) => {
+                                                    const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
+                                                    if (fullName.search(otherUser.toLowerCase()) !== -1)
+                                                        return <li tabIndex="0" key={user.id} className={`${classes.assignItem} ${transition === user['@id'] ? classes.transition : ""}`}>
+                                                            <span>{user.firstName} {user.lastName}</span>
+                                                            {transition === user['@id'] ? <span className={classes.added}>Ajouté</span> :
+                                                                <button>
+                                                                    <BiPlusCircle title={`Ajouter ${user.firstName} ${user.lastName} dans ${entity?.name}`}
+                                                                        onClick={() => handleUpdate(user, 'add')} /></button>}
+
+                                                        </li>
+                                                })} */}
                                             </ul>
                                             <Button color={'orange'} onClick={(e) => handleScroll(e, 0)}>Terminer</Button>
                                         </div>

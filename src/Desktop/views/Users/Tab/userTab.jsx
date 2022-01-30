@@ -9,33 +9,41 @@ import Input from 'Utils/Input/input'
 import request from 'Utils/Request/request'
 import classes from '../Tab/tab.module.css'
 
-function UserTab({ time, selected, setSelected, edit, setEdit, editInfo, setEditInfo, modal, setModal }) {
+function UserTab({ time, selected, setUsers, setSelected, edit, setEdit, editInfo, setEditInfo, modal, setModal }) {
     const [user, setUser] = React.useState({})
     const [search, setSearch] = React.useState('')
     const [usersList, setUsersList] = React.useState([])
     const toFocus = React.useRef(null)
 
     const sortUsers = (usersList) => {
+
         setUsersList(usersList?.sort((function (a, b) {
-            if (a.firstName.toLowerCase() < b.firstName.toLowerCase() || a['@id'] === JSON.parse(localStorage.getItem('user'))['@id']) { return -1; }
+            if (a.firstName.toLowerCase() < b.firstName.toLowerCase() && b['@id'] !== JSON.parse(localStorage.getItem('user'))['@id']) { return -1; }
             if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) { return 1; }
             return 0
         })))
+        setUsers(usersList)
     }
 
     const getDataUser = async () => {
-        const users = await request.get(`users`)
-        setUsersList(users.data['hydra:member'])
+        await request.get(`users`).then((res) => sortUsers(res.data['hydra:member']))
     }
 
-    React.useMemo(() => {
+    React.useMemo(async () => {
         getDataUser()
-        sortUsers(usersList)
-    }, [edit, modal])
+    }, [modal])
 
-    React.useMemo(() => {
-        sortUsers(usersList)
-    }, usersList)
+    // const handleDeleteAll = () => {
+    //     for (let index = 0; index < usersList.length; index++) {
+    //         const element = usersList[index];
+    //         if (element?.id !== JSON.parse(localStorage.getItem("user"))?.id)
+    //             await request.delete(`users/${element.id}`).then(
+    //                 () => {
+    //                     index === usersList.length - 1 && refreshData(type)
+    //                     count++;
+    //                 }).catch(() => notification({ content: <>Impossible de supprimer <span style={{ color: "#FF7954" }}>{element.firstName} {element.lastName}</span></>, status: "invalid" }))
+    //     }
+    // }
 
     const handleChange = async (e, id) => {
         e.preventDefault()
@@ -44,12 +52,13 @@ function UserTab({ time, selected, setSelected, edit, setEdit, editInfo, setEdit
             lastName: user.lastName,
             phone: user.phone,
             position: user.poste,
-            mail: user.mail
+            email: user.email
         }
+        console.log(req)
         await request.patch(id, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(() => getDataUser())
-        
+
         setEdit()
         setEditInfo()
     }
@@ -65,7 +74,7 @@ function UserTab({ time, selected, setSelected, edit, setEdit, editInfo, setEdit
 
         <div className={classes.colheader}>
             <span className={classes.totalNumber}>{usersList.length < 2 ? `${usersList.length} collaborateur` : `${usersList.length} collaborateurs`}</span>
-            <button onClick={() => setModal({ type: "allusers" })}>Supprimer tout</button>
+            <button onClick={() => setModal({ type: "allusers", items: usersList })}>Supprimer tout</button>
         </div>
         <ul className={`${classes.itemsList} ${classes.usersList}`}>
             <form onChange={(e) => e.target.type === "radio" && setSelected(JSON.parse(e.target.value))}>
@@ -102,7 +111,7 @@ function UserTab({ time, selected, setSelected, edit, setEdit, editInfo, setEdit
                                     </div>}
                                 {editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>
                                     <div className={classes.editDiv}>
-                                        <Input type="text" placeholder="Adresse mail" defaultValue={user.email} onChange={(e) => setUser({ ...user, mail: e.target.value })} />
+                                        <Input type="text" placeholder="Adresse mail" defaultValue={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} />
                                         <div className={classes.inputsContainer}>
                                             <Input type="text" placeholder="Poste" defaultValue={user.position} onChange={(e) => setUser({ ...user, poste: e.target.value })} />
                                             <Input type="tel" placeholder="Mobile" defaultValue={user.phone} onChange={(e) => setUser({ ...user, phone: e.target.value })} />
