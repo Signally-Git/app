@@ -8,7 +8,6 @@ import { API } from "config";
 export default function Frame(props) {
     const [user, setUser] = useState()
     const [organisation, setOrganisation] = useState()
-    const [update, setUpdate] = useState()
 
 
     // const es = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${JSON.parse(localStorage.getItem('user')).organisation}`)
@@ -46,7 +45,7 @@ export default function Frame(props) {
             sse.close();
             sseUser.close();
         };
-    }, [update])
+    }, [])
 
     return (<>
         <div className={classes.desktop}>

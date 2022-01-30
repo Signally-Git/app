@@ -329,10 +329,10 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     if (tab === "create-user")
         return (<CreateUser setDone={setDone} />)
     if (tab === "users")
-        return (<>
+        return (<div>
             {modal.type ? modalContent : ""}
                 <UserTab time={time} selected={selected}
                     setSelected={setSelected} edit={edit} setEdit={setEdit} editInfo={editInfo}
                     setEditInfo={setEditInfo} setModal={setModal} />
-        </>)
+        </div>)
 }
