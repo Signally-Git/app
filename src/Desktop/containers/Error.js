@@ -1,4 +1,4 @@
-import ErrorPage from '../components/Error/ErrorPage'
+import ErrorPage from '../views/Error/ErrorPage'
 
 function Error() {
     return (<>

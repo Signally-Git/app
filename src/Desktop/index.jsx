@@ -8,15 +8,15 @@ import Payment from './components/Payment/Payment'
 import Import from './containers/Import'
 import PrivateRoute from 'Utils/PrivateRoute/privateRoute'
 import CreateSignature from './containers/CreateSignature'
-import Users from './components/Dashboard/Users/users'
-import ImgUploader from './components/imgUploader/imgUploader'
+import Users from './views/Users/users'
+import ImgUploader from './views/imgUploader/imgUploader'
 import Studio from './containers/Studio'
 import Store from './containers/Store'
 import Billing from './containers/Billing'
 import Report from './containers/Feedback'
 import Signup from './components/Landing/SignUp/SignUp'
 import { NotificationProvider } from 'Utils/Notifications/notifications'
-import ResetPassword from './containers/ResetPassword/ResetPassword.jsx'
+import ResetPassword from './views/ResetPassword/ResetPassword.jsx'
 
 // Routing for desktop view
 
@@ -69,7 +69,7 @@ export default function DesktopRoutes() {
 
             {/* <PrivateRoute path="/synchronize" component={SyncPage} /> */}
 
-            <PrivateRoute path="/import" component={Import} />
+            {/* <PrivateRoute path="/import" component={Import} /> */}
 
             <PrivateRoute path="/upload-img" component={ImgUploader} />
 

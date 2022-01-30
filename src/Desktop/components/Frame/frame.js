@@ -18,6 +18,7 @@ export default function Frame(props) {
     // }
 
     useEffect(async () => {
+
         const logUser = await request.get('whoami')
         setUser(logUser.data)
         const organisation = await request.get(logUser.data.organisation)
@@ -34,15 +35,16 @@ export default function Frame(props) {
         }
         sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
 
-        function getRealtimeData(data) {
+        function getRealtimeDataUser(data) {
             setUser(data)
         }
-        sseUser.onmessage = e => getRealtimeData(JSON.parse(e.data));
+        sseUser.onmessage = e => getRealtimeDataUser(JSON.parse(e.data));
         // sse.onerror = () => {
         //     sse.close();
         // }
         return () => {
             sse.close();
+            sseUser.close();
         };
     }, [update])
 

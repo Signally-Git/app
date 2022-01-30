@@ -8,8 +8,8 @@ import { GrFacebookOption } from 'react-icons/gr';
 import { AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai';
 import { BsSnapchat } from 'react-icons/bs';
 
-export default function DefineSocials() {
-    const [socials, setSocials] = React.useState([{ url: "", type: "" }])
+export default function DefineSocials({ setList, defaultValue }) {
+    const [socials, setSocials] = React.useState(defaultValue || [{ url: "", name: "" }])
     const [select, setSelect] = React.useState(0)
     const [value, setValue] = React.useState("")
     const socialLink = React.useRef(null)
@@ -25,15 +25,15 @@ export default function DefineSocials() {
     }
 
     const renderSocial = (social) => {
-        const Component = socialIcons[social.type.toUpperCase()]
+        const Component = socialIcons[social.name.toUpperCase()]
         return Component
     }
 
-    const getType = (string) => {
-        let type;
+    const getName = (string) => {
+        let name;
         try {
-            type = new URL((string)).hostname.replace('www.', '').replace('.com', '').replace(`^(?:.*://)?(?:.*?\.)?([^:/]*?\.[^:/]*).*$`, '');
-            return type
+            name = new URL((string)).hostname.replace('www.', '').replace('.com', '').replace(`^(?:.*://)?(?:.*?\.)?([^:/]*?\.[^:/]*).*$`, '');
+            return name
         } catch (_) {
             return false;
         }
@@ -41,9 +41,9 @@ export default function DefineSocials() {
 
     const handleChange = React.useCallback((e) => {
         e.preventDefault()
-        const type = getType(e.target.value)
+        const name = getName(e.target.value)
         let newArr = [...socials];
-        newArr[select] = { url: e.target.value, type: type };
+        newArr[select] = { url: e.target.value, name: name };
         setSocials(newArr);
         setValue(e.target.value || "")
     })
@@ -55,14 +55,15 @@ export default function DefineSocials() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (socials.filter((social) => getType(value) === social?.type).length === 1) {
+        if (socials.filter((social) => getName(value) === social?.name).length === 1) {
             setSelect(socials.length)
             setValue("")
             socialLink.current.focus()
         }
         else {
-            notification({ content: <>Il existe déjà un réseau social {getType(value)}</>, status: 'invalid' })
+            notification({ content: <>Il existe déjà un réseau social {getName(value)}</>, status: 'invalid' })
         }
+        setList(socials)
     }
 
     const handleRemove = () => {
@@ -79,7 +80,7 @@ export default function DefineSocials() {
                     <ul className={classes.socialsList}>
                         {socials?.map((social, index) => {
                             return <li key={index} title={social?.url} onClick={() => handleSwap(social)}>
-                                {social?.type ? renderSocial(social) : ""}
+                                {social?.name ? renderSocial(social) : ""}
                             </li>
                         })}
                     </ul>
