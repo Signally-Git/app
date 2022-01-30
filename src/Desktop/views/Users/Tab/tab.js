@@ -333,6 +333,6 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
             {modal.type ? modalContent : ""}
                 <UserTab time={time} selected={selected}
                     setSelected={setSelected} edit={edit} setEdit={setEdit} editInfo={editInfo}
-                    setEditInfo={setEditInfo} setModal={setModal} />
+                    setEditInfo={setEditInfo} modal={modal} setModal={setModal} />
         </div>)
 }

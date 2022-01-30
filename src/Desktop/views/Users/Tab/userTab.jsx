@@ -9,7 +9,7 @@ import Input from 'Utils/Input/input'
 import request from 'Utils/Request/request'
 import classes from '../Tab/tab.module.css'
 
-function UserTab({ time, selected, setSelected, edit, setEdit, editInfo, setEditInfo, setModal }) {
+function UserTab({ time, selected, setSelected, edit, setEdit, editInfo, setEditInfo, modal, setModal }) {
     const [user, setUser] = React.useState({})
     const [search, setSearch] = React.useState('')
     const [usersList, setUsersList] = React.useState([])
@@ -31,24 +31,11 @@ function UserTab({ time, selected, setSelected, edit, setEdit, editInfo, setEdit
     React.useMemo(() => {
         getDataUser()
         sortUsers(usersList)
-    }, [edit])
+    }, [edit, modal])
 
     React.useMemo(() => {
         sortUsers(usersList)
     }, usersList)
-
-    React.useEffect(() => {
-        // if (!user['@id'])
-        //     return;
-        // const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${user['@id']}`);
-        // function getRealtimeData(data) {
-        //     setEditInfo(data)
-        // }
-        // sse.onmessage = e => { getDataUser(); getRealtimeData(JSON.parse(e.data)) };
-        // return () => {
-        //     sse.close();
-        // };
-    }, [])
 
     const handleChange = async (e, id) => {
         e.preventDefault()
@@ -111,7 +98,7 @@ function UserTab({ time, selected, setSelected, edit, setEdit, editInfo, setEdit
                                     </div> :
                                     <div className={classes.actionsContainer}>
                                         {editInfo === user ? <FiCheck strokeWidth={"4"} onClick={(e) => { handleChange(e, user['@id']) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEditInfo(user) }} />}
-                                        <FiTrash onClick={() => setModal({ name: `${user.firstName} ${user.lastName}`, id: user.id, type: "usersList" })} />
+                                        <FiTrash onClick={() => setModal({ name: `${user.firstName} ${user.lastName}`, id: user.id, type: "users" })} />
                                     </div>}
                                 {editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>
                                     <div className={classes.editDiv}>
