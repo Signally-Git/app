@@ -69,6 +69,11 @@
   width: 100%;
 }
 
+.colheader .totalNumber {
+  color: grey;
+  font-size: 0.9rem;
+}
+
 .colheader button {
   border: none;
   color: #402927;
