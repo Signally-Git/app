@@ -21,13 +21,11 @@ function Team() {
     const [otherTeam, setOtherTeam] = useState("")
     const [edit, setEdit] = useState()
     const [editInfo, setEditInfo] = useState()
-    const [userList, setUserList] = useState([])
 
     const [transition, setTransition] = useState()
 
-    let test;
     const slider = useRef(null)
-    // console.log(entity)
+
     useEffect(async () => {
         const listUsers = await request.get('users')
         setUsers(listUsers.data['hydra:member'])
@@ -36,15 +34,8 @@ function Team() {
     useEffect(async () => {
         const listTeams = await request.get('teams')
         setTeams(listTeams.data['hydra:member'])
-        // if (entity)
-        //     listUsers.data['hydra:member'].map((user) => {
-        //             test.push(entity.users.filter(val => user['@id'] !== (val['@id'])))
-        //     })
-        // console.log(listUsers.data['hydra:member'] = listUsers.data['hydra:member'].filter(val => !entity.users.includes(val['@id'])));
-        // console.log(edit)
-
     }, [entity])
-    // users/users-without-team
+
     useEffect(() => {
         const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${entity?.['@id']}`);
         if (edit === 'assign-team') {
@@ -56,12 +47,6 @@ function Team() {
             }, 1100);
         }
 
-        // const sseWoutTeams = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users/users-without-team`);
-        // sseWoutTeams.onmessage = e => getRealtimeDataWOutTeam(JSON.parse(e.data));
-        // function getRealtimeDataWOutTeam(data) {
-        //     setUsers(data)
-        // }
-
         return () => {
             sse.close();
         };
@@ -72,11 +57,15 @@ function Team() {
         sse.onmessage = e => getRealtimeDataWOutTeam(JSON.parse(e.data));
         function getRealtimeDataWOutTeam(data) {
             setTimeout(() => {
-                console.log(data)
-                if (data.length)
-                    setUsers(data)
+                console.log(data, data.users)
+                // if (data.length)
+                    setUsers(data.users)
             }, 1100);
-        }
+        }        
+        
+        return () => {
+            sse.close();
+        };
     }, [transition])
 
     const handleUpdate = (user, action) => {
@@ -95,7 +84,6 @@ function Team() {
                 break;
 
             case 'add':
-
                 request.patch(user['@id'], { team: entity?.['@id'] }, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
                 }).then(() => setTransition(user['@id']));

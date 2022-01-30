@@ -70,10 +70,11 @@ export default function CreateUser({ setDone }) {
     }
 
     const handleSave = async () => {
-        const req = team === "Aucune équipe" || !team ? { user } : {
+        const req = team === "Aucune équipe" || !team ? user : {
             team: team,
             ...user
         }
+        console.log(req)
         await request.post('users', req).then(() => {
             notification({ content: <>Le collaborateur <span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> a été créé avec succès</>, status: "valid" })
             setDone(true)
