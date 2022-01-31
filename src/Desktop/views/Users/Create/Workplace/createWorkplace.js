@@ -52,7 +52,7 @@ export default function CreateWorkplace({ setDone }) {
         const img = new FormData()
         img.append('image', file)
         if (file)
-            await request.post(`import/image`, file).then(async (res) => {
+            await request.post(`import/image`, img).then(async (res) => {
                 const requestLogo = {
                     name: "test",
                     path: res.data.path,

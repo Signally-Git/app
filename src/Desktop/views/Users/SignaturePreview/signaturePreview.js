@@ -29,10 +29,13 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     const type = show["@type"].toLowerCase()
     const notification = useNotification()
 
+
+
     //  PREVIEW EVENT
     useEffect(async () => {
+        console.log(selectedTemplate)
         setEntity(await request.get(`${type}s/${show.id}`))
-        const isEvent = selectedTemplate?.html || ""
+        const isEvent = selectedTemplate || ""
         const events = await request.get('events');
         const toPush = events.data["hydra:member"].filter((data) => (new Date(data.startAt) < new Date()) && (new Date(data.endAt) > new Date())).sort(function (a, b) {
             if (a.startAt < b.startAt) { return -1; }
@@ -70,7 +73,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         const entity = await request.get(`${type}s/${show.id}`)
         setAssignedTemplate(entity.data.compiledSignature)
         const templates = await request.get('signatures')
-        setSelectedTemplate(templates.data["hydra:member"][0]?.html)
+        setSelectedTemplate(templates.data["hydra:member"][0].html)
         setTemplates(templates.data["hydra:member"])
     }, [show, edit])
 
@@ -103,15 +106,16 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     }
 
     const handleAssign = async (element) => {
-        console.log(element, event)
-        console.log(multiEvents)
+        // console.log(element, event)
+        console.log(selectedTemplate)
+        // console.log(multiEvents)
         const req =
             event ? {
-                // signature: selectedTemplate["@id"],
+                signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.["@id"],
                 events: event === 'playlist' ? multiEvents : [event['@id']]
             } :
                 {
-                    signature: selectedTemplate["@id"]
+                    signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.["@id"],
                 }
         await request.patch(`${type}s/${element.id}`, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
@@ -190,7 +194,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                         <div>
                             <label>Choisissez une signature</label>
                             {templates.length > 0 &&
-                                <CustomSelect onChange={(e) => { setSelectedTemplate(e) }} callback="callback" display="name" getValue="html" items={templates} />}
+                                <CustomSelect onChange={(e) => setSelectedTemplate(e)} items={templates} display={"name"} getValue={"html"} />}
                             <div className={classes.signature}>
                                 {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
                             </div>

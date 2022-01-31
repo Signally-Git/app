@@ -182,26 +182,29 @@ function CreateSignatureComponent() {
       html: renderToString(test)
     }
 
-    await request.post(`signatures`, req).then(
-      async (res) => {
-        notification({ content: <>Votre signature <span style={{ color: "#FF7954" }}>{signatureName}</span> a été créée avec succès</>, status: "valid" })
-        setTemplateIdToPatch(res.data.id)
-
-        // console.log(localStorage.getItem('user').signature_template_id)
-        await axios.get(`${API}template/${JSON.parse(localStorage.getItem('user')).signature_template_id}?access_token=${localStorage.getItem("token")}`)
-          .then().catch(async () => {
-            const req = {
-              signature_template_id: res.data.id,
-            }
-
-            await axios.patch(`${API}user/${localStorage.getItem('user_id')}?access_token=${localStorage.getItem('token')}`, req)
-              .then((res) => console.log(res))
-          })
-
-        history.push('/signatures')
-      }
-    ).catch(() => {
-      notification({ content: <>Une erreur s'est produite. Veuillez réessayer</>, status: "invalid" })
+    await request.post('signature_templates', req).then(async (res) => {
+      console.log(JSON.parse(localStorage.getItem('user')).organisation)
+        await request.post(`signatures`, {name: signatureName, html: renderToString(test), signatureTemplate: res.data['@id'], organisation: JSON.parse(localStorage.getItem('user')).organisation}).then(
+          async (res) => {
+            notification({ content: <>Votre signature <span style={{ color: "#FF7954" }}>{signatureName}</span> a été créée avec succès</>, status: "valid" })
+            setTemplateIdToPatch(res.data.id)
+    
+            // console.log(localStorage.getItem('user').signature_template_id)
+            // await axios.get(`${API}template/${JSON.parse(localStorage.getItem('user')).signature_template_id}?access_token=${localStorage.getItem("token")}`)
+            //   .then().catch(async () => {
+            //     const req = {
+            //       signature_template_id: res.data.id,
+            //     }
+    
+            //     await axios.patch(`${API}user/${localStorage.getItem('user_id')}?access_token=${localStorage.getItem('token')}`, req)
+            //       .then((res) => console.log(res))
+            //   })
+    
+            history.push('/signatures')
+          }
+        ).catch(() => {
+          notification({ content: <>Une erreur s'est produite. Veuillez réessayer</>, status: "invalid" })
+        })
     })
 
   }
