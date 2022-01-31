@@ -1,15 +1,5 @@
 import { useEffect, useState } from 'react'
 import classes from './informations.module.css'
-import { AiOutlinePlusCircle } from 'react-icons/ai'
-import {
-    FaLink,
-    FaInstagram,
-    FaFacebookF,
-    FaTwitter,
-    FaLinkedinIn,
-    FaSnapchat,
-    FaPinterest,
-} from "react-icons/fa";
 import { useHistory } from 'react-router-dom';
 import Hello from 'Assets/img/hi.svg';
 import Button from 'Utils/Button/btn';
@@ -21,9 +11,6 @@ import DefineSocials from 'Desktop/components/defineSocials/defineSocials';
 
 function Informations() {
     const [active, setActive] = useState("company")
-    // const [social, setSocial] = useState([' '])
-    // const [icon, setIcon] = useState([<FaLink />])
-    // const [logo, setLogo] = useState()
     const [organisationId, setOrganisationId] = useState()
     const [organisationIRI, setOrganisationIRI] = useState()
     const [uploadedMedia, setUploadedMedia] = useState()
@@ -49,11 +36,6 @@ function Informations() {
             setMobile(res.data.phone)
         })
     }, [])
-
-    // useEffect(() => {
-
-    //     console.log(social)
-    // }, [social])
 
     const handleSaveCompany = async () => {
         const img = new FormData()
@@ -127,95 +109,17 @@ function Informations() {
     }
 
     useEffect(async () => {
-        // handleSocial()
         let organisation = await request.get(JSON.parse(localStorage.getItem('user')).organisation)
         organisation = organisation.data
         setOrganisationId(organisation.id)
         setOrganisationIRI(organisation['@id'])
-        // setLogo(organisation.logos[0])
         setCompanyName(organisation.name)
         setCompanyAddress(organisation.address.street)
         setWebsite(organisation.websiteUrl)
         setPhone(organisation.digitalAddress.phone)
         setSocialsList(organisation.socialMediaAccounts)
-
-        // if (organisation.socialMediaAccounts.twitter) {
-        //     setSocials(({ ...socials, twitter: organisation.socialMediaAccounts.twitter }))
-        //     icon[0] = <FaTwitter />
-        //     setIcon([...icon])
-        // }
-        // if (organisation.socialMediaAccounts.facebook) {
-        //     setSocials(({ ...socials, facebook: organisation.socialMediaAccounts.facebook }))
-        //     icon[1] = <FaFacebookF />
-        //     setIcon([...icon])
-        // }
-        // if (organisation.socialMediaAccounts.instagram) {
-        //     setSocials(({ ...socials, instagram: organisation.socialMediaAccounts.instagram }))
-        //     icon[2] = <FaInstagram />
-        //     setIcon([...icon])
-        // }
-        // if (organisation.socialMediaAccounts.linkedin) {
-        //     setSocials(({ ...socials, linkedin: organisation.socialMediaAccounts.linkedin }))
-        //     icon[3] = <FaLinkedinIn />
-        //     setIcon([...icon])
-        // }
-
-        // const tmp = [organisation.socialMediaAccounts.twitter, organisation.socialMediaAccounts.facebook, organisation.socialMediaAccounts.instagram, organisation.socialMediaAccounts.linkedin]
-        // setSocial(tmp.filter((rs) => { return (rs !== undefined) }))
-
     }, [])
 
-    // const handleSocial = (string, index) => {
-    //     if (social?.length > 0) {
-    //         social[index] = string
-    //         setSocial([...social]);
-    //     }
-
-    //     if (string) {
-    //         if (string.search(/snapchat/i) !== -1) {
-    //             icon[index] = <FaSnapchat />
-    //             setIcon([...icon])
-    //             setSocials({ ...socials, snapchat: string })
-    //             return
-    //         }
-    //         if (string.search(/pinterest/i) !== -1) {
-    //             icon[index] = <FaPinterest />
-    //             setIcon([...icon])
-    //             setSocials({ ...socials, pinterest: string })
-    //             return
-    //         }
-    //         if (string.search(/twitter/i) !== -1) {
-    //             icon[index] = <FaTwitter />
-    //             setIcon([...icon])
-    //             setSocials({ ...socials, twitter: string })
-    //             return
-    //         }
-    //         if (string.search(/facebook/i) !== -1) {
-    //             icon[index] = <FaFacebookF />
-    //             setIcon([...icon])
-    //             setSocials({ ...socials, facebook: string })
-    //             return
-    //         }
-    //         if (string.search(/instagram/i) !== -1) {
-    //             icon[index] = <FaInstagram />
-    //             setIcon([...icon])
-    //             setSocials({ ...socials, instagram: string })
-    //             return
-    //         }
-    //         if (string.search(/linkedin/i) !== -1) {
-    //             icon[index] = <FaLinkedinIn />
-    //             setIcon([...icon])
-    //             setSocials({ ...socials, linkedin: string })
-    //             return
-    //         }
-
-    //         else {
-    //             icon[index] = <FaLink />
-    //             setIcon([...icon])
-    //             return
-    //         }
-    //     }
-    // }
     return (
         <div className={classes.container}>
             <h1>Compte</h1>

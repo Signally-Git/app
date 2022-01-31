@@ -24,6 +24,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     const [searchWorkplace, setSearchWorkplace] = useState("")
     const [searchTeam, setSearchTeam] = useState("")
     const toFocus = useRef(null)
+    const [file, setFile] = useState()
     const [workplaces, setWorkplaces] = useState([])
     const [teams, setTeams] = useState([])
     const [users, setUsers] = useState([])
@@ -258,7 +259,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                         </div>
                                         {editInfo === workplace ? <>
                                             <div className={classes.editDiv}>
-                                                <UploadFile placeholder="Importer un logo" style={{ background: '#FFF', marginBottom: '.2rem' }} />
+                                                <UploadFile file={file} setFile={setFile} placeholder="Importer un logo" style={{ background: '#FFF', marginBottom: '.2rem' }} />
                                                 <div className={classes.inputsContainer}>
                                                     <Input onLoad={() => setStreet(workplace.address.street)} onChange={(e) => setStreet(e.target.value)} type="text" placeholder="Adresse" defaultValue={workplace.address.street} />
                                                     <Input onChange={(e) => setStreetInfo(e.target.value)} type="text" placeholder="Adresse 2" defaultValue={workplace.address.streetInfo} />

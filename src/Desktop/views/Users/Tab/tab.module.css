@@ -100,6 +100,10 @@
   width: 100%;
 }
 
+.itemsList form {
+  z-index: 0;
+}
+
 .itemsList li {
   margin: 1rem 0;
   margin-left: auto;
