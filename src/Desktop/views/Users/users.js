@@ -27,7 +27,7 @@ function Team() {
     const slider = useRef(null)
 
     useEffect(async () => {
-        const listUsers = await request.get('users')
+        const listUsers = await request.get('users?page=1&team=null')
         setUsers(listUsers.data['hydra:member'])
     }, [])
 

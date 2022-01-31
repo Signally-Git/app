@@ -31,7 +31,7 @@ export default function CreateWorkplace({ setDone }) {
 
     const handleCSV = async (file) => {
         const csv = new FormData()
-        const url = `import/organisation/${JSON.parse(localStorage.getItem('user')).organisation.replace("/organisations/", "")}/workplaces`
+        const url = `import/workplaces`
 
         csv.append('file', file)
 
