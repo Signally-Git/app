@@ -334,6 +334,14 @@
     z-index: 10;
     margin: auto;
     background: #FFF;
+    p {
+        line-height: 1.5rem;
+        text-align: center;
+        .orangeTxt {
+            color: $signally-orange;
+            display: inline;
+        }
+    }
     .btnsContainer {
         margin-top: 0rem;
         button {

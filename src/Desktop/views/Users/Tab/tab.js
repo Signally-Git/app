@@ -53,18 +53,11 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         setTeams(teams.data["hydra:member"])
     }
 
-    // const getDataUser = async () => {
-    //     const users = await request.get(`users`)
-    //     setUsers(users.data['hydra:member'])
-    // }
-
     const refreshData = (type) => {
         if (type === "workplace" || !type)
             getDataWorkspace()
         if (type === "teams" || !type)
             getDataTeam()
-        // if (type === "users" || !type)
-        //     getDataUser()
         setDone(false)
     }
 
@@ -189,7 +182,19 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     }, [edit])
 
     const handleChangeWP = async (e, workplace) => {
-        // if ()
+        const img = new FormData()
+        img.append('image', file)
+        if (file)
+            await request.post(`import/image`, img).then(async (res) => {
+                const requestLogo = {
+                    name: workplace.name + "_logo",
+                    path: res.data.path,
+                    workplace: workplace['@id']
+                }
+                await request.post('logos', requestLogo).then((res) => {
+                    console.log(res.data)
+                })
+            })
         e.preventDefault()
         const req = {
             name: workplaceName || workplace.name,
@@ -202,7 +207,6 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 fax: fax
             }
         }
-        console.log("editing!", workplace)
         await request.patch(workplace['@id'], req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         })
@@ -307,8 +311,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                     <input onChange={(e) => { if (e.target.checked) { setEdit(team); setSelected(team) } }}
                                         className={classes.checkbox}
                                         checked={edit?.id === team.id && edit?.name === team?.name ? true : false} type="radio" name="team" value={JSON.stringify(team)} />
-                                    {/* <input onChange={(e) => { setEdit(team); setSelected(team) }} className={classes.checkbox} checked={edit?.id === team.id && edit?.name === team.name ? true : false} type="radio" name="team" value={JSON.stringify(team)} /> */}
-                                    <span></span>
+                                     <span></span>
                                     {editInfo === team ? <input autoFocus className={classes.rename} ref={toFocus} type="text" defaultValue={team?.name} onChange={(e) => setTeamName(e.target.value)} /> :
                                         <input className={classes.rename} disabled type="text" defaultValue={teamName || team?.name} />}
                                     {team.workplace?.name?.length > 0 ? <div className={classes.infos}>
@@ -316,7 +319,6 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                     </div> : ""}
                                     <div className={classes.actionsContainer}>
                                         {editInfo === team ? <FiCheck strokeWidth={"4"} className={classes.validate} onClick={(e) => { handleChangeTeam(e, team) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEditInfo(team) }} />}
-                                        {/* <AiOutlineEdit onClick={(e) => { setEdit('assign-team') }} /> */}
                                         <FiTrash onClick={() => setModal({ name: team.name, id: team.id, type: "teams" })} />
                                     </div>
                                 </li>)

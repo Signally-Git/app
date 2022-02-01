@@ -419,3 +419,7 @@
 .search:focus {
   border-color: #FF7954;
 }
+
+.btnReady .checkmark {
+  color: #FF7954;
+}

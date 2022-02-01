@@ -33,7 +33,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
 
     //  PREVIEW EVENT
     useEffect(async () => {
-        console.log(selectedTemplate)
         setEntity(await request.get(`${type}s/${show.id}`))
         const isEvent = selectedTemplate || ""
         const events = await request.get('events');
@@ -99,24 +98,30 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         var markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
         var tmp = []
         for (var checkbox of markedCheckbox) {
-            tmp.push(checkbox.value)
+            tmp.push(JSON.parse(checkbox.value))
         }
+        console.log(tmp)
         setMultiEvents(tmp)
         setChoosePlaylist(false)
     }
 
     const handleAssign = async (element) => {
-        // console.log(element, event)
-        console.log(selectedTemplate)
-        // console.log(multiEvents)
-        const req =
-            event ? {
-                signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.["@id"],
-                events: event === 'playlist' ? multiEvents : [event['@id']]
-            } :
-                {
-                    signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.["@id"],
-                }
+        const req = {
+            signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.["@id"]
+        }
+        // event ? {
+        //     signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.["@id"],
+        //     events: event === 'playlist' ? multiEvents : [event['@id']]
+        // } :
+        // console.log('HERE', multiEvents)
+        multiEvents.map(async (e) => {
+            const req = { ...e, [type + 's']: [element['@id']] }
+            await request.patch(e['@id'], req, {
+                headers: { 'Content-Type': 'application/merge-patch+json' }
+            }).then((res) => {
+                console.log(res)
+            }).catch((err) => console.log(err))
+        })
         await request.patch(`${type}s/${element.id}`, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(
@@ -154,7 +159,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                     </span>
                                 </div>
                                 <label>
-                                    <input type="checkbox" value={event['@id']} />
+                                    <input type="checkbox" value={JSON.stringify(event)} />
                                     <span></span>
                                 </label>
                             </li>
@@ -206,12 +211,12 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                 <CustomSelect onChange={(e) => {
                                     if (e === 'playlist') { setChoosePlaylist(true); setEvent(e) } else setEvent(e)
                                 }}
-                                    display="name" displayInList="listName" getValue="@id" items={events} defaultValue={event['@id']} />
+                                    display="name" displayinlist="listName" getValue="@id" items={events} defaultValue={event['@id']} />
                             </> :
                                 <>
                                     <label>Programmez vos events à venir</label>
                                     <Button onClick={(e) => { setChoosePlaylist(true); }}
-                                        color="orange" style={{ borderRadius: '10px', margin: 0, marginTop: '1.285rem', height: '2.55rem', width: '100%' }} display="name" displayInList="listName" getValue="@id" items={events} defaultValue={event}>
+                                        color="orange" style={{ borderRadius: '10px', margin: 0, marginTop: '1.285rem', height: '2.55rem', width: '100%' }}>
                                         Ajouter une playlist
                                     </Button>
                                 </>}

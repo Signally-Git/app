@@ -4,7 +4,7 @@ import Input from 'Utils/Input/input'
 import classes from './customselect.module.css'
 import { ImCheckmark } from 'react-icons/im'
 
-export default function CustomSelect({ items, display, displayInList, getValue, multiple, defaultValue, onChange, styleList, callback }) {
+export default function CustomSelect({ items, display, displayinlist, getValue, multiple, defaultValue, onChange, styleList, callback }) {
     const [value, setValue] = useState([defaultValue || items[0]?.[getValue] || items[0][display]])
     const click = useRef(null)
     const [isOpen, setIsOpen] = useState(false)
@@ -39,7 +39,7 @@ export default function CustomSelect({ items, display, displayInList, getValue, 
                                 onClick={item?.callback ? () => item?.callback(true) : () => {}} >
                                     <input defaultChecked={item[getValue] === value[0] ? true : false} name="item" 
                                     value={item[getValue]} type={multiple ? "checkbox" : "radio"} />
-                                    {item[displayInList] || item[display]}
+                                    {item[displayinlist] || item[display]}
                                     <ImCheckmark className={classes.checkmark} />
                                 </li>
                             })}

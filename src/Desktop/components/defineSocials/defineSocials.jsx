@@ -1,12 +1,13 @@
 import React from 'react'
 import Input from 'Utils/Input/input'
 import classes from './defineSocials.module.css'
-import { BiPlusCircle, BiMinusCircle } from 'react-icons/bi';
 import { useNotification } from 'Utils/Notifications/notifications';
 import { TiSocialLinkedin, TiSocialPinterest } from 'react-icons/ti';
 import { GrFacebookOption } from 'react-icons/gr';
 import { AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai';
 import { BsSnapchat } from 'react-icons/bs';
+import { FiCheck, FiTrash } from 'react-icons/fi';
+import request from 'Utils/Request/request';
 
 export default function DefineSocials({ setList, defaultValue }) {
     const [socials, setSocials] = React.useState(defaultValue || [{ url: "", name: "" }])
@@ -16,12 +17,12 @@ export default function DefineSocials({ setList, defaultValue }) {
     const notification = useNotification()
 
     const socialIcons = {
-        FACEBOOK: <GrFacebookOption style={{ padding: '5px'}} />,
-        INSTAGRAM: <AiOutlineInstagram style={{ padding: '4px'}} />,
-        LINKEDIN: <TiSocialLinkedin style={{ padding: '1px'}} />,
+        FACEBOOK: <GrFacebookOption style={{ padding: '5px' }} />,
+        INSTAGRAM: <AiOutlineInstagram style={{ padding: '4px' }} />,
+        LINKEDIN: <TiSocialLinkedin style={{ padding: '1px' }} />,
         PINTEREST: <TiSocialPinterest />,
-        SNAPCHAT: <BsSnapchat style={{ padding: '6px'}} />,
-        TWITTER: <AiOutlineTwitter style={{ padding: '4px'}} />
+        SNAPCHAT: <BsSnapchat style={{ padding: '6px' }} />,
+        TWITTER: <AiOutlineTwitter style={{ padding: '4px' }} />
     }
 
     const renderSocial = (social) => {
@@ -46,6 +47,11 @@ export default function DefineSocials({ setList, defaultValue }) {
         newArr[select] = { url: e.target.value, name: name };
         setSocials(newArr);
         setValue(e.target.value || "")
+        // const req = { ...newArr[select], legalEntity: JSON.parse(localStorage.getItem('user')).organisation }
+        // if (newArr[select]['@id'])
+        //     request.patch(newArr[select]['@id'], req)
+        // else
+        //     request.post('social_media_accounts', req)
     })
 
     const handleSwap = (social) => {
@@ -59,14 +65,21 @@ export default function DefineSocials({ setList, defaultValue }) {
             setSelect(socials.length)
             setValue("")
             socialLink.current.focus()
+            notification({ content: <>{getName(value)} enregistré</>, status: 'valid' })
         }
         else {
             notification({ content: <>Il existe déjà un réseau social {getName(value)}</>, status: 'invalid' })
         }
+        const req = { ...socials[select], legalEntity: JSON.parse(localStorage.getItem('user')).organisation }
+        if (socials[select]['@id'])
+            request.patch(socials[select]['@id'], req)
+        else
+            request.post('social_media_accounts', req)
         setList(socials)
     }
 
     const handleRemove = () => {
+        request.delete(socials[select]['@id']).then(() => notification({ content: <>{socials[select].name} supprimé avec succès</>, status: 'valid' })).catch(() => notification({ content: <>Impossible de supprimer {socials[select].name}</>, status: 'invalid' }))
         socials.splice(socials.findIndex(x => x?.url === value), 1)
         setValue("")
         setSelect(socials.length)
@@ -87,8 +100,8 @@ export default function DefineSocials({ setList, defaultValue }) {
                 </div>
                 <div className={classes.editSocials}>
                     <Input ref={socialLink} style={{ width: '20rem' }} value={value} onChange={(e) => handleChange(e)} type="text" placeholder="URL" />
-                    {socials[0]?.url?.length > 1 && <BiMinusCircle title={`Supprimer ${socials[select]?.url || socials[select - 1].url}`} onClick={() => handleRemove()} />}
-                    <BiPlusCircle onClick={(e) => handleSubmit(e)} />
+                    <FiCheck onClick={(e) => handleSubmit(e)} />
+                    {socials[0]?.url?.length > 1 && <FiTrash title={`Supprimer ${socials[select]?.url || socials[select - 1].url}`} onClick={() => handleRemove()} />}
                 </div>
             </form>
         </div>

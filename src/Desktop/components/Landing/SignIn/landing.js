@@ -71,16 +71,15 @@ const Login = () => {
 
     const handleForgotSubmit = (e) => {
         e.preventDefault()
-        axios.post(`${API}reset-password`, {email: email}).then(() => {
-            setModal(false)
-            notification({ content: <>Si un compte avec votre adresse mail existe,<br /> un message vous a été envoyé avec un lien pour réinitialiser votre mot de passe.</>, status: "valid" })
+        axios.post(`${API}reset-password`, { email: email }).then(() => {
+            setModal('done')
+            // notification({ content: <>Si un compte avec votre adresse mail existe,<br /> un message vous a été envoyé avec un lien pour réinitialiser votre mot de passe.</>, status: "valid" })
         })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (validateEmail(email))
-        {
+        if (validateEmail(email)) {
             handleScroll(e, 2000)
             setTimeout(() => {
                 setLogging(true)
@@ -113,7 +112,10 @@ const Login = () => {
     }
 
     return (<div style={{ background: "#FFF", overflow: 'hidden', height: "100vh" }}>
-        {modal ?
+        {modal === "done" ? <div className={classes.modal}>
+            <p>Un message a été envoyé à <span className={classes.orangeTxt}>{email}</span> <br /> avec un lien pour réinitialiser votre mot de passe.</p>
+            <Button color={"orange"} width={'40%'} onClick={() => setModal(false)}>OK</Button>
+            </div> : modal ?
             <form onSubmit={(e) => handleForgotSubmit(e)} className={classes.modal}>
                 <h3>Réinitialiser mon mot de passe</h3>
                 <Input defaultValue={email} type="mail" style={{ width: '100%' }} autoComplete="email" placeholder="Email" />

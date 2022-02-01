@@ -43,9 +43,12 @@
 }
 
 .login {
-  left: auto;
-  right: 18%;
+  left: 56.5%;
+  right: auto;
+  max-width: 42rem;
   top: 30%;
+  margin-left: auto;
+  margin-right: 0;
 }
 
 @-webkit-keyframes fadeInLeft {

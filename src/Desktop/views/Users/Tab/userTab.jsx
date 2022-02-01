@@ -6,22 +6,31 @@ import { HiOutlineSearch } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import Button from 'Utils/Button/btn'
 import Input from 'Utils/Input/input'
+import { useNotification } from 'Utils/Notifications/notifications'
 import request from 'Utils/Request/request'
 import classes from '../Tab/tab.module.css'
 
 function UserTab({ time, selected, setUsers, setSelected, edit, setEdit, editInfo, setEditInfo, modal, setModal }) {
     const [user, setUser] = React.useState({})
     const [search, setSearch] = React.useState('')
+    const [changed, setChanged] = React.useState(false)
     const [usersList, setUsersList] = React.useState([])
     const toFocus = React.useRef(null)
+    const notification = useNotification()
 
     const sortUsers = (usersList) => {
-
+        let admin;
+        usersList.map((user, index) => {
+            console.log(user)
+            if (user['@id'] === JSON.parse(localStorage.getItem('user'))['@id'])
+                admin = usersList.splice(index, 1)
+        })
         setUsersList(usersList?.sort((function (a, b) {
-            if (a.firstName.toLowerCase() < b.firstName.toLowerCase() && b['@id'] !== JSON.parse(localStorage.getItem('user'))['@id']) { return -1; }
+            if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) { return -1; }
             if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) { return 1; }
             return 0
         })))
+        usersList.unshift(admin[0])
         setUsers(usersList)
     }
 
@@ -33,20 +42,14 @@ function UserTab({ time, selected, setUsers, setSelected, edit, setEdit, editInf
         getDataUser()
     }, [modal])
 
-    // const handleDeleteAll = () => {
-    //     for (let index = 0; index < usersList.length; index++) {
-    //         const element = usersList[index];
-    //         if (element?.id !== JSON.parse(localStorage.getItem("user"))?.id)
-    //             await request.delete(`users/${element.id}`).then(
-    //                 () => {
-    //                     index === usersList.length - 1 && refreshData(type)
-    //                     count++;
-    //                 }).catch(() => notification({ content: <>Impossible de supprimer <span style={{ color: "#FF7954" }}>{element.firstName} {element.lastName}</span></>, status: "invalid" }))
-    //     }
-    // }
+    const handleChange = (e, data) => {
+        setChanged(true)
+        setUser({ ...user, [data]: e })
+    }
 
-    const handleChange = async (e, id) => {
+    const handleSubmit = async (e, id) => {
         e.preventDefault()
+        console.log(changed)
         const req = {
             firstName: user.firstName,
             lastName: user.lastName,
@@ -57,11 +60,15 @@ function UserTab({ time, selected, setUsers, setSelected, edit, setEdit, editInf
         console.log(req)
         await request.patch(id, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
-        }).then(() => getDataUser())
-
-        setEdit()
-        setEditInfo()
+        }).then(() => {
+            notification({ content: <>{user.firstName} {user.lastName} a bien été modifié</> })
+            getDataUser()
+            setEdit()
+            setEditInfo()
+            setChanged(false)
+        })
     }
+
 
     return (<div>
         <Link to="create-user">
@@ -94,8 +101,8 @@ function UserTab({ time, selected, setUsers, setSelected, edit, setEdit, editInf
                                 <input className={classes.checkbox} onChange={(e) => { setEdit(user); setSelected(user) }} checked={edit?.id === user.id && edit?.name === user.name ? true : false} type="radio" name="user" value={JSON.stringify(user)} />
                                 {editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>
                                     <div className={classes.renameContainer}>
-                                        <input placeholder='Prénom' className={classes.rename} ref={toFocus} type="text" defaultValue={`${user.firstName}`} onChange={(e) => setUser({ ...user, firstName: e.target.value })} />
-                                        <input placeholder='Nom' className={classes.rename} ref={toFocus} type="text" defaultValue={`${user.lastName}`} onChange={(e) => setUser({ ...user, lastName: e.target.value })} />
+                                        <input placeholder='Prénom' className={classes.rename} ref={toFocus} type="text" defaultValue={`${user.firstName}`} onChange={(e) => handleChange(e.target.value, 'firstName')} />
+                                        <input placeholder='Nom' className={classes.rename} ref={toFocus} type="text" defaultValue={`${user.lastName}`} onChange={(e) => handleChange(e.target.value, 'lastName')} />
                                     </div>
                                 </>
                                     :
@@ -105,16 +112,16 @@ function UserTab({ time, selected, setUsers, setSelected, edit, setEdit, editInf
                                     <div className={classes.actionsContainerAdmin}>
                                         <Link to="/profile/informations"><FaUser /></Link>
                                     </div> :
-                                    <div className={classes.actionsContainer}>
-                                        {editInfo === user ? <FiCheck strokeWidth={"4"} onClick={(e) => { handleChange(e, user['@id']) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEditInfo(user) }} />}
+                                    <div className={`${classes.actionsContainer} ${changed === true ? classes.btnReady : ""}`}>
+                                        {editInfo === user ? <FiCheck className={classes.checkmark} strokeWidth={"4"} onClick={(e) => { handleSubmit(e, user['@id']) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEditInfo(user) }} />}
                                         <FiTrash onClick={() => setModal({ name: `${user.firstName} ${user.lastName}`, id: user.id, type: "users" })} />
                                     </div>}
                                 {editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>
                                     <div className={classes.editDiv}>
-                                        <Input type="text" placeholder="Adresse mail" defaultValue={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} />
+                                        <Input type="text" placeholder="Adresse mail" defaultValue={user.email} onChange={(e) => handleChange(e.target.value, 'email')} />
                                         <div className={classes.inputsContainer}>
-                                            <Input type="text" placeholder="Poste" defaultValue={user.position} onChange={(e) => setUser({ ...user, poste: e.target.value })} />
-                                            <Input type="tel" placeholder="Mobile" defaultValue={user.phone} onChange={(e) => setUser({ ...user, phone: e.target.value })} />
+                                            <Input type="text" placeholder="Poste" defaultValue={user.position} onChange={(e) => handleChange(e.target.value, 'poste')} />
+                                            <Input type="tel" placeholder="Mobile" defaultValue={user.phone} onChange={(e) => handleChange(e.target.value, 'phone')} />
                                         </div>
                                     </div>
                                 </> : <></>}

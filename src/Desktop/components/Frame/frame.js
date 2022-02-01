@@ -21,8 +21,6 @@ export default function Frame(props) {
         const logUser = await request.get('whoami')
         setUser(logUser.data)
         const organisation = await request.get(logUser.data.organisation)
-
-        console.log(organisation)
         setOrganisation(organisation.data)
     }, [])
 

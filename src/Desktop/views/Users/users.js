@@ -1,8 +1,6 @@
 import classes from './users.module.css'
 import { useEffect, useRef, useState } from 'react'
-// import axios from 'axios'
-// import { API } from 'config'
-import { HiOutlineMinusCircle, HiOutlineSearch } from 'react-icons/hi'
+import { HiOutlineSearch } from 'react-icons/hi'
 import Tab from './Tab/tab'
 import SignaturePreview from './SignaturePreview/signaturePreview'
 import { Link, useParams } from 'react-router-dom'
@@ -57,8 +55,6 @@ function Team() {
         sse.onmessage = e => getRealtimeDataWOutTeam(JSON.parse(e.data));
         function getRealtimeDataWOutTeam(data) {
             setTimeout(() => {
-                console.log(data, data.users)
-                // if (data.length)
                     setUsers(data.users)
             }, 1100);
         }        
@@ -201,37 +197,6 @@ function Team() {
                                                             </button>}
                                                         </li>
                                                 })}
-                                                {/* {userList.length > 0 ? userList?.sort(function (a, b) {
-                                                    if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) { return -1; }
-                                                    if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) { return 1; }
-                                                    return 0
-                                                }).map((user) => {
-                                                    const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
-                                                    if (fullName.search(otherUser.toLowerCase()) !== -1)
-                                                        return <li tabIndex="0" key={user.id} className={`${classes.assignItem} ${transition === user['@id'] ? classes.transition : ""}`}>
-                                                            <span>{user.firstName} {user.lastName}</span>
-                                                            {transition === user['@id'] ? <span className={classes.added}>Ajouté</span> :
-                                                                <button>
-                                                                    <BiPlusCircle title={`Ajouter ${user.firstName} ${user.lastName} dans ${entity?.name}`}
-                                                                        onClick={() => handleUpdate(user, 'add')} /></button>}
-
-                                                        </li>
-                                                }) : users?.sort(function (a, b) {
-                                                    if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) { return -1; }
-                                                    if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) { return 1; }
-                                                    return 0
-                                                }).map((user) => {
-                                                    const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
-                                                    if (fullName.search(otherUser.toLowerCase()) !== -1)
-                                                        return <li tabIndex="0" key={user.id} className={`${classes.assignItem} ${transition === user['@id'] ? classes.transition : ""}`}>
-                                                            <span>{user.firstName} {user.lastName}</span>
-                                                            {transition === user['@id'] ? <span className={classes.added}>Ajouté</span> :
-                                                                <button>
-                                                                    <BiPlusCircle title={`Ajouter ${user.firstName} ${user.lastName} dans ${entity?.name}`}
-                                                                        onClick={() => handleUpdate(user, 'add')} /></button>}
-
-                                                        </li>
-                                                })} */}
                                             </ul>
                                             <Button color={'orange'} onClick={(e) => handleScroll(e, 0)}>Terminer</Button>
                                         </div>
