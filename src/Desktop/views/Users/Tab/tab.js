@@ -264,7 +264,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                         </div>
                                         {editInfo === workplace ? <>
                                             <div className={classes.editDiv}>
-                                                <UploadFile file={file} setFile={setFile} placeholder={'Remplacer ' + workplace.logo.name} style={{ background: '#FFF', marginBottom: '.2rem' }} />
+                                                <UploadFile file={file} setFile={setFile} placeholder={workplace?.logo?.name ? 'Remplacer ' + workplace.logo.name : 'Importer un logo'} style={{ background: '#FFF', marginBottom: '.2rem' }} />
                                                 <div className={classes.inputsContainer}>
                                                     <Input onLoad={() => setStreet(workplace.address.street)} onChange={(e) => setStreet(e.target.value)} type="text" placeholder="Adresse" defaultValue={workplace.address.street} />
                                                     <Input onChange={(e) => setStreetInfo(e.target.value)} type="text" placeholder="Adresse 2" defaultValue={workplace.address.streetInfo} />
