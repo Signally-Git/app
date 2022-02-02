@@ -61,7 +61,7 @@ function UserTab({ time, selected, setUsers, setSelected, edit, setEdit, editInf
         await request.patch(id, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(() => {
-            notification({ content: <>{user.firstName} {user.lastName} a bien été modifié</> })
+            notification({ content: <><span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> a bien été modifié</> })
             getDataUser()
             setEdit()
             setEditInfo()

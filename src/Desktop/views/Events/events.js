@@ -37,11 +37,11 @@ function Events() {
     }, [create, edit, preview])
 
     const handleDelete = async (id) => {
-        await request.delete(`events/${id}`).catch((error) => notification({ content: <>Impossible de supprimer l'event</>, status: "invalid" }))
+        await request.delete(`events/${id}`).catch(() => notification({ content: <>Impossible de supprimer <span style={{ color: "#FF7954" }}>{preview.name}</span></>, status: "invalid" }))
         getData()
         setModal()
         setPreview()
-        notification({ content: <>Event supprimé avec succès</>, status: "valid" })
+        notification({ content: <><span style={{ color: "#FF7954" }}>{preview.name}</span> supprimé avec succès</>, status: "valid" })
     }
 
     useEffect(() => {
