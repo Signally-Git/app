@@ -54,7 +54,7 @@ export default function CreateWorkplace({ setDone }) {
         if (file)
             await request.post(`import/image`, img).then(async (res) => {
                 const requestLogo = {
-                    name: "test",
+                    name: file.name,
                     path: res.data.path,
                     workplace: create.data['@id']
                 }

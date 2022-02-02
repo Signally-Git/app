@@ -44,7 +44,6 @@ export default function CreateTeam({ setDone }) {
         })
     }
 
-
     const getWorkplaces = async () => {
         const wps = await request.get('workplaces')
         if (wps.data["hydra:member"].length > 0) {
@@ -82,7 +81,7 @@ export default function CreateTeam({ setDone }) {
                 <div>
                     {workplaces.length > 0 &&
                         <CustomSelect display="name" getValue="@id"
-                            styleList={{ maxHeight: "10rem!important", paddingTop: '2.5rem' }}
+                            styleList={{ maxHeight: '15rem', paddingTop: '2.5rem' }}
                             items={workplaces} defaultValue={workplace} onChange={(e) => { setWorkplace(e); focus.current.focus() }} />}
                     <Input style={{ width: "100%" }} ref={focus} onChange={(e) => setTeamName(e.target.value)} type="text" placeholder="Nom de l'équipe" />
 

@@ -23,7 +23,7 @@ export default function CustomSelect({ items, display, displayinlist, getValue, 
 
     return (
         <>
-            <div ref={click} className={`${classes.container} ${isOpen ? classes.open : ""}`} onClick={() => { setIsOpen(!isOpen); }}>
+            <div  ref={click} className={`${classes.container} ${isOpen ? classes.open : ""}`} onClick={() => { setIsOpen(!isOpen); }}>
                 <div className={classes.inputContainer}>
                     <Input type="text" disabled style={Object?.values(items)?.find((obj) => { return obj[getValue] == value })?.['style']}
                         value={value.length > 1 ?
@@ -31,9 +31,9 @@ export default function CustomSelect({ items, display, displayinlist, getValue, 
                             Object?.values(items)?.find((obj) => { return obj[getValue] == value })?.[display]} />
                     <VscTriangleDown />
                 </div>
-                <form onChange={(e) => { onChange(e.target.value); multiple ? e.target.checked ? setValue([...value, e.target.value]) : setValue(value.filter((val) => val !== e.target.value)) : setValue([e.target.value]) }}>
+                <form style={{maxHeight: styleList.maxHeight}} onChange={(e) => { onChange(e.target.value); multiple ? e.target.checked ? setValue([...value, e.target.value]) : setValue(value.filter((val) => val !== e.target.value)) : setValue([e.target.value]) }}>
                     {isOpen ?
-                        <ul className={classes.list} style={styleList} >
+                        <ul className={classes.list} style={{styleList}} >
                             {items.map((item, index) => {
                                 return <li className={classes.element} key={index} style={{...item?.style}} 
                                 onClick={item?.callback ? () => item?.callback(true) : () => {}} >

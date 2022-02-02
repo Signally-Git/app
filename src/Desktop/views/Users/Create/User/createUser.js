@@ -21,37 +21,37 @@ export default function CreateUser({ setDone }) {
     const history = useHistory()
     const notification = useNotification()
 
-    function debounce(fn, ms) {
-        let timer
-        return _ => {
-            clearTimeout(timer)
-            timer = setTimeout(_ => {
-                timer = null
-                fn.apply(this, arguments)
-            }, ms)
-        };
-    }
-    const [dimensions, setDimensions] = useState({
-        height: window.innerHeight,
-        width: window.innerWidth
-    })
+    // function debounce(fn, ms) {
+    //     let timer
+    //     return _ => {
+    //         clearTimeout(timer)
+    //         timer = setTimeout(_ => {
+    //             timer = null
+    //             fn.apply(this, arguments)
+    //         }, ms)
+    //     };
+    // }
+    // const [dimensions, setDimensions] = useState({
+    //     height: window.innerHeight,
+    //     width: window.innerWidth
+    // })
 
-    useEffect(() => {
-        const debouncedHandleResize = debounce(function handleResize() {
-            setDimensions({
-                height: window.innerHeight,
-                width: window.innerWidth
-            })
-        }, 1000)
+    // useEffect(() => {
+    //     const debouncedHandleResize = debounce(function handleResize() {
+    //         setDimensions({
+    //             height: window.innerHeight,
+    //             width: window.innerWidth
+    //         })
+    //     }, 1000)
 
-        window.addEventListener('resize', debouncedHandleResize)
+    //     window.addEventListener('resize', debouncedHandleResize)
 
-        console.log(dimensions)
-        return _ => {
-            window.removeEventListener('resize', debouncedHandleResize)
+    //     console.log(dimensions)
+    //     return _ => {
+    //         window.removeEventListener('resize', debouncedHandleResize)
 
-        }
-    })
+    //     }
+    // })
 
     const handleCSV = async (file) => {
         const csv = new FormData()
@@ -70,11 +70,12 @@ export default function CreateUser({ setDone }) {
     }
 
     const handleSave = async () => {
+        console.log(team)
         const req = team === "Aucune équipe" || !team ? user : {
             team: team,
             ...user
         }
-        console.log(req)
+
         await request.post('users', req).then(() => {
             notification({ content: <>Le collaborateur <span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> a été créé avec succès</>, status: "valid" })
             setDone(true)
@@ -101,13 +102,12 @@ export default function CreateUser({ setDone }) {
         })
     }
 
-
     const getTeams = async () => {
         const tms = await request.get('teams')
         if (tms.data["hydra:member"].length > 0) {
             tms.data["hydra:member"].unshift({ '@id': "Aucune équipe", name: "Aucune équipe" })
-            setTeams(tms.data["hydra:member"])
             setTeam(tms.data["hydra:member"][1]['@id'])
+            setTeams(tms.data["hydra:member"])
         }
     }
 
@@ -150,8 +150,11 @@ export default function CreateUser({ setDone }) {
                 <div>
                     {teams.length > 0 &&
                         <CustomSelect display="name" getValue="@id"
-                            styleList={{ height: '15rem', paddingTop: '2.5rem' }}
-                            items={teams} onChange={(e) => { setTeam(e); focus.current.focus() }} defaultValue={team} />}
+                            styleList={{ maxHeight: '15rem', paddingTop: '2.5rem' }}
+                            items={teams} onChange={(e) => {
+                                setTeam(e);
+                                focus.current.focus()
+                            }} defaultValue={team} />}
                     <Input style={{ width: "100%" }} ref={focus} onChange={(e) => setUser({ ...user, firstName: e.target.value })} type="text" placeholder="Prénom" />
                     <Input style={{ width: "100%" }} onChange={(e) => setUser({ ...user, lastName: e.target.value })} type="text" placeholder="Nom" />
                     <div className={classes.btnsContainer}>
