@@ -33,7 +33,7 @@ export default function CustomSelect({ items, display, displayinlist, getValue, 
                 </div>
                 <form style={{maxHeight: styleList?.maxHeight}} onChange={(e) => { onChange(e.target.value); multiple ? e.target.checked ? setValue([...value, e.target.value]) : setValue(value.filter((val) => val !== e.target.value)) : setValue([e.target.value]) }}>
                     {isOpen ?
-                        <ul className={classes.list} style={{styleList}} >
+                        <ul className={classes.list} style={styleList} >
                             {items.map((item, index) => {
                                 return <li className={classes.element} key={index} style={{...item?.style}} 
                                 onClick={item?.callback ? () => item?.callback(true) : () => {}} >

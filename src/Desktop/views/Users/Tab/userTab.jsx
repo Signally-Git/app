@@ -10,7 +10,7 @@ import { useNotification } from 'Utils/Notifications/notifications'
 import request from 'Utils/Request/request'
 import classes from '../Tab/tab.module.css'
 
-function UserTab({ time, selected, setUsers, setSelected, edit, setEdit, editInfo, setEditInfo, modal, setModal }) {
+function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, editInfo, setEditInfo, modal, setModal }) {
     const [user, setUser] = React.useState({})
     const [search, setSearch] = React.useState('')
     const [changed, setChanged] = React.useState(false)
@@ -38,9 +38,10 @@ function UserTab({ time, selected, setUsers, setSelected, edit, setEdit, editInf
         await request.get(`users`).then((res) => sortUsers(res.data['hydra:member']))
     }
 
-    React.useMemo(async () => {
+    React.useMemo(() => {
+        console.log(modal)
         getDataUser()
-    }, [modal])
+    }, [modal, edit])
 
     const handleChange = (e, data) => {
         setChanged(true)
@@ -61,11 +62,11 @@ function UserTab({ time, selected, setUsers, setSelected, edit, setEdit, editInf
         await request.patch(id, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(() => {
-            notification({ content: <><span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> a bien été modifié</> })
-            getDataUser()
             setEdit()
             setEditInfo()
+            getDataUser()
             setChanged(false)
+            notification({ content: <><span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> a bien été modifié</> })
         })
     }
 
@@ -106,7 +107,7 @@ function UserTab({ time, selected, setUsers, setSelected, edit, setEdit, editInf
                                     </div>
                                 </>
                                     :
-                                    <input className={classes.rename} disabled type="text" defaultValue={`${user.firstName} ${user.lastName}`} />}
+                                    <input className={classes.rename} disabled type="text" value={`${user.firstName} ${user.lastName}`} />}
                                 <span></span>
                                 {user?.id === JSON.parse(localStorage.getItem("user"))?.id ?
                                     <div className={classes.actionsContainerAdmin}>

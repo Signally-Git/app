@@ -20,6 +20,7 @@ import UserTab from './userTab'
 // Assigns templates and structure
 
 export default function Tab({ tab, selected, setSelected, edit, setEdit, editInfo, setEditInfo }) {
+    const [changed, setChanged] = useState(false)
     const [addedWorkplace, setAddedWorkplace] = useState("")
     const [searchWorkplace, setSearchWorkplace] = useState("")
     const [searchTeam, setSearchTeam] = useState("")
@@ -33,7 +34,9 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     const [workplaceName, setWorkplaceName] = useState('')
     const [teamName, setTeamName] = useState('')
     const [street, setStreet] = useState("")
-    const [streetInfo, setStreetInfo] = useState("")
+    const [city, setCity] = useState("")
+    const [zipCode, setZipCode] = useState("")
+    const [country, setCountry] = useState("")
     const [mobile, setMobile] = useState("")
     const [fax, setFax] = useState("")
     const [done, setDone] = useState(false)
@@ -69,7 +72,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     const handleDelete = (id, type, name) => {
         request.delete(`${type}/${id}`).then(
             () => {
-                refreshData(type)
+                refreshData()
                 notification({ content: <><span style={{ color: "#FF7954" }}>{name}</span> supprimé avec succès</>, status: "valid" })
             }
 
@@ -79,12 +82,12 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         setModal({ type: "", name: "", id: "" })
     }
 
-    // Deletes eithe every workplace, every team or every user
+    // Deletes either every workplace, every team or every user
     const handleDeleteAll = async (type) => {
         let count = 0;
 
         switch (type) {
-            case "workplace":
+            case "workplaces":
                 for (let index = 0; index < workplaces.length; index++) {
                     const element = workplaces[index];
                     await request.delete(`workplaces/${element.id}`).then(
@@ -133,7 +136,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                             <br /><span className={classes.orangeTxt}>{`${workplaces.length} hotels`}</span></h4>
                         <div>
                             <Button color="orange" onClick={() => setModal({ type: "", name: "", id: "" })}>Annuler</Button>
-                            <Button color="orangeFill" onClick={() => handleDeleteAll("workplace")}>Supprimer</Button>
+                            <Button color="orangeFill" onClick={() => handleDeleteAll("workplaces")}>Supprimer</Button>
                         </div>
                     </div>)
                 case "allteams":
@@ -200,7 +203,9 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
             name: workplaceName || workplace.name,
             address: {
                 street: street || workplace.address.street,
-                streetInfo: streetInfo || workplace.address.streetInfo
+                city: city || workplace.address.city,
+                zipCode: zipCode || workplace.address.zipCode,
+                country: country || workplace.address.country
             },
             digitalAddress: {
                 mobile: mobile,
@@ -209,6 +214,8 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         }
         await request.patch(workplace['@id'], req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
+        }).then(() => {
+            setChanged(false)
         })
         setEditInfo()
     }
@@ -218,7 +225,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         if (teamName.length > 0)
             await request.patch(team['@id'], { name: teamName }, {
                 headers: { 'Content-Type': 'application/merge-patch+json' }
-            }).then(() => notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> modifié avec succès</>, status: "valid" })).catch(() => notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> n'a pas pu être modifié</>, status: "invalid" }))
+            }).then(() => {notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> modifié avec succès</>, status: "valid" }); setChanged(false)}).catch(() => notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> n'a pas pu être modifié</>, status: "invalid" }))
         setEditInfo()
     }
 
@@ -252,26 +259,30 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                         key={workplace.id} className={`${editInfo === workplace ? classes.editing : ""} ${selected?.id === workplace.id && selected?.name === workplace?.name ? classes.selected : ""}`} >
                                         <input onChange={(e) => { if (e.target.checked) { setEdit(workplace); setSelected(workplace) } }}
                                             className={classes.checkbox}
-                                            checked={edit?.id === workplace.id && edit?.name === workplace?.name ? true : false} type="radio" name="workplace" value={JSON.stringify(workplace)} />
-                                        {editInfo === workplace ? <input className={classes.rename} ref={toFocus} type="text" defaultValue={workplace?.name} onChange={(e) => setWorkplaceName(e.target.value)} /> :
+                                            checked={edit?.id === workplace.id && edit?.name === workplace?.name ? true : false} type="radio" name="workplaces" value={JSON.stringify(workplace)} />
+                                        {editInfo === workplace ? <input className={classes.rename} ref={toFocus} type="text" defaultValue={workplace?.name} onChange={(e) => { setWorkplaceName(e.target.value); setChanged(true) }} /> :
                                             <input className={classes.rename} disabled type="text" defaultValue={workplaceName || workplace?.name} />}
                                         <span></span>
-                                        <div className={classes.actionsContainer}>
+                                        <div className={`${classes.actionsContainer} ${changed === true ? classes.btnReady : ""}`}>
                                             {/* <BsCreditCard2Front /> */}
                                             {/* <GrUserSettings onClick={(e) => { setEdit('assign-workplace') }} /> */}
-                                            {editInfo === workplace ? <FiCheck strokeWidth={"4"} onClick={(e) => { handleChangeWP(e, workplace) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEditInfo(workplace) }} />}
+                                            {editInfo === workplace ? <FiCheck className={classes.checkmark} strokeWidth={"4"} onClick={(e) => { handleChangeWP(e, workplace) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEditInfo(workplace) }} />}
                                             <FiTrash onClick={() => setModal({ name: workplace?.name, id: workplace.id, type: "workplaces" })} />
                                         </div>
                                         {editInfo === workplace ? <>
                                             <div className={classes.editDiv}>
                                                 <UploadFile file={file} setFile={setFile} placeholder={workplace?.logo?.name ? 'Remplacer ' + workplace.logo.name : 'Importer un logo'} style={{ background: '#FFF', marginBottom: '.2rem' }} />
                                                 <div className={classes.inputsContainer}>
-                                                    <Input onLoad={() => setStreet(workplace.address.street)} onChange={(e) => setStreet(e.target.value)} type="text" placeholder="Adresse" defaultValue={workplace.address.street} />
-                                                    <Input onChange={(e) => setStreetInfo(e.target.value)} type="text" placeholder="Adresse 2" defaultValue={workplace.address.streetInfo} />
+                                                    <Input onChange={(e) => { setStreet(e.target.value); setChanged(true) }} type="text" placeholder="Adresse" defaultValue={workplace.address.street} />
+                                                    <Input onChange={(e) => { setZipCode(e.target.value); setChanged(true) }} type="text" placeholder="ZIP Code" defaultValue={workplace.address.zipCode} />
                                                 </div>
                                                 <div className={classes.inputsContainer}>
-                                                    <Input onChange={(e) => setMobile(e.target.value)} type="tel" placeholder="Téléphone" defaultValue={workplace.digitalAddress.mobile} />
-                                                    <Input onChange={(e) => setFax(e.target.value)} type="tel" placeholder="Fax" defaultValue={workplace.digitalAddress.fax} />
+                                                    <Input onChange={(e) => { setCity(e.target.value); setChanged(true) }} type="text" placeholder="City" defaultValue={workplace.address.city} />
+                                                    <Input onChange={(e) => { setCountry(e.target.value); setChanged(true) }} type="text" placeholder="Country" defaultValue={workplace.address.country} />
+                                                </div>
+                                                <div className={classes.inputsContainer}>
+                                                    <Input onChange={(e) => { setMobile(e.target.value); setChanged(true) }} type="tel" placeholder="Téléphone" defaultValue={workplace.digitalAddress.mobile} />
+                                                    <Input onChange={(e) => { setFax(e.target.value); setChanged(true) }} type="tel" placeholder="Fax" defaultValue={workplace.digitalAddress.fax} />
                                                 </div>
                                             </div>
                                         </> : <></>}
@@ -312,14 +323,14 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                     <input onChange={(e) => { if (e.target.checked) { setEdit(team); setSelected(team) } }}
                                         className={classes.checkbox}
                                         checked={edit?.id === team.id && edit?.name === team?.name ? true : false} type="radio" name="team" value={JSON.stringify(team)} />
-                                     <span></span>
-                                    {editInfo === team ? <input autoFocus className={classes.rename} ref={toFocus} type="text" defaultValue={team?.name} onChange={(e) => setTeamName(e.target.value)} /> :
+                                    <span></span>
+                                    {editInfo === team ? <input autoFocus className={classes.rename} ref={toFocus} type="text" defaultValue={team?.name} onChange={(e) => {setTeamName(e.target.value); setChanged(true)}} /> :
                                         <input className={classes.rename} disabled type="text" defaultValue={teamName || team?.name} />}
                                     {team.workplace?.name?.length > 0 ? <div className={classes.infos}>
                                         <span className={classes.groupName}>{team.workplace?.name}</span>
                                     </div> : ""}
-                                    <div className={classes.actionsContainer}>
-                                        {editInfo === team ? <FiCheck strokeWidth={"4"} className={classes.validate} onClick={(e) => { handleChangeTeam(e, team) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEditInfo(team) }} />}
+                                    <div className={`${classes.actionsContainer} ${changed === true ? classes.btnReady : ""}`}>
+                                        {editInfo === team ? <FiCheck strokeWidth={"4"} className={`${classes.validate} ${classes.checkmark}`} onClick={(e) => { handleChangeTeam(e, team) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEditInfo(team) }} />}
                                         <FiTrash onClick={() => setModal({ name: team.name, id: team.id, type: "teams" })} />
                                     </div>
                                 </li>)
@@ -335,8 +346,8 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     if (tab === "users")
         return (<div>
             {modal.type ? modalContent : ""}
-                <UserTab time={time} selected={selected} setUsers={setUsers}
-                    setSelected={setSelected} edit={edit} setEdit={setEdit} editInfo={editInfo}
-                    setEditInfo={setEditInfo} modal={modal} setModal={setModal} />
+            <UserTab time={time} selected={selected} users={users} setUsers={setUsers}
+                setSelected={setSelected} edit={edit} setEdit={setEdit} editInfo={editInfo}
+                setEditInfo={setEditInfo} modal={modal} setModal={setModal} />
         </div>)
 }

@@ -11,7 +11,7 @@ import request from 'Utils/Request/request';
 
 export default function DefineSocials({ setList, defaultValue }) {
     const [socials, setSocials] = React.useState(defaultValue || [{ url: "", name: "" }])
-    const [select, setSelect] = React.useState(0)
+    const [select, setSelect] = React.useState(defaultValue.length || 0)
     const [value, setValue] = React.useState("")
     const socialLink = React.useRef(null)
     const notification = useNotification()
@@ -70,7 +70,7 @@ export default function DefineSocials({ setList, defaultValue }) {
         else {
             notification({ content: <>Il existe déjà un réseau social {getName(value)}</>, status: 'invalid' })
         }
-        const req = { ...socials[select], legalEntity: JSON.parse(localStorage.getItem('user')).organisation }
+        const req = { ...socials[select], organisation: JSON.parse(localStorage.getItem('user')).organisation }
         if (socials[select]['@id'])
             request.patch(socials[select]['@id'], req)
         else
