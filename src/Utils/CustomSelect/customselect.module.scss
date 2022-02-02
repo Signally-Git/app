@@ -76,6 +76,7 @@
     padding-top: 2.65rem;
     list-style: none;
     opacity: 0;
+    max-height: inherit;
     animation: dropDown 1s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;

@@ -86,6 +86,7 @@
   padding-top: 2.65rem;
   list-style: none;
   opacity: 0;
+  max-height: inherit;
   -webkit-animation: dropDown 1s;
           animation: dropDown 1s;
   -webkit-animation-iteration-count: 1;

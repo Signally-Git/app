@@ -25,8 +25,10 @@ export default function Frame(props) {
     }, [])
 
     useEffect(() => {
-        const sseUser = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${JSON.parse(localStorage.getItem('user'))?.['@id']}`);
-        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${JSON.parse(localStorage.getItem('user'))?.organisation}`);
+        
+            const sseUser = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${user?.['@id']}`);
+        
+            const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${organisation?.['@id']}`);
         function getRealtimeData(data) {
             setOrganisation(data)
         }
@@ -43,7 +45,7 @@ export default function Frame(props) {
             sse.close();
             sseUser.close();
         };
-    }, [])
+    }, [user, organisation])
 
     return (<>
         <div className={classes.desktop}>
