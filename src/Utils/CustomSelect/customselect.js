@@ -31,7 +31,7 @@ export default function CustomSelect({ items, display, displayinlist, getValue, 
                             Object?.values(items)?.find((obj) => { return obj[getValue] == value })?.[display]} />
                     <VscTriangleDown />
                 </div>
-                <form style={{maxHeight: styleList.maxHeight}} onChange={(e) => { onChange(e.target.value); multiple ? e.target.checked ? setValue([...value, e.target.value]) : setValue(value.filter((val) => val !== e.target.value)) : setValue([e.target.value]) }}>
+                <form style={{maxHeight: styleList?.maxHeight}} onChange={(e) => { onChange(e.target.value); multiple ? e.target.checked ? setValue([...value, e.target.value]) : setValue(value.filter((val) => val !== e.target.value)) : setValue([e.target.value]) }}>
                     {isOpen ?
                         <ul className={classes.list} style={{styleList}} >
                             {items.map((item, index) => {
