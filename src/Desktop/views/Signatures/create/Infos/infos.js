@@ -15,17 +15,19 @@ export default function Infos(props) {
     const [img, setImg] = useState("");
 
     // Template informations
-    const inputs = [{ placeholder: "Prénom", type: "text", toChange: "firstName", value: props.content.firstName },
-    { placeholder: "Nom", type: "text", toChange: "lastName", value: props.content.lastName },
-    { placeholder: "Poste / Fonction", type: "text", toChange: "jobName", value: props.content.jobName },
-    { placeholder: "Company", type: "text", toChange: "company", value: props.content.company, disabled: true },
-    { placeholder: "Adresse Street", type: "text", toChange: "addressStreet", value: props.content.addressStreet },
-    { placeholder: "Adresse Info", type: "text", toChange: "addressInfo", value: props.content.addressInfo },
-    { placeholder: "Adresse Zipcode", type: "text", toChange: "addressZipcode", value: props.content.addressZipcode },
-    { placeholder: "Adresse City ", type: "text", toChange: "addressCity", value: props.content.addressCity },
-    { placeholder: "Adresse Country ", type: "text", toChange: "addressCountry", value: props.content.addressCountry },
-    { placeholder: "Téléphone mobile", type: "tel", toChange: "mobile", value: props.content.mobile },
-    { placeholder: "Téléphone fixe", type: "tel", toChange: "phone", value: props.content.phone }]
+    const inputs = [{ placeholder: "Prénom", type: "text", toChange: "firstName", value: props.content.firstName, disabled: true },
+    { placeholder: "Nom", type: "text", toChange: "lastName", value: props.content.lastName, disabled: true },
+    { placeholder: "Poste", type: "text", toChange: "jobName", value: props.content.jobName, disabled: true },
+    { placeholder: "Mobile", type: "tel", toChange: "mobile", value: props.content.mobile, disabled: true }
+    ]
+
+    const companyInputs = [{ placeholder: "Société", type: "text", toChange: "company", value: props.content.company, disabled: true },
+    { placeholder: "Adresse", type: "text", toChange: "addressStreet", value: props.content.addressStreet, disabled: true },
+    { placeholder: "Code postal", type: "text", toChange: "addressZipcode", value: props.content.addressZipcode, disabled: true },
+    { placeholder: "Ville", type: "text", toChange: "addressCity", value: props.content.addressCity, disabled: true },
+    { placeholder: "Pays", type: "text", toChange: "addressCountry", value: props.content.addressCountry, disabled: true },
+    { placeholder: "Téléphone", type: "tel", toChange: "phone", value: props.content.phone, disabled: true }
+    ]
 
     // Styling the whole template's font
     // Listing websafe fonts to select font-family
@@ -65,22 +67,43 @@ export default function Infos(props) {
                         />
                     </div>
                 </div>
-                <h4>Informations personnelles</h4>
-                {inputs.map((input) => {
-                    return <div className={classes.inputContainer} key={input.placeholder}>
-                        <Input
-                            value={input.value.value}
-                            type={input.type}
-                            placeholder={input.placeholder}
-                            disabled={input.disabled}
-                            defaultColor={input.value.color}
-                            defaultStyle={input.value.style}
-                            toChange={input.toChange}
-                            content={props.content}
-                            setContent={props.setContent}
-                        />
-                    </div>
-                })}
+                <br />
+                <h4>Informations du profil</h4>
+                <div className={classes.inputsFlex}>
+                    {inputs.map((input) => {
+                        return <div className={classes.inputContainer} key={input.placeholder}>
+                            <Input
+                                value={input.value.value}
+                                type={input.type}
+                                placeholder={input.placeholder}
+                                disabled={input.disabled}
+                                defaultColor={input.value.color}
+                                defaultStyle={input.value.style}
+                                toChange={input.toChange}
+                                content={props.content}
+                                setContent={props.setContent}
+                            />
+                        </div>
+                    })}
+                </div>
+                <h4>Informations de la société</h4>
+                <div className={classes.inputsFlex}>
+                    {companyInputs.map((input) => {
+                        return <div className={classes.inputContainer} key={input.placeholder}>
+                            <Input
+                                value={input.value.value}
+                                type={input.type}
+                                placeholder={input.placeholder}
+                                disabled={input.disabled}
+                                defaultColor={input.value.color}
+                                defaultStyle={input.value.style}
+                                toChange={input.toChange}
+                                content={props.content}
+                                setContent={props.setContent}
+                            />
+                        </div>
+                    })}
+                </div>
                 <div className={classes.inputContainer}>
                     <h4>Style et taille du texte</h4>
                 </div>

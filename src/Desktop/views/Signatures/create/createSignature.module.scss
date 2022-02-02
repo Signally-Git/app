@@ -147,7 +147,7 @@
         position: relative;
         display: flex;
         text-align: center;
-        width: 175px;
+        width: 50%;
         height: 3rem;
         * {
             -webkit-tap-highlight-color: transparent;
@@ -156,12 +156,12 @@
         }
     }
     input:not(:checked) + .sliderTabs:before {
-        left: -0.3rem;
+        left: 5%;
     }
 
     input:checked + .sliderTabs:before {
-        width: 5rem;
-        left: 3.75rem;
+        width: 40%;
+        left: 45%;
     }
     .switchTabs input {
         outline: none;
@@ -376,7 +376,7 @@
 .tabContent {
     display: flex;
     position: relative;
-    width: 80%;
+    width: 95%;
     height: 95%;
     overflow: auto;
     margin: auto;

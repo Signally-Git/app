@@ -61,6 +61,11 @@ export default function DefineSocials({ setList, defaultValue }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        if (!getName(value))
+        {
+            notification({ content: <>Réseau social non disponible</>, status: 'invalid' })
+            return;
+        }
         if (socials.filter((social) => getName(value) === social?.name).length === 1) {
             setSelect(socials.length)
             setValue("")
@@ -69,8 +74,10 @@ export default function DefineSocials({ setList, defaultValue }) {
         }
         else {
             notification({ content: <>Il existe déjà un réseau social {getName(value)}</>, status: 'invalid' })
+            return;
         }
         const req = { ...socials[select], organisation: JSON.parse(localStorage.getItem('user')).organisation }
+        
         if (socials[select]['@id'])
             request.patch(socials[select]['@id'], req)
         else
@@ -79,7 +86,7 @@ export default function DefineSocials({ setList, defaultValue }) {
     }
 
     const handleRemove = () => {
-        request.delete(socials[select]['@id']).then(() => notification({ content: <>{socials[select].name} supprimé avec succès</>, status: 'valid' })).catch(() => notification({ content: <>Impossible de supprimer {socials[select].name}</>, status: 'invalid' }))
+        request.delete(socials[select]['@id']).catch(() => notification({ content: <>Impossible de supprimer {socials[select].name}</>, status: 'invalid' }))
         socials.splice(socials.findIndex(x => x?.url === value), 1)
         setValue("")
         setSelect(socials.length)

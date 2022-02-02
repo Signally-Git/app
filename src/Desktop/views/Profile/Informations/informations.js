@@ -11,6 +11,7 @@ import DefineSocials from 'Desktop/components/defineSocials/defineSocials';
 
 function Informations() {
     const [active, setActive] = useState("company")
+    const [organisation, setOrganisation] = useState({})
     const [organisationId, setOrganisationId] = useState()
     const [organisationIRI, setOrganisationIRI] = useState()
     const [uploadedMedia, setUploadedMedia] = useState()
@@ -74,7 +75,7 @@ function Informations() {
                 name: companyName,
                 websiteUrl: website,
                 address: {
-                    street: companyAddress
+                    ...organisation.address
                 },
                 digitalAddress: {
                     phone: phone
@@ -111,6 +112,7 @@ function Informations() {
     useEffect(async () => {
         let organisation = await request.get(JSON.parse(localStorage.getItem('user')).organisation)
         organisation = organisation.data
+        setOrganisation(organisation)
         setOrganisationId(organisation.id)
         setOrganisationIRI(organisation['@id'])
         setCompanyName(organisation.name)
@@ -147,8 +149,24 @@ function Informations() {
                         <div className={classes.row}>
                             <div className={classes.inputContainer}>
                                 <label>Adresse</label>
-                                <Input type="text" value={companyAddress} onChange={(e) => setCompanyAddress(e.target.value)} />
+                                <Input type="text" value={companyAddress} onChange={(e) => setOrganisation({ ...organisation, address: { ...organisation.address, street: e.target.value } })} />
                             </div>
+                            <div className={classes.inputContainer}>
+                                <label>Code postal</label>
+                                <Input type="text" value={organisation.address?.zipCode} onChange={(e) => setOrganisation({ ...organisation, address: { ...organisation.address, zipCode: e.target.value } })} />
+                            </div>
+                        </div>
+                        <div className={classes.row}>
+                            <div className={classes.inputContainer}>
+                                <label>Ville</label>
+                                <Input type="text" value={organisation.address?.city} onChange={(e) => setOrganisation({ ...organisation, address: { ...organisation.address, city: e.target.value } })} />
+                            </div>
+                            <div className={classes.inputContainer}>
+                                <label>Pays</label>
+                                <Input type="text" value={organisation.address?.country} onChange={(e) => setOrganisation({ ...organisation, address: { ...organisation.address, country: e.target.value } })} />
+                            </div>
+                        </div>
+                        <div className={classes.row}>
                             <div className={classes.inputContainer}>
                                 <label>Téléphone fixe</label>
                                 <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />

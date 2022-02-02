@@ -96,7 +96,7 @@
         input:checked + svg  {
             opacity: 1;
         }
-        &:hover {
+        &:hover, &:focus-within {
             transition: .2s;
             color: $signally-brown;
             background-color: $signally-pink;

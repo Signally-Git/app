@@ -261,7 +261,7 @@ function CreateSignatureComponent() {
             <div className={classes.tabsContainer}>
               <label className={classes.switchTabs}>
                 <div className={classes.tabTitles}>
-                  <span>Infos</span>
+                  <span>Style</span>
                   <span>Options</span>
                 </div>
                 <input type="checkbox" onChange={() => setTab(!tab)} />

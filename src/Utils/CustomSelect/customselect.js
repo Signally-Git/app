@@ -23,7 +23,7 @@ export default function CustomSelect({ items, display, displayinlist, getValue, 
 
     return (
         <>
-            <div  ref={click} className={`${classes.container} ${isOpen ? classes.open : ""}`} onClick={() => { setIsOpen(!isOpen); }}>
+            <div ref={click} className={`${classes.container} ${isOpen ? classes.open : ""}`} onClick={() => { setIsOpen(!isOpen); }}>
                 <div className={classes.inputContainer}>
                     <Input type="text" disabled style={Object?.values(items)?.find((obj) => { return obj[getValue] == value })?.['style']}
                         value={value.length > 1 ?
