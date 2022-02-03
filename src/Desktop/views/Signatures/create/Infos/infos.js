@@ -5,6 +5,7 @@ import classes from './infos.module.css'
 import { IoMdClose } from 'react-icons/io';
 import { Range } from "react-range";
 import UploadFile from 'Utils/Upload/uploadFile';
+import { FiChevronDown } from 'react-icons/fi';
 
 // Informations tab, allows to change texts to preview long or short ones
 // Styles every text with color & decoration, and family + size for the whole template
@@ -13,6 +14,9 @@ import UploadFile from 'Utils/Upload/uploadFile';
 export default function Infos(props) {
     // Template banner
     const [img, setImg] = useState("");
+    const [profile, setProfile] = useState(false);
+    const [organisation, setOrganisation] = useState(false);
+
 
     // Template informations
     const inputs = [{ placeholder: "Prénom", type: "text", toChange: "firstName", value: props.content.firstName, disabled: true },
@@ -67,42 +71,54 @@ export default function Infos(props) {
                         />
                     </div>
                 </div>
-                <br />
-                <h4>Informations du profil</h4>
-                <div className={classes.inputsFlex}>
-                    {inputs.map((input) => {
-                        return <div className={classes.inputContainer} key={input.placeholder}>
-                            <Input
-                                value={input.value.value}
-                                type={input.type}
-                                placeholder={input.placeholder}
-                                disabled={input.disabled}
-                                defaultColor={input.value.color}
-                                defaultStyle={input.value.style}
-                                toChange={input.toChange}
-                                content={props.content}
-                                setContent={props.setContent}
-                            />
+                <div className={classes.inputsContainer}>
+                    <div className={`${classes.expandTitle} ${!profile ? classes.closed : ""}`}>
+                        <h4 onClick={() => setProfile(!profile)}>Informations du profil</h4>
+                        <FiChevronDown onClick={() => setProfile(!profile)} />
                         </div>
-                    })}
+                    {
+                        profile ?
+                            <div className={classes.inputsFlex}>
+                                {inputs.map((input) => {
+                                    return <div className={classes.inputContainer} key={input.placeholder}>
+                                        <Input
+                                            value={input.value.value}
+                                            type={input.type}
+                                            placeholder={input.placeholder}
+                                            disabled={input.disabled}
+                                            defaultColor={input.value.color}
+                                            defaultStyle={input.value.style}
+                                            toChange={input.toChange}
+                                            content={props.content}
+                                            setContent={props.setContent}
+                                        />
+                                    </div>
+                                })}
+                            </div> : <></>}
                 </div>
-                <h4>Informations de la société</h4>
-                <div className={classes.inputsFlex}>
-                    {companyInputs.map((input) => {
-                        return <div className={classes.inputContainer} key={input.placeholder}>
-                            <Input
-                                value={input.value.value}
-                                type={input.type}
-                                placeholder={input.placeholder}
-                                disabled={input.disabled}
-                                defaultColor={input.value.color}
-                                defaultStyle={input.value.style}
-                                toChange={input.toChange}
-                                content={props.content}
-                                setContent={props.setContent}
-                            />
-                        </div>
-                    })}
+                <div className={classes.inputsContainer}>
+                    <div className={`${classes.expandTitle} ${!organisation ? classes.closed : ""}`}>
+                        <h4 onClick={() => setOrganisation(!organisation)}>Informations de la société</h4>
+                        <FiChevronDown onClick={() => setOrganisation(!organisation)} />
+                    </div>
+                    {organisation ?
+                        <div className={classes.inputsFlex}>
+                            {companyInputs.map((input) => {
+                                return <div className={classes.inputContainer} key={input.placeholder}>
+                                    <Input
+                                        value={input.value.value}
+                                        type={input.type}
+                                        placeholder={input.placeholder}
+                                        disabled={input.disabled}
+                                        defaultColor={input.value.color}
+                                        defaultStyle={input.value.style}
+                                        toChange={input.toChange}
+                                        content={props.content}
+                                        setContent={props.setContent}
+                                    />
+                                </div>
+                            })}
+                        </div> : <></>}
                 </div>
                 <div className={classes.inputContainer}>
                     <h4>Style et taille du texte</h4>

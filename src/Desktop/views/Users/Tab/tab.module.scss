@@ -59,12 +59,18 @@
     }
 }
 
+
+.mh100 {
+    max-height: 100%;
+}
+
 .itemsList {
     display: flex;
     flex-direction: column;
     overflow: auto;
     z-index: 0;
-    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
     margin-top: 1rem;
     width: 100%;
     form {

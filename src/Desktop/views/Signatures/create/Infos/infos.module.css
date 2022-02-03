@@ -7,6 +7,7 @@
   font-weight: bold;
   font-size: 0.8rem;
   text-align: left;
+  margin: .5rem 0;
 }
 
 .inputsContainer {
@@ -18,24 +19,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-}
-
-.inputsContainer input {
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-  background: #fff;
-  border: 1px solid #f5eef0;
-  padding: 1rem;
-  border-radius: 20px;
-  margin: 0.5rem 0;
-  font-family: "Montserrat";
-  outline: none;
-}
-
-.inputsContainer input:focus {
-  border: 1px solid #FF7954;
-  -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
-          box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+  margin-bottom: .75rem;
 }
 
 .inputsFlex {
@@ -48,6 +32,11 @@
   width: 100%;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+}
+
+.inputsFlex input {
+  background-color: #f8f2f0;
+  padding: .5rem .75rem;
 }
 
 .inputsFlex .inputContainer {
@@ -184,6 +173,34 @@
   border: none;
 }
 
+.closed svg {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.expandTitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.expandTitle h4 {
+  cursor: pointer;
+}
+
+.expandTitle svg {
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+  margin-left: .5rem;
+  font-size: 1rem;
+}
+
 .colorContainer {
   width: 100%;
   position: relative;
@@ -292,13 +309,14 @@
   padding: 0;
   position: absolute;
   z-index: 5;
-  top: 1.5rem;
+  top: auto;
+  bottom: 1.5rem;
   left: 0;
   max-height: 10rem;
   overflow-y: auto;
   overflow-x: hidden;
   padding: .5rem 0;
-  border-radius: 0  0 20px 20px;
+  border-radius: 20px 20px 0 0;
   list-style: none;
   background-color: #fbf8f7;
   width: 100%;

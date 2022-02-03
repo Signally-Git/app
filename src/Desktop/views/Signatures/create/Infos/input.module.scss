@@ -109,7 +109,8 @@
 
 .colorContainer {
     flex-direction: column-reverse;
-    width: 50%;
+    width: 80%;
+    min-width: 10vw;
     padding: .5rem;
     height: 12rem;
     background: #FFF;

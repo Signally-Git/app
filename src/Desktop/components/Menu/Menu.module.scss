@@ -50,11 +50,11 @@
 .event {
     position: relative;
     & :hover span {
-        color: #66433e;
+        color: $signally-ebony-pink;
     }
     span {
         font-weight: 600;
-        color: #66433e;
+        color: $signally-ebony-pink;
         text-align: center;
         right: 0;
         left: 0;

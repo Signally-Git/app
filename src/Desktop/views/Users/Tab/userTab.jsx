@@ -71,7 +71,7 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
     }
 
 
-    return (<div>
+    return (<div className={classes.mh100}>
         <Link to="create-user">
             <Button style={{ width: "15rem" }} color="orange" arrow={true}>Ajouter un collaborateur</Button>
         </Link>
