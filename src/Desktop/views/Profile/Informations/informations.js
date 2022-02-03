@@ -149,7 +149,7 @@ function Informations() {
                         <div className={classes.row}>
                             <div className={classes.inputContainer}>
                                 <label>Adresse</label>
-                                <Input type="text" value={companyAddress} onChange={(e) => setOrganisation({ ...organisation, address: { ...organisation.address, street: e.target.value } })} />
+                                <Input type="text" value={organisation.address.street} onChange={(e) => setOrganisation({ ...organisation, address: { ...organisation.address, street: e.target.value } })} />
                             </div>
                             <div className={classes.inputContainer}>
                                 <label>Code postal</label>
