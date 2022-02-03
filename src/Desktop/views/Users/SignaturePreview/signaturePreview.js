@@ -215,7 +215,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                             </> :
                                 <>
                                     <label>Programmez vos events à venir</label>
-                                    <Button onClick={(e) => { setChoosePlaylist(true); }}
+                                    <Button onClick={() => { setChoosePlaylist(true); }}
                                         color="orange" style={{ borderRadius: '10px', margin: 0, marginTop: '1.285rem', height: '2.55rem', width: '100%' }}>
                                         Ajouter une playlist
                                     </Button>

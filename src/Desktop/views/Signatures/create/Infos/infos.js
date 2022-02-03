@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Input from './Input'
 import { BsChevronDown, BsUpload } from "react-icons/bs";
 import classes from './infos.module.css'
@@ -6,6 +6,7 @@ import { IoMdClose } from 'react-icons/io';
 import { Range } from "react-range";
 import UploadFile from 'Utils/Upload/uploadFile';
 import { FiChevronDown } from 'react-icons/fi';
+import request from 'Utils/Request/request';
 
 // Informations tab, allows to change texts to preview long or short ones
 // Styles every text with color & decoration, and family + size for the whole template
@@ -16,21 +17,27 @@ export default function Infos(props) {
     const [img, setImg] = useState("");
     const [profile, setProfile] = useState(false);
     const [organisation, setOrganisation] = useState(false);
+    const user = JSON.parse(localStorage.getItem('user'))
+    const [organisationInfos, setOrganisationInfos] = useState({})
+
+    React.useEffect(async () => {
+        await request.get(user.organisation).then((res) => setOrganisationInfos(res.data))
+    }, [])
 
 
     // Template informations
-    const inputs = [{ placeholder: "Prénom", type: "text", toChange: "firstName", value: props.content.firstName, disabled: true },
-    { placeholder: "Nom", type: "text", toChange: "lastName", value: props.content.lastName, disabled: true },
-    { placeholder: "Poste", type: "text", toChange: "jobName", value: props.content.jobName, disabled: true },
-    { placeholder: "Mobile", type: "tel", toChange: "mobile", value: props.content.mobile, disabled: true }
+    const inputs = [{ placeholder: user.firstName || "", type: "text", toChange: "firstName", value: props.content.firstName, disabled: true },
+    { placeholder: user.lastName || "", type: "text", toChange: "lastName", value: props.content.lastName, disabled: true },
+    { placeholder: user.position || "", type: "text", toChange: "jobName", value: props.content.jobName, disabled: true },
+    { placeholder: user.phone || "", type: "tel", toChange: "mobile", value: props.content.mobile, disabled: true }
     ]
 
-    const companyInputs = [{ placeholder: "Société", type: "text", toChange: "company", value: props.content.company, disabled: true },
-    { placeholder: "Adresse", type: "text", toChange: "addressStreet", value: props.content.addressStreet, disabled: true },
-    { placeholder: "Code postal", type: "text", toChange: "addressZipcode", value: props.content.addressZipcode, disabled: true },
-    { placeholder: "Ville", type: "text", toChange: "addressCity", value: props.content.addressCity, disabled: true },
-    { placeholder: "Pays", type: "text", toChange: "addressCountry", value: props.content.addressCountry, disabled: true },
-    { placeholder: "Téléphone", type: "tel", toChange: "phone", value: props.content.phone, disabled: true }
+    const companyInputs = [{ placeholder: organisationInfos.name, type: "text", toChange: "company", value: props.content.company, disabled: true },
+    { placeholder: organisationInfos.address?.street || "", type: "text", toChange: "addressStreet", value: props.content.addressStreet, disabled: true },
+    { placeholder: organisationInfos.address?.zipCode || "", type: "text", toChange: "addressZipcode", value: props.content.addressZipcode, disabled: true },
+    { placeholder: organisationInfos.address?.city || "", type: "text", toChange: "addressCity", value: props.content.addressCity, disabled: true },
+    { placeholder: organisationInfos.address?.country || "", type: "text", toChange: "addressCountry", value: props.content.addressCountry, disabled: true },
+    { placeholder: organisationInfos.digitalAddress?.phone || "", type: "tel", toChange: "phone", value: props.content.phone, disabled: true }
     ]
 
     // Styling the whole template's font
@@ -84,13 +91,14 @@ export default function Infos(props) {
                                         <Input
                                             value={input.value.value}
                                             type={input.type}
-                                            placeholder={input.placeholder}
+                                            placeholder={`${input?.placeholder?.substring(0,10)}${input?.placeholder?.length > 10 ? '...' : ''}`}
                                             disabled={input.disabled}
                                             defaultColor={input.value.color}
                                             defaultStyle={input.value.style}
                                             toChange={input.toChange}
                                             content={props.content}
                                             setContent={props.setContent}
+                                            title={input.placeholder}
                                         />
                                     </div>
                                 })}
@@ -108,7 +116,7 @@ export default function Infos(props) {
                                     <Input
                                         value={input.value.value}
                                         type={input.type}
-                                        placeholder={input.placeholder}
+                                        placeholder={`${input.placeholder.substring(0,10)}${input.placeholder.length > 10 ? '...' : ''}`}
                                         disabled={input.disabled}
                                         defaultColor={input.value.color}
                                         defaultStyle={input.value.style}

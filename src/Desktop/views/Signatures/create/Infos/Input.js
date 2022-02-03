@@ -66,10 +66,10 @@ function Input(props) {
                     onChange={(e) => props.setContent({ ...props.content, [props.toChange]: { ...props.content[props.toChange], value: e.target.value } })}
                     onClick={() => setOption("")}
                 />
-                <div className={classes.inputOptions}>
+                <div className={`${classes.inputOptions} ${option === "text" ? classes.opened : ""}`}>
                     <IoTextOutline
                         size="1.35rem"
-                        color="#ff7954"
+                        // color="#ff7954"
                         onClick={() => setOption(option === "text" ? "" : "text")}
                     />
                     <div
@@ -105,7 +105,7 @@ function Input(props) {
                                     <li><input type="checkbox" defaultChecked={props.defaultStyle.fontWeight === "bold"} value={JSON.stringify({ fontWeight: 'bold' })} /><span style={{ fontWeight: "bold" }}>B</span></li>
                                     <li><input type="checkbox" defaultChecked={props.defaultStyle.fontStyle === "italic"} value={JSON.stringify({ fontStyle: 'italic' })} /><span style={{ fontStyle: "italic" }}>I</span></li>
                                     <li><input type="checkbox" defaultChecked={props.defaultStyle.textDecoration === "underline"} value={JSON.stringify({ textDecoration: 'underline' })} /><span style={{ textDecoration: "underline" }}>U</span></li>
-                                    <li><button type="submit"><AiOutlineClose /></button></li>
+                                    <li><button type="submit"><AiOutlineClose strokeWidth={60} /></button></li>
                                 </ul>
                             </form>
                         </div>

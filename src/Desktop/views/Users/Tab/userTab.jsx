@@ -54,8 +54,8 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
         const req = {
             firstName: user.firstName,
             lastName: user.lastName,
-            phone: user.phone,
-            position: user.poste,
+            phone: user.mobilePhone,
+            position: user.position,
             email: user.email
         }
         console.log(req)

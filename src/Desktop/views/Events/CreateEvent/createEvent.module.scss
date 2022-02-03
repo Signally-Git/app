@@ -71,6 +71,11 @@
     }
 }
 
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
 .currentEventPreview {
     width: 100%;
     img {
@@ -84,8 +89,12 @@
 
 .btnsContainer {
     display: flex;
-    width: 43%;
-    justify-content: space-around;
+    button {
+        margin: 2rem 0 0;
+    }
+    button:last-child {
+        margin-left: 1rem;
+    }
 }
 
 .eventName {

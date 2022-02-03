@@ -39,6 +39,22 @@
   padding: .5rem .75rem;
 }
 
+.inputsFlex input::-webkit-input-placeholder {
+  color: #402927;
+}
+
+.inputsFlex input:-ms-input-placeholder {
+  color: #402927;
+}
+
+.inputsFlex input::-ms-input-placeholder {
+  color: #402927;
+}
+
+.inputsFlex input::placeholder {
+  color: #402927;
+}
+
 .inputsFlex .inputContainer {
   width: 48%;
 }

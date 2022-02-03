@@ -146,35 +146,35 @@ function Informations() {
                                     type="image/*" />
                             </div>
                         </div>
-                        <div className={classes.row}>
+                        {/* <div className={classes.row}> */}
                             <div className={classes.inputContainer}>
                                 <label>Adresse</label>
                                 <Input type="text" value={organisation.address.street} onChange={(e) => setOrganisation({ ...organisation, address: { ...organisation.address, street: e.target.value } })} />
                             </div>
-                            <div className={classes.inputContainer}>
+                        {/* </div> */}
+                        <div className={classes.row}>
+                            <div className={classes.inputContainer} style={{maxWidth: '20%'}}>
                                 <label>Code postal</label>
                                 <Input type="text" value={organisation.address?.zipCode} onChange={(e) => setOrganisation({ ...organisation, address: { ...organisation.address, zipCode: e.target.value } })} />
                             </div>
-                        </div>
-                        <div className={classes.row}>
-                            <div className={classes.inputContainer}>
+                            <div className={classes.inputContainer} style={{maxWidth: '35%'}}>
                                 <label>Ville</label>
                                 <Input type="text" value={organisation.address?.city} onChange={(e) => setOrganisation({ ...organisation, address: { ...organisation.address, city: e.target.value } })} />
                             </div>
-                            <div className={classes.inputContainer}>
+                            <div className={classes.inputContainer} style={{maxWidth: '35%'}}>
                                 <label>Pays</label>
                                 <Input type="text" value={organisation.address?.country} onChange={(e) => setOrganisation({ ...organisation, address: { ...organisation.address, country: e.target.value } })} />
                             </div>
                         </div>
                         <div className={classes.row}>
-                            <div className={classes.inputContainer}>
+                            <div className={classes.inputContainer} style={{maxWidth: '30%'}}>
                                 <label>Téléphone fixe</label>
                                 <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
                             </div>
-                        </div>
-                        <div className={classes.inputContainer}>
+                        <div className={classes.inputContainer} style={{width: '65%', maxWidth: '65%'}}>
                             <label>Site web</label>
                             <Input type="text" value={website} onChange={(e) => setWebsite(e.target.value)} />
+                        </div>
                         </div>
                         <div className={classes.socialsContainer}>
                             <DefineSocials defaultValue={socialsList} setList={setSocialsList} />

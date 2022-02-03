@@ -22,6 +22,7 @@
 
 .tabContainer {
   padding: 2rem;
+  position: relative;
   background: #fff;
   border-radius: 20px;
   overflow: auto;
@@ -145,7 +146,7 @@
 }
 
 .inputContainer > div {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   text-align: center;
 }
 
@@ -193,13 +194,13 @@
 }
 
 .socialsContainer label {
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: #FF7954;
 }
 
 .socialsContainer svg {
   cursor: pointer;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
 
 .iconInput {
@@ -223,12 +224,18 @@
 }
 
 .btnsContainer {
-  margin-top: 1rem;
+  margin-top: auto;
+  bottom: 2rem;
+  left: 2rem;
+  right: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 43%;
   -ms-flex-pack: distribute;
       justify-content: space-around;
   margin-right: auto;
+}
+
+.btnsContainer > button:last-child {
+  margin-left: 1rem;
 }

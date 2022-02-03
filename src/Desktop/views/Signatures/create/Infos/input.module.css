@@ -92,7 +92,7 @@
 }
 
 .optionsContainer {
-  background: #FFF;
+  background: #fff;
   border-radius: 0 0 10px 10px;
 }
 
@@ -123,7 +123,7 @@
   -webkit-transition: 0.2s;
   transition: 0.2s;
   background: #fff;
-  border: 1px solid #F6F6F6;
+  border: 1px solid #f6f6f6;
   padding: 1rem;
   padding-right: 5rem;
   border-radius: 10px;
@@ -145,9 +145,9 @@
           flex-direction: column-reverse;
   width: 80%;
   min-width: 10vw;
-  padding: .5rem;
+  padding: 0.5rem;
   height: 12rem;
-  background: #FFF;
+  background: #fff;
   -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
           box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
   border-radius: 10px;
@@ -173,7 +173,7 @@
 
 .colorContainer input {
   width: 100%;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 .colorPreview {
@@ -184,7 +184,7 @@
 
 .colorPick {
   width: 100% !important;
-  margin: .5 auto;
+  margin: 0.5 auto;
 }
 
 .inputColorSize {
@@ -203,6 +203,10 @@
   position: relative;
 }
 
+.opened svg {
+  color: #FF7954 !important;
+}
+
 .textStyle {
   padding: 0;
   list-style-type: none;
@@ -217,10 +221,9 @@
           align-items: center;
   overflow: hidden;
   height: 2rem;
-  width: 40%;
-  font-family: "Book Antiqua";
-  margin: 2rem auto 0;
-  background-color: #FFF;
+  width: 70%;
+  margin: 0;
+  background-color: #fff;
   border-radius: 30px;
   -webkit-box-shadow: 0px 2px 20px rgba(177, 176, 175, 0.8);
           box-shadow: 0px 2px 20px rgba(177, 176, 175, 0.8);
@@ -238,32 +241,48 @@
           align-items: center;
   position: relative;
   width: 100%;
-  font-size: .8rem;
+  font-size: 0.8rem;
   height: 100%;
 }
 
 .textStyle li:nth-child(2) {
   border-left: 1px solid;
   border-right: 1px solid;
-  -o-border-image: linear-gradient(to top, #FFF 30%, #3d2b28 30%, #3d2b28 70%, #FFF 70%) 1;
-     border-image: -webkit-gradient(linear, left bottom, left top, color-stop(30%, #FFF), color-stop(30%, #3d2b28), color-stop(70%, #3d2b28), color-stop(70%, #FFF)) 1;
-     border-image: linear-gradient(to top, #FFF 30%, #3d2b28 30%, #3d2b28 70%, #FFF 70%) 1;
+  -o-border-image: linear-gradient(to top, #fff 30%, #3d2b2815 30%, #3d2b2815 70%, #fff 70%) 1;
+     border-image: -webkit-gradient(linear, left bottom, left top, color-stop(30%, #fff), color-stop(30%, #3d2b2815), color-stop(70%, #3d2b2815), color-stop(70%, #fff)) 1;
+     border-image: linear-gradient(to top, #fff 30%, #3d2b2815 30%, #3d2b2815 70%, #fff 70%) 1;
+}
+
+.textStyle li .inputOptions svg {
+  color: #402927;
 }
 
 .textStyle li:hover span {
-  color: #ff7954;
+  color: #FF7954;
 }
 
 .textStyle li:last-child {
-  width: 3rem;
+  max-width: 2rem;
 }
 
 .textStyle li:last-child button {
-  color: #ff7954;
-  height: .5rem;
-  font-size: .5rem;
-  margin-bottom: auto;
-  margin-top: .25rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #fff;
+  padding: 0;
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  font-size: 0.65rem;
+  margin: 0;
+  background-color: #FF7954;
 }
 
 .textStyle li span {

@@ -16,6 +16,7 @@ export default function CreateEvent({ setDone, event }) {
     const [endDate, setEndDate] = useState(event?.endAt ? new Date(event?.endAt) : new Date())
     const [banner, setBanner] = useState()
     const [eventName, setEventName] = useState(event?.name || "")
+    const [eventLink, setEventLink] = useState(event?.link || "")
 
     const notification = useNotification()
     const eventNameRef = useRef(null)
@@ -47,6 +48,7 @@ export default function CreateEvent({ setDone, event }) {
                 const req = {
                     imagePath: res.data.path,
                     name: eventName,
+                    link: eventLink,
                     startAt: start,
                     endAt: end,
                 }
@@ -68,6 +70,7 @@ export default function CreateEvent({ setDone, event }) {
                     const req = {
                         name: eventName,
                         startAt: start,
+                        link: eventLink,
                         endAt: end,
                         imagePath: res.data.path
                     }
@@ -83,12 +86,13 @@ export default function CreateEvent({ setDone, event }) {
             else {
                 const req = {
                     name: eventName,
+                    link: eventLink,
                     startAt: start,
                     endAt: end,
                 }
                 await request.patch(`events/${event.id}`, req, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
-                }).then((res) => {
+                }).then(() => {
                     setDone(false)
                     notification({ content: <><span style={{ color: "#FF7954" }}>{eventName}</span> modifié avec succès</>, status: "valid" })
                 }).catch(() => notification({ content: <>Erreur lors de l'édition de <span style={{ color: "#FF7954" }}>{eventName}</span></>, status: "invalid" }))
@@ -114,7 +118,10 @@ export default function CreateEvent({ setDone, event }) {
                 <Datetime locale="fr-fr" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="D MMM YYYY" timeFormat="HH mm ss" />
             </div>
         </div>
-        <Input required value={eventName} onChange={(e) => setEventName(e.target.value)} style={{ width: "100%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef} />
+        <div className={classes.row}>
+            <Input required value={eventName} onChange={(e) => setEventName(e.target.value)} style={{ width: "48%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef} />
+            <Input required value={eventLink} onChange={(e) => setEventLink(e.target.value)} style={{ width: "48%" }} placeholder="Lien" type="text" />
+        </div>
         <div className={classes.currentEventPreview}>
             {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={API + event.imagePath} title={event.banner?.name} /> : ""}
         </div>

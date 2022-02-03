@@ -35,6 +35,9 @@
     input {
         background-color: $signally-isabelline;
         padding: .5rem .75rem;
+        &::placeholder {
+            color: $signally-brown;
+        }
     }
     .inputContainer {
         width: 48%;

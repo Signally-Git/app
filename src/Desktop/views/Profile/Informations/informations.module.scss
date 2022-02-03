@@ -16,6 +16,7 @@
 
 .tabContainer {
     padding: 2rem;
+    position: relative;
     background: #fff;
     border-radius: 20px;
     overflow: auto;
@@ -92,7 +93,7 @@
         font-size: 0.8rem;
     }
     ~ button {
-        margin-top: 1.5rem!important;
+        margin-top: 1.5rem !important;
     }
 }
 
@@ -102,7 +103,7 @@
     flex-direction: column;
     margin: 0.5rem 0;
     > div {
-        margin-top: .5rem;
+        margin-top: 0.5rem;
         text-align: center;
     }
 }
@@ -135,12 +136,12 @@
     align-items: center;
     color: $signally-orange;
     label {
-        font-size: .9rem;
+        font-size: 0.9rem;
         color: $signally-orange;
     }
     svg {
         cursor: pointer;
-        margin-left: .5rem;
+        margin-left: 0.5rem;
     }
 }
 
@@ -160,9 +161,15 @@
 }
 
 .btnsContainer {
-    margin-top: 1rem;
+    margin-top: auto;
+    bottom: 2rem;
+    left: 2rem;
+    right: auto;
     display: flex;
-    width: 43%;
+    // width: 43%;
     justify-content: space-around;
     margin-right: auto;
+    > button:last-child {
+        margin-left: 1rem;
+    }
 }
