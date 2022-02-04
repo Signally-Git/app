@@ -23,6 +23,7 @@ export default function CreateEvent({ setDone, event }) {
 
     useEffect(() => {
         setEventName(event?.name)
+        setEventLink(event?.link || "")
         setStartDate(new Date(event?.startAt ? new Date(event?.startAt) : new Date()))
         setEndDate(new Date(event?.endAt ? new Date(event?.endAt) : new Date()))
     }, [event])
