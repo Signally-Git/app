@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { MobileView } from 'react-device-detect'
 import request from 'Utils/Request/request'
+import Button from 'Utils/Button/btn'
+import Modal from 'Utils/Modals/modal'
 
 function Tiles(props) {
     const [loading, setLoading] = useState(false)
@@ -12,17 +14,24 @@ function Tiles(props) {
     const [teamsList, setTeamsList] = useState([])
     const [activeTeams, setActiveTeams] = useState([])
     const [users, setUsers] = useState([])
+    const [user, setUser] = useState({})
+    const [modal, setModal] = useState(false)
+    const [organisation, setOrganisation] = useState({})
     const [activeUsers, setActiveUsers] = useState([])
     const [templates, setTemplates] = useState([])
     const [signatures, setSignatures] = useState([])
 
     useEffect(async () => {
         props.handleHeader(" ")
-        await request.get(`whoami`).then((res) => {
+        await request.get(`whoami`).then(async (res) => {
             localStorage.setItem("user", JSON.stringify(res.data))
             setLoading(true)
+            setUser(res.data)
+            await request.get(res.data.organisation).then((res) =>
+            setOrganisation(res.data))
             // console.log(res)
         })
+
         await request.get(`events`).then((res) => {
             setEvents(res.data["hydra:member"])
         })
@@ -35,7 +44,7 @@ function Tiles(props) {
         await request.get(`signatures`).then((res) => {
             setTemplates(res.data["hydra:member"])
         })
-    
+
     }, [])
 
     useEffect(() => {
@@ -52,6 +61,10 @@ function Tiles(props) {
     }, [users])
     return (
         <div className={classes.container}>
+            {modal ? <Modal style={{left: 0}} title="Êtes-vous sûr de vouloir déployer la signature ?" 
+            content={`Vous allez envoyer un mail de déploiement à ${users.length} utilisateurs`}
+            cancel="Annuler" validate="Déployer" 
+            onCancel={() => setModal(false)} onConfirm={() => setModal(false)} /> : "" }
             <MobileView><h1>Bonjour {JSON.parse(localStorage.getItem("user"))?.first_name}</h1></MobileView>
             <div className={classes.tilesList}>
                 <Link to="/signatures" className={classes.tile}>
@@ -82,9 +95,22 @@ function Tiles(props) {
                     </div>
                 </Link>
                 {!teamsList.length < 1 ? <>
+                    <Link to="/teams/workplaces" className={classes.tile}>
+                        <div className={classes.row}>
+                            <p>Groupes</p>
+                            <img src={ChevronRight} alt="View" className={classes.blackImg} />
+                        </div>
+                        <div className={classes.row}>
+                            <div>
+                                <span className={classes.bigTxt}>{activeTeams.length}</span>
+                                <span> /{teamsList.length}</span>
+                            </div>
+                            <span className={classes.activeSpan}>actifs</span>
+                        </div>
+                    </Link>
                     <Link to="/teams/teams" className={classes.tile}>
                         <div className={classes.row}>
-                            <p>Teams</p>
+                            <p>Équipes</p>
                             <img src={ChevronRight} alt="View" className={classes.blackImg} />
                         </div>
                         <div className={classes.row}>
@@ -96,18 +122,33 @@ function Tiles(props) {
                         </div>
                     </Link>
                 </> : null}
-                    <Link to="/teams/users" className={classes.tile}>
-                        <div className={classes.row}>
-                            <p>Collaborateurs</p>
-                            <img src={ChevronRight} alt="View" className={classes.blackImg} />
+                <Link to="/teams/users" className={classes.tile}>
+                    <div className={classes.row}>
+                        <p>Collaborateurs</p>
+                        <img src={ChevronRight} alt="View" className={classes.blackImg} />
+                    </div>
+                    <div className={classes.row}>
+                        <div>
+                            <span className={classes.bigTxt}>{users.length}</span>
                         </div>
-                        <div className={classes.row}>
-                            <div>
+                        <span className={classes.activeSpan}>actifs</span>
+                    </div>
+                </Link>
+                <div className={`${classes.tile} `}>
+                    <div className={classes.row}>
+                        <p>Déploiement</p>
+                        <img src={ChevronRight} alt="View" />
+                    </div>
+                    <div className={classes.row}>
+                        <div>
+                            <Button color={"brownFill"} style={{padding: '.5rem'}} onClick={() => setModal(true)}>Déployer pour {organisation?.name}</Button>
+                            {/* <div>
                                 <span className={classes.bigTxt}>{users.length}</span>
                             </div>
-                            <span className={classes.activeSpan}>actifs</span>
+                            <span className={classes.activeSpan}>actifs</span> */}
                         </div>
-                    </Link>
+                    </div>
+                </div>
                 <div to="#" className={`${classes.tile} ${classes.billingTile}`}>
                     <div className={classes.row}>
                         <p>Abonnement</p>
@@ -115,7 +156,7 @@ function Tiles(props) {
                     </div>
                     <div className={classes.row}>
                         <div>
-                        <span className={classes.free}>Gratuit</span>
+                            <span className={classes.free}>Gratuit</span>
                             {/* {users.length === 1 ?  <><span className={classes.bigTxt}> </span><span className={classes.free}>Gratuit</span></> : <>
                             <span className={classes.bigTxt}>{users.length * 0.5 + activeEvents.length * 10}€</span> */}
                             {/* <span> /mois</span> </>} */}

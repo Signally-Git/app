@@ -237,7 +237,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 <input onChange={(e) => setSearchWorkplace(e.target.value.toLowerCase())} className={classes.search} type="text" placeholder="Rechercher un hotel" />
             </div>
             <div className={classes.colheader}>
-                <span className={addedWorkplace.length > 0 ? classes.orangeTxt : ""}>{addedWorkplace.length > 0 ? addedWorkplace : `${workplaces.length} hotels`}</span>
+                <span className={`${classes.totalNumber} ${addedWorkplace.length > 0 ? classes.orangeTxt : ""}`}>{addedWorkplace.length > 0 ? addedWorkplace : `${workplaces.length} hotel(s)`}</span>
                 <button onClick={() => setModal({ type: "allworkplaces" })}>Supprimer tout</button>
             </div>
 
@@ -304,7 +304,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 <input className={classes.search} onChange={(e) => setSearchTeam(e.target.value.toLowerCase())} type="text" placeholder="Rechercher une équipe" />
             </div>
             <div className={classes.colheader}>
-                <span>{teams.length} équipes</span>
+                <span className={classes.totalNumber}>{teams.length} équipe(s)</span>
                 <button onClick={() => setModal({ type: "allteams" })}>Supprimer tout</button>
             </div>
             <ul className={`${classes.itemsList} ${classes.teamList}`}>

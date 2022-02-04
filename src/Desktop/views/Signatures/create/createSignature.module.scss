@@ -157,12 +157,12 @@
         }
     }
     input:not(:checked) + .sliderTabs:before {
-        left: 0%;
+        left: 1%;
     }
 
     input:checked + .sliderTabs:before {
         width: 40%;
-        left: 42%;
+        left: 41.5%;
     }
     .switchTabs input {
         outline: none;

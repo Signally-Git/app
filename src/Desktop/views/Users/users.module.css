@@ -5,6 +5,7 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   height: 90%;
+  max-height: 100%;
 }
 
 .container h1 {

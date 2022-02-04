@@ -74,7 +74,8 @@
 }
 
 .colheader .totalNumber {
-  color: grey;
+  color: #FF7954;
+  font-weight: bold;
   font-size: 0.9rem;
 }
 
@@ -103,7 +104,7 @@
           flex-direction: column;
   overflow: auto;
   z-index: 0;
-  min-height: 100%;
+  min-height: 38vh;
   max-height: 100%;
   margin-top: 1rem;
   width: 100%;
