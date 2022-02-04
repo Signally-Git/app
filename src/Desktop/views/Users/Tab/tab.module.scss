@@ -1,5 +1,9 @@
 @import "../../../../Assets/style/colors.scss";
 
+.container {
+    max-height: 60%;
+}
+
 .modal {
     position: fixed;
     display: flex;

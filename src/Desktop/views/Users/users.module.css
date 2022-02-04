@@ -119,10 +119,6 @@
   margin-top: 0.5rem;
 }
 
-.menu ~ div {
-  max-height: 60%;
-}
-
 .active {
   color: #FF7954;
 }

@@ -230,7 +230,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     }
 
     if (tab === "workplaces")
-        return (<div>{modal.type ? modalContent : ""}
+        return (<div className={classes.container}>{modal.type ? modalContent : ""}
             <Link to="create-workplace"><Button style={{ width: "15rem" }} color="orange" arrow={true}>Ajouter un hotel</Button></Link>
             <div className={classes.searchInput}>
                 <HiOutlineSearch />
