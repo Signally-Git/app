@@ -24,10 +24,10 @@ function Team() {
 
     const slider = useRef(null)
 
-    useEffect(async () => {
-        const listUsers = await request.get('users?page=1&team=null')
-        setUsers(listUsers.data['hydra:member'])
-    }, [])
+    // useEffect(async () => {
+    //     const listUsers = await request.get('users?exists[team]=false')
+    //     setUsers(listUsers.data['hydra:member'])
+    // }, [])
 
     useEffect(async () => {
         const listTeams = await request.get('teams')
@@ -40,6 +40,7 @@ function Team() {
             sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
         }
         function getRealtimeData(data) {
+            console.log(data)
             setTimeout(() => {
                 setEntity({ ...entity, users: data.users })
             }, 1100);
@@ -49,26 +50,27 @@ function Team() {
             sse.close();
         };
     }, [edit])
-
+    const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users/users-without-team`);
     useEffect(() => {
-        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users/users-without-team`);
         sse.onmessage = e => getRealtimeDataWOutTeam(JSON.parse(e.data));
+
         function getRealtimeDataWOutTeam(data) {
-            setTimeout(() => {
-                    setUsers(data.users)
-            }, 1100);
-        }        
-        
+            // setTimeout(() => {
+            setUsers(data)
+            // }, 1100);
+        }
+
         return () => {
             sse.close();
         };
-    }, [transition])
+    }, [])
 
     const handleUpdate = (user, action) => {
+        console.log(user)
         switch (action) {
             case 'remove':
                 const removedUsers = entity.users.filter((userCheck) => userCheck['id'] !== user['id'])
-                request.patch(user['@id'], { team: null }, {
+                request.delete(`${entity['@id']}/users/${user.id}`, { team: null }, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
                 }).then(() => {
                     setTransition(user['@id'])
@@ -80,7 +82,7 @@ function Team() {
                 break;
 
             case 'add':
-                request.patch(user['@id'], { team: entity?.['@id'] }, {
+                request.patch(`users/${user.id}`, { team: entity?.['@id'] }, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
                 }).then(() => setTransition(user['@id']));
                 setTimeout(() => {
@@ -187,14 +189,16 @@ function Team() {
                                                 <input className={classes.search} type="text" onChange={(e) => setOtherUser(e.target.value)} placeholder="Rechercher un collaborateur" />
                                             </div>
                                             <ul className={classes.itemsList}>
-                                                {users.map((user) => {
+                                                {users?.map((user) => {
                                                     const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
                                                     if (fullName.search(currentUsers.toLowerCase()) !== -1)
                                                         return <li key={user.id} className={`${classes.assignItem} ${transition === user['@id'] ? classes.transition : ""}`}>
                                                             <span>{user.firstName} {user.lastName}</span>
-                                                            {transition === user['@id'] ? <span className={classes.added}>Ajouté</span> : <button>
+                                                            {/* {transition === user['@id'] ? <span className={classes.added}>Ajouté</span> :  */}
+                                                            <button>
                                                                 <BiPlusCircle title={`Ajouter ${user.firstName} ${user.lastName} dans ${entity?.name}`} onClick={() => handleUpdate(user, 'add')} />
-                                                            </button>}
+                                                            </button>
+                                                            {/* } */}
                                                         </li>
                                                 })}
                                             </ul>

@@ -67,7 +67,7 @@ function Informations() {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
                 }).then(() => {
                     notification({ content: <><span style={{ color: "#FF7954" }}>{companyName}</span> édité avec succès</>, status: "valid" })
-                    // history.goBack()
+                    history.goBack()
                 }).catch(() => notification({ content: <>Impossible de modifier <span style={{ color: "#FF7954" }}>{companyName}</span></>, status: "invalid" }))
             })
         else {
@@ -85,7 +85,7 @@ function Informations() {
             }
             await request.patch(`organisations/${organisationId}`, req, {
                 headers: { 'Content-Type': 'application/merge-patch+json' }
-            }).then((res) => {
+            }).then(() => {
                 notification({ content: <><span style={{ color: "#FF7954" }}>{companyName}</span> édité avec succès</>, status: "valid" })
                 history.goBack()
             })

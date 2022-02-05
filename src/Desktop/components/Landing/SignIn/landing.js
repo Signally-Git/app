@@ -71,7 +71,7 @@ const Login = () => {
 
     const handleForgotSubmit = (e) => {
         e.preventDefault()
-        axios.post(`${API}reset-password`, { email: email }).then(() => {
+        axios.post(`${API}reset_password`, { email: email }).then(() => {
             setModal('done')
             // notification({ content: <>Si un compte avec votre adresse mail existe,<br /> un message vous a été envoyé avec un lien pour réinitialiser votre mot de passe.</>, status: "valid" })
         })

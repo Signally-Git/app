@@ -239,6 +239,10 @@
   border-radius: 0;
 }
 
+.usersList {
+  max-height: 60%;
+}
+
 .usersList .editing {
   height: 9.5rem !important;
 }

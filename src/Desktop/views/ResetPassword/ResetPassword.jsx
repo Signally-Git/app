@@ -45,7 +45,7 @@ export default function ResetPassword() {
             <form onSubmit={(e) => handleSubmit(e)} style={{ display: 'flex', height: '80vh', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 <h1>Réinitialisez votre mot de passe</h1>
                 <div className={classes.passwordContainer}>
-                    <Input onChange={(e) => setNewPass(e.target.value)} style={{ width: '20rem' }} type={!showPass ? "password" : "text"} placeholder="Nouveau mot de passe" />
+                    <Input onChange={(e) => setNewPass(e.target.value)} style={{ width: '20rem', fontWeight: 'bold' }} type={!showPass ? "password" : "text"} placeholder="Nouveau mot de passe" />
                     <div onClick={() => setShowPass(!showPass)}>
                         {showPass ? <FiEyeOff /> : <FiEye />}
                     </div>
