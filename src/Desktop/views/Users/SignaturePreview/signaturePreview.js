@@ -114,21 +114,23 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         //     events: event === 'playlist' ? multiEvents : [event['@id']]
         // } :
         // console.log('HERE', multiEvents)
-        multiEvents.map(async (e) => {
-            const req = { ...e, [type + 's']: [element['@id']] }
-            await request.patch(e['@id'], req, {
+        if (multiEvents)
+            multiEvents.map(async (e) => {
+                const req = { ...e, [type + 's']: [element['@id']] }
+                await request.patch(e['@id'], req, {
+                    headers: { 'Content-Type': 'application/merge-patch+json' }
+                }).then((res) => {
+                    console.log(res)
+                }).catch((err) => console.log(err))
+            })
+        if (req.signature)
+            await request.patch(`${type}s/${element.id}`, req, {
                 headers: { 'Content-Type': 'application/merge-patch+json' }
-            }).then((res) => {
-                console.log(res)
-            }).catch((err) => console.log(err))
-        })
-        await request.patch(`${type}s/${element.id}`, req, {
-            headers: { 'Content-Type': 'application/merge-patch+json' }
-        }).then(
-            () => {
-                notification({ content: <>Signature de {type === "user" ? element.firstName + " " + element.lastName : type} modifiée</>, status: "valid" })
-                setEdit()
-            }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
+            }).then(
+                () => {
+                    notification({ content: <>Signature de {type === "user" ? element.firstName + " " + element.lastName : type} modifiée</>, status: "valid" })
+                    setEdit()
+                }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
     }
 
     return (<div className={classes.flipcontainer}>
