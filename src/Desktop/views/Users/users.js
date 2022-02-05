@@ -51,8 +51,8 @@ function Team() {
         };
     }, [edit])
 
-    const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users/users-without-team`);
     useEffect(() => {
+        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users/users-without-team`);
         sse.onmessage = e => getRealtimeDataWOutTeam(JSON.parse(e.data));
 
         function getRealtimeDataWOutTeam(data) {
