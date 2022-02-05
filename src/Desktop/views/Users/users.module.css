@@ -158,9 +158,15 @@
   max-height: 100%;
 }
 
-.transition {
-  -webkit-animation: swipeOutLeft .5s 1s 1;
-          animation: swipeOutLeft .5s 1s 1;
+.transitionRight {
+  -webkit-animation: swipeOutLeft;
+          animation: swipeOutLeft;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: .75s;
+          animation-delay: .75s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 .added {
@@ -197,8 +203,14 @@
 }
 
 .transitionRemove {
-  -webkit-animation: swipeOutRight .5s 1s 1;
-          animation: swipeOutRight .5s 1s 1;
+  -webkit-animation: swipeOutRight;
+          animation: swipeOutRight;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: .75s;
+          animation-delay: .75s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes swipeOutRight {

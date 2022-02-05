@@ -128,8 +128,11 @@
     max-height: 100%;
 }
 
-.transition {
-    animation: swipeOutLeft .5s 1s 1;
+.transitionRight {
+    animation: swipeOutLeft;
+    animation-duration: 1s;
+    animation-delay: .75s;
+    animation-fill-mode: forwards;
 }
 
 .added {
@@ -149,7 +152,10 @@
 }
 
 .transitionRemove {
-    animation: swipeOutRight .5s 1s 1;
+    animation: swipeOutRight;
+    animation-duration: 1s;
+    animation-delay: .75s;
+    animation-fill-mode: forwards;
 }
 
 @keyframes swipeOutRight {

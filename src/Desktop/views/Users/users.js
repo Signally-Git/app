@@ -24,10 +24,10 @@ function Team() {
 
     const slider = useRef(null)
 
-    // useEffect(async () => {
-    //     const listUsers = await request.get('users?exists[team]=false')
-    //     setUsers(listUsers.data['hydra:member'])
-    // }, [])
+    useEffect(async () => {
+        const listUsers = await request.get('users?exists[team]=false')
+        setUsers(listUsers.data['hydra:member'])
+    }, [])
 
     useEffect(async () => {
         const listTeams = await request.get('teams')
@@ -43,27 +43,28 @@ function Team() {
             console.log(data)
             setTimeout(() => {
                 setEntity({ ...entity, users: data.users })
-            }, 1100);
+            }, 1500);
         }
 
         return () => {
             sse.close();
         };
     }, [edit])
+
     const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users/users-without-team`);
     useEffect(() => {
         sse.onmessage = e => getRealtimeDataWOutTeam(JSON.parse(e.data));
 
         function getRealtimeDataWOutTeam(data) {
-            // setTimeout(() => {
-            setUsers(data)
-            // }, 1100);
+            setTimeout(() => {
+                setUsers(data)
+            }, 1500);
         }
 
         return () => {
             sse.close();
         };
-    }, [])
+    }, [edit])
 
     const handleUpdate = (user, action) => {
         console.log(user)
@@ -73,7 +74,7 @@ function Team() {
                 request.delete(`${entity['@id']}/users/${user.id}`, { team: null }, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
                 }).then(() => {
-                    setTransition(user['@id'])
+                    setTransition(user.id)
                     setTimeout(() => {
                         setEntity({ ...entity, users: removedUsers })
                         setTransition('done')
@@ -84,10 +85,17 @@ function Team() {
             case 'add':
                 request.patch(`users/${user.id}`, { team: entity?.['@id'] }, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
-                }).then(() => setTransition(user['@id']));
-                setTimeout(() => {
-                    setTransition('done')
-                }, 1500);
+                }).then(() => {
+                    setTransition(user.id)
+                    setTimeout(() => {
+                        // setEntity({ ...entity, users: removedUsers })
+                        setTransition('done')
+                    }, 1500);
+                });
+                // }).then(() => setTransition(user.id));
+                // setTimeout(() => {
+                //     setTransition('done')
+                // }, 1500);
                 break;
             default:
                 break;
@@ -169,9 +177,9 @@ function Team() {
                                                 {entity?.users?.map((user) => {
                                                     const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
                                                     if (fullName.search(currentUsers.toLowerCase()) !== -1)
-                                                        return <li key={user.id} className={`${classes.assignItem} ${transition === user['@id'] ? classes.transitionRemove : ""}`}>
+                                                        return <li key={user.id} className={`${classes.assignItem} ${transition === user.id ? classes.transitionRemove : ""}`}>
                                                             <span>{user.firstName} {user.lastName}</span>
-                                                            {transition === user['@id'] ? <span className={classes.added}>Retiré</span> : <button>
+                                                            {transition === user.id ? <span className={classes.added}>Retiré</span> : <button>
                                                                 <BiMinusCircle title={`Retirer ${user.firstName} ${user.lastName} dans ${entity?.name}`} onClick={() => handleUpdate(user, 'remove')} />
                                                             </button>}
                                                         </li>
@@ -192,13 +200,13 @@ function Team() {
                                                 {users?.map((user) => {
                                                     const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
                                                     if (fullName.search(currentUsers.toLowerCase()) !== -1)
-                                                        return <li key={user.id} className={`${classes.assignItem} ${transition === user['@id'] ? classes.transition : ""}`}>
+                                                        return <li key={user.id} className={`${classes.assignItem} ${transition === user.id ? classes.transitionRight : ""}`}>
                                                             <span>{user.firstName} {user.lastName}</span>
-                                                            {/* {transition === user['@id'] ? <span className={classes.added}>Ajouté</span> :  */}
+                                                            {transition === user.id ? <span className={classes.added}>Ajouté</span> : 
                                                             <button>
                                                                 <BiPlusCircle title={`Ajouter ${user.firstName} ${user.lastName} dans ${entity?.name}`} onClick={() => handleUpdate(user, 'add')} />
                                                             </button>
-                                                            {/* } */}
+                                                }
                                                         </li>
                                                 })}
                                             </ul>
