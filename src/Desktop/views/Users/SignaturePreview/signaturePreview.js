@@ -29,8 +29,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     const type = show["@type"].toLowerCase()
     const notification = useNotification()
 
-
-
     //  PREVIEW EVENT
     useEffect(async () => {
         setEntity(await request.get(`${type}s/${show.id}`))
@@ -41,14 +39,20 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
             if (a.startAt > b.startAt) { return 1; }
             return 0
         })
+
+        setEvent(toPush[0] || { '@id': "playlist" })
+        setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event['@id'] === "playlist" ? "Modifier la playlist" : "Playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
+    }, [selectedTemplate])
+
+    useEffect(async () => {
+        const events = await request.get('events');
+        
         setIncEvents(events.data["hydra:member"].filter((data) => (new Date(data.startAt) > new Date())).sort(function (a, b) {
             if (a.startAt < b.startAt) { return -1; }
             if (a.startAt > b.startAt) { return 1; }
             return 0
         }))
-        setEvent(toPush[0] || { '@id': "playlist" })
-        setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event['@id'] === "playlist" ? "Modifier la playlist" : "Playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
-    }, [selectedTemplate])
+    }, [edit])
 
     useEffect(() => {
         const tmp = templates;
@@ -143,9 +147,14 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 </div>
                 <ul>
                     {incomingEvents.map((event) => {
-                        if (event.name.toLowerCase().search(searchQuery?.toLowerCase()) >= 0)
+                        let checked = false
+                        if (event.name.toLowerCase().search(searchQuery?.toLowerCase()) >= 0) {
+                            if (edit.events?.filter((a) => a.id === event.id)[0]?.id === event.id)
+                                checked = true
+                            else 
+                                checked = false
+                                console.log(checked)
                             return <li key={event['@id']}>
-
                                 <img className={classes.bannerPreview} src={`${API}${event.imagePath}`} />
                                 <div className={classes.eventText}>
                                     <span className={classes.active}>{event.name}</span>
@@ -161,10 +170,11 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                     </span>
                                 </div>
                                 <label>
-                                    <input type="checkbox" value={JSON.stringify(event)} />
+                                    <input defaultChecked={checked} type="checkbox" value={JSON.stringify(event)} />
                                     <span></span>
                                 </label>
                             </li>
+                        }
                     })}
                 </ul>
             </div>
