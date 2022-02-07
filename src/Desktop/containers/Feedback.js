@@ -26,13 +26,13 @@ export default function Report() {
         let req = {};
         e.preventDefault()
         const img = new FormData()
-        if (file){
+        if (file) {
             img.append('image', file)
-            await request.post(`import/image`, img).then ((res) => {
-                req = {fileUrl: res.data.path}
+            await request.post(`import/image`, img).then((res) => {
+                req = { fileUrl: res.data.path }
             })
         }
-        
+
         if (bug.length > 3) {
             req = {
                 ...req,
@@ -57,6 +57,7 @@ export default function Report() {
 
     return (<>
         <div className={classes.row}>
+            <h2>Signaler un problème</h2>
             <div className={classes.container}>
                 <div className={classes.tagLine}>
                     <h3>Bienvenue sur la Beta privée Signally !</h3>

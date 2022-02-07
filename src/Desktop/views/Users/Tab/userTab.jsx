@@ -21,7 +21,6 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
     const sortUsers = (usersList) => {
         let admin;
         usersList.map((user, index) => {
-            console.log(user)
             if (user['@id'] === JSON.parse(localStorage.getItem('user'))['@id'])
                 admin = usersList.splice(index, 1)
         })
@@ -39,7 +38,6 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
     }
 
     React.useMemo(() => {
-        console.log(modal)
         getDataUser()
     }, [modal, edit])
 
@@ -50,7 +48,6 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
 
     const handleSubmit = async (e, id) => {
         e.preventDefault()
-        console.log(changed)
         const req = {
             firstName: user.firstName,
             lastName: user.lastName,

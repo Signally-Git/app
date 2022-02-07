@@ -15,6 +15,7 @@ function Tiles(props) {
     const [activeTeams, setActiveTeams] = useState([])
     const [users, setUsers] = useState([])
     const [user, setUser] = useState({})
+    const [wps, setWPs] = useState([])
     const [modal, setModal] = useState(false)
     const [organisation, setOrganisation] = useState({})
     const [activeUsers, setActiveUsers] = useState([])
@@ -34,16 +35,19 @@ function Tiles(props) {
 
         await request.get(`events`).then((res) => {
             setEvents(res.data["hydra:member"])
-        })
+        }).catch(() => {})
         await request.get(`teams`).then((res) => {
             setTeamsList(res.data["hydra:member"])
-        })
+        }).catch(() => {})
+        await request.get(`workplaces`).then((res) => {
+            setWPs(res.data["hydra:member"])
+        }).catch(() => {})
         await request.get(`users`).then((res) => {
             setUsers(res.data["hydra:member"])
-        })
+        }).catch(() => {})
         await request.get(`signatures`).then((res) => {
             setTemplates(res.data["hydra:member"])
-        })
+        }).catch(() => {})
 
     }, [])
 
@@ -94,7 +98,7 @@ function Tiles(props) {
 
                     </div>
                 </Link>
-                {!teamsList.length < 1 ? <>
+                {/* {!teamsList.length < 1 ? <> */}
                     <Link to="/teams/workplaces" className={classes.tile}>
                         <div className={classes.row}>
                             <p>Groupes</p>
@@ -103,7 +107,7 @@ function Tiles(props) {
                         <div className={classes.row}>
                             <div>
                                 <span className={classes.bigTxt}>{activeTeams.length}</span>
-                                <span> /{teamsList.length}</span>
+                                <span> /{wps.length}</span>
                             </div>
                             <span className={classes.activeSpan}>actifs</span>
                         </div>
@@ -121,7 +125,7 @@ function Tiles(props) {
                             <span className={classes.activeSpan}>actives</span>
                         </div>
                     </Link>
-                </> : null}
+                {/* </> : null} */}
                 <Link to="/teams/users" className={classes.tile}>
                     <div className={classes.row}>
                         <p>Collaborateurs</p>

@@ -1,6 +1,7 @@
 @import '../../../Assets/style/colors.scss';
 
 .container {
+  
     p, input {
         color: $signally-brown;
     }
@@ -9,6 +10,7 @@
     border-radius: 20px;
     padding: 1rem 2rem 1rem 2rem;
     max-height: 95%;
+    flex: 50%;
     display: flex;
     flex-direction: column;
     overflow: auto;
@@ -48,14 +50,24 @@
 
 .row
 {
+    margin-top: 0;
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     height: 100%;
+    h2 {
+        margin-bottom: 0;
+        flex: 100%;
+    }
+    > div {
+        max-width: 40%;
+        flex: 40%;
+    }
     img {
         width: auto;
-        height: 100%;
+        height: 70%;
         margin: auto;
-        padding-top: 5rem
+        padding-top: 5rem;
     }
 } 
 

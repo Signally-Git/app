@@ -89,8 +89,8 @@ function CreateSignatureComponent() {
 
   useEffect(() => {
     const getUser = async () => {
-      const user = await UseUserInfos(localStorage.getItem("user_id"))
-      const company = await UseOrganizationInfos(localStorage.getItem("organisation_id"))
+      const user = await request.get('whoami')
+      const company = await request.get(JSON.parse(localStorage.getItem('user')).organisation)
 
       setUser(user)
       setCompany(company)
