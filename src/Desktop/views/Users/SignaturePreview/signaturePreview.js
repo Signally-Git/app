@@ -124,7 +124,8 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 await request.patch(e['@id'], req, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
                 }).then((res) => {
-                    console.log(res)
+                    notification({ content: <>Signature de {type === "user" ? element.firstName + " " + element.lastName : type} mise à jour</>, status: "valid" })
+                    setEdit()
                 }).catch((err) => console.log(err))
             })
         if (req.signature)

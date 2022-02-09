@@ -26,10 +26,16 @@ export default function Report() {
         let req = {};
         e.preventDefault()
         const img = new FormData()
+        console.log(file)
         if (file) {
-            img.append('image', file)
-            await request.post(`import/image`, img).then((res) => {
+            img.append('image', file, { type: file.type })
+            await request.post(`import/image`, img, {
+                headers: { 'Content-Type': file.type }
+            }).then((res) => {
                 req = { fileUrl: res.data.path }
+                console.log(res.data.headers['Content-Type'])
+            }).catch((err) => {
+                console.log(err)
             })
         }
 
@@ -56,7 +62,7 @@ export default function Report() {
     }, [select])
 
     return (<>
-            <h1>Retour d'expérience</h1>
+        <h1>Retour d'expérience</h1>
         <div className={classes.row}>
             <div className={classes.container}>
                 <div className={classes.tagLine}>
