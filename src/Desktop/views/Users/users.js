@@ -15,6 +15,7 @@ function Team() {
     const [users, setUsers] = useState([])
     const [otherUser, setOtherUser] = useState("")
     const [currentUsers, setCurrentUsers] = useState("")
+    const [currentTeams, setCurrentTeams] = useState("")
     const [teams, setTeams] = useState([])
     const [otherTeam, setOtherTeam] = useState("")
     const [edit, setEdit] = useState()
@@ -34,6 +35,7 @@ function Team() {
         setTeams(listTeams.data['hydra:member'])
     }, [entity])
 
+    // HANDLING REAL TIME USERS IN TEAM
     useEffect(() => {
         const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${entity?.['@id']}`);
         if (edit === 'assign-team') {
@@ -51,6 +53,7 @@ function Team() {
         };
     }, [edit])
 
+    // HANDLING REAL TIME USERS WITHOUT TEAM
     useEffect(() => {
         const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users/users-without-team`);
         sse.onmessage = e => getRealtimeDataWOutTeam(JSON.parse(e.data));
@@ -66,8 +69,31 @@ function Team() {
         };
     }, [edit])
 
+    const handleAddTeam = (team) => {
+        request.patch(`teams/${team.id}`, { workplace: entity?.['@id'] }, {
+            headers: { 'Content-Type': 'application/merge-patch+json' }
+        }).then(() => {
+            setTransition(team.id)
+            setTimeout(() => {
+                setTransition('done')
+            }, 1500);
+        });
+    }
+
+    const handleRemoveTeam = (team) => {
+        const removedTeams = entity.teams.filter((teamCheck) => teamCheck['id'] !== team['id'])
+                request.delete(`${entity['@id']}/teams/${team.id}`, { workplace: null }, {
+                    headers: { 'Content-Type': 'application/merge-patch+json' }
+                }).then(() => {
+                    setTransition(team.id)
+                    setTimeout(() => {
+                        setEntity({ ...entity, teams: removedTeams })
+                        setTransition('done')
+                    }, 1500);
+                });
+    }
+
     const handleUpdate = (user, action) => {
-        console.log(user)
         switch (action) {
             case 'remove':
                 const removedUsers = entity.users.filter((userCheck) => userCheck['id'] !== user['id'])
@@ -88,14 +114,9 @@ function Team() {
                 }).then(() => {
                     setTransition(user.id)
                     setTimeout(() => {
-                        // setEntity({ ...entity, users: removedUsers })
                         setTransition('done')
                     }, 1500);
                 });
-                // }).then(() => setTransition(user.id));
-                // setTimeout(() => {
-                //     setTransition('done')
-                // }, 1500);
                 break;
             default:
                 break;
@@ -138,29 +159,56 @@ function Team() {
                     <div className={classes.overflow}>
                         {edit === "assign-workplace" ?
                             <div className={classes.teamAssignment}>
+                            <div className={classes.slider} ref={slider}>
                                 <div className={classes.col}>
-                                    <h2>Équipes de <span className={classes.orangeTxt}>{entity?.name}</span></h2>
-                                    {entity?.teams ? <><span>{entity?.teams?.length} équipes</span>
-                                        <ul className={`${classes.itemsList} ${classes.users}`}>
-                                            {entity?.teams?.map((team) => {
-                                                return <li key={team.id}>{team.name}</li>
-                                            })}
-                                        </ul></> : "Aucune équipe associée"}
-                                </div>
-                                <div className={classes.col}>
-                                    <h2>Autres équipes</h2>
+                                    <div className={classes.tagline}>
+                                        <h2><span className={classes.orangeTxt}>{entity?.users?.length || 0}</span> membre(s) <span className={classes.orangeTxt}>{entity?.name}</span></h2>
+                                        <Button color="brown" onClick={() => { setEdit('assign-signature') }}>Attribuer signature</Button>
+                                    </div>
+                                    <br />
                                     <div className={classes.searchInput}>
                                         <HiOutlineSearch />
-                                        <input className={classes.search} type="text" onChange={(e) => setOtherTeam(e.target.value)} placeholder="Rechercher une équipe" />
+                                        <input className={classes.search} type="text" onChange={(e) => setCurrentTeams(e.target.value)} placeholder="Rechercher un collaborateur" />
                                     </div>
-                                    <ul className={classes.itemsList}>
-                                        {teams.map((team) => {
-                                            if (team.name.search(otherTeam.toLowerCase()) !== -1)
-                                                return <li key={team.id}>{team.name}</li>
+                                    <ul className={`${classes.itemsList} ${classes.users}`}>
+                                        {entity?.teams?.map((team) => {
+                                            if (team.name.search(currentTeams.toLowerCase()) !== -1)
+                                                return <li key={team.id} className={`${classes.assignItem} ${transition === team.id ? classes.transitionRemove : ""}`}>
+                                                    <span>{team.name}</span>
+                                                    {transition === team.id ? <span className={classes.added}>Retiré</span> : <button>
+                                                        <BiMinusCircle title={`Retirer ${team.name} dans ${entity?.name}`} onClick={() => handleRemoveTeam(team)} />
+                                                    </button>}
+                                                </li>
                                         })}
                                     </ul>
+                                    <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 1000)}>Ajouter d'autres équipes</Button>
                                 </div>
-                            </div> : edit === "assign-team" ?
+                                <div className={classes.col}>
+                                    <div className={classes.tagline}>
+                                        <h2>Ajouter d'autres équipes</h2>
+                                    </div>
+                                    <br />
+                                    <div className={classes.searchInput}>
+                                        <HiOutlineSearch />
+                                        <input className={classes.search} type="text" onChange={(e) => setOtherTeam(e.target.value)} placeholder="Rechercher un collaborateur" />
+                                    </div>
+                                    <ul className={classes.itemsList}>
+                                        {teams?.map((team) => {
+                                            if (team.name.search(otherTeam.toLowerCase()) !== -1)
+                                                return <li key={team.id} className={`${classes.assignItem} ${transition === team.id ? classes.transitionRight : ""}`}>
+                                                    <span>{team.name}</span>
+                                                    {transition === team.id ? <span className={classes.added}>Ajouté</span> : 
+                                                    <button>
+                                                        <BiPlusCircle title={`Ajouter ${team.name} dans ${entity?.name}`} onClick={() => handleAddTeam(team)} />
+                                                    </button>
+                                        }
+                                                </li>
+                                        })}
+                                    </ul>
+                                    <Button color={'orange'} onClick={(e) => handleScroll(e, 0)}>Terminer</Button>
+                                </div>
+                            </div>
+                        </div> : edit === "assign-team" ?
                                 <div className={classes.teamAssignment}>
                                     <div className={classes.slider} ref={slider}>
                                         <div className={classes.col}>

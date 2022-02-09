@@ -123,7 +123,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 const req = { ...e, [type + 's']: [element['@id']] }
                 await request.patch(e['@id'], req, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
-                }).then((res) => {
+                }).then(() => {
                     notification({ content: <>Signature de {type === "user" ? element.firstName + " " + element.lastName : type} mise à jour</>, status: "valid" })
                     setEdit()
                 }).catch((err) => console.log(err))
@@ -205,7 +205,9 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 {edit === "copySign" ? <CopySignature signature={assignedTemplate} /> : <>
                     <div className={classes.topLine}>
                         <h2>Édition <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></h2>
-                        {show.name ? <Button color="brown" onClick={() => { setEdit('assign-team') }}>Attribuer collaborateurs</Button> : ""}
+                        {show['@type'] === 'Team' ? <Button color="brown" onClick={() => { setEdit('assign-team') }}>Attribuer collaborateurs</Button> : 
+                        show['@type'] === 'Workplace' ?  <Button color="brown" onClick={() => { setEdit('assign-workplace') }}>Attribuer équipes</Button>
+                        : ""}
 
                     </div>
                     <div className={classes.row}>
