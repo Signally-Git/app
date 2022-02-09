@@ -65,6 +65,7 @@ export default function TemplateSelection(props) {
                         if (tag) {
                             if (template.tags[0].toLowerCase() === "studio") {
                                 return (<li key={template.id}>
+                                    <p className={classes.templateName}>Nom de la template</p>
                                     <input type="radio" name="template" value={template.html} />
                                     <Template template={template.html} socials={props.icons} />
                                 </li>)

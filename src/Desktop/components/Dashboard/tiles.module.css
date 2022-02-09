@@ -103,6 +103,10 @@
   line-height: 2.5;
 }
 
+.deploy {
+  background-color: #E87E41 !important;
+}
+
 .syncTile {
   -webkit-perspective: 1000px;
           perspective: 1000px;

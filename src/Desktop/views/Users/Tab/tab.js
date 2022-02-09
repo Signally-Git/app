@@ -88,22 +88,34 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
 
         switch (type) {
             case "workplaces":
-                for (let index = 0; index < workplaces.length; index++) {
-                    const element = workplaces[index];
-                    await request.delete(`workplaces/${element.id}`).then(
+                const wps = workplaces;
+                for (let index = 0; index < wps.length; index++) {
+                    const element = wps[index];
+                    request.delete(`workplaces/${element.id}`).then(
                         () => {
-                            index === workplaces.length - 1 && refreshData(type)
+                            notification({ content: <><span style={{ color: "#FF7954" }}>{element.name}</span> supprimé avec succès</>, status: "valid" })
                             count++;
+                            if (count === workplaces.length)
+                            {
+                                notification({ content: <><span style={{ color: "#FF7954" }}>{count} hotel(s)</span> supprimé(s) avec succès</>, status: "valid" })
+                                refreshData()
+                            }
                         }).catch(() => notification({ content: <>Impossible de supprimer <span style={{ color: "#FF7954" }}>{element.name}</span></>, status: "invalid" }))
                 }
+
                 break;
             case "teams":
                 for (let index = 0; index < teams.length; index++) {
                     const element = teams[index];
-                    await request.delete(`teams/${element.id}`).then(
+                    request.delete(`teams/${element.id}`).then(
                         (res) => {
-                            index === teams.length - 1 && refreshData(type)
+                            index === teams.length - 1 && refreshData()
                             count++;
+                            if (count === teams.length)
+                            {
+                                notification({ content: <><span style={{ color: "#FF7954" }}>{count} équipe(s)</span> supprimée(s) avec succès</>, status: "valid" })
+                                refreshData()
+                            }
                         }).catch(() => notification({ content: <>Impossible de supprimer <span style={{ color: "#FF7954" }}>{element.name}</span></>, status: "invalid" }))
                 }
                 break;
@@ -111,10 +123,15 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 for (let index = 0; index < users.length; index++) {
                     const element = users[index];
                     if (element?.id !== JSON.parse(localStorage.getItem("user"))?.id)
-                        await request.delete(`users/${element.id}`).then(
+                        request.delete(`users/${element.id}`).then(
                             () => {
-                                index === users.length - 1 && refreshData(type)
+                                index === users.length - 1 && refreshData()
                                 count++;
+                                if (count === users.length - 1)
+                                {
+                                    notification({ content: <><span style={{ color: "#FF7954" }}>{count} collaborateur(s)</span> supprimé(s) avec succès</>, status: "valid" })
+                                    refreshData()
+                                }
                             }).catch(() => notification({ content: <>Impossible de supprimer <span style={{ color: "#FF7954" }}>{element.firstName} {element.lastName}</span></>, status: "invalid" }))
                 }
                 break;
@@ -141,7 +158,6 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                     </div>)
                 case "allteams":
                     return (<div className={classes.modal}>
-                        <span>Les équipes <>Blabla</>, <>Blablou</></span>
                         <h4>Vous allez supprimer
                             <br /><span className={classes.orangeTxt}>{`${teams.length} équipes`}</span></h4>
                         <br />
@@ -225,7 +241,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         if (teamName.length > 0)
             await request.patch(team['@id'], { name: teamName }, {
                 headers: { 'Content-Type': 'application/merge-patch+json' }
-            }).then(() => {notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> modifié avec succès</>, status: "valid" }); setChanged(false)}).catch(() => notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> n'a pas pu être modifié</>, status: "invalid" }))
+            }).then(() => { notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> modifié avec succès</>, status: "valid" }); setChanged(false) }).catch(() => notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> n'a pas pu être modifié</>, status: "invalid" }))
         setEditInfo()
     }
 
@@ -324,7 +340,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                         className={classes.checkbox}
                                         checked={edit?.id === team.id && edit?.name === team?.name ? true : false} type="radio" name="team" value={JSON.stringify(team)} />
                                     <span></span>
-                                    {editInfo === team ? <input autoFocus className={classes.rename} ref={toFocus} type="text" defaultValue={team?.name} onChange={(e) => {setTeamName(e.target.value); setChanged(true)}} /> :
+                                    {editInfo === team ? <input autoFocus className={classes.rename} ref={toFocus} type="text" defaultValue={team?.name} onChange={(e) => { setTeamName(e.target.value); setChanged(true) }} /> :
                                         <input className={classes.rename} disabled type="text" defaultValue={teamName || team?.name} />}
                                     {team.workplace?.name?.length > 0 ? <div className={classes.infos}>
                                         <span className={classes.groupName}>{team.workplace?.name}</span>

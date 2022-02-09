@@ -130,12 +130,14 @@ const Login = () => {
                     <img className={classes.takeoff} src={Takeoff} />
                     <div className={classes.descriptionBeta}>
                         <h1>Bienvenue sur la Beta privée Signally !</h1>
-                        <p>Nous sommes très heureux de vous compter parmi les tous premiers utilisateurs.</p>
+                        <p>Nous sommes très heureux de vous compter parmi nos premiers utilisateurs.</p>
                         <p>Avec vous, nous souhaitons faire de Signally, l’application la plus intuitive et la plus innovante du marché tout en répondant au mieux à vos
                             objectifs de communication et de marketing.</p>
                         <p>Comme nous sommes en version Beta, tout n’est pas encore parfait !</p>
                         <p>Néanmoins, grâce à vous, nous pourrons rendre la plateforme de plus en plus performante et encore plus simple à utiliser.</p>
-                        <p>Un grand merci pour votre aide.</p><br />
+                        <p>Un grand merci pour votre aide.</p>
+                        <p>-- L'équipe Signally</p>
+                        <br />
                         <div>
                             <img className={classes.plugins} src={PluginsOutlook} />
                             <img className={classes.plugins} src={PluginsSoon} />

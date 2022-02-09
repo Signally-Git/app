@@ -160,7 +160,8 @@
         font-size: 1rem;
     }
     .templatesContainer {
-        margin-top: 1rem;
+        margin-top: 2rem;
+        margin-bottom: -3rem;
         padding: 0;
         list-style: none;
         width: 100%;
@@ -184,16 +185,29 @@
             max-width: 48%;
             border-radius: 20px;
             background-color: #fff;
-            transition: 0.2s;
+            transition: border-color 0.3s;
+            border: 1px solid transparent;
             margin-right: 2rem;
             margin-bottom: 2rem;
             &:hover {
-                box-shadow: 0 0 20px rgba(112, 112, 112, 0.37);
+                p {
+                    color: $signally-orange
+                }
+                border-color: $signally-orange
+                // box-shadow: 0 0 20px rgba(112, 112, 112, 0.6);
             }
             // width: 17rem;
             // height: 10rem;
         }
     }
+}
+
+.templateName {
+    margin-top: 0;
+    transition: color .3s;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
 }
 
 .btnBackTemplate {

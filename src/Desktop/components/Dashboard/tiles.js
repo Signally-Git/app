@@ -6,6 +6,9 @@ import { MobileView } from 'react-device-detect'
 import request from 'Utils/Request/request'
 import Button from 'Utils/Button/btn'
 import Modal from 'Utils/Modals/modal'
+import { AiOutlineNotification } from 'react-icons/ai'
+import { IoIosNotificationsOutline } from 'react-icons/io'
+import { BsBroadcastPin } from 'react-icons/bs'
 
 function Tiles(props) {
     const [loading, setLoading] = useState(false)
@@ -33,19 +36,19 @@ function Tiles(props) {
             // console.log(res)
         })
 
-        await request.get(`events`).then((res) => {
+        request.get(`events`).then((res) => {
             setEvents(res.data["hydra:member"])
         }).catch(() => {})
-        await request.get(`teams`).then((res) => {
+        request.get(`teams`).then((res) => {
             setTeamsList(res.data["hydra:member"])
         }).catch(() => {})
-        await request.get(`workplaces`).then((res) => {
+        request.get(`workplaces`).then((res) => {
             setWPs(res.data["hydra:member"])
         }).catch(() => {})
-        await request.get(`users`).then((res) => {
+        request.get(`users`).then((res) => {
             setUsers(res.data["hydra:member"])
         }).catch(() => {})
-        await request.get(`signatures`).then((res) => {
+        request.get(`signatures`).then((res) => {
             setTemplates(res.data["hydra:member"])
         }).catch(() => {})
 
@@ -138,19 +141,20 @@ function Tiles(props) {
                         <span className={classes.activeSpan}>actifs</span>
                     </div>
                 </Link>
-                <div className={`${classes.tile} `}>
+                <div className={`${classes.tile} ${classes.deploy}`}>
                     <div className={classes.row}>
                         <p>Déploiement</p>
-                        <img src={ChevronRight} alt="View" />
+                        <BsBroadcastPin fontSize={'1.75rem'} style={{margin: 'auto 0 1rem 0'}} />
+                        {/* <img src={ChevronRight} alt="View" /> */}
                     </div>
                     <div className={classes.row}>
-                        <div>
-                            <Button color={"brownFill"} style={{padding: '.5rem'}} onClick={() => setModal(true)}>Déployer pour {organisation?.name}</Button>
-                            {/* <div>
+                        {/* <div> */}
+                            {/* <Button color={"brownFill"} style={{padding: '.5rem'}} onClick={() => setModal(true)}>Déployer pour {organisation?.name}</Button> */}
+                            <div>
                                 <span className={classes.bigTxt}>{users.length}</span>
                             </div>
-                            <span className={classes.activeSpan}>actifs</span> */}
-                        </div>
+                            <span className={classes.activeSpan}>actifs</span>
+                        {/* </div> */}
                     </div>
                 </div>
                 <div to="#" className={`${classes.tile} ${classes.billingTile}`}>

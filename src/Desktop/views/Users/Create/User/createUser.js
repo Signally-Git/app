@@ -82,7 +82,7 @@ export default function CreateUser({ setDone }) {
             history.push('/teams/users')
         }).catch((err) => {
             // notification({ content: <><span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> n'a pas pu être créé</>, status: "invalid" }))
-            if (err?.violations?.[0]?.code === '23bd9dbf-6b9b-41cd-a99e-4844bcf3077f')
+            if (err?.title === "App\\Exception\\User\\UserWithSameEmailAlreadyExistsDomainException")
                 notification({ content: <><span style={{ color: "#FF7954" }}>{user.email}</span> a déjà été créé</>, status: "invalid" })
             else {
                 console.log(err);

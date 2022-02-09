@@ -17,11 +17,16 @@ export default function Infos(props) {
     const [img, setImg] = useState("");
     const [profile, setProfile] = useState(false);
     const [organisation, setOrganisation] = useState(false);
-    const user = JSON.parse(localStorage.getItem('user'))
+    const [user, setUser] = useState({})
     const [organisationInfos, setOrganisationInfos] = useState({})
 
     React.useEffect(async () => {
-        await request.get(user.organisation).then((res) => setOrganisationInfos(res.data))
+        await request.get('whoami').then(async (res) => 
+        {
+            setUser(res.data)
+            await request.get(res.data.organisation).then((res) => setOrganisationInfos(res.data))
+        })
+       
     }, [])
 
 
@@ -32,7 +37,7 @@ export default function Infos(props) {
     { placeholder: user.phone || "", type: "tel", toChange: "mobile", value: props.content.mobile, disabled: true }
     ]
 
-    const companyInputs = [{ placeholder: organisationInfos.name, type: "text", toChange: "company", value: props.content.company, disabled: true },
+    const companyInputs = [{ placeholder: organisationInfos.name || "", type: "text", toChange: "company", value: props.content.company, disabled: true },
     { placeholder: organisationInfos.address?.street || "", type: "text", toChange: "addressStreet", value: props.content.addressStreet, disabled: true },
     { placeholder: organisationInfos.address?.zipCode || "", type: "text", toChange: "addressZipcode", value: props.content.addressZipcode, disabled: true },
     { placeholder: organisationInfos.address?.city || "", type: "text", toChange: "addressCity", value: props.content.addressCity, disabled: true },

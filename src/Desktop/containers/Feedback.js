@@ -56,8 +56,8 @@ export default function Report() {
     }, [select])
 
     return (<>
+            <h1>Retour d'expérience</h1>
         <div className={classes.row}>
-            <h2>Signaler un problème</h2>
             <div className={classes.container}>
                 <div className={classes.tagLine}>
                     <h3>Bienvenue sur la Beta privée Signally !</h3>

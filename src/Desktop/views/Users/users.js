@@ -199,7 +199,7 @@ function Team() {
                                             <ul className={classes.itemsList}>
                                                 {users?.map((user) => {
                                                     const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
-                                                    if (fullName.search(currentUsers.toLowerCase()) !== -1)
+                                                    if (fullName.search(otherUser.toLowerCase()) !== -1)
                                                         return <li key={user.id} className={`${classes.assignItem} ${transition === user.id ? classes.transitionRight : ""}`}>
                                                             <span>{user.firstName} {user.lastName}</span>
                                                             {transition === user.id ? <span className={classes.added}>Ajouté</span> : 

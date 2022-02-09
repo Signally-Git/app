@@ -232,7 +232,8 @@
 }
 
 .modal .templatesContainer {
-  margin-top: 1rem;
+  margin-top: 2rem;
+  margin-bottom: -3rem;
   padding: 0;
   list-style: none;
   width: 100%;
@@ -262,15 +263,28 @@
   max-width: 48%;
   border-radius: 20px;
   background-color: #fff;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  border: 1px solid transparent;
   margin-right: 2rem;
   margin-bottom: 2rem;
 }
 
 .modal .templatesContainer li:hover {
-  -webkit-box-shadow: 0 0 20px rgba(112, 112, 112, 0.37);
-          box-shadow: 0 0 20px rgba(112, 112, 112, 0.37);
+  border-color: #FF7954;
+}
+
+.modal .templatesContainer li:hover p {
+  color: #FF7954;
+}
+
+.templateName {
+  margin-top: 0;
+  -webkit-transition: color .3s;
+  transition: color .3s;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .btnBackTemplate {
