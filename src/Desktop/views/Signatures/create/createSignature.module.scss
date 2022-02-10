@@ -29,7 +29,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #FFF;
+    background: #fff;
     border-radius: 20px;
     width: 25%;
     height: 13rem;
@@ -69,7 +69,7 @@
         justify-content: center;
         align-items: center;
         button {
-            margin: 1.5rem .5rem 0 !important;
+            margin: 1.5rem 0.5rem 0 !important;
         }
     }
     .orangeTxt {
@@ -147,6 +147,7 @@
         cursor: pointer;
         position: relative;
         display: flex;
+        flex-direction: column;
         text-align: center;
         width: 40%;
         height: 3rem;
@@ -156,17 +157,24 @@
             outline: none;
         }
     }
+    // input:not(:checked) + .sliderTabs:before {
+    //     left: 0%;
+    //     width: 50%;
+    // }
     input:not(:checked) + .sliderTabs:before {
-        left: 1%;
+        transform: translateX(0);
     }
-
     input:checked + .sliderTabs:before {
-        width: 40%;
-        left: 41.5%;
+        transform: translateX(100%);
     }
+    // input:checked + .sliderTabs:before {
+    //     width: 50%;
+    //     left: 41.5%;
+    // }
     .switchTabs input {
         outline: none;
         opacity: 0;
+        position: absolute;
         width: 0;
         height: 0;
     }
@@ -174,12 +182,12 @@
     .tabTitles {
         width: 100%;
         margin: auto;
-        padding: 1rem;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
         text-align: center;
+        padding: 6%;
         height: 100%;
         display: flex;
         align-items: center;
@@ -203,16 +211,21 @@
         background-color: $signally-isabelline;
         -webkit-transition: 0.4s;
         transition: 0.4s;
+        border-left: 12px solid $signally-isabelline;
+        border-right: 12px solid $signally-isabelline;
     }
 
     .sliderTabs:before {
         position: absolute;
         content: "";
         height: 65%;
-        width: 4rem;
+        width: 50%;
         bottom: 0;
+        left: 0;
         top: 0;
-        margin: auto 1rem;
+        margin: auto;
+        margin-left: 0;
+        margin-right: auto;
         background-color: white;
         transition: 0.4s;
     }
@@ -246,14 +259,14 @@
         animation: blink 1s infinite;
     }
     button:hover svg {
-        stroke: #FFF!important;
+        stroke: #fff !important;
     }
 }
 
 .confirm {
     width: 15rem;
     min-width: 15rem;
-    transition: min-width 1s!important;
+    transition: min-width 1s !important;
     display: flex;
     align-items: center;
     span {
@@ -268,10 +281,10 @@
     }
     .noBgBtn {
         background: $signally-brown;
-        padding: .15rem .75rem!important;
+        padding: 0.15rem 0.75rem !important;
         border: $signally-brown;
         border-radius: 20px;
-        color: #FFF;
+        color: #fff;
         margin-left: 1rem;
     }
     button {
@@ -283,7 +296,7 @@
         font-size: 1.1rem;
         display: flex;
         align-items: center;
-        margin-left: .25rem;
+        margin-left: 0.25rem;
         &:last-child {
             color: $signally-brown;
         }

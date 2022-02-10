@@ -87,7 +87,7 @@
 }
 
 .tile:nth-of-type(2) {
-  background-color: #F6CE4D;
+  background-color: #ffc300;
 }
 
 .tile:nth-of-type(2) * {
