@@ -84,7 +84,7 @@ const Login = () => {
             setTimeout(() => {
                 setLogging(true)
                 toFocus.current.focus()
-            }, 400)
+            }, 700)
         }
         else {
             notification({ content: <>Le format d'email n'est pas valide</>, status: "invalid" })

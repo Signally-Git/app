@@ -35,6 +35,8 @@
   font-size: 0.8rem;
   text-overflow: ellipsis;
   overflow: hidden;
+  display: block;
+  max-width: 80%;
   margin-left: .5rem;
   white-space: nowrap;
   display: -webkit-box;
