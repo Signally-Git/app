@@ -47,8 +47,8 @@ export default function CreateWorkplace({ setDone }) {
             ...workplace
         }
         const create = await request.post('workplaces', req).catch(
-            () => notification({ content: <>Le workplace <span style={{ color: "#FF7954" }}>{workplace.name}</span> n'a pas pu être créé</>, status: "invalid" }))
-        create.data && notification({ content: <>Le workplace <span style={{ color: "#FF7954" }}>{workplace.name}</span> a été créé avec succès</>, status: "valid" })
+            () => notification({ content: <>L'hôtel <span style={{ color: "#FF7954" }}>{workplace.name}</span> n'a pas pu être créé</>, status: "invalid" }))
+        create.data && notification({ content: <>L'hôtel <span style={{ color: "#FF7954" }}>{workplace.name}</span> a été créé avec succès</>, status: "valid" })
         const img = new FormData()
         img.append('image', file)
         if (file)

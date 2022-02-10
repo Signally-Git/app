@@ -48,9 +48,11 @@ function Informations() {
                     path: res.data.path,
                     organisation: organisationIRI
                 }
-                await request.post('logos', requestLogo).then((res) => {
-                    console.log(res.data)
-                });
+                setTimeout(async () => {     
+                    await request.post('logos', requestLogo).then((res) => {
+                        console.log(res.data)
+                    });
+                }, 3000);
                 const req = {
                     name: companyName,
                     websiteUrl: website,

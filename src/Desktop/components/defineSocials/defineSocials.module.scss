@@ -39,10 +39,11 @@
 
 .socialsList {
     list-style: none;
-    // margin-left: 1rem;
+    margin-left: 1rem;
     padding: 0;
-    height: auto;
+    height: 2rem;
     display: flex;
+
     align-items: center;
     li {
         display: flex;

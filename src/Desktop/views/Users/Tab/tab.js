@@ -99,6 +99,8 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                             {
                                 notification({ content: <><span style={{ color: "#FF7954" }}>{count} hotel(s)</span> supprimé(s) avec succès</>, status: "valid" })
                                 refreshData()
+                                setEdit()
+                                setSelected()
                             }
                         }).catch(() => notification({ content: <>Impossible de supprimer <span style={{ color: "#FF7954" }}>{element.name}</span></>, status: "invalid" }))
                 }
@@ -115,6 +117,8 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                             {
                                 notification({ content: <><span style={{ color: "#FF7954" }}>{count} équipe(s)</span> supprimée(s) avec succès</>, status: "valid" })
                                 refreshData()
+                                setEdit()
+                                setSelected()
                             }
                         }).catch(() => notification({ content: <>Impossible de supprimer <span style={{ color: "#FF7954" }}>{element.name}</span></>, status: "invalid" }))
                 }
@@ -131,6 +135,8 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                 {
                                     notification({ content: <><span style={{ color: "#FF7954" }}>{count} collaborateur(s)</span> supprimé(s) avec succès</>, status: "valid" })
                                     refreshData()
+                                    setEdit()
+                                    setSelected()
                                 }
                             }).catch(() => notification({ content: <>Impossible de supprimer <span style={{ color: "#FF7954" }}>{element.firstName} {element.lastName}</span></>, status: "invalid" }))
                 }

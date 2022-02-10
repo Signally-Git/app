@@ -124,7 +124,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 await request.patch(e['@id'], req, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
                 }).then(() => {
-                    notification({ content: <>Signature de {type === "user" ? element.firstName + " " + element.lastName : type} mise à jour</>, status: "valid" })
+                    notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> mise à jour</>, status: "valid" })
                     setEdit()
                 }).catch((err) => console.log(err))
             })
@@ -133,7 +133,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 headers: { 'Content-Type': 'application/merge-patch+json' }
             }).then(
                 () => {
-                    notification({ content: <>Signature de {type === "user" ? element.firstName + " " + element.lastName : type} modifiée</>, status: "valid" })
+                    notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
                     setEdit()
                 }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
     }

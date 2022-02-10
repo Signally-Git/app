@@ -1,7 +1,7 @@
 .container {
   background: #FFF;
-  -webkit-box-shadow: 0 0 40px #402927;
-          box-shadow: 0 0 40px #402927;
+  -webkit-box-shadow: 0 0 40px rgba(64, 41, 39, 0.3);
+          box-shadow: 0 0 40px rgba(64, 41, 39, 0.3);
   width: 60%;
   max-height: 15rem;
   border-radius: 20px;
