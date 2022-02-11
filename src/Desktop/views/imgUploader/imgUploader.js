@@ -40,8 +40,8 @@ function ImgUploader() {
     // Uploading image to signally servers
     const uploadImg = async (uploadedMedia) => {
         const img = new FormData()
-        img.append('image', uploadedMedia)
-        await request.post(`import/image`, img).then(async (res) => {
+        img.append('file', uploadedMedia)
+        await request.post(`import/file`, img).then(async (res) => {
 
             console.log(res)
             if (res.data.path) {

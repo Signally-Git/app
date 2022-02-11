@@ -208,9 +208,9 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
 
     const handleChangeWP = async (e, workplace) => {
         const img = new FormData()
-        img.append('image', file)
+        img.append('file', file)
         if (file)
-            await request.post(`import/image`, img).then(async (res) => {
+            await request.post(`import/file`, img).then(async (res) => {
                 const requestLogo = {
                     name: workplace.name + "_logo",
                     path: res.data.path,

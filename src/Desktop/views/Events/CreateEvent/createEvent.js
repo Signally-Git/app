@@ -43,9 +43,9 @@ export default function CreateEvent({ setDone, event }) {
         const start = (moment(startDate).subtract({ hour: 1 })).format('D-MM-YYYYHH:mm:ss')
         const end = (moment(endDate).subtract({ hour: 1 })).format('D-MM-YYYYHH:mm:ss')
         const image = new FormData()
-        image.append('image', banner)
+        image.append('file', banner)
         if (!event && banner) {
-            await request.post(`import/image`, image).then(async (res) => {
+            await request.post(`import/file`, image).then(async (res) => {
                 const req = {
                     imagePath: res.data.path,
                     name: eventName,
@@ -66,8 +66,8 @@ export default function CreateEvent({ setDone, event }) {
             const image = new FormData()
 
             if (banner) {
-                image.append('image', banner)
-                await request.post(`import/image`, image).then(async (res) => {
+                image.append('file', banner)
+                await request.post(`upload`, image).then(async (res) => {
                     const req = {
                         name: eventName,
                         startAt: start,

@@ -40,9 +40,9 @@ function Informations() {
 
     const handleSaveCompany = async () => {
         const img = new FormData()
-        img.append('image', uploadedMedia)
+        img.append('file', uploadedMedia)
         if (uploadedMedia)
-            await request.post(`import/image`, img).then(async (res) => {
+            await request.post(`import/file`, img).then(async (res) => {
                 const requestLogo = {
                     name: "test",
                     path: res.data.path,

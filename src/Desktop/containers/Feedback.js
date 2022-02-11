@@ -28,8 +28,8 @@ export default function Report() {
         const img = new FormData()
         console.log(file)
         if (file) {
-            img.append('image', file, { type: file.type })
-            await request.post(`import/image`, img, {
+            img.append('file', file, { type: file.type })
+            await request.post(`import/file`, img, {
                 headers: { 'Content-Type': file.type }
             }).then((res) => {
                 req = { fileUrl: res.data.path }

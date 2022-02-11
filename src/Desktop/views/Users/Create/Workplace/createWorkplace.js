@@ -50,9 +50,9 @@ export default function CreateWorkplace({ setDone }) {
             () => notification({ content: <>L'hôtel <span style={{ color: "#FF7954" }}>{workplace.name}</span> n'a pas pu être créé</>, status: "invalid" }))
         create.data && notification({ content: <>L'hôtel <span style={{ color: "#FF7954" }}>{workplace.name}</span> a été créé avec succès</>, status: "valid" })
         const img = new FormData()
-        img.append('image', file)
+        img.append('file', file)
         if (file)
-            await request.post(`import/image`, img).then(async (res) => {
+            await request.post(`import/file`, img).then(async (res) => {
                 const requestLogo = {
                     name: file.name,
                     path: res.data.path,
