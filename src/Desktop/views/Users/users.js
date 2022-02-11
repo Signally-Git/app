@@ -28,7 +28,7 @@ function Team() {
     useEffect(async () => {
         const listUsers = await request.get('users?exists[team]=false')
         setUsers(listUsers.data['hydra:member'])
-    }, [])
+    }, [entity])
 
     useEffect(async () => {
         const listTeams = await request.get('teams')
