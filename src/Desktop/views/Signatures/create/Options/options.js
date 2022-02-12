@@ -162,7 +162,7 @@ export default function Options(props) {
                 </div>
 
                 {/* Banner */}
-                <div className={classes.checkToText}>
+                {/* <div className={classes.checkToText}>
                     <div className={classes.row}>
                         <label htmlFor="bannerTop">
                             <h4>Bannière supérieure</h4>
@@ -184,16 +184,16 @@ export default function Options(props) {
                             <span className={`${classes.slider} ${classes.round}`}></span>
                         </label>
                     </div>
-                    {props.data.bannerTop.enabled ?
-                        <>
-                            <div className={classes.fileUpload}>
+                    {/* {props.data.bannerTop.enabled ? */}
+                        {/* <> */}
+                            {/* <div className={classes.fileUpload}>
                                 <UploadFile file={props.data.bannerTop.data}
                                     setFile={(e) => props.setData({
                                         ...props.data, bannerTop: { ...props.data.bannerTop, data: e }
                                     })}
                                     placeholder="Importer une image"
                                     type="image/*"
-                                    style={{ maxWidth: "70%" }} />
+                                    style={{ maxWidth: "70%" }} /> */}
                                 {/* {props.data.bannerTop.data?.name?.length > 0 ? (
                                     <div className={classes.uploadedFile}>
                                         <span>{props.data.bannerTop.data?.name}</span>{" "}
@@ -225,8 +225,8 @@ export default function Options(props) {
                                         </span>
                                     </>
                                 )} */}
-                            </div>
-                            <div className={classes.spacing}>
+                            {/* </div> */}
+                            {/* <div className={classes.spacing}>
                                 <h6>Espacement</h6>
                                 <Range
                                     step={2}
@@ -248,10 +248,10 @@ export default function Options(props) {
                                         />
                                     )}
                                 />
-                            </div>
-                        </>
-                        : ""}
-                </div>
+                            </div> */}
+                        {/* </> */}
+                        {/* : ""} */}
+                {/* </div> */}
 
                 {/* Bonus changeable elements of the template */}
                 <div className={classes.custom}>

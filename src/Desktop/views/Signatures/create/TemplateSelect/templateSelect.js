@@ -7,7 +7,11 @@ import Button from 'Utils/Button/btn';
 // Displaying the list of bought and free templates (Studio, Store) and allows to select one to create custom signature
 
 const templateAPI = [{
-    id: 1, alignment: "Horizontal", tags: ["studio"], html: `    <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:0">
+    id: 1, alignment: "Horizontal", tags: ["studio"], html: `   
+    {% if greeting %}
+    {{ greetings }}
+    {% endif %}
+    <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:0">
     <tbody>
         <tr>
             <td valign="top" style="width:380px; height: 108px; border: none; padding: 0cm">
@@ -32,17 +36,14 @@ const templateAPI = [{
                                     style="border-collapse:collapse; border:none; border-color: #fce750;">
                                     <tbody>
                                         <tr>
-                                            <td style="background: #fce750; width: 12px;">
-                                                <img style="margin: 0!important;padding:0; display: block;" src="{{ absolute_url(asset('images//yellow-left-61d32efd2cec8.png')) }}" />
-                                            </td>
                                             <td
-                                                style="box-sizing: border-box; border: none; background: #fce750; font-size: 8pt; height: 94px; width: 272px">
+                                                style="box-sizing: border-box; border: none; background: {{ styles['customDiv']['color'] }}; font-size: 8pt; height: 94px; width: 272px">
                                                 <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0"
                                                     style="border-collapse:collapse; border:none; font-size: 8pt;">
                                                     <tbody>
                                                         <tr height="1">
                                                             <td style="font-size: 8pt;">
-                                                                <b style="color:{{ styles['user']['color'] }}; font-size: 8pt;font-family: Helvetica; font-size: 11px;">{{ user.firstName }}</b>
+                                                                <b style=" font-size: 8pt;font-family: Helvetica; font-size: 11px; color:{{ styles['firstName']['color'] }}">{{ user.firstName }}</b>
                                                                 <b style="color:black;font-size: 8pt;font-family: Helvetica; font-size: 11px;">{{ user.lastName }}</b>
                                                             </td>
                                                         </tr>
@@ -77,9 +78,6 @@ const templateAPI = [{
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                            </td>
-                                            <td style="background: #fce750; width: 12px;">
-                                            <img style="margin: 0!important;padding:0; display: block;" src="{{ absolute_url(asset('images//yellow-right-61d32f319d093.png')) }}" />
                                             </td>
                                         </tr>
                                     </tbody>
@@ -201,7 +199,10 @@ const templateAPI = [{
                     </tbody>
             </td>
     </tbody>
-</table>`}]
+</table>
+{% if disclaimer %}
+{{ disclaimers }}
+{% endif %}`}]
 
 export default function TemplateSelection(props) {
     const [orientation, setOrientation] = useState("Horizontal")

@@ -28,6 +28,7 @@ function CreateSignatureComponent() {
   const [selectedTemplate, setSelectedTemplate] = useState()
   const history = useHistory()
   const notification = useNotification()
+  const [preview, setPreview] = useState("")
 
   const [templateRules, setTemplateRules] = useState({
     fontSize: { min: 9, max: 13, step: 1 }
@@ -183,12 +184,13 @@ function CreateSignatureComponent() {
     }
 
     await request.post('signature_templates', req).then(async (res) => {
-      console.log(JSON.parse(localStorage.getItem('user')).organisation)
+      // console.log(JSON.parse(localStorage.getItem('user')).organisation)
         await request.post(`signatures`, {name: signatureName, html: renderToString(test), signatureTemplate: res.data['@id'], organisation: JSON.parse(localStorage.getItem('user')).organisation}).then(
-          async (res) => {
+          async (result) => {
             notification({ content: <>Votre signature <span style={{ color: "#FF7954" }}>{signatureName}</span> a été créée avec succès</>, status: "valid" })
-            setTemplateIdToPatch(res.data.id)
-    
+            setTemplateIdToPatch(result.data.id)
+            // GERER ICI
+            // request.post('signature_styles', { signature: result.data['@id'], signatureTemplate: res.data['@id'], })
             // console.log(localStorage.getItem('user').signature_template_id)
             // await axios.get(`${API}template/${JSON.parse(localStorage.getItem('user')).signature_template_id}?access_token=${localStorage.getItem("token")}`)
             //   .then().catch(async () => {
@@ -251,6 +253,13 @@ function CreateSignatureComponent() {
 
   }
 
+  useEffect(() => {
+    console.log("HERE", signatureInfo.firstName, "END HERE")
+    if (signatureInfo && signatureOption && selectedTemplate)
+    setPreview(<Preview infos={signatureInfo} options={signatureOption} template={selectedTemplate} />)
+  }, [signatureInfo, signatureOption, selectedTemplate])
+
+
   return (
     <div className={classes.container} ref={elem}>
       {modal === true ? modalContent : ""}
@@ -290,7 +299,7 @@ function CreateSignatureComponent() {
               <div className={classes.lazyLoadingMedium}></div>
               <br />
               {selectedTemplate &&
-                <Preview infos={signatureInfo} options={signatureOption} template={selectedTemplate} />}
+                preview}
               <div className={classes.CTAsContainer}>
                 <Button color="orange" onClick={() => setModal(true)} style={{ opacity: selectedTemplate ? 1 : 0, pointerEvents: selectedTemplate ? "" : "none" }}>Sauvegarder</Button>
                 <Button color="brown" onClick={() => showTemplates(true)}>Choisir un {selectedTemplate ? "autre modèle" : "modèle de signature"} <BsArrowRight style={{ stroke: "black", strokeWidth: "1", marginLeft: ".5rem" }} className={`${selectedTemplate ? "" : classes.blinking} ${classes.arrow}`} /></Button>

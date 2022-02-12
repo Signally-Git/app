@@ -4,46 +4,65 @@ import parse from "html-react-parser"
 import { renderToStaticMarkup } from "react-dom/server"
 import DetectSocialNetwork from "Utils/DetectSocialNetwork/DetectSocialNetwork"
 
-export default function Template(props) {
-    console.log(props.socials)
-    const socialNetworks = renderToStaticMarkup(props.socials?.items.map((item) => <a href="https://twitter.com/" style={{ marginRight: "4px" }}><DetectSocialNetwork social={item} fill={"#FFF"} /></a>))
-    const mapObj = {
-        PLACEHOLDER_GENERAL_FONT: props.infos?.fontFamily || "Helvetica,Arial,sans-serif",
-        PLACEHOLDER_GENERAL_FONTSIZE: "11px;",
-        PLACEHOLDER_COMPANY_ICON: props.infos?.logo.path || "http://fakeimg.pl/108?font=noto&font_size=12",
-        PLACEHOLDER_BANNER: props.options?.bannerTop.data ? `<img style="border-radius: 4px; margin-bottom: 12px; max-width: 380px;" src='${props.options.bannerTop.data}'
-    alt='banner' />` : "",
-        PLACEHOLDER_DIV_COLOR: "#FCE750",
-        PLACEHOLDER_SALUTATION: props.options?.salutation.enabled ? `<p style="padding-bottom: ${props.options?.salutation.padding}px;"}>${props.options?.salutation.value || "Cordialement,"}</p>` : "",
-        PLACEHOLDER_FIRST_NAME: props.infos?.firstName.value || "Prénom",
-        PLACEHOLDER_FIRST_NAME_STYLE: "font-weight: bold;",
-        PLACEHOLDER_LAST_NAME: props.infos?.lastName.value || "Nom",
-        PLACEHOLDER_LAST_NAME_STYLE: "font-weight: bold;",
-        PLACEHOLDER_POSITION: props.infos?.jobName.value || "Poste",
-        PLACEHOLDER_POSTE_STYLE: "font-size: 11px;",
-        PLACEHOLDER_COMPANY: props.infos?.company.value || "Société",
-        PLACEHOLDER_COMPANY_STYLE: "font-weight: bold;",
-        PLACEHOLDER_FOLLOWUS: "Follow us",
-        PLACEHOLDER_SOCIALS: socialNetworks,
-        PLACEHOLDER_ADDRESS_STREET: props.infos?.addressStreet || "Adresse",
-        PLACEHOLDER_ADDRESS_INFO: props.infos?.addressInfo || "",
-        PLACEHOLDER_ADDRESS_ZIPCODE: props.infos?.addressZipcode || "Code postal",
-        PLACEHOLDER_ADDRESS_CITY: props.infos?.addressCity || "Ville",
-        PLACEHOLDER_ADDRESS_COUNTRY: props.infos?.addressCountry || "Pays",
-        PLACEHOLDER_ADDRESS_STYLE: "font-size: 11px;",
-        PLACEHOLDER_MOBILE: props.infos?.mobile.value || "mobile",
-        PLACEHOLDER_MOBILE_STYLE: "font-size: 11px;",
-        PLACEHOLDER_PHONE: props.infos?.phone.value || "fixe",
-        PLACEHOLDER_PHONE_STYLE: "font-size: 11px;",
-        PLACEHOLDER_EVENT_BANNER: props.infos?.logo.path || `http://fakeimg.pl/380x126?font=noto&font_size=14`,
-        PLACEHOLDER_DISCLAIMER: props.options?.footer?.enabled ? `<p style="box-sizing: border-box; margin-top:${props.options?.footer?.padding}px; font-size:${props.options?.footer?.size}px; max-width: ${props.options?.footer?.maxWidth}px;">${props.options?.footer?.value.replace(/\n/g, "<br />")}</p>` : ""
-    }
-    return parse(
-        props.template.replace(
-            /\b(?:PLACEHOLDER_GENERAL_FONT|PLACEHOLDER_DISCLAIMER|PLACEHOLDER_DIV_COLOR|PLACEHOLDER_GENERAL_FONTSIZE|PLACEHOLDER_FOLLOWUS|PLACEHOLDER_SOCIALS|PLACEHOLDER_BANNER|PLACEHOLDER_SALUTATION|PLACEHOLDER_FIRST_NAME|PLACEHOLDER_COMPANY_ICON|PLACEHOLDER_FIRST_NAME_STYLE|PLACEHOLDER_LAST_NAME|PLACEHOLDER_LAST_NAME_STYLE|PLACEHOLDER_POSITION|PLACEHOLDER_POSTE_STYLE|PLACEHOLDER_COMPANY|PLACEHOLDER_COMPANY_STYLE|PLACEHOLDER_ADDRESS_STREET|PLACEHOLDER_ADDRESS_INFO|PLACEHOLDER_ADDRESS_ZIPCODE|PLACEHOLDER_ADDRESS_CITY|PLACEHOLDER_ADDRESS_COUNTRY|PLACEHOLDER_ADDRESS_STYLE|PLACEHOLDER_MOBILE|PLACEHOLDER_MOBILE_STYLE|PLACEHOLDER_PHONE|PLACEHOLDER_PHONE_STYLE|PLACEHOLDER_FACEBOOK|PLACEHOLDER_INSTAGRAM|PLACEHOLDER_TWITTER|PLACEHOLDER_LINKEDIN|PLACEHOLDER_SOCIALS_STYLE|PLACEHOLDER_EVENT_BANNER)\b/gi,
-            (matched) => mapObj[matched]
-        )
-    )
+export default function Template({ template, infos, options }) {
+    // console.log(template, template.replace('{{ user.firstName }}', 'infos.firstName.value' || 'Prénom'))
+    let replaced;
+    replaced = template.replaceAll('{{ user.firstName }}', infos?.firstName?.value || 'Prénom')
+    replaced = replaced.replaceAll('{{ user.lastName }}', infos?.lastName?.value || 'Nom')
+    replaced = replaced.replaceAll('{{ user.position }}', infos?.firstName?.value || 'Poste')
+    
+    replaced = replaced.replaceAll('{{ absolute_url(asset(logo)) }}', infos?.logo.path || "http://fakeimg.pl/108?font=noto&font_size=12")
+    replaced = replaced.replaceAll('{{ company.name }}', infos?.firstName?.value || 'Société')
+    replaced = replaced.replaceAll('{{ address.street }}', infos?.firstName?.value || 'Adresse')
+    replaced = replaced.replaceAll('{{ address.streetInfo }}', infos?.firstName?.value || 'Adresse 2')
+    replaced = replaced.replaceAll('{{ address.zipCode }}', infos?.firstName?.value || 'Code postal')
+    replaced = replaced.replaceAll('{{ address.city }}', infos?.firstName?.value || 'Ville')
+    replaced = replaced.replaceAll('{{ address.country }}', infos?.firstName?.value || 'Pays')
+
+    replaced = replaced.replaceAll('{{ user.mobilePhone }}', infos?.firstName?.value || 'Mobile')
+    replaced = replaced.replaceAll('{{ user.phone }}', infos?.firstName?.value || 'Fixe')
+
+    replaced = replaced.replaceAll('{{ event.imagePath }}', infos?.logo.path || `http://fakeimg.pl/380x126?font=noto&font_size=14`)
+    return parse(replaced)
+    // console.log(props.socials)
+    // const socialNetworks = renderToStaticMarkup(props.socials?.items.map((item) => <a href="https://twitter.com/" style={{ marginRight: "4px" }}><DetectSocialNetwork social={item} fill={"#FFF"} /></a>))
+    // const mapObj = {
+    //     PLACEHOLDER_GENERAL_FONT: props.infos?.fontFamily || "Helvetica,Arial,sans-serif",
+    //     PLACEHOLDER_GENERAL_FONTSIZE: "11px;",
+    //     PLACEHOLDER_COMPANY_ICON: props.infos?.logo.path || "http://fakeimg.pl/108?font=noto&font_size=12",
+    //     PLACEHOLDER_BANNER: props.options?.bannerTop.data ? `<img style="border-radius: 4px; margin-bottom: 12px; max-width: 380px;" src='${props.options.bannerTop.data}'
+    // alt='banner' />` : "",
+    //     PLACEHOLDER_DIV_COLOR: "#FCE750",
+    //     PLACEHOLDER_SALUTATION: props.options?.salutation.enabled ? `<p style="padding-bottom: ${props.options?.salutation.padding}px;"}>${props.options?.salutation.value || "Cordialement,"}</p>` : "",
+    //     PLACEHOLDER_FIRST_NAME: props.infos?.firstName.value || "Prénom",
+    //     PLACEHOLDER_FIRST_NAME_STYLE: "font-weight: bold;",
+    //     PLACEHOLDER_LAST_NAME: props.infos?.lastName.value || "Nom",
+    //     PLACEHOLDER_LAST_NAME_STYLE: "font-weight: bold;",
+    //     PLACEHOLDER_POSITION: props.infos?.jobName.value || "Poste",
+    //     PLACEHOLDER_POSTE_STYLE: "font-size: 11px;",
+    //     PLACEHOLDER_COMPANY: props.infos?.company.value || "Société",
+    //     PLACEHOLDER_COMPANY_STYLE: "font-weight: bold;",
+    //     PLACEHOLDER_FOLLOWUS: "Follow us",
+    //     PLACEHOLDER_SOCIALS: socialNetworks,
+    //     PLACEHOLDER_ADDRESS_STREET: props.infos?.addressStreet || "Adresse",
+    //     PLACEHOLDER_ADDRESS_INFO: props.infos?.addressInfo || "",
+    //     PLACEHOLDER_ADDRESS_ZIPCODE: props.infos?.addressZipcode || "Code postal",
+    //     PLACEHOLDER_ADDRESS_CITY: props.infos?.addressCity || "Ville",
+    //     PLACEHOLDER_ADDRESS_COUNTRY: props.infos?.addressCountry || "Pays",
+    //     PLACEHOLDER_ADDRESS_STYLE: "font-size: 11px;",
+    //     PLACEHOLDER_MOBILE: props.infos?.mobile.value || "mobile",
+    //     PLACEHOLDER_MOBILE_STYLE: "font-size: 11px;",
+    //     PLACEHOLDER_PHONE: props.infos?.phone.value || "fixe",
+    //     PLACEHOLDER_PHONE_STYLE: "font-size: 11px;",
+    //     PLACEHOLDER_EVENT_BANNER: props.infos?.logo.path || `http://fakeimg.pl/380x126?font=noto&font_size=14`,
+    //     PLACEHOLDER_DISCLAIMER: props.options?.footer?.enabled ? `<p style="box-sizing: border-box; margin-top:${props.options?.footer?.padding}px; font-size:${props.options?.footer?.size}px; max-width: ${props.options?.footer?.maxWidth}px;">${props.options?.footer?.value.replace(/\n/g, "<br />")}</p>` : ""
+    // }
+    // return parse(
+    //     props.template.replace(
+    //         /\b(?:PLACEHOLDER_GENERAL_FONT|PLACEHOLDER_DISCLAIMER|PLACEHOLDER_DIV_COLOR|PLACEHOLDER_GENERAL_FONTSIZE|PLACEHOLDER_FOLLOWUS|PLACEHOLDER_SOCIALS|PLACEHOLDER_BANNER|PLACEHOLDER_SALUTATION|PLACEHOLDER_FIRST_NAME|PLACEHOLDER_COMPANY_ICON|PLACEHOLDER_FIRST_NAME_STYLE|PLACEHOLDER_LAST_NAME|PLACEHOLDER_LAST_NAME_STYLE|PLACEHOLDER_POSITION|PLACEHOLDER_POSTE_STYLE|PLACEHOLDER_COMPANY|PLACEHOLDER_COMPANY_STYLE|PLACEHOLDER_ADDRESS_STREET|PLACEHOLDER_ADDRESS_INFO|PLACEHOLDER_ADDRESS_ZIPCODE|PLACEHOLDER_ADDRESS_CITY|PLACEHOLDER_ADDRESS_COUNTRY|PLACEHOLDER_ADDRESS_STYLE|PLACEHOLDER_MOBILE|PLACEHOLDER_MOBILE_STYLE|PLACEHOLDER_PHONE|PLACEHOLDER_PHONE_STYLE|PLACEHOLDER_FACEBOOK|PLACEHOLDER_INSTAGRAM|PLACEHOLDER_TWITTER|PLACEHOLDER_LINKEDIN|PLACEHOLDER_SOCIALS_STYLE|PLACEHOLDER_EVENT_BANNER)\b/gi,
+    //         (matched) => mapObj[matched]
+    //     )
+    // )
     // console.log(props.infos?.firstName.style, props.infos?.lastName.style)
     // return (<>
     //     <div style={{ fontFamily: `${props.infos?.fontFamily}` }}>
