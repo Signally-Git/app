@@ -22,12 +22,13 @@
 
 .tabContainer {
   padding: 2rem;
+  margin-bottom: auto;
   position: relative;
   background: #fff;
   border-radius: 20px;
   overflow: auto;
   width: 50%;
-  height: 85%;
+  height: 80%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

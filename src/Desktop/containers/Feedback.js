@@ -8,6 +8,7 @@ import Noting from 'Assets/img/noting.png'
 import request from "Utils/Request/request";
 import { useNotification } from "Utils/Notifications/notifications";
 import CustomSelect from "Utils/CustomSelect/customselect";
+import Btns from "Utils/Btns/btns";
 
 export default function Report() {
     const [file, setFile] = useState()
@@ -87,7 +88,7 @@ export default function Report() {
                     </form> */}
                     <br />
                     <h4>{table.filter((entry) => entry.key === select)[0].name}</h4>
-                    <Input placeholder="Bonjour, comme vous pouvez le voir sur cette image en PJ, le logo de l'entreprise ne s'affiche pas sur Outlook."
+                    <Input placeholder={table.filter((entry) => entry.key === select)[0].key === "SIGNALLY_APP" ? "Bonjour, comme vous pouvez le voir sur cette image en PJ, le logo de l'entreprise ne s'affiche pas sur Outlook." : ""}
                         style={{ height: "4.5rem", resize: "none", width: '100%', marginBottom: '1.5rem' }}
                         onChange={(e) => setBug(e.target.value)} type="textarea" />
                     <br />
@@ -96,10 +97,11 @@ export default function Report() {
                         file={file}
                         setFile={setFile}
                         placeholder="Importer un fichier" />
-                    <div className={classes.actionsContainer}>
+                        <Btns onConfirm={() => {}} confirmTxt="Envoyer le formulaire" onCancel={(e) => { e.preventDefault(); history.goBack() }} />
+                    {/* <div className={classes.actionsContainer}>
                         <Button type="submit" width={"45%"} color="orange">Envoyer</Button>
                         <Button onClick={(e) => { e.preventDefault(); history.goBack() }} width={"45%"} color="orangeFill">Annuler</Button>
-                    </div>
+                    </div> */}
                 </form>
             </div>
             <img src={Noting} />

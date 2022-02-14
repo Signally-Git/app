@@ -1,4 +1,4 @@
-@import '../../../../../Assets/style/colors.scss';
+@import "../../../../../Assets/style/colors.scss";
 
 .infosContainer {
     width: 100%;
@@ -7,7 +7,7 @@
         font-weight: bold;
         font-size: 0.8rem;
         text-align: left;
-        margin: .5rem 0;
+        margin: 0.5rem 0;
     }
 }
 
@@ -34,7 +34,7 @@
 .inputsFlex {
     input {
         background-color: $signally-isabelline;
-        padding: .5rem .75rem;
+        padding: 0.5rem 0.75rem;
         &::placeholder {
             color: $signally-brown;
         }
@@ -146,7 +146,7 @@
     width: 100%;
     border: none;
 }
-.closed svg{
+.closed svg {
     transform: rotate(-90deg);
 }
 
@@ -159,7 +159,7 @@
     svg {
         cursor: pointer;
         transition: transform 0.3s;
-        margin-left: .5rem;
+        margin-left: 0.5rem;
         font-size: 1rem;
     }
 }
@@ -206,7 +206,7 @@
 }
 
 .fontSize {
-    font-size: .75rem;
+    font-size: 0.75rem;
     position: absolute;
     bottom: 1.05rem;
 }
@@ -216,9 +216,9 @@
     position: relative;
     transition: 0.2s height;
     svg {
-        font-size: .75rem;
+        font-size: 0.75rem;
         position: absolute;
-        right: .5rem;
+        right: 0.5rem;
         top: 0;
         bottom: 0;
         margin: auto;
@@ -229,14 +229,14 @@
 .selectedFont {
     outline: none;
     width: 100%;
-    text-indent: .5rem;
+    text-indent: 0.5rem;
     height: 3rem;
     z-index: 1;
     border: 1px solid #f1f1f1;
     border-radius: 10px;
     display: flex;
     position: relative;
-    background: #FFF;
+    background: #fff;
     cursor: pointer;
 }
 
@@ -250,10 +250,11 @@
     max-height: 10rem;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
     border-radius: 20px 20px 0 0;
     list-style: none;
-    background-color: #fbf8f7;
+    background-color: #fff;
+    box-shadow: 0 20px 30px $signally-darkgrey;
     width: 100%;
     li {
         position: relative;
@@ -261,12 +262,12 @@
         height: 100%;
         display: flex;
         align-items: center;
-        padding: .5rem 1rem;
-        font-size: .85rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
         align-items: center;
         transition: 0.2s;
         &:nth-child(even) {
-            border: 1px solid #FFF;
+            border: 1px solid #fff;
             border-right: none;
             border-left: none;
         }
@@ -274,13 +275,16 @@
             cursor: pointer;
             margin: 0;
         }
-        &:hover {
-            color:rgba(0, 0, 0, 0.356);
+        &:hover, &:focus-within {
+            transition: .2s;
+            color: $signally-brown;
+            background-color: $signally-pink;
         }
     }
     input {
         opacity: 0;
-        z-index: -1;
+        z-index: 1;
+        cursor: pointer;
         position: absolute;
         top: 0;
         left: 0;

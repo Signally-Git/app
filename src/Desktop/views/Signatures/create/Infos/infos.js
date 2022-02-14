@@ -7,6 +7,7 @@ import { Range } from "react-range";
 import UploadFile from 'Utils/Upload/uploadFile';
 import { FiChevronDown } from 'react-icons/fi';
 import request from 'Utils/Request/request';
+import CustomSelect from 'Utils/CustomSelect/customselect';
 
 // Informations tab, allows to change texts to preview long or short ones
 // Styles every text with color & decoration, and family + size for the whole template
@@ -21,12 +22,11 @@ export default function Infos(props) {
     const [organisationInfos, setOrganisationInfos] = useState({})
 
     React.useEffect(async () => {
-        await request.get('whoami').then(async (res) => 
-        {
+        await request.get('whoami').then(async (res) => {
             setUser(res.data)
             await request.get(res.data.organisation).then((res) => setOrganisationInfos(res.data))
         })
-       
+
     }, [])
 
 
@@ -47,9 +47,22 @@ export default function Infos(props) {
 
     // Styling the whole template's font
     // Listing websafe fonts to select font-family
-    const webSafeFontList = ["Arial", "Arial Black", "Comic Sans MS", "Courier New",
-        "Georgia", "Helvetica", "Impact", "Lucida Console", "Lucida sans Unicode", "Palatino Linotype",
-        "Tahoma", "Times New Roman", "Trebuchet MS", "Verdana"]
+    const webSafeFontList = [
+        { name: "Arial", style: { fontFamily: "Arial" } },
+        { name: "Arial Black", style: { fontFamily: 'Arial Black' } },
+        { name: "Comic Sans MS", style: { fontFamily: 'Comic Sans MS' } },
+        { name: "Courier New", style: { fontFamily: 'Courier New' } },
+        { name: "Georgia", style: { fontFamily: 'Georgia' } },
+        { name: "Helvetica", style: { fontFamily: 'Helvetica' } },
+        { name: "Impact", style: { fontFamily: 'Impact' } },
+        { name: "Lucida Console", style: { fontFamily: 'Lucida Console' } },
+        { name: "Lucida sans Unicode", style: { fontFamily: 'Lucida sans Unicode' } },
+        { name: "Palatino Linotype", style: { fontFamily: 'Palatino Linotype' } },
+        { name: "Tahoma", style: { fontFamily: 'Tahoma' } },
+        { name: "Times New Roman", style: { fontFamily: 'Times New Roman' } },
+        { name: "Trebuchet MS", style: { fontFamily: 'Trebuchet MS' } },
+        { name: "Verdana", style: { fontFamily: 'Verdana' } },
+    ]
     // Handling font-family selection 
     const [selectedFont, setSelectedFont] = useState("Arial")
     const [showFonts, setShowFonts] = useState(false);
@@ -85,9 +98,9 @@ export default function Infos(props) {
                 </div>
                 <div className={classes.inputsContainer}>
                     <div className={`${classes.expandTitle} ${!profile ? classes.closed : ""}`}>
-                        <h4 onClick={() => setProfile(!profile)}>Informations du profil</h4>
+                        <h4 onClick={() => { profile === false && setOrganisation(profile); setProfile(!profile) }}>Informations du profil</h4>
                         <FiChevronDown onClick={() => setProfile(!profile)} />
-                        </div>
+                    </div>
                     {
                         profile ?
                             <div className={classes.inputsFlex}>
@@ -96,7 +109,7 @@ export default function Infos(props) {
                                         <Input
                                             value={input.value.value}
                                             type={input.type}
-                                            placeholder={`${input?.placeholder?.substring(0,10)}${input?.placeholder?.length > 10 ? '...' : ''}`}
+                                            placeholder={`${input?.placeholder?.substring(0, 10)}${input?.placeholder?.length > 10 ? '...' : ''}`}
                                             disabled={input.disabled}
                                             defaultColor={input.value.color}
                                             defaultStyle={input.value.style}
@@ -111,7 +124,7 @@ export default function Infos(props) {
                 </div>
                 <div className={classes.inputsContainer}>
                     <div className={`${classes.expandTitle} ${!organisation ? classes.closed : ""}`}>
-                        <h4 onClick={() => setOrganisation(!organisation)}>Informations de la société</h4>
+                        <h4 onClick={() => { organisation === false && setProfile(organisation); setOrganisation(!organisation) }}>Informations de la société</h4>
                         <FiChevronDown onClick={() => setOrganisation(!organisation)} />
                     </div>
                     {organisation ?
@@ -121,7 +134,7 @@ export default function Infos(props) {
                                     <Input
                                         value={input.value.value}
                                         type={input.type}
-                                        placeholder={`${input.placeholder.substring(0,10)}${input.placeholder.length > 10 ? '...' : ''}`}
+                                        placeholder={`${input.placeholder.substring(0, 10)}${input.placeholder.length > 10 ? '...' : ''}`}
                                         disabled={input.disabled}
                                         defaultColor={input.value.color}
                                         defaultStyle={input.value.style}
@@ -138,7 +151,8 @@ export default function Infos(props) {
                 </div>
                 <div className={classes.styleContainer}>
                     <div className={classes.row}>
-                        <div className={classes.selectFontContainer}>
+                        <CustomSelect styleList={{ height: '10rem' }} onChange={(e) => handleFont(e)} items={webSafeFontList} getValue={'name'} display={'name'} />
+                        {/* <div className={classes.selectFontContainer}>
                             <input style={{ fontFamily: selectedFont }} className={classes.selectedFont}
                                 type="text" readOnly value={selectedFont} onClick={() => setShowFonts(!showFonts)} />
                             <BsChevronDown />
@@ -153,7 +167,7 @@ export default function Infos(props) {
                                     })}
                                 </ul> : ""}
                             </form>
-                        </div>
+                        </div> */}
                         <div className={classes.selectSize}>
                             <div className={classes.row}>
                                 <div>

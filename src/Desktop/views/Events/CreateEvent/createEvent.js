@@ -10,6 +10,7 @@ import UploadFile from 'Utils/Upload/uploadFile';
 import { useNotification } from 'Utils/Notifications/notifications';
 import request from 'Utils/Request/request';
 import { API } from 'config';
+import Btns from 'Utils/Btns/btns';
 
 export default function CreateEvent({ setDone, event }) {
     const [startDate, setStartDate] = useState(event?.startAt ? new Date(event?.startAt) : new Date())
@@ -133,10 +134,11 @@ export default function CreateEvent({ setDone, event }) {
             setFile={setBanner}
         />
         <form>
-            <div className={classes.btnsContainer}>
+            <Btns style={{ left: '.5rem', bottom: '-3rem' }} confirmTxt="Sauvegarder" onCancel={(e) => { e.preventDefault(); setDone(false) }} onConfirm={(e) => saveEvent(e)} />
+            {/* <div className={classes.btnsContainer}>
                 <Button color="orange" onClick={(e) => { e.preventDefault(); setDone(false) }}>Annuler</Button>
                 <Button type="submit" color="orangeFill" onClick={(e) => saveEvent(e)}>Sauvegarder</Button>
-            </div>
+            </div> */}
         </form>
     </div>)
 }

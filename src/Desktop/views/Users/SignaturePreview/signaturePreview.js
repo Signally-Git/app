@@ -9,6 +9,7 @@ import CopySignature from 'Desktop/components/CopySignature/CopySignature';
 import Search from "Assets/icons/search.svg"
 import CustomSelect from 'Utils/CustomSelect/customselect';
 import Modal from 'Utils/Modals/modal';
+import Btns from 'Utils/Btns/btns';
 
 export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     const today = new Date()
@@ -46,7 +47,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
 
     useEffect(async () => {
         const events = await request.get('events');
-        
+
         setIncEvents(events.data["hydra:member"].filter((data) => (new Date(data.startAt) > new Date())).sort(function (a, b) {
             if (a.startAt < b.startAt) { return -1; }
             if (a.startAt > b.startAt) { return 1; }
@@ -152,9 +153,9 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                         if (event.name.toLowerCase().search(searchQuery?.toLowerCase()) >= 0) {
                             if (edit.events?.filter((a) => a.id === event.id)[0]?.id === event.id)
                                 checked = true
-                            else 
+                            else
                                 checked = false
-                                console.log(checked)
+                            console.log(checked)
                             return <li key={event['@id']}>
                                 <img className={classes.bannerPreview} src={`${API}${event.imagePath}`} />
                                 <div className={classes.eventText}>
@@ -179,10 +180,11 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                     })}
                 </ul>
             </div>
-            <div className={classes.btnsContainer}>
+            <Btns onCancel={() => { setChoosePlaylist(false) }} confirmTxt="Enregistrer" onConfirm={() => handleProgram()} />
+            {/* <div className={classes.btnsContainer}>
                 <Button color="orange" width={'40%'} onClick={() => setChoosePlaylist(false)}>Annuler</Button>
                 <Button color="orangeFill" width={'40%'} onClick={() => handleProgram()}>Enregistrer</Button>
-            </div>
+            </div> */}
         </div>
         </div> : ""}
         {modal ? <Modal title={<>Vous allez mettre en ligne <br />la signature <span className={classes.orangeTxt}>{Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.name}</span> <br /><br />pour <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></>}
@@ -205,9 +207,9 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 {edit === "copySign" ? <CopySignature signature={assignedTemplate} /> : <>
                     <div className={classes.topLine}>
                         <h2>Édition <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></h2>
-                        {show['@type'] === 'Team' ? <Button color="brown" onClick={() => { setEdit('assign-team') }}>Attribuer collaborateurs</Button> : 
-                        show['@type'] === 'Workplace' ?  <Button color="brown" onClick={() => { setEdit('assign-workplace') }}>Attribuer équipes</Button>
-                        : ""}
+                        {show['@type'] === 'Team' ? <Button color="brown" onClick={() => { setEdit('assign-team') }}>Attribuer collaborateurs</Button> :
+                            show['@type'] === 'Workplace' ? <Button color="brown" onClick={() => { setEdit('assign-workplace') }}>Attribuer équipes</Button>
+                                : ""}
 
                     </div>
                     <div className={classes.row}>
@@ -237,10 +239,11 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                 </>}
                         </div>
                     </div>
-                    <div className={classes.btnsContainer}>
+                    <Btns onCancel={() => { setEdit() }} confirmTxt="Sauvegarder" onConfirm={() => handleSubmit()} />
+                    {/* <div className={classes.btnsContainer}>
                         <Button onClick={() => setEdit()} color="orange">Annuler</Button>
                         <Button onClick={() => handleSubmit()} color="orangeFill">Sauvegarder</Button>
-                    </div>
+                    </div> */}
                 </>}
             </div>
         </div>

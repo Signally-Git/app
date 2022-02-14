@@ -8,6 +8,7 @@ import DndSocials from './socialsDnd';
 import FooterDnd from './FooterDnd/FooterDnd';
 import UploadFile from 'Utils/Upload/uploadFile';
 import { API } from 'config';
+import CustomSelect from 'Utils/CustomSelect/customselect';
 
 // Options tab
 // Contains : the closing formula
@@ -312,13 +313,15 @@ export default function Options(props) {
                     </div>
                     {props.data.event.enabled ?
                         <>
-                            <form onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${API}${JSON.parse(e.target.value).imagePath}`, selected: JSON.parse(e.target.value) } })}>
+                       <CustomSelect onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${API}${e}`, selected: e} })} 
+                       items={props.data.event.list} getValue={'@id'} display={'name'} />
+                            {/* <form onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${API}${JSON.parse(e.target.value).imagePath}`, selected: JSON.parse(e.target.value) } })}>
                                 <select defaultValue={JSON.stringify(props.data.event.selected)}>
                                     {props.data.event.list.map((event) => {
                                         return <option key={event.id} value={JSON.stringify(event)}>{event.name}</option>
                                     })}
                                 </select>
-                            </form>
+                            </form> */}
                             <div className={classes.spacing}>
                                 <h6>Espacement</h6>
                                 <Range

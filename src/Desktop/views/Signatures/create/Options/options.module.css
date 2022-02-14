@@ -97,7 +97,7 @@
   width: 100%;
 }
 
-.checkToText input {
+.checkToText > input[type="text"] {
   background: none;
   border: 1px solid #f7f5f5;
   border-radius: 10px;

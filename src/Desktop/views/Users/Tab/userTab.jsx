@@ -78,7 +78,7 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
         </div>
 
         <div className={classes.colheader}>
-            <span className={classes.totalNumber}>{usersList.length < 2 ? `${usersList.length} collaborateur` : `${usersList.length} collaborateurs`}</span>
+            <span className={classes.totalNumber}>{usersList.length} collaborateur(s)</span>
             <button onClick={() => setModal({ type: "allusers", items: usersList })}>Supprimer tout</button>
         </div>
         <ul className={`${classes.itemsList} ${classes.usersList}`}>

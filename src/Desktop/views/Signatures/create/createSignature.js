@@ -147,8 +147,8 @@ function CreateSignatureComponent() {
             <h4>Donner un nom à cette signature</h4>
             <Input style={{ width: "75%" }} placeholder="Nom de la signature" type="text" onChange={(e) => setSignatureName(e.target.value)} />
             <div onClick={() => setModal(false)}>
-              <Button width="30%" color="orange">Annuler</Button>
-              <Button width="40%" color="orangeFill" onClick={() => handleSave()}>Valider</Button>
+              <Button width="30%" color="brown">Annuler</Button>
+              <Button width="40%" color="orange" onClick={() => handleSave()}>Valider</Button>
             </div>
           </div>
         </div>

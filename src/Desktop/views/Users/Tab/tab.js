@@ -175,7 +175,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 case "allusers":
                     return (<div className={classes.modal}>
                         <h4>Vous allez supprimer
-                            <br /><span className={classes.orangeTxt}>{`${users.length} collaborateurs`}</span></h4>
+                            <br /><span className={classes.orangeTxt}>{`${users.length - 1} collaborateur(s)`}</span></h4>
                         <div>
                             <Button color="orange" onClick={() => setModal({ type: "", name: "", id: "" })}>Annuler</Button>
                             <Button color="orangeFill" onClick={() => handleDeleteAll("users")}>Supprimer</Button>

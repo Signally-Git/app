@@ -70,7 +70,7 @@ $max-width: 75%;
     flex-direction: column;
     position: relative;
     width: 100%;
-    input {
+    > input[type="text"] {
         background: none;
         border: 1px solid $signally-grey;
         border-radius: 10px;

@@ -4,7 +4,7 @@
     p, input {
         color: $signally-brown;
     }
-    margin-top: auto;
+    margin-bottom: auto;
     min-width: 55%;
     border-radius: 20px;
     padding: 1rem 2rem 1rem 2rem;
@@ -48,15 +48,13 @@
 
 .row
 {
-    margin-top: -4.5rem;
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 85%!important;
     img {
         width: auto;
         height: 100%;
         margin: auto;
-        padding-top: 5rem
     }
 } 
 
