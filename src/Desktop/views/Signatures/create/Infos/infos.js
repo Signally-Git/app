@@ -68,9 +68,8 @@ export default function Infos(props) {
     const [showFonts, setShowFonts] = useState(false);
 
     const handleFont = (event) => {
-        event.preventDefault()
-        setSelectedFont(event.target.value)
-        props.setContent({ ...props.content, fontFamily: event.target.value })
+        setSelectedFont(event)
+        props.setContent({ ...props.content, fontFamily: event })
         setShowFonts(false)
     }
 

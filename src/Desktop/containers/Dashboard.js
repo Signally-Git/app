@@ -15,6 +15,8 @@ import { Link } from 'react-router-dom'
 import { UseEvents } from 'Utils/useEvents/useEvents'
 import ReadOnlyPreview from 'Desktop/views/Signatures/create/Preview/readOnlyPreview'
 import request from 'Utils/Request/request'
+import Button from 'Utils/Button/btn'
+import News from 'Desktop/components/News/news'
 
 let count = 0;
 
@@ -77,8 +79,11 @@ function Dashboard(props) {
     useEffect(async () => {
         await request.get(`whoami`).then((res) => {
             setUser(res.data)
-            setTemplate(res.data?.compiledSignature) 
+            setTemplate(res.data?.compiledSignature)
             setTemplateName(res.data?.signature?.name)
+            request.get(res.data?.organisation).then((r) => {
+                setOrganisation(r.data)
+            })
         })
     }, [])
 
@@ -111,49 +116,7 @@ function Dashboard(props) {
                     {/* <h1 className={classes.h1}>Bonjour {JSON.parse(localStorage.getItem('user'))?.first_name}</h1> */}
                     <h1>Dashboard</h1>
                     <div className={classes.row}>
-                        {(activeEvents?.length > 0 || template) &&
-                            <div className={classes.col}>
-                                {template &&
-                                    <div onClick={() => setStat(!stat)}>
-                                        <div className={`${classes.signatureContainer} ${stat ? classes.open : classes.closed}`}>
-                                            <div className={classes.signaturePreview}>
-                                                <h5>Signature active <Link to="/signatures">{templateName}</Link></h5>
-                                                <br />
-                                                <ReadOnlyPreview template={template} infos={data} />
-                                            </div>
-                                            {stat ?
-                                                <div className={classes.chartContainer}>
-                                                    <Chart options={chartOptions} series={chartSeries} width={190} height={220} />
-                                                </div> : ""}
-                                        </div>
-                                    </div>}
-                                {activeEvents ?
-                                    activeEvents[0] &&
-                                    <div onClick={() => setStat(!stat)}>
-                                        <div className={`${classes.signatureContainer} ${stat ? classes.open : classes.closed}`}>
-                                            <div className={classes.eventPreview}>
-                                                <h5>Event actif <Link to="/signatures">{activeEvents[0]?.name}</Link></h5>
-                                                <img className={classes.banner} src={API + activeEvents[0]?.imagePath} />
-                                                <span className={classes.duration}>
-                                                    <div className={`${classes.col} ${classes.bold}`}>
-                                                        <span>{`du ${new Date(activeEvents[0]?.startAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
-                                                        <span>{`au ${new Date(activeEvents[0]?.endAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
-                                                    </div>
-                                                    <div className={classes.col}>
-                                                        <span>{`${new Date(activeEvents[0].startAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
-                                                        <span>{`${new Date(activeEvents[0]?.endAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                            {statEvent ?
-                                                <div className={classes.chartContainer}>
-                                                    <Chart options={chartOptionsEvents} series={chartSeriesEvents} width={190} height={220} />
-                                                </div>
-                                                : ""}
-                                        </div>
-                                    </div>
-                                    : ""}
-                            </div>}
+                        <News organisation={organisation} />
                         <div className={classes.col}>
                             <div className={classes.tilesContainer}>
                                 <Tiles handleHeader={setIsHeader} />

@@ -239,7 +239,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                 </>}
                         </div>
                     </div>
-                    <Btns onCancel={() => { setEdit() }} confirmTxt="Sauvegarder" onConfirm={() => handleSubmit()} />
+                    <Btns  style={{ left: '.5rem', bottom: '-5rem' }} onCancel={() => { setEdit() }} confirmTxt="Sauvegarder" onConfirm={() => handleSubmit()} />
                     {/* <div className={classes.btnsContainer}>
                         <Button onClick={() => setEdit()} color="orange">Annuler</Button>
                         <Button onClick={() => handleSubmit()} color="orangeFill">Sauvegarder</Button>

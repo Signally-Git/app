@@ -1,6 +1,6 @@
 import Menu from "Desktop/components/Menu/Menu";
 import Header from "Desktop/components/Header/Header";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import classes from "./frame.module.scss";
 import request from "Utils/Request/request";
 import { API } from "config";
@@ -61,7 +61,9 @@ export default function Frame(props) {
                     </div>
 
                     <div className={classes.dashboardContainer}>
+                        <Suspense fallback={<div>Chargement</div>}>
                         {props.children}
+                        </Suspense>
                     </div>
                 </div>
             </div>

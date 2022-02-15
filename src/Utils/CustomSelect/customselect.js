@@ -5,7 +5,7 @@ import classes from './customselect.module.css'
 import { ImCheckmark } from 'react-icons/im'
 
 export default function CustomSelect({ items, display, displayinlist, getValue, multiple, defaultValue, onChange, styleList, callback }) {
-    const [value, setValue] = useState([defaultValue || items[0]?.[getValue] || items[0][display]])
+    const [value, setValue] = useState([defaultValue || items[0]?.[getValue] || items[0]?.[display]])
     const click = useRef(null)
     const [isOpen, setIsOpen] = useState(false)
 

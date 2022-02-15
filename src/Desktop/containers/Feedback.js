@@ -68,6 +68,7 @@ export default function Report() {
             <div className={classes.container}>
                 <div className={classes.tagLine}>
                     <h3>Bienvenue sur la Beta privée Signally !</h3>
+                    <br />
                     <p>Comme nous sommes en version Beta, tout n’est pas encore parfait !
                         <br /><br />
                         Néanmoins, grâce à vous, nous pourrons rendre la plateforme de plus en plus performante et encore plus simple à utiliser.

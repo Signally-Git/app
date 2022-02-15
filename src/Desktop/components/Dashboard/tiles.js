@@ -32,25 +32,25 @@ function Tiles(props) {
             setLoading(true)
             setUser(res.data)
             await request.get(res.data.organisation).then((res) =>
-            setOrganisation(res.data))
+                setOrganisation(res.data))
             // console.log(res)
         })
 
         request.get(`events`).then((res) => {
             setEvents(res.data["hydra:member"])
-        }).catch(() => {})
+        }).catch(() => { })
         request.get(`teams`).then((res) => {
             setTeamsList(res.data["hydra:member"])
-        }).catch(() => {})
+        }).catch(() => { })
         request.get(`workplaces`).then((res) => {
             setWPs(res.data["hydra:member"])
-        }).catch(() => {})
+        }).catch(() => { })
         request.get(`users`).then((res) => {
             setUsers(res.data["hydra:member"])
-        }).catch(() => {})
+        }).catch(() => { })
         request.get(`signatures`).then((res) => {
             setTemplates(res.data["hydra:member"])
-        }).catch(() => {})
+        }).catch(() => { })
 
     }, [])
 
@@ -68,40 +68,44 @@ function Tiles(props) {
     }, [users])
     return (
         <div className={classes.container}>
-            {modal ? <Modal style={{left: 0}} title="Êtes-vous sûr de vouloir déployer la signature ?" 
-            content={`Vous allez envoyer un mail de déploiement à ${users.length} utilisateurs`}
-            cancel="Annuler" validate="Déployer" 
-            onCancel={() => setModal(false)} onConfirm={() => setModal(false)} /> : "" }
+            {modal ? <Modal style={{ left: 0 }} title="Êtes-vous sûr de vouloir déployer la signature ?"
+                content={`Vous allez envoyer un mail de déploiement à ${users.length} utilisateurs`}
+                cancel="Annuler" validate="Déployer"
+                onCancel={() => setModal(false)} onConfirm={() => setModal(false)} /> : ""}
             <MobileView><h1>Bonjour {JSON.parse(localStorage.getItem("user"))?.first_name}</h1></MobileView>
             <div className={classes.tilesList}>
-                <Link to="/signatures" className={classes.tile}>
-                    <div className={classes.row}>
-                        <p>Signatures</p>
-                        <img src={ChevronRight} alt="View" />
-                    </div>
-                    <div className={classes.row}>
-                        <div>
-                            <span className={classes.bigTxt}>{signatures.length}</span>
-                            <span> /{templates?.length}</span>
+                {!templates.length < 1 ? <>
+                    <Link to="/signatures" className={classes.tile}>
+                        <div className={classes.row}>
+                            <p>Signatures</p>
+                            <img src={ChevronRight} alt="View" />
                         </div>
-                        <span className={classes.activeSpan}>actives</span>
-                    </div>
-                </Link>
-                <Link to="/events" className={classes.tile}>
-                    <div className={classes.row}>
-                        <p>Events</p>
-                        <img src={ChevronRight} alt="View" />
-                    </div>
-                    <div className={classes.row}>
-                        <div>
-                            <span className={classes.bigTxt}>{activeEvents.length}</span>
-                            <span> /{events.length}</span>
+                        <div className={classes.row}>
+                            <div>
+                                <span className={classes.bigTxt}>{signatures.length}</span>
+                                <span> /{templates?.length}</span>
+                            </div>
+                            <span className={classes.activeSpan}>actives</span>
                         </div>
-                        <span className={classes.activeSpan}>actifs</span>
+                    </Link>
+                </> : null}
+                {!events.length < 1 ? <>
+                    <Link to="/events" className={classes.tile}>
+                        <div className={classes.row}>
+                            <p>Events</p>
+                            <img src={ChevronRight} alt="View" />
+                        </div>
+                        <div className={classes.row}>
+                            <div>
+                                <span className={classes.bigTxt}>{activeEvents.length}</span>
+                                <span> /{events.length}</span>
+                            </div>
+                            <span className={classes.activeSpan}>actifs</span>
 
-                    </div>
-                </Link>
-                {/* {!teamsList.length < 1 ? <> */}
+                        </div>
+                    </Link>
+                </> : null}
+                {!wps.length < 1 ? <>
                     <Link to="/teams/workplaces" className={classes.tile}>
                         <div className={classes.row}>
                             <p>Groupes</p>
@@ -115,6 +119,8 @@ function Tiles(props) {
                             <span className={classes.activeSpan}>actifs</span>
                         </div>
                     </Link>
+                </> : null}
+                {!teamsList.length < 1 ? <>
                     <Link to="/teams/teams" className={classes.tile}>
                         <div className={classes.row}>
                             <p>Équipes</p>
@@ -128,7 +134,7 @@ function Tiles(props) {
                             <span className={classes.activeSpan}>actives</span>
                         </div>
                     </Link>
-                {/* </> : null} */}
+                </> : null}
                 <Link to="/teams/users" className={classes.tile}>
                     <div className={classes.row}>
                         <p>Collaborateurs</p>
@@ -144,16 +150,16 @@ function Tiles(props) {
                 <div className={`${classes.tile} ${classes.deploy}`}>
                     <div className={classes.row}>
                         <p>Déploiement</p>
-                        <BsBroadcastPin fontSize={'1.75rem'} style={{margin: 'auto 0 1rem 0'}} />
+                        <BsBroadcastPin fontSize={'1.75rem'} style={{ margin: 'auto 0 1rem 0' }} />
                         {/* <img src={ChevronRight} alt="View" /> */}
                     </div>
                     <div className={classes.row}>
                         {/* <div> */}
-                            {/* <Button color={"brownFill"} style={{padding: '.5rem'}} onClick={() => setModal(true)}>Déployer pour {organisation?.name}</Button> */}
-                            <div>
-                                <span className={classes.bigTxt}>{users.length}</span>
-                            </div>
-                            <span className={classes.activeSpan}>actifs</span>
+                        {/* <Button color={"brownFill"} style={{padding: '.5rem'}} onClick={() => setModal(true)}>Déployer pour {organisation?.name}</Button> */}
+                        <div>
+                            <span className={classes.bigTxt}>{users.length}</span>
+                        </div>
+                        <span className={classes.activeSpan}>actifs</span>
                         {/* </div> */}
                     </div>
                 </div>
