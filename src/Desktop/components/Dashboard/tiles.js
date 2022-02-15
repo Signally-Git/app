@@ -26,32 +26,32 @@ function Tiles(props) {
     const [signatures, setSignatures] = useState([])
 
     useEffect(async () => {
+        setLoading(true)
         props.handleHeader(" ")
         await request.get(`whoami`).then(async (res) => {
             localStorage.setItem("user", JSON.stringify(res.data))
-            setLoading(true)
             setUser(res.data)
             await request.get(res.data.organisation).then((res) =>
                 setOrganisation(res.data))
             // console.log(res)
         })
 
-        request.get(`events`).then((res) => {
+        await request.get(`events`).then((res) => {
             setEvents(res.data["hydra:member"])
         }).catch(() => { })
-        request.get(`teams`).then((res) => {
+        await request.get(`teams`).then((res) => {
             setTeamsList(res.data["hydra:member"])
         }).catch(() => { })
-        request.get(`workplaces`).then((res) => {
+        await request.get(`workplaces`).then((res) => {
             setWPs(res.data["hydra:member"])
         }).catch(() => { })
-        request.get(`users`).then((res) => {
+        await request.get(`users`).then((res) => {
             setUsers(res.data["hydra:member"])
         }).catch(() => { })
-        request.get(`signatures`).then((res) => {
+        await request.get(`signatures`).then((res) => {
             setTemplates(res.data["hydra:member"])
+            setLoading(false)
         }).catch(() => { })
-
     }, [])
 
     useEffect(() => {
@@ -61,11 +61,14 @@ function Tiles(props) {
     }, [events, users, teamsList])
 
     useEffect(() => {
+        console.log(loading)
         users.map((user) => {
             if (user.signature_template_id)
                 setSignatures([...signatures, [user.signature_template_id]])
         })
-    }, [users])
+    }, [users, loading])
+    if (loading)
+        return <div className={classes.container}>Chargement...</div>
     return (
         <div className={classes.container}>
             {modal ? <Modal style={{ left: 0 }} title="Êtes-vous sûr de vouloir déployer la signature ?"

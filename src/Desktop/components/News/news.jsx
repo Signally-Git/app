@@ -63,6 +63,7 @@ function News({ organisation }) {
                     </span>
                 );
             }}>
+               
             <div className={classes.tab}>
                 {slide === 0 ?
                     <h5>Compte <span className={classes.orangeTxt}>{organisation?.name}</span></h5>
