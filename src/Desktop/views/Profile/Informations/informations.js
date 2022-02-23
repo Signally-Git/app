@@ -105,8 +105,8 @@ function Informations() {
         await request.patch(`users/${JSON.parse(localStorage.getItem('user')).id}`, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(() => {
-            notification({ content: <><span style={{ color: "#FF7954" }}>{firstName} {lastName}</span> édité avec succès</>, status: "valid" })
-            history.goBack()
+            // notification({ content: <><span style={{ color: "#FF7954" }}>{firstName} {lastName}</span> édité avec succès</>, status: "valid" })
+            // history.goBack()
         }).catch(() => {
             notification({ content: <><span style={{ color: "#FF7954" }}>{firstName} {lastName}</span> n'a pas pu être modifié</>, status: "invalid" })
         })

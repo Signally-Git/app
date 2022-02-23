@@ -1,17 +1,11 @@
 import classes from "../create/createSignature.module.css";
 import { useRef, useState, useEffect } from "react";
-// import axios from "axios";
-// import { API } from "config";
 import Options from "../create/Options/options";
 import Infos from "../create/Infos/infos";
 import TemplateSelection from "../create/TemplateSelect/templateSelect";
 import Preview from "../create/Preview/customizablePreview";
-import { UseUserInfos } from "Utils/useUserInfos/useUserInfos";
-import { UseOrganizationInfos } from "Utils/useOrganizationInfos/useOrganizationInfos";
 import { BsArrowRight } from "react-icons/bs";
 import Button from "Utils/Button/btn";
-import { renderToString } from "react-dom/server";
-import axios from "axios";
 import { API } from "config";
 import Input from "Utils/Input/input";
 import { useHistory, useParams } from "react-router";
@@ -19,7 +13,7 @@ import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
 
-// Component handling the creation of signature, selection of template
+// Component handling the modification of signature, selection of template
 
 function EditSignatureComponent() {
     const { signatureId } = useParams()
@@ -38,12 +32,11 @@ function EditSignatureComponent() {
 
     const [modal, setModal] = useState(false)
     const [modalContent, setModalContent] = useState()
-    const [templateId, setTemplateIdToPatch] = useState()
     const [signatureName, setSignatureName] = useState("")
 
     useEffect(() => {
         const getSignatureFromId = async () => {
-           await request.get('signatures/' + signatureId).then((res) => {
+            await request.get('signatures/' + signatureId).then((res) => {
                 setSelectedTemplate(res.data.html)
                 setSignatureName(res.data.name)
             })
@@ -89,7 +82,22 @@ function EditSignatureComponent() {
     })
 
     const handlePopulate = () => {
-        console.log(signatureOption.event)
+        setSignatureInfo({
+            logo: company?.logo,
+            firstName: { value: user?.first_name, color: "#000", style: { fontWeight: "bold" } },
+            lastName: { value: user?.last_name, color: "#000", style: { fontWeight: "bold" } },
+            jobName: { value: user?.position, color: "#000", style: {} },
+            company: { value: company?.name, color: "#000", style: { fontWeight: "bold" } },
+            addressStreet: { value: company?.address?.street, color: "#000", style: {} },
+            addressInfo: { value: company?.address?.streetInfo, color: "#000", style: {} },
+            addressZipcode: { value: company?.address?.zipCode, color: "#000", style: {} },
+            addressCity: { value: company?.address?.city, color: "#000", style: {} },
+            addressCountry: { value: company?.address?.country, color: "#000", style: {} },
+            mobile: { value: user?.phone_number, color: "#000", style: {} },
+            phone: { value: company?.digitalAddress?.phone, color: "#000", style: {} },
+            fontSize: [11],
+            fontFamily: "Helvetica"
+        })
         setSignatureOption({
             footer: { disclaimerValue: "Disclaimer", disclaimerEnabled: false, ecoValue: "Eco resp", ecoEnabled: false, items: ["Disclaimer", "Eco"] },
             salutation: { value: "Cordialement,", enabled: false, padding: 10 },
@@ -106,7 +114,6 @@ function EditSignatureComponent() {
       Ce message electronique et tous les fichiers joints ainsi que les informations contenues dans ce message (ci apres "le message"), sont confidentiels et destines exclusivement a l'usage de la personne a laquelle ils sont adresses. Si vous avez recu ce message par erreur, merci de le renvoyer a son emetteur et de le detruire. Toute diffusion, publication, totale ou partielle ou divulgation sous quelque forme que ce soit non expressement autorisees de ce message, sont interdites.,`, enabled: false, padding: 10, size: 7
             }
         })
-        console.log(signatureOption.event)
     }
 
     useEffect(() => {
@@ -116,7 +123,6 @@ function EditSignatureComponent() {
 
             setUser(user)
             setCompany(company)
-            console.log(company)
             setSignatureInfo({
                 logo: company?.logo,
                 firstName: { value: user?.first_name, color: "#000", style: { fontWeight: "bold" } },
@@ -148,7 +154,6 @@ function EditSignatureComponent() {
             setSignatureOption({ ...signatureOption, event: { ...signatureOption.event, selected: eventAPI[0], list: eventAPI } }, "active")
         }
         getEvents()
-        console.log(signatureOption.event.selected)
     }, [signatureOption.event.enabled])
 
 
@@ -172,36 +177,11 @@ function EditSignatureComponent() {
     }, [modal, signatureName])
 
     const handleSave = async () => {
-        const toSave = {
-            ...signatureInfo,
-            logo: { ...signatureInfo.logo, path: "PLACEHOLDER_COMPANY_ICON" },
-            firstName: { ...signatureInfo.firstName, value: "PLACEHOLDER_FIRST_NAME" },
-            lastName: { ...signatureInfo.lastName, value: "PLACEHOLDER_LAST_NAME" },
-            jobName: { ...signatureInfo.jobName, value: "PLACEHOLDER_POSITION" },
-            company: { ...signatureInfo.company, value: "PLACEHOLDER_COMPANY" },
-            addressStreet: { ...signatureInfo.addressStreet, value: "PLACEHOLDER_ADDRESS_STREET" },
-            addressInfo: { ...signatureInfo.addressInfo, value: "PLACEHOLDER_ADDRESS_INFO" },
-            addressZipcode: { ...signatureInfo.addressZipcode, value: "PLACEHOLDER_ADDRESS_ZIPCODE" },
-            addressCity: { ...signatureInfo.addressCity, value: "PLACEHOLDER_ADDRESS_CITY" },
-            addressCountry: { ...signatureInfo.country, value: "PLACEHOLDER_ADDRESS_COUNTRY" },
-            mobile: { ...signatureInfo.mobile, value: "PLACEHOLDER_MOBILE" },
-            phone: { ...signatureInfo.phone, value: "PLACEHOLDER_PHONE" },
-
-            event: signatureOption.event.enabled === true ? "PLACEHOLDER_EVENT_BANNER" : "",
-        }
-        const test = <Preview infos={toSave} options={signatureOption} template={selectedTemplate} />
-
-        const req = {
-            name: signatureName,
-            html: renderToString(test)
-        }
-
-        await request.patch(`signatures/` + signatureId, { name: signatureName, html: renderToString(test), }, {
+        await request.patch(`signatures/` + signatureId, { name: signatureName, }, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(
             async (result) => {
                 notification({ content: <>Votre signature <span style={{ color: "#FF7954" }}>{signatureName}</span> a été modifiée avec succès</>, status: "valid" })
-                setTemplateIdToPatch(result.data.id)
                 const styles = [
                     // COLOR FOR EACH TXT
                     {
@@ -514,7 +494,6 @@ function EditSignatureComponent() {
                 history.push('/signatures')
             }
         ).catch((err) => {
-            console.log(err)
             notification({ content: <>Une erreur s'est produite. Veuillez réessayer</>, status: "invalid" })
         })
 
@@ -551,7 +530,6 @@ function EditSignatureComponent() {
     }
 
     useEffect(() => {
-        console.log("HERE", signatureInfo.firstName, "END HERE")
         if (signatureInfo && signatureOption && selectedTemplate)
             setPreview(<Preview infos={signatureInfo} options={signatureOption} template={selectedTemplate} />)
     }, [signatureInfo, signatureOption, selectedTemplate])
@@ -561,7 +539,7 @@ function EditSignatureComponent() {
         <div className={classes.container} ref={elem}>
             {modal === true ? modalContent : ""}
             <div>
-                <h1>Modifier une signature</h1>
+                <h1>Modifier <span className={classes.orangeTxt}>{signatureName}</span></h1>
                 <div className={classes.row}>
                     <div className={classes.options}>
                         <div className={classes.tabsContainer}>

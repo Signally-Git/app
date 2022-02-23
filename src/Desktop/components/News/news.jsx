@@ -11,6 +11,7 @@ function News({ organisation }) {
     const [activeSignature, setActiveSignature] = React.useState(false)
     const [activeUsers, setActiveUsers] = React.useState(false)
     const [activeEvents, setActiveEvents] = React.useState(false)
+    const missing = []
     const [hide, setHide] = React.useState(false)
     const [loading, setLoading] = React.useState(false)
     const [height, setHeight] = React.useState(50)
@@ -26,9 +27,17 @@ function News({ organisation }) {
         if (organisation)
             setLoading(false)
         console.log(organisation)
-        if (organisation?.address.id && organisation?.websiteUrl && organisation?.digitalAddress?.phone) {
+        if (organisation?.address.id && organisation?.websiteUrl.length > 0 && organisation?.digitalAddress?.phone.length > 0) {
             setSlide(1)
             setActiveAcc(true)
+        }
+        else {
+            if (!organisation?.address.id)
+                missing.push('adresse')
+            if (!organisation?.websiteUrl)
+                missing.push('site Internet')
+            if (!organisation?.digitalAddress?.phone)
+                missing.push('téléphone')
         }
         if (organisation?.signatures?.length > 0) {
             setSlide(2)
@@ -63,7 +72,7 @@ function News({ organisation }) {
                     </span>
                 );
             }}>
-               
+
             <div className={classes.tab}>
                 {slide === 0 ?
                     <h5>Compte <span className={classes.orangeTxt}>{organisation?.name}</span></h5>
@@ -80,20 +89,20 @@ function News({ organisation }) {
                                 title={"Vous devez d'abord créer une signature"}>Collaborateurs</li> :
                             <li className={`${activeUsers ? classes.done : ""} ${slide === 2 ? classes.isActive : ""}`}
                                 onClick={() => setSlide(2)}
-                                >Collaborateurs</li>}
+                            >Collaborateurs</li>}
 
                         <li className={`${activeEvents ? classes.done : ""} ${slide === 3 ? classes.isActive : ""}`} onClick={() => setSlide(3)}>Events</li>
                     </ul>
                     <Carousel showIndicators={false} selectedItem={slide} showArrows={false} dynamicHeight={false}>
                         <div className={classes.slide} ref={slider}>
-                            <p>Vous n'avez pas renseigné toutes les informations requises par certaines templates de signature (exemple: l'adresse de votre société)</p>
+                            <p>{missing.length > 0 ? `Vous n'avez pas renseigné toutes les informations requises par certaines templates de signature (${missing.join(", ")})` : "Votre profil contient toutes les informations nécessaires aux templates des signatures."}</p>
                             <div className={classes.btnsContainer}>
                                 <Button color="brown" onClick={() => setSlide(1)}>Passer cette étape</Button>
                                 <Button color="orange" onClick={() => history.push('/profile/informations')}>Compléter mon profil</Button>
                             </div>
                         </div>
                         <div className={classes.slide}>
-                            <p>Vous n'avez pas encore créé de signature. Cliquez ci-dessous pour en ajouter une !</p>
+                            <p>{activeSignature ? "Vous avez déjà créé une première signature ! Vous pouvez les voir dans l'onglet Signatures." : "Vous n'avez pas encore créé de signature. Cliquez ci-dessous pour en ajouter une !"}</p>
                             <Button color="orange" onClick={() => history.push('/create-signature')}>Créer ma première signature</Button>
                         </div>
                         <div className={classes.slide}>

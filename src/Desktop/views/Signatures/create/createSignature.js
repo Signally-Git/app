@@ -159,24 +159,24 @@ function CreateSignatureComponent() {
   }, [modal, signatureName])
 
   const handleSave = async () => {
-    const toSave = {
-      ...signatureInfo,
-      logo: { ...signatureInfo.logo, path: "PLACEHOLDER_COMPANY_ICON" },
-      firstName: { ...signatureInfo.firstName, value: "PLACEHOLDER_FIRST_NAME" },
-      lastName: { ...signatureInfo.lastName, value: "PLACEHOLDER_LAST_NAME" },
-      jobName: { ...signatureInfo.jobName, value: "PLACEHOLDER_POSITION" },
-      company: { ...signatureInfo.company, value: "PLACEHOLDER_COMPANY" },
-      addressStreet: { ...signatureInfo.addressStreet, value: "PLACEHOLDER_ADDRESS_STREET" },
-      addressInfo: { ...signatureInfo.addressInfo, value: "PLACEHOLDER_ADDRESS_INFO" },
-      addressZipcode: { ...signatureInfo.addressZipcode, value: "PLACEHOLDER_ADDRESS_ZIPCODE" },
-      addressCity: { ...signatureInfo.addressCity, value: "PLACEHOLDER_ADDRESS_CITY" },
-      addressCountry: { ...signatureInfo.country, value: "PLACEHOLDER_ADDRESS_COUNTRY" },
-      mobile: { ...signatureInfo.mobile, value: "PLACEHOLDER_MOBILE" },
-      phone: { ...signatureInfo.phone, value: "PLACEHOLDER_PHONE" },
+    // const toSave = {
+    //   ...signatureInfo,
+    //   logo: { ...signatureInfo.logo, path: "PLACEHOLDER_COMPANY_ICON" },
+    //   firstName: { ...signatureInfo.firstName, value: "PLACEHOLDER_FIRST_NAME" },
+    //   lastName: { ...signatureInfo.lastName, value: "PLACEHOLDER_LAST_NAME" },
+    //   jobName: { ...signatureInfo.jobName, value: "PLACEHOLDER_POSITION" },
+    //   company: { ...signatureInfo.company, value: "PLACEHOLDER_COMPANY" },
+    //   addressStreet: { ...signatureInfo.addressStreet, value: "PLACEHOLDER_ADDRESS_STREET" },
+    //   addressInfo: { ...signatureInfo.addressInfo, value: "PLACEHOLDER_ADDRESS_INFO" },
+    //   addressZipcode: { ...signatureInfo.addressZipcode, value: "PLACEHOLDER_ADDRESS_ZIPCODE" },
+    //   addressCity: { ...signatureInfo.addressCity, value: "PLACEHOLDER_ADDRESS_CITY" },
+    //   addressCountry: { ...signatureInfo.country, value: "PLACEHOLDER_ADDRESS_COUNTRY" },
+    //   mobile: { ...signatureInfo.mobile, value: "PLACEHOLDER_MOBILE" },
+    //   phone: { ...signatureInfo.phone, value: "PLACEHOLDER_PHONE" },
 
-      event: signatureOption.event.enabled === true ? "PLACEHOLDER_EVENT_BANNER" : "",
-    }
-    const test = <Preview infos={toSave} options={signatureOption} template={selectedTemplate} />
+    //   event: signatureOption.event.enabled === true ? "PLACEHOLDER_EVENT_BANNER" : "",
+    // }
+    const test = <Preview infos={signatureInfo} options={signatureOption} template={selectedTemplate} />
 
     const req = {
       name: signatureName,

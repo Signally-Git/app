@@ -17,6 +17,7 @@ function Dashboard(props) {
     const [isHeader, setIsHeader] = useState("")
     const [createEvent, setCreateEvent] = useState(null)
     const [user, setUser] = useState()
+    const [users, setUsers] = useState([])
     const [template, setTemplate] = useState()
     const [templateName, setTemplateName] = useState()
     const [data, setData] = useState([])
@@ -68,12 +69,14 @@ function Dashboard(props) {
     const [chartSeriesEvents, setChartSeriesEvents] = useState([{ name: 'CPM bannière', type: "line", data: [18, 24, 11, 14, 25, 22, 23] }])
 
     useEffect(async () => {
-        await request.get(`whoami`).then((res) => {
+        await request.get(`whoami`).then(async (res) => {
+            let users;
             setUser(res.data)
             setTemplate(res.data?.compiledSignature)
             setTemplateName(res.data?.signature?.name)
-            request.get(res.data?.organisation).then((r) => {
-                setOrganisation(r.data)
+            await request.get('users').then((r) => users = r.data)
+            await request.get(res.data?.organisation).then((r) => {
+                setOrganisation({...r.data, ...organisation, users: users['hydra:member']})
             })
         })
     }, [])

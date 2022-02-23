@@ -798,3 +798,7 @@ input:checked + .slider:before {
 .reorganizeSocials div {
   cursor: move;
 }
+
+.orangeTxt {
+  color: #FF7954;
+}

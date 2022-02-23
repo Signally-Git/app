@@ -87,8 +87,8 @@ function Team() {
                                 <span>{templates.length} signatures</span>
                                 <ul className={classes.itemsList}>
                                     {templates.map((signature) => {
-                                        return (<li onMouseEnter={() => setPreview(signature)} key={signature.id} onClick={() => history.push('/edit-signature/'+ signature.id)}>
-                                            <span>{signature.name}</span>
+                                        return (<li onMouseEnter={() => setPreview(signature)} key={signature.id}>
+                                            <span  onClick={() => history.push('/edit-signature/'+ signature.id)}>{signature.name}</span>
                                             <div className={classes.actionsContainer}>
                                                 {/* <AiOutlineEdit /> */}
                                                 <FiTrash onClick={() => handleDelete(signature.id)} />
