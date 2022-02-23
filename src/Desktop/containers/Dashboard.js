@@ -5,17 +5,10 @@ import Events from '../views/Events/events'
 import CreateEvent from '../views/Events/CreateEvent/createEvent'
 import { useEffect, useState } from 'react'
 import Profile from '../views/Profile/profile'
-import Chart from 'react-apexcharts'
-
-import axios from 'axios'
-import { API } from 'config'
 import Users from '../views/Users/users'
 import CreateSignature from '../views/Signatures/create/createSignature'
-import { Link } from 'react-router-dom'
 import { UseEvents } from 'Utils/useEvents/useEvents'
-import ReadOnlyPreview from 'Desktop/views/Signatures/create/Preview/readOnlyPreview'
 import request from 'Utils/Request/request'
-import Button from 'Utils/Button/btn'
 import News from 'Desktop/components/News/news'
 
 let count = 0;
@@ -26,8 +19,6 @@ function Dashboard(props) {
     const [user, setUser] = useState()
     const [template, setTemplate] = useState()
     const [templateName, setTemplateName] = useState()
-    const [stat, setStat] = useState(true)
-    const [statEvent, setStatEvent] = useState(true)
     const [data, setData] = useState([])
     const [activeEvents, setActiveEvents] = useState()
     const [organisation, setOrganisation] = useState()

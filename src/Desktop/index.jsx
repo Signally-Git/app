@@ -17,6 +17,7 @@ import Report from './containers/Feedback'
 import Signup from './components/Landing/SignUp/SignUp'
 import { NotificationProvider } from 'Utils/Notifications/notifications'
 import ResetPassword from './views/ResetPassword/ResetPassword.jsx'
+import EditSignatureComponent from './views/Signatures/edit/editSignature'
 
 // Routing for desktop view
 
@@ -50,6 +51,8 @@ export default function DesktopRoutes() {
             <PrivateRoute path="/signatures" page="signatures" component={Dashboard} />
 
             <PrivateRoute path="/create-signature" component={CreateSignature} />
+
+            <PrivateRoute path="/edit-signature/:signatureId" component={EditSignatureComponent} />
 
             <PrivateRoute path="/user/:userId" component={Users} />
 
