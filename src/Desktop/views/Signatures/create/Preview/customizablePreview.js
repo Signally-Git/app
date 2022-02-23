@@ -4,7 +4,7 @@ import DetectSocialNetwork from "Utils/DetectSocialNetwork/DetectSocialNetwork"
 
 export default function Preview({ infos, template, options, ...props }) {
     // Converts JSX camel Case attributes to dashed classics HTML
-    console.log(infos.firstName)
+    console.log(infos?.company?.style?.fontStyle)
     // console.log(props?.options?.event?.display)
     // console.log(infos?.firstName?.color)
     const convertToHTML = (object) => {
@@ -53,20 +53,58 @@ export default function Preview({ infos, template, options, ...props }) {
     let replaced;
 
     replaced = template.replaceAll("{{ styles['firstName']['color'] }}", `${infos?.firstName?.color};`)
+    replaced = replaced.replaceAll("{{ styles['firstName']['textDecoration'] }}", `${infos?.firstName?.style?.textDecoration || "none"};`)
+    replaced = replaced.replaceAll("{{ styles['firstName']['fontWeight'] }}", `${infos?.firstName?.style?.fontWeight || "normal"};`)
+    replaced = replaced.replaceAll("{{ styles['firstName']['fontStyle'] }}", `${infos?.firstName?.style?.fontStyle || "normal"};`)
     replaced = replaced.replaceAll('{{ user.firstName }}', 'Prénom')
-    replaced = replaced.replaceAll('{{ user.lastName }}', infos?.lastName?.value || 'Nom')
-    replaced = replaced.replaceAll('{{ user.position }}', 'Poste')
 
+    replaced = replaced.replaceAll('{{ user.lastName }}', infos?.lastName?.value || 'Nom')
+    replaced = replaced.replaceAll("{{ styles['lastName']['color'] }}", `${infos?.lastName?.color};`)
+    replaced = replaced.replaceAll("{{ styles['lastName']['textDecoration'] }}", `${infos?.lastName?.style?.textDecoration || "none"};`)
+    replaced = replaced.replaceAll("{{ styles['lastName']['fontWeight'] }}", `${infos?.lastName?.style?.fontWeight || "normal"};`)
+    replaced = replaced.replaceAll("{{ styles['lastName']['fontStyle'] }}", `${infos?.lastName?.style?.fontStyle || "normal"};`)
+
+    replaced = replaced.replaceAll('{{ user.position }}', 'Poste')
+    replaced = replaced.replaceAll("{{ styles['jobName']['color'] }}", `${infos?.jobName?.color};`)
+    replaced = replaced.replaceAll("{{ styles['jobName']['textDecoration'] }}", `${infos?.jobName?.style?.textDecoration || "none"};`)
+    replaced = replaced.replaceAll("{{ styles['jobName']['fontWeight'] }}", `${infos?.jobName?.style?.fontWeight || "normal"};`)
+    replaced = replaced.replaceAll("{{ styles['jobName']['fontStyle'] }}", `${infos?.jobName?.style?.fontStyle || "normal"};`)
+    
     replaced = replaced.replaceAll('{{ absolute_url(asset(logo)) }}', infos?.logo?.path || "http://fakeimg.pl/108?font=noto&font_size=12")
+
     replaced = replaced.replaceAll('{{ company.name }}', 'Société')
+    replaced = replaced.replaceAll("{{ styles['companyName']['color'] }}", `${infos?.company?.color};`)
+    replaced = replaced.replaceAll("{{ styles['companyName']['textDecoration'] }}", `${infos?.company?.style.textDecoration || "none"};`)
+    replaced = replaced.replaceAll("{{ styles['companyName']['fontWeight'] }}", `${infos?.company?.style?.fontWeight || "normal"};`)
+    replaced = replaced.replaceAll("{{ styles['companyName']['fontStyle'] }}", `${infos?.company?.style?.fontStyle || "normal"};`)
+
     replaced = replaced.replaceAll('{{ address.street }}', 'Adresse')
+    replaced = replaced.replaceAll("{{ styles['addressStreet']['color'] }}", `${infos?.addressStreet?.color};`)
+    replaced = replaced.replaceAll("{{ styles['addressStreet']['textDecoration'] }}", `${infos?.addressStreet?.style.textDecoration || "none"};`)
+    replaced = replaced.replaceAll("{{ styles['addressStreet']['fontWeight'] }}", `${infos?.addressStreet?.style?.fontWeight || "normal"};`)
+    replaced = replaced.replaceAll("{{ styles['addressStreet']['fontStyle'] }}", `${infos?.addressStreet?.style?.fontStyle || "normal"};`)
     replaced = replaced.replaceAll('{{ address.streetInfo }}', 'Adresse 2')
+
     replaced = replaced.replaceAll('{{ address.zipCode }}', 'Code postal')
+    replaced = replaced.replaceAll("{{ styles['addressZipcode']['color'] }}", `${infos?.addressZipcode?.color};`)
+    replaced = replaced.replaceAll("{{ styles['addressZipcode']['textDecoration'] }}", `${infos?.addressZipcode?.style.textDecoration || "none"};`)
+    replaced = replaced.replaceAll("{{ styles['addressZipcode']['fontWeight'] }}", `${infos?.addressZipcode?.style?.fontWeight || "normal"};`)
+    replaced = replaced.replaceAll("{{ styles['addressZipcode']['fontStyle'] }}", `${infos?.addressZipcode?.style?.fontStyle || "normal"};`)
+
     replaced = replaced.replaceAll('{{ address.city }}', 'Ville')
     replaced = replaced.replaceAll('{{ address.country }}', 'Pays')
-
+    
     replaced = replaced.replaceAll('{{ user.mobilePhone }}', 'Mobile')
+    replaced = replaced.replaceAll("{{ styles['mobile']['color'] }}", `${infos?.mobile?.color};`)
+    replaced = replaced.replaceAll("{{ styles['mobile']['textDecoration'] }}", `${infos?.mobile?.style.textDecoration || "none"};`)
+    replaced = replaced.replaceAll("{{ styles['mobile']['fontWeight'] }}", `${infos?.mobile?.style?.fontWeight || "normal"};`)
+    replaced = replaced.replaceAll("{{ styles['phone']['fontStyle'] }}", `${infos?.mobile?.style?.fontStyle || "normal"};`)
+
     replaced = replaced.replaceAll('{{ user.phone }}', 'Fixe')
+    replaced = replaced.replaceAll("{{ styles['phone']['color'] }}", `${infos?.phone?.color};`)
+    replaced = replaced.replaceAll("{{ styles['phone']['textDecoration'] }}", `${infos?.phone?.style.textDecoration || "none"};`)
+    replaced = replaced.replaceAll("{{ styles['phone']['fontWeight'] }}", `${infos?.phone?.style?.fontWeight || "normal"};`)
+    replaced = replaced.replaceAll("{{ styles['phone']['fontStyle'] }}", `${infos?.phone?.style?.fontStyle || "normal"};`)
 
     var greeting = /{% if greeting %}\s*{{.*}}\s*{% endif %}/ig;
     replaced = replaced.replaceAll(greeting, options?.salutation.enabled ? `<p style="padding-bottom: ${options?.salutation.padding}px;"}>${options?.salutation.value || "Cordialement,"}</p>` : "")
@@ -85,60 +123,9 @@ export default function Preview({ infos, template, options, ...props }) {
 
 
     // OPTIONS
-    replaced = replaced.replaceAll("{{ styles['customDiv']['color'] }}", options?.bgColor || "#FCE750")
+    replaced = replaced.replaceAll("{{ styles['greetingsPadding']['padding'] }}", options?.event.padding || 12)
+    replaced = replaced.replaceAll("{{ styles['divColor']['color'] }}", options?.bgColor || "#FCE750")
+    replaced = replaced.replaceAll("{{ styles['eventPadding']['padding'] }}", options?.event.padding || 12)
 
     return parse(replaced)
-    // const mapObj = {
-    //     PLACEHOLDER_GENERAL_FONT: props.infos?.fontFamily || "Helvetica,Arial,sans-serif",
-    //     PLACEHOLDER_GENERAL_FONTSIZE: `${props.infos?.fontSize[0]}px` || "11px",
-    //     PLACEHOLDER_COMPANY_ICON: props.infos?.logo?.path || "https://via.placeholder.com/108",
-    //     PLACEHOLDER_BANNER: props.options?.bannerTop.data ? `<img style="border-radius: 4px; margin-bottom: 12px; max-width: 380px" src='${URL.createObjectURL(props.options.bannerTop.data)}'
-    // alt='banner' />` : "",
-    //     PLACEHOLDER_SALUTATION: props.options?.salutation.enabled ? `<p style="padding-bottom: ${props.options?.salutation.padding}px;"}>${props.options?.salutation.value || "Cordialement,"}</p>` : "",
-    //     PLACEHOLDER_DIV_COLOR: props.options?.bgColor || "#FCE750",
-    //     PLACEHOLDER_FIRST_NAME: props.infos?.firstName.value || "Prénom",
-    //     PLACEHOLDER_FIRST_NAME_STYLE: `color:${props.infos?.firstName?.color}; ${convertToHTML(props.infos?.firstName?.style)}` || "PLACEHOLDER_FIRST_NAME_STYLE",
-    //     PLACEHOLDER_LAST_NAME: props.infos?.lastName?.value || "Nom",
-    //     PLACEHOLDER_LAST_NAME_STYLE: `color:${props.infos?.lastName?.color};${convertToHTML(props.infos?.lastName?.style)}` || "PLACEHOLDER_LAST_NAME_STYLE",
-    //     PLACEHOLDER_POSITION: props.infos?.jobName?.value || "Poste",
-    //     PLACEHOLDER_POSTE_STYLE: `color:${props.infos?.jobName?.color};${convertToHTML(props.infos?.jobName?.style)}` || "PLACEHOLDER_POSTE_STYLE",
-    //     PLACEHOLDER_COMPANY: props.infos?.company?.value || "Société",
-    //     PLACEHOLDER_COMPANY_STYLE: `color:${props.infos?.company?.color};${convertToHTML(props.infos?.company?.style)}` || "PLACEHOLDER_COMPANY_STYLE",
-    //     PLACEHOLDER_ADDRESS_STREET: props.infos?.addressStreet?.value || "Adresse",
-    //     PLACEHOLDER_ADDRESS_INFO: props.infos?.addressInfo?.value || "",
-    //     PLACEHOLDER_ADDRESS_ZIPCODE: props.infos?.addressZipcode?.value || "Code postal",
-    //     PLACEHOLDER_ADDRESS_CITY: props.infos?.addressCity?.value || "Ville",
-    //     PLACEHOLDER_ADDRESS_COUNTRY: props.infos?.addressCountry?.value || "Pays",
-    //     PLACEHOLDER_FOLLOWUS: props.options?.followUs?.value,
-    //     PLACEHOLDER_SOCIALS: socialNetworks,
-    //     PLACEHOLDER_ADDRESS_STYLE: `color:${props.infos?.addressStreet?.color};` || "PLACEHOLDER_ADDRESS_STYLE",
-    //     PLACEHOLDER_MOBILE: props.infos?.mobile.value || "mobile",
-    //     PLACEHOLDER_MOBILE_STYLE: `color:${props.infos?.mobile?.color};${convertToHTML(props.infos?.mobile?.style)}` || "PLACEHOLDER_MOBILE_STYLE",
-    //     PLACEHOLDER_PHONE: props.infos?.phone?.value || "fixe",
-    //     PLACEHOLDER_PHONE_STYLE: `color:${props.infos?.phone?.color};${convertToHTML(props.infos?.phone?.style)}` || "PLACEHOLDER_PHONE_STYLE",
-    //     PLACEHOLDER_EVENT_BANNER: props.infos.event ? props.infos.event : (props.options?.event?.enabled ? `PLACEHOLDER_EVENT_BANNER` : ""), 
-    //     // PLACEHOLDER_EVENT_BANNER: props.options?.event?.enabled ? `${props?.options?.event?.display}` : "", 
-    //     PLACEHOLDER_DISCLAIMER: props.options?.footer?.enabled ? `<p style="box-sizing: border-box; margin-top:${props.options?.footer?.padding}px; font-size:${props.options?.footer?.size}px; max-width: ${props.options?.footer?.maxWidth}px;">${props.options?.footer?.value.replace(/\n/g, "<br />")}</p>` : ""
-    // }
-
-    // return parse(
-    //     props.template.replace(
-    //         /\b(?:PLACEHOLDER_GENERAL_FONT|PLACEHOLDER_GENERAL_FONTSIZE|PLACEHOLDER_BANNER|PLACEHOLDER_FOLLOWUS|PLACEHOLDER_SALUTATION|PLACEHOLDER_DIV_COLOR|PLACEHOLDER_FIRST_NAME|PLACEHOLDER_COMPANY_ICON|PLACEHOLDER_FIRST_NAME_STYLE|PLACEHOLDER_LAST_NAME|PLACEHOLDER_LAST_NAME_STYLE|PLACEHOLDER_POSITION|PLACEHOLDER_POSTE_STYLE|PLACEHOLDER_COMPANY|PLACEHOLDER_COMPANY_STYLE|PLACEHOLDER_ADDRESS_STREET|PLACEHOLDER_ADDRESS_INFO|PLACEHOLDER_ADDRESS_ZIPCODE|PLACEHOLDER_ADDRESS_CITY|PLACEHOLDER_ADDRESS_COUNTRY|PLACEHOLDER_ADDRESS_STYLE|PLACEHOLDER_MOBILE|PLACEHOLDER_MOBILE_STYLE|PLACEHOLDER_PHONE|PLACEHOLDER_PHONE_STYLE|PLACEHOLDER_FACEBOOK|PLACEHOLDER_INSTAGRAM|PLACEHOLDER_TWITTER|PLACEHOLDER_LINKEDIN|PLACEHOLDER_SOCIALS|PLACEHOLDER_EVENT_BANNER|PLACEHOLDER_DISCLAIMER)\b/gi,
-    //         (matched) => mapObj[matched]
-    //     )
-    // )
-    // console.log(props.infos?.firstName.style, props.infos?.lastName.style)
-    // return (<>
-    //     <div style={{ fontFamily: `${props.infos?.fontFamily}` }}>
-    //         {props.options?.salutation.enabled ? <p style={{paddingBottom: `${props.options?.salutation.padding}px`}}>{props.options?.salutation.value}</p> : ""}
-    //         {props.options?.bannerTop.enabled && props.options?.bannerTop.data ? <img src={URL.createObjectURL(props.options?.bannerTop.data)}  style={{paddingBottom: `${props.options?.bannerTop.padding}px`}} /> : ""}
-    //         <p style={{ ...props.infos?.firstName.style, color: props.infos?.firstName.color, fontSize: `${props.infos?.fontSize}px` }}>{props.infos?.firstName.value}</p>
-    //         <p style={{ ...props.infos?.lastName.style, color: props.infos?.lastName.color, fontSize: `${props.infos?.fontSize}px` }}>{props.infos?.lastName.value}</p>
-    //         <p style={{ ...props.infos?.jobName.style, color: props.infos?.jobName.color, fontSize: `${props.infos?.fontSize}px` }}>{props.infos?.jobName.value}</p>
-    //         <p style={{ ...props.infos?.company.style, color: props.infos?.company.color, fontSize: `${props.infos?.fontSize}px` }}>{props.infos?.company.value}</p>
-    //         <p style={{ ...props.infos?.address.style, color: props.infos?.address.color, fontSize: `${props.infos?.fontSize}px` }}>{props.infos?.address.value}</p>
-    //         <p style={{ ...props.infos?.mobile.style, color: props.infos?.mobile.color, fontSize: `${props.infos?.fontSize}px` }}>{props.infos?.mobile.value}</p>
-    //         <p style={{ ...props.infos?.phone.style, color: props.infos?.phone.color, fontSize: `${props.infos?.fontSize}px` }}>{props.infos?.phone.value}</p>
-    //     </div>
-    // </>)
 }

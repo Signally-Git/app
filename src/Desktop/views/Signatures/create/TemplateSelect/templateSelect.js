@@ -8,9 +8,11 @@ import Button from 'Utils/Button/btn';
 
 const templateAPI = [{
     id: 1, alignment: "Horizontal", tags: ["studio"], html: `   
+    <span style="padding-bottom: {{ styles['greetingsPadding']['padding'] }}">
     {% if greeting %}
     {{ greetings }}
     {% endif %}
+    </span>
     <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:0">
     <tbody>
         <tr>
@@ -33,45 +35,47 @@ const templateAPI = [{
                             </td>
                             <td valign="middle" style="box-sizing: border-box; border: none; padding: 0;">
                                 <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0"
-                                    style="border-collapse:collapse; border:none; border-color: #fce750;">
+                                    style="border-collapse:collapse; border:none; border-color: {{ styles['divColor']['color'] }};">
                                     <tbody>
                                         <tr>
+                                            <td style="background: {{ styles['divColor']['color'] }}; width: 12px;">
+                                            </td>
                                             <td
-                                                style="box-sizing: border-box; border: none; background: {{ styles['customDiv']['color'] }}; font-size: 8pt; height: 94px; width: 272px">
+                                                style="box-sizing: border-box; border: none; background: {{ styles['divColor']['color'] }}; font-size: 8pt; height: 94px; width: 272px">
                                                 <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0"
                                                     style="border-collapse:collapse; border:none; font-size: 8pt;">
                                                     <tbody>
                                                         <tr height="1">
                                                             <td style="font-size: 8pt;">
-                                                                <b style=" font-size: 8pt;font-family: Helvetica; font-size: 11px; color:{{ styles['firstName']['color'] }}">{{ user.firstName }}</b>
-                                                                <b style="color:black;font-size: 8pt;font-family: Helvetica; font-size: 11px;">{{ user.lastName }}</b>
+                                                                <b style="color:{{ styles['firstName']['color'] }}; text-decoration: {{ styles['firstName']['textDecoration'] }} font-style: {{ styles['firstName']['fontStyle'] }} font-weight: {{ styles['firstName']['fontWeight'] }}; font-size: 8pt;font-family: Helvetica; font-size: 11px;">{{ user.firstName }}</b>
+                                                                <b style="color:{{ styles['lastName']['color'] }}; text-decoration: {{ styles['lastName']['textDecoration'] }} font-style: {{ styles['lastName']['fontStyle'] }} font-weight: {{ styles['lastName']['fontWeight'] }}; font-size: 8pt;font-family: Helvetica; font-size: 11px;">{{ user.lastName }}</b>
                                                             </td>
                                                         </tr>
                                                         <tr style="height: 1px">
                                                             <td>
                                                                 <span
-                                                                    style="color:black; padding: 0cm;font-family: Helvetica; font-size: 11px;">{{ user.position }}</span>
+                                                                    style="color:{{ styles['jobName']['color'] }}; text-decoration: {{ styles['jobName']['textDecoration'] }} font-style: {{ styles['jobName']['fontStyle'] }} font-weight: {{ styles['jobName']['fontWeight'] }}; padding: 0cm; font-family: Helvetica; font-size: 11px;">{{ user.position }}</span>
                                                             </td>
                                                         </tr>
                                                         <tr height="5"></tr>
                                                         <tr>
                                                             <td>
-                                                                <b style="color:black;font-family: Helvetica; font-size: 11px;">{{ company.name }}</b>
+                                                                <span style="color:{{ styles['companyName']['color'] }}; text-decoration: {{ styles['companyName']['textDecoration'] }} font-style: {{ styles['companyName']['fontStyle'] }}font-weight: {{ styles['companyName']['fontWeight'] }}font-family: Helvetica; font-size: 11px;">{{ company.name }}</span>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span style="color:black;font-family: Helvetica; font-size: 11px;">{{ address.street }} {{ address.streetInfo }}</span>
+                                                                <span style="color:{{ styles['addressStreet']['color'] }}; text-decoration: {{ styles['addressStreet']['textDecoration'] }} font-style: {{ styles['addressStreet']['fontStyle'] }}font-weight: {{ styles['addressStreet']['fontWeight'] }}font-family: Helvetica; font-size: 11px;">{{ address.street }} {{ address.streetInfo }}</span>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span style="color:black;font-family: Helvetica; font-size: 11px;">
+                                                                <span style="color:{{ styles['addressZipcode']['color'] }}; text-decoration: {{ styles['addressZipcode']['textDecoration'] }} font-style: {{ styles['addressZipcode']['fontStyle'] }} font-weight: {{ styles['addressZipcode']['fontWeight'] }}font-family: Helvetica; font-size: 11px;">
                                                                     {{ address.zipCode }} {{ address.city }} {{ address.country }}
                                                                 </span>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>
+                                                            <td style="color: {{ styles['mobile']['color'] }}font-weight: {{ styles['mobile']['fontWeight'] }};">
                                                                 {{ user.mobilePhone }}
                                                                 {{ user.phone }}
                                                             </td>
@@ -79,6 +83,8 @@ const templateAPI = [{
                                                     </tbody>
                                                 </table>
                                             </td>
+                                            <td style="background: {{ styles['divColor']['color'] }}; width: 12px;">
+                                                                                        </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -90,7 +96,7 @@ const templateAPI = [{
             </td>
         </tr>
         <tr>
-            <td style="border: none; padding: 12px 0">
+            <td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: {{ styles['eventPadding']['padding'] }}px">
                 {% if event %}
                 <img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380"
                     src="{{ event.imagePath }}" alt='{{ event.name }}' />
@@ -103,6 +109,8 @@ const templateAPI = [{
                     style="border:none; ">
                     <tbody>
                         <tr>
+                            <td style="border-collapse:collapse; background: #000; width: 49px;">
+                                                            </td>
                             <td style="background: black">
                                 <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0">
                                     <tbody>
@@ -194,15 +202,19 @@ const templateAPI = [{
                                         </tr>
                                 </table>
                             </td>
-                  
+                            <td style="border-collapse:collapse; background: #000; width: 49px;">
+                                                            </td>
                         </tr>
                     </tbody>
             </td>
     </tbody>
 </table>
+<span style="padding-top: {{ styles['eventPadding']['padding'] }}px">
 {% if disclaimer %}
 {{ disclaimers }}
-{% endif %}`}]
+{% endif %}
+</span>
+`}]
 
 export default function TemplateSelection(props) {
     const [orientation, setOrientation] = useState("Horizontal")

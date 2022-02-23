@@ -60,7 +60,7 @@ function Team() {
         await request.delete(`signatures/${id}`).then(
             (res) => {
                 notification({ content: <>La signature a été supprimée avec succès</>, status: "valid" })
-                setPreview([]); setDeleted(res.data)
+                setPreview([]); setDeleted(id)
             }).catch(() => notification({ content: <>Impossible de supprimer <span style={{ color: "#FF7954" }}>{preview.name}</span></>, status: "invalid" }))
 
     }
