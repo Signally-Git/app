@@ -31,7 +31,7 @@ function Team() {
     }, [entity])
 
     useEffect(async () => {
-        const listTeams = await request.get('teams')
+        const listTeams = await request.get('teams?exists[workplace]=false')
         setTeams(listTeams.data['hydra:member'])
     }, [entity])
 
@@ -61,6 +61,21 @@ function Team() {
         function getRealtimeDataWOutTeam(data) {
             setTimeout(() => {
                 setUsers(data)
+            }, 1500);
+        }
+
+        return () => {
+            sse.close();
+        };
+    }, [edit])
+
+    useEffect(() => {
+        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users/teams-without-workplace`);
+        sse.onmessage = e => getRealtimeDataWOutWP(JSON.parse(e.data));
+
+        function getRealtimeDataWOutWP(data) {
+            setTimeout(() => {
+                setTeams(data)
             }, 1500);
         }
 
