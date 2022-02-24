@@ -27,7 +27,7 @@ function News({ organisation }) {
         if (organisation)
             setLoading(false)
         console.log(organisation)
-        if (organisation?.address.id && organisation?.websiteUrl.length > 0 && organisation?.digitalAddress?.phone.length > 0) {
+        if (organisation?.address.id && organisation?.websiteUrl?.length > 0 && organisation?.digitalAddress?.phone?.length > 0) {
             setSlide(1)
             setActiveAcc(true)
         }

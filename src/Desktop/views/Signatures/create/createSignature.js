@@ -185,7 +185,7 @@ function CreateSignatureComponent() {
 
     await request.post('signature_templates', req).then(async (res) => {
       // console.log(JSON.parse(localStorage.getItem('user')).organisation)
-      await request.post(`signatures`, { name: signatureName, html: renderToString(test), signatureTemplate: res.data['@id'], organisation: JSON.parse(localStorage.getItem('user')).organisation }).then(
+      await request.post(`signatures`, { name: signatureName, html: selectedTemplate, signatureTemplate: res.data['@id'], organisation: JSON.parse(localStorage.getItem('user')).organisation }).then(
         async (result) => {
           notification({ content: <>Votre signature <span style={{ color: "#FF7954" }}>{signatureName}</span> a été créée avec succès</>, status: "valid" })
           setTemplateIdToPatch(result.data.id)
