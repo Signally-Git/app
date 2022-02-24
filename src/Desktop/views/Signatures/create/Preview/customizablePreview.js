@@ -4,7 +4,6 @@ import DetectSocialNetwork from "Utils/DetectSocialNetwork/DetectSocialNetwork"
 
 export default function Preview({ infos, template, options, ...props }) {
     // Converts JSX camel Case attributes to dashed classics HTML
-    console.log(infos?.company?.style?.fontStyle)
     // console.log(props?.options?.event?.display)
     // console.log(infos?.firstName?.color)
     const convertToHTML = (object) => {
@@ -106,18 +105,21 @@ export default function Preview({ infos, template, options, ...props }) {
     replaced = replaced.replaceAll("{{ styles['phone']['fontWeight'] }}", `${infos?.phone?.style?.fontWeight || "normal"};`)
     replaced = replaced.replaceAll("{{ styles['phone']['fontStyle'] }}", `${infos?.phone?.style?.fontStyle || "normal"};`)
 
+    replaced = replaced.replaceAll("{{ styles['generalFontFamily']['fontFamily'] }}", `${infos?.fontFamily || "Helvetica"};`)
+    replaced = replaced.replaceAll("{{ styles['generalFontSize']['fontSize'] }}", `${infos?.fontSize+'px' || "11"};`)
+
     var greeting = /{% if greeting %}\s*{{.*}}\s*{% endif %}/ig;
     replaced = replaced.replaceAll(greeting, options?.salutation.enabled ? `<p style="padding-bottom: ${options?.salutation.padding}px;"}>${options?.salutation.value || "Cordialement,"}</p>` : "")
     var disclaimer = /{% if disclaimer %}\s*{{.*}}\s*{% endif %}/ig;
     replaced = replaced.replaceAll(disclaimer, options?.footer?.enabled ? `<p style="box-sizing: border-box; margin-top:${options?.footer?.padding}px; font-size:${options?.footer?.size}px; max-width: ${options?.footer?.maxWidth}px;">${options?.footer?.value.replace(/\n/g, "<br />")}</p>` : "")
 
     if (options?.event?.enabled) {
-        replaced = replaced.replaceAll(/{% if .* %}/gim, "")
-        replaced = replaced.replaceAll(/{% endif %}/gim, "")
+        replaced = replaced.replaceAll(/{% if event %}/gi, "")
+        replaced = replaced.replaceAll(/{% endif %}/gi, "")
         replaced = replaced.replaceAll('{{ event.imagePath }}', options?.event?.display || `http://fakeimg.pl/380x126?font=noto&font_size=14`)
     }
     else {
-        var event = /{% if .* %}\s*.*\s*.*\s*{% endif %}/gim;
+        var event = /{% if event %}[^]*{% endif %}/gim;
         replaced = replaced.replaceAll(event, "")
     }
 

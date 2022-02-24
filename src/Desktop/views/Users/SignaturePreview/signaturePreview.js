@@ -77,7 +77,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         const entity = await request.get(`${type}s/${show.id}`)
         setAssignedTemplate(entity.data.compiledSignature)
         const templates = await request.get('signatures')
-        setSelectedTemplate(templates.data["hydra:member"][0]?.html)
+        setSelectedTemplate(templates.data["hydra:member"][0])
         setTemplates(templates.data["hydra:member"])
     }, [show, edit])
 
@@ -111,9 +111,9 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     }
 
     const handleAssign = async (element) => {
-        const req = {
-            signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.["@id"]
-        }
+        // const req = {
+        //     signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate.html })?.["@id"]
+        // }
         // event ? {
         //     signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.["@id"],
         //     events: event === 'playlist' ? multiEvents : [event['@id']]
@@ -129,14 +129,21 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                     setEdit()
                 }).catch((err) => console.log(err))
             })
-        if (req.signature)
-            await request.patch(`${type}s/${element.id}`, req, {
+        if (selectedTemplate['@id'])
+            await request.patch(selectedTemplate['@id'], {[type+'s']: [`${type}s/${element.id}`]}, {
                 headers: { 'Content-Type': 'application/merge-patch+json' }
             }).then(
                 () => {
                     notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
                     setEdit()
                 }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
+            // await request.patch(`${type}s/${element.id}`, req, {
+            //     headers: { 'Content-Type': 'application/merge-patch+json' }
+            // }).then(
+            //     () => {
+            //         notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
+            //         setEdit()
+            //     }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
     }
 
     return (<div className={classes.flipcontainer}>
@@ -155,7 +162,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                 checked = true
                             else
                                 checked = false
-                            console.log(checked)
                             return <li key={event['@id']}>
                                 <img className={classes.bannerPreview} src={`${API}${event.imagePath}`} />
                                 <div className={classes.eventText}>
@@ -187,7 +193,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
             </div> */}
         </div>
         </div> : ""}
-        {modal ? <Modal title={<>Vous allez mettre en ligne <br />la signature <span className={classes.orangeTxt}>{Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.name}</span> <br /><br />pour <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></>}
+        {modal ? <Modal title={<>Vous allez mettre en ligne <br />la signature <span className={classes.orangeTxt}>{selectedTemplate?.name}</span> <br /><br />pour <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></>}
             cancel="Annuler"
             validate="Confirmer" onCancel={() => setModal(false)} onConfirm={() => { handleAssign(show); setModal(false) }} /> : ""}
         <div className={`${classes.flipper} ${edit ? classes.flip : ""}`}>
@@ -216,9 +222,9 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                         <div>
                             <label>Choisissez une signature</label>
                             {templates.length > 0 &&
-                                <CustomSelect onChange={(e) => setSelectedTemplate(e)} items={templates} display={"name"} getValue={"html"} />}
+                                <CustomSelect onChange={(e) => setSelectedTemplate(Object?.values(templates)?.find((obj) => { return obj.id == e }))} items={templates} display={"name"} getValue={"id"} />}
                             <div className={classes.signature}>
-                                {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
+                                {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate.html} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
                             </div>
                         </div>
                         <div>

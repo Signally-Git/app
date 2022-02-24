@@ -29,11 +29,12 @@ function CreateSignatureComponent() {
   const history = useHistory()
   const notification = useNotification()
   const [preview, setPreview] = useState("")
-
+  
   const [templateRules, setTemplateRules] = useState({
     fontSize: { min: 9, max: 13, step: 1 }
   })
-
+  
+  
   const [signatureInfo, setSignatureInfo] = useState({
     logo: company?.logo,
     firstName: { value: user?.first_name, color: "#000", style: { fontWeight: "bold" } },
@@ -68,7 +69,22 @@ function CreateSignatureComponent() {
   })
 
   const handlePopulate = () => {
-    console.log(signatureOption.event)
+    setSignatureInfo({
+      logo: company?.logo,
+      firstName: { value: user?.first_name, color: "#000", style: { fontWeight: "bold" } },
+      lastName: { value: user?.last_name, color: "#000", style: { fontWeight: "bold" } },
+      jobName: { value: user?.position, color: "#000", style: {} },
+      company: { value: company?.name, color: "#000", style: { fontWeight: "bold" } },
+      addressStreet: { value: company?.street, color: "#000", style: {} },
+      addressInfo: { value: company?.streetInfo, color: "#000", style: {} },
+      addressZipcode: { value: company?.zipCode, color: "#000", style: {} },
+      addressCity: { value: company?.city, color: "#000", style: {} },
+      addressCountry: { value: company?.country, color: "#000", style: {} },
+      mobile: { value: user?.phone_number, color: "#000", style: {} },
+      phone: { value: company?.phone_number, color: "#000", style: {} },
+      fontSize: [11],
+      fontFamily: "Helvetica"
+    })
     setSignatureOption({
       footer: { disclaimerValue: "Disclaimer", disclaimerEnabled: false, ecoValue: "Eco resp", ecoEnabled: false, items: ["Disclaimer", "Eco"] },
       salutation: { value: "Cordialement,", enabled: false, padding: 10 },
@@ -85,7 +101,6 @@ function CreateSignatureComponent() {
       Ce message electronique et tous les fichiers joints ainsi que les informations contenues dans ce message (ci apres "le message"), sont confidentiels et destines exclusivement a l'usage de la personne a laquelle ils sont adresses. Si vous avez recu ce message par erreur, merci de le renvoyer a son emetteur et de le detruire. Toute diffusion, publication, totale ou partielle ou divulgation sous quelque forme que ce soit non expressement autorisees de ce message, sont interdites.,`, enabled: false, padding: 10, size: 7
       }
     })
-    console.log(signatureOption.event)
   }
 
   useEffect(() => {
@@ -95,7 +110,6 @@ function CreateSignatureComponent() {
 
       setUser(user)
       setCompany(company)
-      console.log(company)
       setSignatureInfo({
         logo: company?.logo,
         firstName: { value: user?.first_name, color: "#000", style: { fontWeight: "bold" } },
@@ -127,7 +141,6 @@ function CreateSignatureComponent() {
       setSignatureOption({ ...signatureOption, event: { ...signatureOption.event, selected: eventAPI[0], list: eventAPI } }, "active")
     }
     getEvents()
-    console.log(signatureOption.event.selected)
   }, [signatureOption.event.enabled])
 
   // Used to handle transition
@@ -184,7 +197,6 @@ function CreateSignatureComponent() {
     }
 
     await request.post('signature_templates', req).then(async (res) => {
-      // console.log(JSON.parse(localStorage.getItem('user')).organisation)
       await request.post(`signatures`, { name: signatureName, html: selectedTemplate, signatureTemplate: res.data['@id'], organisation: JSON.parse(localStorage.getItem('user')).organisation }).then(
         async (result) => {
           notification({ content: <>Votre signature <span style={{ color: "#FF7954" }}>{signatureName}</span> a été créée avec succès</>, status: "valid" })
@@ -536,6 +548,7 @@ function CreateSignatureComponent() {
 
   useEffect(() => {
     showTemplates(false)
+    // console.log(selectedTemplate)
   }, [selectedTemplate])
 
   const showTemplates = (isOpen) => {
@@ -563,9 +576,9 @@ function CreateSignatureComponent() {
   }
 
   useEffect(() => {
-    console.log("HERE", signatureInfo.firstName, "END HERE")
+    console.log(signatureInfo, signatureOption, selectedTemplate)
     if (signatureInfo && signatureOption && selectedTemplate)
-      setPreview(<Preview infos={signatureInfo} options={signatureOption} template={selectedTemplate} />)
+      setPreview(<Preview infos={signatureInfo} options={signatureOption} template={selectedTemplate.html} />)
   }, [signatureInfo, signatureOption, selectedTemplate])
 
 

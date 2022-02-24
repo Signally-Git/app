@@ -1,19 +1,57 @@
-<body>
-    <div style="font-family: Arial, Helvetica, sans-serif;">
-        Hello, <br />
+<body style="margin:0; padding:0;">
+    <center>
+    <table style="width: 100%; max-width:980px; background-color: #f8f2f0; text-align: center; margin: 0 auto;" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td></td>
+            <td>
+                <br /><br /><br /><br /><br />
+                <h4 style="margin-top: 0;">Signally</h4>
+                <h2 style="color: #FF7954; font-style: italic; font-family: Arial, Helvetica, sans-serif;">
+                    La signature de mail ré-inventée</h2>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td
+                style="font-family: Arial, Helvetica, sans-serif; background-color: #FFF; width: 50%; padding: 15px; border-radius: 20px; margin: auto;">
+                <h3 style="font-style: italic;">Bienvenue {{ user.firstName }} !</h3>
+                <p>Pour vous connecter automatiquement à votre compte Signally, </p>
+                <p style="font-weight: bold;">Cliquez sur le « magic link » ci-dessous </p>
+                <br />
+                <a href="{{ link }}"
+                    style="text-decoration: none; background-color: #FF7954; color:#FFF; padding: 10px 20px; border-radius: 20px;">
+                    Connectez vous à Signally
+                </a>
+                <br />
+                <br />
+                <p>Ce magic link expire dans 24h et ne peut-être utilisé qu’une seule fois !</p>
+                <p>
+                    <br />
+                    Cheers,
+                </p>
+                <span style="font-weight: bold;"> — L’équipe <span
+                        style="font-family: 'Trebuchet MS';">Signally</span></span>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <span style="font-size: 11px">
+                    <br />
+                    Made by <span style="color: #FF7954;">Signally - Email signatures, the easy way
+                    </span></span>
+                    <br /><br /><br /><br /><br /><br /><br /><br />
+            </td>
+            <td></td>
+        </tr>
+        <!-- <div
+            style="font-family: Arial, Helvetica, sans-serif; background-color: #FFF; width: 550px; height: 325px; padding: 15px; border-radius: 20px; margin: auto;">
+
+        </div> -->
         <br />
-        Pour vous connecter directement à votre compte <span style="font-family: 'Trebuchet MS'; color: #FF7954">Signally</span>,<br />
-        Cliquez sur le bouton ci-dessous :<br />
-        <br />
-        <a href="https://staging.signally.io/sign-in?token=">
-            <bouton style="background: #FF7954; border-radius: 10px; padding: 10px; color: #FFF;">Connectez-vous à Signally</bouton>
-        </a>
-        <br />
-        <br />
-        Note : votre « magic link » expire dans 24h et ne peut être utilisé qu’une fois.<br />
-        <br />
-        A bientôt,
-        <br />
-        — L’équipe <span style="font-family: 'Trebuchet MS'; color: #FF7954">Signally</span>
-    </div>
+
+    </table>
+</center>
 </body>
