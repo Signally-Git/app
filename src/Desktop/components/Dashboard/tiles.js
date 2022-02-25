@@ -141,7 +141,7 @@ function Tiles(props) {
                 <Link to="/teams/users" className={classes.tile}>
                     <div className={classes.row}>
                         <p>Collaborateurs</p>
-                        <img src={ChevronRight} alt="View" className={classes.blackImg} />
+                        <img src={ChevronRight} alt="View" />
                     </div>
                     <div className={classes.row}>
                         <div>
