@@ -21,6 +21,7 @@ function EditSignatureComponent() {
     const [company, setCompany] = useState(null)
     const [events, setEvents] = useState([])
     const [selectedTemplate, setSelectedTemplate] = useState()
+    const [defaultStyles, setDefaultStyles] = useState()
     const history = useHistory()
     const notification = useNotification()
     const [preview, setPreview] = useState("")
@@ -39,6 +40,7 @@ function EditSignatureComponent() {
             await request.get('signatures/' + signatureId).then((res) => {
                 setSelectedTemplate(res.data.html)
                 console.log(res.data.html)
+                setDefaultStyles(res.data.signatureStyles)
                 setSignatureName(res.data.name)
             })
         }

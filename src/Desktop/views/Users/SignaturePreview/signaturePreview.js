@@ -124,8 +124,8 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         //     events: event === 'playlist' ? multiEvents : [event['@id']]
         // } :
         // console.log('HERE', multiEvents)
-        console.log(assignedTemplate, type+'s')
-        console.log(assignedTemplate?.[type+'s'])
+        // console.log(assignedTemplate, type+'s')
+        // console.log(assignedTemplate?.[type+'s'])
         if (multiEvents)
             multiEvents.map(async (e) => {
                 const req = { ...e, [type + 's']: [element['@id']] }
@@ -137,7 +137,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 }).catch((err) => console.log(err))
             })
         if (selectedTemplate['@id'])
-            await request.patch(selectedTemplate['@id'], { [type + 's']: [...assignedTemplate[type + 's'], `${type}s/${element.id}`] }, {
+            await request.patch(selectedTemplate['@id'], { [type + 's']: [`${type}s/${element.id}`] }, {
                 headers: { 'Content-Type': 'application/merge-patch+json' }
             }).then(
                 () => {
