@@ -11,7 +11,7 @@ const templateAPI = [{
     alignment: "Horizontal",
     tags: ["studio"],
     html: `
-    <span style="padding-bottom: {{ styles['greetingsPadding']['padding'] }};">
+	<span style="padding-bottom: {{ styles['greetingsPadding']['padding'] }};">
 	{% if greeting %}
 		{{ greetings }}
 	{% endif %}
@@ -41,9 +41,12 @@ const templateAPI = [{
 													<tbody>
 														<tr height="1">
 															<td style="font-size: 8pt; padding: 8px 0 0 0;">
-																<b style="color:{{ styles['firstName']['color'] }}; text-decoration: {{ styles['firstName']['textDecoration'] }}; font-style: {{ styles['firstName']['fontStyle'] }}; font-weight: {{ styles['firstName']['fontWeight'] }}; font-size: 8pt;font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{{ user.firstName }}</b>
-																<b style="color:{{ styles['lastName']['color'] }}; text-decoration: {{ styles['lastName']['textDecoration'] }} ;font-style: {{ styles['lastName']['fontStyle'] }} ;font-weight: {{ styles['lastName']['fontWeight'] }}; font-size: 8pt;font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
-                                                                {{ user.lastName }}</b>
+																<b style="color:{{ styles['firstName']['color'] }}; text-decoration: {{ styles['firstName']['textDecoration'] }}; font-style: {{ styles['firstName']['fontStyle'] }}; font-weight: {{ styles['firstName']['fontWeight'] }}; font-size: 8pt; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
+                                                                    {{ user.firstName }}
+                                                                </b>
+																<b style="color:{{ styles['lastName']['color'] }}; text-decoration: {{ styles['lastName']['textDecoration'] }} ;font-style: {{ styles['lastName']['fontStyle'] }} ;font-weight: {{ styles['lastName']['fontWeight'] }}; font-size: 8pt; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
+                                                                    {{ user.lastName }}
+                                                                </b>
 															</td>
 														</tr>
 														<tr style="height: 1px">
@@ -54,31 +57,39 @@ const templateAPI = [{
 														<tr height="5"></tr>
 														<tr>
 															<td>
-																<span style="color:{{ styles['companyName']['color'] }}; text-decoration: {{ styles['companyName']['textDecoration'] }} ;font-style: {{ styles['companyName']['fontStyle'] }}font-weight: {{ styles['companyName']['fontWeight'] }}font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
+																<span style="color:{{ styles['companyName']['color'] }}; text-decoration: {{ styles['companyName']['textDecoration'] }} ;font-style: {{ styles['companyName']['fontStyle'] }}; font-weight: {{ styles['companyName']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
                                                                 {{ company.name }}</span>
 															</td>
 														</tr>
 														<tr>
 															<td>
-																<span style="color:{{ styles['addressStreet']['color'] }}; text-decoration: {{ styles['addressStreet']['textDecoration'] }} ;font-style: {{ styles['addressStreet']['fontStyle'] }}font-weight: {{ styles['addressStreet']['fontWeight'] }}font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{{ address.street }}
+																<span style="color:{{ styles['addressStreet']['color'] }}; text-decoration: {{ styles['addressStreet']['textDecoration'] }} ;font-style: {{ styles['addressStreet']['fontStyle'] }}; font-weight: {{ styles['addressStreet']['fontWeight'] }};font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{{ address.street }}
 																	{{ address.streetInfo }}</span>
 															</td>
 														</tr>
 														<tr>
 															<td>
-																<span style="color:{{ styles['addressZipcode']['color'] }}; text-decoration: {{ styles['addressZipcode']['textDecoration'] }} ;font-style: {{ styles['addressZipcode']['fontStyle'] }} ;font-weight: {{ styles['addressZipcode']['fontWeight'] }}font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
+																<span style="color:{{ styles['addressZipcode']['color'] }}; text-decoration: {{ styles['addressZipcode']['textDecoration'] }} ;font-style: {{ styles['addressZipcode']['fontStyle'] }} ;font-weight: {{ styles['addressZipcode']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
 																	{{ address.zipCode }}
 																	{{ address.city }}
 																	{{ address.country }}
 																</span>
 															</td>
 														</tr>
+														{% if user.mobilePhone or user.phone %}
 														<tr>
-															<td style=" padding: 0 0 8px 0; color: {{ styles['mobile']['color'] }}font-weight: {{ styles['mobile']['fontWeight'] }};font-family: {{ styles['generalFontFamily']['fontFamily'] }};font-size: {{ styles['generalFontSize']['fontSize'] }}">
+															{% if user.mobilePhone %}
+															<td style=" padding: 0 0 8px 0; color: {{ styles['mobile']['color'] }};text-decoration: {{ styles['mobile']['textDecoration'] }} ;font-style: {{ styles['mobile']['fontStyle'] }}; font-weight: {{ styles['mobile']['fontWeight'] }};font-family: {{ styles['generalFontFamily']['fontFamily'] }};font-size: {{ styles['generalFontSize']['fontSize'] }}">
 																{{ user.mobilePhone }}
+															</td>
+															{% endif %}
+															{% if user.phone %}
+															<td style=" padding: 0 0 8px 0; color: {{ styles['mobile']['color'] }}; text-decoration: {{ styles['mobile']['textDecoration'] }} ;font-style: {{ styles['mobile']['fontStyle'] }}; font-weight: {{ styles['mobile']['fontWeight'] }};font-family: {{ styles['generalFontFamily']['fontFamily'] }};font-size: {{ styles['generalFontSize']['fontSize'] }}">
 																{{ user.phone }}
 															</td>
+															{% endif %}
 														</tr>
+														{% endif %}
 													</tbody>
 												</table>
 											</td>
@@ -182,6 +193,7 @@ const templateAPI = [{
 		{{ disclaimers }}
 	{% endif %}
 </span>
+
 `
 }]
 

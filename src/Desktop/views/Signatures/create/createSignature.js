@@ -220,6 +220,12 @@ function CreateSignatureComponent() {
             },
             {
               "property": "color",
+              "value": signatureInfo.company.color,
+              "type": "companyName",
+              "signature": result.data.id,
+            },
+            {
+              "property": "color",
               "value": signatureInfo.mobile.color,
               "type": "mobile",
               "signature": result.data.id,
@@ -277,6 +283,12 @@ function CreateSignatureComponent() {
               "property": "fontWeight",
               "value": signatureInfo.jobName.style.fontWeight || "normal",
               "type": "jobName",
+              "signature": result.data.id,
+            },
+            {
+              "property": "fontWeight",
+              "value": signatureInfo.company.style.fontWeight || "normal",
+              "type": "companyName",
               "signature": result.data.id,
             },
             {
@@ -342,6 +354,12 @@ function CreateSignatureComponent() {
             },
             {
               "property": "textDecoration",
+              "value": signatureInfo.company.style.textDecoration || "none",
+              "type": "companyName",
+              "signature": result.data.id,
+            },
+            {
+              "property": "textDecoration",
               "value": signatureInfo.mobile.style.textDecoration || "none",
               "type": "mobile",
               "signature": result.data.id,
@@ -399,6 +417,12 @@ function CreateSignatureComponent() {
               "property": "fontStyle",
               "value": signatureInfo.jobName.style.fontStyle || "normal",
               "type": "jobName",
+              "signature": result.data.id,
+            },
+            {
+              "property": "fontStyle",
+              "value": signatureInfo.company.style.fontStyle || "none",
+              "type": "companyName",
               "signature": result.data.id,
             },
             {
