@@ -112,7 +112,7 @@ function Tiles(props) {
                     <Link to="/teams/workplaces" className={classes.tile}>
                         <div className={classes.row}>
                             <p>Groupes</p>
-                            <img src={ChevronRight} alt="View" className={classes.blackImg} />
+                            <img src={ChevronRight} alt="View" />
                         </div>
                         <div className={classes.row}>
                             <div>
@@ -127,7 +127,7 @@ function Tiles(props) {
                     <Link to="/teams/teams" className={classes.tile}>
                         <div className={classes.row}>
                             <p>Équipes</p>
-                            <img src={ChevronRight} alt="View" className={classes.blackImg} />
+                            <img src={ChevronRight} alt="View" />
                         </div>
                         <div className={classes.row}>
                             <div>

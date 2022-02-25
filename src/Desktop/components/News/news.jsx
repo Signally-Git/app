@@ -43,7 +43,7 @@ function News({ organisation }) {
             setSlide(2)
             setActiveSignature(true)
         }
-        if (organisation?.users?.length > 0) {
+        if (organisation?.users?.length > 1) {
             setSlide(3)
             setActiveUsers(true)
         }

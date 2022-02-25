@@ -59,6 +59,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 48%;
+  height: 9rem;
   -webkit-box-flex: 48%;
       -ms-flex: 48%;
           flex: 48%;
@@ -83,7 +84,7 @@
 }
 
 .tile:first-of-type * {
-  color: #FFF;
+  color: #FFF !important;
 }
 
 .tile:nth-of-type(2) {

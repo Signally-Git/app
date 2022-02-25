@@ -44,6 +44,7 @@
     align-items: center;
     justify-content: space-between;
     width: 48%;
+    height: 9rem;
     flex: 48%;
     max-width: 48%;
     padding: 1rem 1rem;
@@ -54,7 +55,7 @@
     &:first-of-type {
         background-color: $signally-orange;
         * {
-            color: #FFF;
+            color: #FFF!important;
         }
     }
     &:nth-of-type(2) {

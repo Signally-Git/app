@@ -15,8 +15,9 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     const today = new Date()
 
     const [templates, setTemplates] = useState([])
-    const [selectedTemplate, setSelectedTemplate] = useState()
     const [assignedTemplate, setAssignedTemplate] = useState()
+    const [selectedTemplate, setSelectedTemplate] = useState()
+    const [previewSignature, setPreviewSignature] = useState()
     const [signatureInfos, setSignatureInfos] = useState()
     const defaultUser = localStorage.getItem("user")
     const [entity, setEntity] = useState()
@@ -47,7 +48,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
 
     useEffect(async () => {
         const events = await request.get('events');
-
+        
         setIncEvents(events.data["hydra:member"].filter((data) => (new Date(data.startAt) > new Date())).sort(function (a, b) {
             if (a.startAt < b.startAt) { return -1; }
             if (a.startAt > b.startAt) { return 1; }
@@ -75,12 +76,16 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     // PREVIEW SIGNATURE
     useEffect(async () => {
         const entity = await request.get(`${type}s/${show.id}`)
-        setAssignedTemplate(entity.data.compiledSignature)
+        setPreviewSignature(entity.data.compiledSignature)
+        console.log(entity.data.compiledSignature)
         const templates = await request.get('signatures')
         setSelectedTemplate(templates.data["hydra:member"][0])
         setTemplates(templates.data["hydra:member"])
+        const template = await request.get(show?.signature?.['@id'])
+        setAssignedTemplate(template.data)
+        console.log(template.data)
     }, [show, edit])
-
+    
     // Modal
     const [modal, setModal] = useState(false)
     const handleSubmit = ((e) => {
@@ -119,6 +124,8 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         //     events: event === 'playlist' ? multiEvents : [event['@id']]
         // } :
         // console.log('HERE', multiEvents)
+        console.log(assignedTemplate, type+'s')
+        console.log(assignedTemplate?.[type+'s'])
         if (multiEvents)
             multiEvents.map(async (e) => {
                 const req = { ...e, [type + 's']: [element['@id']] }
@@ -130,20 +137,20 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 }).catch((err) => console.log(err))
             })
         if (selectedTemplate['@id'])
-            await request.patch(selectedTemplate['@id'], {[type+'s']: [`${type}s/${element.id}`]}, {
+            await request.patch(selectedTemplate['@id'], { [type + 's']: [...assignedTemplate[type + 's'], `${type}s/${element.id}`] }, {
                 headers: { 'Content-Type': 'application/merge-patch+json' }
             }).then(
                 () => {
                     notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
                     setEdit()
                 }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
-            // await request.patch(`${type}s/${element.id}`, req, {
-            //     headers: { 'Content-Type': 'application/merge-patch+json' }
-            // }).then(
-            //     () => {
-            //         notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
-            //         setEdit()
-            //     }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
+        // await request.patch(`${type}s/${element.id}`, req, {
+        //     headers: { 'Content-Type': 'application/merge-patch+json' }
+        // }).then(
+        //     () => {
+        //         notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
+        //         setEdit()
+        //     }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
     }
 
     return (<div className={classes.flipcontainer}>
@@ -202,19 +209,19 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                     <h2>Signature active pour <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></h2>
                 </div>
                 <div>
-                    {assignedTemplate ?
-                        <ReadOnlyPreview template={assignedTemplate} infos={signatureInfos} />
+                    {previewSignature ?
+                        <ReadOnlyPreview template={previewSignature} infos={signatureInfos} />
                         : ""}
                 </div>
                 {show?.group?.name &&
                     <span className={classes.groupName}>{show?.group?.name}</span>}
             </div>
             <div className={classes.back}>
-                {edit === "copySign" ? <CopySignature signature={assignedTemplate} /> : <>
+                {edit === "copySign" ? <CopySignature signature={previewSignature} /> : <>
                     <div className={classes.topLine}>
                         <h2>Édition <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></h2>
-                        {show['@type'] === 'Team' ? <Button color="brown" onClick={() => { setEdit('assign-team') }}>Attribuer collaborateurs</Button> :
-                            show['@type'] === 'Workplace' ? <Button color="brown" onClick={() => { setEdit('assign-workplace') }}>Attribuer équipes</Button>
+                        {show['@type'] === 'Team' ? <Button color="brown" onClick={() => { setEdit('assign-team') }}>Collaborateurs</Button> :
+                            show['@type'] === 'Workplace' ? <Button color="brown" onClick={() => { setEdit('assign-workplace') }}>Équipes</Button>
                                 : ""}
 
                     </div>
@@ -245,7 +252,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                 </>}
                         </div>
                     </div>
-                    <Btns  style={{ left: '.5rem', bottom: '-5rem' }} onCancel={() => { setEdit() }} confirmTxt="Sauvegarder" onConfirm={() => handleSubmit()} />
+                    <Btns style={{ left: '.5rem', bottom: '-5rem' }} onCancel={() => { setEdit() }} confirmTxt="Sauvegarder" onConfirm={() => handleSubmit()} />
                     {/* <div className={classes.btnsContainer}>
                         <Button onClick={() => setEdit()} color="orange">Annuler</Button>
                         <Button onClick={() => handleSubmit()} color="orangeFill">Sauvegarder</Button>

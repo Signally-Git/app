@@ -177,13 +177,13 @@ function Team() {
                             <div className={classes.slider} ref={slider}>
                                 <div className={classes.col}>
                                     <div className={classes.tagline}>
-                                        <h2><span className={classes.orangeTxt}>{entity?.users?.length || 0}</span> membre(s) <span className={classes.orangeTxt}>{entity?.name}</span></h2>
-                                        <Button color="brown" onClick={() => { setEdit('assign-signature') }}>Attribuer signature</Button>
+                                        <h2><span className={classes.orangeTxt}>{entity?.users?.length || 0}</span> équipe(s) <span className={classes.orangeTxt}>{entity?.name}</span></h2>
+                                        <Button color="brown" onClick={() => { setEdit('assign-signature') }}>Signature</Button>
                                     </div>
                                     <br />
                                     <div className={classes.searchInput}>
                                         <HiOutlineSearch />
-                                        <input className={classes.search} type="text" onChange={(e) => setCurrentTeams(e.target.value)} placeholder="Rechercher un collaborateur" />
+                                        <input className={classes.search} type="text" onChange={(e) => setCurrentTeams(e.target.value)} placeholder="Rechercher une équipe" />
                                     </div>
                                     <ul className={`${classes.itemsList} ${classes.users}`}>
                                         {entity?.teams?.map((team) => {
@@ -229,7 +229,7 @@ function Team() {
                                         <div className={classes.col}>
                                             <div className={classes.tagline}>
                                                 <h2><span className={classes.orangeTxt}>{entity?.users?.length || 0}</span> membre(s) <span className={classes.orangeTxt}>{entity?.name}</span></h2>
-                                                <Button color="brown" onClick={() => { setEdit('assign-signature') }}>Attribuer signature</Button>
+                                                <Button color="brown" onClick={() => { setEdit('assign-signature') }}>Signature</Button>
                                             </div>
                                             <br />
                                             <div className={classes.searchInput}>
