@@ -34,7 +34,7 @@ const templateAPI = [{
 							<td valign="middle" style="box-sizing: border-box; border: none; padding: 0;">
 								<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:none; border-color: {{ styles['divColor']['color'] }};">
 									<tbody>
-										<tr>
+										<tr> 
 											<td style="background: {{ styles['divColor']['color'] }}; width: 12px;"/>
 											<td style="box-sizing: border-box; border: none; background: {{ styles['divColor']['color'] }}; font-size: 8pt; height: 94px; width: 272px">
 												<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:none; font-size: 8pt;">
