@@ -11,7 +11,7 @@ const templateAPI = [{
     alignment: "Horizontal",
     tags: ["studio"],
     html: `
-    <span style="padding-bottom: {{ styles['greetingsPadding']['padding'] }}">
+    <span style="padding-bottom: {{ styles['greetingsPadding']['padding'] }};">
 	{% if greeting %}
 		{{ greetings }}
 	{% endif %}
@@ -41,32 +41,32 @@ const templateAPI = [{
 													<tbody>
 														<tr height="1">
 															<td style="font-size: 8pt; padding: 8px 0 0 0;">
-																<b style="color:{{ styles['firstName']['color'] }}; text-decoration: {{ styles['firstName']['textDecoration'] }} font-style: {{ styles['firstName']['fontStyle'] }} font-weight: {{ styles['firstName']['fontWeight'] }}; font-size: 8pt;font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{{ user.firstName }}</b>
-																<b style="color:{{ styles['lastName']['color'] }}; text-decoration: {{ styles['lastName']['textDecoration'] }} font-style: {{ styles['lastName']['fontStyle'] }} font-weight: {{ styles['lastName']['fontWeight'] }}; font-size: 8pt;font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
+																<b style="color:{{ styles['firstName']['color'] }}; text-decoration: {{ styles['firstName']['textDecoration'] }}; font-style: {{ styles['firstName']['fontStyle'] }}; font-weight: {{ styles['firstName']['fontWeight'] }}; font-size: 8pt;font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{{ user.firstName }}</b>
+																<b style="color:{{ styles['lastName']['color'] }}; text-decoration: {{ styles['lastName']['textDecoration'] }} ;font-style: {{ styles['lastName']['fontStyle'] }} ;font-weight: {{ styles['lastName']['fontWeight'] }}; font-size: 8pt;font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
                                                                 {{ user.lastName }}</b>
 															</td>
 														</tr>
 														<tr style="height: 1px">
 															<td>
-																<span style="color:{{ styles['jobName']['color'] }}; text-decoration: {{ styles['jobName']['textDecoration'] }} font-style: {{ styles['jobName']['fontStyle'] }} font-weight: {{ styles['jobName']['fontWeight'] }}; padding: 0cm; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{{ user.position }}</span>
+																<span style="color:{{ styles['jobName']['color'] }}; text-decoration: {{ styles['jobName']['textDecoration'] }} ;font-style: {{ styles['jobName']['fontStyle'] }} ;font-weight: {{ styles['jobName']['fontWeight'] }}; padding: 0cm; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{{ user.position }}</span>
 															</td>
 														</tr>
 														<tr height="5"></tr>
 														<tr>
 															<td>
-																<span style="color:{{ styles['companyName']['color'] }}; text-decoration: {{ styles['companyName']['textDecoration'] }} font-style: {{ styles['companyName']['fontStyle'] }}font-weight: {{ styles['companyName']['fontWeight'] }}font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
+																<span style="color:{{ styles['companyName']['color'] }}; text-decoration: {{ styles['companyName']['textDecoration'] }} ;font-style: {{ styles['companyName']['fontStyle'] }}font-weight: {{ styles['companyName']['fontWeight'] }}font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
                                                                 {{ company.name }}</span>
 															</td>
 														</tr>
 														<tr>
 															<td>
-																<span style="color:{{ styles['addressStreet']['color'] }}; text-decoration: {{ styles['addressStreet']['textDecoration'] }} font-style: {{ styles['addressStreet']['fontStyle'] }}font-weight: {{ styles['addressStreet']['fontWeight'] }}font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{{ address.street }}
+																<span style="color:{{ styles['addressStreet']['color'] }}; text-decoration: {{ styles['addressStreet']['textDecoration'] }} ;font-style: {{ styles['addressStreet']['fontStyle'] }}font-weight: {{ styles['addressStreet']['fontWeight'] }}font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{{ address.street }}
 																	{{ address.streetInfo }}</span>
 															</td>
 														</tr>
 														<tr>
 															<td>
-																<span style="color:{{ styles['addressZipcode']['color'] }}; text-decoration: {{ styles['addressZipcode']['textDecoration'] }} font-style: {{ styles['addressZipcode']['fontStyle'] }} font-weight: {{ styles['addressZipcode']['fontWeight'] }}font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
+																<span style="color:{{ styles['addressZipcode']['color'] }}; text-decoration: {{ styles['addressZipcode']['textDecoration'] }} ;font-style: {{ styles['addressZipcode']['fontStyle'] }} ;font-weight: {{ styles['addressZipcode']['fontWeight'] }}font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
 																	{{ address.zipCode }}
 																	{{ address.city }}
 																	{{ address.country }}
