@@ -1,7 +1,5 @@
 import axios from 'axios';
 import { API } from 'config';
-import { useHistory } from 'react-router-dom';
-
 
 const request = axios.create({
     baseURL: API
@@ -16,13 +14,15 @@ request.interceptors.response.use((response) => {
     return response;
 }, (error) => {
     if (error.response && error.response.data) {
-        if (error.response.data.code === 401) {
+        if (!localStorage.getItem('token') || error.response.data.code === 401) {
             axios.post(`${API}token/refresh`, { refresh_token: localStorage.getItem('refresh_token') }).then((res) => {
                 localStorage.setItem('token', res.data.token)
                 localStorage.setItem('refresh_token', res.data.refresh_token)
                 window.location.replace('/')
-            }).catch(() => { localStorage.removeItem('token'); localStorage.removeItem('refresh_token') })
-
+            })
+        }
+        else {
+            localStorage.removeItem('token'); localStorage.removeItem('refresh_token')
         }
         return Promise.reject(error.response.data);
     }

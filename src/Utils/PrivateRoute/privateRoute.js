@@ -9,22 +9,23 @@ import { NotificationProvider } from "Utils/Notifications/notifications"
 function PrivateRoute({ component: Component, ...rest }) {
     const [notification, setNotification] = useState()
 
-    useEffect(() => {
+    // useEffect(() => {
 
-    }, [localStorage.getItem('token')])
-
+    // }, [localStorage.getItem('token')])
+    if (!localStorage.getItem('token'))
+        return <></>
     return (
-    <Route {...rest} exact={rest.exact}
-        render={props => localStorage.getItem("token") ? (
-            <Frame path={rest.path}>
-                <NotificationProvider msg={notification}>
-                <Component {...props} page={rest.page} setNotification={setNotification} />
-                </NotificationProvider>
-            </Frame>
-        ) : (
-            <Redirect to={{ pathname: "/sign-in", state: { from: props.location, error: "You must be logged in to see this page" } }} />
-    )}
-    />)
+        <Route {...rest} exact={rest.exact}
+            render={props => localStorage.getItem("token") ? (
+                <Frame path={rest.path}>
+                    <NotificationProvider msg={notification}>
+                        <Component {...props} page={rest.page} setNotification={setNotification} />
+                    </NotificationProvider>
+                </Frame>
+            ) : (
+                <Redirect to={{ pathname: "/sign-in", state: { from: props.location, error: "You must be logged in to see this page" } }} />
+            )}
+        />)
 }
 
 export default PrivateRoute

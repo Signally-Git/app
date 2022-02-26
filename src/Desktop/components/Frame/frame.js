@@ -48,25 +48,26 @@ export default function Frame(props) {
     }, [user, organisation])
 
     return (<>
-        <div className={classes.desktop}>
+        {user ? 
+            <div className={classes.desktop}>
             <div className={classes.desktopSubcontainer}>
-                <Header page={props.path || ""} user={user} />
-                <div className={classes.mainContent}>
-                    <div className={classes.menuContainer}>
-                        <div className={classes.userInfos}>
-                            <img src={organisation?.logo ? (API + organisation?.logo.path) : 'https://dummyimage.com/108/f4eeef.png'} alt='' />
-                            <p className={classes.capitalize}>{organisation?.name}</p>
+                <Header page={props.path || ""} user={user} /> 
+                    <div className={classes.mainContent}>
+                        <div className={classes.menuContainer}>
+                            <div className={classes.userInfos}>
+                                <img src={organisation?.logo ? (API + organisation?.logo.path) : 'https://dummyimage.com/108/f4eeef.png'} alt='' />
+                                <p className={classes.capitalize}>{organisation?.name}</p>
+                            </div>
+                            <Menu className={classes.menu} page={props.path} />
                         </div>
-                        <Menu className={classes.menu} page={props.path} />
-                    </div>
 
-                    <div className={classes.dashboardContainer}>
-                        <Suspense fallback={<div>Chargement</div>}>
-                            {props.children}
-                        </Suspense>
+                        <div className={classes.dashboardContainer}>
+                            <Suspense fallback={<div>Chargement</div>}>
+                                {props.children}
+                            </Suspense>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>: ""}
     </>)
 }
