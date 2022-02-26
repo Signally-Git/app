@@ -11,7 +11,7 @@ function News({ organisation }) {
     const [activeSignature, setActiveSignature] = React.useState(false)
     const [activeUsers, setActiveUsers] = React.useState(false)
     const [activeEvents, setActiveEvents] = React.useState(false)
-    const missing = []
+    const [missing, setMissing] = React.useState([])
     const [hide, setHide] = React.useState(false)
     const [loading, setLoading] = React.useState(false)
     const [height, setHeight] = React.useState(50)
@@ -24,20 +24,10 @@ function News({ organisation }) {
 
     React.useEffect(() => {
         setLoading(true)
-        if (organisation)
-            setLoading(false)
-        console.log(organisation)
+
         if (organisation?.address.id && organisation?.websiteUrl?.length > 0 && organisation?.digitalAddress?.phone?.length > 0) {
             setSlide(1)
             setActiveAcc(true)
-        }
-        else {
-            if (!organisation?.address.id)
-                missing.push('adresse')
-            if (!organisation?.websiteUrl)
-                missing.push('site Internet')
-            if (!organisation?.digitalAddress?.phone)
-                missing.push('téléphone')
         }
         if (organisation?.signatures?.length > 0) {
             setSlide(2)
@@ -51,8 +41,24 @@ function News({ organisation }) {
             setHide(true)
             setActiveUsers(true)
         }
+
+        if (organisation)
+            setLoading(false)
     }, [organisation])
 
+    React.useEffect(() => {
+        const missingArray = []
+        if (!organisation?.websiteUrl) {
+            missingArray.push(['site Internet'])
+        }
+        if (!organisation?.digitalAddress?.phone) {
+            missingArray.push(['fixe'])
+        }
+        if (!organisation?.address?.street) {
+            missingArray.push(['adresse'])
+        }
+        setMissing(missingArray)
+    }, [organisation])
 
     return (<div className={classes.container}>
         {loading ? 'Chargement...' : <Carousel
@@ -95,7 +101,7 @@ function News({ organisation }) {
                     </ul>
                     <Carousel showIndicators={false} selectedItem={slide} showArrows={false} dynamicHeight={false}>
                         <div className={classes.slide} ref={slider}>
-                            <p>{missing.length > 0 ? `Vous n'avez pas renseigné toutes les informations requises par certaines templates de signature (${missing.join(", ")})` : "Votre profil contient toutes les informations nécessaires aux templates des signatures."}</p>
+                            <p>{missing.length > 0 === true ? `Vous n'avez pas renseigné toutes les informations requises par certaines templates de signature (${missing.join(", ")})` : "Votre profil contient toutes les informations nécessaires aux templates des signatures."}</p>
                             <div className={classes.btnsContainer}>
                                 <Button color="brown" onClick={() => setSlide(1)}>Passer cette étape</Button>
                                 <Button color="orange" onClick={() => history.push('/profile/informations')}>Compléter mon profil</Button>

@@ -1,8 +1,8 @@
 import classes from './templateSelect.module.css'
-import { HiOutlineArrowLeft } from "react-icons/hi";
 import { useState } from 'react';
-import Template from './template';
+// import Template from './template';
 import Button from 'Utils/Button/btn';
+import Template from '../Preview/customizablePreview';
 
 // Displaying the list of bought and free templates (Studio, Store) and allows to select one to create custom signature
 
@@ -203,6 +203,7 @@ export default function TemplateSelection(props) {
     const handleForm = (e) => {
         props.setTemplate(JSON.parse(e.target.value))
     }
+
     const handleAlignment = (e) => {
         setOrientation(e.target.id)
     }

@@ -86,7 +86,7 @@ function Informations() {
                 socialMediaAccounts: socialsList
 
             }
-            await request.patch(`organisations/${organisationId}`, req, {
+            await request.patch(organisationIRI, req, {
                 headers: { 'Content-Type': 'application/merge-patch+json' }
             }).then(() => {
                 notification({ content: <><span style={{ color: "#FF7954" }}>{companyName}</span> édité avec succès</>, status: "valid" })

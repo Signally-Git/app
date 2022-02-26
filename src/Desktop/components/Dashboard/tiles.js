@@ -61,12 +61,12 @@ function Tiles(props) {
     }, [events, users, teamsList])
 
     useEffect(() => {
-        console.log(loading)
         users.map((user) => {
             if (user.signature_template_id)
                 setSignatures([...signatures, [user.signature_template_id]])
         })
     }, [users, loading])
+    
     if (loading)
         return <div className={classes.container}>Chargement...</div>
     return (

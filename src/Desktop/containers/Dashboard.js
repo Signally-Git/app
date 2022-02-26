@@ -10,6 +10,7 @@ import CreateSignature from '../views/Signatures/create/createSignature'
 import { UseEvents } from 'Utils/useEvents/useEvents'
 import request from 'Utils/Request/request'
 import News from 'Desktop/components/News/news'
+import { useHistory } from 'react-router-dom'
 
 let count = 0;
 
@@ -17,56 +18,11 @@ function Dashboard(props) {
     const [isHeader, setIsHeader] = useState("")
     const [createEvent, setCreateEvent] = useState(null)
     const [user, setUser] = useState()
-    const [users, setUsers] = useState([])
     const [template, setTemplate] = useState()
     const [templateName, setTemplateName] = useState()
     const [data, setData] = useState([])
     const [activeEvents, setActiveEvents] = useState()
     const [organisation, setOrganisation] = useState()
-    const [chartOptions, setChartOptions] = useState({
-        chart: {
-            id: 'apexchart-example', toolbar: {
-                show: false
-            },
-            animations: {
-                enabled: false,
-            }
-        },
-        stroke: {
-            curve: 'smooth',
-            width: 2
-        },
-        markers: {
-            size: 4,
-        },
-        colors: ['#ff7954'],
-        xaxis: {
-            categories: ["L", "M", "M", "J", "V", "S", "D"]
-        },
-    })
-    const [chartOptionsEvents, setChartOptionsEvents] = useState({
-        chart: {
-            id: 'apexchart-example', toolbar: {
-                show: false
-            },
-            animations: {
-                enabled: false,
-            }
-        },
-        stroke: {
-            curve: 'smooth',
-            width: 2
-        },
-        markers: {
-            size: 4,
-        },
-        colors: ['#66433e'],
-        xaxis: {
-            categories: ["L", "M", "M", "J", "V", "S", "D"]
-        },
-    })
-    const [chartSeries, setChartSeries] = useState([{ name: 'CPM signature', type: "line", data: [30, 40, 45, 50, 49, 22, 70] }])
-    const [chartSeriesEvents, setChartSeriesEvents] = useState([{ name: 'CPM bannière', type: "line", data: [18, 24, 11, 14, 25, 22, 23] }])
 
     useEffect(async () => {
         await request.get(`whoami`).then(async (res) => {
@@ -76,9 +32,15 @@ function Dashboard(props) {
             setTemplateName(res.data?.signature?.name)
             await request.get('users').then((r) => users = r.data)
             await request.get(res.data?.organisation).then((r) => {
-                setOrganisation({...r.data, ...organisation, users: users['hydra:member']})
+                setOrganisation({ ...r.data, ...organisation, users: users['hydra:member'] })
+                const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${r.data.['@id']}`);
+                function getRealtimeData(data) {
+                    setOrganisation(data)
+                }
+                sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
             })
         })
+      
     }, [])
 
     useEffect(() => {

@@ -25,10 +25,10 @@ export default function Frame(props) {
     }, [])
 
     useEffect(() => {
-        
-            const sseUser = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${user?.['@id']}`);
-        
-            const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${organisation?.['@id']}`);
+
+        const sseUser = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${user?.['@id']}`);
+
+        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${organisation?.['@id']}`);
         function getRealtimeData(data) {
             setOrganisation(data)
         }
@@ -62,7 +62,7 @@ export default function Frame(props) {
 
                     <div className={classes.dashboardContainer}>
                         <Suspense fallback={<div>Chargement</div>}>
-                        {props.children}
+                            {props.children}
                         </Suspense>
                     </div>
                 </div>
