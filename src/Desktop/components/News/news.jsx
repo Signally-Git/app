@@ -63,6 +63,7 @@ function News({ organisation }) {
     return (<div className={classes.container}>
         {loading ? 'Chargement...' : <Carousel
             dynamicHeight={true}
+            showThumbs={false}
             renderIndicator={(onClickHandler, isSelected, index, label) => {
                 return (
                     <span
@@ -99,7 +100,7 @@ function News({ organisation }) {
 
                         <li className={`${activeEvents ? classes.done : ""} ${slide === 3 ? classes.isActive : ""}`} onClick={() => setSlide(3)}>Events</li>
                     </ul>
-                    <Carousel showIndicators={false} selectedItem={slide} showArrows={false} dynamicHeight={false}>
+                    <Carousel showIndicators={false} selectedItem={slide} showArrows={false} dynamicHeight={false} showThumbs={false}>
                         <div className={classes.slide} ref={slider}>
                             <p>{missing.length > 0 === true ? `Vous n'avez pas renseigné toutes les informations requises par certaines templates de signature (${missing.join(", ")})` : "Votre profil contient toutes les informations nécessaires aux templates des signatures."}</p>
                             <div className={classes.btnsContainer}>
