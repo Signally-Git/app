@@ -311,7 +311,7 @@ export default function Options(props) {
                             <span className={`${classes.slider} ${classes.round}`}></span>
                         </label>
                     </div>
-                    {props.data.event.enabled && props.data.event.list.length > 0 ?
+                    {props.data.event.enabled && props.data.event.list?.length > 0 ?
                         <>
                        <CustomSelect onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${API}${e}`, selected: e} })} 
                        items={props.data.event.list} getValue={'@id'} display={'name'} />

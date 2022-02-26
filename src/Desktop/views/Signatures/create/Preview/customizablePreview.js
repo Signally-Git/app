@@ -123,6 +123,8 @@ export default function Preview({ infos, template, options, ...props }) {
         replaced = replaced.replaceAll(event, "")
     }
 
+    replaced = replaced.replaceAll(/{% if user.mobilePhone or user.phone %}[^]*{% endif %}/gi, "")
+
 
     // OPTIONS
     replaced = replaced.replaceAll("{{ styles['greetingsPadding']['padding'] }}", options?.event.padding || 12)

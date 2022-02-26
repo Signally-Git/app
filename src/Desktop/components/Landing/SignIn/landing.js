@@ -53,7 +53,7 @@ const Login = () => {
             setEmail(query.get('user'))
             const magicLink = await request.get(`sign_in${window.location.search}`)
             localStorage.setItem('token', magicLink.data.token)
-            history.push('/dashboard')
+            history.push('/')
         }
     }, [])
 
