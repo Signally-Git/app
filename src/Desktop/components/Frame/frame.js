@@ -4,6 +4,7 @@ import { Suspense, useEffect, useMemo, useState } from "react";
 import classes from "./frame.module.scss";
 import request from "Utils/Request/request";
 import { API } from "config";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function Frame(props) {
     const [user, setUser] = useState()
@@ -68,6 +69,6 @@ export default function Frame(props) {
                         </div>
                     </div>
                 </div>
-            </div>: ""}
+            </div> : <div className={classes.loading}><AiOutlineLoading3Quarters /></div>}
     </>)
 }
