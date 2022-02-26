@@ -48,10 +48,10 @@ const Login = () => {
     })
 
     useEffect(async () => {
-        console.log(query.get('user'), decodeURI(encodeURI(query.get('user'))))
+        console.log(window.location.search)
         if (query.get('user')) {
             setEmail(query.get('user'))
-            const magicLink = await request.get(`login_check?user=${query.get("user")}&expires=${query.get('expires')}&hash=${query.get('hash')}`)
+            const magicLink = await request.get(`sign_in${window.location.search}`)
             localStorage.setItem('token', magicLink.data.token)
             history.push('/dashboard')
         }
