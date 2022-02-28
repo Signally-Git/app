@@ -127,12 +127,15 @@ export default function CreateEvent({ setDone, event }) {
         <div className={classes.currentEventPreview}>
             {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={API + event.imagePath} title={event.banner?.name} /> : ""}
         </div>
-        <UploadFile
-            accept="image/*"
-            file={banner}
-            placeholder={event ? "Importer une autre bannière" : "Importer une bannière"}
-            setFile={setBanner}
-        />
+        <div className={classes.uploadContainer}>
+
+            <UploadFile
+                accept="image/*"
+                file={banner}
+                placeholder={event ? "Importer une autre bannière" : "Importer une bannière"}
+                setFile={setBanner}
+            />
+        </div>
         <form>
             <Btns style={{ left: '.5rem', bottom: '-3rem' }} confirmTxt="Sauvegarder" onCancel={(e) => { e.preventDefault(); setDone(false) }} onConfirm={(e) => saveEvent(e)} />
             {/* <div className={classes.btnsContainer}>

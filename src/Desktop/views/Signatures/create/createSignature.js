@@ -597,9 +597,9 @@ function CreateSignatureComponent() {
   }
 
   useEffect(() => {
-    console.log(signatureInfo, signatureOption, selectedTemplate)
+    // console.log(signatureInfo, signatureOption, selectedTemplate)
     if (signatureInfo && signatureOption && selectedTemplate)
-      setPreview(<Preview infos={signatureInfo} options={signatureOption} template={selectedTemplate.html} />)
+      setPreview(<Preview infos={signatureInfo} options={signatureOption} template={selectedTemplate.html} organisationId={company} />)
   }, [signatureInfo, signatureOption, selectedTemplate])
 
 

@@ -18,14 +18,14 @@ export default function Frame(props) {
     // }
 
     useEffect(() => {
-       request.get('whoami').then((res) => {
+        request.get('whoami').then((res) => {
             setUser(res.data)
             request.get(res.data.organisation).then((r) => {
                 setOrganisation(r.data)
             }).catch((err) => console.log(err))
         }).catch((err) => { console.log(err) })
 
-       
+
     }, [])
 
     useEffect(() => {
@@ -72,6 +72,8 @@ export default function Frame(props) {
                         </div>
                     </div>
                 </div>
-            </div> : <div className={classes.loading}><AiOutlineLoading3Quarters /></div>}
+            </div>
+            : <div className={classes.loading}><AiOutlineLoading3Quarters /></div>
+        }
     </>)
 }

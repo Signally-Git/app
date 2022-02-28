@@ -1,10 +1,23 @@
 import parse from "html-react-parser"
 import { renderToStaticMarkup } from "react-dom/server"
 import DetectSocialNetwork from "Utils/DetectSocialNetwork/DetectSocialNetwork"
+import request from 'Utils/Request/request';
+import React from 'react';
 
-export default function Preview({ infos, template, options, ...props }) {
+
+export default function Preview({ infos, template, options, organisation, ...props }) {
     // Converts JSX camel Case attributes to dashed classics HTML
     // console.log(props?.options?.event?.display)
+    const [socials, setSocials] = React.useState(["facebook", "linkedin", "twitter", "instagram", "snapchat", "pinterest"])
+    // console.log(infos?.socials)
+    React.useEffect(() => {
+        if (organisation?.socialMediaAccounts.length > 0)
+        {
+            setSocials(organisation?.socialMediaAccounts)
+            console.log(organisation?.socialMediaAccounts)
+        }
+    }, [organisation])
+
     // console.log(infos?.firstName?.color)
     const convertToHTML = (object) => {
         return JSON.stringify(object).replace(/[,]+/g, ';').replace(/[{}]+/g, '').replace(/["]+/g, '').replace(/[A-Z]/g, m => "-" + m.toLowerCase())
@@ -46,9 +59,14 @@ export default function Preview({ infos, template, options, ...props }) {
                 break;
         }
     }
-    const socialNetworks = renderToStaticMarkup(props.options?.socials?.items.map((item) => <a target="_blank" href={handleLink(item)} style={{ marginRight: "5px" }}>
-        <img src={handleImg(item)} alt={item} />
-    </a>))
+    // const socialNetworks = renderToStaticMarkup(socials.map((item) => <a target="_blank" href={handleLink(item)} style={{ marginRight: "5px", width: '24px' }}>
+    //     <img src={handleImg(item)} alt={item} style={{width: '24px'}} />
+    // </a>))
+    const socialNetworks = renderToStaticMarkup(socials.map((item) => <td height="24" width="24" style={{ height: '24px', width: '24px', margin: '0 auto', textAlign: 'left', padding: '0 2px' }} valign="top">
+        <a href={handleLink(item)} height="24" width="24" style={{ height: '24px', width: '24px' }} alt={item}>
+            <img height="24" width="24" style={{ verticalAlign: 'middle', display: 'block', height: '24px', width: '24px', lineHeight: '24px' }} src={handleImg(item)} alt='' />
+        </a>
+    </td>))
     let replaced;
 
     replaced = template.replaceAll("{{ styles['firstName']['color'] }}", `${infos?.firstName?.color};`)
@@ -68,7 +86,7 @@ export default function Preview({ infos, template, options, ...props }) {
     replaced = replaced.replaceAll("{{ styles['jobName']['textDecoration'] }}", `${infos?.jobName?.style?.textDecoration || "none"};`)
     replaced = replaced.replaceAll("{{ styles['jobName']['fontWeight'] }}", `${infos?.jobName?.style?.fontWeight || "normal"};`)
     replaced = replaced.replaceAll("{{ styles['jobName']['fontStyle'] }}", `${infos?.jobName?.style?.fontStyle || "normal"};`)
-    
+
     replaced = replaced.replaceAll('{{ absolute_url(asset(logo)) }}', infos?.logo?.path || "http://fakeimg.pl/108?font=noto&font_size=12")
 
     replaced = replaced.replaceAll('{{ company.name }}', 'Société')
@@ -92,7 +110,7 @@ export default function Preview({ infos, template, options, ...props }) {
 
     replaced = replaced.replaceAll('{{ address.city }}', 'Ville')
     replaced = replaced.replaceAll('{{ address.country }}', 'Pays')
-    
+
     replaced = replaced.replaceAll('{{ user.mobilePhone }}', 'Mobile')
     replaced = replaced.replaceAll("{{ styles['mobile']['color'] }}", `${infos?.mobile?.color};`)
     replaced = replaced.replaceAll("{{ styles['mobile']['textDecoration'] }}", `${infos?.mobile?.style.textDecoration || "none"};`)
@@ -106,12 +124,16 @@ export default function Preview({ infos, template, options, ...props }) {
     replaced = replaced.replaceAll("{{ styles['phone']['fontStyle'] }}", `${infos?.phone?.style?.fontStyle || "normal"};`)
 
     replaced = replaced.replaceAll("{{ styles['generalFontFamily']['fontFamily'] }}", `${infos?.fontFamily || "Helvetica"};`)
-    replaced = replaced.replaceAll("{{ styles['generalFontSize']['fontSize'] }}", `${infos?.fontSize+'px' || "11"};`)
+    replaced = replaced.replaceAll("{{ styles['generalFontSize']['fontSize'] }}", `${infos?.fontSize + 'px' || "11"};`)
 
-    var greeting = /{% if greeting %}\s*{{.*}}\s*{% endif %}/ig;
+    var greeting = /{# START GREETINGS #}.*{# END GREETINGS #}/isg;
     replaced = replaced.replaceAll(greeting, options?.salutation.enabled ? `<p style="padding-bottom: ${options?.salutation.padding}px;"}>${options?.salutation.value || "Cordialement,"}</p>` : "")
-    var disclaimer = /{% if disclaimer %}\s*{{.*}}\s*{% endif %}/ig;
+    var disclaimer =  /{# START DISCLAIMERS #}.*{# END DISCLAIMERS #}/isg;
     replaced = replaced.replaceAll(disclaimer, options?.footer?.enabled ? `<p style="box-sizing: border-box; margin-top:${options?.footer?.padding}px; font-size:${options?.footer?.size}px; max-width: ${options?.footer?.maxWidth}px;">${options?.footer?.value.replace(/\n/g, "<br />")}</p>` : "")
+
+    // socials
+
+    replaced = replaced.replaceAll(/{# START SOCIALS #}.*{# END SOCIALS #}/isg, socialNetworks)
 
     if (options?.event?.enabled) {
         replaced = replaced.replaceAll(/{% if event %}/gi, "")
@@ -119,11 +141,11 @@ export default function Preview({ infos, template, options, ...props }) {
         replaced = replaced.replaceAll('{{ event.imagePath }}', options?.event?.display || `http://fakeimg.pl/380x126?font=noto&font_size=14`)
     }
     else {
-        var event = /{% if event %}[^]*{% endif %}/gim;
+        var event = /{# START EVENT #}.*{# END EVENT #}/gs;
         replaced = replaced.replaceAll(event, "")
     }
 
-    replaced = replaced.replaceAll(/{% if user.mobilePhone or user.phone %}[^]*{% endif %}/gi, "")
+    replaced = replaced.replace(/{# START PHONE #}.*{# END PHONE #}/igs, "")
 
 
     // OPTIONS

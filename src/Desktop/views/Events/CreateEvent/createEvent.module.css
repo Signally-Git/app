@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  min-width: 30vw;
+  min-width: 35vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -117,6 +117,17 @@
 
 .currentEventPreview + div {
   width: 48%;
+}
+
+.uploadContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100% !important;
+}
+
+.uploadContainer > div {
+  width: 100%;
 }
 
 .btnsContainer {

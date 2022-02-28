@@ -1,5 +1,5 @@
 import Frame from "Desktop/components/Frame/frame"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Redirect, Route } from "react-router"
 import { NotificationProvider } from "Utils/Notifications/notifications"
 
@@ -8,12 +8,6 @@ import { NotificationProvider } from "Utils/Notifications/notifications"
 
 function PrivateRoute({ component: Component, ...rest }) {
     const [notification, setNotification] = useState()
-
-    // useEffect(() => {
-
-    // }, [localStorage.getItem('token')])
-    if (!localStorage.getItem('token'))
-        return <></>
     return (
         <Route {...rest} exact={rest.exact}
             render={props => localStorage.getItem("token") ? (
