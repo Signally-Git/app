@@ -25,7 +25,7 @@ function News({ organisation }) {
     React.useEffect(() => {
         setLoading(true)
 
-        if (organisation?.address.id && organisation?.websiteUrl?.length > 0 && organisation?.digitalAddress?.phone?.length > 0) {
+        if (organisation?.address.street && organisation?.websiteUrl?.length > 0 && organisation?.digitalAddress?.phone?.length > 0) {
             setSlide(1)
             setActiveAcc(true)
         }

@@ -33,11 +33,6 @@ function Dashboard(props) {
             await request.get('users').then((r) => users = r.data)
             await request.get(res.data?.organisation).then((r) => {
                 setOrganisation({ ...r.data, ...organisation, users: users['hydra:member'] })
-                const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${r.data.['@id']}`);
-                function getRealtimeData(data) {
-                    setOrganisation(data)
-                }
-                sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
             })
         })
       
@@ -64,6 +59,20 @@ function Dashboard(props) {
             phone: organisation?.phone_number
         })
     }, [])
+
+    useEffect(() => {
+        if (organisation) {
+            const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${organisation['@id']}`);
+            function getRealtimeData(data) {
+                setOrganisation(data)
+            }
+            sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
+    
+            return () => {
+                sse.close();
+            };
+        }
+    }, [organisation])
 
     return (
         <>

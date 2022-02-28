@@ -177,7 +177,7 @@ function Team() {
                             <div className={classes.slider} ref={slider}>
                                 <div className={classes.col}>
                                     <div className={classes.tagline}>
-                                        <h2><span className={classes.orangeTxt}>{entity?.users?.length || 0}</span> équipe(s) <span className={classes.orangeTxt}>{entity?.name}</span></h2>
+                                        <h2><span className={classes.orangeTxt}>{entity?.teams?.length || 0}</span> équipe(s) <span className={classes.orangeTxt}>{entity?.name}</span></h2>
                                         <Button color="brown" onClick={() => { setEdit('assign-signature') }}>Signature</Button>
                                     </div>
                                     <br />
