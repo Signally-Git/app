@@ -17,12 +17,15 @@ export default function Frame(props) {
     //     setUpdate(JSON.parse(e.data))
     // }
 
-    useEffect(async () => {
+    useEffect(() => {
+       request.get('whoami').then((res) => {
+            setUser(res.data)
+            request.get(res.data.organisation).then((r) => {
+                setOrganisation(r.data)
+            }).catch((err) => console.log(err))
+        }).catch((err) => { console.log(err) })
 
-        const logUser = await request.get('whoami')
-        setUser(logUser.data)
-        const organisation = await request.get(logUser.data.organisation)
-        setOrganisation(organisation.data)
+       
     }, [])
 
     useEffect(() => {
@@ -49,10 +52,10 @@ export default function Frame(props) {
     }, [user, organisation])
 
     return (<>
-        {user ? 
+        {user ?
             <div className={classes.desktop}>
-            <div className={classes.desktopSubcontainer}>
-                <Header page={props.path || ""} user={user} /> 
+                <div className={classes.desktopSubcontainer}>
+                    <Header page={props.path || ""} user={user} />
                     <div className={classes.mainContent}>
                         <div className={classes.menuContainer}>
                             <div className={classes.userInfos}>
