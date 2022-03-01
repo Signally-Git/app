@@ -254,7 +254,7 @@ export default function TemplateSelection(props) {
 						else
 							return (<li key={template.id}>
 								<input type="radio" name="template" value={template.html} />
-								<Template template={template.html} socials={props.icons} />
+								<Template template={template.html} socials={props.icons} organisation={props.organisation} />
 							</li>)
 				})}
 				{!tag ? <li style={{ width: "412px", height: "220px" }}></li> : ""}

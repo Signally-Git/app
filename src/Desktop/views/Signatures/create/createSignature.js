@@ -574,7 +574,7 @@ function CreateSignatureComponent() {
 
   const showTemplates = (isOpen) => {
     if (isOpen) {
-      setTemplates(<TemplateSelection showFunction={showTemplates} setTemplate={setSelectedTemplate} icons={signatureOption.socials} />)
+      setTemplates(<TemplateSelection showFunction={showTemplates} setTemplate={setSelectedTemplate} icons={signatureOption.socials} organisation={company.data} />)
       setTimeout(() => {
         elem.current.scrollTo({
           top: 0,
@@ -599,7 +599,7 @@ function CreateSignatureComponent() {
   useEffect(() => {
     // console.log(signatureInfo, signatureOption, selectedTemplate)
     if (signatureInfo && signatureOption && selectedTemplate)
-      setPreview(<Preview infos={signatureInfo} options={signatureOption} template={selectedTemplate.html} organisationId={company} />)
+      setPreview(<Preview infos={signatureInfo} options={signatureOption} template={selectedTemplate.html} organisation={company.data} />)
   }, [signatureInfo, signatureOption, selectedTemplate])
 
 
@@ -641,8 +641,7 @@ function CreateSignatureComponent() {
               <div className={classes.lazyLoadingShort}></div>
               <div className={classes.lazyLoadingMedium}></div>
               <br />
-              {selectedTemplate &&
-                preview}
+              {selectedTemplate && preview}
               <div className={classes.CTAsContainer}>
                 <Button color="orange" onClick={() => setModal(true)} style={{ opacity: selectedTemplate ? 1 : 0, pointerEvents: selectedTemplate ? "" : "none" }}>Sauvegarder</Button>
                 <Button color="brown" onClick={() => showTemplates(true)}>Choisir un {selectedTemplate ? "autre modèle" : "modèle de signature"} <BsArrowRight style={{ stroke: "black", strokeWidth: "1", marginLeft: ".5rem" }} className={`${selectedTemplate ? "" : classes.blinking} ${classes.arrow}`} /></Button>

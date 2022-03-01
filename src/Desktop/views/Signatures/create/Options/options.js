@@ -281,7 +281,7 @@ export default function Options(props) {
                     <div className={classes.optionsContainer}>
                         {handleBackground()}
                     </div>
-                    {props.data.custom.enabled ? <div className={classes.inputStyle}>
+                    {props.data.custom.enabled ? <div className={classes.inputStyle} style={{width: '10rem', marginRight: 'auto'}}>
                         <span>Couleur de fond</span>
                         <div title="Background color" style={{ backgroundColor: props.data.bgColor }} className={classes.colorPreview} onClick={() => colorSelect !== "bg" ? setColorSelect("bg") : setColorSelect("")} />
                     </div> : ""
@@ -376,7 +376,7 @@ export default function Options(props) {
                         <span className={`${classes.slider} ${classes.round}`}></span>
                     </label>
                 </div>
-                <div className={classes.checkToText}>
+                {/* <div className={classes.checkToText}>
                     {props.data.socials.enabled ?
                         <>
                             <input type="text"
@@ -397,17 +397,17 @@ export default function Options(props) {
                                     <div title="Fill color" style={{ backgroundColor: props.data.socials.fill }} className={classes.colorPreview} onClick={() => colorSelect !== "fill" ? setColorSelect("fill") : setColorSelect("")} />
                                 </div>
                             </div> */}
-                            <div className={classes.optionsContainer}>
+                            {/* <div className={classes.optionsContainer}>
                                 {handleColors()}
                             </div>
 
                             <div className={classes.socialsList}>
                                 <DndSocials data={props.data} setData={props.setData} fill={props.data.socials.fill} background={props.data.socials.backgroundColor} />
-                            </div>
-                        </>
-                        :
-                        ""}
-                </div>
+                            </div> */}
+                        {/* </> */}
+                        {/* : */}
+                        {/* ""} */}
+                {/* </div> */} 
 
                 {/* Disclaimer */}
                 <div className={classes.row}>
