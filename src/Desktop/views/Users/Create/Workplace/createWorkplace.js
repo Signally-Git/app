@@ -19,6 +19,7 @@ export default function CreateWorkplace({ setDone }) {
         {
             logos: [],
             name: "",
+            link: "",
             address: {
                 street: "",
                 streetInfo: ""
@@ -108,8 +109,9 @@ export default function CreateWorkplace({ setDone }) {
             </div>
             <div className={classes.slide}>
                 <div className={classes.inputsContainer}>
-                    <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, name: e.target.value })} type="text" placeholder="Nom du workplace" />
+                    <Input style={{ width: "100%", marginBottom: '1rem' }} onChange={(e) => setWorkplace({ ...workplace, name: e.target.value })} type="text" placeholder="Nom du workplace" />
                     <UploadFile placeholder="Importer un logo" file={file} setFile={setFile} />
+                    <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, link: e.target.value })} type="text" placeholder="Lien du site" />
                     <div className={classes.btnsContainer}>
                         <Button width={width} color="orange" className={`${classes.btn}`} onClick={(e) => handleSlide(e, 1)}>Retour</Button>
                         <Button disabled={workplace.name.length < 1} width={width} color={workplace.name.length < 1 ? "orange" : "orangeFill"} arrow={true} onClick={(e) => { handleSlide(e, 4) }} className={`${classes.btn}`}>Valider</Button>

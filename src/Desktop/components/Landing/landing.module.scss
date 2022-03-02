@@ -19,9 +19,6 @@
 }
 
 .container {
-    animation: fadeIn 1.5s forwards ease-in;
-    animation-delay: 500ms;
-    opacity: 0;
     display: flex;
     flex-direction: row-reverse;
     // min-height: 70vh;
@@ -95,6 +92,9 @@
 }
 
 .logInContainer {
+    // animation: fadeIn 1.5s forwards ease-in;
+    // animation-delay: 500ms;
+    // opacity: 0;
     margin: auto;
     align-items: center;
     min-width: 40%;

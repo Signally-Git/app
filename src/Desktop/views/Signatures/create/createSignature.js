@@ -57,7 +57,7 @@ function CreateSignatureComponent() {
     bgColor: "#FCE750",
     bannerTop: { url: "test", enabled: false, padding: 10 },
     event: { list: events, selected: events[0], enabled: false, padding: 12 },
-    socials: { enabled: false, bgColor: "#000", fill: "#FFF", items: ["facebook", "linkedin", "twitter", "instagram", "snapchat", "pinterest"] },
+    socials: { enabled: true, bgColor: "#000", fill: "#FFF", items: ["facebook", "linkedin", "twitter", "instagram", "snapchat", "pinterest"] },
     footer: {
       maxWidth: 380, value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.
     

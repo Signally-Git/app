@@ -110,7 +110,8 @@ const Login = () => {
             return;
         });
     }
-
+    if (query.get('user')) 
+    return <></>
     return (<div style={{ background: "#FFF", overflow: 'hidden', height: "100vh" }}>
         {modal === "done" ? <div className={classes.modal}>
             <p>Un message a été envoyé à <span className={classes.orangeTxt}>{email}</span> <br /> avec un lien pour réinitialiser votre mot de passe.</p>

@@ -364,6 +364,7 @@ export default function Options(props) {
                             type="checkbox"
                             autoFocus
                             id="socials"
+                            disabled
                             checked={props.data.socials.enabled}
                             onChange={(e) => {
                                 props.setData({

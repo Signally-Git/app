@@ -39,6 +39,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     const [country, setCountry] = useState("")
     const [mobile, setMobile] = useState("")
     const [fax, setFax] = useState("")
+    const [link, setLink] = useState("")
     const [done, setDone] = useState(false)
     let time;
 
@@ -95,8 +96,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                         () => {
                             notification({ content: <><span style={{ color: "#FF7954" }}>{element.name}</span> supprimé avec succès</>, status: "valid" })
                             count++;
-                            if (count === workplaces.length)
-                            {
+                            if (count === workplaces.length) {
                                 notification({ content: <><span style={{ color: "#FF7954" }}>{count} hotel(s)</span> supprimé(s) avec succès</>, status: "valid" })
                                 refreshData()
                                 setEdit()
@@ -113,8 +113,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                         (res) => {
                             index === teams.length - 1 && refreshData()
                             count++;
-                            if (count === teams.length)
-                            {
+                            if (count === teams.length) {
                                 notification({ content: <><span style={{ color: "#FF7954" }}>{count} équipe(s)</span> supprimée(s) avec succès</>, status: "valid" })
                                 refreshData()
                                 setEdit()
@@ -131,8 +130,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                             () => {
                                 index === users.length - 1 && refreshData()
                                 count++;
-                                if (count === users.length - 1)
-                                {
+                                if (count === users.length - 1) {
                                     notification({ content: <><span style={{ color: "#FF7954" }}>{count} collaborateur(s)</span> supprimé(s) avec succès</>, status: "valid" })
                                     refreshData()
                                     setEdit()
@@ -248,10 +246,11 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         if (teamName.length > 0)
             await request.patch(team['@id'], { name: teamName }, {
                 headers: { 'Content-Type': 'application/merge-patch+json' }
-            }).then(() => { 
-                notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> modifié avec succès</>, status: "valid" }); 
+            }).then(() => {
+                notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> modifié avec succès</>, status: "valid" });
                 getDataTeam()
-                setChanged(false) }).catch(() => notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> n'a pas pu être modifié</>, status: "invalid" }))
+                setChanged(false)
+            }).catch(() => notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> n'a pas pu être modifié</>, status: "invalid" }))
         setEditInfo()
     }
 
@@ -297,7 +296,10 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                         </div>
                                         {editInfo === workplace ? <>
                                             <div className={classes.editDiv}>
-                                                <UploadFile file={file} setFile={setFile} placeholder={workplace?.logo?.name ? 'Remplacer ' + workplace.logo.name : 'Importer un logo'} style={{ background: '#FFF', marginBottom: '.2rem' }} />
+                                                <div className={classes.inputsContainer}>
+                                                    <UploadFile file={file} setFile={setFile} placeholder={workplace?.logo?.name ? 'Remplacer ' + workplace.logo.name : 'Importer un logo'} style={{ background: '#FFF', marginBottom: '.2rem', width: '48%' }} />
+                                                    <Input onChange={(e) => { setLink(e.target.value); setChanged(true) }} type="string" placeholder="Lien du site" defaultValue={workplace.link} />
+                                                </div>
                                                 <div className={classes.inputsContainer}>
                                                     <Input onChange={(e) => { setStreet(e.target.value); setChanged(true) }} type="text" placeholder="Adresse" defaultValue={workplace.address.street} />
                                                     <Input onChange={(e) => { setZipCode(e.target.value); setChanged(true) }} type="text" placeholder="ZIP Code" defaultValue={workplace.address.zipCode} />
