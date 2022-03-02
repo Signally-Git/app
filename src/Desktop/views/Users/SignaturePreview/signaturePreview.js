@@ -10,6 +10,7 @@ import Search from "Assets/icons/search.svg"
 import CustomSelect from 'Utils/CustomSelect/customselect';
 import Modal from 'Utils/Modals/modal';
 import Btns from 'Utils/Btns/btns';
+import parse from 'html-react-parser'
 
 export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     const today = new Date()
@@ -44,6 +45,8 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
 
         setEvent(toPush[0] || { '@id': "playlist" })
         setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event['@id'] === "playlist" ? "Modifier la playlist" : "Playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
+        if (selectedTemplate?.['@id'] && !selectedTemplate?.preview)
+            await request.get(selectedTemplate['@id']).then((res) => setSelectedTemplate(res.data))
     }, [selectedTemplate])
 
     useEffect(async () => {
@@ -83,7 +86,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         setTemplates(templates.data["hydra:member"])
         const template = await request.get(show?.signature?.['@id'])
         setAssignedTemplate(template.data)
-        console.log(template.data)
     }, [show, edit])
     
     // Modal
@@ -231,7 +233,10 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                             {templates.length > 0 &&
                                 <CustomSelect onChange={(e) => setSelectedTemplate(Object?.values(templates)?.find((obj) => { return obj.id == e }))} items={templates} display={"name"} getValue={"id"} />}
                             <div className={classes.signature}>
-                                {selectedTemplate ? <ReadOnlyPreview template={selectedTemplate.html} infos={{ event: `${API}/${event?.imagePath}` }} /> : ""}
+                                {selectedTemplate?.preview ? 
+                                // <ReadOnlyPreview template={selectedTemplate.html} infos={{ event: `${API}/${event?.imagePath}` }} /> 
+                                parse(selectedTemplate?.preview)
+                                : ""}
                             </div>
                         </div>
                         <div>
