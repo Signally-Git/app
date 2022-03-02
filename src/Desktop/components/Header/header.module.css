@@ -32,6 +32,14 @@
   z-index: 5;
 }
 
+.landing {
+  opacity: 0;
+  -webkit-animation: fadeIn 1.5s forwards ease-in;
+          animation: fadeIn 1.5s forwards ease-in;
+  -webkit-animation-delay: 500ms;
+          animation-delay: 500ms;
+}
+
 .landing .logoContainer {
   margin-top: 0;
 }
@@ -494,6 +502,24 @@
   100% {
     top: 0;
     max-height: 1.75rem;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 

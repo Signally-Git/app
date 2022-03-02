@@ -85,7 +85,7 @@ export default function Infos(props) {
         <>
             <div className={classes.infosContainer}>
                 <div className={classes.inputsContainer}>
-                    <div className={classes.inputContainer}>
+                    {/* <div className={classes.inputContainer}>
                         <h4>Photo ou logo</h4>
                         <UploadFile
                             file={img}
@@ -93,7 +93,7 @@ export default function Infos(props) {
                             placeholder="Importer une image"
                             type="image/*"
                         />
-                    </div>
+                    </div> */}
                 </div>
                 <div className={classes.inputsContainer}>
                     <div className={`${classes.expandTitle} ${!profile ? classes.closed : ""}`}>

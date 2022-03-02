@@ -28,7 +28,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     const [choosePlaylist, setChoosePlaylist] = useState(false)
     const [playlist, setPlaylist] = useState([])
     const [searchQuery, setSearchQuery] = useState("")
-    const type = show["@type"].toLowerCase()
+    const type = show["@type"]?.toLowerCase()
     const notification = useNotification()
 
     //  PREVIEW EVENT

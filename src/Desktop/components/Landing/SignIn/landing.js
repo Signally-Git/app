@@ -93,32 +93,32 @@ const Login = () => {
 
     const handleLogIn = async (e) => {
         e.preventDefault()
+        let token;
         setLoading(true)
         const req = {
             username: email.toLowerCase(),
             password: code
         }
 
-        const token = await request.post(`token/auth`, req).catch(() => {
+        await axios.post(`${API}token/auth`, req).then((res) => {
+            localStorage.setItem('token', res.data.token)
+            localStorage.setItem('refresh_token', res.data.refresh_token)
+            history.go(0)
+        }).catch(() => {
             notification({ content: <>Email ou mot de passe incorrect</>, status: "invalid" })
             setLoading(false)
+            return;
         });
-
-        if (token) {
-            localStorage.setItem('token', token.data.token)
-            localStorage.setItem('refresh_token', token.data.refresh_token)
-            history.go(0)
-        }
     }
 
     return (<div style={{ background: "#FFF", overflow: 'hidden', height: "100vh" }}>
         {modal === "done" ? <div className={classes.modal}>
             <p>Un message a été envoyé à <span className={classes.orangeTxt}>{email}</span> <br /> avec un lien pour réinitialiser votre mot de passe.</p>
             <Button color={"orange"} width={'40%'} onClick={() => setModal(false)}>OK</Button>
-            </div> : modal ?
+        </div> : modal ?
             <form onSubmit={(e) => handleForgotSubmit(e)} className={classes.modal}>
                 <h3>Réinitialiser mon mot de passe</h3>
-                <Input defaultValue={email} type="mail" style={{ width: '100%' }} autoComplete="email" placeholder="Email" />
+                <Input defaultValue={email} onChange={(e) => setEmail(e.target.value)} type="mail" style={{ width: '100%' }} autoComplete="email" placeholder="Email" />
                 <div className={classes.btnsContainer}>
                     <Button type="submit" color={"orangeFill"} width={'40%'}>Envoyer</Button>
                     <Button type="button" color={"orange"} width={'40%'} onClick={() => setModal(false)}>Annuler</Button>
@@ -178,7 +178,7 @@ const Login = () => {
                             </div>
                             <span onClick={() => setModal(true)} className={classes.forgot}>Mot de passe oublié</span>
                             <div className={classes.btnsContainer}>
-                                <Button width={"30%"} color="orangeFill" type="submit">{loading ? <AiOutlineLoading3Quarters stroke-width="1" stroke='2px' fontWeight={'bolder'} className={classes.loading} /> : "Connexion"}</Button>
+                                <Button width={"30%"} color="orangeFill" type="submit">{loading ? <AiOutlineLoading3Quarters strokeWidth="1" stroke='2px' fontWeight={'bolder'} className={classes.loading} /> : "Connexion"}</Button>
                                 <Button width={"30%"} color="orange" onClick={(e) => { handleScroll(e, 0) }}>Annuler</Button>
                             </div>
                         </form>

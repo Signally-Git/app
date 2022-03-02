@@ -238,6 +238,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(() => {
             setChanged(false)
+            getDataWorkspace()
         })
         setEditInfo()
     }
@@ -247,7 +248,10 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         if (teamName.length > 0)
             await request.patch(team['@id'], { name: teamName }, {
                 headers: { 'Content-Type': 'application/merge-patch+json' }
-            }).then(() => { notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> modifié avec succès</>, status: "valid" }); setChanged(false) }).catch(() => notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> n'a pas pu être modifié</>, status: "invalid" }))
+            }).then(() => { 
+                notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> modifié avec succès</>, status: "valid" }); 
+                getDataTeam()
+                setChanged(false) }).catch(() => notification({ content: <><span style={{ color: "#FF7954" }}>{team.name}</span> n'a pas pu être modifié</>, status: "invalid" }))
         setEditInfo()
     }
 

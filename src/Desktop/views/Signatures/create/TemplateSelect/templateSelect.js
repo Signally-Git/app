@@ -36,12 +36,12 @@ const templateAPI = [{
 								<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:none; border-color: {{ styles['divColor']['color'] }};">
 									<tbody>
 										<tr> 
-											<td style="background: {{ styles['divColor']['color'] }}; width: 12px;"/>
-											<td style="box-sizing: border-box; border: none; background: {{ styles['divColor']['color'] }}; font-size: 8pt; height: 94px; width: 272px">
+											<td style="background: {{ styles['divColor']['color'] }}; width: 12px; height: 108px; border-radius: 4px 0 0 4px;"/>
+											<td style="box-sizing: border-box; border: none; background: {{ styles['divColor']['color'] }}; font-size: 8pt; height: 108px; width: 240px">
 												<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:none; font-size: 8pt;">
 													<tbody>
 														<tr height="1">
-															<td style="font-size: 8pt; padding: 8px 0 0 0;">
+															<td style="font-size: 8pt; padding:0">
 																<b style="color:{{ styles['firstName']['color'] }}; text-decoration: {{ styles['firstName']['textDecoration'] }}; font-style: {{ styles['firstName']['fontStyle'] }}; font-weight: {{ styles['firstName']['fontWeight'] }}; font-size: 8pt; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
                                                                     {{ user.firstName }}
                                                                 </b>
@@ -82,12 +82,12 @@ const templateAPI = [{
 														{% if user.mobilePhone or user.phone %}
 														<tr>
 															{% if user.mobilePhone %}
-															<td style=" padding: 0 0 8px 0; color: {{ styles['mobile']['color'] }}font-weight: {{ styles['mobile']['fontWeight'] }};font-family: {{ styles['generalFontFamily']['fontFamily'] }};font-size: {{ styles['generalFontSize']['fontSize'] }}">
+															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}font-weight: {{ styles['mobile']['fontWeight'] }};font-family: {{ styles['generalFontFamily']['fontFamily'] }};font-size: {{ styles['generalFontSize']['fontSize'] }}">
 																{{ user.mobilePhone }}
 															</td>
 															{% endif %}
 															{% if user.phone %}
-															<td style=" padding: 0 0 8px 0; color: {{ styles['mobile']['color'] }}font-weight: {{ styles['mobile']['fontWeight'] }};font-family: {{ styles['generalFontFamily']['fontFamily'] }};font-size: {{ styles['generalFontSize']['fontSize'] }}">
+															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}font-weight: {{ styles['mobile']['fontWeight'] }};font-family: {{ styles['generalFontFamily']['fontFamily'] }};font-size: {{ styles['generalFontSize']['fontSize'] }}">
 																{{ user.phone }}
 															</td>
 															{% endif %}
@@ -97,32 +97,29 @@ const templateAPI = [{
 													</tbody>
 												</table>
 											</td>
-											<td style="background: {{ styles['divColor']['color'] }}; width: 12px;"></td>
-										</tr>
-									</tbody>
-								</table>
+											<td style="background: {{ styles['divColor']['color'] }}; width: 12px; border-radius: 0 4px 4px 0;"></td>
+										</tr></tbody></table>
 							</td>
 						</tr>
 					</tbody>
 				</table>
-				<p class="x_MsoNormal"></p>
 			</td>
 		</tr>
 		<tr>
 		{# START EVENT #}
 			{% if event %}
-				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: {{ styles['eventPadding']['padding'] }}px">
-					<img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="{{ event.imagePath }}" alt='{{ event.name }}'/>
+				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
+					<img style="padding: 0cm; width: 380px; height: 126px; display: block; border-radius: 4px;" height="126" width="380" src="{{ event.imagePath }}" alt='{{ event.name }}'/>
 				</td>
 			{% endif %}
 			{# END EVENT #}
 		</tr>
 		<tr>
-			<td style="width:380px; box-sizing: border-box; border: none;">
-				<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border:none; ">
+			<td style="width:380px; box-sizing: border-box; border: none; padding-top: 12px;">
+				<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border:none; width: 380px;">
 					<tbody>
 						<tr>
-							<td style="border-collapse:collapse; background: #000; width: 8px; height: 44px;"></td>
+							<td style="border-collapse:collapse; background: #000; width: 8px; height: 44px;border-radius: 4px 0 0 4px;"></td>
 							<td style="background: black">
 								<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0">
 									<tbody>
@@ -133,7 +130,7 @@ const templateAPI = [{
 														<tr>
 															<td nowrap style="width:65px; border: none; background:black; padding: 0cm; font-size: 9.5pt;">
 																<p class="x_MsoNormal" style="vertical-align: middle;margin: 0">
-																	<b style="color:white; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: 12px; vertical-align: text-top;" nowrap>Follow
+																	<b style="color:white; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: 12px; vertical-align: text-top; display: grid;" nowrap>Follow
 																																																						                                                                        us</b>
 																</p>
 															</td>
@@ -145,9 +142,9 @@ const templateAPI = [{
 																		<tr height="24">
 																		{# START SOCIALSLIST #}
 																				{% for media in socialMediaAccounts %}
-																				<td height="24" width="24" style="height:24px; width:24px; margin: 0 auto; text-align: left; padding: 0 2px;" valign="top">
+																				<td height="24" width="24" style="height:24px; width:24px; text-align: left; padding: 0;" valign="top">
 																					<a href="{{ media.url }} " height="24" width="24" style="height:24px; width:24px" alt="{{ media.name }} ">
-																						<img height="24" width="24" style="vertical-align: middle; display: block; height:24px; width:24px; line-height:24px;" src="{{ absolute_url(asset(media.image)) }}" alt=''/>
+																						<img height="24" width="24" style="vertical-align: middle; display: block; height:24px; width:24px; line-height:24px; margin: 0 3px" src="{{ absolute_url(asset(media.image)) }}" alt=''/>
 																					</a>
 																				</td>
 																				{% endfor %}
@@ -158,8 +155,8 @@ const templateAPI = [{
 															</td>
 															{% endif %}
 															{# END SOCIALS #}
-															<td style="width:55px; border: none; background:black; padding: 0cm; height: 24px" height="24">
-																<img height="24" style="vertical-align: middle; height: 24px;" src="{{ absolute_url(asset('images//mama-61c0f1b6cbc19.png')) }}"/>
+															<td style="width:55px; border: none; background:black; padding: 0cm; height: 24px;" height="24">
+																<img height="24" style="vertical-align: middle; height: 24px; margin-right: 0; text-align: right" src="https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/mama-61c0f1b6cbc19.png"/>
 															</td>
 														</tr>
 													</tbody>
@@ -169,7 +166,7 @@ const templateAPI = [{
 									</tbody>
 								</table>
 							</td>
-							<td style="border-collapse:collapse; background: #000; width: 8px;"></td>
+							<td style="border-collapse:collapse; background: #000; width: 8px;border-radius: 0 4px 4px 0;"></td>
 						</tr>
 					</tbody>
 				</td>
@@ -245,9 +242,9 @@ export default function TemplateSelection(props) {
 						if (tag) {
 							if (template.tags[0].toLowerCase() === "studio") {
 								return (<li key={template.id}>
-									<p className={classes.templateName}>Nom de la template</p>
+									<p className={classes.templateName}>Mama Shelter</p>
 									<input readOnly type="radio" name="template" value={JSON.stringify(template)} />
-									<Template template={template.html} socials={props.icons} />
+									<Template options={{event: { enabled: true }}} template={template.html} socials={props.icons} />
 								</li>)
 							}
 						}

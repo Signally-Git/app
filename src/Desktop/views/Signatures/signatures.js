@@ -217,7 +217,7 @@ function Team() {
                                 <span>{templates.length} signatures</span>
                                 <ul className={classes.itemsList}>
                                     {templates.map((signature) => {
-                                        return (<li onMouseEnter={() => {setPreview(signature); setDefaultStyles(signature.signatureStyles)}} key={signature.id}>
+                                        return (<li onMouseEnter={() => {request.get(signature['@id']).then((res) => setPreview(res.data)); setDefaultStyles(signature.signatureStyles)}} key={signature.id}>
                                             <span onClick={() => history.push('/edit-signature/' + signature.id)}>{signature.name}</span>
                                             <div className={classes.actionsContainer}>
                                                 {/* <AiOutlineEdit /> */}

@@ -4,7 +4,6 @@
   height: 100%;
   padding-left: 1rem;
   max-height: 80vh;
-  overflow: auto !important;
   background-color: #f5eef0;
   display: -webkit-box;
   display: -ms-flexbox;
