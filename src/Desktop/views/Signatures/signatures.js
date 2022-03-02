@@ -10,6 +10,7 @@ import Button from 'Utils/Button/btn'
 import ReadOnlyPreview from './create/Preview/readOnlyPreview'
 import { useNotification } from 'Utils/Notifications/notifications'
 import request from 'Utils/Request/request'
+import parse from "html-react-parser"
 import Preview from './create/Preview/customizablePreview'
 
 function Team() {
@@ -252,7 +253,8 @@ function Team() {
                                 <li>
                                     <h5>Signature <span className={classes.orangeTxt}>{preview.name}</span></h5>
                                     {/* {preview.signatureData?.length > 0 && parse(preview.signatureData)} */}
-                                    <Preview infos={signatureInfo} options={signatureOption} template={preview.html} organisation={organisation} />
+                                    {parse(preview.preview)}
+                                    {/* <Preview infos={signatureInfo} options={signatureOption} template={preview.html} organisation={organisation} /> */}
                                     {/* <ReadOnlyPreview infos={data} template={preview.html} /> */}
                                     {/* <p className={classes.groupName}>Team Design</p>
                                     <span className={classes.groupName}>#Mama Los Angeles</span> */}

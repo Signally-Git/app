@@ -574,7 +574,7 @@ function CreateSignatureComponent() {
 
   const showTemplates = (isOpen) => {
     if (isOpen) {
-      setTemplates(<TemplateSelection showFunction={showTemplates} setTemplate={setSelectedTemplate} icons={signatureOption.socials} organisation={company.data} />)
+      setTemplates(<TemplateSelection showFunction={showTemplates} setTemplate={setSelectedTemplate} icons={signatureOption.socials} organisation={company?.data} />)
       setTimeout(() => {
         elem.current.scrollTo({
           top: 0,
