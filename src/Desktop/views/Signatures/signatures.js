@@ -196,7 +196,7 @@ function Team() {
     }, [user, template])
 
     const handleModal = (id) => {
-        setModal(<Modal title="Êtes-vous sûr de vouloir supprimer la signature ?"
+        setModal(<Modal title={<span>Vous allez supprimer <br /><span>{preview.name}</span></span>}
             content={``}
             cancel="Annuler" validate="Supprimer"
             onCancel={() => setModal()} onConfirm={() => handleDelete(id)} />)

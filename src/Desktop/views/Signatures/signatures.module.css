@@ -20,16 +20,21 @@
   display: flex;
   margin: auto;
   width: 75%;
-  left: 25%;
+  left: 35%;
   right: 0;
   position: absolute;
 }
 
 .modalContainer > div {
+  padding: 0 1rem;
   top: 0%;
-  width: 40%;
+  width: 20%;
   left: auto;
   right: auto;
+}
+
+.modalContainer > div span > span {
+  color: #FF7954;
 }
 
 .row {

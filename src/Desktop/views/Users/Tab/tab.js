@@ -221,7 +221,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         e.preventDefault()
         const req = {
             name: workplaceName || workplace.name,
-            websiteUrl: websiteUrl,
+            websiteUrl: websiteUrl || workplace.websiteUrl,
             address: {
                 street: street || workplace.address.street,
                 city: city || workplace.address.city,
@@ -229,8 +229,8 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 country: country || workplace.address.country
             },
             digitalAddress: {
-                mobile: mobile,
-                fax: fax
+                mobile: mobile || workplace.digitalAddress.mobile,
+                fax: fax || workplace.digitalAddress.fax
             }
         }
         await request.patch(workplace['@id'], req, {

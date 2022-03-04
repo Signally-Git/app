@@ -114,6 +114,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
             events.pop()
             setEvents([...events, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event !== "playlist" ? "Playlist" : "Modifier la playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
         }
+        console.log(event)
     }, [event])
 
     // ASSIGNATION
@@ -128,9 +129,10 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     }
 
     const handleAssign = async (element) => {
-        // const rq = {
-        //     signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate.html })?.["@id"]
-        // }
+        const req = {
+            signature: selectedTemplate['@id'],
+            events: event === 'playlist' ? multiEvents : [event?.['@id'] || event] 
+        }
         // event ? {
         //     signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.["@id"],
         //     events: event === 'playlist' ? multiEvents : [event['@id']]
@@ -138,31 +140,31 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         // console.log('HERE', multiEvents)
         // console.log(assignedTemplate, type+'s')
         // console.log(assignedTemplate?.[type+'s'])
-        if (multiEvents)
-            multiEvents.map(async (e) => {
-                const req = { ...e, [type + 's']: [element['@id']] }
-                await request.patch(e['@id'], req, {
-                    headers: { 'Content-Type': 'application/merge-patch+json' }
-                }).then(() => {
-                    notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> mise à jour</>, status: "valid" })
-                    setEdit()
-                }).catch((err) => console.log(err))
-            })
-        if (selectedTemplate['@id'])
-            await request.patch(selectedTemplate['@id'], { [type + 's']: [`${type}s/${element.id}`] }, {
-                headers: { 'Content-Type': 'application/merge-patch+json' }
-            }).then(
-                () => {
-                    notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
-                    setEdit()
-                }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
-        // await request.patch(`${type}s/${element.id}`, req, {
-        //     headers: { 'Content-Type': 'application/merge-patch+json' }
-        // }).then(
-        //     () => {
-        //         notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
-        //         setEdit()
-        //     }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
+        // if (multiEvents)
+        //     multiEvents.map(async (e) => {
+        //         const req = { ...e, [type + 's']: [element['@id']] }
+        //         await request.patch(e['@id'], req, {
+        //             headers: { 'Content-Type': 'application/merge-patch+json' }
+        //         }).then(() => {
+        //             notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> mise à jour</>, status: "valid" })
+        //             setEdit()
+        //         }).catch((err) => console.log(err))
+        //     })
+        // if (selectedTemplate['@id'])
+        //     await request.patch(selectedTemplate['@id'], { [type + 's']: [`${type}s/${element.id}`] }, {
+        //         headers: { 'Content-Type': 'application/merge-patch+json' }
+        //     }).then(
+        //         () => {
+        //             notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
+        //             setEdit()
+        //         }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
+        await request.patch(`${type}s/${element.id}`, req, {
+            headers: { 'Content-Type': 'application/merge-patch+json' }
+        }).then(
+            () => {
+                notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
+                setEdit()
+            }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
     }
 
     return (<div className={classes.flipcontainer}>
@@ -245,7 +247,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                             <div className={classes.signature}>
                                 {selectedTemplate?.preview ?
                                     // <ReadOnlyPreview template={selectedTemplate.html} infos={{ event: `${API}/${event?.imagePath}` }} /> 
-                                    parse(selectedTemplate?.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', event?.imagePath ? `${API}/${event?.imagePath}` : 'http://fakeimg.pl/380x126?font=noto&font_size=14'))
+                                    parse(selectedTemplate?.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', event?.imagePath ? `${API}/${event?.imagePath}` : Object?.values(events)?.find((obj) => { return obj['@id'] == event }) ? `${API}/${Object?.values(events)?.find((obj) => { return obj['@id'] == event })?.imagePath}` : 'http://fakeimg.pl/380x126?font=noto&font_size=14'))
                                     : ""}
                             </div>
                         </div>
