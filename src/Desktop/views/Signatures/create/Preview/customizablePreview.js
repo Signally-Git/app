@@ -159,6 +159,7 @@ export default function Preview({ infos, template, options, organisation, ...pro
         replaced = replaced.replaceAll(/{# START EVENT #}/gi, "")
         replaced = replaced.replaceAll(/{# END EVENT #}/gi, "")
         replaced = replaced.replaceAll('{{ event.imagePath }}', options?.event?.display?.search('undefined') === - 1 ? options?.event?.display : `http://fakeimg.pl/380x126?font=noto&font_size=14`)
+        replaced =  replaced.replaceAll(/{# START ELSE #}.*{# END ELSE #}/gs, "");
     }
     else {
         var event = /{# START EVENT #}.*{# END EVENT #}/gs;

@@ -12,6 +12,21 @@
     }
 }
 
+.modalContainer {
+    display: flex;
+    margin: auto;
+    width: 75%;
+    left: 25%;
+    right: 0;
+    position: absolute;
+    > div {
+        top: 0%;
+        width: 40%;
+        left: auto;
+        right: auto;
+    }
+}
+
 .row {
     display: flex;
     position: relative;

@@ -27,9 +27,10 @@ const templateAPI = [{
 						<tr>
 							<td valign="top" style="width:108px; border: none; padding: 0cm 8px 0 0; font-size: 8.5pt;">
 								<p class="x_MsoNormal" style="height: 108px; margin: 0; padding: 0;" height="108" valign="middle">
-									<span style="height: 108px;" height="108">
-										<img style="width: 108px; height: 108px; vertical-align: middle;" height="108" width="108" valign="middle" src="{{ absolute_url(asset(logo)) }}" alt="{{ company.name }}"/>
-									</span>
+								<span style="height: 108px;" height="108">
+								<a href="{{company.websiteUrl}}"><img style="width: 108px; height: 108px; vertical-align: middle;" height="108" width="108" valign="middle" src="{{ absolute_url(asset(logo)) }}" alt="{{ company.name }}"/></a>
+							</span>
+
 								</p>
 							</td>
 							<td valign="middle" style="box-sizing: border-box; border: none; padding: 0;">
@@ -107,11 +108,17 @@ const templateAPI = [{
 		</tr>
 		<tr>
 		{# START EVENT #}
-			{% if event %}
+		{% if event %}
 				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
-					<img style="padding: 0cm; width: 380px; height: 126px; display: block; border-radius: 4px;" height="126" width="380" src="{{ event.imagePath }}" alt='{{ event.name }}'/>
+					<a href="{{ event.link }}"><img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="{{ event.imagePath }}" alt='{{ event.name }}'/></a>
+				</td>
+				{# START ELSE #}
+			{% else %}
+				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
+					<img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="http://fakeimg.pl/380x126?font=noto&font_size=14" alt='Event'/>
 				</td>
 			{% endif %}
+			{# END ELSE #}
 			{# END EVENT #}
 		</tr>
 		<tr>
@@ -244,7 +251,7 @@ export default function TemplateSelection(props) {
 								return (<li key={template.id}>
 									<p className={classes.templateName}>Mama Shelter</p>
 									<input readOnly type="radio" name="template" value={JSON.stringify(template)} />
-									<Template options={{event: { enabled: true }}} template={template.html} socials={props.icons} />
+									<Template options={{ event: { enabled: true } }} template={template.html} socials={props.icons} />
 								</li>)
 							}
 						}

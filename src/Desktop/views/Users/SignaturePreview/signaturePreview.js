@@ -245,7 +245,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                             <div className={classes.signature}>
                                 {selectedTemplate?.preview ?
                                     // <ReadOnlyPreview template={selectedTemplate.html} infos={{ event: `${API}/${event?.imagePath}` }} /> 
-                                    parse(selectedTemplate?.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', `${API}/${event?.imagePath}`))
+                                    parse(selectedTemplate?.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', event?.imagePath ? `${API}/${event?.imagePath}` : 'http://fakeimg.pl/380x126?font=noto&font_size=14'))
                                     : ""}
                             </div>
                         </div>

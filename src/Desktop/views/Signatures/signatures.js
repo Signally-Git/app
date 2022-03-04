@@ -12,6 +12,7 @@ import { useNotification } from 'Utils/Notifications/notifications'
 import request from 'Utils/Request/request'
 import parse from "html-react-parser"
 import Preview from './create/Preview/customizablePreview'
+import Modal from 'Utils/Modals/modal'
 
 function Team() {
     const [templates, setTemplates] = useState([])
@@ -20,6 +21,7 @@ function Team() {
     const [active, setActive] = useState("active")
     const [user, setUser] = useState()
     const [template, setTemplate] = useState()
+    const [modal, setModal] = useState()
     const [signatureInfo, setSignatureInfo] = useState({})
     const [signatureOption, setSignatureOption] = useState({})
     const [defaultStyles, setDefaultStyles] = useState()
@@ -193,13 +195,21 @@ function Team() {
         })
     }, [user, template])
 
+    const handleModal = (id) => {
+        setModal(<Modal title="Êtes-vous sûr de vouloir supprimer la signature ?"
+            content={``}
+            cancel="Annuler" validate="Supprimer"
+            onCancel={() => setModal()} onConfirm={() => handleDelete(id)} />)
+    }
+
     const handleDelete = async (id) => {
         await request.delete(`signatures/${id}`).then(
             (res) => {
                 notification({ content: <>La signature a été supprimée avec succès</>, status: "valid" })
-                setPreview([]); setDeleted(id)
+                setPreview([]);
+                setDeleted(id)
             }).catch(() => notification({ content: <>Impossible de supprimer <span style={{ color: "#FF7954" }}>{preview.name}</span></>, status: "invalid" }))
-
+        setModal()
     }
 
     if (loading)
@@ -209,6 +219,9 @@ function Team() {
             <div className={classes.container}>
                 <h1>Signatures</h1>
                 <div className={classes.row}>
+                    {modal ? <div className={classes.modalContainer}>
+                        {modal}
+                    </div> : ""}
                     <div className={classes.teamsContainer}>
                         <ul className={classes.menu}>
                             <li onClick={() => setActive("active")} className={active === "active" ? classes.active : ""}>Actives</li>
@@ -228,7 +241,7 @@ function Team() {
                                             <span onClick={() => history.push('/edit-signature/' + signature.id)}>{signature.name}</span>
                                             <div className={classes.actionsContainer}>
                                                 {/* <AiOutlineEdit /> */}
-                                                <FiTrash onClick={() => handleDelete(signature.id)} />
+                                                <FiTrash onClick={() => handleModal(signature.id)} />
                                             </div>
                                         </li>)
                                     })}
