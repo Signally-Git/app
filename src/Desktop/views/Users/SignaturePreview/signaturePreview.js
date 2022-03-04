@@ -45,13 +45,14 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
 
         setEvent(toPush[0] || { '@id': "playlist" })
         setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event['@id'] === "playlist" ? "Modifier la playlist" : "Playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
-        if (selectedTemplate?.['@id'] && !selectedTemplate?.preview)
-            await request.get(selectedTemplate['@id']).then((res) => setSelectedTemplate(res.data))
+        // if (selectedTemplate?.['@id'] && !selectedTemplate?.preview)
+        //     await request.get(selectedTemplate['@id']).then((res) => setSelectedTemplate(res.data))
+        console.log(selectedTemplate)
     }, [selectedTemplate])
 
     useEffect(async () => {
         const events = await request.get('events');
-        
+
         setIncEvents(events.data["hydra:member"].filter((data) => (new Date(data.startAt) > new Date())).sort(function (a, b) {
             if (a.startAt < b.startAt) { return -1; }
             if (a.startAt > b.startAt) { return 1; }
@@ -80,14 +81,23 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     useEffect(async () => {
         const entity = await request.get(`${type}s/${show.id}`)
         setPreviewSignature(entity.data.compiledSignature)
-        console.log(entity.data.compiledSignature)
-        const templates = await request.get('signatures')
-        setSelectedTemplate(templates.data["hydra:member"][0])
-        setTemplates(templates.data["hydra:member"])
-        const template = await request.get(show?.signature?.['@id'])
-        setAssignedTemplate(template.data)
+        let templatesAPI = []
+        await request.get('signatures').then((result) => {
+           result.data["hydra:member"].map(async (template, index) => {
+                await request.get(template['@id']).then((res) => {
+                    templatesAPI[index] = res.data;
+                })
+            })
+        })
+       
+            console.log(templatesAPI)
+            setSelectedTemplate(templatesAPI[0])
+            setTemplates(templatesAPI)
+            const template = await request.get(show?.signature?.['@id'])
+            setAssignedTemplate(template.data)
+
     }, [show, edit])
-    
+
     // Modal
     const [modal, setModal] = useState(false)
     const handleSubmit = ((e) => {
@@ -112,7 +122,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         for (var checkbox of markedCheckbox) {
             tmp.push(JSON.parse(checkbox.value))
         }
-        console.log(tmp)
         setMultiEvents(tmp)
         setChoosePlaylist(false)
     }
@@ -212,7 +221,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 </div>
                 <div>
                     {previewSignature ?
-                        <ReadOnlyPreview template={previewSignature} infos={signatureInfos} />
+                        parse(previewSignature)
                         : ""}
                 </div>
                 {show?.group?.name &&
@@ -233,10 +242,10 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                             {templates.length > 0 &&
                                 <CustomSelect onChange={(e) => setSelectedTemplate(Object?.values(templates)?.find((obj) => { return obj.id == e }))} items={templates} display={"name"} getValue={"id"} />}
                             <div className={classes.signature}>
-                                {selectedTemplate?.preview ? 
-                                // <ReadOnlyPreview template={selectedTemplate.html} infos={{ event: `${API}/${event?.imagePath}` }} /> 
-                                parse(selectedTemplate?.preview)
-                                : ""}
+                                {selectedTemplate?.preview ?
+                                    // <ReadOnlyPreview template={selectedTemplate.html} infos={{ event: `${API}/${event?.imagePath}` }} /> 
+                                    parse(selectedTemplate?.preview)
+                                    : ""}
                             </div>
                         </div>
                         <div>

@@ -11,6 +11,7 @@ import { UseEvents } from 'Utils/useEvents/useEvents'
 import request from 'Utils/Request/request'
 import News from 'Desktop/components/News/news'
 import { useHistory } from 'react-router-dom'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
 let count = 0;
 
@@ -23,6 +24,8 @@ function Dashboard(props) {
     const [data, setData] = useState([])
     const [activeEvents, setActiveEvents] = useState()
     const [organisation, setOrganisation] = useState()
+    const [loadingTiles, setLoadingTiles] = useState(false)
+    const [loadingNews, setLoadingNews] = useState(false)
 
     useEffect(async () => {
         await request.get(`whoami`).then(async (res) => {
@@ -35,7 +38,11 @@ function Dashboard(props) {
                 setOrganisation({ ...r.data, ...organisation, users: users['hydra:member'] })
             })
         })
-      
+    }, [])
+
+    useEffect(() => {
+        setLoadingNews(false)
+        setLoadingTiles(false)
     }, [])
 
     useEffect(() => {
@@ -67,7 +74,7 @@ function Dashboard(props) {
                 setOrganisation(data)
             }
             sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
-    
+
             return () => {
                 sse.close();
             };
@@ -79,12 +86,13 @@ function Dashboard(props) {
             {props.page === 'home' ?
                 <>
                     {/* <h1 className={classes.h1}>Bonjour {JSON.parse(localStorage.getItem('user'))?.first_name}</h1> */}
-                    <h1>Dashboard</h1>
-                    <div className={classes.row}>
-                        <News organisation={organisation} />
+                    <h1 className={classes.title}>Dashboard {!loadingNews || !loadingTiles ? <AiOutlineLoading3Quarters /> : ""}</h1>
+                   
+                    <div className={`${classes.row} ${!loadingNews || !loadingTiles ? classes.load : ""}`}>
+                        <News organisation={organisation} loading={loadingNews} setLoading={setLoadingNews} />
                         <div className={classes.col}>
                             <div className={classes.tilesContainer}>
-                                <Tiles handleHeader={setIsHeader} />
+                                <Tiles handleHeader={setIsHeader} loading={loadingTiles} setLoading={setLoadingTiles} />
                             </div>
                         </div>
                     </div>

@@ -37,10 +37,16 @@ function Team() {
 
     const getData = async () => {
         const signatures = await request.get(`signatures`)
+
         await request.get(localStorage.getItem('user').organisation).then((res) => setOrganisation(res.data))
         signatures.data["hydra:totalItems"] < 1 ? history.push("/create-signature")
             // : console.log(signatures.data["hydra:member"])
             : setTemplates(signatures.data["hydra:member"])
+        signatures.data["hydra:member"].map((template, index) => {
+            request.get(template['@id']).then((r) => {
+                signatures[index] = r.data;
+            })
+        })
         setLoading(false)
 
     }
@@ -218,7 +224,7 @@ function Team() {
                                 <span>{templates.length} signatures</span>
                                 <ul className={classes.itemsList}>
                                     {templates.map((signature) => {
-                                        return (<li onMouseEnter={() => {request.get(signature['@id']).then((res) => setPreview(res.data)); setDefaultStyles(signature.signatureStyles)}} key={signature.id}>
+                                        return (<li onMouseEnter={() => { request.get(signature['@id']).then((res) => setPreview(res.data)); setDefaultStyles(signature.signatureStyles) }} key={signature.id}>
                                             <span onClick={() => history.push('/edit-signature/' + signature.id)}>{signature.name}</span>
                                             <div className={classes.actionsContainer}>
                                                 {/* <AiOutlineEdit /> */}

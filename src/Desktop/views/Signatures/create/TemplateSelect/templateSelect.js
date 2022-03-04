@@ -16,7 +16,7 @@ const templateAPI = [{
 	{% if greetings %}
 		{{ greetings }}
 	{% endif %}
-	</span>
+</span>
 	{# END GREETINGS #}
 <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:0">
 	<tbody>
@@ -156,7 +156,7 @@ const templateAPI = [{
 															{% endif %}
 															{# END SOCIALS #}
 															<td style="width:55px; border: none; background:black; padding: 0cm; height: 24px;" height="24">
-																<img height="24" style="vertical-align: middle; height: 24px; margin-right: 0; text-align: right" src="https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/mama-61c0f1b6cbc19.png"/>
+																<img height="24" style="vertical-align: middle; height: 24px; margin-right: 0; text-align: right" src="https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/mama-logo-social.png"/>
 															</td>
 														</tr>
 													</tbody>

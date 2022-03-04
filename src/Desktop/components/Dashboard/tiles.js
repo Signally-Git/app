@@ -4,14 +4,10 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { MobileView } from 'react-device-detect'
 import request from 'Utils/Request/request'
-import Button from 'Utils/Button/btn'
 import Modal from 'Utils/Modals/modal'
-import { AiOutlineNotification } from 'react-icons/ai'
-import { IoIosNotificationsOutline } from 'react-icons/io'
 import { BsBroadcastPin } from 'react-icons/bs'
 
 function Tiles(props) {
-    const [loading, setLoading] = useState(false)
     const [events, setEvents] = useState([])
     const [activeEvents, setActiveEvents] = useState([])
     const [teamsList, setTeamsList] = useState([])
@@ -26,7 +22,7 @@ function Tiles(props) {
     const [signatures, setSignatures] = useState([])
 
     useEffect(async () => {
-        setLoading(true)
+        props.setLoading(false)
         props.handleHeader(" ")
         await request.get(`whoami`).then(async (res) => {
             localStorage.setItem("user", JSON.stringify(res.data))
@@ -50,7 +46,7 @@ function Tiles(props) {
         }).catch(() => { })
         await request.get(`signatures`).then((res) => {
             setTemplates(res.data["hydra:member"])
-            setLoading(false)
+            props.setLoading(true)
         }).catch(() => { })
     }, [])
 
@@ -65,10 +61,8 @@ function Tiles(props) {
             if (user.signature_template_id)
                 setSignatures([...signatures, [user.signature_template_id]])
         })
-    }, [users, loading])
-    
-    if (loading)
-        return <div className={classes.container}>Chargement...</div>
+    }, [users, props.loading])
+
     return (
         <div className={classes.container}>
             {modal ? <Modal style={{ left: 0 }} title="Êtes-vous sûr de vouloir déployer la signature ?"

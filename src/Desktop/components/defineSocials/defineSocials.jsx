@@ -44,7 +44,7 @@ export default function DefineSocials({ setList, defaultValue }) {
         e.preventDefault()
         const name = getName(e.target.value)
         let newArr = [...socials];
-        newArr[select] = { url: e.target.value, name: name };
+        newArr[select] = { url: e.target.value, name: name, image: "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/"+name+'.png' };
         setSocials(newArr);
         setValue(e.target.value || "")
         // const req = { ...newArr[select], legalEntity: JSON.parse(localStorage.getItem('user')).organisation }

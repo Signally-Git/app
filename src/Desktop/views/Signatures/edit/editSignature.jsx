@@ -198,7 +198,7 @@ function EditSignatureComponent() {
             bgColor: defaultStyles?.filter((style) => style.type === "divColor" && style.property === 'color')[0].value,
             bannerTop: { url: "test", enabled: false, padding: 10 },
             event: { ...signatureOption.event, display: `${API}${signatureOption.event?.selected?.imagePath}`, enabled: defaultStyles?.filter((style) => style.type === "event")[0].value === "false" ? false : true, padding: defaultStyles?.filter((style) => style.type === "eventPadding")[0].value },
-            socials: { enabled: false, bgColor: "#000", fill: "#FFF", items: ["twitter", "facebook", "pinterest", "snapchat", "linkedin", "instagram"] },
+            socials: { enabled: true, bgColor: "#000", fill: "#FFF", items: ["twitter", "facebook", "pinterest", "snapchat", "linkedin", "instagram"] },
             footer: {
                 maxWidth: 380, value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.
       

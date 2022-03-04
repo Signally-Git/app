@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import Button from "Utils/Button/btn";
 import classes from './news.module.css'
 
-function News({ organisation }) {
+function News({ organisation, loading, setLoading }) {
     const [slide, setSlide] = React.useState(0)
     const [activeAcc, setActiveAcc] = React.useState(false)
     const [activeSignature, setActiveSignature] = React.useState(false)
@@ -13,7 +13,6 @@ function News({ organisation }) {
     const [activeEvents, setActiveEvents] = React.useState(false)
     const [missing, setMissing] = React.useState([])
     const [hide, setHide] = React.useState(false)
-    const [loading, setLoading] = React.useState(false)
     const [height, setHeight] = React.useState(50)
     const slider = React.useRef(null)
     const history = useHistory()
@@ -23,8 +22,6 @@ function News({ organisation }) {
     })
 
     React.useEffect(() => {
-        setLoading(true)
-
         if (organisation?.address.street && organisation?.websiteUrl?.length > 0 && organisation?.digitalAddress?.phone?.length > 0) {
             setSlide(1)
             setActiveAcc(true)
@@ -43,7 +40,7 @@ function News({ organisation }) {
         }
 
         if (organisation)
-            setLoading(false)
+            setLoading(true)
     }, [organisation])
 
     React.useEffect(() => {
@@ -61,7 +58,7 @@ function News({ organisation }) {
     }, [organisation])
 
     return (<div className={classes.container}>
-        {loading ? 'Chargement...' : <Carousel
+        <Carousel
             dynamicHeight={true}
             showThumbs={true}
             renderIndicator={(onClickHandler, isSelected, index, label) => {
@@ -132,7 +129,7 @@ function News({ organisation }) {
             <div className={classes.tab}>
                 <h5>Event actif</h5>
             </div>
-        </Carousel>}
+        </Carousel>
     </div>
     )
 }

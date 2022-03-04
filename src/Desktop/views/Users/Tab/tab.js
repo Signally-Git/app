@@ -39,7 +39,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     const [country, setCountry] = useState("")
     const [mobile, setMobile] = useState("")
     const [fax, setFax] = useState("")
-    const [link, setLink] = useState("")
+    const [websiteUrl, setWebsiteUrl] = useState("")
     const [done, setDone] = useState(false)
     let time;
 
@@ -221,6 +221,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         e.preventDefault()
         const req = {
             name: workplaceName || workplace.name,
+            websiteUrl: websiteUrl,
             address: {
                 street: street || workplace.address.street,
                 city: city || workplace.address.city,
@@ -298,7 +299,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                             <div className={classes.editDiv}>
                                                 <div className={classes.inputsContainer}>
                                                     <UploadFile file={file} setFile={setFile} placeholder={workplace?.logo?.name ? 'Remplacer ' + workplace.logo.name : 'Importer un logo'} style={{ background: '#FFF', marginBottom: '.2rem', width: '48%' }} />
-                                                    <Input onChange={(e) => { setLink(e.target.value); setChanged(true) }} type="string" placeholder="Lien du site" defaultValue={workplace.link} />
+                                                    <Input onChange={(e) => { setWebsiteUrl(e.target.value); setChanged(true) }} type="string" placeholder="Lien du site" defaultValue={workplace.websiteUrl} />
                                                 </div>
                                                 <div className={classes.inputsContainer}>
                                                     <Input onChange={(e) => { setStreet(e.target.value); setChanged(true) }} type="text" placeholder="Adresse" defaultValue={workplace.address.street} />
@@ -338,7 +339,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
             <ul className={`${classes.itemsList} ${classes.teamList}`}>
                 <form onChange={(e) => e.target.type === "radio" && setSelected(JSON.parse(e.target.value))}>
                     {teams.map((team) => {
-                        if (team.name?.toLowerCase().search(searchTeam) !== -1 || team.workplace?.name?.toLowerCase().search(searchTeam) !== -1)
+                        if (team.name?.toLowerCase().search(searchTeam) !== -1)
                             return (
                                 <li onMouseMove={() => {
                                     if (!edit) {
