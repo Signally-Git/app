@@ -142,6 +142,11 @@
   width: 100%;
 }
 
+.itemsList span {
+  height: 100%;
+  width: 100%;
+}
+
 .itemsList li {
   margin: .5rem 0;
   margin-left: auto;

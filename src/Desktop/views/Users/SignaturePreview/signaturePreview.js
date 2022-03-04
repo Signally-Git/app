@@ -83,18 +83,19 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         setPreviewSignature(entity.data.compiledSignature)
         let templatesAPI = []
         await request.get('signatures').then((result) => {
-           result.data["hydra:member"].map(async (template, index) => {
+            result.data["hydra:member"].map(async (template, index) => {
                 await request.get(template['@id']).then((res) => {
                     templatesAPI[index] = res.data;
+                    if (index === 0)
+                        setSelectedTemplate(res.data)
                 })
             })
         })
-       
-            console.log(templatesAPI)
-            setSelectedTemplate(templatesAPI[0])
-            setTemplates(templatesAPI)
-            const template = await request.get(show?.signature?.['@id'])
-            setAssignedTemplate(template.data)
+
+        console.log(templatesAPI)
+        setTemplates(templatesAPI)
+        const template = await request.get(show?.signature?.['@id'])
+        setAssignedTemplate(template.data)
 
     }, [show, edit])
 
@@ -127,7 +128,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     }
 
     const handleAssign = async (element) => {
-        // const req = {
+        // const rq = {
         //     signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate.html })?.["@id"]
         // }
         // event ? {
@@ -239,12 +240,12 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                     <div className={classes.row}>
                         <div>
                             <label>Choisissez une signature</label>
-                            {templates.length > 0 &&
+                            {selectedTemplate &&
                                 <CustomSelect onChange={(e) => setSelectedTemplate(Object?.values(templates)?.find((obj) => { return obj.id == e }))} items={templates} display={"name"} getValue={"id"} />}
                             <div className={classes.signature}>
                                 {selectedTemplate?.preview ?
                                     // <ReadOnlyPreview template={selectedTemplate.html} infos={{ event: `${API}/${event?.imagePath}` }} /> 
-                                    parse(selectedTemplate?.preview)
+                                    parse(selectedTemplate?.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', `${API}/${event?.imagePath}`))
                                     : ""}
                             </div>
                         </div>

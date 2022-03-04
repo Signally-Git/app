@@ -87,14 +87,7 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
                     const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
                     if (fullName.search(search.toLowerCase()) !== -1)
                         return (
-                            <li onMouseMove={() => {
-                                if (!edit) {
-                                    clearTimeout(time)
-                                    time = setTimeout(() => {
-                                        setSelected(user)
-                                    }, 100)
-                                }
-                            }}
+                            <li onMouseMove={() => { if (!edit) { setSelected(user) } }}
                                 key={user.id} className={`${editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? classes.editing : ""} ${selected?.id === user.id && selected?.name === user.name ? classes.selected : ""}`} >
                                 <input className={classes.checkbox} onChange={(e) => { setEdit(user); setSelected(user) }} checked={edit?.id === user.id && edit?.name === user.name ? true : false} type="radio" name="user" value={JSON.stringify(user)} />
                                 {editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>
