@@ -73,13 +73,15 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     const handleDelete = (id, type, name) => {
         request.delete(`${type}/${id}`).then(
             () => {
-                refreshData()
+
                 notification({ content: <><span style={{ color: "#FF7954" }}>{name}</span> supprimé avec succès</>, status: "valid" })
+                setModal({ type: "", name: "", id: "" })
             }
 
         ).catch(() => notification({ content: <>Une erreur s'est produite. Impossible de supprimer <span style={{ color: "#FF7954" }}>{name}</span></>, status: "invalid" }))
         if (selected?.id === id)
             setSelected()
+        refreshData()
         setModal({ type: "", name: "", id: "" })
     }
 
@@ -135,6 +137,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                                     refreshData()
                                     setEdit()
                                     setSelected()
+                                    setModal({ type: "", name: "", id: "" })
                                 }
                             }).catch(() => notification({ content: <>Impossible de supprimer <span style={{ color: "#FF7954" }}>{element.firstName} {element.lastName}</span></>, status: "invalid" }))
                 }

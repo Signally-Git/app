@@ -51,7 +51,7 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
         const req = {
             firstName: user.firstName,
             lastName: user.lastName,
-            phone: user.mobilePhone,
+            phone: user.phone,
             position: user.position,
             email: user.email
         }
@@ -87,7 +87,7 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
                     const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
                     if (fullName.search(search.toLowerCase()) !== -1)
                         return (
-                            <li onMouseMove={() => { if (!edit) { setSelected(user) } }}
+                            <li onMouseMove={() => { if (!edit) { setSelected(user);  } }}
                                 key={user.id} className={`${editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? classes.editing : ""} ${selected?.id === user.id && selected?.name === user.name ? classes.selected : ""}`} >
                                 <input className={classes.checkbox} onChange={(e) => { setEdit(user); setSelected(user) }} checked={edit?.id === user.id && edit?.name === user.name ? true : false} type="radio" name="user" value={JSON.stringify(user)} />
                                 {editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>
@@ -104,7 +104,7 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
                                         <Link to="/profile/informations"><FaUser /></Link>
                                     </div> :
                                     <div className={`${classes.actionsContainer} ${changed === true ? classes.btnReady : ""}`}>
-                                        {editInfo === user ? <FiCheck className={classes.checkmark} strokeWidth={"4"} onClick={(e) => { handleSubmit(e, user['@id']) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEditInfo(user) }} />}
+                                        {editInfo === user ? <FiCheck className={classes.checkmark} strokeWidth={"4"} onClick={(e) => { handleSubmit(e, user['@id']) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEditInfo(user); setUser(user) }} />}
                                         <FiTrash onClick={() => setModal({ name: `${user.firstName} ${user.lastName}`, id: user.id, type: "users" })} />
                                     </div>}
                                 {editInfo === user && user?.id !== JSON.parse(localStorage.getItem("user"))?.id ? <>

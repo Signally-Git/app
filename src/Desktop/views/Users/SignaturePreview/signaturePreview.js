@@ -47,7 +47,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event['@id'] === "playlist" ? "Modifier la playlist" : "Playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
         // if (selectedTemplate?.['@id'] && !selectedTemplate?.preview)
         //     await request.get(selectedTemplate['@id']).then((res) => setSelectedTemplate(res.data))
-        console.log(selectedTemplate)
     }, [selectedTemplate])
 
     useEffect(async () => {
@@ -92,7 +91,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
             })
         })
 
-        console.log(templatesAPI)
         setTemplates(templatesAPI)
         const template = await request.get(show?.signature?.['@id'])
         setAssignedTemplate(template.data)
@@ -114,7 +112,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
             events.pop()
             setEvents([...events, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event !== "playlist" ? "Playlist" : "Modifier la playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
         }
-        console.log(event)
     }, [event])
 
     // ASSIGNATION

@@ -31,18 +31,18 @@ export default function Infos(props) {
 
 
     // Template informations
-    const inputs = [{ placeholder: user.firstName || "", type: "text", toChange: "firstName", value: props.content.firstName, disabled: true },
-    { placeholder: user.lastName || "", type: "text", toChange: "lastName", value: props.content.lastName, disabled: true },
-    { placeholder: user.position || "", type: "text", toChange: "jobName", value: props.content.jobName, disabled: true },
-    { placeholder: user.phone || "", type: "tel", toChange: "mobile", value: props.content.mobile, disabled: true }
+    const inputs = [{ placeholder: user.firstName || "Prénom", type: "text", toChange: "firstName", value: props.content.firstName, disabled: true },
+    { placeholder: user.lastName || "Nom", type: "text", toChange: "lastName", value: props.content.lastName, disabled: true },
+    { placeholder: user.position || "Poste", type: "text", toChange: "jobName", value: props.content.jobName, disabled: true },
+    { placeholder: user.phone || "Mobile", type: "tel", toChange: "mobile", value: props.content.mobile, disabled: true }
     ]
 
-    const companyInputs = [{ placeholder: organisationInfos.name || "", type: "text", toChange: "company", value: props.content.company, disabled: true },
-    { placeholder: organisationInfos.address?.street || "", type: "text", toChange: "addressStreet", value: props.content.addressStreet, disabled: true },
-    { placeholder: organisationInfos.address?.zipCode || "", type: "text", toChange: "addressZipcode", value: props.content.addressZipcode, disabled: true },
-    { placeholder: organisationInfos.address?.city || "", type: "text", toChange: "addressCity", value: props.content.addressCity, disabled: true },
-    { placeholder: organisationInfos.address?.country || "", type: "text", toChange: "addressCountry", value: props.content.addressCountry, disabled: true },
-    { placeholder: organisationInfos.digitalAddress?.phone || "", type: "tel", toChange: "phone", value: props.content.phone, disabled: true }
+    const companyInputs = [{ placeholder: organisationInfos.name || "Société", type: "text", toChange: "company", value: props.content.company, disabled: true },
+    { placeholder: organisationInfos.address?.street || "Adresse", type: "text", toChange: "addressStreet", value: props.content.addressStreet, disabled: true },
+    { placeholder: organisationInfos.address?.zipCode || "Code postal", type: "text", toChange: "addressZipcode", value: props.content.addressZipcode, disabled: true },
+    { placeholder: organisationInfos.address?.city || "Ville", type: "text", toChange: "addressCity", value: props.content.addressCity, disabled: true },
+    { placeholder: organisationInfos.address?.country || "Pays", type: "text", toChange: "addressCountry", value: props.content.addressCountry, disabled: true },
+    { placeholder: organisationInfos.digitalAddress?.phone || "Téléphone", type: "tel", toChange: "phone", value: props.content.phone, disabled: true }
     ]
 
     // Styling the whole template's font

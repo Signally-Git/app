@@ -79,7 +79,7 @@ export default function CreateUser({ setDone }) {
 
     const handleSave = async () => {
         if (!validateEmail(user.email)) {
-            notification({ content: <><span style={{ color: "#FF7954" }}>{user.email}</span> ne semble pas être une adresse mail valide.</>, status: "invalid" })
+            notification({ content: <><span style={{ color: "#FF7954" }}>{user.email}</span> ne semble pas être une adresse mail valide</>, status: "invalid" })
             return false
         }
         const req = team === "Aucune équipe" || !team ? user : {
