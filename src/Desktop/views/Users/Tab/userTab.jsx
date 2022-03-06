@@ -46,8 +46,21 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
         setUser({ ...user, [data]: e })
     }
 
+    const validateEmail = (email) => {
+        return String(email)
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
+      };
+
     const handleSubmit = async (e, id) => {
         e.preventDefault()
+        if (!validateEmail(user.email))
+        {
+            notification({ content: <>Vous devez renseigner une adresse mail valide</>, status: 'invalid' })
+            return;
+        }
         const req = {
             firstName: user.firstName,
             lastName: user.lastName,

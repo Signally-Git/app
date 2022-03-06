@@ -198,7 +198,7 @@ const Signup = () => {
                       <div className={classes.spacing}></div>
                       <label className={classes.inputTitle}>SIREN</label>
                       <div style={{ position: 'relative', display: 'flex', marginBottom: 15 }}>
-                        <Input required placeholder='443061841' onClick={() => setSiren('443061841')} onChange={(e) => setSiren(e.target.value)} value={siren} type="text" />
+                        <Input required placeholder='443061841' onChange={(e) => setSiren(e.target.value)} value={siren} type="text" />
                       </div>
                     </div>
                     <div className={classes.inputContainer}>
