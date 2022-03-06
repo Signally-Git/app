@@ -68,7 +68,7 @@ function Tiles(props) {
             let count = 0;
             // res.data["hydra:member"].filter(signature => signature.users.length > 0 || signature.teams.length > 0 || signature.workplaces.length > 0)
             res.data["hydra:member"].map((signature) => {
-                console.log(signature.users.length > 0 || signature.teams.length > 0 || signature.workplaces.length > 0)
+                // console.log(signature.users.length > 0 || signature.teams.length > 0 || signature.workplaces.length > 0)
                 if (signature.users.length > 0 || signature.teams.length > 0 || signature.workplaces.length > 0)
                     count++;
             })

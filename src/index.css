@@ -198,3 +198,7 @@ h6 {
 .rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span {
   color: #000 !important;
 }
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}

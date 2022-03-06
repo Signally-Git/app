@@ -20,7 +20,7 @@ function News({ organisation, loading, setLoading }) {
 
     React.useEffect(() => {
         setHeight(slider?.current?.offsetHeight);
-    }, []);
+    });
 
     React.useEffect(() => {
         if (
