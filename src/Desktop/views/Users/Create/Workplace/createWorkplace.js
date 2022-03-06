@@ -22,7 +22,9 @@ export default function CreateWorkplace({ setDone }) {
             websiteUrl: "",
             address: {
                 street: "",
-                streetInfo: ""
+                city: "",
+                zipCode: "",
+                country: ""
             },
             digitalAddress: { mobile: "" }
         })
@@ -120,8 +122,14 @@ export default function CreateWorkplace({ setDone }) {
             </div>
             <div className={classes.slide}>
                 <div className={classes.inputsContainer}>
-                    <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, address: { ...workplace.address, street: e.target.value } })} type="text" placeholder="Adresse" />
-                    <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, address: { ...workplace.address, streetInfo: e.target.value } })} type="text" placeholder="Adresse 2" />
+                    <div className={classes.row}>
+                        <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, address: { ...workplace.address, street: e.target.value } })} type="text" placeholder="Adresse" />
+                        <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, address: { ...workplace.address, zipCode: e.target.value } })} type="text" placeholder="ZIP Code" />
+                    </div>
+                    <div className={classes.row}>
+                        <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, address: { ...workplace.address, city: e.target.value } })} type="text" placeholder="City" />
+                        <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, address: { ...workplace.address, country: e.target.value } })} type="text" placeholder="Country" />
+                    </div>
                     <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, digitalAddress: { mobile: e.target.value } })} type="text" placeholder="Téléphone" />
                     <div className={classes.btnsContainer}>
                         <Button width={width} color="orange" className={`${classes.btn}`} onClick={(e) => handleSlide(e, 2)}>Retour</Button>

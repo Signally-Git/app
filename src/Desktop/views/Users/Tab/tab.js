@@ -341,7 +341,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                     {teams.map((team) => {
                         if (team.name?.toLowerCase().search(searchTeam) !== -1)
                             return (
-                                <li onMouseMove={() => { setSelected(team) }} key={team.id} className={`${team.workplace?.name?.length > 0 ? classes.teamWithWP : ""} ${editInfo === team ? classes.editing : ""} ${selected?.id === team.id && selected?.name === team.name ? classes.selected : ""}`} >
+                                <li onMouseMove={() => { if (!edit) setSelected(team) }} key={team.id} className={`${team.workplace?.name?.length > 0 ? classes.teamWithWP : ""} ${editInfo === team ? classes.editing : ""} ${selected?.id === team.id && selected?.name === team.name ? classes.selected : ""}`} >
                                     <input onChange={(e) => { if (e.target.checked) { setEdit(team); setSelected(team) } }}
                                         className={classes.checkbox}
                                         checked={edit?.id === team.id && edit?.name === team?.name ? true : false} type="radio" name="team" value={JSON.stringify(team)} />

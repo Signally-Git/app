@@ -110,7 +110,7 @@ const templateAPI = [{
 		{# START EVENT #}
 		{% if event %}
 				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
-					<a href="{{ event.link }}"><img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="{{ event.imagePath }}" alt='{{ event.name }}'/></a>
+					<a style="height: 126px; display: block;" href="{{ event.link }}"><img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="{{ absolute_url(asset(event.imagePath)) }}" alt='{{ event.name }}'/></a>
 				</td>
 				{# START ELSE #}
 			{% else %}
@@ -151,7 +151,7 @@ const templateAPI = [{
 																				{% for media in socialMediaAccounts %}
 																				<td height="24" width="24" style="height:24px; width:24px; text-align: left; padding: 0;" valign="top">
 																					<a href="{{ media.url }} " height="24" width="24" style="height:24px; width:24px" alt="{{ media.name }} ">
-																						
+																						<img height="24" width="24" style="vertical-align: middle; display: block; height:24px; width:24px; line-height:24px; margin: 5px 0;" src="{{ media.image }}" alt=''/>
 																					</a>
 																				</td>
 																				{% endfor %}

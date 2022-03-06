@@ -20,7 +20,7 @@ function News({ organisation, loading, setLoading }) {
 
     React.useEffect(() => {
         setHeight(slider?.current?.offsetHeight);
-    });
+    }, []);
 
     React.useEffect(() => {
         if (
@@ -84,17 +84,15 @@ function News({ organisation, loading, setLoading }) {
                 <div className={classes.row}>
                     <ul className={classes.progress} style={{ height: height }}>
                         <li
-                            className={`${activeAcc ? classes.done : ""} ${
-                                slide === 0 ? classes.isActive : ""
-                            }`}
+                            className={`${activeAcc ? classes.done : ""} ${slide === 0 ? classes.isActive : ""
+                                }`}
                             onClick={() => setSlide(0)}
                         >
                             Compte
                         </li>
                         <li
-                            className={`${
-                                activeSignature ? classes.done : ""
-                            } ${slide === 1 ? classes.isActive : ""}`}
+                            className={`${activeSignature ? classes.done : ""
+                                } ${slide === 1 ? classes.isActive : ""}`}
                             onClick={() => setSlide(1)}
                         >
                             Signature
@@ -109,9 +107,8 @@ function News({ organisation, loading, setLoading }) {
                             </li>
                         ) : (
                             <li
-                                className={`${
-                                    activeUsers ? classes.done : ""
-                                } ${slide === 2 ? classes.isActive : ""}`}
+                                className={`${activeUsers ? classes.done : ""
+                                    } ${slide === 2 ? classes.isActive : ""}`}
                                 onClick={() => setSlide(2)}
                             >
                                 Collaborateurs
@@ -119,9 +116,8 @@ function News({ organisation, loading, setLoading }) {
                         )}
 
                         <li
-                            className={`${activeEvents ? classes.done : ""} ${
-                                slide === 3 ? classes.isActive : ""
-                            }`}
+                            className={`${activeEvents ? classes.done : ""} ${slide === 3 ? classes.isActive : ""
+                                }`}
                             onClick={() => setSlide(3)}
                         >
                             Events
@@ -138,8 +134,8 @@ function News({ organisation, loading, setLoading }) {
                             <p>
                                 {missing.length > 0 === true
                                     ? `Vous n'avez pas renseigné toutes les informations requises par certaines templates de signature (${missing.join(
-                                          ", "
-                                      )})`
+                                        ", "
+                                    )})`
                                     : "Votre profil contient toutes les informations nécessaires aux templates des signatures."}
                             </p>
                             <div className={classes.btnsContainer}>
@@ -230,7 +226,7 @@ function News({ organisation, loading, setLoading }) {
         }
 
         setNewsSlider(array);
-    });
+    }, []);
 
     return (
         <div className={classes.container}>
@@ -240,9 +236,8 @@ function News({ organisation, loading, setLoading }) {
                 renderIndicator={(onClickHandler, isSelected, index, label) => {
                     return (
                         <span
-                            className={`${classes.indicator} ${
-                                isSelected ? classes.selected : ""
-                            }`}
+                            className={`${classes.indicator} ${isSelected ? classes.selected : ""
+                                }`}
                             onClick={onClickHandler}
                             onKeyDown={onClickHandler}
                             value={index}

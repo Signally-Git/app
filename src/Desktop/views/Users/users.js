@@ -97,15 +97,15 @@ function Team() {
 
     const handleRemoveTeam = (team) => {
         const removedTeams = entity.teams.filter((teamCheck) => teamCheck['id'] !== team['id'])
-                request.delete(`${entity['@id']}/teams/${team.id}`, { workplace: null }, {
-                    headers: { 'Content-Type': 'application/merge-patch+json' }
-                }).then(() => {
-                    setTransition(team.id)
-                    setTimeout(() => {
-                        setEntity({ ...entity, teams: removedTeams })
-                        setTransition('done')
-                    }, 1500);
-                });
+        request.delete(`${entity['@id']}/teams/${team.id}`, { workplace: null }, {
+            headers: { 'Content-Type': 'application/merge-patch+json' }
+        }).then(() => {
+            setTransition(team.id)
+            setTimeout(() => {
+                setEntity({ ...entity, teams: removedTeams })
+                setTransition('done')
+            }, 1500);
+        });
     }
 
     const handleUpdate = (user, action) => {
@@ -174,56 +174,56 @@ function Team() {
                     <div className={classes.overflow}>
                         {edit === "assign-workplace" ?
                             <div className={classes.teamAssignment}>
-                            <div className={classes.slider} ref={slider}>
-                                <div className={classes.col}>
-                                    <div className={classes.tagline}>
-                                        <h2><span className={classes.orangeTxt}>{entity?.teams?.length || 0}</span> équipe(s) <span className={classes.orangeTxt}>{entity?.name}</span></h2>
-                                        <Button color="brown" onClick={() => { setEdit('assign-signature') }}>Signature</Button>
+                                <div className={classes.slider} ref={slider}>
+                                    <div className={classes.col}>
+                                        <div className={classes.tagline}>
+                                            <h2><span className={classes.orangeTxt}>{entity?.teams?.length || 0}</span> équipe(s) <span className={classes.orangeTxt}>{entity?.name}</span></h2>
+                                            <Button color="brown" onClick={() => { setEdit('assign-signature') }}>Signature</Button>
+                                        </div>
+                                        <br />
+                                        <div className={classes.searchInput}>
+                                            <HiOutlineSearch />
+                                            <input className={classes.search} type="text" onChange={(e) => setCurrentTeams(e.target.value)} placeholder="Rechercher une équipe" />
+                                        </div>
+                                        <ul className={`${classes.itemsList} ${classes.users}`}>
+                                            {entity?.teams?.map((team) => {
+                                                if (team.name.search(currentTeams.toLowerCase()) !== -1)
+                                                    return <li key={team.id} className={`${classes.assignItem} ${transition === team.id ? classes.transitionRemove : ""}`}>
+                                                        <span>{team.name}</span>
+                                                        {transition === team.id ? <span className={classes.added}>Retiré</span> : <button>
+                                                            <BiMinusCircle title={`Retirer ${team.name} dans ${entity?.name}`} onClick={() => handleRemoveTeam(team)} />
+                                                        </button>}
+                                                    </li>
+                                            })}
+                                        </ul>
+                                        <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 1000)}>Ajouter des équipes</Button>
                                     </div>
-                                    <br />
-                                    <div className={classes.searchInput}>
-                                        <HiOutlineSearch />
-                                        <input className={classes.search} type="text" onChange={(e) => setCurrentTeams(e.target.value)} placeholder="Rechercher une équipe" />
+                                    <div className={classes.col}>
+                                        <div className={classes.tagline}>
+                                            <h2>Ajouter des équipes</h2>
+                                        </div>
+                                        <br />
+                                        <div className={classes.searchInput}>
+                                            <HiOutlineSearch />
+                                            <input className={classes.search} type="text" onChange={(e) => setOtherTeam(e.target.value)} placeholder="Rechercher un collaborateur" />
+                                        </div>
+                                        <ul className={classes.itemsList}>
+                                            {teams?.map((team) => {
+                                                if (team.name.search(otherTeam.toLowerCase()) !== -1)
+                                                    return <li key={team.id} className={`${classes.assignItem} ${transition === team.id ? classes.transitionRight : ""}`}>
+                                                        <span>{team.name}</span>
+                                                        {transition === team.id ? <span className={classes.added}>Ajouté</span> :
+                                                            <button>
+                                                                <BiPlusCircle title={`Ajouter ${team.name} dans ${entity?.name}`} onClick={() => handleAddTeam(team)} />
+                                                            </button>
+                                                        }
+                                                    </li>
+                                            })}
+                                        </ul>
+                                        <Button color={'orange'} onClick={(e) => handleScroll(e, 0)}>Terminer</Button>
                                     </div>
-                                    <ul className={`${classes.itemsList} ${classes.users}`}>
-                                        {entity?.teams?.map((team) => {
-                                            if (team.name.search(currentTeams.toLowerCase()) !== -1)
-                                                return <li key={team.id} className={`${classes.assignItem} ${transition === team.id ? classes.transitionRemove : ""}`}>
-                                                    <span>{team.name}</span>
-                                                    {transition === team.id ? <span className={classes.added}>Retiré</span> : <button>
-                                                        <BiMinusCircle title={`Retirer ${team.name} dans ${entity?.name}`} onClick={() => handleRemoveTeam(team)} />
-                                                    </button>}
-                                                </li>
-                                        })}
-                                    </ul>
-                                    <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 1000)}>Ajouter d'autres équipes</Button>
                                 </div>
-                                <div className={classes.col}>
-                                    <div className={classes.tagline}>
-                                        <h2>Ajouter d'autres équipes</h2>
-                                    </div>
-                                    <br />
-                                    <div className={classes.searchInput}>
-                                        <HiOutlineSearch />
-                                        <input className={classes.search} type="text" onChange={(e) => setOtherTeam(e.target.value)} placeholder="Rechercher un collaborateur" />
-                                    </div>
-                                    <ul className={classes.itemsList}>
-                                        {teams?.map((team) => {
-                                            if (team.name.search(otherTeam.toLowerCase()) !== -1)
-                                                return <li key={team.id} className={`${classes.assignItem} ${transition === team.id ? classes.transitionRight : ""}`}>
-                                                    <span>{team.name}</span>
-                                                    {transition === team.id ? <span className={classes.added}>Ajouté</span> : 
-                                                    <button>
-                                                        <BiPlusCircle title={`Ajouter ${team.name} dans ${entity?.name}`} onClick={() => handleAddTeam(team)} />
-                                                    </button>
-                                        }
-                                                </li>
-                                        })}
-                                    </ul>
-                                    <Button color={'orange'} onClick={(e) => handleScroll(e, 0)}>Terminer</Button>
-                                </div>
-                            </div>
-                        </div> : edit === "assign-team" ?
+                            </div> : edit === "assign-team" ?
                                 <div className={classes.teamAssignment}>
                                     <div className={classes.slider} ref={slider}>
                                         <div className={classes.col}>
@@ -240,19 +240,19 @@ function Team() {
                                                 {entity?.users?.map((user) => {
                                                     const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
                                                     if (fullName.search(currentUsers.toLowerCase()) !== -1)
-                                                        return <li key={user.id} className={`${classes.assignItem} ${transition === user.id ? classes.transitionRemove : ""}`}>
+                                                        return <li key={user.id} className={`${classes.assignItem} ${transition === user.id ? classes.transitionRemove : ""}`} title={`Retirer ${user.firstName} ${user.lastName} dans ${entity?.name}`} onClick={() => handleUpdate(user, 'remove')} >
                                                             <span>{user.firstName} {user.lastName}</span>
                                                             {transition === user.id ? <span className={classes.added}>Retiré</span> : <button>
-                                                                <BiMinusCircle title={`Retirer ${user.firstName} ${user.lastName} dans ${entity?.name}`} onClick={() => handleUpdate(user, 'remove')} />
+                                                                <BiMinusCircle />
                                                             </button>}
                                                         </li>
                                                 })}
                                             </ul>
-                                            <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 1000)}>Ajouter d'autres collaborateurs</Button>
+                                            <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 1000)}>Ajouter des collaborateurs</Button>
                                         </div>
                                         <div className={classes.col}>
                                             <div className={classes.tagline}>
-                                                <h2>Ajouter d'autres collaborateurs</h2>
+                                                <h2>Ajouter des collaborateurs</h2>
                                             </div>
                                             <br />
                                             <div className={classes.searchInput}>
@@ -263,13 +263,13 @@ function Team() {
                                                 {users?.map((user) => {
                                                     const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
                                                     if (fullName.search(otherUser.toLowerCase()) !== -1)
-                                                        return <li key={user.id} className={`${classes.assignItem} ${transition === user.id ? classes.transitionRight : ""}`}>
+                                                        return <li key={user.id} className={`${classes.assignItem} ${transition === user.id ? classes.transitionRight : ""}`} title={`Ajouter ${user.firstName} ${user.lastName} dans ${entity?.name}`} onClick={() => handleUpdate(user, 'add')}>
                                                             <span>{user.firstName} {user.lastName}</span>
-                                                            {transition === user.id ? <span className={classes.added}>Ajouté</span> : 
-                                                            <button>
-                                                                <BiPlusCircle title={`Ajouter ${user.firstName} ${user.lastName} dans ${entity?.name}`} onClick={() => handleUpdate(user, 'add')} />
-                                                            </button>
-                                                }
+                                                            {transition === user.id ? <span className={classes.added}>Ajouté</span> :
+                                                                <button>
+                                                                    <BiPlusCircle />
+                                                                </button>
+                                                            }
                                                         </li>
                                                 })}
                                             </ul>

@@ -9,9 +9,10 @@ import { BsBroadcastPin } from 'react-icons/bs'
 
 function Tiles(props) {
     const [events, setEvents] = useState([])
-    const [activeEvents, setActiveEvents] = useState([])
+    const [activeEvent, setActiveEvent] = useState()
     const [teamsList, setTeamsList] = useState([])
-    const [activeTeams, setActiveTeams] = useState([])
+    const [activeTeams, setActiveTeams] = useState(0)
+    const [activeWorkplaces, setActiveWorkplaces] = useState(0)
     const [users, setUsers] = useState([])
     const [user, setUser] = useState({})
     const [wps, setWPs] = useState([])
@@ -20,6 +21,7 @@ function Tiles(props) {
     const [activeUsers, setActiveUsers] = useState([])
     const [templates, setTemplates] = useState([])
     const [signatures, setSignatures] = useState([])
+    const [activeSignatures, setActiveSignatures] = useState(0)
 
     useEffect(async () => {
         props.setLoading(false)
@@ -33,28 +35,54 @@ function Tiles(props) {
         })
 
         await request.get(`events`).then((res) => {
+            let count = 0;
+            res.data["hydra:member"].map((event) => {
+                if ((event.users.length > 0 || event.teams.length > 0 || event.workplaces.length > 0))
+                    count++;
+            })
+            setActiveEvent(count)
             setEvents(res.data["hydra:member"])
         }).catch(() => { })
         await request.get(`teams`).then((res) => {
+            let count = 0;
+            res.data["hydra:member"].map((team) => {
+                if (team.users.length > 0)
+                    count++;
+            })
+            setActiveTeams(count)
             setTeamsList(res.data["hydra:member"])
         }).catch(() => { })
         await request.get(`workplaces`).then((res) => {
+            let count = 0;
+            res.data["hydra:member"].map((wp) => {
+                if (wp.teams.length > 0)
+                    count++;
+            })
+            setActiveWorkplaces(count)
             setWPs(res.data["hydra:member"])
         }).catch(() => { })
         await request.get(`users`).then((res) => {
             setUsers(res.data["hydra:member"])
         }).catch(() => { })
         await request.get(`signatures`).then((res) => {
+            let count = 0;
+            // res.data["hydra:member"].filter(signature => signature.users.length > 0 || signature.teams.length > 0 || signature.workplaces.length > 0)
+            res.data["hydra:member"].map((signature) => {
+                console.log(signature.users.length > 0 || signature.teams.length > 0 || signature.workplaces.length > 0)
+                if (signature.users.length > 0 || signature.teams.length > 0 || signature.workplaces.length > 0)
+                    count++;
+            })
+            setActiveSignatures(count)
             setTemplates(res.data["hydra:member"])
             props.setLoading(true)
         }).catch(() => { })
     }, [])
 
-    useEffect(() => {
-        setActiveEvents(events.filter(isActive => isActive.active === true))
-        setActiveTeams(teamsList.filter(isActive => isActive.members_count > 0))
-        setActiveUsers(users.filter(isActive => isActive.is_deployed === true))
-    }, [events, users, teamsList])
+    // useEffect(() => {
+    //     setActiveEvents(events.filter(isActive => isActive.active === true))
+    //     setActiveTeams(teamsList.filter(isActive => isActive.members_count > 0))
+    //     setActiveUsers(users.filter(isActive => isActive.is_deployed === true))
+    // }, [events, users, teamsList])
 
     useEffect(() => {
         users.map((user) => {
@@ -79,7 +107,7 @@ function Tiles(props) {
                         </div>
                         <div className={classes.row}>
                             <div>
-                                <span className={classes.bigTxt}>{signatures.length}</span>
+                                <span className={classes.bigTxt}>{activeSignatures}</span>
                                 <span> /{templates?.length}</span>
                             </div>
                             <span className={classes.activeSpan}>actives</span>
@@ -94,7 +122,7 @@ function Tiles(props) {
                         </div>
                         <div className={classes.row}>
                             <div>
-                                <span className={classes.bigTxt}>{activeEvents.length}</span>
+                                <span className={classes.bigTxt}>{activeEvent}</span>
                                 <span> /{events.length}</span>
                             </div>
                             <span className={classes.activeSpan}>actifs</span>
@@ -110,7 +138,7 @@ function Tiles(props) {
                         </div>
                         <div className={classes.row}>
                             <div>
-                                <span className={classes.bigTxt}>{activeTeams.length}</span>
+                                <span className={classes.bigTxt}>{activeWorkplaces}</span>
                                 <span> /{wps.length}</span>
                             </div>
                             <span className={classes.activeSpan}>actifs</span>
@@ -125,7 +153,7 @@ function Tiles(props) {
                         </div>
                         <div className={classes.row}>
                             <div>
-                                <span className={classes.bigTxt}>{activeTeams.length}</span>
+                                <span className={classes.bigTxt}>{activeTeams}</span>
                                 <span> /{teamsList.length}</span>
                             </div>
                             <span className={classes.activeSpan}>actives</span>
