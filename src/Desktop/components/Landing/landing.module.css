@@ -278,7 +278,7 @@
   margin-right: 1rem;
 }
 
-.formContainer svg {
+.formContainer button svg {
   -webkit-animation: spin 1s infinite linear;
           animation: spin 1s infinite linear;
 }
