@@ -252,6 +252,11 @@
           justify-content: space-between;
 }
 
+.registerContainer .formContainer button svg {
+  -webkit-animation: spin 1s infinite linear;
+          animation: spin 1s infinite linear;
+}
+
 .formContainer {
   min-width: 100%;
   overflow: auto;
@@ -276,11 +281,6 @@
 
 .formContainer:first-child {
   margin-right: 1rem;
-}
-
-.formContainer button svg {
-  -webkit-animation: spin 1s infinite linear;
-          animation: spin 1s infinite linear;
 }
 
 .btnsContainer {
