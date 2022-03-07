@@ -275,6 +275,13 @@ function News({ organisation, loading, setLoading }) {
 
     }, [slider, organisation]);
 
+    React.useEffect(() => {
+        if (change === newsSlider.length - 1)
+        setTimeout(() => {
+            setChange(0)
+        }, 5000);
+    }, [change])
+
     return (
         <div className={`${classes.container}`}>
             <Carousel
@@ -283,8 +290,8 @@ function News({ organisation, loading, setLoading }) {
                 onChange={(e) => { setChange(e); }}
                 className={change !== signatureIndex ? classes.test : ""}
                 autoPlay={hide}
-                selectedItem={0}
-                interval={3000}
+                selectedItem={change}
+                interval={5000}
                 renderIndicator={(onClickHandler, isSelected, index, label) => {
                     return (
                         <span
