@@ -19,35 +19,6 @@ function News({ organisation, loading, setLoading }) {
     const history = useHistory();
 
     React.useEffect(() => {
-        setHeight(slider?.current?.offsetHeight);
-    });
-
-    React.useEffect(() => {
-        if (
-            organisation?.address.street &&
-            organisation?.websiteUrl?.length > 0 &&
-            organisation?.digitalAddress?.phone?.length > 0
-        ) {
-            setSlide(1);
-            setActiveAcc(true);
-        }
-        if (organisation?.signatures?.length > 0) {
-            setSlide(2);
-            setActiveSignature(true);
-        }
-        if (organisation?.users?.length > 1) {
-            setSlide(3);
-            setActiveUsers(true);
-        }
-        if (organisation?.events?.length > 0) {
-            setHide(true);
-            setActiveUsers(true);
-        }
-
-        if (organisation) setLoading(true);
-    }, [organisation]);
-
-    React.useEffect(() => {
         const missingArray = [];
         if (!organisation?.websiteUrl) {
             missingArray.push(["site Internet"]);
@@ -224,9 +195,35 @@ function News({ organisation, loading, setLoading }) {
                 </div>
             );
         }
-
+        setHeight(slider?.current?.offsetHeight);
         setNewsSlider(array);
-    }, []);
+    }, [height, slider, slide]);
+
+    React.useEffect(() => {
+        console.log(organisation)
+        if (
+            organisation?.address.street &&
+            organisation?.websiteUrl?.length > 0 &&
+            organisation?.digitalAddress?.phone?.length > 0
+        ) {
+            setSlide(1);
+            setActiveAcc(true);
+        }
+        if (organisation?.signatures?.length > 0) {
+            setSlide(2);
+            setActiveSignature(true);
+        }
+        if (organisation?.users?.length > 1) {
+            setSlide(3);
+            setActiveUsers(true);
+        }
+        if (organisation?.events?.length > 0) {
+            setHide(true);
+            setActiveUsers(true);
+        }
+        if (organisation)
+            setLoading(true);
+    }, [slider, organisation]);
 
     return (
         <div className={classes.container}>

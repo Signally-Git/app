@@ -193,6 +193,9 @@
     &:first-child {
         margin-right: 1rem;
     }
+    svg {
+        animation: spin 1s infinite linear;
+    }
 }
 
 .btnsContainer {

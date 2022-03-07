@@ -13,6 +13,7 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useNotification } from 'Utils/Notifications/notifications';
 import axios from 'axios';
 import { API } from 'config';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const Signup = () => {
   const [email, setEmail] = useState('')
@@ -112,9 +113,9 @@ const Signup = () => {
           notification({ content: <>Cette société est déjà enregistrée sur Signally</>, status: "invalid" })
         if (err.response.data.title === 'App\\Exception\\User\\UserWithSameEmailAlreadyExistsDomainException')
           notification({ content: <>Cet utilisateur est déjà enregistré sur Signally</>, status: "invalid" })
+          return;
+        })
         setLoading(false);
-        return;
-      })
     }
   }
 
@@ -147,7 +148,7 @@ const Signup = () => {
               <p>Votre compte a bien été créé.</p>
               <p>Veuillez maintenant consulter votre boite mail et cliquer sur le lien de connexion.</p>
             </div></> :
-              <div className={`${classes.formContainer} ${loading ? classes.disappear : ""}`}>
+              <div className={`${classes.formContainer} ${sent ? classes.disappear : ""}`}>
                 <form onSubmit={(e) => handleSignUp(e)}>
                   <div className={classes.inputs}>
                     <div className={classes.inputContainer}>
@@ -208,7 +209,7 @@ const Signup = () => {
                       </div>
                     </div>
                   </div>
-                  <Button style={{ width: '40%', marginTop: '1rem' }} defaultBgColor={'transparent'} color={valid ? "orangeFill" : "orange"} type="submit">S'inscrire</Button>
+                  <Button style={{ width: '40%', marginTop: '1rem' }} defaultBgColor={'transparent'} color={valid ? "orangeFill" : "orange"} type="submit">{loading ? <AiOutlineLoading3Quarters /> : "S'inscrire"}</Button>
                 </form>
               </div>}
         </div>
