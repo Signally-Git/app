@@ -137,9 +137,10 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     }
 
     const handleAssign = async (element) => {
+        console.log(event)
         const req = {
             signature: selectedTemplate['@id'],
-            events: event === 'playlist' ? multiEvents : [event?.['@id'] || event]
+            events: event === 'playlist' || event['@id'] === 'playlist' ? multiEvents : [event?.['@id'] || event]
         }
         // event ? {
         //     signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.["@id"],
