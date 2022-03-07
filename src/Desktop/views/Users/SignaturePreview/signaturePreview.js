@@ -158,7 +158,8 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         await request.patch(`${type}s/${element.id}`, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(
-            () => {
+            (res) => {
+                setPreviewSignature(res.data.signature.preview)
                 notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
                 setEdit()
             }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))

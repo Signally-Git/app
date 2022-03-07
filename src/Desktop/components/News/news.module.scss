@@ -1,4 +1,4 @@
-@import '../../../Assets/style/colors.scss';
+@import "../../../Assets/style/colors.scss";
 
 .container {
     border-radius: 20px;
@@ -16,13 +16,15 @@
         text-transform: uppercase;
         text-align: left;
     }
-    > div{
+    > div {
         display: flex;
         > div {
             padding-bottom: 2.5rem;
+            // min-height: 20rem;
+            height: 100%;
             > ul {
-                top:auto;
-                bottom: -1.25rem!important;
+                top: auto;
+                bottom: -1.25rem !important;
             }
             &:last-child {
                 width: 0;
@@ -67,7 +69,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    font-size: .9rem;
+    font-size: 0.9rem;
     p {
         margin-top: 0;
         padding-left: 12.5%;
@@ -81,7 +83,7 @@
     &:hover {
         cursor: pointer;
         &::before {
-            background-color: rgba($signally-orange, .3);
+            background-color: rgba($signally-orange, 0.3);
         }
     }
     &::before {
@@ -92,7 +94,7 @@
         transition: background-color 300ms;
         border-radius: 50%;
         background-color: $signally-lightgrey;
-        margin: .5rem;
+        margin: 0.5rem;
     }
 }
 
@@ -114,13 +116,13 @@
         color: $signally-orange;
     }
     li {
-        font-size: .9rem;
+        font-size: 0.9rem;
         font-weight: 600;
         cursor: pointer;
         text-align: left;
         transition: color 300ms;
         &:hover {
-            color: $signally-orange
+            color: $signally-orange;
         }
     }
     & ~ div {
@@ -131,7 +133,7 @@
 }
 
 .done:not(.isActive) {
-    opacity: .3;
+    opacity: 0.3;
 }
 
 .btnsContainer {
@@ -143,8 +145,52 @@
 }
 
 .disabled {
-    cursor: not-allowed!important;
+    cursor: not-allowed !important;
     &:hover {
-        color: $signally-brown!important;
+        color: $signally-brown !important;
+    }
+}
+
+.previewSign {
+
+    padding-top: 3rem;
+}
+
+.preview {
+    padding-top: 3rem;
+    display: flex;
+    margin-right: auto;
+    align-items: flex-start;
+    flex-direction: column;
+      > img {
+        max-height: 15rem;
+        max-width: 90%;
+        width: auto !important;
+        margin-right: auto;
+        margin-left: 0;
+    }
+}
+
+.test > div > div {
+    height: 22rem!important;
+}
+
+.bold > span {
+    font-weight: bold;
+}
+
+.duration {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-weight: normal;
+    .col {
+        display: flex;
+        flex-direction: column;
+        &:first-child {
+            margin-right: 1rem;
+        }
     }
 }
