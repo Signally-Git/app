@@ -54,7 +54,15 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
 
     const getDataTeam = async () => {
         const teams = await request.get("teams")
-        setTeams(teams.data["hydra:member"])
+        const teamsList = []
+        teams.data["hydra:member"].map((team) => {
+            if (team.signature)
+                request.get(team.signature['@id']).then((res) => {
+                    team['preview'] = res.data.preview
+                    teamsList.push(team)
+                })
+        })
+        setTeams(teamsList)
     }
 
     const refreshData = (type) => {
@@ -73,7 +81,6 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     const handleDelete = (id, type, name) => {
         request.delete(`${type}/${id}`).then(
             () => {
-
                 notification({ content: <><span style={{ color: "#FF7954" }}>{name}</span> supprimé avec succès</>, status: "valid" })
                 setModal({ type: "", name: "", id: "" })
             }

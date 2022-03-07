@@ -79,7 +79,18 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     // PREVIEW SIGNATURE
     useEffect(async () => {
         const entity = await request.get(`${type}s/${show.id}`)
-        setPreviewSignature(entity.data.compiledSignature)
+        if (entity.data.compiledSignature)
+            setPreviewSignature(entity.data.compiledSignature)
+            else if (entity.data.signature?.['@id'])
+            {
+                await request.get(entity.data.signature['@id']).then((res) => setPreviewSignature(res.data.preview))
+            }
+        else if (entity.data.signature)
+        {
+            await request.get(entity.data.signature).then((res) => setPreviewSignature(res.data.preview))
+        }
+        else (setPreviewSignature())
+
         let templatesAPI = []
         await request.get('signatures').then((result) => {
             result.data["hydra:member"].map(async (template, index) => {
@@ -128,7 +139,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     const handleAssign = async (element) => {
         const req = {
             signature: selectedTemplate['@id'],
-            events: event === 'playlist' ? multiEvents : [event?.['@id'] || event] 
+            events: event === 'playlist' ? multiEvents : [event?.['@id'] || event]
         }
         // event ? {
         //     signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.["@id"],
