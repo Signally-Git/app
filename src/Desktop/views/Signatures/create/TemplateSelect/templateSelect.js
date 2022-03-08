@@ -149,9 +149,9 @@ const templateAPI = [{
 																		<tr height="24">
 																		{# START SOCIALSLIST #}
 																				{% for media in socialMediaAccounts %}
-																				<td height="24" width="24" style="height:24px; width:24px; text-align: left; padding: 0;" valign="top">
+																				<td height="24" width="24" style="height:24px; width:24px; text-align: left; padding: 0 2px;" valign="top">
 																					<a href="{{ media.url }} " height="24" width="24" style="height:24px; width:24px" alt="{{ media.name }} ">
-																						<img height="24" width="24" style="vertical-align: middle; display: block; height:24px; width:24px; line-height:24px; margin: 0 3px;" src="{{ media.image }}" alt=''/>
+																						<img height="24" width="24" style="vertical-align: middle; display: block; height:24px; width:24px; line-height:24px; margin: 0;" src="{{ media.image }}" alt=''/>
 																					</a>
 																				</td>
 																				{% endfor %}
