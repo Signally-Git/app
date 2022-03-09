@@ -39,9 +39,8 @@ function EditSignatureComponent() {
         const getSignatureFromId = async () => {
             await request.get('signatures/' + signatureId).then((res) => {
                 setSelectedTemplate(res.data)
-                console.log(res.data.html)
+                console.log("SETTING", res.data.signatureStyles)
                 setDefaultStyles(res.data.signatureStyles)
-                console.log(res.data.signatureStyles?.filter((style) => style.type === "firstName"))
                 setSignatureName(res.data.name)
             })
         }
@@ -209,8 +208,9 @@ function EditSignatureComponent() {
     }
 
     useMemo(() => {
+        if (defaultStyles)
         handlePopulate()
-    }, [defaultStyles])
+    }, [defaultStyles, selectedTemplate])
 
 
     useEffect(() => {
@@ -251,7 +251,7 @@ function EditSignatureComponent() {
             setSignatureOption({ ...signatureOption, event: { ...signatureOption.event, selected: eventAPI[0], list: eventAPI } }, "active")
         }
         getEvents()
-    }, [signatureOption.event.enabled])
+    }, [])
 
 
     useEffect(() => {
