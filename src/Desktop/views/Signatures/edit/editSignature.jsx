@@ -38,7 +38,7 @@ function EditSignatureComponent() {
     useEffect(() => {
         const getSignatureFromId = async () => {
             await request.get('signatures/' + signatureId).then((res) => {
-                setSelectedTemplate(res.data.html)
+                setSelectedTemplate(res.data)
                 console.log(res.data.html)
                 setDefaultStyles(res.data.signatureStyles)
                 console.log(res.data.signatureStyles?.filter((style) => style.type === "firstName"))
@@ -628,7 +628,7 @@ function EditSignatureComponent() {
 
     const showTemplates = (isOpen) => {
         if (isOpen) {
-            setTemplates(<TemplateSelection showFunction={showTemplates} setTemplate={setSelectedTemplate} icons={signatureOption.socials} />)
+            setTemplates(<TemplateSelection showFunction={showTemplates} setTemplate={setSelectedTemplate} icons={signatureOption.socials} organisation={company?.data} />)
             setTimeout(() => {
                 elem.current.scrollTo({
                     top: 0,
@@ -652,8 +652,8 @@ function EditSignatureComponent() {
 
     useEffect(() => {
         if (signatureInfo && signatureOption && selectedTemplate)
-            setPreview(<Preview infos={signatureInfo} options={signatureOption} template={selectedTemplate} />)
-    }, [signatureInfo, signatureOption, selectedTemplate])
+            setPreview(<Preview infos={signatureInfo} options={signatureOption} template={selectedTemplate.html} organisation={company?.data} />)
+    }, [signatureInfo, signatureOption, selectedTemplate, company])
 
 
     return (
