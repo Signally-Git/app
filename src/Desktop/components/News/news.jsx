@@ -4,7 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useHistory } from "react-router-dom";
 import Button from "Utils/Button/btn";
 import classes from "./news.module.css";
-import parse from "html-react-parser"
+import parse from "html-react-parser";
 import request from "Utils/Request/request";
 import { API } from "config";
 
@@ -15,10 +15,10 @@ function News({ organisation, loading, setLoading }) {
     const [activeSignature, setActiveSignature] = React.useState(false);
     const [activeUsers, setActiveUsers] = React.useState(false);
     const [activeEvents, setActiveEvents] = React.useState(false);
-    const [signatureIndex, setSignatureIndex] = React.useState(0)
-    const [change, setChange] = React.useState(0)
+    const [signatureIndex, setSignatureIndex] = React.useState(0);
+    const [change, setChange] = React.useState(0);
 
-    const [admin, setAdmin] = React.useState('')
+    const [admin, setAdmin] = React.useState("");
 
     const [newsSlider, setNewsSlider] = React.useState([]);
     const [missing, setMissing] = React.useState([]);
@@ -44,12 +44,12 @@ function News({ organisation, loading, setLoading }) {
 
     React.useEffect(() => {
         async function getAdminData() {
-            await request.get('whoami').then((res) => {
+            await request.get("whoami").then((res) => {
                 setAdmin(res.data);
             });
         }
-        getAdminData()
-    }, [])
+        getAdminData();
+    }, []);
 
     React.useEffect(() => {
         const array = [];
@@ -73,17 +73,22 @@ function News({ organisation, loading, setLoading }) {
                         ""
                     )}
                     <div className={classes.row}>
-                        <ul className={classes.progress} style={{ height: height }}>
+                        <ul
+                            className={classes.progress}
+                            style={{ height: height }}
+                        >
                             <li
-                                className={`${activeAcc ? classes.done : ""} ${slide === 0 ? classes.isActive : ""
-                                    }`}
+                                className={`${activeAcc ? classes.done : ""} ${
+                                    slide === 0 ? classes.isActive : ""
+                                }`}
                                 onClick={() => setSlide(0)}
                             >
                                 Compte
                             </li>
                             <li
-                                className={`${activeSignature ? classes.done : ""
-                                    } ${slide === 1 ? classes.isActive : ""}`}
+                                className={`${
+                                    activeSignature ? classes.done : ""
+                                } ${slide === 1 ? classes.isActive : ""}`}
                                 onClick={() => setSlide(1)}
                             >
                                 Signature
@@ -92,14 +97,17 @@ function News({ organisation, loading, setLoading }) {
                             {!activeSignature ? (
                                 <li
                                     className={classes.disabled}
-                                    title={"Vous devez d'abord créer une signature"}
+                                    title={
+                                        "Vous devez d'abord créer une signature"
+                                    }
                                 >
                                     Collaborateurs
                                 </li>
                             ) : (
                                 <li
-                                    className={`${activeUsers ? classes.done : ""
-                                        } ${slide === 2 ? classes.isActive : ""}`}
+                                    className={`${
+                                        activeUsers ? classes.done : ""
+                                    } ${slide === 2 ? classes.isActive : ""}`}
                                     onClick={() => setSlide(2)}
                                 >
                                     Collaborateurs
@@ -107,8 +115,9 @@ function News({ organisation, loading, setLoading }) {
                             )}
 
                             <li
-                                className={`${activeEvents ? classes.done : ""} ${slide === 3 ? classes.isActive : ""
-                                    }`}
+                                className={`${
+                                    activeEvents ? classes.done : ""
+                                } ${slide === 3 ? classes.isActive : ""}`}
                                 onClick={() => setSlide(3)}
                             >
                                 Events
@@ -126,8 +135,8 @@ function News({ organisation, loading, setLoading }) {
                                 <p>
                                     {missing.length > 0 === true
                                         ? `Vous n'avez pas renseigné toutes les informations requises par certaines templates de signature (${missing.join(
-                                            ", "
-                                        )})`
+                                              ", "
+                                          )})`
                                         : "Votre profil contient toutes les informations nécessaires aux templates des signatures."}
                                 </p>
                                 <div className={classes.btnsContainer}>
@@ -140,7 +149,9 @@ function News({ organisation, loading, setLoading }) {
                                     <Button
                                         color="orange"
                                         onClick={() =>
-                                            history.push("/profile/informations")
+                                            history.push(
+                                                "/profile/informations"
+                                            )
                                         }
                                     >
                                         Compléter mon profil
@@ -188,8 +199,8 @@ function News({ organisation, loading, setLoading }) {
                                         color="brown"
                                         onClick={() => {
                                             setHide(true);
-                                            setSignatureIndex(50)
-                                            setChange(0)
+                                            setSignatureIndex(50);
+                                            setChange(0);
                                         }}
                                     >
                                         Passer cette étape
@@ -207,27 +218,62 @@ function News({ organisation, loading, setLoading }) {
                 </div>
             );
         if (activeSignature && admin.compiledSignature) {
-            const toPush = <div className={classes.tab} style={{ height: '20rem' }}>
-                <h5>Signature active <span className={classes.orangeTxt}>{admin.signature.name}</span></h5>
-                <div className={classes.previewSign}>{parse(admin.compiledSignature)}</div>
-            </div>
+            const toPush = (
+                <div className={classes.tab} style={{ height: "20rem" }}>
+                    <h5>
+                        Signature active{" "}
+                        <span className={classes.orangeTxt}>
+                            {admin.signature?.name}
+                        </span>
+                    </h5>
+                    <div className={classes.previewSign}>
+                        {parse(admin.compiledSignature)}
+                    </div>
+                </div>
+            );
             array.push(toPush);
-
         }
-        if (activeEvents && admin.events) {
+        if (activeEvents && admin?.events[0]?.name) {
             array.push(
                 <div className={classes.tab}>
-                    <h5>Event actif <span className={classes.orangeTxt}>{admin.events[0].name}</span></h5>
+                    <h5>
+                        Event actif{" "}
+                        <span className={classes.orangeTxt}>
+                            {admin.events[0]?.name}
+                        </span>
+                    </h5>
                     <div className={classes.preview}>
-                        <img src={API + admin.events[0].imagePath} />
+                        <img src={API + admin.events[0]?.imagePath} />
                         <span className={classes.duration}>
                             <div className={`${classes.col} ${classes.bold}`}>
-                                <span>{`du ${new Date(admin.events[0]?.startAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
-                                <span>{`au ${new Date(admin.events[0]?.endAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
+                                <span>{`du ${new Date(
+                                    admin.events[0]?.startAt
+                                ).toLocaleString([], {
+                                    day: "numeric",
+                                    month: "short",
+                                    year: "numeric",
+                                })}`}</span>
+                                <span>{`au ${new Date(
+                                    admin.events[0]?.endAt
+                                ).toLocaleString([], {
+                                    day: "numeric",
+                                    month: "short",
+                                    year: "numeric",
+                                })}`}</span>
                             </div>
                             <div className={classes.col}>
-                                <span>{`${new Date(admin.events[0]?.startAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
-                                <span>{`${new Date(admin.events[0]?.endAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
+                                <span>{`${new Date(
+                                    admin.events[0]?.startAt
+                                ).toLocaleString([], {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                })}`}</span>
+                                <span>{`${new Date(
+                                    admin.events[0]?.endAt
+                                ).toLocaleString([], {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                })}`}</span>
                             </div>
                         </span>
                     </div>
@@ -235,10 +281,14 @@ function News({ organisation, loading, setLoading }) {
             );
         }
         array.map((slide, index) => {
-            if (slide.ref?.current?.toString().search('Signature active') === -1 && slide.ref?.current?.toString().search('Event actif') === -1) {
-                setSignatureIndex(index)
+            if (
+                slide.ref?.current?.toString().search("Signature active") ===
+                    -1 &&
+                slide.ref?.current?.toString().search("Event actif") === -1
+            ) {
+                setSignatureIndex(index);
             }
-        })
+        });
         setHeight(slider?.current?.offsetHeight);
         setNewsSlider(array);
     }, [height, slider, slide, admin, hide]);
@@ -261,33 +311,37 @@ function News({ organisation, loading, setLoading }) {
             setActiveUsers(true);
         }
         if (organisation?.events?.length > 0) {
-            setActiveEvents(true)
-            if (organisation?.address.street &&
+            setActiveEvents(true);
+            if (
+                organisation?.address.street &&
                 organisation?.websiteUrl?.length > 0 &&
-                organisation?.digitalAddress?.phone?.length > 0 && organisation?.signatures?.length > 0 && organisation?.users?.length > 1) {
+                organisation?.digitalAddress?.phone?.length > 0 &&
+                organisation?.signatures?.length > 0 &&
+                organisation?.users?.length > 1
+            ) {
                 setHide(true);
-                setSignatureIndex(50)
-                setChange(0)
+                setSignatureIndex(50);
+                setChange(0);
             }
         }
-        if (organisation)
-            setLoading(true);
-
+        if (organisation) setLoading(true);
     }, [slider, organisation]);
 
     React.useEffect(() => {
         if (change === newsSlider.length - 1)
-        setTimeout(() => {
-            setChange(0)
-        }, 5000);
-    }, [change])
+            setTimeout(() => {
+                setChange(0);
+            }, 5000);
+    }, [change]);
 
     return (
         <div className={`${classes.container}`}>
             <Carousel
                 dynamicHeight={true}
                 showThumbs={true}
-                onChange={(e) => { setChange(e); }}
+                onChange={(e) => {
+                    setChange(e);
+                }}
                 className={change !== signatureIndex ? classes.test : ""}
                 autoPlay={hide}
                 selectedItem={change}
@@ -295,8 +349,9 @@ function News({ organisation, loading, setLoading }) {
                 renderIndicator={(onClickHandler, isSelected, index, label) => {
                     return (
                         <span
-                            className={`${classes.indicator} ${isSelected ? classes.selected : ""
-                                }`}
+                            className={`${classes.indicator} ${
+                                isSelected ? classes.selected : ""
+                            }`}
                             onClick={onClickHandler}
                             onKeyDown={onClickHandler}
                             value={index}
