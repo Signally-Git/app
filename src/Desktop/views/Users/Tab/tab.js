@@ -59,8 +59,8 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
             if (team.signature)
                 request.get(team.signature['@id']).then((res) => {
                     team['preview'] = res.data.preview
-                    teamsList.push(team)
                 })
+                teamsList.push(team)
         })
         setTeams(teamsList)
     }
