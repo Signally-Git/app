@@ -233,7 +233,7 @@ function News({ organisation, loading, setLoading }) {
             );
             array.push(toPush);
         }
-        if (activeEvents && admin?.events[0]?.name) {
+        if (activeEvents && admin?.events?.[0]?.name) {
             array.push(
                 <div className={classes.tab}>
                     <h5>
