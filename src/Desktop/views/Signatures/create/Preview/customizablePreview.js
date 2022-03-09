@@ -152,9 +152,9 @@ export default function Preview({ infos, template, options, organisation, ...pro
     //     replaced = replaced.replaceAll(event, "")
     // }
 
-    console.log(options?.event?.display)
     if (options?.event?.enabled) {
         replaced = replaced.replaceAll(/{% if event %}/gi, "")
+        replaced = replaced.replaceAll(/{% if styles\['event'\]\['enabled'\] is same as \(true\) %}/gi, "")
         replaced = replaced.replaceAll(/{% endif %}/gi, "")
         replaced = replaced.replaceAll(/{# START EVENT #}/gi, "")
         replaced = replaced.replaceAll(/{# END EVENT #}/gi, "")

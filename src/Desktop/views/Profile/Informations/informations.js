@@ -59,7 +59,7 @@ function Informations() {
                     websiteUrl: website,
                     logo: res.data['@id'],
                     address: {
-                        street: companyAddress
+                        ...organisation.address
                     },
                     digitalAddress: {
                         phone: phone

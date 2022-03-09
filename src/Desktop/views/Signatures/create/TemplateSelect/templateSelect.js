@@ -7,11 +7,11 @@ import Template from "../Preview/customizablePreview";
 // Displaying the list of bought and free templates (Studio, Store) and allows to select one to create custom signature
 
 const templateAPI = [
-    {
-        id: 1,
-        alignment: "Horizontal",
-        tags: ["studio"],
-        html: `
+	{
+		id: 1,
+		alignment: "Horizontal",
+		tags: ["studio"],
+		html: `
 	{# START GREETINGS #}
 	<span style="padding-bottom: {{ styles['greetingsPadding']['padding'] }};">
 	{% if greetings %}
@@ -81,16 +81,16 @@ const templateAPI = [
 															</td>
 														</tr>
 														{# START PHONE #}
-														{% if user.mobilePhone or user.phone %}
+														{% if user.phone or company.phone %}
 														<tr>
-															{% if user.mobilePhone %}
-															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}font-weight: {{ styles['mobile']['fontWeight'] }};font-family: {{ styles['generalFontFamily']['fontFamily'] }};font-size: {{ styles['generalFontSize']['fontSize'] }}">
-																{{ user.mobilePhone }}
-															</td>
-															{% endif %}
 															{% if user.phone %}
 															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}font-weight: {{ styles['mobile']['fontWeight'] }};font-family: {{ styles['generalFontFamily']['fontFamily'] }};font-size: {{ styles['generalFontSize']['fontSize'] }}">
-																{{ user.phone }}
+																<b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b> {{ user.phone }}
+															</td>
+															{% endif %}
+															{% if company.phone %}
+															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}font-weight: {{ styles['mobile']['fontWeight'] }};font-family: {{ styles['generalFontFamily']['fontFamily'] }};font-size: {{ styles['generalFontSize']['fontSize'] }}">
+															    <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> {{ company.phone }}
 															</td>
 															{% endif %}
 														</tr>
@@ -109,6 +109,7 @@ const templateAPI = [
 		</tr>
 		<tr>
 		{# START EVENT #}
+		{% if styles['event']['enabled'] is same as (true) %}
 		{% if event %}
 				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
 					<a style="height: 126px; display: block;" href="{{ event.link }}"><img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="{{ absolute_url(asset(event.imagePath)) }}" alt='{{ event.name }}'/></a>
@@ -118,6 +119,7 @@ const templateAPI = [
 				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
 					<img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="http://fakeimg.pl/380x126?font=noto&font_size=14" alt='Event'/>
 				</td>
+			{% endif %}
 			{% endif %}
 			{# END ELSE #}
 			{# END EVENT #}
@@ -191,158 +193,157 @@ const templateAPI = [
 </span>
 
 `,
-    },
+	},
 ];
 
 export default function TemplateSelection(props) {
-    const [orientation, setOrientation] = useState("Horizontal");
-    const [tag, setTag] = useState(true);
-    const handleForm = (e) => {
-        props.setTemplate(JSON.parse(e.target.value));
-    };
+	const [orientation, setOrientation] = useState("Horizontal");
+	const [tag, setTag] = useState(true);
+	const handleForm = (e) => {
+		props.setTemplate(JSON.parse(e.target.value));
+	};
 
-    const handleAlignment = (e) => {
-        setOrientation(e.target.id);
-    };
-    const handleStudio = (e) => {
-        setTag(e.target.checked);
-    };
-    return (
-        <div className={classes.modal}>
-            <div className={classes.searchContainer}>
-                <h1>Choisissez votre modèle de signature</h1>
-                <div className={classes.tagsContainer}>
-                    <form onChange={handleStudio}>
-                        <ul className={classes.studioStore}>
-                            <li
-                                className={`${classes.studio} ${
-                                    tag ? classes.activeStudio : ""
-                                }`}
-                            >
-                                <input
-                                    type="checkbox"
-                                    defaultChecked={tag}
-                                    id="studio"
-                                />
-                                My Studio
-                            </li>
-                            <li className={classes.store}>My Store</li>
-                        </ul>
-                    </form>
-                    <div className={classes.otherTagsContainer}>
-                        <ul className={classes.otherTags}>
-                            <li>Classique</li>
-                            <li>Élegant</li>
-                            <li>Créatif</li>
-                        </ul>
-                    </div>
-                </div>
-                <div className={classes.orientationContainer}>
-                    <form onChange={handleAlignment}>
-                        <label
-                            className={classes.radioCtr}
-                            htmlFor="horizontal"
-                        >
-                            Horizontal
-                            <input
-                                type="radio"
-                                defaultChecked={true}
-                                id="horizontal"
-                                name="orientation"
-                            />
-                            <span className={classes.checkmark}></span>
-                        </label>
-                        <label
-                            className={classes.radioCtr}
-                            htmlFor="panoramique"
-                        >
-                            Panoramique
-                            <input
-                                type="radio"
-                                id="panoramique"
-                                name="orientation"
-                            />
-                            <span className={classes.checkmark}></span>
-                        </label>
-                        <label className={classes.radioCtr} htmlFor="vertical">
-                            Vertical
-                            <input
-                                type="radio"
-                                id="vertical"
-                                name="orientation"
-                            />
-                            <span className={classes.checkmark}></span>
-                        </label>
-                    </form>
-                </div>
-            </div>
-            <form onChange={handleForm}>
-                <ul className={classes.templatesContainer}>
-                    {templateAPI.map((template) => {
-                        if (
-                            template.alignment.toLowerCase() ===
-                            orientation.toLowerCase()
-                        )
-                            if (tag) {
-                                if (
-                                    template.tags[0].toLowerCase() === "studio"
-                                ) {
-                                    return (
-                                        <li key={template.id}>
-                                            <p className={classes.templateName}>
-                                                Mama Shelter
-                                            </p>
-                                            <input
-                                                readOnly
-                                                type="radio"
-                                                name="template"
-                                                value={JSON.stringify(template)}
-                                            />
-                                            <Template
-                                                options={{
-                                                    event: { enabled: true },
-                                                }}
-                                                template={template.html}
-                                                socials={props.icons}
-                                            />
-                                        </li>
-                                    );
-                                }
-                            } else
-                                return (
-                                    <li key={template.id}>
-                                        <input
-                                            type="radio"
-                                            name="template"
-                                            value={template.html}
-                                        />
-                                        <Template
-                                            template={template.html}
-                                            socials={props.icons}
-                                            organisation={props.organisation}
-                                        />
-                                    </li>
-                                );
-                    })}
-                    {!tag ? (
-                        <li style={{ width: "412px", height: "220px" }}></li>
-                    ) : (
-                        ""
-                    )}
-                </ul>
-                <div className={classes.btnContainer}>
-                    <Button
-                        color="orange"
-                        width={"5rem"}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            props.showFunction();
-                        }}
-                    >
-                        Annuler
-                    </Button>
-                </div>
-            </form>
-        </div>
-    );
+	const handleAlignment = (e) => {
+		setOrientation(e.target.id);
+	};
+	const handleStudio = (e) => {
+		setTag(e.target.checked);
+	};
+	return (
+		<div className={classes.modal}>
+			<div className={classes.searchContainer}>
+				<h1>Choisissez votre modèle de signature</h1>
+				<div className={classes.tagsContainer}>
+					<form onChange={handleStudio}>
+						<ul className={classes.studioStore}>
+							<li
+								className={`${classes.studio} ${tag ? classes.activeStudio : ""
+									}`}
+							>
+								<input
+									type="checkbox"
+									defaultChecked={tag}
+									id="studio"
+								/>
+								My Studio
+							</li>
+							<li className={classes.store}>My Store</li>
+						</ul>
+					</form>
+					<div className={classes.otherTagsContainer}>
+						<ul className={classes.otherTags}>
+							<li>Classique</li>
+							<li>Élegant</li>
+							<li>Créatif</li>
+						</ul>
+					</div>
+				</div>
+				<div className={classes.orientationContainer}>
+					<form onChange={handleAlignment}>
+						<label
+							className={classes.radioCtr}
+							htmlFor="horizontal"
+						>
+							Horizontal
+							<input
+								type="radio"
+								defaultChecked={true}
+								id="horizontal"
+								name="orientation"
+							/>
+							<span className={classes.checkmark}></span>
+						</label>
+						<label
+							className={classes.radioCtr}
+							htmlFor="panoramique"
+						>
+							Panoramique
+							<input
+								type="radio"
+								id="panoramique"
+								name="orientation"
+							/>
+							<span className={classes.checkmark}></span>
+						</label>
+						<label className={classes.radioCtr} htmlFor="vertical">
+							Vertical
+							<input
+								type="radio"
+								id="vertical"
+								name="orientation"
+							/>
+							<span className={classes.checkmark}></span>
+						</label>
+					</form>
+				</div>
+			</div>
+			<form onChange={handleForm}>
+				<ul className={classes.templatesContainer}>
+					{templateAPI.map((template) => {
+						if (
+							template.alignment.toLowerCase() ===
+							orientation.toLowerCase()
+						)
+							if (tag) {
+								if (
+									template.tags[0].toLowerCase() === "studio"
+								) {
+									return (
+										<li key={template.id}>
+											<p className={classes.templateName}>
+												Mama Shelter
+											</p>
+											<input
+												readOnly
+												type="radio"
+												name="template"
+												value={JSON.stringify(template)}
+											/>
+											<Template
+												options={{
+													event: { enabled: true },
+												}}
+												template={template.html}
+												socials={props.icons}
+											/>
+										</li>
+									);
+								}
+							} else
+								return (
+									<li key={template.id}>
+										<input
+											type="radio"
+											name="template"
+											value={template.html}
+										/>
+										<Template
+											template={template.html}
+											socials={props.icons}
+											organisation={props.organisation}
+										/>
+									</li>
+								);
+					})}
+					{!tag ? (
+						<li style={{ width: "412px", height: "220px" }}></li>
+					) : (
+						""
+					)}
+				</ul>
+				<div className={classes.btnContainer}>
+					<Button
+						color="orange"
+						width={"5rem"}
+						onClick={(e) => {
+							e.preventDefault();
+							props.showFunction();
+						}}
+					>
+						Annuler
+					</Button>
+				</div>
+			</form>
+		</div>
+	);
 }
