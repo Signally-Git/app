@@ -7,6 +7,7 @@ import classes from "./news.module.css";
 import parse from "html-react-parser";
 import request from "Utils/Request/request";
 import { API } from "config";
+import { BiHelpCircle } from "react-icons/bi";
 
 function News({ organisation, loading, setLoading }) {
     const [slide, setSlide] = React.useState(0);
@@ -336,7 +337,9 @@ function News({ organisation, loading, setLoading }) {
 
     return (
         <div className={`${classes.container}`}>
+            {hide ? <BiHelpCircle onClick={() => setHide(false)} /> : ""}
             <Carousel
+            showArrows={false}
                 dynamicHeight={true}
                 showThumbs={true}
                 onChange={(e) => {
