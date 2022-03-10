@@ -58,7 +58,7 @@ function News({ organisation, loading, setLoading }) {
                 <div className={classes.tab} ref={sign}>
                     {slide === 0 ? (
                         <h5>
-                            Compte{" "}
+                            Bienvenue{" "}
                             <span className={classes.orangeTxt}>
                                 {organisation?.name}
                             </span>
