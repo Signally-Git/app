@@ -15,7 +15,7 @@ import parse from 'html-react-parser'
 export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     const today = new Date()
 
-    const [templates, setTemplates] = useState([])
+    const [templates, setTemplates] = useState([{ id: 'signature', name: 'Signature' }])
     const [assignedTemplate, setAssignedTemplate] = useState()
     const [selectedTemplate, setSelectedTemplate] = useState()
     const [previewSignature, setPreviewSignature] = useState()
@@ -45,8 +45,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
 
         setEvent(toPush[0] || { '@id': "playlist" })
         setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event['@id'] === "playlist" ? "Modifier la playlist" : "Playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
-        // if (selectedTemplate?.['@id'] && !selectedTemplate?.preview)
-        //     await request.get(selectedTemplate['@id']).then((res) => setSelectedTemplate(res.data))
     }, [selectedTemplate])
 
     useEffect(async () => {
@@ -61,7 +59,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
 
     useEffect(() => {
         const tmp = templates;
-        setTemplates([])
+        setTemplates([{ id: 'signature', name: 'Signature' }])
         //    setTemplates(tmp)
     }, [edit])
 
@@ -81,12 +79,10 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         const entity = await request.get(`${type}s/${show.id}`)
         if (entity.data.compiledSignature)
             setPreviewSignature(entity.data.compiledSignature)
-            else if (entity.data.signature?.['@id'])
-            {
-                await request.get(entity.data.signature['@id']).then((res) => setPreviewSignature(res.data.preview))
-            }
-        else if (entity.data.signature)
-        {
+        else if (entity.data.signature?.['@id']) {
+            await request.get(entity.data.signature['@id']).then((res) => setPreviewSignature(res.data.preview))
+        }
+        else if (entity.data.signature) {
             await request.get(entity.data.signature).then((res) => setPreviewSignature(res.data.preview))
         }
         else (setPreviewSignature())
@@ -101,6 +97,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 })
             })
         })
+        templatesAPI.unshift({ id: 'signature', name: 'Signature' })
 
         setTemplates(templatesAPI)
         const template = await request.get(show?.signature?.['@id'])
@@ -142,31 +139,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
             signature: selectedTemplate['@id'],
             events: event === 'playlist' || event['@id'] === 'playlist' ? multiEvents : [event?.['@id'] || event]
         }
-        // event ? {
-        //     signature: Object?.values(templates)?.find((obj) => { return obj.html == selectedTemplate })?.["@id"],
-        //     events: event === 'playlist' ? multiEvents : [event['@id']]
-        // } :
-        // console.log('HERE', multiEvents)
-        // console.log(assignedTemplate, type+'s')
-        // console.log(assignedTemplate?.[type+'s'])
-        // if (multiEvents)
-        //     multiEvents.map(async (e) => {
-        //         const req = { ...e, [type + 's']: [element['@id']] }
-        //         await request.patch(e['@id'], req, {
-        //             headers: { 'Content-Type': 'application/merge-patch+json' }
-        //         }).then(() => {
-        //             notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> mise à jour</>, status: "valid" })
-        //             setEdit()
-        //         }).catch((err) => console.log(err))
-        //     })
-        // if (selectedTemplate['@id'])
-        //     await request.patch(selectedTemplate['@id'], { [type + 's']: [`${type}s/${element.id}`] }, {
-        //         headers: { 'Content-Type': 'application/merge-patch+json' }
-        //     }).then(
-        //         () => {
-        //             notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
-        //             setEdit()
-        //         }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
         await request.patch(`${type}s/${element.id}`, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(
@@ -218,10 +190,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 </ul>
             </div>
             <Btns onCancel={() => { setChoosePlaylist(false) }} confirmTxt="Enregistrer" onConfirm={() => handleProgram()} />
-            {/* <div className={classes.btnsContainer}>
-                <Button color="orange" width={'40%'} onClick={() => setChoosePlaylist(false)}>Annuler</Button>
-                <Button color="orangeFill" width={'40%'} onClick={() => handleProgram()}>Enregistrer</Button>
-            </div> */}
         </div>
         </div> : ""}
         {modal ? <Modal title={<>Vous allez mettre en ligne <br />la signature <span className={classes.orangeTxt}>{selectedTemplate?.name}</span> <br /><br />pour <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></>}

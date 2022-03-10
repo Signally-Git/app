@@ -342,6 +342,16 @@
           justify-content: space-between;
 }
 
+.col .CTAsContainer > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.col .CTAsContainer > div button:first-child {
+  margin-right: 1rem;
+}
+
 .col .CTAsContainer button {
   margin: 0;
 }

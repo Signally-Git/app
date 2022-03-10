@@ -107,6 +107,10 @@
         margin-top: 0.5rem;
         text-align: center;
     }
+    :disabled {
+        color: $signally-orange;
+        font-weight: bold;
+    }
 }
 
 .iconsContainer {

@@ -209,7 +209,7 @@ function EditSignatureComponent() {
 
     useMemo(() => {
         if (defaultStyles)
-        handlePopulate()
+            handlePopulate()
     }, [defaultStyles, selectedTemplate])
 
 
@@ -697,7 +697,10 @@ function EditSignatureComponent() {
                             {selectedTemplate &&
                                 preview}
                             <div className={classes.CTAsContainer}>
-                                <Button color="orange" onClick={() => setModal(true)} style={{ opacity: selectedTemplate ? 1 : 0, pointerEvents: selectedTemplate ? "" : "none" }}>Sauvegarder</Button>
+                                <div>
+                                    <Button color="brown" onClick={() => history.goBack()} style={{ opacity: selectedTemplate ? 1 : 0, pointerEvents: selectedTemplate ? "" : "none" }}>Annuler</Button>
+                                    <Button color="orange" onClick={() => setModal(true)} style={{ opacity: selectedTemplate ? 1 : 0, pointerEvents: selectedTemplate ? "" : "none" }}>Sauvegarder</Button>
+                                </div>
                                 <Button color="brown" onClick={() => showTemplates(true)}>Choisir un {selectedTemplate ? "autre modèle" : "modèle de signature"} <BsArrowRight style={{ stroke: "black", strokeWidth: "1", marginLeft: ".5rem" }} className={`${selectedTemplate ? "" : classes.blinking} ${classes.arrow}`} /></Button>
                             </div>
                         </div>

@@ -151,6 +151,11 @@
   text-align: center;
 }
 
+.inputContainer :disabled {
+  color: #FF7954;
+  font-weight: bold;
+}
+
 .iconsContainer {
   margin-top: 0.5rem;
   width: 100%;

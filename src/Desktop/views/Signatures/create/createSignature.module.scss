@@ -251,6 +251,12 @@
         display: flex;
         position: absolute;
         justify-content: space-between;
+        > div {
+            display: flex;
+            button:first-child {
+                margin-right: 1rem;
+            }
+        }
         button {
             margin: 0;
         }
