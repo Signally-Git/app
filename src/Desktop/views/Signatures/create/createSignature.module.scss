@@ -243,9 +243,13 @@
     flex-direction: column;
     width: 55%;
     .CTAsContainer {
-        width: 100%;
-        margin-top: 2rem;
+        width: 98%;
+        margin: auto;
+        bottom: -4rem;
+        left: 0;
+        right: 0;
         display: flex;
+        position: absolute;
         justify-content: space-between;
         button {
             margin: 0;
@@ -319,6 +323,7 @@
     display: flex;
     width: 100%;
     padding: 1rem;
+    position: relative;
     padding-top: 0.25rem;
     flex-direction: column;
     background-color: #fff;

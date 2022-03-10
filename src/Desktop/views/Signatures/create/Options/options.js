@@ -314,7 +314,7 @@ export default function Options(props) {
                     {props.data.event.enabled && props.data.event.list?.length > 0 ?
                         <>
                        <CustomSelect onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${API}${e}`, selected: e} })} 
-                       items={props.data.event.list} getValue={'@id'} display={'name'} />
+                       items={props.data.event.list} getValue={'imagePath'} display={'name'} />
                             {/* <form onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${API}${JSON.parse(e.target.value).imagePath}`, selected: JSON.parse(e.target.value) } })}>
                                 <select defaultValue={JSON.stringify(props.data.event.selected)}>
                                     {props.data.event.list.map((event) => {
