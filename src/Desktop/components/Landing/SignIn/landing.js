@@ -9,10 +9,10 @@ import Input from 'Utils/Input/input';
 import { useHistory, useLocation } from 'react-router-dom';
 import request from 'Utils/Request/request';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-import { useNotification } from 'Utils/Notifications/notifications';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { API } from 'config';
 import axios from 'axios';
+import { ImCross } from 'react-icons/im';
 
 function useQuery() {
     const { search } = useLocation();
@@ -27,7 +27,7 @@ const Login = () => {
     const [showPassword, setShowPass] = useState(false)
     const slider = useRef(null)
     const toFocus = useRef(null)
-    const notification = useNotification()
+    const [error, setError] = useState({ content: "", disappear: false })
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
 
@@ -46,6 +46,15 @@ const Login = () => {
         if (localStorage.getItem('token'))
             history.push('/dashboard')
     })
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setError((a) => ({ ...a, disappear: true }));
+        }, 5500);
+
+        return () => clearTimeout(timeout);
+    }, [error])
+
 
     useEffect(async () => {
         if (query.get('user')) {
@@ -87,7 +96,7 @@ const Login = () => {
             }, 700)
         }
         else {
-            notification({ content: <>Le format d'email n'est pas valide</>, status: "invalid" })
+            setError({ content: <>Le format d'email n'est pas valide <ImCross /></>, disappear: false })
         }
     }
 
@@ -105,13 +114,13 @@ const Login = () => {
             localStorage.setItem('refresh_token', res.data.refresh_token)
             history.go(0)
         }).catch(() => {
-            notification({ content: <>Email ou mot de passe incorrect</>, status: "invalid" })
+            setError({ content: <>Email ou mot de passe incorrect <ImCross /></>, disappear: false })
             setLoading(false)
             return;
         });
     }
-    if (query.get('user')) 
-    return <></>
+    if (query.get('user'))
+        return <></>
     return (<div style={{ background: "#FFF", overflow: 'hidden', height: "100vh" }}>
         {modal === "done" ? <div className={classes.modal}>
             <p>Un message a été envoyé à <span className={classes.orangeTxt}>{email}</span> <br /> avec un lien pour réinitialiser votre mot de passe.</p>
@@ -145,44 +154,47 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-                <div className={classes.slider} ref={slider}>
-                    <div className={classes.formContainer}>
-                        <h2>Connectez-vous à votre espace <span>Signally</span></h2>
-                        <form onSubmit={(e) => handleSubmit(e)}>
-                            <div className={classes.inputContainer}>
-                                <div style={{ position: 'relative', display: 'flex' }}>
-                                    <Input autoComplete="email" style={{ width: "100%" }} placeholder='Email' onChange={(e) => setEmail(e.target.value)} value={email} type="text" />
+                <div className={classes.slider}>
+                    <span className={`${classes.error} ${error.disappear ? classes.fadeOut : ""}`}>{error.content}</span>
+                    <div ref={slider}>
+                        <div className={classes.formContainer}>
+                            <h2>Connectez-vous à votre espace <span>Signally</span></h2>
+                            <form onSubmit={(e) => handleSubmit(e)}>
+                                <div className={classes.inputContainer}>
+                                    <div style={{ position: 'relative', display: 'flex' }}>
+                                        <Input autoComplete="email" style={{ width: "100%" }} placeholder='Email' onChange={(e) => setEmail(e.target.value)} value={email} type="text" />
+                                    </div>
                                 </div>
-                            </div>
-                            <Button width={"30%"} color="orangeFill" type="submit" arrow>Connexion</Button>
-                        </form>
-                    </div>
-                    <div className={classes.formContainer}>
-                        <h2>Entrez votre mot de passe</h2>
-                        <form onSubmit={(e) => handleLogIn(e)}>
-                            <div className={classes.codeContainer}>
-                                {
-                                    logging ?
-                                        <> <div style={{ position: 'relative', display: 'flex' }}>
-                                            <Input autoComplete="current-password" defaultValue={code} ref={toFocus} placeholder="Mot de passe" type={showPassword ? "text" : "password"} onChange={(e) => setCode(e.target.value)} />
-                                            <div className={classes.showPassword} onClick={() => setShowPass(!showPassword)}>
-                                                {showPassword ?
-                                                    <FiEyeOff />
-                                                    :
-                                                    <FiEye />
-                                                }
+                                <Button width={"30%"} color="orangeFill" type="submit" arrow>Connexion</Button>
+                            </form>
+                        </div>
+                        <div className={classes.formContainer}>
+                            <h2>Entrez votre mot de passe</h2>
+                            <form onSubmit={(e) => handleLogIn(e)}>
+                                <div className={classes.codeContainer}>
+                                    {
+                                        logging ?
+                                            <> <div style={{ position: 'relative', display: 'flex' }}>
+                                                <Input autoComplete="current-password" defaultValue={code} ref={toFocus} placeholder="Mot de passe" type={showPassword ? "text" : "password"} onChange={(e) => setCode(e.target.value)} />
+                                                <div className={classes.showPassword} onClick={() => setShowPass(!showPassword)}>
+                                                    {showPassword ?
+                                                        <FiEyeOff />
+                                                        :
+                                                        <FiEye />
+                                                    }
+                                                </div>
                                             </div>
-                                        </div>
-                                        </> : <>
-                                            <Input defaultValue={code} placeholder="Mot de passe" type="password" onChange={(e) => setCode(e.target.value)} />
-                                        </>}
-                            </div>
-                            <span onClick={() => setModal(true)} className={classes.forgot}>Mot de passe oublié</span>
-                            <div className={classes.btnsContainer}>
-                                <Button width={"30%"} color="orangeFill" type="submit">{loading ? <AiOutlineLoading3Quarters strokeWidth="1" stroke='2px' fontWeight={'bolder'} className={classes.loading} /> : "Connexion"}</Button>
-                                <Button width={"30%"} color="orange" onClick={(e) => { handleScroll(e, 0) }}>Annuler</Button>
-                            </div>
-                        </form>
+                                            </> : <>
+                                                <Input defaultValue={code} placeholder="Mot de passe" type="password" onChange={(e) => setCode(e.target.value)} />
+                                            </>}
+                                </div>
+                                <span onClick={() => setModal(true)} className={classes.forgot}>Mot de passe oublié</span>
+                                <div className={classes.btnsContainer}>
+                                    <Button width={"30%"} color="orangeFill" type="submit">{loading ? <AiOutlineLoading3Quarters strokeWidth="1" stroke='2px' fontWeight={'bolder'} className={classes.loading} /> : "Connexion"}</Button>
+                                    <Button width={"30%"} color="orange" onClick={(e) => { handleScroll(e, 0) }}>Annuler</Button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

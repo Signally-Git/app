@@ -153,7 +153,7 @@
   margin-bottom: 2rem;
 }
 
-.logInContainer > .slider > .formContainer button {
+.logInContainer > .slider > div > .formContainer button {
   margin-top: 2rem;
 }
 
@@ -242,10 +242,14 @@
 }
 
 .slider {
+  position: relative;
+  width: 40%;
+}
+
+.slider > div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 40%;
   overflow: hidden;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
@@ -259,7 +263,7 @@
 
 .formContainer {
   min-width: 100%;
-  overflow: auto;
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -504,4 +508,92 @@
 
 .modal .btnsContainer button {
   margin-top: 1rem;
+}
+
+.fadeOut {
+  -webkit-animation: fadeOutAnimate 1s forwards ease-out !important;
+          animation: fadeOutAnimate 1s forwards ease-out !important;
+}
+
+@-webkit-keyframes fadeOutAnimate {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOutAnimate {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.error {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-animation: shakeX 1s forwards ease-in-out;
+          animation: shakeX 1s forwards ease-in-out;
+}
+
+.error > svg {
+  margin-left: .5rem;
+  color: red;
+}
+
+@-webkit-keyframes shakeX {
+  from,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+            transform: translate3d(-10px, 0, 0);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+            transform: translate3d(10px, 0, 0);
+  }
+}
+
+@keyframes shakeX {
+  from,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+            transform: translate3d(-10px, 0, 0);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+            transform: translate3d(10px, 0, 0);
+  }
 }

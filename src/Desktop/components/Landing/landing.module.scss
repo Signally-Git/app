@@ -101,7 +101,7 @@
     h2 {
         margin-bottom: 2rem;
     }
-    > .slider > .formContainer button {
+    > .slider > div > .formContainer button {
         margin-top: 2rem;
     }
 }
@@ -171,10 +171,13 @@
 }
 
 .slider {
-    display: flex;
+    position: relative;
     width: 40%;
-    overflow: hidden;
-    justify-content: space-between;
+    > div {
+        display: flex;
+        overflow: hidden;
+        justify-content: space-between;
+    }
 }
 
 .registerContainer .formContainer {
@@ -186,7 +189,7 @@
 
 .formContainer {
     min-width: 100%;
-    overflow: auto;
+    position: relative;
     display: flex;
     background-color: #fbf4f2;
     border-radius: 8px;
@@ -358,5 +361,53 @@
         button {
             margin-top: 1rem;
         }
+    }
+}
+
+.fadeOut {
+    animation: fadeOutAnimate 1s forwards ease-out!important;
+}
+
+@keyframes fadeOutAnimate {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.error {
+    position: absolute;
+    left: 1rem;
+    top: -3rem;
+    display: flex;
+    align-items: center;
+    animation: shakeX 1s forwards ease-in-out;
+     > svg {
+         margin-left: .5rem;
+         color: red;
+     }
+}
+
+
+@keyframes shakeX {
+    from,
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translate3d(-10px, 0, 0);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translate3d(10px, 0, 0);
     }
 }

@@ -14,13 +14,14 @@ import { useNotification } from 'Utils/Notifications/notifications';
 import axios from 'axios';
 import { API } from 'config';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { ImCross } from 'react-icons/im';
 
 const Signup = () => {
   const [email, setEmail] = useState('')
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [position, setPosition] = useState('')
-  const [society, setSociety] = useState('')
+  const [error, setError] = useState({ content: "", disappear: false })
   const [siren, setSiren] = useState('')
   const [societyName, setSocietyName] = useState('')
   const [password, setPassword] = useState('')
@@ -55,23 +56,13 @@ const Signup = () => {
       );
   };
 
-  // const validateForm = (e) => {
-  //   e.preventDefault()
-  //   if (firstname.length > 1 && lastname.length > 1 && position.length > 1 && password.length > 1 && societyName.length > 1) {
-  //     console.log('true vite fait')
-  //     console.log(email, validateEmail(email))
-  //     console.log(siren, validateSiren(siren))
-  //     if (validateEmail(email) && validateSiren(siren)) {
-  //       console.log('true')
-  //       setValid(true)
-  //     }
-  //     else {
-  //       setValid(false)
-  //     }
-  //   }
-  //   else 
-  //    setValid(false)
-  // }
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+        setError((a) => ({ ...a, disappear: true }));
+    }, 5500);
+
+    return () => clearTimeout(timeout);
+}, [error])
 
   useEffect(() => {
     if (firstname.length > 0 && lastname.length > 0 && position.length > 0 && password.length > 0 && societyName.length > 0) {
@@ -89,10 +80,10 @@ const Signup = () => {
   const handleSignUp = async (e) => {
     e.preventDefault()
     if (!validateEmail(email)) {
-      notification({ content: <>Veuillez vérifier votre adresse mail</>, status: "invalid" })
+      setError({ content: <>Veuillez vérifier votre adresse mail <ImCross /></> })
     }
     if (!validateSiren(siren)) {
-      notification({ content: <>Veuillez vérifier votre SIREN</>, status: "invalid" })
+      setError({ content: <>Veuillez vérifier votre SIREN <ImCross /></>})
     }
     const req = {
       firstName: firstname,
@@ -149,6 +140,7 @@ const Signup = () => {
               <p>Veuillez maintenant consulter votre boite mail et cliquer sur le lien de connexion.</p>
             </div></> :
               <div className={`${classes.formContainer} ${sent ? classes.disappear : ""}`}>
+                  <span className={`${classes.error} ${error.disappear ? classes.fadeOut : ""}`}>{error.content}</span>
                 <form onSubmit={(e) => handleSignUp(e)}>
                   <div className={classes.inputs}>
                     <div className={classes.inputContainer}>
