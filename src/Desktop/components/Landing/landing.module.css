@@ -537,6 +537,7 @@
   position: absolute;
   left: 1rem;
   top: -3rem;
+  font-weight: bold;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
