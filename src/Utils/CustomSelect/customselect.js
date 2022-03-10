@@ -8,7 +8,7 @@ export default function CustomSelect({ items, display, displayinlist, getValue, 
     const [value, setValue] = useState([defaultValue || items[0]?.[getValue] || items[0]?.[display]])
     const click = useRef(null)
     const [isOpen, setIsOpen] = useState(false)
-
+    
     useEffect(() => {
         function handleClickOutside(event) {
             if (click.current && !click.current.contains(event.target)) {

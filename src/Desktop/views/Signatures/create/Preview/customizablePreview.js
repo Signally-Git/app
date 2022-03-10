@@ -1,26 +1,17 @@
 import parse from "html-react-parser"
 import { renderToStaticMarkup } from "react-dom/server"
-import DetectSocialNetwork from "Utils/DetectSocialNetwork/DetectSocialNetwork"
-import request from 'Utils/Request/request';
 import React from 'react';
 
 
 export default function Preview({ infos, template, options, organisation, ...props }) {
     // Converts JSX camel Case attributes to dashed classics HTML
-    // console.log(props?.options?.event?.display)
     const [socials, setSocials] = React.useState([{ name: "facebook" }, { name: "linkedin" }, { name: "twitter" }, { name: "instagram" }, { name: "snapchat" }, { name: "pinterest" }])
-    // console.log(infos?.socials)
-    console.log(organisation)
     React.useEffect(() => {
         if (organisation?.socialMediaAccounts?.length > 0) {
             setSocials(organisation?.socialMediaAccounts)
         }
     }, [organisation])
 
-    // console.log(infos?.firstName?.color)
-    const convertToHTML = (object) => {
-        return JSON.stringify(object).replace(/[,]+/g, ';').replace(/[{}]+/g, '').replace(/["]+/g, '').replace(/[A-Z]/g, m => "-" + m.toLowerCase())
-    }
     const handleLink = (item) => {
         switch (item) {
             case "pinterest":
@@ -58,9 +49,7 @@ export default function Preview({ infos, template, options, organisation, ...pro
                 break;
         }
     }
-    // const socialNetworks = renderToStaticMarkup(socials.map((item) => <a target="_blank" href={handleLink(item)} style={{ marginRight: "5px", width: '24px' }}>
-    //     <img src={handleImg(item)} alt={item} style={{width: '24px'}} />
-    // </a>))
+
     const socialNetworks = renderToStaticMarkup(socials.map((item) => <td height="24" width="24" style={{ height: '24px', width: '24px', textAlign: 'left', padding: '0' }} valign="top">
         <a href={handleLink(item.name)} height="24" width="24" style={{ height: '24px', width: '24px' }} alt={item.name}>
             <img height="24" width="24" style={{ verticalAlign: 'middle', display: 'block', height: '24px', width: '24px', lineHeight: '24px', margin: '0 3px' }} src={handleImg(item.name)} alt='' />
@@ -139,18 +128,6 @@ export default function Preview({ infos, template, options, organisation, ...pro
             </tbody>
         </table>
     </td>`)
-
-    // if (options?.event?.enabled) {
-    //     replaced = replaced.replaceAll(/{% if event %}/gi, "")
-    //     replaced = replaced.replaceAll(/{% endif %}/gi, "")
-    //     replaced = replaced.replaceAll(/{# START EVENT #}/gi, "")
-    //     replaced = replaced.replaceAll(/{# END EVENT #}/gi, "")
-    //     replaced = replaced.replaceAll('{{ event.imagePath }}', options?.event?.display || `http://fakeimg.pl/380x126?font=noto&font_size=14`)
-    // }
-    // else {
-    //     var event = /{# START EVENT #}.*{# END EVENT #}/gs;
-    //     replaced = replaced.replaceAll(event, "")
-    // }
 
     if (options?.event?.enabled) {
         replaced = replaced.replaceAll(/{% if event %}/gi, "")

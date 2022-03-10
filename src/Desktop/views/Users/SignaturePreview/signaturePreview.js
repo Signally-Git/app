@@ -2,7 +2,6 @@ import classes from './signaturePreview.module.css'
 import { useEffect, useState } from 'react';
 import { API } from 'config';
 import Button from 'Utils/Button/btn';
-import ReadOnlyPreview from '../../Signatures/create/Preview/readOnlyPreview';
 import request from 'Utils/Request/request';
 import { useNotification } from 'Utils/Notifications/notifications';
 import CopySignature from 'Desktop/components/CopySignature/CopySignature';
@@ -13,38 +12,30 @@ import Btns from 'Utils/Btns/btns';
 import parse from 'html-react-parser'
 
 export default function SignaturePreview({ show, setShow, edit, setEdit }) {
-    const today = new Date()
-
-    const [templates, setTemplates] = useState([{ id: 'signature', name: 'Signature' }])
-    const [assignedTemplate, setAssignedTemplate] = useState()
+    const [templates, setTemplates] = useState([])
     const [selectedTemplate, setSelectedTemplate] = useState()
     const [previewSignature, setPreviewSignature] = useState()
-    const [signatureInfos, setSignatureInfos] = useState()
-    const defaultUser = localStorage.getItem("user")
-    const [entity, setEntity] = useState()
     const [event, setEvent] = useState("")
     const [multiEvents, setMultiEvents] = useState([])
     const [events, setEvents] = useState([])
     const [incomingEvents, setIncEvents] = useState([])
     const [choosePlaylist, setChoosePlaylist] = useState(false)
-    const [playlist, setPlaylist] = useState([])
     const [searchQuery, setSearchQuery] = useState("")
     const type = show["@type"]?.toLowerCase()
     const notification = useNotification()
 
     //  PREVIEW EVENT
     useEffect(async () => {
-        setEntity(await request.get(`${type}s/${show.id}`))
-        const isEvent = selectedTemplate || ""
         const events = await request.get('events');
         const toPush = events.data["hydra:member"].filter((data) => (new Date(data.startAt) < new Date()) && (new Date(data.endAt) > new Date())).sort(function (a, b) {
             if (a.startAt < b.startAt) { return -1; }
             if (a.startAt > b.startAt) { return 1; }
             return 0
         })
-
+        toPush.unshift({name: 'Event', '@id': 'event'})
         setEvent(toPush[0] || { '@id': "playlist" })
         setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event['@id'] === "playlist" ? "Modifier la playlist" : "Playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
+
     }, [selectedTemplate])
 
     useEffect(async () => {
@@ -58,9 +49,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     }, [edit])
 
     useEffect(() => {
-        const tmp = templates;
-        setTemplates([{ id: 'signature', name: 'Signature' }])
-        //    setTemplates(tmp)
+        setTemplates([])
     }, [edit])
 
     useEffect(() => {
@@ -75,33 +64,44 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     }, [show])
 
     // PREVIEW SIGNATURE
-    useEffect(async () => {
-        const entity = await request.get(`${type}s/${show.id}`)
-        if (entity.data.compiledSignature)
-            setPreviewSignature(entity.data.compiledSignature)
-        else if (entity.data.signature?.['@id']) {
-            await request.get(entity.data.signature['@id']).then((res) => setPreviewSignature(res.data.preview))
+    useEffect(() => {
+        const refreshPreview = async () => {
+            const entity = await request.get(`${type}s/${show.id}`)
+            if (entity.data.compiledSignature)
+                setPreviewSignature(entity.data.compiledSignature)
+            else if (entity.data.signature?.['@id']) {
+                await request.get(entity.data.signature['@id']).then((res) => setPreviewSignature(res.data.preview))
+            }
+            else if (entity.data.signature) {
+                await request.get(entity.data.signature).then((res) => setPreviewSignature(res.data.preview))
+            }
+            else (setPreviewSignature())
         }
-        else if (entity.data.signature) {
-            await request.get(entity.data.signature).then((res) => setPreviewSignature(res.data.preview))
-        }
-        else (setPreviewSignature())
 
-        let templatesAPI = []
-        await request.get('signatures').then((result) => {
-            result.data["hydra:member"].map(async (template, index) => {
-                await request.get(template['@id']).then((res) => {
-                    templatesAPI[index] = res.data;
-                    if (index === 0)
-                        setSelectedTemplate(res.data)
-                })
+        let templatesAPI = [{id: 'signature', name: 'Signature'}]
+        const listTemplates = async () => {
+            await request.get('signatures').then((result) => {
+                result.data["hydra:member"].map(async (template, index) => {
+                    await request.get(template['@id']).then((res) => {
+                        templatesAPI.push(res.data)
+                        // if (index === 0) {
+                            //     templatesAPI(res.data)
+                            // }
+                        })
+                        setTemplates(templatesAPI)
+                    })
+                    console.log(templatesAPI)
             })
-        })
-        templatesAPI.unshift({ id: 'signature', name: 'Signature' })
 
-        setTemplates(templatesAPI)
-        const template = await request.get(show?.signature?.['@id'])
-        setAssignedTemplate(template.data)
+            // console.log(templatesAPI, templates)
+        }
+
+        refreshPreview()
+        listTemplates()
+
+        // await request.get(show?.signature?.['@id']).then((res) => {
+        //     setSelectedTemplate(res.data)
+        // })
 
     }, [show, edit])
 
@@ -215,16 +215,14 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                         {show['@type'] === 'Team' ? <Button color="brown" onClick={() => { setEdit('assign-team') }}>Collaborateurs</Button> :
                             show['@type'] === 'Workplace' ? <Button color="brown" onClick={() => { setEdit('assign-workplace') }}>Équipes</Button>
                                 : ""}
-
                     </div>
                     <div className={classes.row}>
                         <div>
                             <label>Choisissez une signature</label>
-                            {selectedTemplate &&
+                            {templates.length > 0 &&
                                 <CustomSelect onChange={(e) => setSelectedTemplate(Object?.values(templates)?.find((obj) => { return obj.id == e }))} items={templates} display={"name"} getValue={"id"} />}
                             <div className={classes.signature}>
                                 {selectedTemplate?.preview ?
-                                    // <ReadOnlyPreview template={selectedTemplate.html} infos={{ event: `${API}/${event?.imagePath}` }} /> 
                                     parse(selectedTemplate?.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', event?.imagePath ? `${API}/${event?.imagePath}` : Object?.values(events)?.find((obj) => { return obj['@id'] == event }) ? `${API}/${Object?.values(events)?.find((obj) => { return obj['@id'] == event })?.imagePath}` : 'http://fakeimg.pl/380x126?font=noto&font_size=14'))
                                     : ""}
                             </div>
@@ -248,10 +246,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                         </div>
                     </div>
                     <Btns style={{ left: '.5rem', bottom: '-5rem' }} onCancel={() => { setEdit() }} confirmTxt="Sauvegarder" onConfirm={() => handleSubmit()} />
-                    {/* <div className={classes.btnsContainer}>
-                        <Button onClick={() => setEdit()} color="orange">Annuler</Button>
-                        <Button onClick={() => handleSubmit()} color="orangeFill">Sauvegarder</Button>
-                    </div> */}
                 </>}
             </div>
         </div>

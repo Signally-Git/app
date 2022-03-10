@@ -30,27 +30,6 @@ function EditSignatureComponent() {
     // Used to handle transition
     const elem = useRef(null);
     const [templates, setTemplates] = useState(false)
-
-    const [modal, setModal] = useState(false)
-    const [modalContent, setModalContent] = useState()
-    const [signatureName, setSignatureName] = useState("")
-
-    useEffect(() => {
-        const getSignatureFromId = async () => {
-            await request.get('signatures/' + signatureId).then((res) => {
-                setSelectedTemplate(res.data)
-                console.log("SETTING", res.data.signatureStyles)
-                setDefaultStyles(res.data.signatureStyles)
-                setSignatureName(res.data.name)
-            })
-        }
-        getSignatureFromId()
-    }, [])
-
-    const [templateRules, setTemplateRules] = useState({
-        fontSize: { min: 9, max: 13, step: 1 }
-    })
-
     const [signatureInfo, setSignatureInfo] = useState({
         logo: company?.logo,
         firstName: { value: user?.first_name, color: defaultStyles?.filter((style) => style.type === "firstName").color, style: { fontWeight: defaultStyles?.filter((style) => style.type === "firstName").fontWeight, fontStyle: defaultStyles?.filter((style) => style.type === "firstName").fontStyle, textDecoration: defaultStyles?.filter((style) => style.type === "firstName").textDecoration } },
@@ -80,9 +59,26 @@ function EditSignatureComponent() {
     Ce message electronique et tous les fichiers joints ainsi que les informations contenues dans ce message (ci apres "le message"), sont confidentiels et destines exclusivement a l'usage de la personne a laquelle ils sont adresses. Si vous avez recu ce message par erreur, merci de le renvoyer a son emetteur et de le detruire. Toute diffusion, publication, totale ou partielle ou divulgation sous quelque forme que ce soit non expressement autorisees de ce message, sont interdites.,`, enabled: false, padding: 10, size: 7
         }
     })
+    const [modal, setModal] = useState(false)
+    const [modalContent, setModalContent] = useState()
+    const [signatureName, setSignatureName] = useState("")
+
+    useEffect(() => {
+        const getSignatureFromId = async () => {
+            await request.get('signatures/' + signatureId).then((res) => {
+                setSelectedTemplate(res.data)
+                setDefaultStyles(res.data.signatureStyles)
+                setSignatureName(res.data.name)
+            })
+        }
+        getSignatureFromId()
+    }, [])
+
+    const [templateRules, setTemplateRules] = useState({
+        fontSize: { min: 9, max: 13, step: 1 }
+    })
 
     const handlePopulate = () => {
-        console.log(defaultStyles?.filter((style) => style.type === "disclaimer")[0].value)
         setSignatureInfo({
             logo: company?.logo,
             firstName: {
@@ -207,12 +203,6 @@ function EditSignatureComponent() {
         })
     }
 
-    useMemo(() => {
-        if (defaultStyles)
-            handlePopulate()
-    }, [defaultStyles, selectedTemplate])
-
-
     useEffect(() => {
         const getUser = async () => {
             const user = await request.get('whoami')
@@ -220,26 +210,15 @@ function EditSignatureComponent() {
 
             setUser(user)
             setCompany(company)
-            // setSignatureInfo({
-            //     logo: company?.logo,
-            //     firstName: { value: user?.first_name, color: "#000", style: { fontWeight: "bold" } },
-            //     lastName: { value: user?.last_name, color: "#000", style: { fontWeight: "bold" } },
-            //     jobName: { value: user?.position, color: "#000", style: {} },
-            //     company: { value: company?.name, color: "#000", style: { fontWeight: "bold" } },
-            //     addressStreet: { value: company?.address?.street, color: "#000", style: {} },
-            //     addressInfo: { value: company?.address?.streetInfo, color: "#000", style: {} },
-            //     addressZipcode: { value: company?.address?.zipCode, color: "#000", style: {} },
-            //     addressCity: { value: company?.address?.city, color: "#000", style: {} },
-            //     addressCountry: { value: company?.address?.country, color: "#000", style: {} },
-            //     mobile: { value: user?.phone_number, color: "#000", style: {} },
-            //     phone: { value: company?.digitalAddress?.phone, color: "#000", style: {} },
-            //     fontSize: [11],
-            //     fontFamily: "Helvetica"
-            // })
         }
 
         getUser()
     }, [])
+
+    useEffect(() => {
+        if (defaultStyles)
+            handlePopulate()
+    }, [defaultStyles, selectedTemplate, company])
 
     // Menu
     const [tab, setTab] = useState(true);
@@ -608,13 +587,11 @@ function EditSignatureComponent() {
                         "signature": result.data.id
                     }
                 ]
-                request.post('signature_styles/batch', styles).then((r) => {
-                    console.log(r.data)
-                })
+                request.post('signature_styles/batch', styles)
 
                 history.push('/signatures')
             }
-        ).catch((err) => {
+        ).catch(() => {
             notification({ content: <>Une erreur s'est produite. Veuillez réessayer</>, status: "invalid" })
         })
 
