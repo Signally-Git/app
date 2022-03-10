@@ -549,8 +549,12 @@
 }
 
 .error > svg {
+  font-size: 1.5rem;
   margin-left: .5rem;
-  color: red;
+  background: red;
+  color: #FFF;
+  border-radius: 50%;
+  padding: 5px;
 }
 
 @-webkit-keyframes shakeX {
