@@ -360,3 +360,13 @@
         border-color: $signally-orange;
     }
 }
+
+.all {
+    cursor: pointer;
+    transition: 300ms;
+    float: right;
+
+    &:hover {
+        color: $signally-orange;
+    }
+}

@@ -185,7 +185,7 @@ const Login = () => {
                                                 </div>
                                             </div>
                                             </> : <>
-                                                <Input defaultValue={code} placeholder="Mot de passe" type="password" onChange={(e) => setCode(e.target.value)} />
+                                                <Input autoComplete="current-password" defaultValue={code} placeholder="Mot de passe" type="password" onChange={(e) => setCode(e.target.value)} />
                                             </>}
                                 </div>
                                 <span onClick={() => setModal(true)} className={classes.forgot}>Mot de passe oublié</span>

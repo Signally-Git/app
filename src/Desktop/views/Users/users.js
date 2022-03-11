@@ -108,6 +108,12 @@ function Team() {
         });
     }
 
+    const handleUpdateAll = (users, action) => {
+        users?.map((user) => {
+            handleUpdate(user, action)
+        })
+    }
+
     const handleUpdate = (user, action) => {
         switch (action) {
             case 'remove':
@@ -236,6 +242,7 @@ function Team() {
                                                 <HiOutlineSearch />
                                                 <input className={classes.search} type="text" onChange={(e) => setCurrentUsers(e.target.value)} placeholder="Rechercher un collaborateur" />
                                             </div>
+                                            <span className={classes.all} onClick={() => handleUpdateAll(entity?.users, 'remove')}>Désassigner tout</span>
                                             <ul className={`${classes.itemsList} ${classes.users}`}>
                                                 {entity?.users?.map((user) => {
                                                     const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
@@ -259,6 +266,7 @@ function Team() {
                                                 <HiOutlineSearch />
                                                 <input className={classes.search} type="text" onChange={(e) => setOtherUser(e.target.value)} placeholder="Rechercher un collaborateur" />
                                             </div>
+                                            <span className={classes.all} onClick={() => handleUpdateAll(users, 'add')}>Assigner tout</span>
                                             <ul className={classes.itemsList}>
                                                 {users?.map((user) => {
                                                     const fullName = user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()

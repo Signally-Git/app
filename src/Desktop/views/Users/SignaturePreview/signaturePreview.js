@@ -137,7 +137,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         console.log(event)
         const req = {
             signature: selectedTemplate['@id'],
-            events: event === 'playlist' || event['@id'] === 'playlist' ? multiEvents : [event?.['@id'] || event]
+            events: event === 'event' || event['@id'] === 'event' ? [] : event === 'playlist' || event['@id'] === 'playlist' ? multiEvents : [event?.['@id'] || event]
         }
         await request.patch(`${type}s/${element.id}`, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }

@@ -489,3 +489,14 @@
 .search:focus {
   border-color: #FF7954;
 }
+
+.all {
+  cursor: pointer;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+  float: right;
+}
+
+.all:hover {
+  color: #FF7954;
+}

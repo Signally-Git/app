@@ -84,12 +84,12 @@ const templateAPI = [
 														{% if user.phone or company.phone %}
 														<tr>
 															{% if user.phone %}
-															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}font-weight: {{ styles['mobile']['fontWeight'] }};font-family: {{ styles['generalFontFamily']['fontFamily'] }};font-size: {{ styles['generalFontSize']['fontSize'] }}">
+															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
 																<b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b> {{ user.phone }}
 															</td>
 															{% endif %}
 															{% if company.phone %}
-															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}font-weight: {{ styles['mobile']['fontWeight'] }};font-family: {{ styles['generalFontFamily']['fontFamily'] }};font-size: {{ styles['generalFontSize']['fontSize'] }}">
+															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
 															    <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> {{ company.phone }}
 															</td>
 															{% endif %}
