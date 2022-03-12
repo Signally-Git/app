@@ -5,7 +5,6 @@ import classes from "./frame.module.scss";
 import request from "Utils/Request/request";
 import { API } from "config";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import Logo from "Utils/Logo/logo";
 
 export default function Frame(props) {
     const [user, setUser] = useState()
@@ -52,8 +51,6 @@ export default function Frame(props) {
         };
     }, [user, organisation])
 
-    if (user)
-    return <Logo />
     return (<>
         {user ?
             <div className={classes.desktop}>
