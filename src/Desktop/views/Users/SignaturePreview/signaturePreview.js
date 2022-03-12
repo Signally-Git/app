@@ -13,7 +13,7 @@ import parse from 'html-react-parser'
 
 export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     const [templates, setTemplates] = useState([])
-    const [selectedTemplate, setSelectedTemplate] = useState()
+    const [selectedTemplate, setSelectedTemplate] = useState([{ '@id': 'signature', name: 'signature' }])
     const [previewSignature, setPreviewSignature] = useState()
     const [event, setEvent] = useState("")
     const [multiEvents, setMultiEvents] = useState([])
@@ -32,7 +32,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
             if (a.startAt > b.startAt) { return 1; }
             return 0
         })
-        toPush.unshift({name: 'Event', '@id': 'event'})
+        toPush.unshift({ name: 'Event', '@id': 'event' })
         setEvent(toPush[0] || { '@id': "playlist" })
         setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event['@id'] === "playlist" ? "Modifier la playlist" : "Playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
 
@@ -78,19 +78,18 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
             else (setPreviewSignature())
         }
 
-        let templatesAPI = [{id: 'signature', name: 'Signature'}]
+        let templatesAPI = [{ id: 'signature', name: 'Signature' }]
         const listTemplates = async () => {
             await request.get('signatures').then((result) => {
                 result.data["hydra:member"].map(async (template, index) => {
                     await request.get(template['@id']).then((res) => {
                         templatesAPI.push(res.data)
                         // if (index === 0) {
-                            //     templatesAPI(res.data)
-                            // }
-                        })
-                        setTemplates(templatesAPI)
+                        //     templatesAPI(res.data)
+                        // }
                     })
-                    console.log(templatesAPI)
+                    setTemplates(templatesAPI)
+                })
             })
 
             // console.log(templatesAPI, templates)
@@ -127,26 +126,64 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         var markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
         var tmp = []
         for (var checkbox of markedCheckbox) {
-            tmp.push(JSON.parse(checkbox.value))
+            tmp.push(JSON.parse(checkbox.value)['@id'])
         }
         setMultiEvents(tmp)
         setChoosePlaylist(false)
     }
 
-    const handleAssign = async (element) => {
-        console.log(event)
-        const req = {
-            signature: selectedTemplate['@id'],
-            events: event === 'event' || event['@id'] === 'event' ? [] : event === 'playlist' || event['@id'] === 'playlist' ? multiEvents : [event?.['@id'] || event]
+    const handleSwapSignature = (id) => {
+        let template = Object?.values(templates)?.find((obj) => { return obj.id == id })
+
+        if (event.imagePath !== undefined)
+            template = { ...template, preview: template.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', `${API}${event?.imagePath}`) }
+
+        // parse(selectedTemplate?.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', event?.imagePath ? `${API}${event?.imagePath}` : Object?.values(events)?.find((obj) => { return obj['@id'] == event }) ? `${API}${Object?.values(events)?.find((obj) => { return obj['@id'] == event })?.imagePath}` : 'http://fakeimg.pl/380x126?font=noto&font_size=14'))
+        setSelectedTemplate(template)
+    }
+
+    const handleSwapEvent = (id) => {
+        if (id === 'playlist') {
+            setChoosePlaylist(true);
+            setEvent(id)
         }
-        await request.patch(`${type}s/${element.id}`, req, {
-            headers: { 'Content-Type': 'application/merge-patch+json' }
-        }).then(
-            (res) => {
-                setPreviewSignature(res.data.signature.preview)
-                notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
-                setEdit()
-            }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
+        else setEvent(id)
+
+        if (id !== 'playlist' && id !== 'event')
+        {
+            let template = selectedTemplate;
+            console.log("TANERE")
+            const url = Object?.values(events)?.find((obj) => { return obj['@id'] == id }).imagePath ? API + Object?.values(events)?.find((obj) => { return obj['@id'] == id }).imagePath : 'http://fakeimg.pl/380x126?font=noto&font_size=14'
+            template = ({ ...template, preview: template.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', url) })
+            setSelectedTemplate(template)
+        }
+    }
+
+    const handleAssign = async (element) => {
+        let signatures = selectedTemplate['@id'] || selectedTemplate;
+
+        if (selectedTemplate?.['@id'] === 'signature' || selectedTemplate === 'signature')
+            signatures = "";
+        let events = [event['@id'] || event];
+        if (event === 'playlist')
+            events = multiEvents
+        else if (event['@id'] === 'event' || event === 'event')
+            events = []
+        const req = {
+            signature: signatures,
+            // signature: selectedTemplate?.['@id'] === 'signature' ? [] : selectedTemplate['@id'],
+            events: events
+            // events: (event === 'event' || event['@id'] === 'event') ? [] : (event === 'playlist' || event['@id'] === 'playlist') ? multiEvents : [event?.['@id'] || event]
+        }
+        console.log(event, req)
+        // await request.patch(`${type}s/${element.id}`, req, {
+        //     headers: { 'Content-Type': 'application/merge-patch+json' }
+        // }).then(
+        //     (res) => {
+        //         setPreviewSignature(res.data.signature.preview)
+        //         notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
+        //         setEdit()
+        //     }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
     }
 
     return (<div className={classes.flipcontainer}>
@@ -201,9 +238,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                     <h2>Signature active pour <span className={classes.orangeTxt}>{show.name || `${show.firstName} ${show.lastName}`}</span></h2>
                 </div>
                 <div>
-                    {previewSignature ?
-                        parse(previewSignature)
-                        : ""}
+                    {typeof previewSignature === 'string' ? parse(previewSignature) : ""}
                 </div>
                 {show?.group?.name &&
                     <span className={classes.groupName}>{show?.group?.name}</span>}
@@ -220,20 +255,16 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                         <div>
                             <label>Choisissez une signature</label>
                             {templates.length > 0 &&
-                                <CustomSelect onChange={(e) => setSelectedTemplate(Object?.values(templates)?.find((obj) => { return obj.id == e }))} items={templates} display={"name"} getValue={"id"} />}
+                                <CustomSelect onChange={(e) => handleSwapSignature(e)} items={templates} display={"name"} getValue={"id"} />}
                             <div className={classes.signature}>
-                                {selectedTemplate?.preview ?
-                                    parse(selectedTemplate?.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', event?.imagePath ? `${API}/${event?.imagePath}` : Object?.values(events)?.find((obj) => { return obj['@id'] == event }) ? `${API}/${Object?.values(events)?.find((obj) => { return obj['@id'] == event })?.imagePath}` : 'http://fakeimg.pl/380x126?font=noto&font_size=14'))
-                                    : ""}
+                                {typeof selectedTemplate.preview === 'string' ? parse(selectedTemplate.preview) : ""}
                             </div>
                         </div>
                         <div>
                             {/* if event list events */}
                             {events.length > 1 ? <>
                                 <label>Ajouter un event ou une playlist</label>
-                                <CustomSelect onChange={(e) => {
-                                    if (e === 'playlist') { setChoosePlaylist(true); setEvent(e) } else setEvent(e)
-                                }}
+                                <CustomSelect onChange={(e) => handleSwapEvent(e)}
                                     display="name" displayinlist="listName" getValue="@id" items={events} defaultValue={event['@id']} />
                             </> :
                                 <>

@@ -114,7 +114,7 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
                                 <span></span>
                                 {user?.id === JSON.parse(localStorage.getItem("user"))?.id ?
                                     <div className={classes.actionsContainerAdmin}>
-                                        <Link to="/profile/informations"><FaUser /></Link>
+                                        <Link to="/profile/informations/user"><FaUser /></Link>
                                     </div> :
                                     <div className={`${classes.actionsContainer} ${changed === true ? classes.btnReady : ""}`}>
                                         {editInfo === user ? <FiCheck className={classes.checkmark} strokeWidth={"4"} onClick={(e) => { handleSubmit(e, user['@id']) }} /> : <AiOutlineEdit onClick={(e) => { e.preventDefault(); setEditInfo(user); setUser(user) }} />}

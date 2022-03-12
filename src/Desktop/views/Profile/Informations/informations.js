@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import classes from './informations.module.css'
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Hello from 'Assets/img/hi.svg';
 import Button from 'Utils/Button/btn';
 import Input from 'Utils/Input/input';
@@ -29,14 +29,23 @@ function Informations() {
     const notification = useNotification()
 
     let history = useHistory()
-    useEffect(async () => {
-        await request.get(`whoami`).then((res) => {
-            localStorage.setItem("user", JSON.stringify(res.data))
-            setFirstName(res.data.firstName)
-            setLastName(res.data.lastName)
-            setPosition(res.data.position)
-            setMobile(res.data.phone)
-        })
+    const query = new URLSearchParams(window.location.search);
+    const { tab } = useParams()
+    useEffect(() => {
+        const missing = query.get('missing')
+        console.log(missing)
+        const getData = async () => {
+            await request.get(`whoami`).then((res) => {
+                localStorage.setItem("user", JSON.stringify(res.data))
+                setFirstName(res.data.firstName)
+                setLastName(res.data.lastName)
+                setPosition(res.data.position)
+                setMobile(res.data.phone)
+            })
+        }
+        getData()
+        console.log(tab)
+        setActive(tab === 'user' ? "company" : "personal")
     }, [])
 
     const handleSaveCompany = async () => {
@@ -119,7 +128,7 @@ function Informations() {
         setOrganisationId(organisation.id)
         setOrganisationIRI(organisation['@id'])
         setCompanyName(organisation.name)
-        setCompanyAddress(organisation.address.street)
+        setCompanyAddress(organisation.address?.street)
         setWebsite(organisation.websiteUrl)
         setPhone(organisation.digitalAddress.phone)
         setSocialsList(organisation.socialMediaAccounts)
@@ -152,7 +161,7 @@ function Informations() {
                         {/* <div className={classes.row}> */}
                         <div className={classes.inputContainer}>
                             <label>Adresse</label>
-                            <Input type="text" value={organisation.address.street} onChange={(e) => setOrganisation({ ...organisation, address: { ...organisation.address, street: e.target.value } })} />
+                            <Input type="text" value={organisation.address?.street} onChange={(e) => setOrganisation({ ...organisation, address: { ...organisation.address, street: e.target.value } })} />
                         </div>
                         {/* </div> */}
                         <div className={classes.row}>

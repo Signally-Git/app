@@ -14,7 +14,7 @@ function Profile(props) {
 
     return (
         <Switch>
-            <Route path="/profile/informations" render={() =>
+            <Route path="/profile/informations/:tab" render={() =>
                 <>{props.handleHeader("Informations")}
                     <Informations />
                 </>}>
@@ -31,7 +31,7 @@ function Profile(props) {
                     </div>
                     <ul>
                         <li>
-                            <Link to="/profile/informations">
+                            <Link to="/profile/informations/user">
                                 Informations <img className={classes.chevron} src={ChevronRight} alt="Informations" />
                             </Link>
                         </li>

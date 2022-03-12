@@ -151,7 +151,7 @@ function News({ organisation, loading, setLoading }) {
                                         color="orange"
                                         onClick={() =>
                                             history.push(
-                                                "/profile/informations"
+                                                "/profile/informations/organisation"
                                             )
                                         }
                                     >
