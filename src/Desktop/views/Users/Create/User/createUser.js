@@ -20,7 +20,7 @@ export default function CreateUser({ setDone }) {
     const [hide, setHide] = useState(false)
     const history = useHistory()
     const notification = useNotification()
-
+    console.log(window.location.hash)
     // function debounce(fn, ms) {
     //     let timer
     //     return _ => {
@@ -55,11 +55,11 @@ export default function CreateUser({ setDone }) {
 
     const validateEmail = (email) => {
         return String(email)
-          .toLowerCase()
-          .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          );
-      };
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
 
     const handleCSV = async (file) => {
         const csv = new FormData()
@@ -73,7 +73,10 @@ export default function CreateUser({ setDone }) {
                 notification({ content: <>Votre import a été effectué avec succès</>, status: "valid" })
                 setDone(true)
                 // props.setState(`${res.data["hydra:totalItems"]} ${props.fill.type} ajoutés`)
-                history.push(`/teams/users`)
+                if (window.location.hash === "#onboarding")
+                    history.goBack()
+                else
+                    history.push(`/teams/users`)
             }).catch(() => notification({ content: <>Une erreur s'est produite lors de l'import</>, status: "invalid" }))
     }
 

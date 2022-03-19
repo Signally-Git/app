@@ -11,6 +11,7 @@ import { useNotification } from 'Utils/Notifications/notifications';
 import request from 'Utils/Request/request';
 import { API } from 'config';
 import Btns from 'Utils/Btns/btns';
+import { useHistory } from 'react-router-dom';
 
 export default function CreateEvent({ setDone, event }) {
     const [startDate, setStartDate] = useState(event?.startAt ? new Date(event?.startAt) : new Date())
@@ -21,6 +22,7 @@ export default function CreateEvent({ setDone, event }) {
 
     const notification = useNotification()
     const eventNameRef = useRef(null)
+    const history = useHistory()
 
     useEffect(() => {
         setEventName(event?.name)
@@ -57,9 +59,12 @@ export default function CreateEvent({ setDone, event }) {
                 await request.post(`events`, req).then((res) => {
                     notification({ content: <><span style={{ color: "#FF7954" }}>{eventName}</span> créé avec succès</>, status: "valid" })
                     setDone(false)
+                    if (window.location.hash === "#onboarding")
+                        history.goBack()
                 }).catch(() => notification({ content: <>Erreur lors de l'ajout de <span style={{ color: "#FF7954" }}>{eventName}</span></>, status: "invalid" }))
             }).catch((err) => notification({ content: <>Erreur lors de l'import de l'image</>, status: "invalid" }))
             return false;
+
         }
         if (event) {
             const start = (moment(startDate).subtract({ hour: 1 })).format('D-MM-YYYYHH:mm:ss')

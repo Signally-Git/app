@@ -5,6 +5,7 @@ import classes from "./frame.module.scss";
 import request from "Utils/Request/request";
 import { API } from "config";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 
 export default function Frame(props) {
     const [user, setUser] = useState()
@@ -58,10 +59,12 @@ export default function Frame(props) {
                     <Header page={props.path || ""} user={user} />
                     <div className={classes.mainContent}>
                         <div className={classes.menuContainer}>
-                            <div className={classes.userInfos}>
-                                <img src={organisation?.logo ? (API + organisation?.logo.path) : 'https://dummyimage.com/108/f4eeef.png'} alt='' />
-                                <p className={classes.capitalize}>{organisation?.name}</p>
-                            </div>
+                            <Link to="/profile/informations/company">
+                                <div className={classes.userInfos}>
+                                    <img src={organisation?.logo ? (API + organisation?.logo.path) : 'https://dummyimage.com/108/f4eeef.png'} alt='' />
+                                    <p className={classes.capitalize}>{organisation?.name}</p>
+                                </div>
+                            </Link>
                             <Menu className={classes.menu} page={props.path} />
                         </div>
 

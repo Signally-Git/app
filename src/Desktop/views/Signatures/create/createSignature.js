@@ -26,12 +26,12 @@ function CreateSignatureComponent() {
   const history = useHistory()
   const notification = useNotification()
   const [preview, setPreview] = useState("")
-  
+
   const [templateRules, setTemplateRules] = useState({
     fontSize: { min: 9, max: 13, step: 1 }
   })
-  
-  
+
+
   const [signatureInfo, setSignatureInfo] = useState({
     logo: company?.logo,
     firstName: { value: user?.first_name, color: "#000", style: { fontWeight: "bold" } },
@@ -542,8 +542,10 @@ function CreateSignatureComponent() {
           //     await axios.patch(`${API}user/${localStorage.getItem('user_id')}?access_token=${localStorage.getItem('token')}`, req)
           //       .then((res) => console.log(res))
           //   })
-
-          history.push('/signatures')
+          if (window.location.hash === "#onboarding")
+            history.goBack()
+          else
+            history.push('/signatures')
         }
       ).catch((err) => {
         console.log(err)

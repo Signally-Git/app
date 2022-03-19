@@ -3,6 +3,7 @@ import { IoPower } from 'react-icons/io5'
 import classes from "./header.module.css"
 import { Link, useHistory } from "react-router-dom"
 import { useState } from "react"
+import { FaUser } from 'react-icons/fa';
 
 const soon = "Cette fonctionnalité arrive très prochainement !"
 
@@ -44,8 +45,9 @@ function Header(props) {
                             onMouseLeave={() => setTimeout(() => { setHover(false) }, 300)}>
                             <li className={classes.UserName}>
                                 <span>{props.user?.firstName} {props.user?.lastName || "profil"}</span>
+                                <FaUser />
                             </li>
-                            <li><Link to="/profile/informations/profile">Compte</Link></li>
+                            <li><Link to="/profile/informations/user">Compte</Link></li>
                             <li title={soon}><Link to="/billing" className="disabled">Abonnement</Link></li>
 
                         </ul>

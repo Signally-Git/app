@@ -19,20 +19,19 @@ function Dashboard(props) {
     const [isHeader, setIsHeader] = useState("")
     const [createEvent, setCreateEvent] = useState(null)
     const [user, setUser] = useState()
-    const [template, setTemplate] = useState()
-    const [templateName, setTemplateName] = useState()
+    // const [template, setTemplate] = useState()
+    // const [templateName, setTemplateName] = useState()
     const [data, setData] = useState([])
-    const [activeEvents, setActiveEvents] = useState()
     const [organisation, setOrganisation] = useState()
     const [loadingTiles, setLoadingTiles] = useState(false)
     const [loadingNews, setLoadingNews] = useState(false)
 
-    useEffect(async () => {
-        await request.get(`whoami`).then(async (res) => {
+    useEffect(() => {
+        request.get(`whoami`).then(async (res) => {
             let users;
             setUser(res.data)
-            setTemplate(res.data?.compiledSignature)
-            setTemplateName(res.data?.signature?.name)
+            // setTemplate(res.data?.compiledSignature)
+            // setTemplateName(res.data?.signature?.name)
             await request.get('users').then((r) => users = r.data)
             await request.get(res.data?.organisation).then((r) => {
                 setOrganisation({ ...r.data, ...organisation, users: users['hydra:member'] })
@@ -48,7 +47,7 @@ function Dashboard(props) {
     useEffect(() => {
         const getEvents = async () => {
             const eventAPI = await UseEvents(localStorage.getItem("organisation_id"), 'active')
-            setActiveEvents(eventAPI)
+            // setActiveEvents(eventAPI)
         }
         getEvents()
         count = 0;
@@ -67,19 +66,19 @@ function Dashboard(props) {
         })
     }, [])
 
-    useEffect(() => {
-        if (organisation) {
-            const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${organisation['@id']}`);
-            function getRealtimeData(data) {
-                setOrganisation(data)
-            }
-            sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
+    // useEffect(() => {
+    //     if (organisation) {
+    //         const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${organisation['@id']}`);
+    //         function getRealtimeData(data) {
+    //             setOrganisation(data)
+    //         }
+    //         sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
 
-            return () => {
-                sse.close();
-            };
-        }
-    }, [organisation])
+    //         return () => {
+    //             sse.close();
+    //         };
+    //     }
+    // }, [organisation])
 
     return (
         <>
@@ -89,7 +88,7 @@ function Dashboard(props) {
                     <h1 className={classes.title}>Dashboard {!loadingNews || !loadingTiles ? <AiOutlineLoading3Quarters /> : ""}</h1>
                    
                     <div className={`${classes.row} ${!loadingNews || !loadingTiles ? classes.load : ""}`}>
-                        <News organisation={organisation} loading={loadingNews} setLoading={setLoadingNews} />
+                        {organisation ? <News organisation={organisation} loading={loadingNews} setLoading={setLoadingNews} /> : null}
                         <div className={classes.col}>
                             <div className={classes.tilesContainer}>
                                 <Tiles handleHeader={setIsHeader} loading={loadingTiles} setLoading={setLoadingTiles} />
