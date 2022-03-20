@@ -172,18 +172,18 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         const req = {
             signature: signatures,
             // signature: selectedTemplate?.['@id'] === 'signature' ? [] : selectedTemplate['@id'],
-            events: events
+            // events: events
             // events: (event === 'event' || event['@id'] === 'event') ? [] : (event === 'playlist' || event['@id'] === 'playlist') ? multiEvents : [event?.['@id'] || event]
         }
-        console.log(event, req)
-        // await request.patch(`${type}s/${element.id}`, req, {
-        //     headers: { 'Content-Type': 'application/merge-patch+json' }
-        // }).then(
-        //     (res) => {
-        //         setPreviewSignature(res.data.signature.preview)
-        //         notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
-        //         setEdit()
-        //     }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
+        // console.log(event, req)
+        await request.patch(`${type}s/${element.id}`, req, {
+            headers: { 'Content-Type': 'application/merge-patch+json' }
+        }).then(
+            (res) => {
+                setPreviewSignature(res.data.signature.preview)
+                notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
+                setEdit()
+            }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
     }
 
     return (<div className={classes.flipcontainer}>
