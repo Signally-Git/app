@@ -29,8 +29,11 @@ function OnBoarding({ organisation, completed, setCompleted }) {
 
     React.useEffect(() => {
         const missingTabs = menu.filter((element) => element.done === false)
+        console.log(missingTabs.length)
         if (missingTabs.length === 0 && completed !== 'show')
             setCompleted(true)
+        else 
+            setCompleted('show')
 
         const refreshOrganisation = async () => {
             await request.get(organisation['@id']).then((res) => { console.log(res.data); organisation = res.data })
