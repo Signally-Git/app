@@ -155,7 +155,7 @@ function CreateSignatureComponent() {
         <div className={classes.slidesContainer}>
           <div className={classes.slide}>
             <h4>Donner un nom à cette signature</h4>
-            <Input style={{ width: "75%" }} placeholder="Nom de la signature" type="text" onChange={(e) => setSignatureName(e.target.value)} />
+            <Input autoFocus style={{ width: "75%" }} placeholder="Nom de la signature" type="text" onChange={(e) => setSignatureName(e.target.value)} />
             <div onClick={() => setModal(false)}>
               <Button width="30%" color="brown">Annuler</Button>
               <Button width="40%" color="orange" onClick={() => handleSave()}>Valider</Button>
@@ -196,6 +196,10 @@ function CreateSignatureComponent() {
     await request.post('signature_templates', req).then(async (res) => {
       await request.post(`signatures`, { name: signatureName, html: selectedTemplate.html, signatureTemplate: res.data['@id'], organisation: JSON.parse(localStorage.getItem('user')).organisation }).then(
         async (result) => {
+          if (company.data.signatures?.length === 0 && !user.data?.compiledSignature)
+            await request.patch(user.data['@id'], { signature: result.data['@id'] }, {
+              headers: { 'Content-Type': 'application/merge-patch+json' }
+            });
           notification({ content: <>Votre signature <span style={{ color: "#FF7954" }}>{signatureName}</span> a été créée avec succès</>, status: "valid" })
           setTemplateIdToPatch(result.data.id)
           const styles = [

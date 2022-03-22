@@ -111,7 +111,7 @@ function Events() {
                                 <HiOutlineSearch />
                                 <input onChange={(e) => setSearch(e.target.value)} className={classes.search} type="text" placeholder="Rechercher un event" />
                             </div>
-                            <span> {handleEvents('past').length} event{handleEvents('past').length > 1 ? 's' : ""}</span>
+                            <span className={classes.boldOrange}> {handleEvents('past').length} event{handleEvents('past').length > 1 ? 's' : ""}</span>
                             <ul className={classes.itemsList}>
                                 {handleEvents('past')}
                             </ul>
@@ -123,7 +123,7 @@ function Events() {
                                     <HiOutlineSearch />
                                     <input onChange={(e) => setSearch(e.target.value)} className={classes.search} type="text" placeholder="Rechercher un event" />
                                 </div>
-                                <span>{handleEvents('present').length} event{handleEvents('present').length > 1 ? 's' : ""}</span>
+                                <span className={classes.boldOrange}>{handleEvents('present').length} event{handleEvents('present').length > 1 ? 's' : ""}</span>
                                 <ul className={classes.itemsList}>
                                     {handleEvents('present')}
                                 </ul>
@@ -134,7 +134,7 @@ function Events() {
                                     <HiOutlineSearch />
                                     <input onChange={(e) => setSearch(e.target.value)} className={classes.search} type="text" placeholder="Rechercher un event" />
                                 </div>
-                                <span>{handleEvents('future').length} event{handleEvents('future').length > 1 ? 's' : ""}</span>
+                                <span className={classes.boldOrange}>{handleEvents('future').length} event{handleEvents('future').length > 1 ? 's' : ""}</span>
                                 <ul className={classes.itemsList}>
                                     {handleEvents('future')}
                                 </ul>

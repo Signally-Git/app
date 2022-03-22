@@ -67,6 +67,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     useEffect(() => {
         const refreshPreview = async () => {
             const entity = await request.get(`${type}s/${show.id}`)
+            console.log(entity.data.compiledSignature)
             if (entity.data.compiledSignature)
                 setPreviewSignature(entity.data.compiledSignature)
             else if (entity.data.signature?.['@id']) {

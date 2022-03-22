@@ -11,6 +11,7 @@ import { ImCheckmark } from 'react-icons/im';
 
 function OnBoarding({ organisation, completed, setCompleted }) {
     const [org, setOrg] = React.useState(organisation)
+    const [users, setUsers] = React.useState(organisation.users)
     const [swiper, setSwiper] = React.useState(null);
     const [slideIndex, setSlideIndex] = React.useState(0)
     const [missing, setMissing] = React.useState([])
@@ -33,13 +34,15 @@ function OnBoarding({ organisation, completed, setCompleted }) {
 
         if (missingTabs.length === 0 && completed !== 'show')
             setCompleted(true)
-        else 
+        else
             setCompleted('show')
 
         const refreshOrganisation = async () => {
-            await request.get(organisation['@id']).then((res) => { 
-                setOrg(res.data); 
-                console.log(res.data)
+            request.get('users').then((r) => {
+                setUsers(r.data['hydra:member']);
+            })
+            request.get(organisation['@id']).then(async (res) => {
+                setOrg({ ...res.data, users: users });
             })
         }
         refreshOrganisation()
