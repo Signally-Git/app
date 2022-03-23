@@ -1,6 +1,5 @@
 import React from "react";
 import classes from "./news.module.css";
-import { BiHelpCircle } from "react-icons/bi";
 import OnBoarding from "./onBoarding/onBoarding";
 import { Pagination, A11y, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react.js';
@@ -26,11 +25,10 @@ function News({ organisation, loading, setLoading }) {
     }, [organisation])
 
     React.useEffect(() => {
+        setSlides([])
         const toPush = []
 
-        // if (onboardingComplete !== true){
-            toPush.push(<><OnBoarding organisation={organisation} completed={onboardingComplete} setCompleted={setOnboardingComplete} /></>)
-        // }
+        toPush.push(<><OnBoarding organisation={organisation} completed={onboardingComplete} setCompleted={setOnboardingComplete} /></>)
 
         if (admin?.compiledSignature)
             toPush.push(<>
@@ -92,9 +90,13 @@ function News({ organisation, loading, setLoading }) {
         <Swiper modules={[Pagination, A11y, Autoplay]}
             spaceBetween={50}
             className={classes.swiper}
-            // autoplay={true}
-            // allowTouchMove={false}
-            autoHeight
+            allowTouchMove={false}
+            autoHeight={true}
+            onClick={(e) => {
+                setTimeout(() => {
+                    e.updateAutoHeight()
+                }, 10);
+            }}
             pagination={{ type: 'bullets', clickable: true }}
             onSlideChange={(e) => console.log(e)}
         >
