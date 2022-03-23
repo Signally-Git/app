@@ -101,9 +101,9 @@ const Signup = () => {
         setSent(true)
       }).catch((err) => {
         if (err.response.data.title === 'App\\Exception\\Organisation\\OrganisationWithSameSirenAlreadyExistsDomainException')
-          notification({ content: <>Cette société est déjà enregistrée sur Signally</>, status: "invalid" })
+        setError({ content: <>Cette société est déjà enregistrée sur Signally <ImCross /></>})
         if (err.response.data.title === 'App\\Exception\\User\\UserWithSameEmailAlreadyExistsDomainException')
-          notification({ content: <>Cet utilisateur est déjà enregistré sur Signally</>, status: "invalid" })
+        setError({ content: <>Cet utilisateur est déjà enregistré sur Signally <ImCross /></> })
           return;
         })
         setLoading(false);

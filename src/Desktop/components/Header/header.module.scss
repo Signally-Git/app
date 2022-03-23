@@ -280,7 +280,7 @@
             box-shadow: 0 15px 24px #3d2b2826;
         }
     }
-    svg {
+    > svg {
         &:hover {
             cursor: pointer;
             filter: brightness(0) saturate(100%) invert(74%) sepia(39%) saturate(5602%) hue-rotate(324deg)

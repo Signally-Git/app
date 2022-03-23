@@ -147,6 +147,7 @@ function Team() {
 
     useEffect(() => {
         setEntity()
+        setEdit()
     }, [type])
 
     const handleScroll = (e, scroll) => {

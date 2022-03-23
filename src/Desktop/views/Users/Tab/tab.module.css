@@ -279,7 +279,7 @@
   bottom: 1rem;
 }
 
-.editDiv input {
+.editDiv input:not(input[type="file"]) {
   height: 1rem;
   font-size: 0.75rem;
   margin: 0.5rem 0 0 0;
@@ -296,7 +296,7 @@
   z-index: 5;
 }
 
-.editDiv .inputsContainer input {
+.editDiv .inputsContainer input:not(input[type="file"]) {
   min-width: 48%;
   max-width: 48%;
 }

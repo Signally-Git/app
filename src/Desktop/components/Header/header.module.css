@@ -345,7 +345,7 @@
           box-shadow: 0 15px 24px #3d2b2826;
 }
 
-.name svg:hover {
+.name > svg:hover {
   cursor: pointer;
   -webkit-filter: brightness(0) saturate(100%) invert(74%) sepia(39%) saturate(5602%) hue-rotate(324deg) brightness(100%) contrast(104%);
           filter: brightness(0) saturate(100%) invert(74%) sepia(39%) saturate(5602%) hue-rotate(324deg) brightness(100%) contrast(104%);

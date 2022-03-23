@@ -77,7 +77,8 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
             getDataUser()
             setChanged(false)
             notification({ content: <><span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> a bien été modifié</> })
-        })
+        }).catch((err) => 
+        err['hydra:description'] === "email: This value is already used." && notification({ content: <>Ce mail est déjà enregistré sur Signally avec un autre nom</>, status: 'invalid' }) ) 
     }
 
 

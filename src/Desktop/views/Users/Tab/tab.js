@@ -225,7 +225,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                     workplace: workplace['@id']
                 }
                 await request.post('logos', requestLogo).then((res) => {
-                    console.log(res.data)
+                    setFile()
                 })
             })
         e.preventDefault()
@@ -246,6 +246,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         await request.patch(workplace['@id'], req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(() => {
+            notification({ content: <><span style={{ color: "#FF7954" }}>{workplace.name}</span> modifié avec succès</>, status: "valid" });
             setChanged(false)
             getDataWorkspace()
         })

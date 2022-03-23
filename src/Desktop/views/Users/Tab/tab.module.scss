@@ -210,7 +210,7 @@
     min-height: 70%;
     max-height: 70%;
     bottom: 1rem;
-    input {
+    input:not(input[type="file"]) {
         height: 1rem;
         font-size: 0.75rem;
         margin: 0.5rem 0 0 0;
@@ -219,7 +219,7 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
-        input {
+        input:not(input[type="file"]) {
             min-width: 48%;
             max-width: 48%;
         }
