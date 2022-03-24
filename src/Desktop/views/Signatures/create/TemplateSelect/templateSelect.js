@@ -54,7 +54,9 @@ const templateAPI = [
 														</tr>
 														<tr style="height: 1px">
 															<td>
-																<span style="color:{{ styles['jobName']['color'] }}; text-decoration: {{ styles['jobName']['textDecoration'] }} ;font-style: {{ styles['jobName']['fontStyle'] }} ;font-weight: {{ styles['jobName']['fontWeight'] }}; padding: 0cm; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{% if isPreview %} Poste {% else %} {{ user.position }} {% endif %}</span>
+																<span style="color:{{ styles['jobName']['color'] }}; text-decoration: {{ styles['jobName']['textDecoration'] }} ;font-style: {{ styles['jobName']['fontStyle'] }} ;font-weight: {{ styles['jobName']['fontWeight'] }}; padding: 0cm; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
+																{% if isPreview %} Poste {% else %} {{ user.position }} {% endif %}
+																</span>
 															</td>
 														</tr>
 														<tr height="5"></tr>

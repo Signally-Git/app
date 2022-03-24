@@ -61,15 +61,15 @@ export default function Preview({ infos, template, options, organisation, ...pro
     replaced = replaced.replaceAll("{{ styles['firstName']['textDecoration'] }}", `${infos?.firstName?.style?.textDecoration || "none"};`)
     replaced = replaced.replaceAll("{{ styles['firstName']['fontWeight'] }}", `${infos?.firstName?.style?.fontWeight || "normal"};`)
     replaced = replaced.replaceAll("{{ styles['firstName']['fontStyle'] }}", `${infos?.firstName?.style?.fontStyle || "normal"};`)
-    replaced = replaced.replaceAll('{{ user.firstName }}', 'Prénom')
+    replaced = replaced.replaceAll('{% if isPreview %} Prénom {% else %} {{ user.firstName }} {% endif %}', 'Prénom')
 
-    replaced = replaced.replaceAll('{{ user.lastName }}', infos?.lastName?.value || 'Nom')
+    replaced = replaced.replaceAll('{% if isPreview %} Nom {% else %} {{ user.lastName }} {% endif %}', infos?.lastName?.value || 'Nom')
     replaced = replaced.replaceAll("{{ styles['lastName']['color'] }}", `${infos?.lastName?.color};`)
     replaced = replaced.replaceAll("{{ styles['lastName']['textDecoration'] }}", `${infos?.lastName?.style?.textDecoration || "none"};`)
     replaced = replaced.replaceAll("{{ styles['lastName']['fontWeight'] }}", `${infos?.lastName?.style?.fontWeight || "normal"};`)
     replaced = replaced.replaceAll("{{ styles['lastName']['fontStyle'] }}", `${infos?.lastName?.style?.fontStyle || "normal"};`)
 
-    replaced = replaced.replaceAll('{{ user.position }}', 'Poste')
+    replaced = replaced.replaceAll('{% if isPreview %} Poste {% else %} {{ user.position }} {% endif %}', 'Poste')
     replaced = replaced.replaceAll("{{ styles['jobName']['color'] }}", `${infos?.jobName?.color};`)
     replaced = replaced.replaceAll("{{ styles['jobName']['textDecoration'] }}", `${infos?.jobName?.style?.textDecoration || "none"};`)
     replaced = replaced.replaceAll("{{ styles['jobName']['fontWeight'] }}", `${infos?.jobName?.style?.fontWeight || "normal"};`)
@@ -105,7 +105,7 @@ export default function Preview({ infos, template, options, organisation, ...pro
     replaced = replaced.replaceAll("{{ styles['mobile']['fontWeight'] }}", `${infos?.mobile?.style?.fontWeight || "normal"};`)
     replaced = replaced.replaceAll("{{ styles['phone']['fontStyle'] }}", `${infos?.mobile?.style?.fontStyle || "normal"};`)
 
-    replaced = replaced.replaceAll('{{ user.phone }}', 'Fixe')
+    replaced = replaced.replaceAll('{% if isPreview %} 0123456789 {% else %} {{ user.phone }} {% endif %}', 'Fixe')
     replaced = replaced.replaceAll("{{ styles['phone']['color'] }}", `${infos?.phone?.color};`)
     replaced = replaced.replaceAll("{{ styles['phone']['textDecoration'] }}", `${infos?.phone?.style.textDecoration || "none"};`)
     replaced = replaced.replaceAll("{{ styles['phone']['fontWeight'] }}", `${infos?.phone?.style?.fontWeight || "normal"};`)
