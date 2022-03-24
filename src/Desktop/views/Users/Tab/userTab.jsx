@@ -56,6 +56,8 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
 
     const handleSubmit = async (e, id) => {
         e.preventDefault()
+        const oldUser = Object?.values(users)?.find((obj) => { return obj['@id'] == id })
+
         if (!validateEmail(user.email))
         {
             notification({ content: <>Vous devez renseigner une adresse mail valide</>, status: 'invalid' })
@@ -68,7 +70,7 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
             position: user.position,
             email: user.email
         }
-        console.log(req)
+
         await request.patch(id, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(() => {
@@ -76,7 +78,7 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
             setEditInfo()
             getDataUser()
             setChanged(false)
-            notification({ content: <><span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> a bien été modifié</> })
+            notification({ content: <><span style={{ color: "#FF7954" }}>{oldUser?.firstName} {oldUser?.lastName}</span> a bien été modifié</> })
         }).catch((err) => 
         err['hydra:description'] === "email: This value is already used." && notification({ content: <>Ce mail est déjà enregistré sur Signally avec un autre nom</>, status: 'invalid' }) ) 
     }

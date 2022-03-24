@@ -50,7 +50,7 @@
 .menuLinks {
   padding: 0;
   width: calc(25% -2rem);
-  height: 6rem;
+  height: 7rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -89,19 +89,25 @@
 }
 
 .btnsContainer {
+  position: absolute;
+  bottom: 0;
+  left: 2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 100%;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  margin-top: auto;
+  width: 55%;
+  margin-right: auto;
+}
+
+.btnsContainer :first-child {
+  margin-left: 0;
 }
 
 .content {
   font-size: .9rem;
-  max-height: 10rem;
-  height: 10rem;
+  max-height: 12rem;
+  height: 12rem;
   padding: 2rem;
   padding-right: calc(25% -2rem);
   display: -webkit-box;
@@ -111,10 +117,15 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+}
+
+.content > button {
+  margin-left: 0;
+  position: absolute;
+  bottom: 0;
+  left: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: auto;
 }

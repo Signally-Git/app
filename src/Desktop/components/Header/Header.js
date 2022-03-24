@@ -39,6 +39,7 @@ function Header(props) {
                         {props.page !== "/store" ? <Link to="#" className={`${classes.store} ${notif ? classes.notif : ""} disabled`}>STORE</Link> : <Link  to="#" className={classes.store} onClick={() => history.goBack()}>QUITTER LE STORE</Link>}
                     </div>
                     <div className={classes.name}>
+                    <div className={classes.nameSize}>{props.user?.firstName} {props.user?.lastName || "profil"}</div>
                         <ul
                             className={hover ? classes.animateMenu : ""}
                             onMouseOver={() => setHover(true)}

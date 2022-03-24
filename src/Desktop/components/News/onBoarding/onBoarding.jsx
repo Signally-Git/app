@@ -3,15 +3,13 @@ import classes from "./onBoarding.module.css";
 import { useHistory } from "react-router-dom";
 import { Navigation, Pagination, A11y, HashNavigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react.js';
+import { ImCheckmark } from 'react-icons/im';
 import Button from 'Utils/Button/btn';
 
 import 'swiper/swiper.min.css';
-import request from 'Utils/Request/request';
-import { ImCheckmark } from 'react-icons/im';
 
 function OnBoarding({ organisation, completed, setCompleted }) {
-    const [org, setOrg] = React.useState(organisation)
-    const [users, setUsers] = React.useState(organisation.users)
+    console.log(organisation)
     const [swiper, setSwiper] = React.useState(null);
     const [slideIndex, setSlideIndex] = React.useState(0)
     const [missing, setMissing] = React.useState([])
@@ -37,35 +35,26 @@ function OnBoarding({ organisation, completed, setCompleted }) {
         else
             setCompleted('show')
 
-        const refreshOrganisation = async () => {
-            request.get('users').then((r) => {
-                setUsers(r.data['hydra:member']);
-            })
-            request.get(organisation['@id']).then(async (res) => {
-                setOrg({ ...res.data, users: users });
-            })
-        }
-        refreshOrganisation()
         const missingArray = [];
-        if (!org?.logo?.path) {
+        if (!organisation?.logo?.path) {
             missingArray.push(["logo"])
         }
-        if (!org?.websiteUrl) {
+        if (!organisation?.websiteUrl) {
             missingArray.push(["site Internet"]);
         }
-        if (!org?.digitalAddress?.phone) {
+        if (!organisation?.digitalAddress?.phone) {
             missingArray.push(["fixe"]);
         }
-        if (!org?.address?.street) {
+        if (!organisation?.address?.street) {
             missingArray.push(["adresse"]);
         }
         setMissing(missingArray);
         setMenu([
             {
                 link: <>Compte</>,
-                title: <>Bienvenue <span className={classes.orangeTxt}>{org.name}</span></>,
-                done: org.address?.street?.length > 0 && org.websiteUrl?.length > 0 && org.logo?.path?.length > 0,
-                content: org.address?.street?.length > 0 && org.websiteUrl?.length > 0 && org.logo?.path?.length > 0 ? <>Votre profil contient toutes les informations nécessaires aux templates des signatures.
+                title: <>Bienvenue <span className={classes.orangeTxt}>{organisation.name}</span></>,
+                done: organisation.address?.street?.length > 0 && organisation.websiteUrl?.length > 0 && organisation.logo?.path?.length > 0,
+                content: organisation.address?.street?.length > 0 && organisation.websiteUrl?.length > 0 && organisation.logo?.path?.length > 0 ? <>Votre profil contient toutes les informations nécessaires aux templates des signatures.
                     <div className={classes.btnsContainer}>
                         <Button color="brown" onClick={() => handleSkip()}>Passer cette étape</Button>
                         <Button color="orange" onClick={() => history.push('/profile/informations/organisation')}>Éditer mon profil</Button>
@@ -81,9 +70,9 @@ function OnBoarding({ organisation, completed, setCompleted }) {
             {
                 link: <>Signature</>,
                 title: 'Signature',
-                done: org?.signatures?.length > 0,
+                done: organisation?.signatures?.length > 0,
                 content: <>
-                    {org?.signatures?.length > 0 ?
+                    {organisation?.signatures?.length > 0 ?
                         <>Vous avez déjà créé une première signature !<br /> Vous pouvez y accéder dans l'onglet "Signatures".
                             <Button color="orange" onClick={() => history.push('/signatures')}>Gérer mes signatures</Button>
                         </>
@@ -96,9 +85,9 @@ function OnBoarding({ organisation, completed, setCompleted }) {
             {
                 link: <>Collaborateurs</>,
                 title: 'Collaborateurs',
-                done: org?.users?.length > 1,
+                done: organisation?.users?.length > 1,
                 content: <>
-                    {org?.users?.length > 1 ?
+                    {organisation?.users?.length > 1 ?
                         <>Vous avez déjà importé des collaborateurs. <Button color="orange" onClick={() => history.push('/teams/users')}>Gérer mes collaborateurs</Button></>
                         : <>Vous n'avez pas encore importé de collaborateurs. Cliquez ci-dessous pour en ajouter et commencer à gérer vos équipes<Button color="orange" onClick={() => history.push('/teams/create-user#onboarding')}>Ajouter des collaborateurs</Button></>}
 
@@ -107,28 +96,31 @@ function OnBoarding({ organisation, completed, setCompleted }) {
             {
                 link: <>Events</>,
                 title: 'Events',
-                done: org?.events?.length > 0,
+                done: organisation?.events?.length > 0,
                 content: <>
-                    {org?.events?.length > 1 ?
-                        `Vous avez actuellement créé ${org?.events?.length} events.` : `Vous n'avez pas encore créé d'event. Cliquez ci-dessous pour en ajouter et programmer des campagnes de promotion`}
-                    <div className={classes.btnsContainer}>
-                        <Button color="brown" onClick={() => handleSkip()}>Passer cette étape</Button>
-                        <Button color="orange" onClick={() => history.push('/events#onboarding')}>Gérer les events</Button>
-                    </div>
+                    {organisation?.events?.length > 0 ?
+                        <>Vous avez actuellement créé {organisation?.events?.length} event(s).<div className={classes.btnsContainer}>
+                            <Button color="brown" onClick={() => handleSkip()}>Passer cette étape</Button>
+                            <Button color="orange" onClick={() => history.push('/events')}>Gérer les events</Button>
+                        </div></> : <>Vous n'avez pas encore créé d'event. Cliquez ci-dessous pour en ajouter et programmer des campagnes de promotion<div className={classes.btnsContainer}>
+                            <Button color="brown" onClick={() => handleSkip()}>Passer cette étape</Button>
+                            <Button color="orange" onClick={() => history.push('/events#onboarding')}>Ajouter un event</Button>
+                        </div></>}
+
                 </>
             }
         ])
-    }, [swiper, completed])
+    }, [swiper, organisation, completed])
 
 
     React.useEffect(() => {
         const missingTabs = menu.filter((element) => element.done === false)
         if (swiper) {
-            swiper?.slideTo(menu.indexOf(missingTabs[0]))
+            swiper?.slideTo(menu.indexOf(missingTabs[0]), 100)
             if (missingTabs.length === 0 && completed !== 'show' && completed !== false)
                 setCompleted(true)
         }
-    }, [swiper])
+    }, [swiper, organisation, missing, menu])
 
     if (completed === true)
         return (<div className={classes.container}>
@@ -154,6 +146,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                 spaceBetween={50}
                 slidesPerView={1}
                 navigation
+                // onInit={() => refreshOrganisation()}
                 direction='vertical'
                 pagination={{ clickable: true }}
                 allowTouchMove={false}

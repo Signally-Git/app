@@ -31,6 +31,7 @@ function Informations() {
     let history = useHistory()
     const query = new URLSearchParams(window.location.search);
     const { tab } = useParams()
+
     useEffect(() => {
         const missing = query.get('missing')
         console.log(missing)
@@ -121,17 +122,18 @@ function Informations() {
         })
     }
 
-    useEffect(async () => {
-        let organisation = await request.get(JSON.parse(localStorage.getItem('user')).organisation)
-        organisation = organisation.data
-        setOrganisation(organisation)
-        setOrganisationId(organisation.id)
-        setOrganisationIRI(organisation['@id'])
-        setCompanyName(organisation.name)
-        setCompanyAddress(organisation.address?.street)
-        setWebsite(organisation.websiteUrl)
-        setPhone(organisation.digitalAddress.phone)
-        setSocialsList(organisation.socialMediaAccounts)
+    useEffect(() => {
+        request.get(JSON.parse(localStorage.getItem('user')).organisation).then((organisation) => {
+            organisation = organisation.data
+            setOrganisation(organisation)
+            setOrganisationId(organisation.id)
+            setOrganisationIRI(organisation['@id'])
+            setCompanyName(organisation.name)
+            setCompanyAddress(organisation.address?.street)
+            setWebsite(organisation.websiteUrl)
+            setPhone(organisation.digitalAddress.phone)
+            setSocialsList(organisation.socialMediaAccounts)
+        })
     }, [])
 
     return (

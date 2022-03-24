@@ -45,16 +45,16 @@ const templateAPI = [
 														<tr height="1">
 															<td style="font-size: 8pt; padding:0">
 																<b style="color:{{ styles['firstName']['color'] }}; text-decoration: {{ styles['firstName']['textDecoration'] }}; font-style: {{ styles['firstName']['fontStyle'] }}; font-weight: {{ styles['firstName']['fontWeight'] }}; font-size: 8pt; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
-                                                                    {{ user.firstName }}
+																	{% if isPreview %} Prénom {% else %} {{ user.firstName }} {% endif %}
                                                                 </b>
 																<b style="color:{{ styles['lastName']['color'] }}; text-decoration: {{ styles['lastName']['textDecoration'] }} ;font-style: {{ styles['lastName']['fontStyle'] }} ;font-weight: {{ styles['lastName']['fontWeight'] }}; font-size: 8pt; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
-                                                                    {{ user.lastName }}
+																{% if isPreview %} Nom {% else %} {{ user.lastName }} {% endif %}
                                                                 </b>
 															</td>
 														</tr>
 														<tr style="height: 1px">
 															<td>
-																<span style="color:{{ styles['jobName']['color'] }}; text-decoration: {{ styles['jobName']['textDecoration'] }} ;font-style: {{ styles['jobName']['fontStyle'] }} ;font-weight: {{ styles['jobName']['fontWeight'] }}; padding: 0cm; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{{ user.position }}</span>
+																<span style="color:{{ styles['jobName']['color'] }}; text-decoration: {{ styles['jobName']['textDecoration'] }} ;font-style: {{ styles['jobName']['fontStyle'] }} ;font-weight: {{ styles['jobName']['fontWeight'] }}; padding: 0cm; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{% if isPreview %} Poste {% else %} {{ user.position }} {% endif %}</span>
 															</td>
 														</tr>
 														<tr height="5"></tr>
@@ -83,9 +83,9 @@ const templateAPI = [
 														{# START PHONE #}
 														{% if user.phone or company.phone %}
 														<tr>
-															{% if user.phone %}
+															{% if user.phone or isPreview %}
 															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
-																<b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b> {{ user.phone }}
+																<b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b> {% if isPreview %} 0123456789 {% else %} {{ user.phone }} {% endif %}
 															</td>
 															{% endif %}
 															{% if company.phone %}

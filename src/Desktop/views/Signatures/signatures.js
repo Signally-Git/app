@@ -18,6 +18,7 @@ function Team() {
     const [templates, setTemplates] = useState([])
     const notification = useNotification()
     const [deleted, setDeleted] = useState(false)
+    const [selected, setSelected] = useState({})
     const [active, setActive] = useState("active")
     const [user, setUser] = useState()
     const [template, setTemplate] = useState()
@@ -229,7 +230,9 @@ function Team() {
                         </ul>
                         {active === "active" ?
                             <div>
-                                <Link to="create-signature"><Button color="orange" arrow={true}>Ajouter une signature</Button></Link>
+                                <Link to="create-signature">
+                                    <Button color="orange" arrow={true}>Ajouter une signature</Button>
+                                    </Link>
                                 <div className={classes.searchInput}>
                                     <HiOutlineSearch />
                                     <input className={classes.search} type="text" placeholder="Rechercher une signature" />
@@ -237,7 +240,8 @@ function Team() {
                                 <span>{templates.length} signatures</span>
                                 <ul className={classes.itemsList}>
                                     {templates.map((signature) => {
-                                        return (<li onMouseEnter={() => { request.get(signature['@id']).then((res) => setPreview(res.data)); setDefaultStyles(signature.signatureStyles) }} key={signature.id}>
+                                        return (<li onMouseEnter={() => { setSelected(signature); request.get(signature['@id']).then((res) => setPreview(res.data)); setDefaultStyles(signature.signatureStyles) }} key={signature.id}
+                                            className={selected === signature ? classes.selected : ""}>
                                             <span onClick={() => history.push('/edit-signature/' + signature.id)}>{signature.name}</span>
                                             <div className={classes.actionsContainer}>
                                                 {/* <AiOutlineEdit /> */}

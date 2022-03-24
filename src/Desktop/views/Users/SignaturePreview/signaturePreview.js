@@ -15,7 +15,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     const [templates, setTemplates] = useState([])
     const [selectedTemplate, setSelectedTemplate] = useState([{ '@id': 'signature', name: 'signature' }])
     const [previewSignature, setPreviewSignature] = useState()
-    const [event, setEvent] = useState("")
+    const [event, setEvent] = useState({ '@id': "event", name: "event" })
     const [multiEvents, setMultiEvents] = useState([])
     const [events, setEvents] = useState([])
     const [incomingEvents, setIncEvents] = useState([])
@@ -33,7 +33,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
             return 0
         })
         toPush.unshift({ name: 'Event', '@id': 'event' })
-        setEvent(toPush[0] || { '@id': "playlist" })
+        // setEvent(toPush[0] || { '@id': "playlist" })
         setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event['@id'] === "playlist" ? "Modifier la playlist" : "Playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
 
     }, [selectedTemplate])
@@ -67,7 +67,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     useEffect(() => {
         const refreshPreview = async () => {
             const entity = await request.get(`${type}s/${show.id}`)
-            console.log(entity.data.compiledSignature)
             if (entity.data.compiledSignature)
                 setPreviewSignature(entity.data.compiledSignature)
             else if (entity.data.signature?.['@id']) {
@@ -139,51 +138,44 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         if (event.imagePath !== undefined)
             template = { ...template, preview: template?.preview?.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', `${API}${event?.imagePath}`) }
 
-        // parse(selectedTemplate?.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', event?.imagePath ? `${API}${event?.imagePath}` : Object?.values(events)?.find((obj) => { return obj['@id'] == event }) ? `${API}${Object?.values(events)?.find((obj) => { return obj['@id'] == event })?.imagePath}` : 'http://fakeimg.pl/380x126?font=noto&font_size=14'))
         setSelectedTemplate(template)
     }
 
     const handleSwapEvent = (id) => {
         if (id === 'playlist') {
             setChoosePlaylist(true);
-            setEvent(id)
         }
-        else setEvent(id)
 
-        if (id !== 'playlist' && id !== 'event')
-        {
-            let template = selectedTemplate;
-            const url = Object?.values(events)?.find((obj) => { return obj['@id'] == id }).imagePath ? API + Object?.values(events)?.find((obj) => { return obj['@id'] == id }).imagePath : 'http://fakeimg.pl/380x126?font=noto&font_size=14'
-            template = ({ ...template, preview: template?.preview?.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', url) })
-            setSelectedTemplate(template)
-        }
+        setEvent(Object?.values(events)?.find((obj) => { return obj['@id'] == id }))
     }
 
     const handleAssign = async (element) => {
         let signatures = selectedTemplate['@id'] || selectedTemplate;
+        let events;
 
         if (selectedTemplate?.['@id'] === 'signature' || selectedTemplate === 'signature')
             signatures = "";
-        let events = [event['@id'] || event];
-        if (event === 'playlist')
+
+        if (event['@id'] === "playlist")
             events = multiEvents
-        else if (event['@id'] === 'event' || event === 'event')
+        else if (event['@id'] === 'event')
             events = []
+        else
+            events = [event['@id']]
+
         const req = {
             signature: signatures,
             events: events
-            // signature: selectedTemplate?.['@id'] === 'signature' ? [] : selectedTemplate['@id'],
-            // events: (event === 'event' || event['@id'] === 'event') ? [] : (event === 'playlist' || event['@id'] === 'playlist') ? multiEvents : [event?.['@id'] || event]
+
         }
-        console.log(req)
-        // await request.patch(`${type}s/${element.id}`, req, {
-        //     headers: { 'Content-Type': 'application/merge-patch+json' }
-        // }).then(
-        //     (res) => {
-        //         setPreviewSignature(res.data.signature.preview)
-        //         notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
-        //         setEdit()
-        //     }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
+        await request.patch(`${type}s/${element.id}`, req, {
+            headers: { 'Content-Type': 'application/merge-patch+json' }
+        }).then(
+            (res) => {
+                setPreviewSignature(res.data.signature.preview)
+                notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
+                setEdit()
+            }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
     }
 
     return (<div className={classes.flipcontainer}>
@@ -257,7 +249,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                             {templates.length > 0 &&
                                 <CustomSelect onChange={(e) => handleSwapSignature(e)} items={templates} display={"name"} getValue={"id"} />}
                             <div className={classes.signature}>
-                                {typeof selectedTemplate.preview === 'string' ? parse(selectedTemplate.preview) : ""}
+                                {typeof selectedTemplate.preview === 'string' ? parse(selectedTemplate.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', event.imagePath ? API + event.imagePath : 'http://fakeimg.pl/380x126?font=noto&font_size=14')) : ""}
                             </div>
                         </div>
                         <div>

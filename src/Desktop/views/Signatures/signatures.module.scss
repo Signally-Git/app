@@ -26,8 +26,8 @@
         left: auto;
         right: auto;
         span > span {
-             color: $signally-orange;
-         }
+            color: $signally-orange;
+        }
     }
 }
 
@@ -59,7 +59,7 @@
         height: 95%;
         > span {
             color: grey;
-            padding-top: .5rem;
+            padding-top: 0.5rem;
             font-size: 0.8rem;
         }
     }
@@ -126,7 +126,7 @@
         width: 100%;
     }
     li {
-        margin: .5rem 0;
+        margin: 0.5rem 0;
         margin-left: auto;
         width: 100%;
         transition: 0.2s;
@@ -138,6 +138,7 @@
         justify-content: space-between;
         font-size: 0.85rem;
         font-weight: 600;
+        cursor: pointer;
         position: relative;
         background: $signally-grey;
         border-radius: 10px;
@@ -156,10 +157,6 @@
             background: transparent;
             transition: 0.2s;
         }
-        &:hover {
-            width: 95%;
-            cursor: pointer;
-        }
         &:focus-within {
             width: 95%;
             &::before {
@@ -176,11 +173,15 @@
             justify-content: space-between;
             > span > span {
                 font-weight: normal;
-                font-size: .75rem;
+                font-size: 0.75rem;
                 text-decoration: underline;
             }
         }
     }
+}
+
+.selected {
+    width: 95%!important;
 }
 
 .groupName {
@@ -194,7 +195,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-top: .25rem;
+    margin-top: 0.25rem;
 }
 
 .searchInput {
@@ -204,7 +205,7 @@
         top: 0;
         bottom: 0;
         margin: auto;
-        left: .75rem;
+        left: 0.75rem;
         position: absolute;
     }
 }
@@ -242,7 +243,7 @@
         margin-top: 0;
     }
     h5 {
-        font-size: 1.2rem!important;
+        font-size: 1.2rem !important;
         padding-bottom: 2rem;
     }
     > ul {
@@ -260,14 +261,15 @@
     }
     > li {
         min-width: 20rem;
-        margin: .5rem;
+        margin: 0.5rem;
     }
     > .groupName {
         font-weight: 600;
     }
 }
 
-.btn, .CTA {
+.btn,
+.CTA {
     width: 60%;
     text-align: center;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
@@ -277,14 +279,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: .5rem auto;
-    padding: .75rem;
+    margin: 0.5rem auto;
+    padding: 0.75rem;
     font-size: 0.85rem;
     font-weight: 600;
     border-radius: 20px;
     svg {
         transition: 0.2s;
-        margin-left: .5rem;
+        margin-left: 0.5rem;
         stroke: $signally-orange;
         stroke-width: 1px;
     }
@@ -293,7 +295,7 @@
         border: 1px solid transparent;
         color: #fff;
         svg {
-            stroke: #FFF;
+            stroke: #fff;
         }
         cursor: pointer;
     }

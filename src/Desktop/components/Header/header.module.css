@@ -298,9 +298,8 @@
           align-items: center;
 }
 
-.animateMenu {
-  -webkit-animation: menuSlideOut 0.3s ease forwards;
-          animation: menuSlideOut 0.3s ease forwards;
+.nameSize {
+  margin-right: 4.5rem;
 }
 
 .name {
@@ -321,12 +320,13 @@
   border: 1px solid #402927;
   border-radius: 20px;
   list-style: none;
-  max-height: 1.8rem;
+  max-height: 1.7rem;
   overflow: hidden;
   margin-right: 1rem;
-  position: relative;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
+  position: absolute;
+  top: -99%;
+  -webkit-transition: 200ms max-height;
+  transition: 200ms max-height;
 }
 
 .name ul li:first-child {
@@ -339,8 +339,7 @@
 }
 
 .name ul:hover {
-  -webkit-animation: menuSlide 0.2s ease forwards;
-          animation: menuSlide 0.2s ease forwards;
+  max-height: 10rem;
   -webkit-box-shadow: 0 15px 24px #3d2b2826;
           box-shadow: 0 15px 24px #3d2b2826;
 }
@@ -372,7 +371,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding-top: 4px;
+  padding-top: 3px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -382,8 +381,8 @@
 }
 
 .name .UserName > svg {
-  margin-left: .5rem;
-  font-size: .7rem;
+  margin-left: 0.5rem;
+  font-size: 0.7rem;
 }
 
 .name .UserName span {
@@ -458,7 +457,8 @@
 }
 
 @-webkit-keyframes menuSlide {
-  0% {
+  0%,
+  80% {
     top: 0;
     max-height: 1.8rem;
   }
@@ -472,7 +472,8 @@
 }
 
 @keyframes menuSlide {
-  0% {
+  0%,
+  80% {
     top: 0;
     max-height: 1.8rem;
   }
