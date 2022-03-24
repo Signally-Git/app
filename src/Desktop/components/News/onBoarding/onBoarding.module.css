@@ -107,8 +107,7 @@
 .content {
   font-size: .9rem;
   max-height: 12rem;
-  height: 12rem;
-  padding: 2rem;
+  padding: 1.5rem;
   padding-right: calc(25% -2rem);
   display: -webkit-box;
   display: -ms-flexbox;
