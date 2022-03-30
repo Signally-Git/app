@@ -43,8 +43,8 @@ export default function CreateEvent({ setDone, event }) {
             notification({ content: <>Veuillez remplir le nom de l'event</>, status: "invalid" })
             return false;
         }
-        const start = (moment(startDate).subtract({ hour: 1 })).format('D-MM-YYYYHH:mm:ss')
-        const end = (moment(endDate).subtract({ hour: 1 })).format('D-MM-YYYYHH:mm:ss')
+        const start = (moment(startDate))
+        const end = (moment(endDate))
         const image = new FormData()
         image.append('file', banner)
         if (!event && banner) {
@@ -53,8 +53,8 @@ export default function CreateEvent({ setDone, event }) {
                     imagePath: res.data.path,
                     name: eventName,
                     link: eventLink,
-                    startAt: start,
-                    endAt: end,
+                    startAt: start.utc(false),
+                    endAt: end.utc(false),
                 }
                 await request.post(`events`, req).then((res) => {
                     notification({ content: <><span style={{ color: "#FF7954" }}>{eventName}</span> créé avec succès</>, status: "valid" })
@@ -67,8 +67,8 @@ export default function CreateEvent({ setDone, event }) {
 
         }
         if (event) {
-            const start = (moment(startDate).subtract({ hour: 1 })).format('D-MM-YYYYHH:mm:ss')
-            const end = (moment(endDate).subtract({ hour: 1 })).format('D-MM-YYYYHH:mm:ss')
+            const start = (moment(startDate).local(false))
+            const end = (moment(endDate).local(false))
             const image = new FormData()
 
             if (banner) {
@@ -76,9 +76,9 @@ export default function CreateEvent({ setDone, event }) {
                 await request.post(`upload`, image).then(async (res) => {
                     const req = {
                         name: eventName,
-                        startAt: start,
+                        startAt: start.utc(false),
+                        endAt: end.utc(false),
                         link: eventLink,
-                        endAt: end,
                         imagePath: res.data.path
                     }
                     await request.patch(`events/${event.id}`, req, {
@@ -91,11 +91,12 @@ export default function CreateEvent({ setDone, event }) {
                 return false;
             }
             else {
+
                 const req = {
                     name: eventName,
                     link: eventLink,
-                    startAt: start,
-                    endAt: end,
+                    startAt: start.utc(false),
+                    endAt: end.utc(false),
                 }
                 await request.patch(`events/${event.id}`, req, {
                     headers: { 'Content-Type': 'application/merge-patch+json' }
@@ -118,11 +119,11 @@ export default function CreateEvent({ setDone, event }) {
         <div className={classes.datePick}>
             <div>
                 <label>Date et heure de début</label>
-                <Datetime locale="fr-fr" value={startDate} onChange={setStartDate} closeOnSelect={true} dateFormat="D MMM YYYY" timeFormat="HH mm ss" />
+                <Datetime locale="fr-FR" value={startDate} onChange={setStartDate} closeOnSelect={true} dateFormat="D MMM YYYY" timeFormat="HH mm ss" />
             </div>
             <div>
                 <label>Date et heure de fin</label>
-                <Datetime locale="fr-fr" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="D MMM YYYY" timeFormat="HH mm ss" />
+                <Datetime locale="fr-FR" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="D MMM YYYY" timeFormat="HH mm ss" />
             </div>
         </div>
         <div className={classes.row}>

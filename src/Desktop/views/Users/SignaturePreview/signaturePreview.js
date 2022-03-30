@@ -10,6 +10,7 @@ import CustomSelect from 'Utils/CustomSelect/customselect';
 import Modal from 'Utils/Modals/modal';
 import Btns from 'Utils/Btns/btns';
 import parse from 'html-react-parser'
+import moment from 'moment';
 
 export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     const [templates, setTemplates] = useState([])
@@ -200,12 +201,12 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                     <span className={classes.active}>{event.name}</span>
                                     <span className={classes.duration}>
                                         <div className={`${classes.col} ${classes.bold}`}>
-                                            <span>{`du ${new Date(event?.startAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
-                                            <span>{`au ${new Date(event?.endAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
+                                            <span>{`du ${moment.utc(event?.startAt).local(false).format('HH:mm')}`}</span>
+                                            <span>{`au ${moment.utc(event?.endAt).local(false).format('HH:mm')}}`}</span>
                                         </div>
                                         <div className={classes.col}>
-                                            <span>{`${new Date(event?.startAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
-                                            <span>{`${new Date(event?.endAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
+                                            <span>{`${moment.utc(event?.startAt).local(false).format('HH:mm')}`}</span>
+                                            <span>{`${moment.utc(event?.endAt).local(false).format('HH:mm')}`}</span>
                                         </div>
                                     </span>
                                 </div>

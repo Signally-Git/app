@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react/swiper-react.js';
 import parse from "html-react-parser";
 import { API } from "config";
 import request from "Utils/Request/request";
+import moment from "moment";
 
 import 'swiper/swiper.min.css';
 
@@ -61,34 +62,12 @@ function News({ organisation, loading, setLoading }) {
                     <img src={API + admin.events[0]?.imagePath} />
                     <span className={classes.duration}>
                         <div className={`${classes.col} ${classes.bold}`}>
-                            <span>{`du ${new Date(
-                                admin.events[0]?.startAt
-                            ).toLocaleString([], {
-                                day: "numeric",
-                                month: "short",
-                                year: "numeric",
-                            })}`}</span>
-                            <span>{`au ${new Date(
-                                admin.events[0]?.endAt
-                            ).toLocaleString([], {
-                                day: "numeric",
-                                month: "short",
-                                year: "numeric",
-                            })}`}</span>
+                            <span>{`du ${moment.utc(admin.events[0]?.startAt).local(false).format('D MMM YYYY')}`}</span>
+                            <span>{`au ${moment.utc(admin.events[0]?.endAt).local(false).format('D MMM YYYY')}`}</span>
                         </div>
                         <div className={classes.col}>
-                            <span>{`${new Date(
-                                admin.events[0]?.startAt
-                            ).toLocaleString([], {
-                                hour: "2-digit",
-                                minute: "2-digit",
-                            })}`}</span>
-                            <span>{`${new Date(
-                                admin.events[0]?.endAt
-                            ).toLocaleString([], {
-                                hour: "2-digit",
-                                minute: "2-digit",
-                            })}`}</span>
+                            <span>{`${moment.utc(admin.events[0]?.startAt).local(false).format('HH:mm')}`}</span>
+                            <span>{`${moment.utc(admin.events[0]?.endAt).local(false).format('HH:mm')}`}</span>
                         </div>
                     </span>
                 </div>

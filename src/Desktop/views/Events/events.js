@@ -8,6 +8,7 @@ import { useNotification } from 'Utils/Notifications/notifications'
 import request from 'Utils/Request/request'
 import { API } from 'config'
 import Modal from 'Utils/Modals/modal'
+import moment from 'moment';
 
 function Events() {
     const [active, setActive] = useState("present")
@@ -73,12 +74,12 @@ function Events() {
                                 <span className={classes.active}>{activeEvent.name}</span>
                                 <span className={classes.duration}>
                                     <div className={`${classes.col} ${classes.bold}`}>
-                                        <span>{`du ${new Date(activeEvent?.startAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
-                                        <span>{`au ${new Date(activeEvent?.endAt).toLocaleString([], { day: 'numeric', month: 'short', year: 'numeric' })}`}</span>
+                                        <span>{`du ${moment.utc(activeEvent?.startAt).local(false).format('D MMM YYYY')}`}</span>
+                                        <span>{`au ${moment.utc(activeEvent?.endAt).local(false).format('D MMM YYYY')}`}</span>
                                     </div>
                                     <div className={classes.col}>
-                                        <span>{`${new Date(activeEvent?.startAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
-                                        <span>{`${new Date(activeEvent?.endAt).toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`}</span>
+                                        <span>{`${moment.utc(activeEvent?.startAt).local(false).format('HH:mm')}`}</span>
+                                        <span>{`${moment.utc(activeEvent?.endAt).local(false).format('HH:mm')}`}</span>
                                     </div>
                                 </span>
                                 <div className={classes.actionsContainer}>
