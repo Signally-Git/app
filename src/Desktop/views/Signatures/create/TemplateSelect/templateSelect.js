@@ -109,8 +109,9 @@ const templateAPI = [
 				</table>
 			</td>
 		</tr>
-		<tr>
 		{# START EVENT #}
+		{% if event or isPreview %}
+		<tr>
 		{% if styles['event']['enabled'] is same as( 'true' ) %}
 		{% if event %}
 				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
@@ -124,8 +125,10 @@ const templateAPI = [
 			{% endif %}
 			{% endif %}
 			{# END ELSE #}
-			{# END EVENT #}
+			
 		</tr>
+		{% endif %}
+		{# END EVENT #}
 		<tr>
 			<td style="width:380px; box-sizing: border-box; border: none; padding-top: 12px;">
 				<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border:none; width: 380px;">
