@@ -3,7 +3,6 @@ import "react-datetime/css/react-datetime.css";
 import classes from './createEvent.module.css';
 import 'moment/locale/fr';
 import Input from 'Utils/Input/input';
-import Button from 'Utils/Button/btn';
 import { useEffect, useRef, useState } from 'react';
 import moment from 'moment';
 import UploadFile from 'Utils/Upload/uploadFile';
@@ -110,20 +109,18 @@ export default function CreateEvent({ setDone, event }) {
 
     return (<div className={classes.container}>
         {event ? <>
-            <h2>Modifier event <span>{eventName}</span>
-                {/* <FiEdit onClick={() => setDone(false)} /> */}
-            </h2>
+            <h2>Modifier event <span>{eventName}</span></h2>
         </> : <>
             <h2>Créer un event</h2>
         </>}
         <div className={classes.datePick}>
             <div>
                 <label>Date et heure de début</label>
-                <Datetime locale="fr-FR" value={startDate} onChange={setStartDate} closeOnSelect={true} dateFormat="D MMM YYYY" timeFormat="HH mm ss" />
+                <Datetime locale="fr-FR" value={startDate} onChange={setStartDate} closeOnSelect={true} dateFormat="D MMM YYYY" timeFormat="HH mm" />
             </div>
             <div>
                 <label>Date et heure de fin</label>
-                <Datetime locale="fr-FR" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="D MMM YYYY" timeFormat="HH mm ss" />
+                <Datetime locale="fr-FR" value={endDate} onChange={setEndDate} closeOnSelect={true} dateFormat="D MMM YYYY" timeFormat="HH mm" />
             </div>
         </div>
         <div className={classes.row}>
@@ -144,10 +141,6 @@ export default function CreateEvent({ setDone, event }) {
         </div>
         <form>
             <Btns style={{ left: '.5rem', bottom: '-3rem' }} confirmTxt="Sauvegarder" onCancel={(e) => { e.preventDefault(); setDone(false) }} onConfirm={(e) => saveEvent(e)} />
-            {/* <div className={classes.btnsContainer}>
-                <Button color="orange" onClick={(e) => { e.preventDefault(); setDone(false) }}>Annuler</Button>
-                <Button type="submit" color="orangeFill" onClick={(e) => saveEvent(e)}>Sauvegarder</Button>
-            </div> */}
         </form>
     </div>)
 }

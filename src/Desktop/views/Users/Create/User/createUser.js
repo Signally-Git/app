@@ -16,11 +16,11 @@ export default function CreateUser({ setDone }) {
     const width = "12rem"
     const [teams, setTeams] = useState([])
     const [team, setTeam] = useState("")
-    const [user, setUser] = useState({ firstName: "", lastName: "", position: "", email: "", phone: "" })
+    const [user, setUser] = useState({ firstName: "", lastName: "", position: "", email: "", phone: "", roles: ["ROLE_USER"] })
     const [hide, setHide] = useState(false)
     const history = useHistory()
     const notification = useNotification()
-    console.log(window.location.hash)
+    // console.log(window.location.hash)
     // function debounce(fn, ms) {
     //     let timer
     //     return _ => {
