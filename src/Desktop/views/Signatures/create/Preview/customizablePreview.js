@@ -130,6 +130,7 @@ export default function Preview({ infos, template, options, organisation, ...pro
     </td>`)
 
     if (options?.event?.enabled) {
+        replaced = replaced.replaceAll(/{% if event or isPreview %}/gi, "")
         replaced = replaced.replaceAll(/{% if event %}/gi, "")
         replaced = replaced.replaceAll(/{% if styles\['event'\]\['enabled'\] is same as\( 'true' \) %}/gi, "")
         replaced = replaced.replaceAll(/{% endif %}/gi, "")
