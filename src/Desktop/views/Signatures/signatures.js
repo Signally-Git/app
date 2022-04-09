@@ -230,9 +230,10 @@ function Team() {
                         </ul>
                         {active === "active" ?
                             <div>
-                                <Link to="create-signature">
-                                    <Button color="orange" arrow={true}>Ajouter une signature</Button>
-                                    </Link>
+                                {JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH" ?
+                                    
+                                        <Button color="orange" arrow={true}><Link to="create-signature">Ajouter une signature</Link></Button>
+                                     : ""}
                                 <div className={classes.searchInput}>
                                     <HiOutlineSearch />
                                     <input className={classes.search} type="text" placeholder="Rechercher une signature" />
@@ -242,7 +243,7 @@ function Team() {
                                     {templates.map((signature) => {
                                         return (<li onMouseEnter={() => { setSelected(signature); request.get(signature['@id']).then((res) => setPreview(res.data)); setDefaultStyles(signature.signatureStyles) }} key={signature.id}
                                             className={selected === signature ? classes.selected : ""}>
-                                            <span onClick={() => history.push('/edit-signature/' + signature.id)}>{signature.name}</span>
+                                            <span onClick={() => JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH" ? history.push('/edit-signature/' + signature.id) : ""}>{signature.name}</span>
                                             <div className={classes.actionsContainer}>
                                                 {/* <AiOutlineEdit /> */}
                                                 <FiTrash onClick={() => handleModal(signature.id)} />

@@ -68,7 +68,7 @@ function Events() {
 
                             }}
                         >
-                            <input type="checkbox" name="events" className={classes.checkbox} defaultChecked={edit} onChange={() => { setEdit(true); setPreview({ activeEvent, past: status === "past", index }) }} />
+                            <input disabled={(JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH") ? false : true} type="checkbox" name="events" className={classes.checkbox} defaultChecked={edit} onChange={() => { setCreate(false); setEdit(true); setPreview({ activeEvent, past: status === "past", index }) }} />
                             <img className={classes.bannerPreview} src={`${API}${activeEvent.imagePath}`} />
                             <div className={classes.eventText}>
                                 <span className={classes.active}>{activeEvent.name}</span>
@@ -119,7 +119,7 @@ function Events() {
                         </div>
                         : active === "present" ?
                             <div>
-                                <Button color="orange" arrow={true} onClick={() => { setPreview(); setCreate(true); }}>Ajouter un event</Button>
+                                {JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH" ? <Button color="orange" arrow={true} onClick={() => { setPreview(); setCreate(true); }}>Ajouter un event</Button> : ""}
                                 <div className={classes.searchInput}>
                                     <HiOutlineSearch />
                                     <input onChange={(e) => setSearch(e.target.value)} className={classes.search} type="text" placeholder="Rechercher un event" />
@@ -130,7 +130,7 @@ function Events() {
                                 </ul>
                             </div> :
                             <div>
-                                <Button color="orange" arrow={true} onClick={() => { setPreview(); setCreate(true); }}>Ajouter un event</Button>
+                                 {JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH" ?  <Button color="orange" arrow={true} onClick={() => { setPreview(); setCreate(true); }}>Ajouter un event</Button> : ""}
                                 <div className={classes.searchInput}>
                                     <HiOutlineSearch />
                                     <input onChange={(e) => setSearch(e.target.value)} className={classes.search} type="text" placeholder="Rechercher un event" />
