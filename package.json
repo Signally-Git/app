@@ -15,6 +15,7 @@
         "axios": "^0.21.1",
         "date-fns": "^2.21.3",
         "event-source-polyfill": "^1.0.25",
+        "gitmoji-cli": "^4.13.0",
         "html-react-parser": "^1.2.6",
         "intro.js-react": "^0.5.0",
         "moment": "^2.29.1",
