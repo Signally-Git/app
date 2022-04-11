@@ -100,9 +100,9 @@ const Signup = () => {
       await axios.post(API + 'register', req).then(() => {
         setSent(true)
       }).catch((err) => {
-        if (err.response.data.title === 'App\\Exception\\Organisation\\OrganisationWithSameSirenAlreadyExistsDomainException')
+        if (err?.response?.data?.title === 'App\\Exception\\Organisation\\OrganisationWithSameSirenAlreadyExistsDomainException')
         setError({ content: <>Cette société est déjà enregistrée sur Signally <ImCross /></>})
-        if (err.response.data.title === 'App\\Exception\\User\\UserWithSameEmailAlreadyExistsDomainException')
+        if (err?.response?.data?.title === 'App\\Exception\\User\\UserWithSameEmailAlreadyExistsDomainException')
         setError({ content: <>Cet utilisateur est déjà enregistré sur Signally <ImCross /></> })
           return;
         })
