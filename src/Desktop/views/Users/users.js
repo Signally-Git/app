@@ -203,7 +203,7 @@ function Team() {
                                                     </li>
                                             })}
                                         </ul>
-                                        <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 1000)}>Ajouter des équipes</Button>
+                                        <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 2000)}>Ajouter des équipes</Button>
                                     </div>
                                     <div className={classes.col}>
                                         <div className={classes.tagline}>
@@ -256,7 +256,7 @@ function Team() {
                                                         </li>
                                                 })}
                                             </ul>
-                                            <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 1000)}>Ajouter des collaborateurs</Button>
+                                            <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 2000)}>Ajouter des collaborateurs</Button>
                                         </div>
                                         <div className={classes.col}>
                                             <div className={classes.tagline}>

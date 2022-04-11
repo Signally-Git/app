@@ -135,7 +135,7 @@
   background-color: #FF7954;
   color: #fff;
   padding: 2px;
-  font-size: 12px;
+  font-size: .8rem;
   right: -9px;
   top: -9px;
   border-radius: 50%;
@@ -299,7 +299,8 @@
 }
 
 .nameSize {
-  margin-right: 4.5rem;
+  opacity: 0;
+  margin-right: 5.5rem;
 }
 
 .name {

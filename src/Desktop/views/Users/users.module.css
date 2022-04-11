@@ -139,10 +139,23 @@
 .slider {
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
+  /* Optional: show position indicator in red */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.slider::-webkit-scrollbar {
+  z-index: -10;
+  width: 0;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+}
+
+.slider::-webkit-scrollbar-thumb {
+  background: transparent;
 }
 
 .slider .col {

@@ -175,8 +175,17 @@
     width: 40%;
     > div {
         display: flex;
-        overflow: hidden;
         justify-content: space-between;
+        overflow: auto;
+        &::-webkit-scrollbar {
+            z-index: -10;
+            width: 0;  /* Remove scrollbar space */
+            background: transparent;  /* Optional: just make scrollbar invisible */
+        }
+        /* Optional: show position indicator in red */
+        &::-webkit-scrollbar-thumb {
+            background: transparent;
+        }
     }
 }
 

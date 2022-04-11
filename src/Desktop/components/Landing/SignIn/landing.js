@@ -26,6 +26,7 @@ const Login = () => {
     const [logging, setLogging] = useState(false)
     const [showPassword, setShowPass] = useState(false)
     const slider = useRef(null)
+    const toFocusMail = useRef(null)
     const toFocus = useRef(null)
     const [error, setError] = useState({ content: "", disappear: false })
     const [loading, setLoading] = useState(false)
@@ -56,14 +57,17 @@ const Login = () => {
     }, [error])
 
 
-    useEffect(async () => {
-        if (query.get('user')) {
-            setEmail(query.get('user'))
-            const magicLink = await request.get(`sign_in${window.location.search}`)
-            localStorage.setItem('token', magicLink.data.token)
-            localStorage.setItem('refresh_token', magicLink.data.refresh_token)
-            history.push('/dashboard')
+    useEffect(() => {
+        async function redirectIfLogged() {
+            if (query.get('user')) {
+                setEmail(query.get('user'))
+                const magicLink = await request.get(`sign_in${window.location.search}`)
+                localStorage.setItem('token', magicLink.data.token)
+                localStorage.setItem('refresh_token', magicLink.data.refresh_token)
+                history.push('/dashboard')
+            }
         }
+        redirectIfLogged()
     }, [])
 
     const handleScroll = (e, scroll) => {
@@ -73,16 +77,20 @@ const Login = () => {
             left: scroll,
             behavior: 'smooth'
         });
-        setTimeout(() => {
+        // setTimeout(() => {
             setLogging(false)
-        }, 300)
+            slider.current.scroll({
+                top: 0,
+                left: scroll,
+                behavior: 'smooth'
+            });
+        // }, 300)
     }
 
     const handleForgotSubmit = (e) => {
         e.preventDefault()
         axios.post(`${API}reset_password`, { email: email }).then(() => {
             setModal('done')
-            // notification({ content: <>Si un compte avec votre adresse mail existe,<br /> un message vous a été envoyé avec un lien pour réinitialiser votre mot de passe.</>, status: "valid" })
         })
     }
 
@@ -128,7 +136,7 @@ const Login = () => {
         </div> : modal ?
             <form onSubmit={(e) => handleForgotSubmit(e)} className={classes.modal}>
                 <h3>Réinitialiser mon mot de passe</h3>
-                <Input defaultValue={email} onChange={(e) => setEmail(e.target.value)} type="mail" style={{ width: '100%' }} autoComplete="email" placeholder="Email" />
+                <Input ref={toFocusMail} defaultValue={email} onChange={(e) => setEmail(e.target.value)} type="mail" style={{ width: '100%' }} autoComplete="email" placeholder="Email" />
                 <div className={classes.btnsContainer}>
                     <Button type="submit" color={"orangeFill"} width={'40%'}>Envoyer</Button>
                     <Button type="button" color={"orange"} width={'40%'} onClick={() => setModal(false)}>Annuler</Button>
@@ -171,22 +179,26 @@ const Login = () => {
                         <div className={classes.formContainer}>
                             <h2>Entrez votre mot de passe</h2>
                             <form onSubmit={(e) => handleLogIn(e)}>
-                                <div className={classes.codeContainer}>
-                                    {
-                                        logging ?
-                                            <> <div style={{ position: 'relative', display: 'flex' }}>
-                                                <Input autoComplete="current-password" defaultValue={code} ref={toFocus} placeholder="Mot de passe" type={showPassword ? "text" : "password"} onChange={(e) => setCode(e.target.value)} />
-                                                <div className={classes.showPassword} onClick={() => setShowPass(!showPassword)}>
-                                                    {showPassword ?
-                                                        <FiEyeOff />
-                                                        :
-                                                        <FiEye />
-                                                    }
-                                                </div>
-                                            </div>
-                                            </> : <>
-                                                <Input autoComplete="current-password" defaultValue={code} placeholder="Mot de passe" type="password" onChange={(e) => setCode(e.target.value)} />
-                                            </>}
+                                <div className={classes.codeContainer}><div style={{ position: 'relative', display: 'flex' }}>
+                                    <Input autoFocus={false} autoCorrect="off"
+                                    disabled={logging ? false : true}
+                                        autoCapitalize="off" 
+                                        autoComplete="current-password" 
+                                        defaultValue={code} 
+                                        ref={toFocus} 
+                                        placeholder="Mot de passe" 
+                                        type={showPassword ? "text" : "password"} 
+                                        onChange={(e) => setCode(e.target.value)} />
+
+                                    <div className={classes.showPassword} onClick={() => setShowPass(!showPassword)}>
+                                        {showPassword ?
+                                            <FiEyeOff />
+                                            :
+                                            <FiEye />
+                                        }
+                                    </div>
+                                </div>
+
                                 </div>
                                 <span onClick={() => setModal(true)} className={classes.forgot}>Mot de passe oublié</span>
                                 <div className={classes.btnsContainer}>

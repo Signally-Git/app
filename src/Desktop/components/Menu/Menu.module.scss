@@ -26,6 +26,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+         svg {
+            width: 2rem!important;
+            height: 2rem!important;
+        }
         *{
             color: $signally-brown;
         }
@@ -51,6 +55,9 @@
     position: relative;
     & :hover span {
         color: $signally-ebony-pink;
+    }
+    svg {
+        font-size: 1rem;
     }
     span {
         font-weight: 600;
