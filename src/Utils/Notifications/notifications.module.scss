@@ -9,9 +9,10 @@
     height: 2.5rem!important;
     border-radius: 10px;
     z-index: 10;
-    padding: 0.5rem 3rem;
+    // padding: 0.5rem 3rem;
+    // inset: 3rem 0 0 15rem;
+    top: 3.5rem;
     position: fixed;
-    inset: 3rem 0 0 15rem;
     color: $signally-brown;
     font-weight: bold;
     max-width: 50%;
