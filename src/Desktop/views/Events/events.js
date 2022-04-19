@@ -82,9 +82,10 @@ function Events() {
                                         <span>{`${moment.utc(activeEvent?.endAt).local(false).format('HH:mm')}`}</span>
                                     </div>
                                 </span>
-                                <div className={classes.actionsContainer}>
+                                {(JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH") ?  <div className={classes.actionsContainer}>
                                     <FiTrash onClick={() => setModal({ name: activeEvent.name, id: activeEvent.id })} />
-                                </div>
+                                </div> : ""}
+                               
                             </div>
                             {/* <img src={ChevronRight} className={classes.chevron} alt="Click" /> */}
                         </li>

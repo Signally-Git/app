@@ -244,10 +244,10 @@ function Team() {
                                         return (<li onMouseEnter={() => { setSelected(signature); request.get(signature['@id']).then((res) => setPreview(res.data)); setDefaultStyles(signature.signatureStyles) }} key={signature.id}
                                             className={selected === signature ? classes.selected : ""}>
                                             <span onClick={() => JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH" ? history.push('/edit-signature/' + signature.id) : ""}>{signature.name}</span>
-                                            <div className={classes.actionsContainer}>
+                                            {(JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH") ? <div className={classes.actionsContainer}>
                                                 {/* <AiOutlineEdit /> */}
                                                 <FiTrash onClick={() => handleModal(signature.id)} />
-                                            </div>
+                                            </div> : ""}
                                         </li>)
                                     })}
                                 </ul>

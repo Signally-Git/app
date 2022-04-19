@@ -15,6 +15,8 @@ export default function CreateUser({ setDone }) {
     const focus = useRef(null)
     const width = "12rem"
     const [teams, setTeams] = useState([])
+    const [roles, setRoles] = useState([{ 'name': "Utilisateur", 'value': "ROLE_USER" }, { 'name': "RH", 'value': "ROLE_RH" }])
+    const [role, setRole] = useState()
     const [team, setTeam] = useState("")
     const [user, setUser] = useState({ firstName: "", lastName: "", position: "", email: "", phone: "", roles: ["ROLE_USER"] })
     const [hide, setHide] = useState(false)
@@ -179,6 +181,11 @@ export default function CreateUser({ setDone }) {
             </div>
             <div className={classes.slide}>
                 <div>
+                    <CustomSelect display="name" getValue="value"
+                        styleList={{ maxHeight: '15rem', paddingTop: '2.5rem' }}
+                        items={roles} onChange={(e) => {
+                            setRole(e); setUser({...user, roles: role === "ROLE_USER" ? ["ROLE_USER"] : ["ROLE_USER", "ROLE_RH"]})
+                        }} defaultValue={role} />
                     <Input style={{ width: "100%" }} onChange={(e) => setUser({ ...user, position: e.target.value })} type="text" placeholder="Poste" />
                     <Input style={{ width: "100%" }} onChange={(e) => setUser({ ...user, email: e.target.value })} type="text" placeholder="Adresse mail" />
                     <Input style={{ width: "100%" }} onChange={(e) => setUser({ ...user, phone: e.target.value })} type="text" placeholder="Téléphone" />
