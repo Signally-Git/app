@@ -396,12 +396,6 @@
   transition: 0.2s;
 }
 
-.name .UserName span::before {
-  content: " ";
-  display: block;
-  height: 1px;
-}
-
 .reportContainer {
   display: -webkit-box;
   display: -ms-flexbox;

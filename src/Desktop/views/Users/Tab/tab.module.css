@@ -83,6 +83,7 @@
   border: none;
   color: #402927;
   background: none;
+  font-size: 0.9rem;
 }
 
 .colheader button:hover {

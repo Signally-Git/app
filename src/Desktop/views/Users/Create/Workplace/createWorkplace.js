@@ -51,18 +51,18 @@ export default function CreateWorkplace({ setDone }) {
         }
         const create = await request.post('workplaces', req).catch(
             () => notification({ content: <>L'hôtel <span style={{ color: "#FF7954" }}>{workplace.name}</span> n'a pas pu être créé</>, status: "invalid" }))
-        create.data && notification({ content: <>L'hôtel <span style={{ color: "#FF7954" }}>{workplace.name}</span> a été créé avec succès</>, status: "valid" })
+        create?.data && notification({ content: <>L'hôtel <span style={{ color: "#FF7954" }}>{workplace.name}</span> a été créé avec succès</>, status: "valid" })
         const img = new FormData()
         img.append('file', file)
         if (file)
             await request.post(`import/file`, img).then(async (res) => {
                 const requestLogo = {
                     name: file.name,
-                    path: res.data.path,
-                    workplace: create.data['@id']
+                    path: res?.data.path,
+                    workplace: create?.data['@id']
                 }
                 await request.post('logos', requestLogo).then((res) => {
-                    console.log(res.data)
+                    console.log(res?.data)
                 })
             })
         setDone(true)
@@ -133,7 +133,7 @@ export default function CreateWorkplace({ setDone }) {
                     <Input style={{ width: "100%" }} onChange={(e) => setWorkplace({ ...workplace, digitalAddress: { mobile: e.target.value } })} type="text" placeholder="Téléphone" />
                     <div className={classes.btnsContainer}>
                         <Button width={width} color="orange" className={`${classes.btn}`} onClick={(e) => handleSlide(e, 2)}>Retour</Button>
-                        <Button width={width} color="orangeFill"
+                        <Button width={width}
                             color={workplace.address.street.length < 5 || workplace.digitalAddress.mobile.length < 9 ? "orange" : "orangeFill"}
                             onClick={(e) => { handleSave(); handleSlide(e, 3) }}
                             className={`${classes.btn} ${workplace.name < 1 ? classes.disabled : ""}`}>Valider</Button>

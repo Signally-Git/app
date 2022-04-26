@@ -325,11 +325,6 @@
             font-size: 0.9rem;
             color: $signally-brown;
             transition: 0.2s;
-            &::before {
-                content: " ";
-                display: block;
-                height: 1px;
-            }
         }
     }
 }
