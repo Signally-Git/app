@@ -127,7 +127,7 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
                                     <div className={classes.editDiv}>
                                         <Input type="text" placeholder="Adresse mail" defaultValue={user.email} onChange={(e) => handleChange(e.target.value, 'email')} />
                                         <div className={classes.inputsContainer}>
-                                            <Input type="text" placeholder="Poste" defaultValue={user.position} onChange={(e) => handleChange(e.target.value, 'poste')} />
+                                            <Input type="text" placeholder="Poste" defaultValue={user.position} onChange={(e) => handleChange(e.target.value, 'position')} />
                                             <Input type="tel" placeholder="Mobile" defaultValue={user.phone} onChange={(e) => handleChange(e.target.value, 'phone')} />
                                         </div>
                                     </div>
