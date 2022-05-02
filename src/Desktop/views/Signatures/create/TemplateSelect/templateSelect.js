@@ -8,9 +8,10 @@ import Template from "../Preview/customizablePreview";
 
 const templateAPI = [
 	{
-		id: 1,
+		id: 0,
 		alignment: "Horizontal",
 		tags: ["studio"],
+		name: "Mama Shelter",
 		html: `
 	{# START GREETINGS #}
 	<span style="padding-bottom: {{ styles['greetingsPadding']['padding'] }};">
@@ -199,6 +200,134 @@ const templateAPI = [
 
 `,
 	},
+	{
+		id: 2,
+		alignment: "Horizontal",
+		tags: ["studio"],
+		name: "Warner Bros",
+		html: `
+	{# START GREETINGS #}
+	<span style="padding-bottom: {{ styles['greetingsPadding']['padding'] }};">
+	{% if greetings %}
+		{{ greetings }}
+	{% endif %}
+</span>
+	{# END GREETINGS #}
+<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:0">
+	<tbody>
+		<tr>
+			<td valign="top" style="width:380px; height: 108px; border: none; padding: 0cm">
+				<table class="x_MsoTableGrid" border="0" cellspacing="2" cellpadding="2" style="border-collapse:collapse; border:none">
+					<tbody>
+						<tr>
+							<td valign="top" style="width:108px; border: none; padding: 0cm 8px 0 0; font-size: 8.5pt;">
+								<p class="x_MsoNormal" style="height: 108px; margin: 0; padding: 0;" height="108" valign="middle">
+								<span style="height: 108px;" height="108">
+								<a href="{{company.websiteUrl}}"><img style="width: 108px; height: 108px; vertical-align: middle;" height="108" width="108" valign="middle" src="{{ absolute_url(asset(logo)) }}" alt="{{ company.name }}"/></a>
+							</span>
+
+								</p>
+							</td>
+							<td valign="middle" style="box-sizing: border-box; border: none; padding: 0;">
+								<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:none; border-color: {{ styles['divColor']['color'] }};">
+									<tbody>
+										<tr> 
+											<td style="border-left: 2px solid {{ styles['divColor']['color'] }}; width: 12px; height: 108px; border-radius: 4px 0 0 4px;"/>
+											<td style="box-sizing: border-box; border: none; font-size: 8pt; height: 108px; width: 240px">
+												<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:none; font-size: 8pt;">
+													<tbody>
+														<tr height="1">
+															<td style="font-size: 8pt; padding:0">
+																<b style="color:{{ styles['firstName']['color'] }}; text-decoration: {{ styles['firstName']['textDecoration'] }}; font-style: {{ styles['firstName']['fontStyle'] }}; font-weight: {{ styles['firstName']['fontWeight'] }}; font-size: 8pt; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
+																	{% if isPreview %} Prénom {% else %} {{ user.firstName }} {% endif %}
+                                                                </b>
+																<b style="color:{{ styles['lastName']['color'] }}; text-decoration: {{ styles['lastName']['textDecoration'] }} ;font-style: {{ styles['lastName']['fontStyle'] }} ;font-weight: {{ styles['lastName']['fontWeight'] }}; font-size: 8pt; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
+																{% if isPreview %} Nom {% else %} {{ user.lastName }} {% endif %}
+                                                                </b>
+															</td>
+														</tr>
+														<tr style="height: 1px">
+															<td>
+																<span style="color:{{ styles['jobName']['color'] }}; text-decoration: {{ styles['jobName']['textDecoration'] }} ;font-style: {{ styles['jobName']['fontStyle'] }} ;font-weight: {{ styles['jobName']['fontWeight'] }}; padding: 0cm; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
+																{% if isPreview %} Poste {% else %} {{ user.position }} {% endif %}
+																</span>
+															</td>
+														</tr>
+														<tr height="5"></tr>
+														<tr>
+															<td>
+																<span style="color:{{ styles['addressStreet']['color'] }}; text-decoration: {{ styles['addressStreet']['textDecoration'] }} ;font-style: {{ styles['addressStreet']['fontStyle'] }}; font-weight: {{ styles['addressStreet']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{{ address.street }}
+																	{{ address.streetInfo }}
+																</span>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<span style="color:{{ styles['addressZipcode']['color'] }}; text-decoration: {{ styles['addressZipcode']['textDecoration'] }} ;font-style: {{ styles['addressZipcode']['fontStyle'] }} ;font-weight: {{ styles['addressZipcode']['fontWeight'] }}font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
+																	{{ address.zipCode }}
+																	{{ address.city }}
+																	{{ address.country }}
+																</span>
+															</td>
+														</tr>
+														{# START PHONE #}
+														{% if user.phone or company.phone %}
+														<tr>
+															{% if user.phone or isPreview %}
+															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
+																<b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b> {% if isPreview %} 0123456789 {% else %} {{ user.phone }} {% endif %}
+															</td>
+															{% endif %}
+															{% if company.phone %}
+															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
+															    <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> {{ company.phone }}
+															</td>
+															{% endif %}
+														</tr>
+														{% endif %}
+														{# END PHONE #}
+													</tbody>
+												</table>
+											</td>
+										</tr></tbody></table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		{# START EVENT #}
+		{% if event or isPreview %}
+		<tr>
+		{% if styles['event']['enabled'] is same as( 'true' ) %}
+		{% if event %}
+				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
+					<a style="height: 126px; display: block;" href="{{ event.link }}"><img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="{{ absolute_url(asset(event.imagePath)) }}" alt='{{ event.name }}'/></a>
+				</td>
+				{# START ELSE #}
+			{% else %}
+				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
+					<img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="http://fakeimg.pl/380x126?font=noto&font_size=14" alt='Event'/>
+				</td>
+			{% endif %}
+			{% endif %}
+			{# END ELSE #}
+			
+		</tr>
+		{% endif %}
+		{# END EVENT #}
+	</tbody>
+</table>
+<span style="padding-top: {{ styles['eventPadding']['padding'] }}px">
+{# START DISCLAIMERS #}
+	{% if disclaimers %}
+		{{ disclaimers }}
+	{% endif %}
+	{# END DISCLAIMERS #}
+</span>
+
+`,
+	}
 ];
 
 export default function TemplateSelection(props) {
@@ -296,7 +425,7 @@ export default function TemplateSelection(props) {
 									return (
 										<li key={template.id}>
 											<p className={classes.templateName}>
-												Mama Shelter
+												{template.name}
 											</p>
 											<input
 												readOnly
