@@ -9,7 +9,6 @@
 }
 
 .container {
-  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -83,7 +82,7 @@
   background-color: #FF7954;
 }
 
-.tile:first-of-type * {
+.tile:first-of-type span, .tile:first-of-type p, .tile:first-of-type svg, .tile:first-of-type svg path {
   color: #FFF !important;
 }
 
@@ -91,7 +90,7 @@
   background-color: #ffc300;
 }
 
-.tile:nth-of-type(2) * {
+.tile:nth-of-type(2) span, .tile:nth-of-type(2) p {
   color: #FFF;
 }
 

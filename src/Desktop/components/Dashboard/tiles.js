@@ -6,6 +6,7 @@ import { MobileView } from 'react-device-detect'
 import request from 'Utils/Request/request'
 import Modal from 'Utils/Modals/modal'
 import { BsBroadcastPin } from 'react-icons/bs'
+import Button from 'Utils/Button/btn'
 
 function Tiles(props) {
     const [events, setEvents] = useState([])
@@ -94,9 +95,9 @@ function Tiles(props) {
     return (
         <div className={classes.container}>
             {modal ? <Modal style={{ left: 0 }} title="Êtes-vous sûr de vouloir déployer la signature ?"
-                content={`Vous allez envoyer un mail de déploiement à ${users.length} utilisateurs`}
+                content={`Vous allez envoyer un mail à ${users.length} collaborateur(s)`}
                 cancel="Annuler" validate="Déployer"
-                onCancel={() => setModal(false)} onConfirm={() => setModal(false)} /> : ""}
+                onCancel={() => setModal(false)} onConfirm={() => { setModal(false); request.get('user/send-token').then((res) => console.log(res)) }} /> : ""}
             <MobileView><h1>Bonjour {JSON.parse(localStorage.getItem("user"))?.first_name}</h1></MobileView>
             <div className={classes.tilesList}>
                 {!templates.length < 1 ? <>
@@ -179,13 +180,13 @@ function Tiles(props) {
                         {/* <img src={ChevronRight} alt="View" /> */}
                     </div>
                     <div className={classes.row}>
-                        {/* <div> */}
-                        {/* <Button color={"brownFill"} style={{padding: '.5rem'}} onClick={() => setModal(true)}>Déployer pour {organisation?.name}</Button> */}
                         <div>
-                            <span className={classes.bigTxt}>{users.length}</span>
+                            <Button color={"white"} style={{ padding: '.5rem 1rem' }} onClick={() => setModal(true)}>Déployer pour {organisation?.name}</Button>
+                            {/* <div>
+                                <span className={classes.bigTxt}>{users.length}</span>
+                            </div>
+                            <span className={classes.activeSpan}>actifs</span> */}
                         </div>
-                        <span className={classes.activeSpan}>actifs</span>
-                        {/* </div> */}
                     </div>
                 </div>
                 <div to="#" className={`${classes.tile} ${classes.billingTile}`}>

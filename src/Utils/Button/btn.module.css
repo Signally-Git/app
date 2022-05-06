@@ -32,10 +32,10 @@
 .orange {
   color: #FF7954;
   border-color: #FF7954;
+  cursor: pointer;
 }
 
 .orange:hover {
-  cursor: pointer;
   background-color: #FF7954;
   color: #FFF;
 }
@@ -114,6 +114,17 @@
   background-color: transparent;
   color: #402927;
   cursor: pointer;
+}
+
+.white {
+  border-color: transparent;
+  background-color: #FFF;
+  cursor: pointer;
+}
+
+.white:hover {
+  color: #FFF;
+  background-color: #402927;
 }
 
 .disabled {
