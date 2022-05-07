@@ -6,13 +6,14 @@ import { useParams } from 'react-router-dom';
 import request from 'Utils/Request/request';
 const { ClipboardItem } = window;
 
-export default function CopySignature({ signature }) {
+export default function CopySignature() {
     const [btnText, setBtnText] = React.useState('Copier')
+    const [signature, setSignature] = React.useState('')
     const { token } = useParams()
 
     React.useEffect(() => {
         async function getSignature() {
-            await request.get(`/connect/token/check?token=${token}`).then((res) => console.log(res))
+            await request.get(`/connect/token/check?token=${token}`).then((res) => setSignature(res.compiledSignature))
         }
         getSignature()
     }, [])
