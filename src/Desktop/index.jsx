@@ -82,6 +82,10 @@ export default function DesktopRoutes() {
 
             <PrivateRoute exact path="/report" component={Report} />
 
+            <Route path="/users/:token">
+                
+            </Route>
+
             <Route path="/">
                 <Error />
             </Route>

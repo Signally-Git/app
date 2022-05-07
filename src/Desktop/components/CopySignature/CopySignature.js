@@ -2,10 +2,20 @@ import Button from 'Utils/Button/btn'
 import classes from './CopySignature.module.css'
 import parse from 'html-react-parser'
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import request from 'Utils/Request/request';
 const { ClipboardItem } = window;
 
 export default function CopySignature({ signature }) {
     const [btnText, setBtnText] = React.useState('Copier')
+    const { token } = useParams()
+
+    React.useEffect(() => {
+        async function getSignature() {
+            await request.get(`/connect/token/check?token=${token}`).then((res) => console.log(res))
+        }
+        getSignature()
+    }, [])
 
     const handleCopy = async (e) => {
         e.preventDefault()
