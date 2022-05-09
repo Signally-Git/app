@@ -1,7 +1,6 @@
 @import "../../../Assets/style/colors.scss";
 
-@media screen and (max-width: 680px)
-{
+@media screen and (max-width: 680px) {
     .container {
         padding-bottom: 10rem;
         min-height: 100vh;
@@ -17,7 +16,7 @@
     margin-left: auto;
     h1 {
         flex: 100%;
-        margin-left: .5rem;
+        margin-left: 0.5rem;
         color: $signally-brown;
         font-size: 1.75rem;
     }
@@ -48,22 +47,27 @@
     max-width: 48%;
     padding: 1rem 1rem;
     border-radius: 10px;
-    margin: .5rem 0;
-    background: #FFF;
+    margin: 0.5rem 0;
+    background: #fff;
     box-shadow: 0px 20px 20px rgba(206, 142, 124, 0.15);
     &:first-of-type {
         background-color: $signally-orange;
-        span, p, svg, svg path  {
-            color: #FFF!important;
+        span,
+        p,
+        svg,
+        svg path {
+            color: #fff !important;
         }
     }
     &:nth-of-type(2) {
         background-color: $signally-yellow;
-        span, p {
-            color: #FFF;
+        span,
+        p {
+            color: #fff;
         }
     }
-    p, span {
+    p,
+    span {
         font-size: 1rem;
         font-weight: 400;
     }
@@ -72,8 +76,59 @@
     }
 }
 
+.orangeTxt {
+    color: $signally-orange;
+}
+
+.loadingBtn {
+    animation: spin infinite 1s linear;
+    font-size: 1rem;
+    position: absolute;
+    margin-left: auto!important;
+    margin-right: auto;
+    margin: auto;
+    inset: 0;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .deploy {
-    background-color: #E87E41!important;
+    .onHover {
+        display: none;
+        svg {
+            animation: flash infinite ease 2s;
+        }
+    }
+    cursor: pointer;
+    background-color: #e87e41 !important;
+    &:hover {
+        > .onHover {
+            display: flex;
+        }
+        > .onUnHover {
+            display: none;
+        }
+    }
+}
+
+@keyframes flash {
+    from,
+    50%,
+    to {
+        opacity: 1;
+    }
+
+    25%,
+    75% {
+        opacity: 0;
+    }
 }
 
 .syncTile {
@@ -91,7 +146,7 @@
 }
 
 .rotating {
-    animation:spin 4s linear infinite;
+    animation: spin 4s linear infinite;
 }
 
 .syncContainer {
@@ -119,7 +174,8 @@
     transform: rotateY(180deg);
 }
 
-.syncFront, .syncBack{
+.syncFront,
+.syncBack {
     position: absolute;
     width: 100%;
     padding: 1rem;
@@ -132,32 +188,37 @@
     align-items: center;
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
-  }
+}
 
-  .syncBack {
-      background: red;
+.syncBack {
+    background: red;
     transform: rotateY(180deg);
-  }
+}
 
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
 
 .billingTile {
-    background: $signally-brown!important;
+    background: $signally-brown !important;
     * {
-        color: #FFF;
+        color: #fff;
     }
 }
 
 .bigTxt {
     line-height: 1.5;
-    font-size: 2.5rem!important;
-    font-weight: 600!important;
+    font-size: 2.5rem !important;
+    font-weight: 600 !important;
 }
 
 .free {
     line-height: 3rem;
-    font-size: 1.2rem!important;
-    font-weight: 600!important;
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
 }
 
 .row {
@@ -170,7 +231,7 @@
 }
 
 .blackImg {
-    filter: contrast(0)
+    filter: contrast(0);
 }
 
 .watermark {
@@ -189,8 +250,8 @@
 
 .activeSpan {
     text-transform: uppercase;
-    font-weight: 600!important;
-    font-size: .8rem!important;
+    font-weight: 600 !important;
+    font-size: 0.8rem !important;
 }
 
 .fliping {
