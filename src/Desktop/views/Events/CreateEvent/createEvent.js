@@ -72,7 +72,7 @@ export default function CreateEvent({ setDone, event }) {
 
             if (banner) {
                 image.append('file', banner)
-                await request.post(`upload`, image).then(async (res) => {
+                await request.post(`import/file`, image).then(async (res) => {
                     const req = {
                         name: eventName,
                         startAt: start.utc(false),
