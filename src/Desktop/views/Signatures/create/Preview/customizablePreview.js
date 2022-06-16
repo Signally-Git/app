@@ -136,7 +136,7 @@ export default function Preview({ infos, template, options, organisation, ...pro
         replaced = replaced.replaceAll(/{% endif %}/gi, "")
         replaced = replaced.replaceAll(/{# START EVENT #}/gi, "")
         replaced = replaced.replaceAll(/{# END EVENT #}/gi, "")
-        replaced = replaced.replaceAll('{{ absolute_url(asset(event.imagePath)) }}', options?.event?.display?.search('undefined') === - 1 ? options?.event?.display : `http://fakeimg.pl/380x126?font=noto&font_size=14`)
+        replaced = replaced.replaceAll('{{ absolute_url(asset(https://api.staging.signally.io/event/token/{{ user.token }}/image)) }}', options?.event?.display?.search('undefined') === - 1 ? options?.event?.display : `http://fakeimg.pl/380x126?font=noto&font_size=14`)
         replaced =  replaced.replaceAll(/{# START ELSE #}.*{# END ELSE #}/gs, "");
     }
     else {

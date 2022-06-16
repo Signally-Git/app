@@ -84,16 +84,11 @@ const templateAPI = [
 															</td>
 														</tr>
 														{# START PHONE #}
-														{% if user.phone or company.phone %}
+														{% if user.phone %}
 														<tr>
 															{% if user.phone or isPreview %}
 															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
 																<b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b> {% if isPreview %} 0123456789 {% else %} {{ user.phone }} {% endif %}
-															</td>
-															{% endif %}
-															{% if company.phone %}
-															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
-															    <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> {{ company.phone }}
 															</td>
 															{% endif %}
 														</tr>
@@ -302,7 +297,7 @@ const templateAPI = [
 		{% if styles['event']['enabled'] is same as( 'true' ) %}
 		{% if event %}
 				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
-					<a style="height: 126px; display: block;" href="{{ event.link }}"><img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="{{ absolute_url(https://api.staging.signally.io/event/token/{{ user.token }}/image) }}" alt='{{ event.name }}'/></a>
+					<a style="height: 126px; display: block;" href="{{ event.link }}"><img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="{{ absolute_url(asset(https://api.staging.signally.io/event/token/{{ user.token }}/image)) }}" alt='{{ event.name }}'/></a>
 				</td>
 				{# START ELSE #}
 			{% else %}
