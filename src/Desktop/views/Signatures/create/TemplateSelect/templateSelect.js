@@ -84,15 +84,31 @@ const templateAPI = [
 															</td>
 														</tr>
 														{# START PHONE #}
-														{% if user.phone %}
-														<tr>
-															{% if user.phone or isPreview %}
-															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
-																<b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b> {% if isPreview %} 0123456789 {% else %} {{ user.phone }} {% endif %}
-															</td>
-															{% endif %}
-														</tr>
-														{% endif %}
+                                                            {% if isPreview %}
+                                                                <tr>
+                                                                    <td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
+                                                                        {# FAKE WORKPLACEPHONE #}
+                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> 0102030405
+                                                                        {# FAKE ORGANISATION PHONE #}
+                                                                         <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> 0203040506
+                                                                        {# FAKE USER PHONE #}
+                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b>  0304050607
+                                                                    </td>
+                                                                </tr>
+                                                            {% else %}
+                                                                <tr>
+                                                                    <td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
+                                                                     {% if workplacePhone %}
+                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> {{ workplacePhone}} 
+                                                                    {% elseif organisationPhone %}
+                                                                         <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> {{ organisationPhone }}
+                                                                     {% endif %}
+                                                                     {% if user.phone %}0
+                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b>  {{ user.phone }}
+                                                                     {% endif %}
+                                                                    </td>
+                                                                </tr>
+                                                            {% endif %}
 														{# END PHONE #}
 													</tbody>
 												</table>
@@ -266,15 +282,31 @@ const templateAPI = [
 															</td>
 														</tr>
 														{# START PHONE #}
-														{% if user.phone %}
-														<tr>
-															{% if user.phone or isPreview %}
-															<td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
-																<b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b> {% if isPreview %} 0123456789 {% else %} {{ user.phone }} {% endif %}
-															</td>
-															{% endif %}
-														</tr>
-														{% endif %}
+                                                            {% if isPreview %}
+                                                                <tr>
+                                                                    <td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
+                                                                        {# FAKE WORKPLACEPHONE #}
+                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> 0102030405
+                                                                        {# FAKE ORGANISATION PHONE #}
+                                                                         <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> 0203040506
+                                                                        {# FAKE USER PHONE #}
+                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b>  0304050607
+                                                                    </td>
+                                                                </tr>
+                                                            {% else %}
+                                                                <tr>
+                                                                    <td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
+                                                                     {% if workplacePhone %}
+                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> {{ workplacePhone}} 
+                                                                    {% elseif organisationPhone %}
+                                                                         <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> {{ organisationPhone }}
+                                                                     {% endif %}
+                                                                     {% if user.phone %}0
+                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b>  {{ user.phone }}
+                                                                     {% endif %}
+                                                                    </td>
+                                                                </tr>
+                                                            {% endif %}
 														{# END PHONE #}
 													</tbody>
 												</table>
