@@ -127,7 +127,7 @@ const templateAPI = [
 		{% if styles['event']['enabled'] is same as( 'true' ) %}
 		{% if event %}
 				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
-					<a style="height: 126px; display: block;" href="{{ event.link }}"><img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="https://api.staging.signally.io/event/token/'{{ user.token }}'/image" alt='{{ event.name }}'/></a>
+					<a style="height: 126px; display: block;" target="_blank" href="{{ API }}/event/token/{{ user.token }}/link"><img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="{{ API }}/event/token/{{ user.token }}/image" alt='{{ event.name }}'/></a>
 				</td>
 				{# START ELSE #}
 			{% else %}
@@ -324,7 +324,7 @@ const templateAPI = [
 		{% if styles['event']['enabled'] is same as( 'true' ) %}
 		{% if event %}
 				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
-					<a style="height: 126px; display: block;" href="{{ event.link }}"><img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="https://api.staging.signally.io/event/token/'{{ user.token }}'/image" alt='{{ event.name }}'/></a>
+					<a style="height: 126px; display: block;" target="_blank" href="{{ API }}/event/token/{{ user.token }}/link"><img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="{{ API }}/event/token/{{ user.token }}/image" alt='{{ event.name }}'/></a>
 				</td>
 				{# START ELSE #}
 			{% else %}
