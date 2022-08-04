@@ -1,0 +1,26 @@
+@import '../../Assets/style/colors.scss';
+
+.select {
+    font-family: "Montserrat";
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border: none;
+    outline: none;
+    transition: border-color 0.3s;
+    background: #fff;
+    border: 1px solid $signally-lightgrey;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    margin: 1rem auto;
+    &::placeholder {
+        color: #a87069;
+    }
+    &:focus-within {
+        box-shadow: none;
+        border-color: $signally-orange;
+    }
+}

@@ -1,0 +1,53 @@
+@import "../../../Assets/style/colors.scss";
+
+.container {
+    border-radius: 20px;
+    color: $signally-brown;
+    background-color: #fff;
+    width: 55%;
+    padding: 2rem;
+    margin-right: 2rem;
+    height: auto;
+    margin-bottom: auto;
+    position: relative;
+    h2 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+    > div > div > div > svg {
+        color: $signally-brown;
+        position: absolute;
+        right: 0rem;
+        font-size: 1.25rem;
+        top: 0;
+        z-index: 2;
+        &:hover {
+            color: $signally-orange;
+            cursor: pointer;
+        }
+    }
+}
+
+.orangeTxt {
+    color: $signally-orange;
+}
+
+.bold > span {
+    font-weight: bold;
+}
+
+.duration {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-weight: normal;
+    .col {
+        display: flex;
+        flex-direction: column;
+        &:first-child {
+            margin-right: 1rem;
+        }
+    }
+}

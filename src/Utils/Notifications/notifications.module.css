@@ -5,8 +5,6 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-animation: fadeInLeft 1s forwards ease-in-out;
-          animation: fadeInLeft 1s forwards ease-in-out;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -16,11 +14,11 @@
   height: 2.5rem !important;
   border-radius: 10px;
   z-index: 10;
-  padding: 0.5rem 3rem;
+  top: 3.5rem;
   position: fixed;
-  inset: 3rem 0 0 14rem;
   color: #402927;
   font-weight: bold;
+  max-width: 50%;
 }
 
 .container svg {
@@ -34,6 +32,21 @@
   font-size: 1rem;
   margin: 0;
   margin-right: 0.5rem;
+}
+
+.signup {
+  top: 7rem;
+  right: auto;
+  left: 58.5%;
+}
+
+.login {
+  left: 56.5%;
+  right: auto;
+  max-width: 42rem;
+  top: 30%;
+  margin-left: auto;
+  margin-right: 0;
 }
 
 @-webkit-keyframes fadeInLeft {
@@ -93,6 +106,33 @@
   }
 }
 
+.login.fadeOut {
+  -webkit-animation: fadeOutAnimateLogin 1s forwards ease-out !important;
+          animation: fadeOutAnimateLogin 1s forwards ease-out !important;
+}
+
+@-webkit-keyframes fadeOutAnimateLogin {
+  0% {
+    top: 30%;
+    opacity: 1;
+  }
+  100% {
+    top: 25%;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOutAnimateLogin {
+  0% {
+    top: 30%;
+    opacity: 1;
+  }
+  100% {
+    top: 25%;
+    opacity: 0;
+  }
+}
+
 .valid svg {
   background: green;
 }
@@ -100,8 +140,6 @@
 .invalid {
   -webkit-animation: shakeX 1s forwards ease-in-out;
           animation: shakeX 1s forwards ease-in-out;
-  -webkit-animation-delay: 1s;
-          animation-delay: 1s;
 }
 
 .invalid svg {

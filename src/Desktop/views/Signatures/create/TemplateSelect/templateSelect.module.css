@@ -1,0 +1,383 @@
+.modal {
+  width: 100%;
+  margin-left: 3rem;
+  height: 100%;
+  padding-left: 1rem;
+  max-height: 80vh;
+  background-color: #f5eef0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.modal h1 {
+  color: #402927;
+}
+
+.modal .searchContainer {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  border-radius: 20px;
+}
+
+.modal input {
+  padding: 3rem 10rem;
+  width: 100%;
+  text-indent: 1rem;
+  height: 3rem;
+  font-size: 0.9rem;
+  color: grey;
+  border-radius: 30px;
+  background: transparent;
+  border: none;
+}
+
+.modal input:focus {
+  border: none;
+  outline: none;
+}
+
+.modal form {
+  margin-right: auto;
+  width: 100%;
+}
+
+.modal > button {
+  cursor: pointer;
+  margin-right: auto;
+  margin-left: 0;
+  padding: 0;
+}
+
+.modal .orientationContainer {
+  width: 100%;
+}
+
+.modal .orientationContainer form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 3rem;
+  margin-left: 2px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modal .orientationContainer form input {
+  width: 10px;
+}
+
+.modal .orientationContainer form label {
+  margin-right: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.9rem;
+  color: #402927;
+}
+
+.modal .tagsContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modal .tagsContainer input {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.modal .tagsContainer .otherTags,
+.modal .studioStore {
+  padding: 0;
+  height: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  font-size: 0.7rem;
+}
+
+.modal .tagsContainer .otherTags li,
+.modal .studioStore li {
+  position: relative;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  text-transform: uppercase;
+  border-radius: 20px;
+  border: 1px solid #402927;
+  color: #402927;
+  padding: 0.25rem 0.75rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-weight: 600;
+  margin: 0 0.5rem;
+}
+
+.modal .tagsContainer .otherTags li::before,
+.modal .studioStore li::before {
+  content: "";
+  display: block;
+}
+
+.modal .tagsContainer .otherTags li:hover,
+.modal .studioStore li:hover {
+  background: #402927;
+  color: #fff;
+  cursor: pointer;
+}
+
+.modal .tagsContainer .otherTags .active,
+.modal .studioStore .active {
+  font-weight: bold;
+  background: #402927;
+  color: #fff;
+}
+
+.modal .otherTagsContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modal .otherTagsContainer svg {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal .otherTags {
+  max-height: 2rem;
+  margin: 0;
+  margin-right: auto;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: auto;
+  overflow-y: hidden;
+  padding-bottom: 1rem;
+}
+
+.modal .otherTags::-webkit-scrollbar {
+  background: transparent;
+  height: 0;
+}
+
+.modal .studioStore li:first-child {
+  margin-left: 0;
+}
+
+.modal .studioStore .studio,
+.modal .studioStore .store {
+  color: #FF7954;
+  border-color: #FF7954;
+}
+
+.modal .studioStore .studio:hover,
+.modal .studioStore .store:hover {
+  background-color: #FF7954;
+}
+
+.modal .studioStore .studio input,
+.modal .studioStore .store input {
+  cursor: pointer;
+}
+
+.modal .studioStore .activeStudio {
+  background-color: #FF7954 !important;
+  color: #FFF;
+}
+
+.modal h5 {
+  color: #402927;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.modal .templatesContainer {
+  margin-top: 2rem;
+  margin-bottom: -3rem;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.modal .templatesContainer input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+}
+
+.modal .templatesContainer input:hover {
+  cursor: pointer !important;
+}
+
+.modal .templatesContainer li {
+  padding: 1rem;
+  position: relative;
+  max-width: 48%;
+  border-radius: 20px;
+  background-color: #fff;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  border: 1px solid transparent;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+}
+
+.modal .templatesContainer li:hover {
+  border-color: #FF7954;
+}
+
+.modal .templatesContainer li:hover p {
+  color: #FF7954;
+}
+
+.templateName {
+  margin-top: 0;
+  -webkit-transition: color .3s;
+  transition: color .3s;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.btnBackTemplate {
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: auto;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #402927;
+  background: none;
+}
+
+.btnBackTemplate:hover {
+  color: #FF7954;
+}
+
+.btnBackTemplate svg {
+  font-size: 1.2rem;
+  margin-left: 0.65rem;
+}
+
+.btnBackTemplate svg {
+  margin-left: 0;
+  margin-right: 0.65rem;
+}
+
+/* Customize the label (the radioCtr) */
+.radioCtr {
+  display: block;
+  position: relative;
+  padding-left: 1.5rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radioCtr input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  border: 2px solid #402927;
+  border-radius: 50%;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radioCtr input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radioCtr .checkmark:after {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #402927;
+}
+
+.btnContainer button {
+  margin-right: auto;
+  margin-left: 0rem;
+  margin-top: 3rem;
+}

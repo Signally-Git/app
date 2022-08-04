@@ -1,0 +1,66 @@
+.container {
+  border-radius: 20px;
+  color: #402927;
+  background-color: #fff;
+  width: 55%;
+  padding: 2rem;
+  margin-right: 2rem;
+  height: auto;
+  margin-bottom: auto;
+  position: relative;
+}
+
+.container h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.container > div > div > div > svg {
+  color: #402927;
+  position: absolute;
+  right: 0rem;
+  font-size: 1.25rem;
+  top: 0;
+  z-index: 2;
+}
+
+.container > div > div > div > svg:hover {
+  color: #FF7954;
+  cursor: pointer;
+}
+
+.orangeTxt {
+  color: #FF7954;
+}
+
+.bold > span {
+  font-weight: bold;
+}
+
+.duration {
+  margin-top: 1rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: normal;
+}
+
+.duration .col {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.duration .col:first-child {
+  margin-right: 1rem;
+}

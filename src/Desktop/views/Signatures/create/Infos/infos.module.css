@@ -1,0 +1,387 @@
+.infosContainer {
+  width: 100%;
+}
+
+.infosContainer h4 {
+  color: #402927;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: left;
+  margin: 0.5rem 0;
+}
+
+.inputsContainer {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 1.25rem;
+}
+
+.inputsFlex {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.inputsFlex input {
+  background-color: #f8f2f0;
+  padding: 0.5rem 0.75rem;
+}
+
+.inputsFlex input::-webkit-input-placeholder {
+  color: #402927;
+}
+
+.inputsFlex input:-ms-input-placeholder {
+  color: #402927;
+}
+
+.inputsFlex input::-ms-input-placeholder {
+  color: #402927;
+}
+
+.inputsFlex input::placeholder {
+  color: #402927;
+}
+
+.inputsFlex .inputContainer {
+  width: 48%;
+}
+
+.CTAcontainer {
+  width: 100%;
+  height: 2rem;
+  padding: 1.5rem 5% 3rem 5%;
+  position: absolute;
+  z-index: 4;
+  bottom: -1.25rem;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.fileUpload {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #f7f5f5;
+}
+
+.fileUpload div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.fileUpload .rangeUpload {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.fileUpload input {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.fileUpload span {
+  width: 100%;
+  margin: auto;
+  font-size: 0.9rem;
+  line-height: 3rem;
+}
+
+.fileUpload span svg {
+  vertical-align: sub;
+  margin-right: 0.5rem;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+.outlineBtn {
+  width: auto;
+  padding: 1rem 2rem;
+  margin-right: 1rem;
+  background: transparent;
+  color: #402a27;
+  border: 1px solid #402a27;
+}
+
+.inputContainer,
+.inputColorSize {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 0;
+}
+
+.selectColor option .color {
+  position: relative;
+}
+
+.selectColor option .color::before {
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  position: absolute;
+  content: " ";
+  width: 15px;
+  height: 15px;
+  background: #000;
+  border-radius: 50%;
+}
+
+.select {
+  width: 100%;
+  border: none;
+}
+
+.closed svg {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.expandTitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.expandTitle h4 {
+  cursor: pointer;
+}
+
+.expandTitle svg {
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+  margin-left: 0.5rem;
+  font-size: 1rem;
+}
+
+.colorContainer {
+  width: 100%;
+  position: relative;
+}
+
+.colorContainer input {
+  text-indent: 2rem;
+}
+
+.inputColorSize {
+  position: relative;
+}
+
+.styleContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.styleContainer .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.styleContainer .row h6 {
+  color: #FF7954;
+  font-weight: normal;
+  padding-right: 1rem;
+}
+
+.styleContainer .row > div {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.selectSize {
+  position: relative;
+  margin-left: 1rem;
+  width: 100%;
+}
+
+.fontSize {
+  font-size: 0.75rem;
+  position: absolute;
+  bottom: 1.05rem;
+}
+
+.selectFontContainer {
+  width: 100%;
+  position: relative;
+  -webkit-transition: 0.2s height;
+  transition: 0.2s height;
+}
+
+.selectFontContainer svg {
+  font-size: 0.75rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 2;
+}
+
+.selectedFont {
+  outline: none;
+  width: 100%;
+  text-indent: 0.5rem;
+  height: 3rem;
+  z-index: 1;
+  border: 1px solid #f1f1f1;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  background: #fff;
+  cursor: pointer;
+}
+
+.selectFont {
+  padding: 0;
+  position: absolute;
+  z-index: 5;
+  top: auto;
+  bottom: 1.5rem;
+  left: 0;
+  max-height: 10rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.5rem 0;
+  border-radius: 20px 20px 0 0;
+  list-style: none;
+  background-color: #fff;
+  -webkit-box-shadow: 0 20px 30px #EBE4E1;
+          box-shadow: 0 20px 30px #EBE4E1;
+  width: 100%;
+}
+
+.selectFont li {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  align-items: center;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.selectFont li:nth-child(even) {
+  border: 1px solid #fff;
+  border-right: none;
+  border-left: none;
+}
+
+.selectFont li label {
+  cursor: pointer;
+  margin: 0;
+}
+
+.selectFont li:hover, .selectFont li:focus-within {
+  -webkit-transition: .2s;
+  transition: .2s;
+  color: #402927;
+  background-color: #F4EEEF;
+}
+
+.selectFont input {
+  opacity: 0;
+  z-index: 1;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

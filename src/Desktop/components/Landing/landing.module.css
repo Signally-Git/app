@@ -1,0 +1,617 @@
+.loading {
+  -webkit-animation: spin 1s 0s infinite linear forwards;
+          animation: spin 1s 0s infinite linear forwards;
+  stroke-width: 55px !important;
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  padding-top: 1rem;
+  height: 80vh;
+  max-width: 95%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+
+.container h1 {
+  font-size: 1.8rem;
+}
+
+.container p,
+.container label {
+  font-size: 0.9rem;
+}
+
+.container .plugins {
+  max-width: 40%;
+  margin-left: -2px;
+}
+
+.container .takeoff {
+  max-width: 25vw;
+  margin-right: 1rem;
+}
+
+.container form {
+  width: 100%;
+}
+
+.container input::-webkit-input-placeholder {
+  opacity: 0.25;
+}
+
+.container input:-ms-input-placeholder {
+  opacity: 0.25;
+}
+
+.container input::-ms-input-placeholder {
+  opacity: 0.25;
+}
+
+.container input::placeholder {
+  opacity: 0.25;
+}
+
+.container input[type="text"]:focus,
+.container input[type="email"]:focus,
+.container input[type="password"]:focus,
+.container select:focus {
+  -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+          box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+  border-color: #FF7954;
+}
+
+.container select {
+  padding: 0.9rem;
+  margin-top: -0.35rem;
+  outline: none;
+  border-radius: 10px;
+  width: 100%;
+  border-color: transparent;
+}
+
+.descriptionBeta {
+  max-width: 60%;
+  overflow: auto;
+}
+
+.descriptionBeta p {
+  font-size: 1.1rem;
+}
+
+.descriptionBeta div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.descriptionBeta div img:first-child {
+  margin-bottom: .5rem;
+}
+
+.inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.inputs .inputContainer {
+  width: 48%;
+}
+
+.logInContainer {
+  margin: auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-width: 40%;
+}
+
+.logInContainer h2 {
+  margin-bottom: 2rem;
+}
+
+.logInContainer > .slider > div > .formContainer button {
+  margin-top: 2rem;
+}
+
+.registerContainer,
+.logInContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-height: 100%;
+  max-width: 100vw;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.registerContainer > .formContainer,
+.logInContainer > .formContainer {
+  min-width: 40% !important;
+  max-width: 48%;
+  margin: 0;
+}
+
+.registerContainer input,
+.logInContainer input {
+  width: 100%;
+  font-weight: bold;
+}
+
+.registerContainer .inputContainer > div,
+.logInContainer .inputContainer > div {
+  position: relative;
+}
+
+.registerContainer .textIllustration,
+.logInContainer .textIllustration {
+  margin: 0;
+}
+
+.spacing {
+  height: 1rem;
+}
+
+.error p {
+  font-size: 0.7rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.showPassword {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  outline: none;
+  border: none;
+  background: none;
+  right: 1rem;
+  cursor: pointer;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 0;
+}
+
+.inputContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.inputContainer > div {
+  width: 100%;
+}
+
+.inputContainer .inputTitle {
+  margin-bottom: 6px;
+  color: #402a27;
+}
+
+.slider {
+  position: relative;
+  width: 40%;
+}
+
+.slider > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  overflow: auto;
+  /* Optional: show position indicator in red */
+}
+
+.slider > div::-webkit-scrollbar {
+  z-index: -10;
+  width: 0;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+}
+
+.slider > div::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.registerContainer .formContainer button svg {
+  -webkit-animation: spin 1s infinite linear;
+          animation: spin 1s infinite linear;
+}
+
+.formContainer {
+  min-width: 100%;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #fbf4f2;
+  border-radius: 8px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: Montserrat;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  max-height: 80vh;
+  margin: auto;
+  padding: 2rem;
+}
+
+.formContainer:first-child {
+  margin-right: 1rem;
+}
+
+.btnsContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  width: 100%;
+  padding: 0 2rem;
+  margin: auto;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.btnsContainer button {
+  margin: 0;
+  margin-top: 2rem;
+}
+
+.btnsContainer button:last-child:not(:hover) {
+  background: none;
+}
+
+.codeContainer > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.codeContainer input {
+  width: 100%;
+}
+
+.formContainer h2 {
+  text-align: center;
+  font-family: Trebuchet MS;
+  color: #402927;
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+.formContainer h2 span {
+  color: #FF7954;
+}
+
+.textIllustration {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  width: 60%;
+  margin-right: 2rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.textIllustration h1 {
+  color: #FF7954;
+  margin-bottom: 2rem;
+}
+
+.textIllustration p {
+  color: #402927;
+}
+
+.textIllustration p span {
+  color: #FF7954;
+  font-weight: bold;
+}
+
+.textIllustration .takeoff {
+  height: auto;
+  margin-left: -45px;
+}
+
+.congrats {
+  width: 100%;
+  margin: auto;
+  max-width: 30%;
+  font-size: 1.25rem;
+}
+
+.congrats * {
+  opacity: 0;
+  -webkit-animation: fadeIn ease 2s;
+          animation: fadeIn ease 2s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.congrats p {
+  font-size: 1.15rem;
+  -webkit-animation-delay: 0.75s;
+          animation-delay: 0.75s;
+}
+
+.congrats h2 {
+  color: #FF7954;
+}
+
+.disappear {
+  opacity: 1;
+  -webkit-animation: fadeOut ease 0.25s;
+          animation: fadeOut ease 0.25s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.forgot {
+  font-size: .8rem;
+  margin-left: auto;
+  padding-right: .5rem;
+  text-align: right;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+  cursor: pointer;
+  color: #402927;
+}
+
+.forgot:hover {
+  color: #FF7954;
+}
+
+.modal {
+  padding: 2rem;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-shadow: 0 0 40px rgba(64, 41, 39, 0.3);
+          box-shadow: 0 0 40px rgba(64, 41, 39, 0.3);
+  border-radius: 20px;
+  inset: 0;
+  width: 25rem;
+  height: 15rem;
+  z-index: 10;
+  margin: auto;
+  background: #FFF;
+}
+
+.modal p {
+  line-height: 1.5rem;
+  text-align: center;
+}
+
+.modal p .orangeTxt {
+  color: #FF7954;
+  font-weight: bold;
+  display: inline;
+}
+
+.modal .btnsContainer {
+  margin-top: 0rem;
+}
+
+.modal .btnsContainer button {
+  margin-top: 1rem;
+}
+
+.fadeOut {
+  -webkit-animation: fadeOutAnimate 1s forwards ease-out !important;
+          animation: fadeOutAnimate 1s forwards ease-out !important;
+}
+
+@-webkit-keyframes fadeOutAnimate {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOutAnimate {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.error {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  font-weight: bold;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-animation: shakeX 1s forwards ease-in-out;
+          animation: shakeX 1s forwards ease-in-out;
+}
+
+.error > svg {
+  font-size: 1.5rem;
+  margin-left: .5rem;
+  background: red;
+  color: #FFF;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+@-webkit-keyframes shakeX {
+  from,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+            transform: translate3d(-10px, 0, 0);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+            transform: translate3d(10px, 0, 0);
+  }
+}
+
+@keyframes shakeX {
+  from,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+            transform: translate3d(-10px, 0, 0);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+            transform: translate3d(10px, 0, 0);
+  }
+}

@@ -1,12 +1,12 @@
-import { BsArrowRight } from "react-icons/bs";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import classes from './btn.module.css'
 
-export default function Button({ arrow, color, onClick, width, children, ...props }) {
+export default function Button({ arrow, color, defaultBgColor, onClick, width, children, hidden, disabled, ...props }) {
     return <button
         {...props}
         style={{ width, ...props.style }}
-        className={`${classes.btn} ${classes[color]}`}
+        className={`${classes.btn} ${classes[color]} ${defaultBgColor === 'white' ? classes.whiteBg : ""} ${disabled ? classes.disabled : ""} ${hidden ? classes.hidden : ""}`}
         onClick={onClick}>
-        {children}{arrow === true ? <BsArrowRight /> : ""}
+        {arrow === 'left' ? <BsArrowLeft className={classes.left} /> : ""}{children}{arrow === true ? <BsArrowRight /> : ""}
     </button>
 }

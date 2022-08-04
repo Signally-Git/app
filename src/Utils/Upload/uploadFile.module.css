@@ -1,7 +1,7 @@
 .container {
   width: auto;
   position: relative;
-  border: 1px solid #F1ECEA;
+  border: 1px solid #f0e9e9;
   border-radius: 10px;
   padding: 0.5rem;
   -webkit-transition: border-color .3s, -webkit-box-shadow .3s;
@@ -35,11 +35,10 @@
   font-size: 0.8rem;
   text-overflow: ellipsis;
   overflow: hidden;
+  display: block;
+  max-width: 80%;
   margin-left: .5rem;
   white-space: nowrap;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;

@@ -1,0 +1,339 @@
+@import "../../../../Assets/style/colors.scss";
+
+.container {
+    max-height: 60%;
+}
+
+.modal {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 20px;
+    width: 20%;
+    padding: 0 1rem 1rem;
+    z-index: 3;
+    left: 15%;
+    overflow: hidden;
+    text-align: center;
+    right: 0;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.288);
+    backdrop-filter: blur(10px);
+    margin: auto;
+    h4 {
+        line-height: 2rem;
+    }
+    > div:first-child {
+        display: flex;
+        width: 70%;
+    }
+    > span {
+        text-align: justify;
+    }
+    > div:last-child {
+        display: flex;
+        width: 100%;
+    }
+}
+
+.orangeTxt {
+    color: $signally-orange !important;
+}
+
+.colheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    width: 100%;
+    .totalNumber {
+        color: $signally-orange;
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+    button {
+        border: none;
+        color: $signally-brown;
+        background: none;
+        font-size: 0.9rem;
+        &:hover {
+            color: $signally-orange;
+            cursor: pointer;
+        }
+    }
+}
+
+
+.mh100 {
+    max-height: 100%;
+}
+
+.itemsList {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    z-index: 0;
+    min-height: 38vh;
+    max-height: 100%;
+    margin-top: 1rem;
+    width: 100%;
+    form {
+        z-index: 0;
+    }
+    li {
+        margin: 1rem 0;
+        margin-left: auto;
+        width: 100%;
+        height: 3.5rem;
+        transition: height 0.2s, width 0.2s;
+        z-index: 2;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        font-size: 0.85rem;
+        font-weight: 600;
+        position: relative;
+        background: $signally-grey;
+        border-radius: 10px;
+        .checkbox {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            border: none;
+            background: none;
+            opacity: 0;
+            cursor: pointer;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            &:checked ~ span::before {
+                content: "";
+                position: absolute;
+                display: block;
+                z-index: -1;
+                left: -1rem;
+                top: 0;
+                z-index: -1;
+                bottom: 0;
+                margin: auto;
+                height: 8px;
+                border-radius: 50%;
+                width: 8px;
+                background: $signally-orange;
+                transition: 0.2s;
+            }
+        }
+        &:hover {
+            width: 95%;
+            transition: 0.3s;
+            cursor: pointer;
+            // background: rgba($signally-orange, 0.3);
+        }
+        > div {
+            display: flex;
+            justify-content: space-between;
+            span {
+                color: $signally-brown;
+            }
+            > span > span {
+                font-weight: normal;
+                font-size: 0.75rem;
+            }
+        }
+    }
+}
+
+.renameContainer {
+    margin-bottom: auto;
+    max-width: 85%;
+    display: flex;
+    justify-content: space-between;
+    .rename {
+        max-width: 48%;
+    }
+}
+
+.teamList {
+    .teamWithWP.editing {
+        height: 6rem !important;
+        .rename {
+            margin-bottom: .25rem;
+        }
+    }
+    .editing {
+        height: 3.5rem !important;
+    }
+
+    .editing .rename {
+        padding: 0.5rem 1rem;
+        margin: 0 0 0 0;
+        border-radius: 20px;
+    }
+    .rename {
+        margin-bottom: 0;
+        padding: 0;
+        border-radius: 0;
+        // text-indent: .2rem;
+    }
+}
+
+.usersList {
+    max-height: 60%;
+    .editing {
+        height: 9.5rem !important;
+        .editDiv {
+            bottom: 0.5rem;
+        }
+    }
+    .editDiv {
+        top: auto;
+        bottom: 1rem;
+    }
+}
+
+.editDiv {
+    animation: fadeIn 0.2s forwards;
+    // background-color: rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 10px;
+    inset: auto 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 70%;
+    max-height: 70%;
+    bottom: 1rem;
+    input:not(input[type="file"]) {
+        height: 1rem;
+        font-size: 0.75rem;
+        margin: 0.5rem 0 0 0;
+    }
+    .inputsContainer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        input:not(input[type="file"]) {
+            min-width: 48%;
+            max-width: 48%;
+        }
+        z-index: 5;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 7rem;
+    }
+}
+
+.editing {
+    height: 17rem !important;
+    .actionsContainer {
+        top: 1.4rem;
+    }
+}
+
+.actionsContainer,
+.actionsContainerAdmin {
+    transition: 0.2s;
+    position: absolute;
+    right: 1rem;
+    bottom: auto;
+    top: auto;
+    z-index: 2;
+    width: 2.5rem;
+    align-items: center;
+    svg {
+        color: $signally-brown;
+        opacity: 0.6;
+    }
+    svg:first-child {
+        font-size: 1rem;
+    }
+    svg:hover {
+        color: $signally-orange;
+        opacity: 1;
+    }
+}
+
+.actionsContainerAdmin {
+    justify-content: center !important;
+    top: auto;
+}
+
+.rename:not(:disabled) {
+    z-index: 5;
+    background: #fff;
+}
+
+.rename {
+    margin-bottom: auto;
+    transition: 0.2s;
+    background: none;
+    width: 80%;
+    border: none;
+    opacity: 1;
+    color: $signally-brown;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+}
+
+.selected {
+    width: 95% !important;
+}
+
+.groupName {
+    color: rgba($signally-brown, 0.75) !important;
+    padding: 0.25rem 0.75rem;
+    padding-top: 0.25rem !important;
+    border-radius: 20px;
+    background-color: rgba($signally-brown, 0.05);
+    margin-top: 0.5rem;
+    font-weight: 600;
+    font-size: 0.6rem !important;
+}
+
+.searchInput {
+    display: flex;
+    position: relative;
+    svg {
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        left: 0.75rem;
+        position: absolute;
+    }
+}
+
+.search {
+    text-indent: 2rem;
+    border-radius: 20px;
+    width: 100%;
+    outline: none;
+    border: 1px solid transparent;
+    margin: 1rem 0;
+    padding: 0.75rem 0.5rem;
+    background: $signally-grey;
+    display: block;
+    transition: 0.2s;
+    &:focus {
+        border-color: $signally-orange;
+    }
+}
+
+.btnReady .checkmark {
+    color: $signally-orange
+}

@@ -3,17 +3,19 @@
 .container {
     display: flex;
     align-items: center;
-    animation: fadeInLeft 1s forwards ease-in-out;
+    // animation: fadeInLeft 1s forwards ease-in-out;
     justify-content: center;
     width: fit-content!important;
     height: 2.5rem!important;
     border-radius: 10px;
     z-index: 10;
-    padding: 0.5rem 3rem;
+    // padding: 0.5rem 3rem;
+    // inset: 3rem 0 0 15rem;
+    top: 3.5rem;
     position: fixed;
-    inset: 3rem 0 0 14rem;
     color: $signally-brown;
     font-weight: bold;
+    max-width: 50%;
     svg {
         border-radius: 50%;
         padding: 4px;
@@ -26,6 +28,22 @@
         margin: 0;
         margin-right: 0.5rem;
     }
+}
+
+
+.signup {
+    top: 7rem;
+    right: auto;
+    left: 58.5%;
+}
+
+.login {
+    left: 56.5%;
+    right: auto;
+    max-width: 42rem;
+    top: 30%;
+    margin-left: auto;
+    margin-right: 0;
 }
 
 @keyframes fadeInLeft {
@@ -58,13 +76,27 @@
     }
 }
 
+.login.fadeOut {
+    animation: fadeOutAnimateLogin 1s forwards ease-out!important;
+}
+
+@keyframes fadeOutAnimateLogin {
+    0% {
+        top: 30%;
+        opacity: 1;
+    }
+    100% {
+        top: 25%;
+        opacity: 0;
+    }
+}
+
 .valid svg {
     background: green;
 }
 
 .invalid {
     animation: shakeX 1s forwards ease-in-out;
-    animation-delay: 1s;
     svg {
         background: red;
     }

@@ -1,0 +1,130 @@
+.container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container > h5 {
+  text-transform: uppercase;
+  text-align: left;
+  margin: 0;
+}
+
+.container > h5 .orangeTxt {
+  color: #FF7954;
+}
+
+.container > p {
+  font-size: 1rem;
+}
+
+.swiperContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.disabled {
+  opacity: 0.3;
+}
+
+.enabled {
+  opacity: 1;
+}
+
+.active {
+  opacity: 1;
+  color: #FF7954;
+}
+
+.menuLinks {
+  padding: 0;
+  width: calc(25% -2rem);
+  height: 7rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  list-style: none;
+}
+
+.menuLinks li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+.menuLinks li svg {
+  margin-left: .5rem;
+}
+
+.menuLinks li:hover {
+  opacity: 1;
+  color: #FF7954;
+  cursor: pointer;
+}
+
+.swiper {
+  position: relative;
+  max-height: 10rem;
+  height: 10rem;
+}
+
+.btnsContainer {
+  position: absolute;
+  bottom: 0;
+  left: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: auto;
+  width: 55%;
+  margin-right: auto;
+}
+
+.btnsContainer :first-child {
+  margin-left: 0;
+}
+
+.content {
+  font-size: .9rem;
+  max-height: 12rem;
+  padding: 1.5rem;
+  padding-right: calc(25% -2rem);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.content > button {
+  margin-left: 0;
+  position: absolute;
+  bottom: 0;
+  left: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: auto;
+}

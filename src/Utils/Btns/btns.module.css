@@ -1,0 +1,12 @@
+.container {
+  position: absolute;
+  bottom: 1rem;
+  left: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container button:last-child {
+  margin-left: 1rem;
+}

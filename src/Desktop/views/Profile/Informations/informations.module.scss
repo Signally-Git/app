@@ -1,0 +1,182 @@
+@import "../../../../Assets/style/colors.scss";
+
+.container {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    img {
+        height: 85%;
+        max-height: 70vh;
+        margin: auto;
+    }
+}
+
+.tabContainer {
+    padding: 2rem;
+    margin-bottom: auto;
+    position: relative;
+    background: #fff;
+    border-radius: 20px;
+    overflow: auto;
+    width: 50%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.row {
+    width: 100%;
+    // align-items: center;
+    justify-content: space-between;
+    display: flex;
+    > div {
+        width: 48%;
+    }
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: auto;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    li {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        cursor: pointer;
+    }
+    li::after {
+        content: " ";
+        display: block;
+        width: 60%;
+        margin: auto;
+        height: 2px;
+        margin-top: 0.5rem;
+    }
+    .active {
+        transition: 0.2s;
+        color: $signally-orange;
+        &::after {
+            transition: 0.2s;
+            background-color: $signally-orange;
+        }
+    }
+}
+
+/* Rounded sliders */
+.slider {
+    border-radius: 30px;
+}
+
+.slider:before {
+    border-radius: 30px;
+}
+
+.inputsContainer {
+    padding-top: 1.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    label {
+        color: #c9847c;
+        font-weight: 400;
+        font-size: 0.8rem;
+    }
+    ~ button {
+        margin-top: 1.5rem !important;
+    }
+}
+
+.inputContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+    > div {
+        margin-top: 0.5rem;
+        text-align: center;
+    }
+    :disabled {
+        color: $signally-orange;
+        font-weight: bold;
+    }
+}
+
+.iconsContainer {
+    margin-top: 0.5rem;
+    width: 100%;
+    background: #fff;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    label:first-of-type {
+        font-size: 0.85rem;
+    }
+    label {
+        margin: 0;
+        color: #000 !important;
+    }
+    svg {
+        cursor: pointer;
+    }
+}
+
+.socialsContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: $signally-orange;
+    label {
+        font-size: 0.9rem;
+        color: $signally-orange;
+    }
+    svg {
+        cursor: pointer;
+        margin-left: 0.5rem;
+    }
+}
+
+.iconInput {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    svg {
+        position: absolute;
+        left: 1rem;
+        z-index: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+}
+
+.btnsContainer {
+    margin-top: auto;
+    bottom: 2rem;
+    left: 2rem;
+    right: auto;
+    display: flex;
+    // width: 43%;
+    justify-content: space-around;
+    margin-right: auto;
+    > button:last-child {
+        margin-left: 1rem;
+    }
+}

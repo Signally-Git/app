@@ -1,4 +1,9 @@
+.whiteBg {
+  background-color: #fff;
+}
+
 .btn {
+  background-color: transparent;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -7,7 +12,6 @@
   text-align: center;
   -webkit-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-  background-color: #fff;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -28,10 +32,10 @@
 .orange {
   color: #FF7954;
   border-color: #FF7954;
+  cursor: pointer;
 }
 
 .orange:hover {
-  cursor: pointer;
   background-color: #FF7954;
   color: #FFF;
 }
@@ -46,6 +50,11 @@
   margin-left: .5rem;
   stroke: #FF7954;
   stroke-width: 1px;
+}
+
+.left {
+  margin-left: 0 !important;
+  margin-right: .5rem;
 }
 
 .orangeFill {
@@ -105,4 +114,23 @@
   background-color: transparent;
   color: #402927;
   cursor: pointer;
+}
+
+.white {
+  border-color: transparent;
+  background-color: #FFF;
+  cursor: pointer;
+}
+
+.white:hover {
+  color: #FFF;
+  background-color: #402927;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+.hidden {
+  opacity: 0;
 }

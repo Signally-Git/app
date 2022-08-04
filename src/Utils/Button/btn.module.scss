@@ -1,12 +1,16 @@
 @import "../../Assets/style/colors.scss";
 
+.whiteBg {
+    background-color: #fff;
+}
+
 .btn {
+    background-color: transparent;
     display: flex;
     border-radius: 20px;
     border: 1px solid;
     text-align: center;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-    background-color: #fff;
     justify-content: center;
     align-items: center;
     margin: 0.5rem auto;
@@ -22,8 +26,8 @@
 .orange {
     color: $signally-orange;
     border-color: $signally-orange;
+    cursor: pointer;
     &:hover {
-        cursor: pointer;
         background-color: $signally-orange;
         color: #FFF;
         svg {
@@ -36,6 +40,11 @@
         stroke: $signally-orange;
         stroke-width: 1px;
     }
+}
+
+.left {
+    margin-left: 0!important;
+    margin-right: .5rem;
 }
 
 .orangeFill {
@@ -86,4 +95,22 @@
         color: $signally-brown;
         cursor: pointer;
     }
+}
+
+.white {
+    border-color: transparent;
+    background-color: #FFF;
+    cursor: pointer;
+    &:hover {
+        color: #FFF;
+        background-color: $signally-brown;
+    }
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+.hidden {
+    opacity: 0;
 }

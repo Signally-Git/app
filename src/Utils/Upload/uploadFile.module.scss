@@ -3,7 +3,7 @@
 .container {
     width: auto;
     position: relative;
-    border: 1px solid $signally-grey;
+    border: 1px solid $signally-lightgrey;
     border-radius: 10px;
     padding: 0.5rem;
     transition: border-color .3s, box-shadow .3s;
@@ -28,9 +28,10 @@
         font-size: 0.8rem;
         text-overflow: ellipsis;
         overflow: hidden;
+        display: block;
+        max-width: 80%;
         margin-left: .5rem;
         white-space: nowrap;
-        display: flex;
         align-items: center;
         svg {
             margin-right: 0.5rem;

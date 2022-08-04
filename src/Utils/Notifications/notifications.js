@@ -4,19 +4,19 @@ import * as React from 'react'
 
 const NotificationContext = React.createContext()
 
-function NotificationProvider({ children }) {
+function NotificationProvider({ children, signup, login }) {
     const [message, setMessage] = React.useState()
 
     React.useEffect(() => {
         const timeout = setTimeout(() => {
             setMessage((a) => ({ ...a, disappear: true }));
-        }, 4500);
+        }, 5500);
 
         return () => clearTimeout(timeout);
     }, [message])
 
     return <NotificationContext.Provider value={setMessage}>
-        {message && <div className={`${classes[message.status]} ${classes.container} ${message.disappear ? classes.fadeOut : ""}`}>
+        {message && <div className={`${signup ? classes.signup : login ? classes.login : ""} ${classes[message.status]} ${classes.container} ${message.disappear ? classes.fadeOut : ""}`}>
             <p>{message.content}</p>
             {message.status === "valid" ?
                 <ImCheckmark /> :
