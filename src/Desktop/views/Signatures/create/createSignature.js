@@ -169,37 +169,8 @@ function CreateSignatureComponent() {
   }, [modal, signatureName])
 
   const handleSave = async () => {
-    // const toSave = {
-    //   ...signatureInfo,
-    //   logo: { ...signatureInfo.logo, path: "PLACEHOLDER_COMPANY_ICON" },
-    //   firstName: { ...signatureInfo.firstName, value: "PLACEHOLDER_FIRST_NAME" },
-    //   lastName: { ...signatureInfo.lastName, value: "PLACEHOLDER_LAST_NAME" },
-    //   jobName: { ...signatureInfo.jobName, value: "PLACEHOLDER_POSITION" },
-    //   company: { ...signatureInfo.company, value: "PLACEHOLDER_COMPANY" },
-    //   addressStreet: { ...signatureInfo.addressStreet, value: "PLACEHOLDER_ADDRESS_STREET" },
-    //   addressInfo: { ...signatureInfo.addressInfo, value: "PLACEHOLDER_ADDRESS_INFO" },
-    //   addressZipcode: { ...signatureInfo.addressZipcode, value: "PLACEHOLDER_ADDRESS_ZIPCODE" },
-    //   addressCity: { ...signatureInfo.addressCity, value: "PLACEHOLDER_ADDRESS_CITY" },
-    //   addressCountry: { ...signatureInfo.country, value: "PLACEHOLDER_ADDRESS_COUNTRY" },
-    //   mobile: { ...signatureInfo.mobile, value: "PLACEHOLDER_MOBILE" },
-    //   phone: { ...signatureInfo.phone, value: "PLACEHOLDER_PHONE" },
-
-    //   event: signatureOption.event.enabled === true ? "PLACEHOLDER_EVENT_BANNER" : "",
-    // }
-    const test = <Preview infos={signatureInfo} options={signatureOption} template={selectedTemplate.html} />
-
-    const req = {
-      name: signatureName,
-      html: renderToString(test)
-    }
-
-    await request.post('signature_templates', req).then(async (res) => {
-      await request.post(`signatures`, { name: signatureName, html: selectedTemplate.html, signatureTemplate: res.data['@id'], organisation: JSON.parse(localStorage.getItem('user')).organisation }).then(
+      await request.post(`signatures`, { name: signatureName, html: selectedTemplate.html, signatureTemplate: selectedTemplate['@id'], organisation: JSON.parse(localStorage.getItem('user')).organisation }).then(
         async (result) => {
-          if (company.data.signatures?.length === 0 && !user.data?.compiledSignature)
-            await request.patch(user.data['@id'], { signature: result.data['@id'] }, {
-              headers: { 'Content-Type': 'application/merge-patch+json' }
-            });
           notification({ content: <>Votre signature <span style={{ color: "#FF7954" }}>{signatureName}</span> a été créée avec succès</>, status: "valid" })
           setTemplateIdToPatch(result.data.id)
           const styles = [
@@ -534,6 +505,7 @@ function CreateSignatureComponent() {
           request.post('signature_styles/batch', styles).then((r) => {
             console.log(r.data)
           })
+
           // GERER ICI
           // request.post('signature_styles', { signature: result.data['@id'], signatureTemplate: res.data['@id'], })
           // console.log(localStorage.getItem('user').signature_template_id)
@@ -546,6 +518,7 @@ function CreateSignatureComponent() {
           //     await axios.patch(`${API}user/${localStorage.getItem('user_id')}?access_token=${localStorage.getItem('token')}`, req)
           //       .then((res) => console.log(res))
           //   })
+
           if (window.location.hash === "#onboarding")
             history.goBack()
           else
@@ -555,8 +528,6 @@ function CreateSignatureComponent() {
         console.log(err)
         notification({ content: <>Une erreur s'est produite. Veuillez réessayer</>, status: "invalid" })
       })
-    })
-
   }
 
   useEffect(() => {
