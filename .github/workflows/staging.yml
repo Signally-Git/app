@@ -1,0 +1,52 @@
+name: Publish to S3
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "staging" ]
+  pull_request:
+    branches: [ "staging" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [16.x]
+        
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        ref: staging
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3.4.1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Yarn Install
+      run: |
+        CI=false yarn install
+    - name: Production Build
+      run: |
+        CI=false yarn build
+      env:
+        CI: false
+    # Just want to test if deploying to S3 is working. Deactivating unit tests for debugging purpose.
+    #- name: Unit Tests
+    #  run: |
+    #    CI=false yarn test
+    - name: Deploy to S3
+      uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --acl public-read --delete
+      env:
+        AWS_S3_BUCKET: ${{ secrets.AWS_STAGING_BUCKET_NAME }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_STAGING_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_STAGING_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_STAGING_REGION }}
+        SOURCE_DIR: "build"
