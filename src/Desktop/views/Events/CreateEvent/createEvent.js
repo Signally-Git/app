@@ -8,7 +8,6 @@ import moment from 'moment';
 import UploadFile from 'Utils/Upload/uploadFile';
 import { useNotification } from 'Utils/Notifications/notifications';
 import request from 'Utils/Request/request';
-import { API } from 'config';
 import Btns from 'Utils/Btns/btns';
 import { useHistory } from 'react-router-dom';
 
@@ -128,7 +127,7 @@ export default function CreateEvent({ setDone, event }) {
             <Input required value={eventLink} onChange={(e) => setEventLink(e.target.value)} style={{ width: "48%" }} placeholder="Lien" type="text" />
         </div>
         <div className={classes.currentEventPreview}>
-            {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={API + event.imagePath} title={event.banner?.name} /> : ""}
+            {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={process.env.REACT_APP_API_URL + event.imagePath} title={event.banner?.name} /> : ""}
         </div>
         <div className={classes.uploadContainer}>
 

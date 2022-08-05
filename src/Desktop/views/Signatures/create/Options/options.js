@@ -1,13 +1,7 @@
 import classes from './options.module.css'
 import { HexColorInput, HexColorPicker } from "react-colorful";
-import { BsUpload } from "react-icons/bs";
-import { IoMdClose } from "react-icons/io";
 import { Range } from "react-range";
 import { useEffect, useRef, useState } from 'react';
-import DndSocials from './socialsDnd';
-import FooterDnd from './FooterDnd/FooterDnd';
-import UploadFile from 'Utils/Upload/uploadFile';
-import { API } from 'config';
 import CustomSelect from 'Utils/CustomSelect/customselect';
 
 // Options tab
@@ -93,7 +87,7 @@ export default function Options(props) {
             </>
     }
     useEffect(() => {
-        props.setData({ ...props.data, event: { ...props.data?.event, display: `${API}${props?.data?.event?.list[0]?.imagePath}` } })
+        props.setData({ ...props.data, event: { ...props.data?.event, display: `${process.env.REACT_APP_API_URL}${props?.data?.event?.list[0]?.imagePath}` } })
     }, [props?.display?.event?.enabled, props?.display?.event?.padding])
     return (
         <>
@@ -313,9 +307,9 @@ export default function Options(props) {
                     </div>
                     {props.data.event.enabled && props.data.event.list?.length > 0 ?
                         <>
-                       <CustomSelect onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${API}${e}`, selected: e} })} 
+                       <CustomSelect onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${process.env.REACT_APP_API_URL}${e}`, selected: e} })} 
                        items={props.data.event.list} getValue={'imagePath'} display={'name'} />
-                            {/* <form onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${API}${JSON.parse(e.target.value).imagePath}`, selected: JSON.parse(e.target.value) } })}>
+                            {/* <form onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${process.env.REACT_APP_API_URL}${JSON.parse(e.target.value).imagePath}`, selected: JSON.parse(e.target.value) } })}>
                                 <select defaultValue={JSON.stringify(props.data.event.selected)}>
                                     {props.data.event.list.map((event) => {
                                         return <option key={event.id} value={JSON.stringify(event)}>{event.name}</option>
@@ -329,7 +323,7 @@ export default function Options(props) {
                                     min={0}
                                     max={50}
                                     values={[props.data.event.padding]}
-                                    onChange={(range) => props.setData({ ...props.data, event: { ...props.data.event, padding: range, display: `${API}${props?.data?.event?.selected.imagePath}` } })}
+                                    onChange={(range) => props.setData({ ...props.data, event: { ...props.data.event, padding: range, display: `${process.env.REACT_APP_API_URL}${props?.data?.event?.selected.imagePath}` } })}
                                     renderTrack={({ props, children }) => (
                                         <div {...props} className={classes.rangeSlider} style={{
                                             ...props.style,

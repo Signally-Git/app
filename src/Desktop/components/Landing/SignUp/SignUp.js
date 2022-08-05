@@ -12,7 +12,6 @@ import classes from '../landing.module.css'
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useNotification } from 'Utils/Notifications/notifications';
 import axios from 'axios';
-import { API } from 'config';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { ImCross } from 'react-icons/im';
 
@@ -97,7 +96,7 @@ const Signup = () => {
     }
     if (valid) {
       setLoading(true)
-      await axios.post(API + 'register', req).then(() => {
+      await axios.post(process.env.REACT_APP_API_URL + 'register', req).then(() => {
         setSent(true)
       }).catch((err) => {
         if (err?.response?.data?.title === 'App\\Exception\\Organisation\\OrganisationWithSameSirenAlreadyExistsDomainException')

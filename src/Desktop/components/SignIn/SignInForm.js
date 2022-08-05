@@ -3,7 +3,6 @@ import axios from 'axios'
 import { useState } from 'react'
 import MagicLink from 'Assets/img/magic-link.png'
 import { useHistory } from 'react-router'
-import { API } from 'config'
 
 function SignInForm() {
     const [mail, setMail] = useState("")
@@ -13,7 +12,7 @@ function SignInForm() {
 
     const handleSignIn = async (e) => {
         e.preventDefault()
-        await axios.get(`${API}auth/magiclink/login?email=${mail}&code=${code}`).then((res) => {
+        await axios.get(`${process.env.REACT_APP_API_URL}auth/magiclink/login?email=${mail}&code=${code}`).then((res) => {
             localStorage.setItem("token", res.data.authData.access_token)
             localStorage.setItem("user_id", res.data.authData.user_id)
             localStorage.setItem("organisation_id", res.data.authData.organisation_id)
@@ -25,7 +24,7 @@ function SignInForm() {
         e.preventDefault()
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (re.test(String(mail).toLowerCase())) {
-            await axios.get(`${API}auth/magiclink/send?email=${mail}`).then((res) => {
+            await axios.get(`${process.env.REACT_APP_API_URL}auth/magiclink/send?email=${mail}`).then((res) => {
                 setCode(res.data.code)
             })
             setStep(1)

@@ -3,7 +3,6 @@ import classes from './imgUpload.module.css'
 import { IoMdClose } from "react-icons/io";
 import { BsUpload } from "react-icons/bs";
 import axios from 'axios';
-import { API } from 'config';
 import Logo from 'Utils/Logo/logo';
 import Button from 'Utils/Button/btn';
 import request from 'Utils/Request/request';
@@ -81,7 +80,7 @@ function ImgUploader() {
                 {message && <span className={classes.message}>{message}</span>}
                 <input type="text" readOnly value={path.id} onClick={() => copyToClipboard()} disabled={path.path !== "Cliquez ici pour copier le lien de l'image" ? false : true} />
                 <div className={classes.inputContainer}>
-                    {path.path !== "Cliquez ici pour copier le lien de l'image" ? <img className={classes.imgPreview} src={`${API}${path.path}`} /> : ""}
+                    {path.path !== "Cliquez ici pour copier le lien de l'image" ? <img className={classes.imgPreview} src={`${process.env.REACT_APP_API_URL}${path.path}`} /> : ""}
                     <div className={classes.fileUpload}>
                         {imgName.length > 0 ? (
                             <div className={classes.uploadedFile} onClick={() => {
