@@ -6,7 +6,6 @@ import CreateEvent from './CreateEvent/createEvent'
 import { FiTrash } from 'react-icons/fi'
 import { useNotification } from 'Utils/Notifications/notifications'
 import request from 'Utils/Request/request'
-import { API } from 'config'
 import Modal from 'Utils/Modals/modal'
 import moment from 'moment';
 
@@ -69,7 +68,7 @@ function Events() {
                             }}
                         >
                             <input disabled={(JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH") ? false : true} type="checkbox" name="events" className={classes.checkbox} defaultChecked={edit} onChange={() => { setCreate(false); setEdit(true); setPreview({ activeEvent, past: status === "past", index }) }} />
-                            <img className={classes.bannerPreview} src={`${API}${activeEvent.imagePath}`} />
+                            <img className={classes.bannerPreview} src={`${process.env.REACT_APP_API_URL}${activeEvent.imagePath}`} />
                             <div className={classes.eventText}>
                                 <span className={classes.active}>{activeEvent.name}</span>
                                 <span className={classes.duration}>
@@ -155,7 +154,7 @@ function Events() {
                                     <h2><span className={classes.orangeTxt}>{activeEvents[preview?.index].name}</span>
                                         {/* <FiEdit onClick={() => setEdit(!edit)} /> */}
                                     </h2>
-                                    <img src={`${API}${activeEvents[preview?.index]?.imagePath}`} />
+                                    <img src={`${process.env.REACT_APP_API_URL}${activeEvents[preview?.index]?.imagePath}`} />
                                 </div>
                             </div>
                             <div className={classes.back}>
