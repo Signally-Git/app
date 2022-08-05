@@ -1,360 +1,16 @@
 import classes from "./templateSelect.module.css";
-import { useState } from "react";
-// import Template from './template';
+import { useState, useEffect } from "react";
 import Button from "Utils/Button/btn";
 import Template from "../Preview/customizablePreview";
+import request from "Utils/Request/request";
 
 // Displaying the list of bought and free templates (Studio, Store) and allows to select one to create custom signature
-
-const templateAPI = [
-	{
-		id: 0,
-		alignment: "Horizontal",
-		tags: ["studio"],
-		name: "Mama Shelter",
-		html: `
-	{# START GREETINGS #}
-	<span style="padding-bottom: {{ styles['greetingsPadding']['padding'] }};">
-	{% if greetings %}
-		{{ greetings }}
-	{% endif %}
-</span>
-	{# END GREETINGS #}
-<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:0">
-	<tbody>
-		<tr>
-			<td valign="top" style="width:380px; height: 108px; border: none; padding: 0cm">
-				<table class="x_MsoTableGrid" border="0" cellspacing="2" cellpadding="2" style="border-collapse:collapse; border:none">
-					<tbody>
-						<tr>
-							<td valign="top" style="width:108px; border: none; padding: 0cm 8px 0 0; font-size: 8.5pt;">
-								<p class="x_MsoNormal" style="height: 108px; margin: 0; padding: 0;" height="108" valign="middle">
-								<span style="height: 108px;" height="108">
-								<a href="{{company.websiteUrl}}"><img style="width: 108px; height: 108px; vertical-align: middle;" height="108" width="108" valign="middle" src="{{ absolute_url(asset(logo)) }}" alt="{{ company.name }}"/></a>
-							</span>
-
-								</p>
-							</td>
-							<td valign="middle" style="box-sizing: border-box; border: none; padding: 0;">
-								<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:none; border-color: {{ styles['divColor']['color'] }};">
-									<tbody>
-										<tr> 
-											<td style="background: {{ styles['divColor']['color'] }}; width: 12px; height: 108px; border-radius: 4px 0 0 4px;"/>
-											<td style="box-sizing: border-box; border: none; background: {{ styles['divColor']['color'] }}; font-size: 8pt; height: 108px; width: 240px">
-												<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:none; font-size: 8pt;">
-													<tbody>
-														<tr height="1">
-															<td style="font-size: 8pt; padding:0">
-																<b style="color:{{ styles['firstName']['color'] }}; text-decoration: {{ styles['firstName']['textDecoration'] }}; font-style: {{ styles['firstName']['fontStyle'] }}; font-weight: {{ styles['firstName']['fontWeight'] }}; font-size: 8pt; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
-																	{% if isPreview %} Prénom {% else %} {{ user.firstName }} {% endif %}
-                                                                </b>
-																<b style="color:{{ styles['lastName']['color'] }}; text-decoration: {{ styles['lastName']['textDecoration'] }} ;font-style: {{ styles['lastName']['fontStyle'] }} ;font-weight: {{ styles['lastName']['fontWeight'] }}; font-size: 8pt; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
-																{% if isPreview %} Nom {% else %} {{ user.lastName }} {% endif %}
-                                                                </b>
-															</td>
-														</tr>
-														<tr style="height: 1px">
-															<td>
-																<span style="color:{{ styles['jobName']['color'] }}; text-decoration: {{ styles['jobName']['textDecoration'] }} ;font-style: {{ styles['jobName']['fontStyle'] }} ;font-weight: {{ styles['jobName']['fontWeight'] }}; padding: 0cm; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
-																{% if isPreview %} Poste {% else %} {{ user.position }} {% endif %}
-																</span>
-															</td>
-														</tr>
-														<tr height="5"></tr>
-														<tr>
-															<td>
-																<span style="color:{{ styles['companyName']['color'] }}; text-decoration: {{ styles['companyName']['textDecoration'] }} ;font-style: {{ styles['companyName']['fontStyle'] }}; font-weight: {{ styles['companyName']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
-                                                                {{ company.name }}</span>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<span style="color:{{ styles['addressStreet']['color'] }}; text-decoration: {{ styles['addressStreet']['textDecoration'] }} ;font-style: {{ styles['addressStreet']['fontStyle'] }}; font-weight: {{ styles['addressStreet']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{{ address.street }}
-																	{{ address.streetInfo }}
-																</span>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<span style="color:{{ styles['addressZipcode']['color'] }}; text-decoration: {{ styles['addressZipcode']['textDecoration'] }} ;font-style: {{ styles['addressZipcode']['fontStyle'] }} ;font-weight: {{ styles['addressZipcode']['fontWeight'] }}font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
-																	{{ address.zipCode }}
-																	{{ address.city }}
-																	{{ address.country }}
-																</span>
-															</td>
-														</tr>
-														{# START PHONE #}
-                                                            {% if isPreview %}
-                                                                <tr>
-                                                                    <td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
-                                                                        {# FAKE WORKPLACEPHONE #}
-                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> 0102030405
-                                                                        {# FAKE ORGANISATION PHONE #}
-                                                                         <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> 0203040506
-                                                                        {# FAKE USER PHONE #}
-                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b>  0304050607
-                                                                    </td>
-                                                                </tr>
-                                                            {% else %}
-                                                                <tr>
-                                                                    <td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
-                                                                     {% if workplacePhone %}
-                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> {{ workplacePhone}} 
-                                                                    {% elseif organisationPhone %}
-                                                                         <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> {{ organisationPhone }}
-                                                                     {% endif %}
-                                                                     {% if user.phone %}0
-                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b>  {{ user.phone }}
-                                                                     {% endif %}
-                                                                    </td>
-                                                                </tr>
-                                                            {% endif %}
-														{# END PHONE #}
-													</tbody>
-												</table>
-											</td>
-											<td style="background: {{ styles['divColor']['color'] }}; width: 12px; border-radius: 0 4px 4px 0;"></td>
-										</tr></tbody></table>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
-		</tr>
-		{# START EVENT #}
-		{% if event or isPreview %}
-		<tr>
-		{% if styles['event']['enabled'] is same as( 'true' ) %}
-		{% if event %}
-				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
-					<a style="height: 126px; display: block;" target="_blank" href="{{ API }}/event/token/{{ user.token }}/link"><img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="{{ API }}/event/token/{{ user.token }}/image" alt='{{ event.name }}'/></a>
-				</td>
-				{# START ELSE #}
-			{% else %}
-				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
-					<img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="http://fakeimg.pl/380x126?font=noto&font_size=14" alt='Event'/>
-				</td>
-			{% endif %}
-			{% endif %}
-			{# END ELSE #}
-			
-		</tr>
-		{% endif %}
-		{# END EVENT #}
-		<tr>
-			<td style="width:380px; box-sizing: border-box; border: none; padding-top: 12px;">
-				<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border:none; width: 380px;">
-					<tbody>
-						<tr>
-							<td style="border-collapse:collapse; background: #000; width: 8px; height: 44px;border-radius: 4px 0 0 4px;"></td>
-							<td style="background: black">
-								<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0">
-									<tbody>
-										<tr>
-											<td width="360" style="width:360px; border: none; background:black; padding: 0cm" valign="middle">
-												<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0">
-													<tbody>
-														<tr>
-															<td nowrap style="width:65px; border: none; background:black; padding: 0cm; font-size: 9.5pt;">
-																<p class="x_MsoNormal" style="vertical-align: middle;margin: 0">
-																	<b style="color:white; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: 12px; vertical-align: text-top; display: grid;" nowrap>Follow
-																																																						                                                                        us</b>
-																</p>
-															</td>
-															{# START SOCIALS #}
-															{% if socialMediaAccounts %}
-															<td style="width:230px; border: none; background:black; padding: 0cm; height: 24px;" height="24" valign="middle" nowrap>
-																<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" height="24">
-																	<tbody height="24">
-																		<tr height="24">
-																		{# START SOCIALSLIST #}
-																				{% for media in socialMediaAccounts %}
-																				<td height="24" width="24" style="height:24px; width:24px; text-align: left; padding: 0 2px;" valign="top">
-																					<a href="{{ media.url }} " height="24" width="24" style="height:24px; width:24px" alt="{{ media.name }} ">
-																						<img height="24" width="24" style="vertical-align: middle; display: block; height:24px; width:24px; line-height:24px; margin: 0;" src="{{ media.image }}" alt=''/>
-																					</a>
-																				</td>
-																				{% endfor %}
-																				{# END SOCIALSLIST #}
-																		</tr>
-																	</tbody>
-																</table>
-															</td>
-															{% endif %}
-															{# END SOCIALS #}
-															<td style="width:55px; border: none; background:black; padding: 0cm; height: 24px;" height="24">
-																<img height="24" style="vertical-align: middle; height: 24px; margin-right: 0; text-align: right" src="https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/mama-logo-social.png"/>
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</td>
-							<td style="border-collapse:collapse; background: #000; width: 8px;border-radius: 0 4px 4px 0;"></td>
-						</tr>
-					</tbody>
-				</td>
-			</td>
-		</tr>
-	</tbody>
-</table>
-<span style="padding-top: {{ styles['eventPadding']['padding'] }}px">
-{# START DISCLAIMERS #}
-	{% if disclaimers %}
-		{{ disclaimers }}
-	{% endif %}
-	{# END DISCLAIMERS #}
-</span>
-
-`,
-	},
-	{
-		id: 2,
-		alignment: "Horizontal",
-		tags: ["studio"],
-		name: "Warner Bros",
-		html: `
-	{# START GREETINGS #}
-	<span style="padding-bottom: {{ styles['greetingsPadding']['padding'] }};">
-	{% if greetings %}
-		{{ greetings }}
-	{% endif %}
-</span>
-	{# END GREETINGS #}
-<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:0">
-	<tbody>
-		<tr>
-			<td valign="top" style="width:380px; height: 108px; border: none; padding: 0cm">
-				<table class="x_MsoTableGrid" border="0" cellspacing="2" cellpadding="2" style="border-collapse:collapse; border:none">
-					<tbody>
-						<tr>
-							<td valign="top" style="width:108px; border: none; padding: 0cm 8px 0 0; font-size: 8.5pt;">
-								<p class="x_MsoNormal" style="height: 108px; margin: 0; padding: 0;" height="108" valign="middle">
-								<span style="height: 108px;" height="108">
-								<a href="{{company.websiteUrl}}"><img style="width: 108px; height: 108px; vertical-align: middle;" height="108" width="108" valign="middle" src="{{ absolute_url(asset(logo)) }}" alt="{{ company.name }}"/></a>
-							</span>
-
-								</p>
-							</td>
-							<td valign="middle" style="box-sizing: border-box; border: none; padding: 0;">
-								<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:none; border-color: {{ styles['divColor']['color'] }};">
-									<tbody>
-										<tr> 
-											<td style="border-left: 2px solid {{ styles['divColor']['color'] }}; width: 12px; height: 108px; border-radius: 4px 0 0 4px;"/>
-											<td style="box-sizing: border-box; border: none; font-size: 8pt; height: 108px; width: 240px">
-												<table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:none; font-size: 8pt;">
-													<tbody>
-														<tr height="1">
-															<td style="font-size: 8pt; padding:0">
-																<b style="color:{{ styles['firstName']['color'] }}; text-decoration: {{ styles['firstName']['textDecoration'] }}; font-style: {{ styles['firstName']['fontStyle'] }}; font-weight: {{ styles['firstName']['fontWeight'] }}; font-size: 8pt; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
-																	{% if isPreview %} Prénom {% else %} {{ user.firstName }} {% endif %}
-                                                                </b>
-																<b style="color:{{ styles['lastName']['color'] }}; text-decoration: {{ styles['lastName']['textDecoration'] }} ;font-style: {{ styles['lastName']['fontStyle'] }} ;font-weight: {{ styles['lastName']['fontWeight'] }}; font-size: 8pt; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
-																{% if isPreview %} Nom {% else %} {{ user.lastName }} {% endif %}
-                                                                </b>
-															</td>
-														</tr>
-														<tr style="height: 1px">
-															<td>
-																<span style="color:{{ styles['jobName']['color'] }}; text-decoration: {{ styles['jobName']['textDecoration'] }} ;font-style: {{ styles['jobName']['fontStyle'] }} ;font-weight: {{ styles['jobName']['fontWeight'] }}; padding: 0cm; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
-																{% if isPreview %} Poste {% else %} {{ user.position }} {% endif %}
-																</span>
-															</td>
-														</tr>
-														<tr height="5"></tr>
-														<tr>
-															<td>
-																<span style="color:{{ styles['addressStreet']['color'] }}; text-decoration: {{ styles['addressStreet']['textDecoration'] }} ;font-style: {{ styles['addressStreet']['fontStyle'] }}; font-weight: {{ styles['addressStreet']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">{{ address.street }}
-																	{{ address.streetInfo }}
-																</span>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<span style="color:{{ styles['addressZipcode']['color'] }}; text-decoration: {{ styles['addressZipcode']['textDecoration'] }} ;font-style: {{ styles['addressZipcode']['fontStyle'] }} ;font-weight: {{ styles['addressZipcode']['fontWeight'] }}font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }};">
-																	{{ address.zipCode }}
-																	{{ address.city }}
-																	{{ address.country }}
-																</span>
-															</td>
-														</tr>
-														{# START PHONE #}
-                                                            {% if isPreview %}
-                                                                <tr>
-                                                                    <td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
-                                                                        {# FAKE WORKPLACEPHONE #}
-                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> 0102030405
-                                                                        {# FAKE ORGANISATION PHONE #}
-                                                                         <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> 0203040506
-                                                                        {# FAKE USER PHONE #}
-                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b>  0304050607
-                                                                    </td>
-                                                                </tr>
-                                                            {% else %}
-                                                                <tr>
-                                                                    <td style=" padding: 0; color: {{ styles['mobile']['color'] }}; font-weight: {{ styles['mobile']['fontWeight'] }}; font-family: {{ styles['generalFontFamily']['fontFamily'] }}; font-size: {{ styles['generalFontSize']['fontSize'] }}">
-                                                                     {% if workplacePhone %}
-                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> {{ workplacePhone}} 
-                                                                    {% elseif organisationPhone %}
-                                                                         <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">T</b> {{ organisationPhone }}
-                                                                     {% endif %}
-                                                                     {% if user.phone %}0
-                                                                        <b style="color:{{ styles['companyName']['color'] }}; font-weight: bold">M</b>  {{ user.phone }}
-                                                                     {% endif %}
-                                                                    </td>
-                                                                </tr>
-                                                            {% endif %}
-														{# END PHONE #}
-													</tbody>
-												</table>
-											</td>
-										</tr></tbody></table>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
-		</tr>
-		{# START EVENT #}
-		{% if event or isPreview %}
-		<tr>
-		{% if styles['event']['enabled'] is same as( 'true' ) %}
-		{% if event %}
-				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
-					<a style="height: 126px; display: block;" target="_blank" href="{{ API }}/event/token/{{ user.token }}/link"><img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="{{ API }}/event/token/{{ user.token }}/image" alt='{{ event.name }}'/></a>
-				</td>
-				{# START ELSE #}
-			{% else %}
-				<td style="border: none; padding-top: {{ styles['eventPadding']['padding'] }}px; padding-bottom: calc({{ styles['eventPadding']['padding'] }}px - 12px)">
-					<img style="padding: 0cm; width: 380px; height: 126px;" height="126" width="380" src="http://fakeimg.pl/380x126?font=noto&font_size=14" alt='Event'/>
-				</td>
-			{% endif %}
-			{% endif %}
-			{# END ELSE #}
-			
-		</tr>
-		{% endif %}
-		{# END EVENT #}
-	</tbody>
-</table>
-<span style="padding-top: {{ styles['eventPadding']['padding'] }}px">
-{# START DISCLAIMERS #}
-	{% if disclaimers %}
-		{{ disclaimers }}
-	{% endif %}
-	{# END DISCLAIMERS #}
-</span>
-
-`,
-	}
-];
 
 export default function TemplateSelection(props) {
 	const [orientation, setOrientation] = useState("Horizontal");
 	const [tag, setTag] = useState(true);
+	const [templatesList, setTemplatesList] = useState([])
+
 	const handleForm = (e) => {
 		props.setTemplate(JSON.parse(e.target.value));
 	};
@@ -365,6 +21,14 @@ export default function TemplateSelection(props) {
 	const handleStudio = (e) => {
 		setTag(e.target.checked);
 	};
+
+	useEffect(() => {
+		request.get('signature_templates').then((res) => {
+			console.log(res.data['hydra:member'])
+			setTemplatesList(res.data['hydra:member'])
+		})
+	}, [])
+
 	return (
 		<div className={classes.modal}>
 			<div className={classes.searchContainer}>
@@ -435,15 +99,10 @@ export default function TemplateSelection(props) {
 			</div>
 			<form onChange={handleForm}>
 				<ul className={classes.templatesContainer}>
-					{templateAPI.map((template) => {
-						if (
-							template.alignment.toLowerCase() ===
-							orientation.toLowerCase()
-						)
-							if (tag) {
-								if (
-									template.tags[0].toLowerCase() === "studio"
-								) {
+					{templatesList?.map((template) => {
+						// if (template.alignment?.toLowerCase() !== orientation.toLowerCase())
+							// if (!tag) {
+								// if (template.tags[0]?.toLowerCase() !== "studio") {
 									return (
 										<li key={template.id}>
 											<p className={classes.templateName}>
@@ -464,22 +123,22 @@ export default function TemplateSelection(props) {
 											/>
 										</li>
 									);
-								}
-							} else
-								return (
-									<li key={template.id}>
-										<input
-											type="radio"
-											name="template"
-											value={template.html}
-										/>
-										<Template
-											template={template.html}
-											socials={props.icons}
-											organisation={props.organisation}
-										/>
-									</li>
-								);
+							// 	}
+							// } else
+							// 	return (
+							// 		<li key={template.id}>
+							// 			<input
+							// 				type="radio"
+							// 				name="template"
+							// 				value={template.html}
+							// 			/>
+							// 			<Template
+							// 				template={template.html}
+							// 				socials={props.icons}
+							// 				organisation={props.organisation}
+							// 			/>
+							// 		</li>
+							// 	);
 					})}
 					{!tag ? (
 						<li style={{ width: "412px", height: "220px" }}></li>
