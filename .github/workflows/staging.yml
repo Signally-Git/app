@@ -1,6 +1,3 @@
-env:
-  CI: false
-  
 name: Publish to S3
 
 # Controls when the workflow will run
@@ -37,9 +34,10 @@ jobs:
         CI=false yarn build
       env:
         CI: false
-    - name: Unit Tests
-      run: |
-        CI=false yarn test
+    # Just want to test if deploying to S3 is working. Deactivating unit tests for debugging purpose.
+    #- name: Unit Tests
+    #  run: |
+    #    CI=false yarn test
     - name: Deploy to S3
       uses: jakejarvis/s3-sync-action@master
       with:
