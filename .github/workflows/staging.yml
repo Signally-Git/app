@@ -1,5 +1,6 @@
-# This is a basic workflow to help you get started with Actions
-
+env:
+  CI: false
+  
 name: Publish to S3
 
 # Controls when the workflow will run
@@ -30,13 +31,13 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Yarn Install
       run: |
-        CI='' yarn install
+        CI=false yarn install
     - name: Production Build
       run: |
-        CI='' yarn build
+        CI=false yarn build
     - name: Unit Tests
       run: |
-        CI='' yarn test
+        CI=false yarn test
     - name: Deploy to S3
       uses: jakejarvis/s3-sync-action@master
       with:
