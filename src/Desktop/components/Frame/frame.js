@@ -3,7 +3,6 @@ import Header from "Desktop/components/Header/Header";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import classes from "./frame.module.scss";
 import request from "Utils/Request/request";
-import { API } from "config";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 
@@ -31,9 +30,9 @@ export default function Frame(props) {
 
     useEffect(() => {
 
-        const sseUser = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${user?.['@id']}`);
+        const sseUser = new EventSource(`${process.env.REACT_APP_HUB_URL}${user?.['@id']}`);
 
-        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${organisation?.['@id']}`);
+        const sse = new EventSource(`${process.env.REACT_APP_HUB_URL}${organisation?.['@id']}`);
         function getRealtimeData(data) {
             setOrganisation(data)
         }
@@ -61,7 +60,7 @@ export default function Frame(props) {
                         <div className={classes.menuContainer}>
                             <Link to="/profile/informations/company">
                                 <div className={classes.userInfos}>
-                                    <img src={organisation?.logo ? (API + organisation?.logo.path) : 'https://dummyimage.com/108/f4eeef.png'} alt='' />
+                                    <img src={organisation?.logo ? (process.env.REACT_APP_HUB_URL + organisation?.logo.path) : 'https://dummyimage.com/108/f4eeef.png'} alt='' />
                                     <p className={classes.capitalize}>{organisation?.name}</p>
                                 </div>
                             </Link>
