@@ -35,6 +35,8 @@ jobs:
     - name: Production Build
       run: |
         CI=false yarn build
+      env:
+        CI: false
     - name: Unit Tests
       run: |
         CI=false yarn test
