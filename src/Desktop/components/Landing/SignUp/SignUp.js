@@ -96,7 +96,7 @@ const Signup = () => {
     }
     if (valid) {
       setLoading(true)
-      await axios.post(process.env.REACT_APP_API_URL + 'register', req).then(() => {
+      await axios.post(process.env.REACT_APP_API_URL + '/register', req).then(() => {
         setSent(true)
       }).catch((err) => {
         if (err?.response?.data?.title === 'App\\Exception\\Organisation\\OrganisationWithSameSirenAlreadyExistsDomainException')

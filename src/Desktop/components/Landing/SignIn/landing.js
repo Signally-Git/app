@@ -88,7 +88,7 @@ const Login = () => {
 
     const handleForgotSubmit = (e) => {
         e.preventDefault()
-        axios.post(`${process.env.REACT_APP_API_URL}reset_password`, { email: email }).then(() => {
+        axios.post(`${process.env.REACT_APP_API_URL}/reset_password`, { email: email }).then(() => {
             setModal('done')
         })
     }
@@ -116,7 +116,7 @@ const Login = () => {
             password: code
         }
 
-        await axios.post(`${process.env.REACT_APP_API_URL}token/auth`, req).then((res) => {
+        await axios.post(`${process.env.REACT_APP_API_URL}/token/auth`, req).then((res) => {
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('refresh_token', res.data.refresh_token)
             history.go(0)

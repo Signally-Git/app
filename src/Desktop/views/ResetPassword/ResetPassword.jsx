@@ -26,7 +26,7 @@ export default function ResetPassword() {
         const req = {
             password: confirm
         }
-        axios.post(`${process.env.REACT_APP_API_URL}reset/${token.toString().replace('token=', '')}`, req).then(() => {
+        axios.post(`${process.env.REACT_APP_API_URL}/reset/${token.toString().replace('token=', '')}`, req).then(() => {
             setDone(true)
             setTimeout(() => {
                 history.push('/sign-in')
