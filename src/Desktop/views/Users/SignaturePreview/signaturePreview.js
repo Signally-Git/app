@@ -136,7 +136,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         let template = Object?.values(templates)?.find((obj) => { return obj.id == id })
 
         if (event.imagePath !== undefined)
-            template = { ...template, preview: template?.preview?.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', `${process.env.REACT_APP_API_URL}${event?.imagePath}`) }
+            template = { ...template, preview: template?.preview?.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', `${event?.link}`) }
 
         setSelectedTemplate(template)
     }
