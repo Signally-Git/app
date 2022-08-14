@@ -132,7 +132,7 @@ export default function CreateEvent({ setDone, event }) {
         </div>
         <div className={classes.row}>
             <Input required value={eventName} onChange={(e) => setEventName(e.target.value)} style={{ width: "48%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef} />
-            <Input required value={eventLink} onBlur={(e) => console.log(checkEventLink(e.target.value))} onChange={(e) => setEventLink(e.target.value)} style={{ width: "48%" }} placeholder="Lien" type="text" />
+            <Input required value={eventLink} onBlur={(e) => checkEventLink(e.target.value)} onChange={(e) => setEventLink(e.target.value)} style={{ width: "48%" }} placeholder="Lien" type="text" />
         </div>
         <div className={classes.currentEventPreview}>
             {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={process.env.REACT_APP_API_URL + '/' + event.imagePath} title={event.banner?.name} /> : ""}
