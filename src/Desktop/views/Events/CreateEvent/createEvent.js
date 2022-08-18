@@ -58,7 +58,7 @@ export default function CreateEvent({ setDone, event }) {
                 const req = {
                     imagePath: res.data.path,
                     name: eventName,
-                    link: eventLink,
+                    link: res.data.url,
                     startAt: start.utc(false),
                     endAt: end.utc(false),
                 }
@@ -135,7 +135,7 @@ export default function CreateEvent({ setDone, event }) {
             <Input required value={eventLink} onBlur={(e) => checkEventLink(e.target.value)} onChange={(e) => setEventLink(e.target.value)} style={{ width: "48%" }} placeholder="Lien" type="text" />
         </div>
         <div className={classes.currentEventPreview}>
-            {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={process.env.REACT_APP_API_URL + '/' + event.imagePath} title={event.banner?.name} /> : ""}
+            {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={event.imageUrl} title={event.banner?.name} /> : ""}
         </div>
         <div className={classes.uploadContainer}>
 
