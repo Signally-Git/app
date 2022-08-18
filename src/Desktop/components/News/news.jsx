@@ -58,7 +58,7 @@ function News({ organisation, loading, setLoading }) {
                     </span>
                 </h5>
                 <div className={classes.preview}>
-                    <img src={process.env.REACT_APP_API_URL + admin.events[0]?.imagePath} />
+                    <img src={process.env.REACT_APP_API_URL + '/' + admin.events[0]?.imagePath} />
                     <span className={classes.duration}>
                         <div className={`${classes.col} ${classes.bold}`}>
                             <span>{`du ${moment.utc(admin.events[0]?.startAt).local(false).format('D MMM YYYY')}`}</span>

@@ -61,6 +61,7 @@ export default function Frame(props) {
                             <Link to="/profile/informations/company">
                                 <div className={classes.userInfos}>
                                     <img src={organisation?.logo.url ? (organisation?.logo.url) : 'https://dummyimage.com/108/f4eeef.png'} alt='' />
+
                                     <p className={classes.capitalize}>{organisation?.name}</p>
                                 </div>
                             </Link>
