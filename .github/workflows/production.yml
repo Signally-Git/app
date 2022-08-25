@@ -1,4 +1,4 @@
-name: Publish to S3
+name: Publish to S3 - Production
 
 # Controls when the workflow will run
 on:
