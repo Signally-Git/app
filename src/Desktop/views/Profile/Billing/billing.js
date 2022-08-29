@@ -12,7 +12,7 @@ function Billing(props) {
 
     useEffect(async () => {
         props.handleHeader("Votre abonnement")
-        await axios.get(`${process.env.REACT_APP_API_URL}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`).then((res) => {
+        await axios.get(`${process.env.REACT_APP_API_URL}/organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`).then((res) => {
             setUsers(res.data.data)
         })
     }, [])

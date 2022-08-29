@@ -29,7 +29,7 @@ export default function Frame(props) {
     }, [])
 
     useEffect(() => {
-
+        console.log(process.env.REACT_APP_HUB_URL);
         const sseUser = new EventSource(`${process.env.REACT_APP_HUB_URL}${user?.['@id']}`);
 
         const sse = new EventSource(`${process.env.REACT_APP_HUB_URL}${organisation?.['@id']}`);

@@ -136,7 +136,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         let template = Object?.values(templates)?.find((obj) => { return obj.id == id })
 
         if (event.imagePath !== undefined)
-            template = { ...template, preview: template?.preview?.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', `${process.env.REACT_APP_API_URL}${event?.imagePath}`) }
+            template = { ...template, preview: template?.preview?.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', `${event?.imageUrl}`) }
 
         setSelectedTemplate(template)
     }
@@ -195,7 +195,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                             else
                                 checked = false
                             return <li key={event['@id']}>
-                                <img className={classes.bannerPreview} src={`${process.env.REACT_APP_API_URL}${event.imagePath}`} />
+                                <img className={classes.bannerPreview} src={`${process.env.REACT_APP_API_URL}/${event.imagePath}`} />
                                 <div className={classes.eventText}>
                                     <span className={classes.active}>{event.name}</span>
                                     <span className={classes.duration}>
@@ -249,7 +249,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                             {templates.length > 0 &&
                                 <CustomSelect onChange={(e) => handleSwapSignature(e)} items={templates} display={"name"} getValue={"id"} />}
                             <div className={classes.signature}>
-                                {typeof selectedTemplate.preview === 'string' ? parse(selectedTemplate.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', event.imagePath ? process.env.REACT_APP_API_URL + event.imagePath : 'http://fakeimg.pl/380x126?font=noto&font_size=14')) : ""}
+                                {typeof selectedTemplate.preview === 'string' ? parse(selectedTemplate.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', event.imagePath ? process.env.REACT_APP_API_URL+ '/' + event.imagePath : 'http://fakeimg.pl/380x126?font=noto&font_size=14')) : ""}
                             </div>
                         </div>
                         <div>
