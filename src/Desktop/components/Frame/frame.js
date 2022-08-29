@@ -60,7 +60,7 @@ export default function Frame(props) {
                         <div className={classes.menuContainer}>
                             <Link to="/profile/informations/company">
                                 <div className={classes.userInfos}>
-                                    <img src={organisation?.logo ? (process.env.REACT_APP_API_URL + organisation?.logo.path) : 'https://dummyimage.com/108/f4eeef.png'} alt='' />
+                                    <img src={organisation?.logo?.url ? (organisation?.logo?.url) : 'https://dummyimage.com/108/f4eeef.png'} alt='' />
                                     <p className={classes.capitalize}>{organisation?.name}</p>
                                 </div>
                             </Link>
