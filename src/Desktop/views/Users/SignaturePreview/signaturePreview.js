@@ -33,7 +33,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
             return 0
         })
         toPush.unshift({ name: 'Event', '@id': 'event' })
-        // setEvent(toPush[0] || { '@id': "playlist" })
         setEvents([...toPush, { name: 'Playlist', '@id': 'playlist', callback: setChoosePlaylist, listName: event['@id'] === "playlist" ? "Modifier la playlist" : "Playlist", style: { fontWeight: 'bold', color: `#FF7954` } }])
 
     }, [selectedTemplate])
@@ -53,7 +52,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     }, [edit])
 
     useEffect(() => {
-        const sse = new EventSource(`${REACT_APP_HUB_URL}${show?.['@id']}`);
+        const sse = new EventSource(`${process.env.REACT_APP_HUB_URL}${show?.['@id']}`);
         sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
         function getRealtimeData(data) {
             setShow(data)
@@ -84,23 +83,15 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 result.data["hydra:member"].map(async (template, index) => {
                     await request.get(template['@id']).then((res) => {
                         templatesAPI.push(res.data)
-                        // if (index === 0) {
-                        //     templatesAPI(res.data)
-                        // }
                     })
                     setTemplates(templatesAPI)
                 })
             })
 
-            // console.log(templatesAPI, templates)
         }
 
         refreshPreview()
         listTemplates()
-
-        // await request.get(show?.signature?.['@id']).then((res) => {
-        //     setSelectedTemplate(res.data)
-        // })
 
     }, [show, edit])
 

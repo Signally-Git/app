@@ -37,7 +37,7 @@ function Team() {
 
     // HANDLING REAL TIME USERS IN TEAM
     useEffect(() => {
-        const sse = new EventSource(`${REACT_APP_HUB_URL}${entity?.['@id']}`);
+        const sse = new EventSource(`${process.env.REACT_APP_HUB_URL}${entity?.['@id']}`);
         if (edit === 'assign-team') {
             sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
         }
@@ -55,7 +55,7 @@ function Team() {
 
     // HANDLING REAL TIME USERS WITHOUT TEAM
     useEffect(() => {
-        const sse = new EventSource(`${REACT_APP_HUB_URL}/users/users-without-team`);
+        const sse = new EventSource(`${process.env.REACT_APP_HUB_URL}/users/users-without-team`);
         sse.onmessage = e => getRealtimeDataWOutTeam(JSON.parse(e.data));
 
         function getRealtimeDataWOutTeam(data) {
@@ -70,7 +70,7 @@ function Team() {
     }, [edit])
 
     useEffect(() => {
-        const sse = new EventSource(`${REACT_APP_HUB_URL}/users/teams-without-workplace`);
+        const sse = new EventSource(`${process.env.REACT_APP_HUB_URL}/users/teams-without-workplace`);
         sse.onmessage = e => getRealtimeDataWOutWP(JSON.parse(e.data));
 
         function getRealtimeDataWOutWP(data) {
