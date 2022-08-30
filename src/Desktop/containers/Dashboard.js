@@ -66,20 +66,6 @@ function Dashboard(props) {
         })
     }, [])
 
-    // useEffect(() => {
-    //     if (organisation) {
-    //         const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${organisation['@id']}`);
-    //         function getRealtimeData(data) {
-    //             setOrganisation(data)
-    //         }
-    //         sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
-
-    //         return () => {
-    //             sse.close();
-    //         };
-    //     }
-    // }, [organisation])
-
     return (
         <>
             {props.page === 'home' ?

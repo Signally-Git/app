@@ -53,7 +53,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     }, [edit])
 
     useEffect(() => {
-        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${show?.['@id']}`);
+        const sse = new EventSource(`${REACT_APP_HUB_URL}${show?.['@id']}`);
         sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
         function getRealtimeData(data) {
             setShow(data)

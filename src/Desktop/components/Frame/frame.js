@@ -10,13 +10,6 @@ export default function Frame(props) {
     const [user, setUser] = useState()
     const [organisation, setOrganisation] = useState()
 
-
-    // const es = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${JSON.parse(localStorage.getItem('user')).organisation}`)
-
-    // es.onmessage = function (e) {
-    //     setUpdate(JSON.parse(e.data))
-    // }
-
     useEffect(() => {
         request.get('whoami').then((res) => {
             setUser(res.data)
@@ -42,9 +35,7 @@ export default function Frame(props) {
             setUser(data)
         }
         sseUser.onmessage = e => getRealtimeDataUser(JSON.parse(e.data));
-        // sse.onerror = () => {
-        //     sse.close();
-        // }
+
         return () => {
             sse.close();
             sseUser.close();
