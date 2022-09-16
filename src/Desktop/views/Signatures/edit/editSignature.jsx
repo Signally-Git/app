@@ -64,9 +64,6 @@ function EditSignatureComponent() {
     useEffect(() => {
         const getSignatureFromId = async () => {
             await request.get('signatures/' + signatureId).then((res) => {
-                
-                //ENVOYER LE TEMPLATE ET PAS LA SIGNATURE POUR L'ID 
-                
                 setSelectedTemplate(res.data)
                 console.log(res.data)
                 setDefaultStyles(res.data.signatureStyles)
@@ -254,7 +251,7 @@ function EditSignatureComponent() {
     }, [modal, signatureName])
 
     const handleSave = async () => {
-        await request.patch(`signatures/` + signatureId, { name: signatureName, signatureTemplate: selectedTemplate['@id'] }, {
+        await request.patch(`signatures/` + signatureId, { name: signatureName, signatureTemplate: selectedTemplate?.signatureTemplate?.['@id'] }, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(
             async (result) => {
