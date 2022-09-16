@@ -46,7 +46,6 @@ function EditSignatureComponent() {
         fontFamily: "Helvetica"
     });
     const [signatureOption, setSignatureOption] = useState({
-        footer: { disclaimerValue: "Disclaimer", disclaimerEnabled: false, ecoValue: "Eco resp", ecoEnabled: false, items: ["Disclaimer", "Eco"] },
         salutation: { value: "Cordialement,", enabled: false, padding: 10 },
         custom: { enabled: false },
         eco: { value: "Ecoresponsability", enabled: false },
@@ -65,7 +64,11 @@ function EditSignatureComponent() {
     useEffect(() => {
         const getSignatureFromId = async () => {
             await request.get('signatures/' + signatureId).then((res) => {
+                
+                //ENVOYER LE TEMPLATE ET PAS LA SIGNATURE POUR L'ID 
+                
                 setSelectedTemplate(res.data)
+                console.log(res.data)
                 setDefaultStyles(res.data.signatureStyles)
                 setSignatureName(res.data.name)
             })
@@ -184,7 +187,6 @@ function EditSignatureComponent() {
         })
 
         setSignatureOption({
-            footer: { disclaimerValue: "Disclaimer", disclaimerEnabled: false, ecoValue: "Eco resp", ecoEnabled: false, items: ["Disclaimer", "Eco"] },
             salutation: { value: "Cordialement,", enabled: defaultStyles?.filter((style) => style.type === "greetings")[0].value === "false" ? false : true, padding: defaultStyles?.filter((style) => style.type === "greetingsPadding")[0].value },
             custom: { enabled: false },
             eco: { value: "Ecoresponsability", enabled: false },
