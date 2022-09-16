@@ -52,7 +52,7 @@ function Header(props) {
                             <li title={soon}><Link to="/billing" className="disabled">Abonnement</Link></li>
 
                         </ul>
-                        <IoPower title="Déconnexion" color={"#66433e"} size={"1.2rem"} stroke={"#66433e"} strokeWidth={"15px"} onClick={() => { localStorage.clear(); history.push("/") }} />
+                        <IoPower color={"#66433e"} size={"1.2rem"} stroke={"#66433e"} strokeWidth={"15px"} onClick={() => { localStorage.clear(); history.push("/") }} />
                     </div>
                 </div>
             </> : <>
