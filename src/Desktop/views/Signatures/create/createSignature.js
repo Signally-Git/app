@@ -17,7 +17,6 @@ import request from "Utils/Request/request";
 function CreateSignatureComponent() {
   const [user, setUser] = useState(null)
   const [company, setCompany] = useState(null)
-  const [events, setEvents] = useState([])
   const [selectedTemplate, setSelectedTemplate] = useState()
   const history = useHistory()
   const notification = useNotification()
@@ -45,14 +44,13 @@ function CreateSignatureComponent() {
     fontFamily: "Helvetica"
   });
   const [signatureOption, setSignatureOption] = useState({
-    footer: { disclaimerValue: "Disclaimer", disclaimerEnabled: false, ecoValue: "Eco resp", ecoEnabled: false, items: ["Disclaimer", "Eco"] },
     salutation: { value: "Cordialement,", enabled: false, padding: 10 },
     custom: { enabled: false },
     eco: { value: "Ecoresponsability", enabled: false },
     followUs: { value: "Follow us", enabled: false, disabled: true },
     bgColor: "#FCE750",
     bannerTop: { url: "test", enabled: false, padding: 10 },
-    event: { list: events, selected: events[0], enabled: false, padding: 12 },
+    event: { list: [], selected: [], enabled: false, padding: 12 },
     socials: { enabled: true, bgColor: "#000", fill: "#FFF", items: ["facebook", "linkedin", "twitter", "instagram", "snapchat", "pinterest"] },
     footer: {
       maxWidth: 380, value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.
@@ -79,7 +77,6 @@ function CreateSignatureComponent() {
       fontFamily: "Helvetica"
     })
     setSignatureOption({
-      footer: { disclaimerValue: "Disclaimer", disclaimerEnabled: false, ecoValue: "Eco resp", ecoEnabled: false, items: ["Disclaimer", "Eco"] },
       salutation: { value: "Cordialement,", enabled: false, padding: 10 },
       custom: { enabled: false },
       eco: { value: "Ecoresponsability", enabled: false },
@@ -120,7 +117,7 @@ function CreateSignatureComponent() {
         fontFamily: "Helvetica"
       })
     }
-
+    
     getUser()
   }, [])
 
@@ -138,7 +135,30 @@ function CreateSignatureComponent() {
 
   // Used to handle transition
   const elem = useRef(null);
-  const [templates, setTemplates] = useState(false)
+    const showTemplates = (isOpen, transition) => {
+        if (isOpen) {
+            setTemplates(<TemplateSelection showFunction={showTemplates} setTemplate={setSelectedTemplate} icons={signatureOption.socials} organisation={company?.data} />)
+            setTimeout(() => {
+                elem.current.scrollTo({
+                    top: 0,
+                    left: window.innerWidth,
+                    behavior: transition
+                });
+            }, 10);
+        }
+        else {
+            elem.current.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: transition
+            });
+            setTimeout(() => {
+                setTemplates(false)
+            }, 1000);
+        }
+
+    }
+  const [templates, setTemplates] = useState(<TemplateSelection showFunction={showTemplates} setTemplate={setSelectedTemplate} icons={signatureOption.socials} organisation={company?.data} />)
 
   const [modal, setModal] = useState(false)
   const [modalContent, setModalContent] = useState()
@@ -502,19 +522,6 @@ function CreateSignatureComponent() {
             console.log(r.data)
           })
 
-          // GERER ICI
-          // request.post('signature_styles', { signature: result.data['@id'], signatureTemplate: res.data['@id'], })
-          // console.log(localStorage.getItem('user').signature_template_id)
-          // await axios.get(`${API}template/${JSON.parse(localStorage.getItem('user')).signature_template_id}?access_token=${localStorage.getItem("token")}`)
-          //   .then().catch(async () => {
-          //     const req = {
-          //       signature_template_id: res.data.id,
-          //     }
-
-          //     await axios.patch(`${API}user/${localStorage.getItem('user_id')}?access_token=${localStorage.getItem('token')}`, req)
-          //       .then((res) => console.log(res))
-          //   })
-
           if (window.location.hash === "#onboarding")
             history.goBack()
           else
@@ -527,54 +534,14 @@ function CreateSignatureComponent() {
   }
 
   useEffect(() => {
-    // const request = {
-    //   "tags": JSON.stringify(signatureOption.event),
-    // }
-    // const patchTemplate = async () => {
-    //   await axios.patch(`${API}template/${templateId}?access_token=${localStorage.getItem("token")}`, request)
-    //     .then((res) => {
-    //       console.log("PATCHING", res)
-    //     }).catch((err) => { console.log("PATCHING", err) })
-    // }
-    // if (templateId)
-    //   patchTemplate()
-  }, [templateId])
-
-  useEffect(() => {
-    showTemplates(false)
-    // console.log(selectedTemplate)
+    showTemplates(false, 'smooth')
   }, [selectedTemplate])
 
-  const showTemplates = (isOpen) => {
-    if (isOpen) {
-      setTemplates(<TemplateSelection showFunction={showTemplates} setTemplate={setSelectedTemplate} icons={signatureOption.socials} organisation={company?.data} />)
-      setTimeout(() => {
-        elem.current.scrollTo({
-          top: 0,
-          left: window.innerWidth,
-          behavior: 'smooth'
-        });
-      }, 10);
-    }
-    else {
-      elem.current.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      });
-      setTimeout(() => {
-        setTemplates()
-      }, 1000);
-    }
-
-  }
 
   useEffect(() => {
-    // console.log(signatureInfo, signatureOption, selectedTemplate)
     if (signatureInfo && signatureOption && selectedTemplate)
       setPreview(<Preview infos={signatureInfo} options={signatureOption} template={selectedTemplate.html} organisation={company.data} />)
   }, [signatureInfo, signatureOption, selectedTemplate])
-
 
   return (
     <div className={classes.container} ref={elem}>

@@ -126,7 +126,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     const handleSwapSignature = (id) => {
         let template = Object?.values(templates)?.find((obj) => { return obj.id == id })
 
-        if (event.imagePath !== undefined)
+        if (event.imageUrl !== undefined)
             template = { ...template, preview: template?.preview?.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', `${event?.imageUrl}`) }
 
         setSelectedTemplate(template)
@@ -240,7 +240,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                             {templates.length > 0 &&
                                 <CustomSelect onChange={(e) => handleSwapSignature(e)} items={templates} display={"name"} getValue={"id"} />}
                             <div className={classes.signature}>
-                                {typeof selectedTemplate.preview === 'string' ? parse(selectedTemplate.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', event.imageUrl ? event.imageUrl : 'http://fakeimg.pl/380x126?font=noto&font_size=14')) : ""}
+                                {typeof selectedTemplate.preview === 'string' ? parse(selectedTemplate.preview.replace('http://fakeimg.pl/380x126?font=noto&font_size=14', event.imageUrl ? process.env.REACT_APP_API_URL+ '/' + event.imageUrl : 'http://fakeimg.pl/380x126?font=noto&font_size=14')) : ""}
                             </div>
                         </div>
                         <div>
