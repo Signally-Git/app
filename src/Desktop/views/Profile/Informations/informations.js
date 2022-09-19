@@ -34,7 +34,6 @@ function Informations() {
 
     useEffect(() => {
         const missing = query.get('missing')
-        console.log(missing)
         const getData = async () => {
             await request.get(`whoami`).then((res) => {
                 localStorage.setItem("user", JSON.stringify(res.data))
@@ -45,7 +44,6 @@ function Informations() {
             })
         }
         getData()
-        console.log(tab)
         setActive(tab === 'user' ? "company" : "personal")
     }, [])
 
@@ -62,7 +60,7 @@ function Informations() {
                 setTimeout(async () => {
                     await request.post('logos', requestLogo).then((res) => {
                         console.log(res.data)
-                    });
+                    }).catch(() => notification({ content: <>Erreur lors de l'import du logo.</>, status: "invalid" }));
                 }, 3000);
                 const req = {
                     name: companyName,
@@ -82,7 +80,7 @@ function Informations() {
                     notification({ content: <><span style={{ color: "#FF7954" }}>{companyName}</span> édité avec succès</>, status: "valid" })
                     history.goBack()
                 }).catch(() => notification({ content: <>Impossible de modifier <span style={{ color: "#FF7954" }}>{companyName}</span></>, status: "invalid" }))
-            })
+            }).catch(() => notification({ content: <>Erreur lors de l'import du logo.</>, status: "invalid" }))
         else {
             const req = {
                 name: companyName,
