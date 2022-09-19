@@ -58,9 +58,7 @@ function Informations() {
                     organisation: organisationIRI
                 }
                 setTimeout(async () => {
-                    await request.post('logos', requestLogo).then((res) => {
-                        console.log(res.data)
-                    }).catch(() => notification({ content: <>Erreur lors de l'import du logo.</>, status: "invalid" }));
+                    await request.post('logos', requestLogo).catch(() => notification({ content: <>Erreur lors de l'import du logo.</>, status: "invalid" }));
                 }, 3000);
                 const req = {
                     name: companyName,
