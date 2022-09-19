@@ -13,34 +13,29 @@ export default function Frame(props) {
     useEffect(() => {
         request.get('whoami').then((res) => {
             setUser(res.data)
+            console.log(res.data)
+            const sseUser = new EventSource(`${process.env.REACT_APP_HUB_URL}${res.data['@id']}`);
+            const sse = new EventSource(`${process.env.REACT_APP_HUB_URL}${res.data['organisation']}`);
+
+            function getRealtimeData(data) {
+                setOrganisation(data)
+            }
+            sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
+
+            function getRealtimeDataUser(data) {
+                setUser(data)
+            }
+            sseUser.onmessage = e => getRealtimeDataUser(JSON.parse(e.data));
+
+            // return () => {
+            //     sse.close();
+            //     sseUser.close();
+            // };
             request.get(res.data.organisation).then((r) => {
                 setOrganisation(r.data)
             }).catch((err) => console.log(err))
         }).catch((err) => { console.log(err) })
-
-
     }, [])
-
-    useEffect(() => {
-        const organisationId = organisation?.['@id'] || localStorage.getItem('user')?.['organisation']
-        const sseUser = new EventSource(`${process.env.REACT_APP_HUB_URL}${user?.['@id']}`);
-        const sse = new EventSource(`${process.env.REACT_APP_HUB_URL}${organisationId}`);
-        
-        function getRealtimeData(data) {
-            setOrganisation(data)
-        }
-        sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
-
-        function getRealtimeDataUser(data) {
-            setUser(data)
-        }
-        sseUser.onmessage = e => getRealtimeDataUser(JSON.parse(e.data));
-
-        return () => {
-            sse.close();
-            sseUser.close();
-        };
-    }, [user, organisation])
 
     return (<>
         {user ?
