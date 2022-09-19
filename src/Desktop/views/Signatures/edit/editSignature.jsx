@@ -65,7 +65,6 @@ function EditSignatureComponent() {
         const getSignatureFromId = async () => {
             await request.get('signatures/' + signatureId).then((res) => {
                 setSelectedTemplate(res.data)
-                console.log(res.data)
                 setDefaultStyles(res.data.signatureStyles)
                 setSignatureName(res.data.name)
             })
