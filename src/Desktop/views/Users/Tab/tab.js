@@ -220,7 +220,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         if (file)
             await request.post(`import/file`, img).then(async (res) => {
                 const requestLogo = {
-                    name: workplace.name + "_logo",
+                    name: file.name,
                     path: res.data.path,
                     workplace: workplace['@id']
                 }
