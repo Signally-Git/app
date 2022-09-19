@@ -13,7 +13,6 @@ export default function Frame(props) {
     useEffect(() => {
         request.get('whoami').then((res) => {
             setUser(res.data)
-            console.log(res.data)
             const sseUser = new EventSource(`${process.env.REACT_APP_HUB_URL}${res.data['@id']}`);
             const sse = new EventSource(`${process.env.REACT_APP_HUB_URL}${res.data['organisation']}`);
 

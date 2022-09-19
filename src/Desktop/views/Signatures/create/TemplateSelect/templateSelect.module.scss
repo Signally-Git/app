@@ -297,6 +297,20 @@
     background: $signally-brown;
 }
 
+.loading {
+    margin: auto;
+    animation: rotate 1s infinite ease;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
 .btnContainer button{
     margin-right: auto;
     margin-left: 0;

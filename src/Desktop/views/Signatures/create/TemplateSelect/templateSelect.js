@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import Button from "Utils/Button/btn";
 import Template from "../Preview/customizablePreview";
 import request from "Utils/Request/request";
+import {AiOutlineLoading3Quarters} from "react-icons/ai";
 
 // Displaying the list of bought and free templates (Studio, Store) and allows to select one to create custom signature
 
 export default function TemplateSelection(props) {
 	const [orientation, setOrientation] = useState("Horizontal");
+    const [fetching, setFetching] = useState(true);
 	const [tag, setTag] = useState(true);
 	const [templatesList, setTemplatesList] = useState([])
 
@@ -24,11 +26,15 @@ export default function TemplateSelection(props) {
 
 	useEffect(() => {
 		request.get('signature_templates').then((res) => {
-			console.log(res.data['hydra:member'])
 			setTemplatesList(res.data['hydra:member'])
+            setFetching(false)
 		})
 	}, [])
 
+    if(fetching)
+        return <div className={classes.modal}>
+            <AiOutlineLoading3Quarters className={classes.loading} />
+        </div>
 	return (
 		<div className={classes.modal}>
 			<div className={classes.searchContainer}>
@@ -100,9 +106,6 @@ export default function TemplateSelection(props) {
 			<form onChange={handleForm}>
 				<ul className={classes.templatesContainer}>
 					{templatesList?.map((template) => {
-						// if (template.alignment?.toLowerCase() !== orientation.toLowerCase())
-							// if (!tag) {
-								// if (template.tags[0]?.toLowerCase() !== "studio") {
 									return (
 										<li key={template.id}>
 											<p className={classes.templateName}>
@@ -123,22 +126,6 @@ export default function TemplateSelection(props) {
 											/>
 										</li>
 									);
-							// 	}
-							// } else
-							// 	return (
-							// 		<li key={template.id}>
-							// 			<input
-							// 				type="radio"
-							// 				name="template"
-							// 				value={template.html}
-							// 			/>
-							// 			<Template
-							// 				template={template.html}
-							// 				socials={props.icons}
-							// 				organisation={props.organisation}
-							// 			/>
-							// 		</li>
-							// 	);
 					})}
 					{!tag ? (
 						<li style={{ width: "412px", height: "220px" }}></li>
@@ -152,7 +139,7 @@ export default function TemplateSelection(props) {
 						width={"5rem"}
 						onClick={(e) => {
 							e.preventDefault();
-							props.showFunction();
+							props.showFunction(false, 'smooth');
 						}}
 					>
 						Annuler

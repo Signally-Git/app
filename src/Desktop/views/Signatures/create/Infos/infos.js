@@ -171,7 +171,7 @@ export default function Infos(props) {
                             <div className={classes.row}>
                                 <div>
                                     <span className={classes.fontSize}>
-                                        {props.content.fontSize}px
+                                        {props.content.fontSize} px
                                     </span>
                                     <Range
                                         step={props.templateRules.fontSize.step}
