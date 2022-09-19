@@ -252,7 +252,7 @@ function EditSignatureComponent() {
     }, [modal, signatureName])
 
     const handleSave = async () => {
-        await request.patch(`signatures/` + signatureId, { name: signatureName, signatureTemplate: selectedTemplate['@id'] }, {
+        await request.patch(`signatures/` + signatureId, { name: signatureName, signatureTemplate: selectedTemplate['signatureTemplate']['@id'] }, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(
             async (result) => {
