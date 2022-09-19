@@ -25,6 +25,7 @@ function Informations() {
     const [position, setPosition] = useState("")
     const [mobile, setMobile] = useState("")
     const [socialsList, setSocialsList] = useState([])
+    const [preview, setPreview] = useState()
 
     const notification = useNotification()
 
@@ -32,6 +33,19 @@ function Informations() {
     const query = new URLSearchParams(window.location.search);
     const { tab } = useParams()
 
+    useEffect(() => {
+        // create the preview
+        if (!uploadedMedia) {
+            setPreview()
+            return;
+        }
+        const objectUrl = URL.createObjectURL(uploadedMedia)
+        setPreview(objectUrl)
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl)
+    }, [uploadedMedia])
+    
     useEffect(() => {
         const missing = query.get('missing')
         const getData = async () => {
@@ -53,7 +67,7 @@ function Informations() {
         if (uploadedMedia)
             await request.post(`import/file`, img).then(async (res) => {
                 const requestLogo = {
-                    name: "test",
+                    name: uploadedMedia.name,
                     path: res.data.path,
                     organisation: organisationIRI
                 }
@@ -122,6 +136,7 @@ function Informations() {
         request.get(JSON.parse(localStorage.getItem('user')).organisation).then((organisation) => {
             organisation = organisation.data
             setOrganisation(organisation)
+            setPreview(organisation?.logo?.url)
             setOrganisationId(organisation.id)
             setOrganisationIRI(organisation['@id'])
             setCompanyName(organisation.name)
@@ -149,11 +164,14 @@ function Informations() {
                             </div>
                             <div className={classes.inputContainer}>
                                 <label>Logo de l'entreprise</label>
-                                <UploadFile file={uploadedMedia}
-                                    setFile={(e) => setUploadedMedia(e)}
-                                    placeholder="Importer une image"
-                                    style={{ paddingTop: '.8rem', paddingBottom: '.8rem' }}
-                                    type="image/*" />
+                                <div className={classes.logoCompanyDiv}>
+                                    {preview && <img className={classes.logoPreview} src={preview} />}
+                                    <UploadFile file={uploadedMedia}
+                                                setFile={(e) => setUploadedMedia(e)}
+                                                placeholder="Importer une image"
+                                                style={{ paddingTop: '.8rem', paddingBottom: '.8rem' }}
+                                                type="image/*" />
+                                </div>
                             </div>
                         </div>
                         {/* <div className={classes.row}> */}

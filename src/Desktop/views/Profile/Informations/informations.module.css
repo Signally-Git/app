@@ -3,20 +3,12 @@
   height: 100%;
   overflow: auto;
   margin: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }
-
-.container img {
+.container > img {
   height: 85%;
   max-height: 70vh;
   margin: auto;
@@ -31,42 +23,24 @@
   overflow: auto;
   width: 50%;
   height: 80%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .row {
   width: 100%;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  justify-content: space-between;
   display: flex;
 }
-
 .row > div {
   width: 48%;
 }
 
 .menu {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   list-style: none;
   padding: 0;
   margin: auto;
@@ -76,14 +50,12 @@
   margin-top: 0;
   margin-bottom: 1rem;
 }
-
 .menu li {
   width: 50%;
   margin: 0 auto;
   text-align: center;
   cursor: pointer;
 }
-
 .menu li::after {
   content: " ";
   display: block;
@@ -92,17 +64,28 @@
   height: 2px;
   margin-top: 0.5rem;
 }
-
 .menu .active {
-  -webkit-transition: 0.2s;
   transition: 0.2s;
   color: #FF7954;
 }
-
 .menu .active::after {
-  -webkit-transition: 0.2s;
   transition: 0.2s;
   background-color: #FF7954;
+}
+
+.logoCompanyDiv {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+.logoCompanyDiv > div {
+  width: 100%;
+}
+
+.logoPreview {
+  max-width: 30px;
+  max-height: 30px;
+  margin: auto;
 }
 
 /* Rounded sliders */
@@ -117,42 +100,28 @@
 .inputsContainer {
   padding-top: 1.5rem;
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
-
 .inputsContainer label {
   color: #c9847c;
   font-weight: 400;
   font-size: 0.8rem;
 }
-
 .inputsContainer ~ button {
   margin-top: 1.5rem !important;
 }
 
 .inputContainer {
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   margin: 0.5rem 0;
 }
-
 .inputContainer > div {
   margin-top: 0.5rem;
   text-align: center;
 }
-
 .inputContainer :disabled {
   color: #FF7954;
   font-weight: bold;
@@ -162,66 +131,45 @@
   margin-top: 0.5rem;
   width: 100%;
   background: #fff;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   border-radius: 10px;
   padding: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
 }
-
 .iconsContainer label:first-of-type {
   font-size: 0.85rem;
 }
-
 .iconsContainer label {
   margin: 0;
   color: #000 !important;
 }
-
 .iconsContainer svg {
   cursor: pointer;
 }
 
 .socialsContainer {
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   color: #FF7954;
 }
-
 .socialsContainer label {
   font-size: 0.9rem;
   color: #FF7954;
 }
-
 .socialsContainer svg {
   cursor: pointer;
   margin-left: 0.5rem;
 }
 
 .iconInput {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   position: relative;
   width: 100%;
 }
-
 .iconInput svg {
   position: absolute;
   left: 1rem;
@@ -236,14 +184,10 @@
   bottom: 2rem;
   left: 2rem;
   right: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
   margin-right: auto;
 }
-
 .btnsContainer > button:last-child {
   margin-left: 1rem;
 }
