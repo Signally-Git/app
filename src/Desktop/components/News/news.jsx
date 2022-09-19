@@ -91,8 +91,8 @@ function News({ organisation, loading, setLoading }) {
             onSlideChange={(e) => console.log(e)}
         >
 
-            {slides?.map((slide) => {
-                return (<SwiperSlide>
+            {slides?.map((slide, index) => {
+                return (<SwiperSlide key={index}>
                     {slide}
                 </SwiperSlide>)
             })}

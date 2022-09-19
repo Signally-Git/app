@@ -2,7 +2,6 @@ import ChevronRight from 'Assets/icons/chevron-right.svg'
 import classes from './tiles.module.css'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { MobileView } from 'react-device-detect'
 import request from 'Utils/Request/request'
 import Modal from 'Utils/Modals/modal'
 import { BsBroadcastPin } from 'react-icons/bs'
@@ -16,11 +15,8 @@ function Tiles(props) {
     const [activeTeams, setActiveTeams] = useState(0)
     const [activeWorkplaces, setActiveWorkplaces] = useState(0)
     const [users, setUsers] = useState([])
-    const [user, setUser] = useState({})
     const [wps, setWPs] = useState([])
     const [modal, setModal] = useState(false)
-    const [organisation, setOrganisation] = useState({})
-    const [activeUsers, setActiveUsers] = useState([])
     const [templates, setTemplates] = useState([])
     const [signatures, setSignatures] = useState([])
     const [activeSignatures, setActiveSignatures] = useState(0)
@@ -34,10 +30,6 @@ function Tiles(props) {
         props.handleHeader(" ")
         await request.get(`whoami`).then(async (res) => {
             localStorage.setItem("user", JSON.stringify(res.data))
-            setUser(res.data)
-            await request.get(res.data.organisation).then((res) =>
-                setOrganisation(res.data))
-            // console.log(res)
         })
 
         await request.get(`events`).then((res) => {
@@ -72,9 +64,7 @@ function Tiles(props) {
         }).catch(() => { })
         await request.get(`signatures`).then((res) => {
             let count = 0;
-            // res.data["hydra:member"].filter(signature => signature.users.length > 0 || signature.teams.length > 0 || signature.workplaces.length > 0)
             res.data["hydra:member"].map((signature) => {
-                // console.log(signature.users.length > 0 || signature.teams.length > 0 || signature.workplaces.length > 0)
                 if (signature.users.length > 0 || signature.teams.length > 0 || signature.workplaces.length > 0)
                     count++;
             })
@@ -83,12 +73,6 @@ function Tiles(props) {
             props.setLoading(true)
         }).catch(() => { })
     }, [])
-
-    // useEffect(() => {
-    //     setActiveEvents(events.filter(isActive => isActive.active === true))
-    //     setActiveTeams(teamsList.filter(isActive => isActive.members_count > 0))
-    //     setActiveUsers(users.filter(isActive => isActive.is_deployed === true))
-    // }, [events, users, teamsList])
 
     useEffect(() => {
         users.map((user) => {
@@ -108,7 +92,6 @@ function Tiles(props) {
                         .then(() => { notification({ content: <>{users.length} collaborateur(s) notifiés</>, status: "valid" }); setSendMailBtn(<>Envoyer le mail</>);  setModal(false) })
                         .catch(() => { notification({ content: <>Une erreur est survenue. Veuillez réessayer</>, status: "invalid" }); setSendMailBtn(<>Envoyer le mail</>);  setModal(false) })
                 }} /> : ""}
-            <MobileView><h1>Bonjour {JSON.parse(localStorage.getItem("user"))?.first_name}</h1></MobileView>
             <div className={classes.tilesList}>
                 {!templates.length < 1 ? <>
                     <Link to="/signatures" className={classes.tile}>
@@ -185,23 +168,19 @@ function Tiles(props) {
                 </Link>
                 <div className={`${classes.tile} ${classes.deploy}`} onClick={() => setModal(true)}>
                     <div className={`${classes.row} ${classes.onUnHover}`}>
-                        <p>Déploiement</p>
+                        <p style={{ width: '5rem'}}>Déploiement</p>
                         <BsBroadcastPin fontSize={'1.75rem'} style={{ margin: 'auto 0 1rem 0' }} />
-                        {/* <img src={ChevronRight} alt="View" /> */}
                     </div>
                     <div className={`${classes.row} ${classes.onHover}`}>
-                        <p>Déployer</p>
+                        <p style={{ width: '5rem'}}>Déployer</p>
                         <BsBroadcastPin fontSize={'1.75rem'} style={{ margin: 'auto 0 1rem 0' }} />
                     </div>
                     <div className={classes.row}>
-                        {/* <div> */}
-                        {/* <Button color={"white"} style={{ padding: '.5rem 1rem' }}>Déployer</Button> */}
                         <div>
                             <span className={classes.bigTxt}>{users.length}</span>
                         </div>
                         <span className={classes.activeSpan}>actifs</span>
                     </div>
-                    {/* </div> */}
                 </div>
                 <div to="#" className={`${classes.tile} ${classes.billingTile}`}>
                     <div className={classes.row}>
@@ -211,9 +190,6 @@ function Tiles(props) {
                     <div className={classes.row}>
                         <div>
                             <span className={classes.free}>Gratuit</span>
-                            {/* {users.length === 1 ?  <><span className={classes.bigTxt}> </span><span className={classes.free}>Gratuit</span></> : <>
-                            <span className={classes.bigTxt}>{users.length * 0.5 + activeEvents.length * 10}€</span> */}
-                            {/* <span> /mois</span> </>} */}
                         </div>
                     </div>
                 </div>

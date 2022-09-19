@@ -1,6 +1,6 @@
 {
     "name": "signally",
-    "version": "0.1.0",  
+    "version": "0.1.0",
     "license": "UNLICENSED",
     "private": true,
     "dependencies": {
@@ -38,14 +38,14 @@
         "react-select": "^4.3.1",
         "react-swipeable": "^6.1.2",
         "react-time-input": "^0.0.19",
-        "sass": "^1.44.0",
+        "sass": "^1.54.9",
         "swiper": "^8.0.7",
         "web-vitals": "^1.0.1"
     },
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test",
+        "test": "react-scripts test.twig",
         "eject": "react-scripts eject",
         "lint": "eslint src/**/*.js src/**/*.js"
     },

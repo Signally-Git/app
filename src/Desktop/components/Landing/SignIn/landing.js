@@ -109,7 +109,6 @@ const Login = () => {
 
     const handleLogIn = async (e) => {
         e.preventDefault()
-        let token;
         setLoading(true)
         const req = {
             username: email.toLowerCase(),

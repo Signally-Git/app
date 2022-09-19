@@ -5,7 +5,6 @@ import Input from 'Utils/Input/input';
 import CustomSelect from 'Utils/CustomSelect/customselect'
 import PluginsOutlook from 'Assets/img/Plugins-Outlook.png'
 import PluginsSoon from 'Assets/img/Plugins-GA.png'
-import request from 'Utils/Request/request';
 import Takeoff from 'Assets/img/takeoff.png'
 
 import classes from '../landing.module.css'
@@ -26,7 +25,6 @@ const Signup = () => {
   const [password, setPassword] = useState('')
   const [nbPerson, setNbPerson] = useState("1 à 5")
   const [showPass, setShowPass] = useState(false)
-  const notification = useNotification()
   const [valid, setValid] = useState(false)
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -42,7 +40,7 @@ const Signup = () => {
   function validateSiren(siren) {
     var isValid = true;
     siren = siren.replace(/[^\d.-]/g, '')
-    if ((siren.length != 9) || (isNaN(siren)))
+    if ((siren.length !== 9) || (isNaN(siren)))
       isValid = false;
     return isValid;
   }

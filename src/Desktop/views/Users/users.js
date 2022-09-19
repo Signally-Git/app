@@ -1,11 +1,11 @@
 import classes from './users.module.css'
-import { useEffect, useRef, useState } from 'react'
-import { HiOutlineSearch } from 'react-icons/hi'
+import {useEffect, useRef, useState} from 'react'
+import {HiOutlineSearch} from 'react-icons/hi'
 import Tab from './Tab/tab'
 import SignaturePreview from './SignaturePreview/signaturePreview'
-import { Link, useParams } from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import request from 'Utils/Request/request'
-import { BiPlusCircle, BiMinusCircle } from 'react-icons/bi'
+import {BiMinusCircle, BiPlusCircle} from 'react-icons/bi'
 import Button from 'Utils/Button/btn'
 
 
@@ -76,8 +76,7 @@ function Team() {
         function getRealtimeDataWOutWP(data) {
             setTimeout(() => {
                 setTeams(data)
-            }, 1500);
-        }
+            }, 1500);       }
 
         return () => {
             sse.close();

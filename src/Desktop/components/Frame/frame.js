@@ -1,6 +1,6 @@
 import Menu from "Desktop/components/Menu/Menu";
 import Header from "Desktop/components/Header/Header";
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import classes from "./frame.module.scss";
 import request from "Utils/Request/request";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -22,7 +22,6 @@ export default function Frame(props) {
     }, [])
 
     useEffect(() => {
-        console.log(process.env.REACT_APP_HUB_URL);
         const sseUser = new EventSource(`${process.env.REACT_APP_HUB_URL}${user?.['@id']}`);
 
         const sse = new EventSource(`${process.env.REACT_APP_HUB_URL}${organisation?.['@id']}`);

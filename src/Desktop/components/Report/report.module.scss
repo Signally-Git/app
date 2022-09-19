@@ -62,7 +62,7 @@
 .actionsContainer {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: start;
+    justify-content: flex-start;
     width: 60%;
     margin-top: 1rem!important;
     button {
