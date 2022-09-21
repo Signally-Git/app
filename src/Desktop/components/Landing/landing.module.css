@@ -250,10 +250,23 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  overflow: hidden;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  overflow: auto;
+  /* Optional: show position indicator in red */
+}
+
+.slider > div::-webkit-scrollbar {
+  z-index: -10;
+  width: 0;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+}
+
+.slider > div::-webkit-scrollbar-thumb {
+  background: transparent;
 }
 
 .registerContainer .formContainer button svg {

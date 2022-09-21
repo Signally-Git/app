@@ -1,6 +1,7 @@
 {
     "name": "signally",
     "version": "0.1.0",
+    "license": "UNLICENSED",
     "private": true,
     "dependencies": {
         "@dnd-kit/core": "^4.0.1",
@@ -15,9 +16,11 @@
         "axios": "^0.21.1",
         "date-fns": "^2.21.3",
         "event-source-polyfill": "^1.0.25",
+        "gitmoji-cli": "^4.13.0",
         "html-react-parser": "^1.2.6",
         "intro.js-react": "^0.5.0",
         "moment": "^2.29.1",
+        "prettier": "^2.7.1",
         "react": "^17.0.2",
         "react-apexcharts": "^1.3.9",
         "react-auth-code-input": "^1.2.1",
@@ -36,14 +39,14 @@
         "react-select": "^4.3.1",
         "react-swipeable": "^6.1.2",
         "react-time-input": "^0.0.19",
-        "sass": "^1.44.0",
+        "sass": "^1.54.9",
         "swiper": "^8.0.7",
         "web-vitals": "^1.0.1"
     },
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test",
+        "test": "react-scripts test.twig",
         "eject": "react-scripts eject",
         "lint": "eslint src/**/*.js src/**/*.js"
     },

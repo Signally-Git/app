@@ -113,7 +113,16 @@
 .slider {
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        z-index: -10;
+        width: 0;  /* Remove scrollbar space */
+        background: transparent;  /* Optional: just make scrollbar invisible */
+    }
+    /* Optional: show position indicator in red */
+    &::-webkit-scrollbar-thumb {
+        background: transparent;
+    }
     display: flex;
     .col {
         &:first-child {

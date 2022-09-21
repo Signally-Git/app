@@ -30,7 +30,7 @@ export default function CreateTeam({ setDone }) {
         const create = await request.post('teams', req).catch(
             () => notification({ content: <>L'équipe <span style={{ color: "#FF7954" }}>{teamName}</span> n'a pas pu être créée</>, status: "invalid" }))
         console.log(create)
-        create.data && notification({ content: <>L'équipe <span style={{ color: "#FF7954" }}>{teamName}</span> a été créée avec succès</>, status: "valid" })
+        create?.data && notification({ content: <>L'équipe <span style={{ color: "#FF7954" }}>{teamName}</span> a été créée avec succès</>, status: "valid" })
         setDone(true)
         history.push('/teams/teams')
     }

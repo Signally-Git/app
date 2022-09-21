@@ -1,11 +1,7 @@
 import { Switch, Route } from 'react-router-dom'
 import Home from './containers/Home'
-import SignIn from './containers/SignIn'
 import Error from './containers/Error'
 import Dashboard from './containers/Dashboard'
-import Payment from './components/Payment/Payment'
-// import SyncPage from './components/Sync/sync'
-import Import from './containers/Import'
 import PrivateRoute from 'Utils/PrivateRoute/privateRoute'
 import CreateSignature from './containers/CreateSignature'
 import Users from './views/Users/users'
@@ -18,8 +14,6 @@ import Signup from './components/Landing/SignUp/SignUp'
 import { NotificationProvider } from 'Utils/Notifications/notifications'
 import ResetPassword from './views/ResetPassword/ResetPassword.jsx'
 import EditSignatureComponent from './views/Signatures/edit/editSignature'
-
-// Routing for desktop view
 
 export default function DesktopRoutes() {
     return (
@@ -68,12 +62,6 @@ export default function DesktopRoutes() {
 
             <PrivateRoute path="/billing" page="billing" component={Billing} />
 
-            <PrivateRoute exact path="/payment" page="payment" component={Payment} />
-
-            {/* <PrivateRoute path="/synchronize" component={SyncPage} /> */}
-
-            {/* <PrivateRoute path="/import" component={Import} /> */}
-
             <PrivateRoute path="/upload-img" component={ImgUploader} />
 
             <PrivateRoute exact path="/studio" component={Studio} />
@@ -81,6 +69,10 @@ export default function DesktopRoutes() {
             <PrivateRoute exact path="/store" component={Store} />
 
             <PrivateRoute exact path="/report" component={Report} />
+
+            <Route path="/users/:token">
+                
+            </Route>
 
             <Route path="/">
                 <Error />

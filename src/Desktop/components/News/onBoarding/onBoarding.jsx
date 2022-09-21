@@ -9,7 +9,6 @@ import Button from 'Utils/Button/btn';
 import 'swiper/swiper.min.css';
 
 function OnBoarding({ organisation, completed, setCompleted }) {
-    console.log(organisation)
     const [swiper, setSwiper] = React.useState(null);
     const [slideIndex, setSlideIndex] = React.useState(0)
     const [missing, setMissing] = React.useState([])
@@ -153,8 +152,8 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                 onSwiper={(s) => setSwiper(s)}
                 onSlideChange={(e) => setSlideIndex(e.realIndex)}
             >
-                {menu.map((element) => {
-                    return <SwiperSlide className={classes.content}>
+                {menu.map((element, index) => {
+                    return <SwiperSlide key={index} className={classes.content}>
                         {element.content}
                     </SwiperSlide>
                 })}

@@ -26,8 +26,8 @@
 .orange {
     color: $signally-orange;
     border-color: $signally-orange;
+    cursor: pointer;
     &:hover {
-        cursor: pointer;
         background-color: $signally-orange;
         color: #FFF;
         svg {
@@ -94,6 +94,16 @@
         background-color: transparent;
         color: $signally-brown;
         cursor: pointer;
+    }
+}
+
+.white {
+    border-color: transparent;
+    background-color: #FFF;
+    cursor: pointer;
+    &:hover {
+        color: #FFF;
+        background-color: $signally-brown;
     }
 }
 

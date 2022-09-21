@@ -5,14 +5,12 @@ import Input from 'Utils/Input/input';
 import CustomSelect from 'Utils/CustomSelect/customselect'
 import PluginsOutlook from 'Assets/img/Plugins-Outlook.png'
 import PluginsSoon from 'Assets/img/Plugins-GA.png'
-import request from 'Utils/Request/request';
 import Takeoff from 'Assets/img/takeoff.png'
 
 import classes from '../landing.module.css'
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useNotification } from 'Utils/Notifications/notifications';
 import axios from 'axios';
-import { API } from 'config';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { ImCross } from 'react-icons/im';
 
@@ -27,7 +25,6 @@ const Signup = () => {
   const [password, setPassword] = useState('')
   const [nbPerson, setNbPerson] = useState("1 à 5")
   const [showPass, setShowPass] = useState(false)
-  const notification = useNotification()
   const [valid, setValid] = useState(false)
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -43,7 +40,7 @@ const Signup = () => {
   function validateSiren(siren) {
     var isValid = true;
     siren = siren.replace(/[^\d.-]/g, '')
-    if ((siren.length != 9) || (isNaN(siren)))
+    if ((siren.length !== 9) || (isNaN(siren)))
       isValid = false;
     return isValid;
   }
@@ -97,12 +94,12 @@ const Signup = () => {
     }
     if (valid) {
       setLoading(true)
-      await axios.post(API + 'register', req).then(() => {
+      await axios.post(process.env.REACT_APP_API_URL + '/register', req).then(() => {
         setSent(true)
       }).catch((err) => {
-        if (err.response.data.title === 'App\\Exception\\Organisation\\OrganisationWithSameSirenAlreadyExistsDomainException')
+        if (err?.response?.data?.title === 'App\\Exception\\Organisation\\OrganisationWithSameSirenAlreadyExistsDomainException')
         setError({ content: <>Cette société est déjà enregistrée sur Signally <ImCross /></>})
-        if (err.response.data.title === 'App\\Exception\\User\\UserWithSameEmailAlreadyExistsDomainException')
+        if (err?.response?.data?.title === 'App\\Exception\\User\\UserWithSameEmailAlreadyExistsDomainException')
         setError({ content: <>Cet utilisateur est déjà enregistré sur Signally <ImCross /></> })
           return;
         })

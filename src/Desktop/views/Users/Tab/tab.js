@@ -65,11 +65,9 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         setTeams(teamsList)
     }
 
-    const refreshData = (type) => {
-        if (type === "workplace" || !type)
-            getDataWorkspace()
-        if (type === "teams" || !type)
-            getDataTeam()
+    const refreshData = () => {
+        getDataWorkspace()
+        getDataTeam()
         setDone(false)
     }
 
@@ -78,18 +76,20 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     }, [addedWorkplace, done])
 
     // Deletes either specified workplace, team or user
-    const handleDelete = (id, type, name) => {
-        request.delete(`${type}/${id}`).then(
-            () => {
-                notification({ content: <><span style={{ color: "#FF7954" }}>{name}</span> supprimé avec succès</>, status: "valid" })
-                setModal({ type: "", name: "", id: "" })
-            }
-
-        ).catch(() => notification({ content: <>Une erreur s'est produite. Impossible de supprimer <span style={{ color: "#FF7954" }}>{name}</span></>, status: "invalid" }))
-        if (selected?.id === id)
-            setSelected()
-        refreshData()
-        setModal({ type: "", name: "", id: "" })
+    const handleDelete = async (id, type, name) => {
+        await request.delete(`${type}/${id}`).then(() => {
+            notification({
+                content: <><span style={{color: "#FF7954"}}>{name}</span> supprimé avec succès</>,
+                status: "valid"
+            })
+            setModal({type: "", name: "", id: ""})
+        }).catch(() => notification({
+            content: <>Une erreur s'est produite. Impossible de supprimer <span
+                style={{color: "#FF7954"}}>{name}</span></>, status: "invalid"
+        }))
+        if (selected?.id === id) setSelected()
+        await refreshData()
+        setModal({type: "", name: "", id: ""})
     }
 
     // Deletes either every workplace, every team or every user
@@ -119,7 +119,7 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 for (let index = 0; index < teams.length; index++) {
                     const element = teams[index];
                     request.delete(`teams/${element.id}`).then(
-                        (res) => {
+                        () => {
                             index === teams.length - 1 && refreshData()
                             count++;
                             if (count === teams.length) {
@@ -220,11 +220,11 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
         if (file)
             await request.post(`import/file`, img).then(async (res) => {
                 const requestLogo = {
-                    name: workplace.name + "_logo",
+                    name: file.name,
                     path: res.data.path,
                     workplace: workplace['@id']
                 }
-                await request.post('logos', requestLogo).then((res) => {
+                await request.post('logos', requestLogo).then(() => {
                     setFile()
                 })
             })
@@ -282,7 +282,6 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 <form onChange={(e) => e.target.type === "radio" && setSelected(JSON.parse(e.target.value))}>
                     {
                         workplaces.map((workplace) => {
-                            console.log(workplace)
                             if (workplace?.name?.toLowerCase().search(searchWorkplace) !== -1)
                                 return (
                                     <li onMouseMove={() => {

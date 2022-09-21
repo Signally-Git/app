@@ -1,11 +1,11 @@
 import classes from './users.module.css'
-import { useEffect, useRef, useState } from 'react'
-import { HiOutlineSearch } from 'react-icons/hi'
+import {useEffect, useRef, useState} from 'react'
+import {HiOutlineSearch} from 'react-icons/hi'
 import Tab from './Tab/tab'
 import SignaturePreview from './SignaturePreview/signaturePreview'
-import { Link, useParams } from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import request from 'Utils/Request/request'
-import { BiPlusCircle, BiMinusCircle } from 'react-icons/bi'
+import {BiMinusCircle, BiPlusCircle} from 'react-icons/bi'
 import Button from 'Utils/Button/btn'
 
 
@@ -37,7 +37,7 @@ function Team() {
 
     // HANDLING REAL TIME USERS IN TEAM
     useEffect(() => {
-        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io${entity?.['@id']}`);
+        const sse = new EventSource(`${process.env.REACT_APP_HUB_URL}${entity?.['@id']}`);
         if (edit === 'assign-team') {
             sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
         }
@@ -55,7 +55,7 @@ function Team() {
 
     // HANDLING REAL TIME USERS WITHOUT TEAM
     useEffect(() => {
-        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users/users-without-team`);
+        const sse = new EventSource(`${process.env.REACT_APP_HUB_URL}/users/users-without-team`);
         sse.onmessage = e => getRealtimeDataWOutTeam(JSON.parse(e.data));
 
         function getRealtimeDataWOutTeam(data) {
@@ -70,14 +70,13 @@ function Team() {
     }, [edit])
 
     useEffect(() => {
-        const sse = new EventSource(`https://hub.signally.io/.well-known/mercure?topic=https://api.beta.signally.io/users/teams-without-workplace`);
+        const sse = new EventSource(`${process.env.REACT_APP_HUB_URL}/users/teams-without-workplace`);
         sse.onmessage = e => getRealtimeDataWOutWP(JSON.parse(e.data));
 
         function getRealtimeDataWOutWP(data) {
             setTimeout(() => {
                 setTeams(data)
-            }, 1500);
-        }
+            }, 1500);       }
 
         return () => {
             sse.close();
@@ -203,7 +202,7 @@ function Team() {
                                                     </li>
                                             })}
                                         </ul>
-                                        <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 1000)}>Ajouter des équipes</Button>
+                                        <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 2000)}>Ajouter des équipes</Button>
                                     </div>
                                     <div className={classes.col}>
                                         <div className={classes.tagline}>
@@ -256,7 +255,7 @@ function Team() {
                                                         </li>
                                                 })}
                                             </ul>
-                                            <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 1000)}>Ajouter des collaborateurs</Button>
+                                            <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 2000)}>Ajouter des collaborateurs</Button>
                                         </div>
                                         <div className={classes.col}>
                                             <div className={classes.tagline}>

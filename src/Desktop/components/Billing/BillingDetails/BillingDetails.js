@@ -16,6 +16,6 @@ export default function BillingDetails() {
             <h3>288 €</h3>
             <span>/ mois</span>
         </div>
-        <img src={Rocket} />
+        <img alt="Rocket" src={Rocket} />
     </div>)
 }

@@ -13,12 +13,12 @@ function App() {
       <ScrollToTop />
 
       {/* Desktop view */}
+      <Route exact path="/users/:token">
+        <CopySignature />
+      </Route>
       <BrowserView>
         <DesktopRoutes />
       </BrowserView>
-      <Route exact path="/getsignature">
-                <CopySignature />
-            </Route>
 
     </BrowserRouter>
   )

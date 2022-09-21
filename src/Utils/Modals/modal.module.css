@@ -4,8 +4,10 @@
           box-shadow: 0 0 40px rgba(64, 41, 39, 0.3);
   width: 60%;
   max-height: 15rem;
+  max-width: 30rem;
   border-radius: 20px;
-  position: fixed;
+  position: absolute;
+  padding: 1rem;
   inset: 0;
   z-index: 10;
   margin: auto;
@@ -35,11 +37,12 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 60%;
+  width: 70%;
   -ms-flex-pack: distribute;
       justify-content: space-around;
 }
 
 .btnsContainer button {
+  position: relative;
   margin: 0 .75rem;
 }

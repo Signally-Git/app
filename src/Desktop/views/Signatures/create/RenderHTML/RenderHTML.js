@@ -1,13 +1,12 @@
 import axios from "axios"
 import parse from "html-react-parser"
 import { useEffect, useState } from "react"
-import { API } from "../../../../../config"
 
 export default function RenderHTML(props) {
   const [organisation, setOrganisation] = useState()
   const [companyLogo, setCompanyLogo] = useState()
   useEffect(async () => {
-    await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user"))?.organisation_id}?access_token=${localStorage.getItem("token")}`).then((res) => {
+    await axios.get(`${process.env.REACT_APP_API_URL}/organisation/${JSON.parse(localStorage.getItem("user"))?.organisation_id}?access_token=${localStorage.getItem("token")}`).then((res) => {
       setOrganisation(res.data)
       setCompanyLogo(res.data.logo?.path)
     })

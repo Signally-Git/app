@@ -4,7 +4,6 @@ import Checkbox from 'Assets/icons/checkbox.svg'
 import Menu from '../../../components/Menu/Menu'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
-import { API } from 'config';
 
 const bannerActivesAPI = 0
 
@@ -13,7 +12,7 @@ function Billing(props) {
 
     useEffect(async () => {
         props.handleHeader("Votre abonnement")
-        await axios.get(`${API}organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`).then((res) => {
+        await axios.get(`${process.env.REACT_APP_API_URL}/organisation/${JSON.parse(localStorage.getItem("user")).organisation_id}/users?access_token=${localStorage.getItem("token")}`).then((res) => {
             setUsers(res.data.data)
         })
     }, [])

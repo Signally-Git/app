@@ -6,7 +6,6 @@ import TemplateSelection from "../create/TemplateSelect/templateSelect";
 import Preview from "../create/Preview/customizablePreview";
 import { BsArrowRight } from "react-icons/bs";
 import Button from "Utils/Button/btn";
-import { API } from "config";
 import Input from "Utils/Input/input";
 import { useHistory, useParams } from "react-router";
 import { UseEvents } from "Utils/useEvents/useEvents";
@@ -47,7 +46,6 @@ function EditSignatureComponent() {
         fontFamily: "Helvetica"
     });
     const [signatureOption, setSignatureOption] = useState({
-        footer: { disclaimerValue: "Disclaimer", disclaimerEnabled: false, ecoValue: "Eco resp", ecoEnabled: false, items: ["Disclaimer", "Eco"] },
         salutation: { value: "Cordialement,", enabled: false, padding: 10 },
         custom: { enabled: false },
         eco: { value: "Ecoresponsability", enabled: false },
@@ -185,14 +183,13 @@ function EditSignatureComponent() {
         })
 
         setSignatureOption({
-            footer: { disclaimerValue: "Disclaimer", disclaimerEnabled: false, ecoValue: "Eco resp", ecoEnabled: false, items: ["Disclaimer", "Eco"] },
             salutation: { value: "Cordialement,", enabled: defaultStyles?.filter((style) => style.type === "greetings")[0].value === "false" ? false : true, padding: defaultStyles?.filter((style) => style.type === "greetingsPadding")[0].value },
             custom: { enabled: false },
             eco: { value: "Ecoresponsability", enabled: false },
             followUs: { value: "Follow us", enabled: false },
             bgColor: defaultStyles?.filter((style) => style.type === "divColor" && style.property === 'color')[0].value,
             bannerTop: { url: "test", enabled: false, padding: 10 },
-            event: { ...signatureOption.event, display: `${API}${signatureOption.event?.selected?.imagePath}`, enabled: defaultStyles?.filter((style) => style.type === "event")[0].value === "false" ? false : true, padding: defaultStyles?.filter((style) => style.type === "eventPadding")[0].value },
+            event: { ...signatureOption.event, display: `${process.env.REACT_APP_API_URL}/${signatureOption.event?.selected?.imagePath}`, enabled: defaultStyles?.filter((style) => style.type === "event")[0].value === "false" ? false : true, padding: defaultStyles?.filter((style) => style.type === "eventPadding")[0].value },
             socials: { enabled: true, bgColor: "#000", fill: "#FFF", items: ["twitter", "facebook", "pinterest", "snapchat", "linkedin", "instagram"] },
             footer: {
                 maxWidth: 380, value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.
@@ -253,7 +250,7 @@ function EditSignatureComponent() {
     }, [modal, signatureName])
 
     const handleSave = async () => {
-        await request.patch(`signatures/` + signatureId, { name: signatureName, }, {
+        await request.patch(`signatures/` + signatureId, { name: signatureName, signatureTemplate: selectedTemplate?.signatureTemplate?.['@id'] }, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(
             async (result) => {

@@ -4,7 +4,6 @@ import OnBoarding from "./onBoarding/onBoarding";
 import { Pagination, A11y, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react.js';
 import parse from "html-react-parser";
-import { API } from "config";
 import request from "Utils/Request/request";
 import moment from "moment";
 
@@ -59,7 +58,7 @@ function News({ organisation, loading, setLoading }) {
                     </span>
                 </h5>
                 <div className={classes.preview}>
-                    <img src={API + admin.events[0]?.imagePath} />
+                    <img src={process.env.REACT_APP_API_URL + '/' + admin.events[0]?.imagePath} />
                     <span className={classes.duration}>
                         <div className={`${classes.col} ${classes.bold}`}>
                             <span>{`du ${moment.utc(admin.events[0]?.startAt).local(false).format('D MMM YYYY')}`}</span>
@@ -92,8 +91,8 @@ function News({ organisation, loading, setLoading }) {
             onSlideChange={(e) => console.log(e)}
         >
 
-            {slides?.map((slide) => {
-                return (<SwiperSlide>
+            {slides?.map((slide, index) => {
+                return (<SwiperSlide key={index}>
                     {slide}
                 </SwiperSlide>)
             })}

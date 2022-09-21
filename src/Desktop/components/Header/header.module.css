@@ -135,7 +135,7 @@
   background-color: #FF7954;
   color: #fff;
   padding: 2px;
-  font-size: 12px;
+  font-size: .8rem;
   right: -9px;
   top: -9px;
   border-radius: 50%;
@@ -299,7 +299,8 @@
 }
 
 .nameSize {
-  margin-right: 4.5rem;
+  opacity: 0;
+  margin-right: 5.5rem;
 }
 
 .name {
@@ -318,7 +319,7 @@
   padding: 0;
   padding: 0 1rem;
   border: 1px solid #402927;
-  border-radius: 20px;
+  border-radius: 15px;
   list-style: none;
   max-height: 1.7rem;
   overflow: hidden;
@@ -393,12 +394,6 @@
   color: #402927;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-}
-
-.name .UserName span::before {
-  content: " ";
-  display: block;
-  height: 1px;
 }
 
 .reportContainer {

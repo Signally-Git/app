@@ -62,6 +62,8 @@
             align-items: center;
             font-size: 0.9rem;
             color: $signally-brown;
+            line-height: 1.65rem;
+            text-indent: 0.35rem;
         }
     }
     .tagsContainer {
@@ -295,8 +297,22 @@
     background: $signally-brown;
 }
 
+.loading {
+    margin: auto;
+    animation: rotate 1s infinite ease;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
 .btnContainer button{
     margin-right: auto;
-    margin-left: 0rem;
+    margin-left: 0;
     margin-top: 3rem;
 }

@@ -8,7 +8,6 @@ import moment from 'moment';
 import UploadFile from 'Utils/Upload/uploadFile';
 import { useNotification } from 'Utils/Notifications/notifications';
 import request from 'Utils/Request/request';
-import { API } from 'config';
 import Btns from 'Utils/Btns/btns';
 import { useHistory } from 'react-router-dom';
 
@@ -27,7 +26,7 @@ export default function CreateEvent({ setDone, event }) {
         setEventName(event?.name)
         setEventLink(event?.link || "")
         setStartDate(new Date(event?.startAt ? new Date(event?.startAt) : new Date()))
-        setEndDate(new Date(event?.endAt ? new Date(event?.endAt) : new Date()))
+        setEndDate(new Date(event?.endAt ? new Date(event?.endAt) : new Date(Date.now() + 24*60*60*1000)))
     }, [event])
 
     useEffect(() => {
@@ -35,6 +34,14 @@ export default function CreateEvent({ setDone, event }) {
             eventNameRef.current.focus()
         }
     }, [banner])
+
+    const checkEventLink = (url) => {
+        let isValid = url.startsWith("http://") ? 1 : 0;
+        if (isValid == 0) isValid = url.startsWith("https://") ? 2 : 0;
+        if (isValid == 0)
+            notification({ content: <>Le lien de l'évènement doit être formatté avec un "https://liendelevenement"</>, status: "invalid" })
+        return true
+    }
 
     const saveEvent = async (e) => {
         e.preventDefault()
@@ -51,7 +58,7 @@ export default function CreateEvent({ setDone, event }) {
                 const req = {
                     imagePath: res.data.path,
                     name: eventName,
-                    link: eventLink,
+                    link: res.data.url,
                     startAt: start.utc(false),
                     endAt: end.utc(false),
                 }
@@ -72,7 +79,7 @@ export default function CreateEvent({ setDone, event }) {
 
             if (banner) {
                 image.append('file', banner)
-                await request.post(`upload`, image).then(async (res) => {
+                await request.post(`import/file`, image).then(async (res) => {
                     const req = {
                         name: eventName,
                         startAt: start.utc(false),
@@ -125,10 +132,10 @@ export default function CreateEvent({ setDone, event }) {
         </div>
         <div className={classes.row}>
             <Input required value={eventName} onChange={(e) => setEventName(e.target.value)} style={{ width: "48%" }} placeholder="Nom de l'évènement" type="text" ref={eventNameRef} />
-            <Input required value={eventLink} onChange={(e) => setEventLink(e.target.value)} style={{ width: "48%" }} placeholder="Lien" type="text" />
+            <Input required value={eventLink} onBlur={(e) => checkEventLink(e.target.value)} onChange={(e) => setEventLink(e.target.value)} style={{ width: "48%" }} placeholder="Lien" type="text" />
         </div>
         <div className={classes.currentEventPreview}>
-            {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={API + event.imagePath} title={event.banner?.name} /> : ""}
+            {banner ? <img src={URL.createObjectURL(banner)} /> : event ? <img src={event.imageUrl} title={event.banner?.name} /> : ""}
         </div>
         <div className={classes.uploadContainer}>
 

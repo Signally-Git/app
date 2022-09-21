@@ -1,7 +1,4 @@
-import axios from 'axios'
-import { API } from 'config'
 import { useRef, useState } from 'react'
-import { BsUpload } from 'react-icons/bs'
 import Button from 'Utils/Button/btn'
 import Input from 'Utils/Input/input'
 import classes from './create.module.css'

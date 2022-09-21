@@ -1,17 +1,12 @@
 import classes from './signatures.module.css'
-import { Link, useParams, useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { API } from 'config'
 import { HiOutlineSearch } from 'react-icons/hi'
-import { AiOutlineEdit } from 'react-icons/ai'
 import { FiTrash } from 'react-icons/fi'
 import Button from 'Utils/Button/btn'
-import ReadOnlyPreview from './create/Preview/readOnlyPreview'
 import { useNotification } from 'Utils/Notifications/notifications'
 import request from 'Utils/Request/request'
 import parse from "html-react-parser"
-import Preview from './create/Preview/customizablePreview'
 import Modal from 'Utils/Modals/modal'
 
 function Team() {
@@ -161,14 +156,13 @@ function Team() {
         })
 
         setSignatureOption({
-            footer: { disclaimerValue: "Disclaimer", disclaimerEnabled: false, ecoValue: "Eco resp", ecoEnabled: false, items: ["Disclaimer", "Eco"] },
             salutation: { value: "Cordialement,", enabled: defaultStyles?.filter((style) => style.type === "greetings")[0].value === "false" ? false : true, padding: defaultStyles?.filter((style) => style.type === "greetingsPadding")[0].value },
             custom: { enabled: false },
             eco: { value: "Ecoresponsability", enabled: false },
             followUs: { value: "Follow us", enabled: false },
             bgColor: defaultStyles?.filter((style) => style.type === "divColor" && style.property === 'color')[0].value,
             bannerTop: { url: "test", enabled: false, padding: 10 },
-            event: { ...signatureOption.event, display: `${API}${signatureOption.event?.selected?.imagePath}`, enabled: defaultStyles?.filter((style) => style.type === "event")[0].value === "false" ? false : true, padding: defaultStyles?.filter((style) => style.type === "eventPadding")[0].value },
+            event: { ...signatureOption.event, display: `${process.env.REACT_APP_API_URL}/${signatureOption.event?.selected?.imagePath}`, enabled: defaultStyles?.filter((style) => style.type === "event")[0].value === "false" ? false : true, padding: defaultStyles?.filter((style) => style.type === "eventPadding")[0].value },
             socials: { enabled: false, bgColor: "#000", fill: "#FFF", items: ["twitter", "facebook", "pinterest", "snapchat", "linkedin", "instagram"] },
             footer: {
                 maxWidth: 380, value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.
@@ -192,7 +186,7 @@ function Team() {
             address: organisation?.address,
             mobile: "Mobile",
             phone: organisation?.phone_number,
-            event: `http://fakeimg.pl/380x126?font=noto&amp;font_size=14`
+            event: `https://fakeimg.pl/380x126?font=noto&amp;font_size=14`
         })
     }, [user, template])
 
@@ -230,9 +224,10 @@ function Team() {
                         </ul>
                         {active === "active" ?
                             <div>
-                                <Link to="create-signature">
-                                    <Button color="orange" arrow={true}>Ajouter une signature</Button>
-                                    </Link>
+                                {JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH" ?
+                                    
+                                        <Button color="orange" arrow={true}><Link to="create-signature">Ajouter une signature</Link></Button>
+                                     : ""}
                                 <div className={classes.searchInput}>
                                     <HiOutlineSearch />
                                     <input className={classes.search} type="text" placeholder="Rechercher une signature" />
@@ -242,11 +237,11 @@ function Team() {
                                     {templates.map((signature) => {
                                         return (<li onMouseEnter={() => { setSelected(signature); request.get(signature['@id']).then((res) => setPreview(res.data)); setDefaultStyles(signature.signatureStyles) }} key={signature.id}
                                             className={selected === signature ? classes.selected : ""}>
-                                            <span onClick={() => history.push('/edit-signature/' + signature.id)}>{signature.name}</span>
-                                            <div className={classes.actionsContainer}>
+                                            <span onClick={() => JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH" ? history.push('/edit-signature/' + signature.id) : ""}>{signature.name}</span>
+                                            {(JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH") ? <div className={classes.actionsContainer}>
                                                 {/* <AiOutlineEdit /> */}
                                                 <FiTrash onClick={() => handleModal(signature.id)} />
-                                            </div>
+                                            </div> : ""}
                                         </li>)
                                     })}
                                 </ul>

@@ -5,7 +5,6 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import classes from './ResetPassword.module.css'
 import React from "react";
 import axios from "axios";
-import { API } from "config";
 import { useHistory, useLocation } from "react-router-dom";
 
 function useQuery() {
@@ -27,7 +26,7 @@ export default function ResetPassword() {
         const req = {
             password: confirm
         }
-        axios.post(`${API}reset/${token.toString().replace('token=', '')}`, req).then(() => {
+        axios.post(`${process.env.REACT_APP_API_URL}/reset/${token.toString().replace('token=', '')}`, req).then(() => {
             setDone(true)
             setTimeout(() => {
                 history.push('/sign-in')

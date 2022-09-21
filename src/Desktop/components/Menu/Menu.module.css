@@ -46,6 +46,11 @@
           align-items: center;
 }
 
+.tabMenu li svg {
+  width: 2rem !important;
+  height: 2rem !important;
+}
+
 .tabMenu li * {
   color: #402927;
 }
@@ -73,6 +78,10 @@
 
 .event :hover span {
   color: #66433e;
+}
+
+.event svg {
+  font-size: 1rem;
 }
 
 .event span {

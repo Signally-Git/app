@@ -6,7 +6,6 @@ import CreateEvent from './CreateEvent/createEvent'
 import { FiTrash } from 'react-icons/fi'
 import { useNotification } from 'Utils/Notifications/notifications'
 import request from 'Utils/Request/request'
-import { API } from 'config'
 import Modal from 'Utils/Modals/modal'
 import moment from 'moment';
 
@@ -68,8 +67,8 @@ function Events() {
 
                             }}
                         >
-                            <input type="checkbox" name="events" className={classes.checkbox} defaultChecked={edit} onChange={() => { setEdit(true); setPreview({ activeEvent, past: status === "past", index }) }} />
-                            <img className={classes.bannerPreview} src={`${API}${activeEvent.imagePath}`} />
+                            <input disabled={(JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH") ? false : true} type="checkbox" name="events" className={classes.checkbox} defaultChecked={edit} onChange={() => { setCreate(false); setEdit(true); setPreview({ activeEvent, past: status === "past", index }) }} />
+                            <img className={classes.bannerPreview} src={`${activeEvent.imageUrl}`} />
                             <div className={classes.eventText}>
                                 <span className={classes.active}>{activeEvent.name}</span>
                                 <span className={classes.duration}>
@@ -82,9 +81,10 @@ function Events() {
                                         <span>{`${moment.utc(activeEvent?.endAt).local(false).format('HH:mm')}`}</span>
                                     </div>
                                 </span>
-                                <div className={classes.actionsContainer}>
+                                {(JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH") ?  <div className={classes.actionsContainer}>
                                     <FiTrash onClick={() => setModal({ name: activeEvent.name, id: activeEvent.id })} />
-                                </div>
+                                </div> : ""}
+                               
                             </div>
                             {/* <img src={ChevronRight} className={classes.chevron} alt="Click" /> */}
                         </li>
@@ -119,7 +119,7 @@ function Events() {
                         </div>
                         : active === "present" ?
                             <div>
-                                <Button color="orange" arrow={true} onClick={() => { setPreview(); setCreate(true); }}>Ajouter un event</Button>
+                                {JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH" ? <Button color="orange" arrow={true} onClick={() => { setPreview(); setCreate(true); }}>Ajouter un event</Button> : ""}
                                 <div className={classes.searchInput}>
                                     <HiOutlineSearch />
                                     <input onChange={(e) => setSearch(e.target.value)} className={classes.search} type="text" placeholder="Rechercher un event" />
@@ -130,7 +130,7 @@ function Events() {
                                 </ul>
                             </div> :
                             <div>
-                                <Button color="orange" arrow={true} onClick={() => { setPreview(); setCreate(true); }}>Ajouter un event</Button>
+                                 {JSON.parse(localStorage.getItem('user')).roles[1] !== "ROLE_RH" ?  <Button color="orange" arrow={true} onClick={() => { setPreview(); setCreate(true); }}>Ajouter un event</Button> : ""}
                                 <div className={classes.searchInput}>
                                     <HiOutlineSearch />
                                     <input onChange={(e) => setSearch(e.target.value)} className={classes.search} type="text" placeholder="Rechercher un event" />
@@ -154,7 +154,7 @@ function Events() {
                                     <h2><span className={classes.orangeTxt}>{activeEvents[preview?.index].name}</span>
                                         {/* <FiEdit onClick={() => setEdit(!edit)} /> */}
                                     </h2>
-                                    <img src={`${API}${activeEvents[preview?.index]?.imagePath}`} />
+                                    <img src={`${activeEvents[preview?.index]?.imageUrl}`} />
                                 </div>
                             </div>
                             <div className={classes.back}>
