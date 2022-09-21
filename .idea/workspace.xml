@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5c4dff9f-5d0a-4e3d-a895-082d60361406" name="Changes" comment="Wait for signature to be completely created before pushing to dashboard">
+      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Dashboard/tiles.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Dashboard/tiles.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Header/header.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Header/header.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Landing/landing.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Landing/landing.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Menu/Menu.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Menu/Menu.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Events/events.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Events/events.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/users.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/users.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Utils/Button/btn.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Button/btn.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Utils/Input/input.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Input/input.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Utils/Modals/modal.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Modals/modal.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Utils/Notifications/notifications.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Notifications/notifications.module.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="staging" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2EUdhAVff6xkOl2mh9a74eqM9sF" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "NewWatcherDialog.advanced.open": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/poro/Documents/signally/app",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "prettierjs.PrettierConfiguration.Package": "/Users/poro/Documents/signally/app/node_modules/prettier",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="npm.build">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.start" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5c4dff9f-5d0a-4e3d-a895-082d60361406" name="Changes" comment="" />
+      <created>1662654213822</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1662654213822</updated>
+      <workItem from="1662654214919" duration="776000" />
+      <workItem from="1662992254096" duration="155000" />
+      <workItem from="1663249823702" duration="7414000" />
+      <workItem from="1663259666554" duration="47628000" />
+    </task>
+    <task id="LOCAL-00001" summary="Changed styling to match the whole app modals">
+      <created>1663253331634</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1663253331634</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add default tooltip for logout icon">
+      <created>1663254913595</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1663254913595</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add default tooltip for logout icon">
+      <created>1663255143669</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1663255143669</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix edit signature patch">
+      <created>1663349020316</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1663349020316</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix edit signature patch">
+      <created>1663350933712</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1663350933712</updated>
+    </task>
+    <task id="LOCAL-00006" summary="custom preview when seeing template">
+      <created>1663351606853</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1663351606853</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Fix preview signature while creation/edition">
+      <created>1663588829184</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1663588829184</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Cleanup, remove console logs and useless imports">
+      <created>1663588939277</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1663588939277</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Error handling when fail to import logo">
+      <created>1663588969756</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1663588969756</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Removes undefined calls to hub">
+      <created>1663590641313</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1663590641313</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Fix SSE logic">
+      <created>1663592874678</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1663592874678</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Refresh when delete entity fixed">
+      <created>1663594053284</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1663594053284</updated>
+    </task>
+    <task id="LOCAL-00013" summary="clean console log">
+      <created>1663595772911</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1663595772911</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Fixed height and width of initial loading">
+      <created>1663595797408</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1663595797408</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Add: preview uploaded or current logo of the organisation">
+      <created>1663607585525</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1663607585525</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Uses the file name for the logos">
+      <created>1663607609325</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1663607609325</updated>
+    </task>
+    <task id="LOCAL-00017" summary="New socials link to s3">
+      <created>1663610759140</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1663610759140</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Arriving in templateSelect when creating a new signature, clean up">
+      <created>1663614597163</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1663614597163</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Add 24h to default creation event start date + style">
+      <created>1663616192206</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1663616192206</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Upgraded from http to https">
+      <created>1663748684066</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1663748684066</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Wait for signature to be completely created before pushing to dashboard">
+      <created>1663750422600</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1663750422600</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changed styling to match the whole app modals" />
+    <MESSAGE value="Add default tooltip for logout icon" />
+    <MESSAGE value="fix edit signature patch" />
+    <MESSAGE value="custom preview when seeing template" />
+    <MESSAGE value="Fix preview signature while creation/edition" />
+    <MESSAGE value="Cleanup, remove console logs and useless imports" />
+    <MESSAGE value="Error handling when fail to import logo" />
+    <MESSAGE value="Removes undefined calls to hub" />
+    <MESSAGE value="Fix SSE logic" />
+    <MESSAGE value="Refresh when delete entity fixed" />
+    <MESSAGE value="clean console log" />
+    <MESSAGE value="Fixed height and width of initial loading" />
+    <MESSAGE value="Add: preview uploaded or current logo of the organisation" />
+    <MESSAGE value="Uses the file name for the logos" />
+    <MESSAGE value="New socials link to s3" />
+    <MESSAGE value="Arriving in templateSelect when creating a new signature, clean up" />
+    <MESSAGE value="Add 24h to default creation event start date + style" />
+    <MESSAGE value="Upgraded from http to https" />
+    <MESSAGE value="Wait for signature to be completely created before pushing to dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="Wait for signature to be completely created before pushing to dashboard" />
+  </component>
+</project>
