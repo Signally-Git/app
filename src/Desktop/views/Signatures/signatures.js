@@ -156,7 +156,6 @@ function Team() {
         })
 
         setSignatureOption({
-            footer: { disclaimerValue: "Disclaimer", disclaimerEnabled: false, ecoValue: "Eco resp", ecoEnabled: false, items: ["Disclaimer", "Eco"] },
             salutation: { value: "Cordialement,", enabled: defaultStyles?.filter((style) => style.type === "greetings")[0].value === "false" ? false : true, padding: defaultStyles?.filter((style) => style.type === "greetingsPadding")[0].value },
             custom: { enabled: false },
             eco: { value: "Ecoresponsability", enabled: false },
@@ -187,7 +186,7 @@ function Team() {
             address: organisation?.address,
             mobile: "Mobile",
             phone: organisation?.phone_number,
-            event: `http://fakeimg.pl/380x126?font=noto&amp;font_size=14`
+            event: `https://fakeimg.pl/380x126?font=noto&amp;font_size=14`
         })
     }, [user, template])
 

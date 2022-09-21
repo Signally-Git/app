@@ -34,17 +34,17 @@ export default function Preview({ infos, template, options, organisation, ...pro
     const handleImg = (item) => {
         switch (item) {
             case "pinterest":
-                return "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/iconmonstr-pinterest-1-48-61cc73437269b.png"
+                return "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/iconmonstr-pinterest-1-48.png"
             case "facebook":
-                return "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/iconmonstr-facebook-4-48-1-61cc73165961b.png"
+                return "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/iconmonstr-facebook-4-48.png"
             case "twitter":
-                return "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/iconmonstr-twitter-4-48-61cc7355e7d05.png"
+                return "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/iconmonstr-twitter-4-48.png"
             case "instagram":
-                return "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/iconmonstr-instagram-14-48-61cc732d0e0eb.png"
+                return "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/iconmonstr-instagram-14-48.png"
             case "linkedin":
-                return "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/iconmonstr-linkedin-4-48-61cc7336e67e8.png"
+                return "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/iconmonstr-linkedin-4-48.png"
             case "snapchat":
-                return "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/iconmonstr-snapchat-4-48-61cc734da01ca.png"
+                return "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/iconmonstr-snapchat-4-48.png"
             default:
                 break;
         }
@@ -75,7 +75,7 @@ export default function Preview({ infos, template, options, organisation, ...pro
     replaced = replaced.replaceAll("{{ styles['jobName']['fontWeight'] }}", `${infos?.jobName?.style?.fontWeight || "normal"};`)
     replaced = replaced.replaceAll("{{ styles['jobName']['fontStyle'] }}", `${infos?.jobName?.style?.fontStyle || "normal"};`)
 
-    replaced = replaced.replaceAll('{{ logo }}', infos?.logo?.path || "http://fakeimg.pl/108?font=noto&font_size=12")
+    replaced = replaced.replaceAll('{{ logo }}', infos?.logo?.path || "https://fakeimg.pl/108?font=noto&font_size=12")
 
     replaced = replaced.replaceAll('{{ company.name }}', 'Société')
     replaced = replaced.replaceAll("{{ styles['companyName']['color'] }}", `${infos?.company?.color};`)
@@ -136,7 +136,7 @@ export default function Preview({ infos, template, options, organisation, ...pro
         replaced = replaced.replaceAll(/{% endif %}/gi, "")
         replaced = replaced.replaceAll(/{# START EVENT #}/gi, "")
         replaced = replaced.replaceAll(/{# END EVENT #}/gi, "")
-        replaced = replaced.replaceAll(`{{ API }}/event/token/{{ user.token }}/image`, options?.event?.display?.search('undefined') === - 1 ? options?.event?.display : `http://fakeimg.pl/380x126?font=noto&font_size=14`)
+        replaced = replaced.replaceAll(`{{ API }}/event/token/{{ user.token }}/image`, options?.event?.display?.search('undefined') === - 1 ? options?.event?.display : `https://fakeimg.pl/380x126?font=noto&font_size=14`)
         replaced =  replaced.replaceAll(/{# START ELSE #}.*{# END ELSE #}/gs, "");
     }
     else {

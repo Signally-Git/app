@@ -17,6 +17,7 @@ $max-width: 75%;
     }
     h6 {
         color: #bdb6b0;
+        font-size: .95rem;
         font-weight: normal;
     }
     h4 {
@@ -54,7 +55,7 @@ $max-width: 75%;
     margin-left: 1.25rem;
     border-radius: 50px;
     > div {
-        transition: "0.2s";
+        transition: 200ms;
         height: 25px;
         width: 25px;
         background-color: $signally-orange;
@@ -78,6 +79,7 @@ $max-width: 75%;
         margin-left: 0rem;
         width: $max-width;
         outline: none;
+        font-size: .9rem;
     }
 }
 
@@ -124,7 +126,7 @@ $max-width: 75%;
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.55);
 }
 
 .colorContainer {
@@ -133,7 +135,7 @@ $max-width: 75%;
     height: 10rem;
     max-width: 9rem;
     background: #fff;
-    box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
+    box-shadow: 0 12px 40px rgba(230, 208, 201, 0.8);
     border-radius: 10px;
     justify-content: center;
     align-items: center;
@@ -145,7 +147,7 @@ $max-width: 75%;
         width: 100%;
     }
     div[aria-label="Hue"] > div {
-        border-radius: 0px !important;
+        border-radius: 0 !important;
         width: 10px;
         opacity: 1;
         border: 1px solid rgb(255, 255, 255);
@@ -238,8 +240,6 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
 
