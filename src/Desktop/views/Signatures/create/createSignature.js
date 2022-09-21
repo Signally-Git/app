@@ -753,11 +753,11 @@ function CreateSignatureComponent() {
                     },
                 ];
                 request.post("signature_styles/batch", styles).then((r) => {
-                    console.log(r.data);
+                    if (window.location.hash === "#onboarding") history.goBack();
+                    else history.push("/signatures");
                 });
 
-                if (window.location.hash === "#onboarding") history.goBack();
-                else history.push("/signatures");
+                
             })
             .catch((err) => {
                 console.log(err);
