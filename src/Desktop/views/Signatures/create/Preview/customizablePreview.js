@@ -75,7 +75,7 @@ export default function Preview({ infos, template, options, organisation, ...pro
     replaced = replaced.replaceAll("{{ styles['jobName']['fontWeight'] }}", `${infos?.jobName?.style?.fontWeight || "normal"};`)
     replaced = replaced.replaceAll("{{ styles['jobName']['fontStyle'] }}", `${infos?.jobName?.style?.fontStyle || "normal"};`)
 
-    replaced = replaced.replaceAll('{{ logo }}', infos?.logo?.path || "http://fakeimg.pl/108?font=noto&font_size=12")
+    replaced = replaced.replaceAll('{{ logo }}', infos?.logo?.path || "https://fakeimg.pl/108?font=noto&font_size=12")
 
     replaced = replaced.replaceAll('{{ company.name }}', 'Société')
     replaced = replaced.replaceAll("{{ styles['companyName']['color'] }}", `${infos?.company?.color};`)
@@ -136,7 +136,7 @@ export default function Preview({ infos, template, options, organisation, ...pro
         replaced = replaced.replaceAll(/{% endif %}/gi, "")
         replaced = replaced.replaceAll(/{# START EVENT #}/gi, "")
         replaced = replaced.replaceAll(/{# END EVENT #}/gi, "")
-        replaced = replaced.replaceAll(`{{ API }}/event/token/{{ user.token }}/image`, options?.event?.display?.search('undefined') === - 1 ? options?.event?.display : `http://fakeimg.pl/380x126?font=noto&font_size=14`)
+        replaced = replaced.replaceAll(`{{ API }}/event/token/{{ user.token }}/image`, options?.event?.display?.search('undefined') === - 1 ? options?.event?.display : `https://fakeimg.pl/380x126?font=noto&font_size=14`)
         replaced =  replaced.replaceAll(/{# START ELSE #}.*{# END ELSE #}/gs, "");
     }
     else {
