@@ -300,11 +300,10 @@
   background: none;
   color: #FF7954;
   padding: 0;
-  margin: 0;
   font-size: 1.1rem;
   display: flex;
   align-items: center;
-  margin-left: 0.25rem;
+  margin: 0 0 0 0.25rem;
 }
 .confirm button:last-child {
   color: #402927;
@@ -332,13 +331,15 @@
 .signatureContainer {
   display: flex;
   width: 100%;
-  padding: 1rem;
   position: relative;
-  padding-top: 0.25rem;
+  padding: 0.25rem 1rem 1rem;
   flex-direction: column;
   background-color: #fff;
   height: fit-content;
   border-radius: 20px;
+}
+.signatureContainer .preview {
+  pointer-events: none;
 }
 .signatureContainer .browserHeader {
   width: 100%;

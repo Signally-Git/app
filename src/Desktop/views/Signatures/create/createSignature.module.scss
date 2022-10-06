@@ -9,8 +9,8 @@
     overflow: auto;
     &::-webkit-scrollbar {
         z-index: -10;
-        width: 0;  /* Remove scrollbar space */
-        background: transparent;  /* Optional: just make scrollbar invisible */
+        width: 0; /* Remove scrollbar space */
+        background: transparent; /* Optional: just make scrollbar invisible */
     }
     /* Optional: show position indicator in red */
     &::-webkit-scrollbar-thumb {
@@ -312,11 +312,10 @@
         background: none;
         color: $signally-orange;
         padding: 0;
-        margin: 0;
         font-size: 1.1rem;
         display: flex;
         align-items: center;
-        margin-left: 0.25rem;
+        margin: 0 0 0 0.25rem;
         &:last-child {
             color: $signally-brown;
         }
@@ -346,10 +345,12 @@
 
 .signatureContainer {
     display: flex;
+    .preview {
+        pointer-events: none;
+    }
     width: 100%;
-    padding: 1rem;
     position: relative;
-    padding-top: 0.25rem;
+    padding: 0.25rem 1rem 1rem;
     flex-direction: column;
     background-color: #fff;
     height: fit-content;
@@ -631,7 +632,6 @@ input:checked + .slider:before {
         cursor: move;
     }
 }
-
 
 .orangeTxt {
     color: $signally-orange;
