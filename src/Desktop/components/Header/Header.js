@@ -21,7 +21,7 @@ function Header(props) {
 
     return (
         <div className={`${classes.dashboardContainer} ${props.landing ? classes.landing : ""}`}>
-            <div onClick={() => setNotif(!notif)} className={classes.logoContainer}>
+            <div className={classes.logoContainer}>
                 <Logo />
                 {!props.landing ? <Link to="/report" className={classes.reportContainer}>
                     <div>
