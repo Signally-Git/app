@@ -30,6 +30,7 @@ const Login = () => {
     const [error, setError] = useState({ content: "", disappear: false })
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
+    const [isScrollable, setIsScrollable] = useState(false)
 
     const history = useHistory()
     const query = useQuery()
@@ -71,6 +72,7 @@ const Login = () => {
 
     const handleScroll = (e, scroll) => {
         e.preventDefault()
+        setIsScrollable(true)
         slider.current.scroll({
             top: 0,
             left: scroll,
@@ -83,6 +85,7 @@ const Login = () => {
                 left: scroll,
                 behavior: 'smooth'
             });
+            setIsScrollable(false)
         // }, 300)
     }
 
@@ -162,7 +165,7 @@ const Login = () => {
                 </div>
                 <div className={classes.slider}>
                     <span className={`${classes.error} ${error.disappear ? classes.fadeOut : ""}`}>{error.content}</span>
-                    <div ref={slider}>
+                    <div ref={slider} style={{ overflow: isScrollable ? 'auto' : 'hidden'}}>
                         <div className={classes.formContainer}>
                             <h2>Connectez-vous à votre espace <span>Signally</span></h2>
                             <form onSubmit={(e) => handleSubmit(e)}>
