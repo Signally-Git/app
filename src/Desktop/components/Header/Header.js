@@ -15,8 +15,6 @@ const soon = "Cette fonctionnalité arrive très prochainement !"
 // profile & log out btn
 
 function Header(props) {
-    const [notif, setNotif] = useState(false)
-    const [hover, setHover] = useState(false)
     let history = useHistory()
 
     return (
@@ -34,23 +32,15 @@ function Header(props) {
             </div>
             {props.landing !== true ? <>
                 <div className={classes.rightSide}>
-                    <div className={classes.btnsContainer} title={soon}>
-                        {props.page !== "/studio" ? <Link to="#" className={`${classes.studio} disabled`}>STUDIO</Link> : <Link  to="#" className={classes.studio} onClick={() => history.goBack()}>QUITTER LE STUDIO</Link>}
-                        {props.page !== "/store" ? <Link to="#" className={`${classes.store} ${notif ? classes.notif : ""} disabled`}>STORE</Link> : <Link  to="#" className={classes.store} onClick={() => history.goBack()}>QUITTER LE STORE</Link>}
-                    </div>
                     <div className={classes.name}>
                     <div className={classes.nameSize}>{props.user?.firstName} {props.user?.lastName || "profil"}</div>
-                        <ul
-                            className={hover ? classes.animateMenu : ""}
-                            onMouseOver={() => setHover(true)}
-                            onMouseLeave={() => setTimeout(() => { setHover(false) }, 300)}>
+                        <ul>
                             <li className={classes.UserName}>
-                                <span>{props.user?.firstName} {props.user?.lastName || "profil"}</span>
-                                <FaUser />
+                                <Link to="/profile/informations/user">
+                                    <span>{props.user?.firstName} {props.user?.lastName || "profil"}</span>
+                                    <FaUser />
+                                </Link>
                             </li>
-                            <li><Link to="/profile/informations/user">Compte</Link></li>
-                            <li title={soon}><Link to="/billing" className="disabled">Abonnement</Link></li>
-
                         </ul>
                         <IoPower title="Déconnexion" color={"#66433e"} size={"1.2rem"} stroke={"#66433e"} strokeWidth={"15px"} onClick={() => { localStorage.clear(); history.push("/") }} />
                     </div>
