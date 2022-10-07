@@ -165,13 +165,19 @@ function Team() {
                 <div className={classes.teamsContainer}>
                     <ul className={classes.menu}>
                         <li className={type === "workplaces" ? classes.active : ""}>
-                            <Link to="/teams/workplaces">Hotels</Link>
+                            <Link to="/teams/workplaces">{JSON.parse(localStorage.getItem("configuration")).filter(
+                                (item) => item.key === 'WORKPLACE_NAME'
+                            )[0].value}</Link>
                         </li>
                         <li className={type === "teams" ? classes.active : ""}>
-                            <Link to="/teams/teams">Équipes</Link>
+                            <Link to="/teams/teams">{JSON.parse(localStorage.getItem("configuration")).filter(
+                                (item) => item.key === 'TEAM_NAME'
+                            )[0].value}</Link>
                         </li>
                         <li className={type === "users" ? classes.active : ""}>
-                            <Link to="/teams/users">Collaborateurs</Link>
+                            <Link to="/teams/users">{JSON.parse(localStorage.getItem("configuration")).filter(
+                                (item) => item.key === 'USER_NAME'
+                            )[0].value}</Link>
                         </li>
                     </ul>
                     <Tab tab={type} selected={entity} setSelected={setEntity} edit={edit} setEdit={setEdit} editInfo={editInfo} setEditInfo={setEditInfo} />
@@ -183,13 +189,17 @@ function Team() {
                                 <div className={classes.slider} ref={slider}>
                                     <div className={classes.col}>
                                         <div className={classes.tagline}>
-                                            <h2><span className={classes.orangeTxt}>{entity?.teams?.length || 0}</span> équipe(s) <span className={classes.orangeTxt}>{entity?.name}</span></h2>
+                                            <h2><span className={classes.orangeTxt}>{entity?.teams?.length || 0}</span> {JSON.parse(localStorage.getItem("configuration")).filter(
+                                                (item) => item.key === 'TEAM_NAME'
+                                            )[0].value} <span className={classes.orangeTxt}>{entity?.name}</span></h2>
                                             <Button color="brown" onClick={() => { setEdit('assign-signature') }}>Signature</Button>
                                         </div>
                                         <br />
                                         <div className={classes.searchInput}>
                                             <HiOutlineSearch />
-                                            <input className={classes.search} type="text" onChange={(e) => setCurrentTeams(e.target.value)} placeholder="Rechercher une équipe" />
+                                            <input className={classes.search} type="text" onChange={(e) => setCurrentTeams(e.target.value)} placeholder={`Rechercher ${JSON.parse(localStorage.getItem("configuration")).filter(
+                                                (item) => item.key === 'TEAM_NAME'
+                                            )[0].value}`} />
                                         </div>
                                         <ul className={`${classes.itemsList} ${classes.users}`}>
                                             {entity?.teams?.map((team) => {
@@ -202,16 +212,22 @@ function Team() {
                                                     </li>
                                             })}
                                         </ul>
-                                        <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 2000)}>Ajouter des équipes</Button>
+                                        <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 2000)}>Ajouter des {JSON.parse(localStorage.getItem("configuration")).filter(
+                                            (item) => item.key === 'TEAM_NAME'
+                                        )[0].value}</Button>
                                     </div>
                                     <div className={classes.col}>
                                         <div className={classes.tagline}>
-                                            <h2>Ajouter des équipes</h2>
+                                            <h2>Ajouter des {JSON.parse(localStorage.getItem("configuration")).filter(
+                                                (item) => item.key === 'TEAM_NAME'
+                                            )[0].value}</h2>
                                         </div>
                                         <br />
                                         <div className={classes.searchInput}>
                                             <HiOutlineSearch />
-                                            <input className={classes.search} type="text" onChange={(e) => setOtherTeam(e.target.value)} placeholder="Rechercher un collaborateur" />
+                                            <input className={classes.search} type="text" onChange={(e) => setOtherTeam(e.target.value)} placeholder={`Rechercher ${JSON.parse(localStorage.getItem("configuration")).filter(
+                                                (item) => item.key === "USER_NAME"
+                                                )[0].value}`} />
                                         </div>
                                         <ul className={classes.itemsList}>
                                             {teams?.map((team) => {
@@ -240,7 +256,9 @@ function Team() {
                                             <br />
                                             <div className={classes.searchInput}>
                                                 <HiOutlineSearch />
-                                                <input className={classes.search} type="text" onChange={(e) => setCurrentUsers(e.target.value)} placeholder="Rechercher un collaborateur" />
+                                                <input className={classes.search} type="text" onChange={(e) => setCurrentUsers(e.target.value)} placeholder={`Rechercher ${JSON.parse(localStorage.getItem("configuration")).filter(
+                                                    (item) => item.key === "USER_NAME"
+                                                )[0].value}`} />
                                             </div>
                                             <span className={classes.all} onClick={() => handleUpdateAll(entity?.users, 'remove')}>Retirer tout</span>
                                             <ul className={`${classes.itemsList} ${classes.users}`}>
@@ -255,16 +273,22 @@ function Team() {
                                                         </li>
                                                 })}
                                             </ul>
-                                            <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 2000)}>Ajouter des collaborateurs</Button>
+                                            <Button color={'orange'} arrow onClick={(e) => handleScroll(e, 2000)}>Ajouter {JSON.parse(localStorage.getItem("configuration")).filter(
+                                                (item) => item.key === 'USER_NAME'
+                                            )[0].value}</Button>
                                         </div>
                                         <div className={classes.col}>
                                             <div className={classes.tagline}>
-                                                <h2>Ajouter des collaborateurs</h2>
+                                                <h2>Ajouter {JSON.parse(localStorage.getItem("configuration")).filter(
+                                                    (item) => item.key === 'USER_NAME'
+                                                )[0].value}</h2>
                                             </div>
                                             <br />
                                             <div className={classes.searchInput}>
                                                 <HiOutlineSearch />
-                                                <input className={classes.search} type="text" onChange={(e) => setOtherUser(e.target.value)} placeholder="Rechercher un collaborateur" />
+                                                <input className={classes.search} type="text" onChange={(e) => setOtherUser(e.target.value)} placeholder={`Rechercher ${JSON.parse(localStorage.getItem("configuration")).filter(
+                                                    (item) => item.key === 'TEAM_NAME'
+                                                )[0].value}`} />
                                             </div>
                                             <span className={classes.all} onClick={() => handleUpdateAll(users, 'add')}>Ajouter tout</span>
                                             <ul className={classes.itemsList}>

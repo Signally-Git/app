@@ -14,6 +14,7 @@ import Signup from './components/Landing/SignUp/SignUp'
 import { NotificationProvider } from 'Utils/Notifications/notifications'
 import ResetPassword from './views/ResetPassword/ResetPassword.jsx'
 import EditSignatureComponent from './views/Signatures/edit/editSignature'
+import TemplateRendererPage from "./views/TemplateRenderer/TemplateRenderer.page";
 
 export default function DesktopRoutes() {
     return (
@@ -70,9 +71,9 @@ export default function DesktopRoutes() {
 
             <PrivateRoute exact path="/report" component={Report} />
 
-            <Route path="/users/:token">
-                
-            </Route>
+            <Route path="/users/:token" />
+            
+            <Route path="/render-template" component={TemplateRendererPage} />
 
             <Route path="/">
                 <Error />

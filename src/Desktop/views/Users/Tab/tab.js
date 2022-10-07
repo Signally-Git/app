@@ -106,7 +106,9 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                             notification({ content: <><span style={{ color: "#FF7954" }}>{element.name}</span> supprimé avec succès</>, status: "valid" })
                             count++;
                             if (count === workplaces.length) {
-                                notification({ content: <><span style={{ color: "#FF7954" }}>{count} hotel(s)</span> supprimé(s) avec succès</>, status: "valid" })
+                                notification({ content: <><span style={{ color: "#FF7954" }}>{count} {JSON.parse(localStorage.getItem("configuration")).filter(
+                                        (item) => item.key === 'TEAM_NAME'
+                                    )[0].value}</span> supprimé(s) avec succès</>, status: "valid" })
                                 refreshData()
                                 setEdit()
                                 setSelected()
@@ -123,7 +125,9 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                             index === teams.length - 1 && refreshData()
                             count++;
                             if (count === teams.length) {
-                                notification({ content: <><span style={{ color: "#FF7954" }}>{count} équipe(s)</span> supprimée(s) avec succès</>, status: "valid" })
+                                notification({ content: <><span style={{ color: "#FF7954" }}>{count} {JSON.parse(localStorage.getItem("configuration")).filter(
+                                        (item) => item.key === 'TEAM_NAME'
+                                    )[0].value}</span> supprimée(s) avec succès</>, status: "valid" })
                                 refreshData()
                                 setEdit()
                                 setSelected()
@@ -164,7 +168,9 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 case "allworkplaces":
                     return (<div className={classes.modal}>
                         <h4>Vous allez supprimer
-                            <br /><span className={classes.orangeTxt}>{`${workplaces.length} hotels`}</span></h4>
+                            <br /><span className={classes.orangeTxt}>{`${workplaces.length} ${JSON.parse(localStorage.getItem("configuration")).filter(
+                                (item) => item.key === 'WORKPLACE_NAME'
+                            )[0].value}`}</span></h4>
                         <div>
                             <Button color="orange" onClick={() => setModal({ type: "", name: "", id: "" })}>Annuler</Button>
                             <Button color="orangeFill" onClick={() => handleDeleteAll("workplaces")}>Supprimer</Button>
@@ -173,7 +179,9 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 case "allteams":
                     return (<div className={classes.modal}>
                         <h4>Vous allez supprimer
-                            <br /><span className={classes.orangeTxt}>{`${teams.length} équipes`}</span></h4>
+                            <br /><span className={classes.orangeTxt}>{`${teams.length} ${JSON.parse(localStorage.getItem("configuration")).filter(
+                                (item) => item.key === 'TEAM_NAME'
+                            )[0].value}`}</span></h4>
                         <br />
                         <div>
                             <Button color="orange" onClick={() => setModal({ type: "", name: "", id: "" })}>Annuler</Button>
@@ -183,7 +191,9 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
                 case "allusers":
                     return (<div className={classes.modal}>
                         <h4>Vous allez supprimer
-                            <br /><span className={classes.orangeTxt}>{`${users.length - 1} collaborateur(s)`}</span></h4>
+                            <br /><span className={classes.orangeTxt}>{`${users.length - 1} ${JSON.parse(localStorage.getItem("configuration")).filter(
+                                (item) => item.key === 'USER_NAME'
+                            )[0].value}`}</span></h4>
                         <div>
                             <Button color="orange" onClick={() => setModal({ type: "", name: "", id: "" })}>Annuler</Button>
                             <Button color="orangeFill" onClick={() => handleDeleteAll("users")}>Supprimer</Button>
@@ -268,13 +278,19 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
 
     if (tab === "workplaces")
         return (<div className={classes.container}>{modal.type ? modalContent : ""}
-            <Link to="create-workplace"><Button style={{ width: "15rem" }} color="orange" arrow={true}>Ajouter un hotel</Button></Link>
+            <Link to="create-workplace"><Button style={{ width: "15rem" }} color="orange" arrow={true}>Ajouter {JSON.parse(localStorage.getItem("configuration")).filter(
+                (item) => item.key === 'WORKPLACE_NAME'
+            )[0].value}</Button></Link>
             <div className={classes.searchInput}>
                 <HiOutlineSearch />
-                <input onChange={(e) => setSearchWorkplace(e.target.value.toLowerCase())} className={classes.search} type="text" placeholder="Rechercher un hotel" />
+                <input onChange={(e) => setSearchWorkplace(e.target.value.toLowerCase())} className={classes.search} type="text" placeholder={`Rechercher ${JSON.parse(localStorage.getItem("configuration")).filter(
+                    (item) => item.key === 'WORKPLACE_NAME'
+                )[0].value}`} />
             </div>
             <div className={classes.colheader}>
-                <span className={`${classes.totalNumber} ${addedWorkplace.length > 0 ? classes.orangeTxt : ""}`}>{addedWorkplace.length > 0 ? addedWorkplace : `${workplaces.length} hotel(s)`}</span>
+                <span className={`${classes.totalNumber} ${addedWorkplace.length > 0 ? classes.orangeTxt : ""}`}>{addedWorkplace.length > 0 ? addedWorkplace : `${workplaces.length} ${JSON.parse(localStorage.getItem("configuration")).filter(
+                    (item) => item.key === 'WORKPLACE_NAME'
+                )[0].value}`}</span>
                 <button onClick={() => setModal({ type: "allworkplaces" })}>Supprimer tout</button>
             </div>
 
@@ -336,14 +352,20 @@ export default function Tab({ tab, selected, setSelected, edit, setEdit, editInf
     if (tab === "teams")
         return (<div>{modal.type ? modalContent : ""}
             <Link to="create-team">
-                <Button style={{ width: "15rem" }} color="orange" arrow={true}>Ajouter une équipe</Button>
+                <Button style={{ width: "15rem" }} color="orange" arrow={true}>Ajouter {JSON.parse(localStorage.getItem("configuration")).filter(
+                    (item) => item.key === 'TEAM_NAME'
+                )[0].value}</Button>
             </Link>
             <div className={classes.searchInput}>
                 <HiOutlineSearch />
-                <input className={classes.search} onChange={(e) => setSearchTeam(e.target.value.toLowerCase())} type="text" placeholder="Rechercher une équipe" />
+                <input className={classes.search} onChange={(e) => setSearchTeam(e.target.value.toLowerCase())} type="text" placeholder={`Rechercher ${JSON.parse(localStorage.getItem("configuration")).filter(
+                    (item) => item.key === 'TEAM_NAME'
+                )[0].value}`} />
             </div>
             <div className={classes.colheader}>
-                <span className={classes.totalNumber}>{teams.length} équipe(s)</span>
+                <span className={classes.totalNumber}>{teams.length} {JSON.parse(localStorage.getItem("configuration")).filter(
+                    (item) => item.key === 'TEAM_NAME'
+                )[0].value}</span>
                 <button onClick={() => setModal({ type: "allteams" })}>Supprimer tout</button>
             </div>
             <ul className={`${classes.itemsList} ${classes.teamList}`}>

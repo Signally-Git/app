@@ -86,15 +86,21 @@ function UserTab({ time, selected, users, setUsers, setSelected, edit, setEdit, 
 
     return (<div className={classes.mh100}>
         <Link to="create-user">
-            <Button style={{ width: "15rem" }} color="orange" arrow={true}>Ajouter un collaborateur</Button>
+            <Button style={{ width: "15rem" }} color="orange" arrow={true}>Ajouter {JSON.parse(localStorage.getItem("configuration")).filter(
+                (item) => item.key === 'USER_NAME'
+            )[0].value}</Button>
         </Link>
         <div className={classes.searchInput}>
             <HiOutlineSearch />
-            <input className={classes.search} onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Rechercher un collaborateur" />
+            <input className={classes.search} onChange={(e) => setSearch(e.target.value)} type="text" placeholder={`Rechercher ${JSON.parse(localStorage.getItem("configuration")).filter(
+                (item) => item.key === 'USER_NAME'
+            )[0].value}`} />
         </div>
 
         <div className={classes.colheader}>
-            <span className={classes.totalNumber}>{usersList.length} collaborateur(s)</span>
+            <span className={classes.totalNumber}>{usersList.length} {JSON.parse(localStorage.getItem("configuration")).filter(
+                (item) => item.key === 'USER_NAME'
+            )[0].value}</span>
             <button onClick={() => setModal({ type: "allusers", items: usersList })}>Supprimer tout</button>
         </div>
         <ul className={`${classes.itemsList} ${classes.usersList}`}>
