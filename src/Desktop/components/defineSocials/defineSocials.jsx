@@ -47,11 +47,6 @@ export default function DefineSocials({ setList, defaultValue }) {
         newArr[select] = { url: e.target.value, name: name, image: "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/"+name+'.png' };
         setSocials(newArr);
         setValue(e.target.value || "")
-        // const req = { ...newArr[select], legalEntity: JSON.parse(localStorage.getItem('user')).organisation }
-        // if (newArr[select]['@id'])
-        //     request.patch(newArr[select]['@id'], req)
-        // else
-        //     request.post('social_media_accounts', req)
     })
 
     const handleSwap = (social) => {
