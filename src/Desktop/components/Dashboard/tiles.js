@@ -39,8 +39,8 @@ function Tiles(props) {
 
         await request.get("configurations").then((res) => {
             localStorage.setItem("configuration", JSON.stringify(res.data['hydra:member']));
-            workplaceName = res.data['hydra:member'].filter((entity) => entity.key = workplaceName).value
-            setUserName(res.data['hydra:member'].filter((entity) => entity.key = userName).value)
+            workplaceName = res.data['hydra:member']?.filter((entity) => entity.key = workplaceName).value
+            setUserName(res.data['hydra:member']?.filter((entity) => entity.key = userName).value)
             console.log(userName)
         });
 
@@ -264,7 +264,7 @@ function Tiles(props) {
                 ) : null}
                 <Link to="/teams/users" className={classes.tile}>
                     <div className={classes.row}>
-                        <p>{JSON.parse(localStorage.getItem("configuration")).filter(
+                        <p>{JSON.parse(localStorage.getItem("configuration"))?.filter(
                                 (item) => item.key === 'USER_NAME'
                             )[0].value}</p>
                         <img src={ChevronRight} alt="View" />
