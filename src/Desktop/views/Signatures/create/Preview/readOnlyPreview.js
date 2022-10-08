@@ -6,6 +6,7 @@ export default function ReadOnlyPreview({ template, infos }) {
         PLACEHOLDER_FIRST_NAME: infos?.firstName || "Prénom",
         PLACEHOLDER_LAST_NAME: infos?.lastName || "Nom",
         PLACEHOLDER_POSITION: infos?.jobName || "Poste",
+        PLACEHOLDER_EMAIL: infos?.email || "em@il.com",
         PLACEHOLDER_COMPANY: infos?.entity || "Société",
         PLACEHOLDER_ADDRESS_STREET: infos?.addressStreet?.value || "Adresse",
         PLACEHOLDER_ADDRESS_INFO: infos?.addressInfo?.value || "",

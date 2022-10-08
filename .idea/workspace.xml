@@ -5,17 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c4dff9f-5d0a-4e3d-a895-082d60361406" name="Changes" comment="Wait for signature to be completely created before pushing to dashboard">
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Dashboard/tiles.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Dashboard/tiles.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Desktop/components/Header/header.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Header/header.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Landing/landing.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Landing/landing.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Desktop/components/Menu/Menu.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Menu/Menu.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Events/events.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Events/events.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/users.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/users.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/Button/btn.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Button/btn.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/Input/input.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Input/input.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/Modals/modal.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Modals/modal.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/Notifications/notifications.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Notifications/notifications.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Menu/Menu.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Menu/Menu.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Preview/customizablePreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Preview/customizablePreview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Preview/readOnlyPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Preview/readOnlyPreview.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,24 +34,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Git.Branch.Popup.ShowAllRemotes": "true",
-    "NewWatcherDialog.advanced.open": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/poro/Documents/signally/app",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "prettierjs.PrettierConfiguration.Package": "/Users/poro/Documents/signally/app/node_modules/prettier",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
+    &quot;NewWatcherDialog.advanced.open&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/poro/Documents/signally/app&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/poro/Documents/signally/app/node_modules/prettier&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="npm.build">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
