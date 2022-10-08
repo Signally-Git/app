@@ -73,8 +73,10 @@
 }
 
 @media screen and (max-width: 680px) {
-    .active &::after {
-        bottom: -5px;
+    .active {
+        &::after {
+            bottom: -5px;
+        }
     }
     .tabMenu {
         position: fixed;
