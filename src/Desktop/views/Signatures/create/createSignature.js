@@ -137,7 +137,7 @@ function CreateSignatureComponent() {
             bannerTop: { url: "test", enabled: false, padding: 10 },
             event: {
                 ...signatureOption.event,
-                display: `${process.env.REACT_APP_API_URL}/${signatureOption?.event?.selected?.imagePath}`,
+                display: signatureOption?.event?.selected?.imageUrl,
                 enabled: false,
                 padding: 12,
             },
