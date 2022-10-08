@@ -105,7 +105,7 @@ export default function Preview({ infos, template, options, organisation, ...pro
     replaced = replaced.replaceAll("{{ styles['mobile']['fontWeight'] }}", `${infos?.mobile?.style?.fontWeight || "normal"};`)
     replaced = replaced.replaceAll("{{ styles['phone']['fontStyle'] }}", `${infos?.mobile?.style?.fontStyle || "normal"};`)
 
-    replaced = replaced.replaceAll('{% if isPreview %} 0123456789 {% else %} {{ user.phone }} {% endif %}', 'Fixe')
+    replaced = replaced.replaceAll('{% if isPreview %} 0123456789 {% else %} {{ user.phone }} {% endif %}', '0102030405')
     replaced = replaced.replaceAll("{{ styles['phone']['color'] }}", `${infos?.phone?.color};`)
     replaced = replaced.replaceAll("{{ styles['phone']['textDecoration'] }}", `${infos?.phone?.style.textDecoration || "none"};`)
     replaced = replaced.replaceAll("{{ styles['phone']['fontWeight'] }}", `${infos?.phone?.style?.fontWeight || "normal"};`)
@@ -114,13 +114,15 @@ export default function Preview({ infos, template, options, organisation, ...pro
     replaced = replaced.replaceAll("{{ styles['generalFontFamily']['fontFamily'] }}", `${infos?.fontFamily || "Helvetica"};`)
     replaced = replaced.replaceAll("{{ styles['generalFontSize']['fontSize'] }}", `${infos?.fontSize + 'px' || "11"};`)
 
+    //mail
+    replaced = replaced.replaceAll("{{ user.email }}", props?.user?.data?.email || 'em@il.com')
+    
     var greeting = /{# START GREETINGS #}.*{# END GREETINGS #}/isg;
     replaced = replaced.replaceAll(greeting, options?.salutation?.enabled ? `<p style="padding-bottom: ${options?.salutation?.padding}px;"}>${options?.salutation.value || "Cordialement,"}</p>` : "")
     var disclaimer = /{# START DISCLAIMERS #}.*{# END DISCLAIMERS #}/isg;
     replaced = replaced.replaceAll(disclaimer, options?.footer?.enabled ? `<p style="box-sizing: border-box; margin-top:${options?.footer?.padding}px; font-size:${options?.footer?.size}px; max-width: ${options?.footer?.maxWidth}px;">${options?.footer?.value.replace(/\n/g, "<br />")}</p>` : "")
 
     // socials
-
     replaced = replaced.replaceAll(/{# START SOCIALS #}.*{# END SOCIALS #}/isg, `		<td style="width:230px; border: none; background:black; padding: 0cm; height: 24px;" height="24" valign="middle" nowrap>
     <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" height="24">
         <tbody height="24">
@@ -144,8 +146,10 @@ export default function Preview({ infos, template, options, organisation, ...pro
         replaced = replaced.replaceAll(event, "")
     }
 
-    replaced = replaced.replace(/{# START PHONE #}.*{# END PHONE #}/igs, "")
-
+    // replaced = replaced.replace(/{# START PHONE #}.*{# END PHONE #}/igs, "T: 0102030405")
+     replaced = replaced.replace(/{# START PHONE #}.*{% if user.phone %}.*{% if user.phone or isPreview %}/igs, "")
+    replaced = replaced.replace(/{% endif %}.*{# END PHONE #}/igs, "")
+    replaced = replaced.replace(/{# END PHONE #}/igs, "")
 
     // OPTIONS
     replaced = replaced.replaceAll("{{ styles['greetingsPadding']['padding'] }}", options?.event.padding || 12)
