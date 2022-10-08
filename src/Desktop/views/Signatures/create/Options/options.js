@@ -87,7 +87,7 @@ export default function Options(props) {
             </>
     }
     useEffect(() => {
-        props.setData({ ...props.data, event: { ...props.data?.event, display: `${process.env.REACT_APP_API_URL}/${props?.data?.event?.list[0]?.imagePath}` } })
+        props.setData({ ...props.data, event: { ...props.data?.event, display: props?.data?.event?.list[0]?.imageUrl } })
     }, [props?.display?.event?.enabled, props?.display?.event?.padding])
     return (
         <>
@@ -307,9 +307,9 @@ export default function Options(props) {
                     </div>
                     {props.data.event.enabled && props.data.event.list?.length > 0 ?
                         <>
-                       <CustomSelect onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${process.env.REACT_APP_API_URL}/${e}`, selected: e} })} 
-                       items={props.data.event.list} getValue={'imagePath'} display={'name'} />
-                            {/* <form onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${process.env.REACT_APP_API_URL}${JSON.parse(e.target.value).imagePath}`, selected: JSON.parse(e.target.value) } })}>
+                       <CustomSelect onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: e, selected: e} })} 
+                       items={props.data.event.list} getValue={'imageUrl'} display={'name'} />
+                            {/* <form onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${process.env.REACT_APP_API_URL}${JSON.parse(e.target.value).imageUrl}`, selected: JSON.parse(e.target.value) } })}>
                                 <select defaultValue={JSON.stringify(props.data.event.selected)}>
                                     {props.data.event.list.map((event) => {
                                         return <option key={event.id} value={JSON.stringify(event)}>{event.name}</option>
@@ -323,7 +323,7 @@ export default function Options(props) {
                                     min={0}
                                     max={50}
                                     values={[props.data.event.padding]}
-                                    onChange={(range) => props.setData({ ...props.data, event: { ...props.data.event, padding: range, display: `${process.env.REACT_APP_API_URL}/${props?.data?.event?.selected.imagePath}` } })}
+                                    onChange={(range) => props.setData({ ...props.data, event: { ...props.data.event, padding: range, display: props?.data?.event?.selected.imageUrl } })}
                                     renderTrack={({ props, children }) => (
                                         <div {...props} className={classes.rangeSlider} style={{
                                             ...props.style,
