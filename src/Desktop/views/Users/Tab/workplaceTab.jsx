@@ -55,7 +55,6 @@ function WorkplaceTab({ time, selected, workplaces, setWorkplaces, setSelected, 
             position: user.position,
             email: user.email
         }
-        console.log(req)
         await request.patch(id, req, {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(() => {
