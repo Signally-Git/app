@@ -745,6 +745,13 @@ function CreateSignatureComponent() {
                         signature: result.data.id,
                     },
                     {
+                        property: "value",
+                        value:
+                            signatureOption?.footer?.value,
+                        type: "disclaimer",
+                        signature: result.data.id,
+                    },
+                    {
                         property: "padding",
                         value:
                             signatureOption.disclaimerValue?.toString() || "12",

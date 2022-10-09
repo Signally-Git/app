@@ -42,7 +42,6 @@ function Team() {
             sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
         }
         function getRealtimeData(data) {
-            console.log(data)
             setTimeout(() => {
                 setEntity({ ...entity, users: data.users })
             }, 1500);
