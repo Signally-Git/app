@@ -15,7 +15,6 @@ export default function Create(props) {
 
     const handleCSV = async (file) => {
         const csv = new FormData()
-        console.log(props.fill.type)
         const url = `import/organisation/${props.fill.type === "users" ? "users" : `${JSON.parse(localStorage.getItem('user')).organisation.replace("/organisations/", "")}/workplaces`}`
 
         csv.append('file', file)
@@ -29,7 +28,6 @@ export default function Create(props) {
 
     const createGroup = () => {
         // axios.post(`${API}organisation/${localStorage.getItem('organisation_id')}/groups?access_token=${localStorage.getItem('token')}`, groupName).then((res) => console.log(res))
-        console.log("createGroup")
         return
     }
 

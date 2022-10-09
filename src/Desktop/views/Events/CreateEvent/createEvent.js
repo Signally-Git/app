@@ -58,7 +58,7 @@ export default function CreateEvent({ setDone, event }) {
                 const req = {
                     imagePath: res.data.path,
                     name: eventName,
-                    link: res.data.url,
+                    link: eventLink,
                     startAt: start.utc(false),
                     endAt: end.utc(false),
                 }
