@@ -48,10 +48,6 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     }, [edit])
 
     useEffect(() => {
-        setTemplates([])
-    }, [edit])
-
-    useEffect(() => {
         const sse = new EventSource(`${process.env.REACT_APP_HUB_URL}${show?.['@id']}`);
         sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
         function getRealtimeData(data) {
@@ -69,14 +65,20 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
             if (entity.data.compiledSignature)
                 setPreviewSignature(entity.data.compiledSignature)
             else if (entity.data.signature?.['@id']) {
-                await request.get(entity.data.signature['@id']).then((res) => setPreviewSignature(res.data.preview))
+                await request.get(entity.data.signature['@id']).then((res) => setPreviewSignature(res.data?.preview))
             }
             else if (entity.data.signature) {
-                await request.get(entity.data.signature).then((res) => setPreviewSignature(res.data.preview))
+                await request.get(entity.data.signature).then((res) => setPreviewSignature(res.data?.preview))
             }
             else (setPreviewSignature())
         }
+        refreshPreview()
+        
+        if (edit) 
+            handleSwapSignature(edit.signature.id)
+    }, [show, edit])
 
+    useEffect(() => {
         let templatesAPI = [{ id: 'signature', name: 'Signature' }]
         const listTemplates = async () => {
             await request.get('signatures').then((result) => {
@@ -89,12 +91,9 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
             })
 
         }
-
-        refreshPreview()
         listTemplates()
-
-    }, [show, edit])
-
+    }, [])
+    
     // Modal
     const [modal, setModal] = useState(false)
     const handleSubmit = ((e) => {
@@ -124,8 +123,9 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     }
 
     const handleSwapSignature = (id) => {
+        console.log(id)
         let template = Object?.values(templates)?.find((obj) => { return obj.id == id })
-
+        console.log(template)
         if (event.imageUrl !== undefined)
             template = { ...template, preview: template?.preview?.replace('https://fakeimg.pl/380x126?font=noto&font_size=14', `${event?.imageUrl}`) }
 
@@ -163,7 +163,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
             headers: { 'Content-Type': 'application/merge-patch+json' }
         }).then(
             (res) => {
-                setPreviewSignature(res.data.signature.preview)
+                setPreviewSignature(res.data.signature?.preview)
                 notification({ content: <>Signature de <span className={classes.orangeTxt}>{type === "user" ? element.firstName + " " + element.lastName : element.name}</span> modifiée</>, status: "valid" })
                 setEdit()
             }).catch(() => notification({ content: <>Impossible de modifier la signature</>, status: "invalid" }))
@@ -240,7 +240,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                             {templates.length > 0 &&
                                 <CustomSelect onChange={(e) => handleSwapSignature(e)} items={templates} display={"name"} getValue={"id"} />}
                             <div className={classes.signature}>
-                                {typeof selectedTemplate.preview === 'string' ? parse(selectedTemplate.preview.replace('https://fakeimg.pl/380x126?font=noto&font_size=14', event.imageUrl ? process.env.REACT_APP_API_URL+ '/' + event.imageUrl : 'https://fakeimg.pl/380x126?font=noto&font_size=14')) : ""}
+                                {typeof selectedTemplate?.preview === 'string' ? parse(selectedTemplate?.preview.replace('https://fakeimg.pl/380x126?font=noto&font_size=14', event.imageUrl ? process.env.REACT_APP_API_URL+ '/' + event.imageUrl : 'https://fakeimg.pl/380x126?font=noto&font_size=14')) : ""}
                             </div>
                         </div>
                         <div>

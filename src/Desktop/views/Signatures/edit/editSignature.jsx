@@ -183,7 +183,7 @@ function EditSignatureComponent() {
         })
 
         setSignatureOption({
-            salutation: { value: "Cordialement,", enabled: defaultStyles?.filter((style) => style.type === "greetings")[0].value === "false" ? false : true, padding: defaultStyles?.filter((style) => style.type === "greetingsPadding")[0].value },
+            salutation: { value: defaultStyles?.filter((style) => style.type === "greetingsValue")[0]?.value || "Cordialement,", enabled: defaultStyles?.filter((style) => style.type === "greetingsEnabled")[0]?.value === "false" ? false : true, padding: defaultStyles?.filter((style) => style.type === "greetingsPadding")[0].value },
             custom: { enabled: false },
             eco: { value: "Ecoresponsability", enabled: false },
             followUs: { value: "Follow us", enabled: false },
@@ -192,10 +192,8 @@ function EditSignatureComponent() {
             event: { ...signatureOption.event, display: signatureOption.event?.selected?.imageUrl, enabled: defaultStyles?.filter((style) => style.type === "event")[0].value === "false" ? false : true, padding: defaultStyles?.filter((style) => style.type === "eventPadding")[0].value },
             socials: { enabled: true, bgColor: "#000", fill: "#FFF", items: ["twitter", "facebook", "pinterest", "snapchat", "linkedin", "instagram"] },
             footer: {
-                maxWidth: 380, value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.
-      
-      Ce message electronique et tous les fichiers joints ainsi que les informations contenues dans ce message (ci apres "le message"), sont confidentiels et destines exclusivement a l'usage de la personne a laquelle ils sont adresses. Si vous avez recu ce message par erreur, merci de le renvoyer a son emetteur et de le detruire. Toute diffusion, publication, totale ou partielle ou divulgation sous quelque forme que ce soit non expressement autorisees de ce message, sont interdites.,`,
-                enabled: defaultStyles?.filter((style) => style.type === "disclaimer")[0].value === "false" ? false : true, padding: defaultStyles?.filter((style) => style.type === "disclaimerPadding")[0].value, size: 7
+                maxWidth: 380, value: defaultStyles?.filter((style) => style.type === "disclaimerValue")[0]?.value || `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.`,
+                enabled: defaultStyles?.filter((style) => style.type === "disclaimerEnabled")[0]?.value === "false" ? false : true, padding: defaultStyles?.filter((style) => style.type === "disclaimerPadding")[0].value, size: 7
             }
         })
     }
@@ -546,16 +544,26 @@ function EditSignatureComponent() {
                     },
                     // Greetings
                     {
-                        "property": "enabled",
-                        "value": signatureOption.salutation.enabled?.toString() || "false",
-                        "type": "greetings",
-                        "signature": result.data.id
+                        property: "enabled",
+                        value:
+                            signatureOption.salutation.enabled?.toString() ||
+                            "false",
+                        type: "greetingsEnabled",
+                        signature: result?.data?.id,
                     },
                     {
-                        "property": "padding",
-                        "value": signatureOption.salutation.padding?.toString() || "12",
-                        "type": "greetingsPadding",
-                        "signature": result.data.id
+                        property: "value",
+                        value: signatureOption.salutation.value,
+                        type: "greetingsValue",
+                        signature: result?.data?.id,
+                    },
+                    {
+                        property: "padding",
+                        value:
+                            signatureOption.salutation.padding?.toString() ||
+                            "12",
+                        type: "greetingsPadding",
+                        signature: result?.data?.id,
                     },
                     // Event
                     {
@@ -572,24 +580,27 @@ function EditSignatureComponent() {
                     },
                     // Disclaimer
                     {
-                        "property": "enabled",
-                        "value": signatureOption.disclaimerEnabled?.toString() || "false",
-                        "type": "disclaimer",
-                        "signature": result.data.id
+                        property: "enabled",
+                        value:
+                            signatureOption.footer.enabled?.toString() ||
+                            "false",
+                        type: "disclaimerEnabled",
+                        signature: result?.data?.id,
                     },
                     {
                         property: "value",
-                        value:
-                        signatureOption?.footer?.value,
-                        type: "disclaimer",
-                        signature: result.data.id,
+                        value: signatureOption.footer.value,
+                        type: "disclaimerValue",
+                        signature: result?.data?.id,
                     },
                     {
-                        "property": "padding",
-                        "value": signatureOption.disclaimerValue?.toString() || "12",
-                        "type": "disclaimerPadding",
-                        "signature": result.data.id
-                    }
+                        property: "padding",
+                        value:
+                            signatureOption.footer.padding?.toString() ||
+                            "12",
+                        type: "disclaimerPadding",
+                        signature: result?.data?.id,
+                    },
                 ]
                 request.post('signature_styles/batch', styles)
 
