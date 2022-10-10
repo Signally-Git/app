@@ -122,6 +122,7 @@
   border-radius: 20px;
   padding: 2rem;
   margin-bottom: auto;
+  overflow: auto;
   position: absolute;
   top: 0;
   left: 0;

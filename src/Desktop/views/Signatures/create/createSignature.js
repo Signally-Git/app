@@ -370,67 +370,67 @@ function CreateSignatureComponent() {
                         property: "color",
                         value: signatureInfo.firstName.color,
                         type: "firstName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "color",
                         value: signatureInfo.lastName.color,
                         type: "lastName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "color",
                         value: signatureInfo.jobName.color,
                         type: "jobName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "color",
                         value: signatureInfo.company.color,
                         type: "companyName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "color",
                         value: signatureInfo.mobile.color,
                         type: "mobile",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "color",
                         value: signatureInfo.addressStreet.color,
                         type: "addressStreet",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "color",
                         value: signatureInfo.addressInfo.color,
                         type: "addressInfo",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "color",
                         value: signatureInfo.addressZipcode.color,
                         type: "addressZipcode",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "color",
                         value: signatureInfo.addressCity.color,
                         type: "addressCity",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "color",
                         value: signatureInfo.addressCountry.color,
                         type: "addressCountry",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "color",
                         value: signatureInfo.phone.color,
                         type: "phone",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     // FONT WEIGHT FOR EACH TXT
                     {
@@ -439,35 +439,35 @@ function CreateSignatureComponent() {
                             signatureInfo.firstName.style.fontWeight ||
                             "normal",
                         type: "firstName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontWeight",
                         value:
                             signatureInfo.lastName.style.fontWeight || "normal",
                         type: "lastName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontWeight",
                         value:
                             signatureInfo.jobName.style.fontWeight || "normal",
                         type: "jobName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontWeight",
                         value:
                             signatureInfo.company.style.fontWeight || "normal",
                         type: "companyName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontWeight",
                         value:
                             signatureInfo.mobile.style.fontWeight || "normal",
                         type: "mobile",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontWeight",
@@ -475,7 +475,7 @@ function CreateSignatureComponent() {
                             signatureInfo.addressStreet.style.fontWeight ||
                             "normal",
                         type: "addressStreet",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontWeight",
@@ -483,7 +483,7 @@ function CreateSignatureComponent() {
                             signatureInfo.addressInfo.style.fontWeight ||
                             "normal",
                         type: "addressInfo",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontWeight",
@@ -491,7 +491,7 @@ function CreateSignatureComponent() {
                             signatureInfo.addressZipcode.style.fontWeight ||
                             "normal",
                         type: "addressZipcode",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontWeight",
@@ -499,7 +499,7 @@ function CreateSignatureComponent() {
                             signatureInfo.addressCity.style.fontWeight ||
                             "normal",
                         type: "addressCity",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontWeight",
@@ -507,13 +507,13 @@ function CreateSignatureComponent() {
                             signatureInfo.addressCountry.style.fontWeight ||
                             "normal",
                         type: "addressCountry",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontWeight",
                         value: signatureInfo.phone.style.fontWeight || "normal",
                         type: "phone",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     // TEXT DECORATION FOR EACH TXT
                     {
@@ -522,7 +522,7 @@ function CreateSignatureComponent() {
                             signatureInfo.firstName.style.textDecoration ||
                             "none",
                         type: "firstName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "textDecoration",
@@ -530,7 +530,7 @@ function CreateSignatureComponent() {
                             signatureInfo.lastName.style.textDecoration ||
                             "none",
                         type: "lastName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "textDecoration",
@@ -538,7 +538,7 @@ function CreateSignatureComponent() {
                             signatureInfo.jobName.style.textDecoration ||
                             "none",
                         type: "jobName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "textDecoration",
@@ -546,14 +546,14 @@ function CreateSignatureComponent() {
                             signatureInfo.company.style.textDecoration ||
                             "none",
                         type: "companyName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "textDecoration",
                         value:
                             signatureInfo.mobile.style.textDecoration || "none",
                         type: "mobile",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "textDecoration",
@@ -561,7 +561,7 @@ function CreateSignatureComponent() {
                             signatureInfo.addressStreet.style.textDecoration ||
                             "none",
                         type: "addressStreet",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "textDecoration",
@@ -569,7 +569,7 @@ function CreateSignatureComponent() {
                             signatureInfo.addressInfo.style.textDecoration ||
                             "none",
                         type: "addressInfo",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "textDecoration",
@@ -577,7 +577,7 @@ function CreateSignatureComponent() {
                             signatureInfo.addressZipcode.style.textDecoration ||
                             "none",
                         type: "addressZipcode",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "textDecoration",
@@ -585,7 +585,7 @@ function CreateSignatureComponent() {
                             signatureInfo.addressCity.style.textDecoration ||
                             "none",
                         type: "addressCity",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "textDecoration",
@@ -593,14 +593,14 @@ function CreateSignatureComponent() {
                             signatureInfo.addressCountry.style.textDecoration ||
                             "none",
                         type: "addressCountry",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "textDecoration",
                         value:
                             signatureInfo.phone.style.textDecoration || "none",
                         type: "phone",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     // FONT STYLE FOR EACH TXT
                     {
@@ -608,33 +608,33 @@ function CreateSignatureComponent() {
                         value:
                             signatureInfo.firstName.style.fontStyle || "normal",
                         type: "firstName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontStyle",
                         value:
                             signatureInfo.lastName.style.fontStyle || "normal",
                         type: "lastName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontStyle",
                         value:
                             signatureInfo.jobName.style.fontStyle || "normal",
                         type: "jobName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontStyle",
                         value: signatureInfo.company.style.fontStyle || "none",
                         type: "companyName",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontStyle",
                         value: signatureInfo.mobile.style.fontStyle || "normal",
                         type: "mobile",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontStyle",
@@ -642,7 +642,7 @@ function CreateSignatureComponent() {
                             signatureInfo.addressStreet.style.fontStyle ||
                             "normal",
                         type: "addressStreet",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontStyle",
@@ -650,7 +650,7 @@ function CreateSignatureComponent() {
                             signatureInfo.addressInfo.style.fontStyle ||
                             "normal",
                         type: "addressInfo",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontStyle",
@@ -658,7 +658,7 @@ function CreateSignatureComponent() {
                             signatureInfo.addressZipcode.style.fontStyle ||
                             "normal",
                         type: "addressZipcode",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontStyle",
@@ -666,7 +666,7 @@ function CreateSignatureComponent() {
                             signatureInfo.addressCity.style.fontStyle ||
                             "normal",
                         type: "addressCity",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontStyle",
@@ -674,33 +674,33 @@ function CreateSignatureComponent() {
                             signatureInfo.addressCountry.style.fontStyle ||
                             "normal",
                         type: "addressCountry",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontStyle",
                         value: signatureInfo.phone.style.fontStyle || "normal",
                         type: "phone",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     // FONT GENERAL STYLE
                     {
                         property: "fontFamily",
                         value: signatureInfo.fontFamily,
                         type: "generalFontFamily",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "fontSize",
                         value: signatureInfo.fontSize[0]?.toString(),
                         type: "generalFontSize",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     // DIV COLOR,
                     {
                         property: "color",
                         value: signatureOption.bgColor,
                         type: "divColor",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     // Greetings
                     {
@@ -708,8 +708,14 @@ function CreateSignatureComponent() {
                         value:
                             signatureOption.salutation.enabled?.toString() ||
                             "false",
-                        type: "greetings",
-                        signature: result.data.id,
+                        type: "greetingsEnabled",
+                        signature: result?.data?.id,
+                    },
+                    {
+                        property: "value",
+                        value: signatureOption.salutation.value,
+                        type: "greetingsValue",
+                        signature: result?.data?.id,
                     },
                     {
                         property: "padding",
@@ -717,7 +723,7 @@ function CreateSignatureComponent() {
                             signatureOption.salutation.padding?.toString() ||
                             "12",
                         type: "greetingsPadding",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     // Event
                     {
@@ -726,37 +732,37 @@ function CreateSignatureComponent() {
                             signatureOption.event.enabled?.toString() ||
                             "false",
                         type: "event",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     {
                         property: "padding",
                         value:
                             signatureOption.event.padding?.toString() || "12",
                         type: "eventPadding",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     // Disclaimer
                     {
                         property: "enabled",
                         value:
-                            signatureOption.disclaimerEnabled?.toString() ||
+                            signatureOption.footer.enabled?.toString() ||
                             "false",
-                        type: "disclaimer",
-                        signature: result.data.id,
+                        type: "disclaimerEnabled",
+                        signature: result?.data?.id,
                     },
                     {
                         property: "value",
-                        value:
-                            signatureOption?.footer?.value,
-                        type: "disclaimer",
-                        signature: result.data.id,
+                        value: signatureOption.footer.value,
+                        type: "disclaimerValue",
+                        signature: result?.data?.id,
                     },
                     {
                         property: "padding",
                         value:
-                            signatureOption.disclaimerValue?.toString() || "12",
+                            signatureOption.footer.padding?.toString() ||
+                            "12",
                         type: "disclaimerPadding",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                 ];
                 request.post("signature_styles/batch", styles).then((r) => {
