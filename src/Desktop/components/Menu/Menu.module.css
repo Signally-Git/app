@@ -1,19 +1,15 @@
 .active {
   position: relative;
 }
-
 .active * {
   color: #FF7954 !important;
 }
-
 .active label {
   color: #FF7954 !important;
   display: block !important;
 }
 
 .tabMenu {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -22,27 +18,21 @@
   width: 100%;
   padding: 0;
 }
-
 .tabMenu li {
   position: relative;
   font-size: 4rem;
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .tabMenu li svg {
   width: 2rem !important;
   height: 2rem !important;
 }
-
 .tabMenu li * {
   color: #402927;
 }
-
 .tabMenu li label {
   font-size: 0.7rem;
   text-align: center;
@@ -53,46 +43,36 @@
   right: 0;
   margin: auto;
   text-transform: uppercase;
-  display: none;
-}
-.tabMenu li:hover label {
-  display: block;
 }
 
 .event {
   position: relative;
 }
-
 .event :hover span {
   color: #66433e;
 }
-
 .event svg {
   font-size: 1rem;
 }
-
 .event span {
   font-weight: 600;
   color: #66433e;
   text-align: center;
   right: 0;
   left: 0;
-  bottom: 1.40rem;
+  bottom: 1.4rem;
   margin: auto;
-  font-size: .7rem;
+  font-size: 0.7rem;
   position: absolute;
 }
 
 @media screen and (max-width: 680px) {
-  .active ::after {
+  .active::after {
     bottom: -5px;
   }
   .tabMenu {
     position: fixed;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+    flex-direction: row;
     z-index: 2;
     background: #fff;
     bottom: 0;
