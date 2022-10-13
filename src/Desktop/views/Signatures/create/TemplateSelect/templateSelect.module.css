@@ -155,7 +155,7 @@
 }
 .modal .studioStore .activeStudio {
   background-color: #FF7954 !important;
-  color: #FFF;
+  color: #fff;
 }
 .modal h5 {
   color: #402927;
@@ -164,13 +164,13 @@
   font-size: 1rem;
 }
 .modal .templatesContainer {
-  margin-top: 2rem;
   margin-bottom: -3rem;
   padding: 0;
   list-style: none;
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  overflow: auto;
 }
 .modal .templatesContainer input {
   width: 100%;

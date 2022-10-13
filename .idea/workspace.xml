@@ -4,13 +4,15 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c4dff9f-5d0a-4e3d-a895-082d60361406" name="Changes" comment="Wait for signature to be completely created before pushing to dashboard">
+    <list default="true" id="90e7ac5f-327d-4013-93d7-106e7bf2f9ed" name="Changes" comment="Adds account back">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Header/header.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Header/header.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Menu/Menu.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Menu/Menu.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Menu/Menu.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Menu/Menu.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Preview/customizablePreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Preview/customizablePreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Preview/readOnlyPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Preview/readOnlyPreview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/components/News/news.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/News/news.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/components/News/onBoarding/onBoarding.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/News/onBoarding/onBoarding.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
