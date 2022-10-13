@@ -170,7 +170,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                             </>
                         ) : (
                             <>
-                                Vous n'avez pas encore importé de
+                                Vous n'avez pas encore importé d'autres
                                 collaborateurs. Cliquez ci-dessous pour en
                                 ajouter et commencer à gérer vos équipes
                                 <Button
