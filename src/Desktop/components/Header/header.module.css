@@ -268,7 +268,7 @@
   cursor: pointer;
   filter: brightness(0) saturate(100%) invert(74%) sepia(39%) saturate(5602%) hue-rotate(324deg) brightness(100%) contrast(104%);
 }
-.name ul li a {
+.name ul > li > a {
   text-transform: uppercase;
   white-space: nowrap;
   font-size: 0.8rem;
@@ -277,19 +277,14 @@
   transition: 0.2s;
   margin-bottom: 1rem;
 }
-.name ul li a:hover {
-  color: #FF7954;
-  font-weight: 600;
-  border-color: #FF7954;
-}
 .name .UserName {
   display: flex;
   padding-top: 3px;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 .name .UserName > svg {
-  margin-left: 0.5rem;
   font-size: 0.7rem;
 }
 .name .UserName span {
@@ -299,6 +294,7 @@
   font-size: 0.9rem;
   color: #402927;
   transition: 0.2s;
+  margin-right: 0.5rem;
 }
 
 .reportContainer {
@@ -306,7 +302,7 @@
   flex-direction: column;
   height: 3rem;
   text-align: center;
-  width: 8.25rem;
+  width: 7.5rem;
   position: relative;
 }
 .reportContainer > div {

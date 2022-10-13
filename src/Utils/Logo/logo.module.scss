@@ -6,37 +6,5 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: #402A27;
     display: flex;
-    width: 7rem;
-}
-
-.i {
-    position: relative;
-    &::before
-    { 
-        content: "";
-        display: block;
-        position: absolute;
-        z-index: 3;
-        top: .45rem;
-        left: 3px;
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: #F6C444;
-    }
-    background: linear-gradient(to top, #402A27 65%, transparent 65%);
-    // background: #402A27;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.dot {
-    position: absolute;
-    bottom: .5rem;
-    right: -1.25rem;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #FF7954;
+    width: 8rem;
 }
