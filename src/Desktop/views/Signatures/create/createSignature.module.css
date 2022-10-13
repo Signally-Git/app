@@ -86,6 +86,10 @@
   color: #FF7954;
 }
 
+.signaturePreview {
+  pointer-events: none;
+}
+
 .btnTemplate {
   cursor: pointer;
   transition: 0.2s;

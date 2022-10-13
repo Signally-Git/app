@@ -15,7 +15,7 @@ import request from "Utils/Request/request";
 // Component handling the creation of signature, selection of template
 
 function CreateSignatureComponent() {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [company, setCompany] = useState(null);
     const [selectedTemplate, setSelectedTemplate] = useState();
@@ -285,19 +285,18 @@ function CreateSignatureComponent() {
             }, 1000);
         }
     };
-    
+
     useEffect(() => {
-        if (selectedTemplate)
-            showTemplates(false, 'smooth');
+        if (selectedTemplate) showTemplates(false, "smooth");
     }, [selectedTemplate]);
-    
+
     const [templates, setTemplates] = useState();
-    
+
     useEffect(() => {
-        showTemplates(true, 'auto')
-        setLoading(false)
-    }, [])
-    
+        showTemplates(true, "auto");
+        setLoading(false);
+    }, []);
+
     const [modal, setModal] = useState(false);
     const [modalContent, setModalContent] = useState();
     const [templateId, setTemplateIdToPatch] = useState();
@@ -759,18 +758,16 @@ function CreateSignatureComponent() {
                     {
                         property: "padding",
                         value:
-                            signatureOption.footer.padding?.toString() ||
-                            "12",
+                            signatureOption.footer.padding?.toString() || "12",
                         type: "disclaimerPadding",
                         signature: result?.data?.id,
                     },
                 ];
                 request.post("signature_styles/batch", styles).then((r) => {
-                    if (window.location.hash === "#onboarding") history.goBack();
+                    if (window.location.hash === "#onboarding")
+                        history.goBack();
                     else history.push("/signatures");
                 });
-
-                
             })
             .catch((err) => {
                 console.log(err);
@@ -793,8 +790,7 @@ function CreateSignatureComponent() {
             );
     }, [signatureInfo, signatureOption, selectedTemplate]);
 
-    if (loading)
-        return <></>
+    if (loading) return <></>;
     return (
         <div className={classes.container} ref={elem}>
             {modal === true ? modalContent : ""}
@@ -846,7 +842,9 @@ function CreateSignatureComponent() {
                             <div className={classes.lazyLoadingShort}></div>
                             <div className={classes.lazyLoadingMedium}></div>
                             <br />
-                            {selectedTemplate && preview}
+                            <div className={classes.signaturePreview}>
+                                {selectedTemplate && preview}
+                            </div>
                             <div className={classes.CTAsContainer}>
                                 <Button
                                     color="orange"
@@ -862,7 +860,9 @@ function CreateSignatureComponent() {
                                 </Button>
                                 <Button
                                     color="brown"
-                                    onClick={() => showTemplates(true, 'smooth')}
+                                    onClick={() =>
+                                        showTemplates(true, "smooth")
+                                    }
                                 >
                                     Choisir un{" "}
                                     {selectedTemplate
