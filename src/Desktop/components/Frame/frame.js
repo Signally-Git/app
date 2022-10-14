@@ -4,7 +4,6 @@ import { Suspense, useEffect, useState } from "react";
 import classes from "./frame.module.scss";
 import request from "Utils/Request/request";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { Link } from "react-router-dom";
 
 export default function Frame(props) {
     const [user, setUser] = useState();
@@ -24,6 +23,7 @@ export default function Frame(props) {
 
                 function getRealtimeData(data) {
                     setOrganisation(data);
+                    localStorage.setItem("organisation", data);
                 }
                 sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
 
@@ -41,6 +41,10 @@ export default function Frame(props) {
                     .get(res.data.organisation)
                     .then((r) => {
                         setOrganisation(r.data);
+                        localStorage.setItem(
+                            "organisation",
+                            JSON.stringify(r.data)
+                        );
                     })
                     .catch((err) => console.log(err));
             })

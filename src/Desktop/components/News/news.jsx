@@ -21,15 +21,12 @@ function News({ organisation, loading, setLoading }) {
     });
     const [onboardingComplete, setOnboardingComplete] = React.useState(false);
 
-    const refreshOrganisation = async () => {
+    const refreshOrganisation = () => {
         request.get("users").then((r) => {
             setUsers(r.data["hydra:member"]);
         });
-        request.get("events").then((r) => {
-            setEvents(r.data["hydra:member"]);
-        });
-        await request.get(organisation["@id"]).then((res) => {
-            setOrg({ ...res.data, users: users, events: events });
+        request.get(localStorage.getItem("organisation")?.["@id"]).then((r) => {
+            setUsers(r.data["hydra:member"]);
         });
     };
 

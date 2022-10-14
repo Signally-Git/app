@@ -7,11 +7,14 @@ import { ImCheckmark } from "react-icons/im";
 import Button from "Utils/Button/btn";
 
 import "swiper/swiper.min.css";
+import request from "../../../../Utils/Request/request";
 
 function OnBoarding({ organisation, completed, setCompleted }) {
     const [swiper, setSwiper] = React.useState(null);
     const [slideIndex, setSlideIndex] = React.useState(0);
     const [missing, setMissing] = React.useState([]);
+    const [events, setEvents] = React.useState([]);
+    const [users, setUsers] = React.useState([]);
     const history = useHistory();
 
     const [menu, setMenu] = React.useState([]);
@@ -26,6 +29,18 @@ function OnBoarding({ organisation, completed, setCompleted }) {
             ? swiper?.slideTo(menu.indexOf(missingTabs[0]))
             : setCompleted(true);
     };
+
+    React.useEffect(() => {
+        const getData = () => {
+            request.get("events").then((r) => {
+                setEvents(r.data["hydra:member"]);
+            });
+            request.get("users").then((r) => {
+                setUsers(r.data["hydra:member"]);
+            });
+        };
+        getData();
+    }, []);
 
     React.useEffect(() => {
         const missingTabs = menu.filter((element) => element.done === false);
@@ -155,10 +170,10 @@ function OnBoarding({ organisation, completed, setCompleted }) {
             {
                 link: <>Collaborateurs</>,
                 title: "Collaborateurs",
-                done: organisation?.users?.length > 1,
+                done: users?.length > 1,
                 content: (
                     <>
-                        {organisation?.users?.length > 1 ? (
+                        {users?.length > 1 ? (
                             <>
                                 Vous avez déjà importé des collaborateurs.{" "}
                                 <Button
@@ -191,13 +206,13 @@ function OnBoarding({ organisation, completed, setCompleted }) {
             {
                 link: <>Events</>,
                 title: "Events",
-                done: organisation?.events?.length > 0,
+                done: events?.length > 0,
                 content: (
                     <>
-                        {organisation?.events?.length > 0 ? (
+                        {events?.length > 0 ? (
                             <>
-                                Vous avez actuellement créé{" "}
-                                {organisation?.events?.length} event(s).
+                                Vous avez actuellement créé {events?.length}{" "}
+                                event(s).
                                 <div className={classes.btnsContainer}>
                                     <Button
                                         color="brown"
@@ -240,7 +255,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                 ),
             },
         ]);
-    }, [swiper, organisation, completed]);
+    }, [swiper, organisation, completed, events]);
 
     React.useEffect(() => {
         const missingTabs = menu.filter((element) => element.done === false);
