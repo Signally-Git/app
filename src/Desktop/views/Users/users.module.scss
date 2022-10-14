@@ -81,6 +81,10 @@
         text-align: center;
         a {
             color: $signally-brown;
+            display: block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
         }
         cursor: pointer;
     }
