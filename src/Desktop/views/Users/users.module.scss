@@ -75,11 +75,11 @@
     font-weight: 600;
     margin-top: 0;
     margin-bottom: 2rem;
-    li {
+    > li {
         width: 33%;
         margin: 0 auto;
         text-align: center;
-        a {
+        > a {
             color: $signally-brown;
             display: block;
             text-overflow: ellipsis;
@@ -88,7 +88,7 @@
         }
         cursor: pointer;
     }
-    li::after {
+    > li::after {
         content: " ";
         display: block;
         width: 60%;

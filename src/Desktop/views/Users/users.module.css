@@ -73,20 +73,20 @@
   margin-top: 0;
   margin-bottom: 2rem;
 }
-.menu li {
+.menu > li {
   width: 33%;
   margin: 0 auto;
   text-align: center;
   cursor: pointer;
 }
-.menu li a {
+.menu > li > a {
   color: #402927;
   display: block;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
-.menu li::after {
+.menu > li::after {
   content: " ";
   display: block;
   width: 60%;
