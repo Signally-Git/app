@@ -12,6 +12,7 @@ export default function TemplateSelection(props) {
     const [fetching, setFetching] = useState(true);
     const [tag, setTag] = useState(true);
     const [templatesList, setTemplatesList] = useState([]);
+    const [organisation, setOrganisation] = useState();
 
     const handleForm = (e) => {
         props.setTemplate(JSON.parse(e.target.value));
@@ -25,9 +26,15 @@ export default function TemplateSelection(props) {
     };
 
     useEffect(() => {
+        const organisationId = JSON.parse(
+            localStorage.getItem("user")
+        )?.organisation;
         request.get("signature_templates").then((res) => {
             setTemplatesList(res.data["hydra:member"]);
             setFetching(false);
+        });
+        request.get(organisationId).then((res) => {
+            setOrganisation(res.data);
         });
     }, []);
 
@@ -125,6 +132,10 @@ export default function TemplateSelection(props) {
                                     }}
                                     template={template.html}
                                     socials={props.icons}
+                                    organisation={organisation}
+                                    user={JSON.parse(
+                                        localStorage.getItem("user")
+                                    )}
                                 />
                             </li>
                         );

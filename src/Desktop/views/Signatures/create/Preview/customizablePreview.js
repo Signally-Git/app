@@ -300,7 +300,7 @@ export default function Preview({
     //mail
     replaced = replaced.replaceAll(
         "{{ user.email }}",
-        props?.user?.data?.email || "em@il.com"
+        user?.email || "em@il.com"
     );
 
     var greeting = /{# START GREETINGS #}.*{# END GREETINGS #}/gis;
