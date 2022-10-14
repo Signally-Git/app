@@ -3,7 +3,8 @@
     bottom: 1rem;
     left: 2rem;
     display: flex;
-    & button:last-child {
+    flex-direction: row-reverse;
+    & button:first-child {
         margin-left: 1rem;
     }
 }

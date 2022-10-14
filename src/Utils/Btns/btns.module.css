@@ -2,11 +2,9 @@
   position: absolute;
   bottom: 1rem;
   left: 2rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
+  flex-direction: row-reverse;
 }
-
-.container button:last-child {
+.container button:first-child {
   margin-left: 1rem;
 }

@@ -304,7 +304,13 @@ function CreateSignatureComponent() {
                 <span>
                     <div className={classes.modal}>
                         <div className={classes.slidesContainer}>
-                            <div className={classes.slide}>
+                            <form
+                                onSubmit={() => {
+                                    setModal(false);
+                                    handleSave();
+                                }}
+                                className={classes.slide}
+                            >
                                 <h4>Donner un nom à cette signature</h4>
                                 <Input
                                     autoFocus
@@ -315,19 +321,23 @@ function CreateSignatureComponent() {
                                         setSignatureName(e.target.value)
                                     }
                                 />
-                                <div onClick={() => setModal(false)}>
-                                    <Button width="30%" color="brown">
-                                        Annuler
-                                    </Button>
+                                <div>
                                     <Button
                                         width="40%"
                                         color="orange"
-                                        onClick={() => handleSave()}
+                                        type="submit"
                                     >
                                         Valider
                                     </Button>
+                                    <Button
+                                        onClick={() => setModal(false)}
+                                        width="30%"
+                                        color="brown"
+                                    >
+                                        Annuler
+                                    </Button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </span>
