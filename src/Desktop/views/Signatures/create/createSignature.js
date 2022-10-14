@@ -786,6 +786,7 @@ function CreateSignatureComponent() {
                     options={signatureOption}
                     template={selectedTemplate.html}
                     organisation={company.data}
+                    user={user.data}
                 />
             );
     }, [signatureInfo, signatureOption, selectedTemplate]);
