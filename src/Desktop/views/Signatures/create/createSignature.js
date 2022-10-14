@@ -15,7 +15,7 @@ import request from "Utils/Request/request";
 // Component handling the creation of signature, selection of template
 
 function CreateSignatureComponent() {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [company, setCompany] = useState(null);
     const [selectedTemplate, setSelectedTemplate] = useState();
@@ -78,9 +78,7 @@ function CreateSignatureComponent() {
         },
         footer: {
             maxWidth: 380,
-            value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.
-    
-    Ce message electronique et tous les fichiers joints ainsi que les informations contenues dans ce message (ci apres "le message"), sont confidentiels et destines exclusivement a l'usage de la personne a laquelle ils sont adresses. Si vous avez recu ce message par erreur, merci de le renvoyer a son emetteur et de le detruire. Toute diffusion, publication, totale ou partielle ou divulgation sous quelque forme que ce soit non expressement autorisees de ce message, sont interdites.,`,
+            value: `This e-mail, unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.`,
             enabled: false,
             padding: 10,
             size: 7,
@@ -156,9 +154,7 @@ function CreateSignatureComponent() {
             },
             footer: {
                 maxWidth: 380,
-                value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.
-      
-      Ce message electronique et tous les fichiers joints ainsi que les informations contenues dans ce message (ci apres "le message"), sont confidentiels et destines exclusivement a l'usage de la personne a laquelle ils sont adresses. Si vous avez recu ce message par erreur, merci de le renvoyer a son emetteur et de le detruire. Toute diffusion, publication, totale ou partielle ou divulgation sous quelque forme que ce soit non expressement autorisees de ce message, sont interdites.,`,
+                value: `This e-mail, unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.`,
                 enabled: false,
                 padding: 10,
                 size: 7,
@@ -285,19 +281,18 @@ function CreateSignatureComponent() {
             }, 1000);
         }
     };
-    
+
     useEffect(() => {
-        if (selectedTemplate)
-            showTemplates(false, 'smooth');
+        if (selectedTemplate) showTemplates(false, "smooth");
     }, [selectedTemplate]);
-    
+
     const [templates, setTemplates] = useState();
-    
+
     useEffect(() => {
-        showTemplates(true, 'auto')
-        setLoading(false)
-    }, [])
-    
+        showTemplates(true, "auto");
+        setLoading(false);
+    }, []);
+
     const [modal, setModal] = useState(false);
     const [modalContent, setModalContent] = useState();
     const [templateId, setTemplateIdToPatch] = useState();
@@ -708,7 +703,7 @@ function CreateSignatureComponent() {
                         value:
                             signatureOption.salutation.enabled?.toString() ||
                             "false",
-                        type: "greetings",
+                        type: "greetingsEnabled",
                         signature: result.data.id,
                     },
                     {
@@ -741,13 +736,12 @@ function CreateSignatureComponent() {
                         value:
                             signatureOption.disclaimerEnabled?.toString() ||
                             "false",
-                        type: "disclaimer",
+                        type: "disclaimerEnabled",
                         signature: result.data.id,
                     },
                     {
                         property: "value",
-                        value:
-                            signatureOption?.footer?.value,
+                        value: signatureOption?.footer?.value,
                         type: "disclaimer",
                         signature: result.data.id,
                     },
@@ -760,11 +754,10 @@ function CreateSignatureComponent() {
                     },
                 ];
                 request.post("signature_styles/batch", styles).then((r) => {
-                    if (window.location.hash === "#onboarding") history.goBack();
+                    if (window.location.hash === "#onboarding")
+                        history.goBack();
                     else history.push("/signatures");
                 });
-
-                
             })
             .catch((err) => {
                 console.log(err);
@@ -787,8 +780,7 @@ function CreateSignatureComponent() {
             );
     }, [signatureInfo, signatureOption, selectedTemplate]);
 
-    if (loading)
-        return <></>
+    if (loading) return <></>;
     return (
         <div className={classes.container} ref={elem}>
             {modal === true ? modalContent : ""}
@@ -856,7 +848,9 @@ function CreateSignatureComponent() {
                                 </Button>
                                 <Button
                                     color="brown"
-                                    onClick={() => showTemplates(true, 'smooth')}
+                                    onClick={() =>
+                                        showTemplates(true, "smooth")
+                                    }
                                 >
                                     Choisir un{" "}
                                     {selectedTemplate
