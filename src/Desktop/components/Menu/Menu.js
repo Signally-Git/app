@@ -1,6 +1,7 @@
 import classes from "./Menu.module.css";
 import { Link } from "react-router-dom";
 import { MdOutlineAccountCircle } from "react-icons/md";
+import { IoStatsChart } from "react-icons/io5";
 
 function Menu(props) {
     const page = props.page || "";
@@ -34,6 +35,17 @@ function Menu(props) {
                     <label>Dashboard</label>
                 </Link>
             </li>
+            <li
+                className={`${
+                    page.search("/statistics") !== -1 ? classes.active : ""
+                }`}
+            >
+                <Link to="/statistics">
+                    <IoStatsChart />
+                    <label>Statistiques</label>
+                </Link>
+            </li>
+
             <li
                 className={`${
                     page.search("signature") !== -1 ? classes.active : ""

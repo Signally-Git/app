@@ -1,13 +1,11 @@
-import Header from '../components/Header/Header'
-import SignInForm from '../components/SignIn/SignInForm'
+import Dashboard from "./Dashboard";
 
-function SignIn() {
+function Statistics() {
     return (
-        <div>
-            <Header />
-            <SignInForm />
-        </div>
-    )
+        <>
+            <Dashboard page="statistics" />
+        </>
+    );
 }
 
-export default SignIn
+export default Statistics;

@@ -12,6 +12,7 @@ import request from "Utils/Request/request";
 import News from "Desktop/components/News/news";
 import { useHistory } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import StatsPage from "../components/Statistics/Stats.page";
 
 let count = 0;
 
@@ -116,6 +117,10 @@ function Dashboard(props) {
             ) : props.page === "teams" ? (
                 <>
                     <Users />
+                </>
+            ) : props.page === "statistics" ? (
+                <>
+                    <StatsPage />
                 </>
             ) : props.page === "signatures" ? (
                 <>
