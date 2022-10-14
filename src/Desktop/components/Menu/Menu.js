@@ -5,7 +5,6 @@ import { MdOutlineAccountCircle } from "react-icons/md";
 function Menu(props) {
     const page = props.page || "";
     const today = new Date();
-    console.log(page);
 
     return (
         <ul className={classes.tabMenu}>
