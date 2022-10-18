@@ -1,21 +1,15 @@
 .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   width: 100%;
   position: relative;
 }
-
 .container li {
   width: 100%;
   position: relative;
 }
-
-.container input[type="checkbox"], .container input[type="radio"] {
+.container input[type=checkbox],
+.container input[type=radio] {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -26,30 +20,23 @@
 .open input {
   border-radius: 10px 10px 0 0;
 }
-
 .open .inputContainer > svg {
-  -webkit-transform: rotate(-180deg);
-          transform: rotate(-180deg);
+  transform: rotate(-180deg);
 }
 
 .inputContainer {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
 }
-
-.inputContainer input[type="text"] {
+.inputContainer input[type=text] {
   z-index: 6;
   width: 100%;
   font-weight: bold;
   color: #402927;
-  padding: .65rem 1rem;
+  padding: 0.65rem 1rem;
 }
-
 .inputContainer svg {
-  -webkit-transition: 0.2s;
   transition: 0.2s;
   cursor: pointer;
   z-index: 7;
@@ -62,8 +49,8 @@
 }
 
 .splitter {
-  font-size: .8rem;
-  color: #FF7954;
+  font-size: 0.8rem;
+  color: #ff7954;
   font-weight: bold;
 }
 
@@ -76,70 +63,42 @@
   right: 0;
   z-index: 5;
   margin: 0 auto;
-  border: 1px solid #EBE4E1;
+  border: 1px solid #ebe4e1;
   width: 100%;
-  background-color: #FFF;
-  -webkit-box-shadow: 0 20px 30px #EBE4E1;
-          box-shadow: 0 20px 30px #EBE4E1;
+  background-color: #fff;
+  box-shadow: 0 20px 30px #ebe4e1;
   border-radius: 0 0 10px 10px;
   padding: 0;
   padding-top: 2.65rem;
   list-style: none;
   opacity: 0;
   max-height: inherit !important;
-  -webkit-animation: dropDown 1s;
-          animation: dropDown 1s;
-  -webkit-animation-iteration-count: 1;
-          animation-iteration-count: 1;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
+  animation: dropDown 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
-
 .list li {
   margin: 0;
   padding: 1rem 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  font-size: .9rem;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
   font-weight: normal;
   color: #402927;
 }
-
-.list li input, .list li input + svg {
+.list li input,
+.list li input + svg {
   opacity: 0;
-  color: #FF7954;
+  color: #ff7954;
 }
-
 .list li input:checked + svg {
   opacity: 1;
 }
-
 .list li:hover, .list li:focus-within {
-  -webkit-transition: .2s;
-  transition: .2s;
+  transition: 0.2s;
   color: #402927;
-  background-color: #F4EEEF;
-}
-
-@-webkit-keyframes dropDown {
-  0% {
-    opacity: 0;
-    max-height: 0;
-  }
-  25% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-    max-height: 100vh;
-  }
+  background-color: #f4eeef;
 }
 
 @keyframes dropDown {

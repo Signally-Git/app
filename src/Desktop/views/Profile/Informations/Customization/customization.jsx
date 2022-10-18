@@ -1,7 +1,15 @@
 import classes from "./customization.module.scss";
 import Input from "../../../../../Utils/Input/input";
 
-function CompanyCustomization({ handleSubmit, wpName, setWP, teamName, setTeam, userName, setUser }) {
+function CompanyCustomization({
+    handleSubmit,
+    wpName,
+    setWP,
+    teamName,
+    setTeam,
+    userName,
+    setUser,
+}) {
     return (
         <div className={classes.container}>
             <form onSubmit={handleSubmit}>

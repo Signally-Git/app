@@ -1,24 +1,20 @@
 .container {
-  background: #FFF;
+  background: #fff;
   padding: 2rem;
   border-radius: 20px;
 }
-
 .container h4 {
-  color: #FF7954;
+  color: #ff7954;
   margin-top: 0;
 }
-
 .container table {
   width: 100%;
 }
-
 .container table th {
   text-align: left;
-  font-size: .9rem;
+  font-size: 0.9rem;
   width: 20%;
 }
-
 .container table td {
-  font-size: .8rem;
+  font-size: 0.8rem;
 }

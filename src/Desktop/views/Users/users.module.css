@@ -96,15 +96,15 @@
 }
 
 .active {
-  color: #FF7954;
+  color: #ff7954;
 }
 .active a {
   transition: 0.2s;
-  color: #FF7954 !important;
+  color: #ff7954 !important;
 }
 .active::after {
   transition: 0.2s;
-  background-color: #FF7954;
+  background-color: #ff7954;
 }
 
 .slider {
@@ -142,7 +142,7 @@
 }
 
 .added {
-  color: #FF7954;
+  color: #ff7954;
   height: 1.65rem;
   display: flex;
   align-items: center;
@@ -225,7 +225,7 @@
   left: -1em;
   height: 8px;
   width: 8px;
-  background: #FF7954;
+  background: #ff7954;
 }
 .itemsList li > div {
   display: flex;
@@ -238,7 +238,7 @@
 }
 
 .groupName {
-  color: #FF7954 !important;
+  color: #ff7954 !important;
   border-radius: 20px;
   font-weight: normal;
   font-size: 0.75rem;
@@ -252,7 +252,7 @@
 }
 
 .orangeTxt {
-  color: #FF7954;
+  color: #ff7954;
 }
 
 .teamAssignment {
@@ -267,7 +267,7 @@
   margin-top: 0;
 }
 .teamAssignment h2 span {
-  color: #FF7954 !important;
+  color: #ff7954 !important;
   font-size: 1.2rem !important;
 }
 .teamAssignment > div {
@@ -287,7 +287,7 @@
   align-items: center !important;
 }
 .assignItem:hover, .assignItem:hover button {
-  color: #FF7954;
+  color: #ff7954;
 }
 .assignItem > span {
   padding-top: 0 !important;
@@ -333,7 +333,7 @@
   height: 8px;
   border-radius: 50%;
   width: 8px;
-  background: #FF7954;
+  background: #ff7954;
 }
 
 .searchInput {
@@ -361,7 +361,7 @@
   transition: 0.2s;
 }
 .search:focus {
-  border-color: #FF7954;
+  border-color: #ff7954;
 }
 
 .all {
@@ -370,5 +370,5 @@
   float: right;
 }
 .all:hover {
-  color: #FF7954;
+  color: #ff7954;
 }

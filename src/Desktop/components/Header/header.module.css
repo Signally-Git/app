@@ -63,19 +63,19 @@
   transition: 0.2s;
 }
 .nonLogged li:last-child a {
-  border: 1px solid #FF7954;
-  color: #FF7954;
+  border: 1px solid #ff7954;
+  color: #ff7954;
 }
 .nonLogged li:last-child a:hover {
-  border-color: #FF7954;
-  background: #FF7954;
+  border-color: #ff7954;
+  background: #ff7954;
   color: #fff;
 }
 .nonLogged li:hover {
   cursor: pointer;
 }
 .nonLogged li:hover a {
-  color: #FF7954;
+  color: #ff7954;
 }
 
 .notif {
@@ -91,14 +91,14 @@
   width: 15px;
   height: 15px;
   text-align: center;
-  background-color: #FF7954;
+  background-color: #ff7954;
   color: #fff;
   padding: 2px;
   font-size: 0.8rem;
   right: -9px;
   top: -9px;
   border-radius: 50%;
-  border: 1px solid #FF7954;
+  border: 1px solid #ff7954;
 }
 
 .pageTitle {
@@ -122,21 +122,21 @@
   border-right: 1px solid #402927;
 }
 .btnsContainer .studio {
-  border: 1px solid #FF7954;
-  color: #FF7954;
+  border: 1px solid #ff7954;
+  color: #ff7954;
 }
 .btnsContainer .studio:hover {
   color: #fff;
-  background: #FF7954;
+  background: #ff7954;
 }
 .btnsContainer .store {
-  border: 1px solid #FF7954;
-  color: #FF7954;
+  border: 1px solid #ff7954;
+  color: #ff7954;
 }
 .btnsContainer .store:hover {
   color: #fff;
-  background: #FF7954;
-  border-color: #FF7954;
+  background: #ff7954;
+  border-color: #ff7954;
 }
 .btnsContainer a {
   font-weight: 600;
@@ -149,8 +149,8 @@
   transition: 0.2s;
 }
 .btnsContainer a:hover {
-  color: #FF7954;
-  border-color: #FF7954;
+  color: #ff7954;
+  border-color: #ff7954;
 }
 
 .searchContainer {
@@ -177,10 +177,10 @@
 }
 
 .headerSpan {
-  color: #FF7954;
+  color: #ff7954;
 }
 .headerSpan a {
-  color: #FF7954;
+  color: #ff7954;
   text-decoration: underline;
 }
 
@@ -194,7 +194,7 @@
   font-size: 26px;
   border-radius: 50%;
   margin: 0;
-  background: #FF7954;
+  background: #ff7954;
 }
 
 .options {
@@ -308,8 +308,8 @@
 .reportContainer > div {
   transition: background-color 0.2s, border-color 0.2s;
   color: #402927;
-  background: #F4EEEF;
-  border: 1px solid #F4EEEF;
+  background: #f4eeef;
+  border: 1px solid #f4eeef;
   font-weight: bold;
   font-size: 0.9rem;
   width: 100%;

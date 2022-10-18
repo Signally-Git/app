@@ -1,5 +1,5 @@
 export const defaultStyles = [
-    "firstName"
+    "firstName",
     // {
     //     property: "color",
     //     value: "#000",

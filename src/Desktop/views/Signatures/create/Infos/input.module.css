@@ -7,19 +7,12 @@
   position: absolute;
   cursor: pointer;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   right: 1rem;
   width: 3.5rem;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  justify-content: space-between;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
 
 .select {
@@ -37,42 +30,21 @@
   display: block;
   margin: 2rem auto;
 }
-
-.select::-webkit-input-placeholder {
-  color: #a87069;
-}
-
-.select:-ms-input-placeholder {
-  color: #a87069;
-}
-
-.select::-ms-input-placeholder {
-  color: #a87069;
-}
-
 .select::placeholder {
   color: #a87069;
 }
-
 .select select:focus {
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
 }
 
 .colorPreviewContainer {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   margin-left: auto;
 }
 
 .colorPreview {
-  -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.356);
-          box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.356);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.356);
   border-radius: 50%;
   margin: 0.2rem;
   width: 20px;
@@ -98,8 +70,6 @@
 
 .optionContainer {
   position: absolute;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   top: -1rem;
@@ -107,11 +77,9 @@
   right: auto;
   z-index: 2;
 }
-
 .optionContainer form {
   width: 100%;
 }
-
 .optionContainer button {
   border: none;
   cursor: pointer;
@@ -120,7 +88,6 @@
 }
 
 .container input {
-  -webkit-transition: 0.2s;
   transition: 0.2s;
   background: #fff;
   border: 1px solid #f6f6f6;
@@ -131,46 +98,34 @@
   font-family: "Montserrat";
   outline: none;
 }
-
 .container input:focus {
   border: 1px solid #ff7954;
-  -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
-          box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+  box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }
 
 .colorContainer {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: column-reverse;
-          flex-direction: column-reverse;
+  flex-direction: column-reverse;
   width: 80%;
   min-width: 10vw;
   padding: 0.5rem;
   height: 12rem;
   background: #fff;
-  -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
-          box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
+  box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
   border-radius: 10px;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   top: 0;
   bottom: 0;
   right: -3rem;
   margin: auto;
 }
-
-.colorContainer div[aria-label="Hue"] > div {
+.colorContainer div[aria-label=Hue] > div {
   border-radius: 0px !important;
   width: 10px;
   opacity: 1;
-  border: 1px solid white;
+  border: 1px solid rgb(255, 255, 255);
   height: 26px;
 }
-
 .colorContainer input {
   width: 100%;
   padding: 0.5rem;
@@ -184,18 +139,13 @@
 
 .colorPick {
   width: 100% !important;
-  margin: 0.5 auto;
+  margin: 0.5rem auto;
 }
 
 .inputColorSize {
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   margin: 0;
 }
 
@@ -204,77 +154,50 @@
 }
 
 .opened svg {
-  color: #FF7954 !important;
+  color: #ff7954 !important;
 }
 
 .textStyle {
   padding: 0;
   list-style-type: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
   height: 2rem;
   width: 70%;
   margin: 0;
   background-color: #fff;
   border-radius: 30px;
-  -webkit-box-shadow: 0px 2px 20px rgba(177, 176, 175, 0.8);
-          box-shadow: 0px 2px 20px rgba(177, 176, 175, 0.8);
+  box-shadow: 0 2px 20px rgba(177, 176, 175, 0.8);
 }
-
 .textStyle li {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   position: relative;
   width: 100%;
   font-size: 0.8rem;
   height: 100%;
 }
-
 .textStyle li:nth-child(2) {
   border-left: 1px solid;
   border-right: 1px solid;
-  -o-border-image: linear-gradient(to top, #fff 30%, #3d2b2815 30%, #3d2b2815 70%, #fff 70%) 1;
-     border-image: -webkit-gradient(linear, left bottom, left top, color-stop(30%, #fff), color-stop(30%, #3d2b2815), color-stop(70%, #3d2b2815), color-stop(70%, #fff)) 1;
-     border-image: linear-gradient(to top, #fff 30%, #3d2b2815 30%, #3d2b2815 70%, #fff 70%) 1;
+  border-image: linear-gradient(to top, #fff 30%, rgba(61, 43, 40, 0.0823529412) 30%, rgba(61, 43, 40, 0.0823529412) 70%, #fff 70%) 1;
 }
-
 .textStyle li .inputOptions svg {
   color: #402927;
 }
-
 .textStyle li:hover span {
-  color: #FF7954;
+  color: #ff7954;
 }
-
 .textStyle li:last-child {
   max-width: 2rem;
 }
-
 .textStyle li:last-child button {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   color: #fff;
   padding: 0;
   border-radius: 50%;
@@ -282,27 +205,17 @@
   height: 1rem;
   font-size: 0.65rem;
   margin: 0;
-  background-color: #FF7954;
+  background-color: #ff7954;
 }
-
 .textStyle li span {
   width: 100%;
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-transition: 0.2s;
+  justify-content: center;
+  align-items: center;
   transition: 0.2s;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
-
 .textStyle li input {
   opacity: 0;
   cursor: pointer;
@@ -313,7 +226,6 @@
   width: 100%;
   height: 100%;
 }
-
 .textStyle li input:checked ~ span {
   color: #ff7954;
 }

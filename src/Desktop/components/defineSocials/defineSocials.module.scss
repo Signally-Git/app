@@ -1,4 +1,4 @@
-@import '../../../Assets/style/colors';
+@import "../../../Assets/style/colors";
 
 .container {
     display: flex;
@@ -18,7 +18,7 @@
     label {
         color: $signally-brown;
         font-weight: bold;
-        font-size: .85rem;
+        font-size: 0.85rem;
     }
     .editSocials {
         max-height: 3rem;
@@ -26,12 +26,12 @@
         svg {
             color: $signally-brown;
             font-size: 1.2rem;
-            transition: color .3s;
+            transition: color 0.3s;
             &:first-of-type {
                 margin-left: 1rem;
             }
             &:hover {
-                color: $signally-orange
+                color: $signally-orange;
             }
         }
     }
@@ -49,7 +49,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 .25rem;
+        margin: 0 0.25rem;
     }
     li {
         &:last-child {
@@ -58,8 +58,8 @@
                 margin: 0 0 0 1rem;
             }
         }
-        &:hover svg{
-            transition: color 0.3s, border-color .3s;
+        &:hover svg {
+            transition: color 0.3s, border-color 0.3s;
             color: $signally-orange;
             border-color: $signally-orange;
         }
@@ -70,7 +70,7 @@
             color: $signally-brown;
             border-radius: 50%;
             border: 1px solid $signally-brown;
-            background-color: #FFF;
+            background-color: #fff;
         }
-    } 
+    }
 }

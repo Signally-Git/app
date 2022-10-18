@@ -4,16 +4,11 @@
   border: 1px solid #f0e9e9;
   border-radius: 10px;
   padding: 0.5rem;
-  -webkit-transition: border-color .3s, -webkit-box-shadow .3s;
-  transition: border-color .3s, -webkit-box-shadow .3s;
-  transition: border-color .3s, box-shadow .3s;
-  transition: border-color .3s, box-shadow .3s, -webkit-box-shadow .3s;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
-
 .container:hover {
-  border-color: #FF7954;
+  border-color: #ff7954;
 }
-
 .container input {
   top: 0;
   left: 0;
@@ -22,13 +17,11 @@
   position: absolute;
   opacity: 0;
 }
-
 .container input[type=file],
 .container input[type=file]::-webkit-file-upload-button {
   /* chromes and blink button */
   cursor: pointer;
 }
-
 .container span {
   top: 0;
   line-height: 1.5rem;
@@ -37,17 +30,13 @@
   overflow: hidden;
   display: block;
   max-width: 80%;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   white-space: nowrap;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
-
 .container span svg {
   margin-right: 0.5rem;
 }
-
 .container svg {
   left: auto;
   right: -1.5rem;
@@ -55,18 +44,11 @@
 
 .uploadedFile {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   width: 100%;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
-
 .uploadedFile span {
   top: 0;
   font-size: 0.8rem;
@@ -74,7 +56,6 @@
   overflow: hidden;
   white-space: nowrap;
 }
-
 .uploadedFile svg {
   right: 0rem;
   top: 0;

@@ -108,7 +108,7 @@
         background-color: $signally-orange;
         color: #fff;
         padding: 2px;
-        font-size: .8rem;
+        font-size: 0.8rem;
         right: -9px;
         top: -9px;
         border-radius: 50%;
@@ -288,8 +288,9 @@
     > svg {
         &:hover {
             cursor: pointer;
-            filter: brightness(0) saturate(100%) invert(74%) sepia(39%) saturate(5602%) hue-rotate(324deg)
-                brightness(100%) contrast(104%);
+            filter: brightness(0) saturate(100%) invert(74%) sepia(39%)
+                saturate(5602%) hue-rotate(324deg) brightness(100%)
+                contrast(104%);
         }
     }
     ul > li > a {
@@ -317,7 +318,7 @@
             font-size: 0.9rem;
             color: $signally-brown;
             transition: 0.2s;
-            margin-right: .5rem;
+            margin-right: 0.5rem;
         }
     }
 }

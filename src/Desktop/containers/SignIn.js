@@ -1,5 +1,5 @@
-import Header from '../components/Header/Header'
-import SignInForm from '../components/SignIn/SignInForm'
+import Header from "../components/Header/Header";
+import SignInForm from "../components/SignIn/SignInForm";
 
 function SignIn() {
     return (
@@ -7,7 +7,7 @@ function SignIn() {
             <Header />
             <SignInForm />
         </div>
-    )
+    );
 }
 
-export default SignIn
+export default SignIn;

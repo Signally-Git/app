@@ -1,11 +1,9 @@
 .select {
-  font-family: "Montserrat";
+  font-family: "Montserrat", serif;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  border: none;
   outline: none;
-  -webkit-transition: border-color 0.3s;
   transition: border-color 0.3s;
   background: #fff;
   border: 1px solid #f0e9e9;
@@ -16,25 +14,10 @@
   cursor: pointer;
   margin: 1rem auto;
 }
-
-.select::-webkit-input-placeholder {
-  color: #a87069;
-}
-
-.select:-ms-input-placeholder {
-  color: #a87069;
-}
-
-.select::-ms-input-placeholder {
-  color: #a87069;
-}
-
 .select::placeholder {
   color: #a87069;
 }
-
 .select:focus-within {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  border-color: #FF7954;
+  box-shadow: none;
+  border-color: #ff7954;
 }

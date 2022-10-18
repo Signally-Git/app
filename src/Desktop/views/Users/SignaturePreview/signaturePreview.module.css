@@ -25,20 +25,20 @@
 }
 .topLine svg:hover {
   cursor: pointer;
-  color: #FF7954;
+  color: #ff7954;
 }
 .topLine form {
   width: 45%;
 }
 .topLine form select {
-  border-color: #FF7954;
-  color: #FF7954;
+  border-color: #ff7954;
+  color: #ff7954;
   margin: 0;
   width: 100%;
 }
 
 .orangeTxt {
-  color: #FF7954;
+  color: #ff7954;
 }
 
 .groupName {
@@ -256,7 +256,7 @@
   flex-direction: column;
 }
 .playlistmodal ul .active {
-  color: #FF7954;
+  color: #ff7954;
 }
 .playlistmodal ul li {
   margin: 0.5rem 0;
@@ -376,7 +376,7 @@
 }
 .playlistmodal .searchInput:focus {
   background: #fff;
-  border: 1px solid #FF7954;
+  border: 1px solid #ff7954;
   box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }
 .playlistmodal .bannerPreview {
