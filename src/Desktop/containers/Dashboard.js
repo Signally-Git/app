@@ -29,9 +29,11 @@ function Dashboard(props) {
     useEffect(() => {
         request.get(`whoami`).then(async (res) => {
             let users;
+            setUser(JSON?.parse(localStorage?.getItem("user")));
             setUser(res.data);
             // setTemplate(res.data?.compiledSignature)
             // setTemplateName(res.data?.signature?.name)
+            setOrganisation(JSON?.parse(localStorage?.getItem("organisation")));
             await request.get("users").then((r) => (users = r.data));
             await request.get(res.data?.organisation).then((r) => {
                 setOrganisation({
@@ -41,8 +43,6 @@ function Dashboard(props) {
                 });
             });
         });
-        setOrganisation(localStorage?.getItem("organisation"));
-        setUser(JSON.parse(localStorage.getItem("user")));
     }, []);
 
     useEffect(() => {

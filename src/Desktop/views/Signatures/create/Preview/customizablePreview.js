@@ -10,6 +10,7 @@ export default function Preview({
     organisation,
     ...props
 }) {
+    console.log(template);
     // Converts JSX camel Case attributes to dashed classics HTML
     const [socials, setSocials] = React.useState([
         { name: "facebook" },
@@ -120,12 +121,12 @@ export default function Preview({
         `${infos?.firstName?.style?.fontStyle || "normal"};`
     );
     replaced = replaced.replaceAll(
-        "{% if isPreview %} Prénom {% else %} {{ user.firstName }} {% endif %}",
+        /{% if isPreview %}\s*Prénom\s*{% else %}\s*{{ user.firstName }}\s*{% endif %}/gis,
         user?.firstName || "Prénom"
     );
 
     replaced = replaced.replaceAll(
-        "{% if isPreview %} Nom {% else %} {{ user.lastName }} {% endif %}",
+        /{% if isPreview %}\s*Nom\s*{% else %}\s*{{ user.lastName }}\s*{% endif %}/gis,
         infos?.lastName?.value || user?.lastName || "Nom"
     );
     replaced = replaced.replaceAll(
@@ -146,7 +147,7 @@ export default function Preview({
     );
 
     replaced = replaced.replaceAll(
-        "{% if isPreview %} Poste {% else %} {{ user.position }} {% endif %}",
+        /{% if isPreview %}\s*Poste\s*{% else %}\s*{{ user.position }}\s*{% endif %}/gis,
         user?.position || "Poste"
     );
     replaced = replaced.replaceAll(
@@ -174,7 +175,7 @@ export default function Preview({
     );
 
     replaced = replaced.replaceAll(
-        "{{ company.name }}",
+        /{{ company.name }}/gis,
         organisation?.name || "Société"
     );
     replaced = replaced.replaceAll(
@@ -268,7 +269,7 @@ export default function Preview({
     );
 
     replaced = replaced.replaceAll(
-        "{% if isPreview %} 0123456789 {% else %} {{ user.phone }} {% endif %}",
+        /{% if isPreview %}\s*0123456789\s*{% else %}\s*{{ user.phone }}\s*{% endif %}/gis,
         "0102030405"
     );
     replaced = replaced.replaceAll(
