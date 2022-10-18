@@ -4,18 +4,11 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c4dff9f-5d0a-4e3d-a895-082d60361406" name="Changes" comment="prettier">
+    <list default="true" id="5c4dff9f-5d0a-4e3d-a895-082d60361406" name="Changes" comment="select signaturePreview">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Dashboard/tiles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Dashboard/tiles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/containers/Feedback.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/containers/Feedback.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Events/CreateEvent/createEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Events/CreateEvent/createEvent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Profile/Informations/informations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Profile/Informations/informations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Create/User/createUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Create/User/createUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/containers/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/containers/Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/SignaturePreview/signaturePreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/SignaturePreview/signaturePreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/SignaturePreview/signaturePreview.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/SignaturePreview/signaturePreview.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/SignaturePreview/signaturePreview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/SignaturePreview/signaturePreview.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/imgUploader/imgUploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/imgUploader/imgUploader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/Btns/btns.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Btns/buttons.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Utils/CustomSelect/customselect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/CustomSelect/customselect.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -338,7 +331,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666107998471</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="select signaturePreview">
+      <created>1666112314107</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1666112314107</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -367,7 +367,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Cleanup, remove console logs and useless imports" />
     <MESSAGE value="Error handling when fail to import logo" />
     <MESSAGE value="Removes undefined calls to hub" />
     <MESSAGE value="Fix SSE logic" />
@@ -392,7 +391,8 @@
     <MESSAGE value="hotfix: preview signature if signature is undefined" />
     <MESSAGE value="CSS overflow adjustments" />
     <MESSAGE value="prettier" />
-    <option name="LAST_COMMIT_MESSAGE" value="prettier" />
+    <MESSAGE value="select signaturePreview" />
+    <option name="LAST_COMMIT_MESSAGE" value="select signaturePreview" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

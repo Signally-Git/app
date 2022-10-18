@@ -93,8 +93,6 @@ export default function CustomSelect({
                                         <input
                                             defaultChecked={
                                                 item[getValue] === value[0]
-                                                    ? true
-                                                    : false
                                             }
                                             name="item"
                                             value={item[getValue]}

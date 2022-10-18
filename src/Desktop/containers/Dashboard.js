@@ -41,7 +41,7 @@ function Dashboard(props) {
                 });
             });
         });
-        setOrganisation(JSON.parse(localStorage.getItem("organisation")));
+        setOrganisation(localStorage?.getItem("organisation"));
         setUser(JSON.parse(localStorage.getItem("user")));
     }, []);
 

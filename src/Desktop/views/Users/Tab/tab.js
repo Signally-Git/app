@@ -61,16 +61,17 @@ export default function Tab({
     };
 
     const getDataTeam = async () => {
-        const teams = await request.get("teams");
+        console.log(teams);
+        const teamsAPI = await request.get("teams");
         const teamsList = [];
-        teams.data["hydra:member"].map((team) => {
+        teamsAPI.data["hydra:member"].map((team) => {
             if (team.signature)
                 request.get(team.signature["@id"]).then((res) => {
                     team["preview"] = res.data.preview;
                 });
             teamsList.push(team);
         });
-        setTeams(teamsList);
+        setTeams([...teamsList]);
     };
 
     const refreshData = () => {
@@ -81,7 +82,8 @@ export default function Tab({
 
     useEffect(() => {
         refreshData();
-    }, [addedWorkplace, done]);
+        console.log(tab);
+    }, [addedWorkplace, done, tab]);
 
     // Deletes either specified workplace, team or user
     const handleDelete = async (id, type, name) => {
@@ -503,8 +505,9 @@ export default function Tab({
                     ),
                     status: "valid",
                 });
+                setWorkplaceName("");
                 setChanged(false);
-                getDataWorkspace();
+                refreshData();
             });
         setEditInfo();
     };
@@ -534,7 +537,8 @@ export default function Tab({
                         ),
                         status: "valid",
                     });
-                    getDataTeam();
+                    refreshData();
+                    setTeamName("");
                     setChanged(false);
                 })
                 .catch(() =>
@@ -973,7 +977,7 @@ export default function Tab({
                             setSelected(JSON.parse(e.target.value))
                         }
                     >
-                        {teams.map((team) => {
+                        {teams?.map((team, index) => {
                             if (
                                 team.name?.toLowerCase().search(searchTeam) !==
                                 -1
@@ -983,7 +987,7 @@ export default function Tab({
                                         onMouseMove={() => {
                                             if (!edit) setSelected(team);
                                         }}
-                                        key={team.id}
+                                        key={team.id + index}
                                         className={`${
                                             team.workplace?.name?.length > 0
                                                 ? classes.teamWithWP

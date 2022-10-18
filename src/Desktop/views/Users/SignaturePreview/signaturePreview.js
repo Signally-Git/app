@@ -101,7 +101,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 } else if (show?.events.length === 1) setEvent(show?.events[0]);
             }
 
-            if (show?.signature) setTemplates(show?.signature?.["@id"]);
+            // if (show?.signature) set(show?.signature?.["@id"]);
             if (entity.data.compiledSignature)
                 setPreviewSignature(entity.data.compiledSignature);
             else if (entity.data.signature?.["@id"]) {
