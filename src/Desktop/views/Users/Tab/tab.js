@@ -659,8 +659,6 @@ export default function Tab({
                                             checked={
                                                 edit?.id === workplace.id &&
                                                 edit?.name === workplace?.name
-                                                    ? true
-                                                    : false
                                             }
                                             type="radio"
                                             name="workplaces"
@@ -1014,8 +1012,6 @@ export default function Tab({
                                             checked={
                                                 edit?.id === team.id &&
                                                 edit?.name === team?.name
-                                                    ? true
-                                                    : false
                                             }
                                             type="radio"
                                             name="team"
