@@ -8,7 +8,7 @@ import moment from "moment";
 import UploadFile from "Utils/Upload/uploadFile";
 import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
-import Btns from "Utils/Btns/btns";
+import Buttons from "Utils/Btns/buttons";
 import { useHistory } from "react-router-dom";
 
 export default function CreateEvent({ setDone, event }) {
@@ -309,7 +309,7 @@ export default function CreateEvent({ setDone, event }) {
                 />
             </div>
             <div>
-                <Btns
+                <Buttons
                     style={{ left: ".5rem", bottom: "-3rem" }}
                     confirmTxt="Sauvegarder"
                     onCancel={(e) => {

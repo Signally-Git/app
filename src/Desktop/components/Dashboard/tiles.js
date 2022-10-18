@@ -50,7 +50,6 @@ function Tiles(props) {
                     (entity) => (entity.key = userName)
                 ).value
             );
-            console.log(userName);
         });
 
         await request

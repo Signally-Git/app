@@ -7,7 +7,7 @@ import Noting from "Assets/img/noting.png";
 import request from "Utils/Request/request";
 import { useNotification } from "Utils/Notifications/notifications";
 import CustomSelect from "Utils/CustomSelect/customselect";
-import Btns from "Utils/Btns/btns";
+import Buttons from "Utils/Btns/buttons";
 
 export default function Report() {
     const [file, setFile] = useState();
@@ -157,7 +157,7 @@ export default function Report() {
                             setFile={setFile}
                             placeholder="Importer un fichier"
                         />
-                        <Btns
+                        <Buttons
                             onConfirm={() => {}}
                             confirmTxt="Envoyer le formulaire"
                             onCancel={(e) => {

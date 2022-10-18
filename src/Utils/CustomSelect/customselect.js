@@ -78,7 +78,7 @@ export default function CustomSelect({
                 >
                     {isOpen ? (
                         <ul className={classes.list} style={styleList}>
-                            {items.map((item, index) => {
+                            {items?.map((item, index) => {
                                 return (
                                     <li
                                         className={classes.element}

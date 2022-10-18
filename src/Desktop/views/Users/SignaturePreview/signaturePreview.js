@@ -7,7 +7,7 @@ import CopySignature from "Desktop/components/CopySignature/CopySignature";
 import Search from "Assets/icons/search.svg";
 import CustomSelect from "Utils/CustomSelect/customselect";
 import Modal from "Utils/Modals/modal";
-import Btns from "Utils/Btns/btns";
+import Buttons from "Utils/Btns/buttons";
 import parse from "html-react-parser";
 import moment from "moment";
 
@@ -94,7 +94,14 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     // PREVIEW SIGNATURE
     useEffect(() => {
         const refreshPreview = async () => {
-            const entity = await request.get(`${type}s/${show.id}`);
+            const entity = await request.get(show?.["@id"]);
+            if (show?.events) {
+                if (show?.events.length > 1) {
+                    setMultiEvents(show?.events?.map((e) => e["@id"]));
+                } else if (show?.events.length === 1) setEvent(show?.events[0]);
+            }
+
+            if (show?.signature) setTemplates(show?.signature?.["@id"]);
             if (entity.data.compiledSignature)
                 setPreviewSignature(entity.data.compiledSignature);
             else if (entity.data.signature?.["@id"]) {
@@ -105,18 +112,18 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 await request
                     .get(entity.data.signature)
                     .then((res) => setPreviewSignature(res.data?.preview));
-            } else setPreviewSignature();
+            } else setPreviewSignature(null);
         };
         refreshPreview();
 
-        if (edit) handleSwapSignature(edit.signature?.id);
+        if (edit) handleSwapSignature(edit.signature?.["@id"]);
     }, [show, edit]);
 
     useEffect(() => {
-        let templatesAPI = [{ id: "signature", name: "Signature" }];
-        const listTemplates = async () => {
-            await request.get("signatures").then((result) => {
-                result.data["hydra:member"].map(async (template, index) => {
+        let templatesAPI = [{ "@id": "signature", name: "Signature" }];
+        const listTemplates = () => {
+            request.get("signatures").then((result) => {
+                result.data["hydra:member"].map(async (template) => {
                     await request.get(template["@id"]).then((res) => {
                         templatesAPI.push(res.data);
                     });
@@ -129,7 +136,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
 
     // Modal
     const [modal, setModal] = useState(false);
-    const handleSubmit = (e) => {
+    const handleSubmit = () => {
         setModal(true);
     };
 
@@ -152,7 +159,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         }
         if (event !== "playlist" && events.length > 1) {
             events.pop();
-            setEvents([
+            setEvents((events) => [
                 ...events,
                 {
                     name: "Playlist",
@@ -170,11 +177,11 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
 
     // ASSIGNATION
     const handleProgram = () => {
-        var markedCheckbox = document.querySelectorAll(
+        let markedCheckbox = document.querySelectorAll(
             'input[type="checkbox"]:checked'
         );
-        var tmp = [];
-        for (var checkbox of markedCheckbox) {
+        let tmp = [];
+        for (let checkbox of markedCheckbox) {
             tmp.push(JSON.parse(checkbox.value)["@id"]);
         }
         setMultiEvents(tmp);
@@ -182,11 +189,9 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     };
 
     const handleSwapSignature = (id) => {
-        console.log(id);
         let template = Object?.values(templates)?.find((obj) => {
-            return obj.id == id;
+            return obj?.["@id"] === id;
         });
-        console.log(template);
         if (event.imageUrl !== undefined)
             template = {
                 ...template,
@@ -206,9 +211,10 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
 
         setEvent(
             Object?.values(events)?.find((obj) => {
-                return obj["@id"] == id;
+                return obj["@id"] === id;
             })
         );
+        return null;
     };
 
     const handleAssign = async (element) => {
@@ -229,8 +235,9 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
             signature: signatures,
             events: events,
         };
+
         await request
-            .patch(`${type}s/${element.id}`, req, {
+            .patch(element?.["@id"], req, {
                 headers: { "Content-Type": "application/merge-patch+json" },
             })
             .then((res) => {
@@ -260,11 +267,11 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     };
 
     return (
-        <div className={classes.flipcontainer}>
+        <div className={classes.flipContainer}>
             {choosePlaylist ? (
                 <div className={classes.modalContainer}>
                     {" "}
-                    <div className={classes.playlistmodal}>
+                    <div className={classes.playlistModal}>
                         <div>
                             <h3>Programmer la diffusion de plusieurs events</h3>
                             <div className={classes.searchContainer}>
@@ -289,16 +296,16 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                                 searchQuery?.toLowerCase()
                                             ) >= 0
                                     ) {
-                                        if (
+                                        checked =
                                             edit.events?.filter(
-                                                (a) => a.id === event.id
-                                            )[0]?.id === event.id
-                                        )
-                                            checked = true;
-                                        else checked = false;
+                                                (a) =>
+                                                    a?.["@id"] ===
+                                                    event?.["@id"]
+                                            )[0]?.["@id"] === event?.["@id"];
                                         return (
                                             <li key={event["@id"]}>
                                                 <img
+                                                    alt={event.name}
                                                     className={
                                                         classes.bannerPreview
                                                     }
@@ -322,7 +329,9 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                                         }
                                                     >
                                                         <div
-                                                            className={`${classes.col} ${classes.bold}`}
+                                                            className={
+                                                                classes.col
+                                                            }
                                                         >
                                                             <span>{`du ${moment
                                                                 .utc(
@@ -381,7 +390,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                 })}
                             </ul>
                         </div>
-                        <Btns
+                        <Buttons
                             onCancel={() => {
                                 setChoosePlaylist(false);
                             }}
@@ -433,7 +442,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                             </span>
                         </h2>
                     </div>
-                    <div>
+                    <div className={classes.signaturePreviewSelect}>
                         {typeof previewSignature === "string"
                             ? parse(previewSignature)
                             : ""}
@@ -487,9 +496,12 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                             onChange={(e) =>
                                                 handleSwapSignature(e)
                                             }
+                                            defaultValue={
+                                                show?.signature?.["@id"]
+                                            }
                                             items={templates}
                                             display={"name"}
-                                            getValue={"id"}
+                                            getValue={"@id"}
                                         />
                                     )}
                                     <div className={classes.signature}>
@@ -524,7 +536,13 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                                 displayinlist="listName"
                                                 getValue="@id"
                                                 items={events}
-                                                defaultValue={event["@id"]}
+                                                defaultValue={
+                                                    show?.events?.length > 1
+                                                        ? events[0]
+                                                        : show?.events?.[0]?.[
+                                                              "@id"
+                                                          ]
+                                                }
                                             />
                                         </>
                                     ) : (
@@ -551,7 +569,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                     )}
                                 </div>
                             </div>
-                            <Btns
+                            <Buttons
                                 style={{ left: ".5rem", bottom: "-5rem" }}
                                 onCancel={() => {
                                     setEdit();

@@ -69,7 +69,7 @@ function ImgUploader() {
         );
         setMessage("Copied successfully!");
         setTimeout(() => {
-            setMessage();
+            setMessage(null);
         }, 5000);
     };
 
@@ -114,16 +114,15 @@ function ImgUploader() {
                     value={path.id}
                     onClick={() => copyToClipboard()}
                     disabled={
-                        path.path !==
+                        path.path ===
                         "Cliquez ici pour copier le lien de l'image"
-                            ? false
-                            : true
                     }
                 />
                 <div className={classes.inputContainer}>
                     {path.path !==
                     "Cliquez ici pour copier le lien de l'image" ? (
                         <img
+                            alt={"preview"}
                             className={classes.imgPreview}
                             src={`${path.url}`}
                         />

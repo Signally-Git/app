@@ -2,7 +2,7 @@ import classes from "./btns.module.css";
 
 const { default: Button } = require("Utils/Button/btn");
 
-function Btns({ cancelTxt, confirmTxt, onCancel, onConfirm, ...props }) {
+function Buttons({ cancelTxt, confirmTxt, onCancel, onConfirm, ...props }) {
     return (
         <div className={classes.container} {...props}>
             <Button
@@ -19,4 +19,4 @@ function Btns({ cancelTxt, confirmTxt, onCancel, onConfirm, ...props }) {
     );
 }
 
-export default Btns;
+export default Buttons;

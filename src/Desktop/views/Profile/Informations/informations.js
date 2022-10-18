@@ -8,7 +8,7 @@ import UploadFile from "Utils/Upload/uploadFile";
 import request from "Utils/Request/request";
 import { useNotification } from "Utils/Notifications/notifications";
 import DefineSocials from "Desktop/components/defineSocials/defineSocials";
-import Btns from "Utils/Btns/btns";
+import Buttons from "Utils/Btns/buttons";
 import CompanyCustomization from "./Customization/customization";
 
 function Informations() {
@@ -480,7 +480,7 @@ function Informations() {
                     </>
                 )}
             </div>
-            <Btns
+            <Buttons
                 onCancel={() => {
                     history.goBack();
                 }}
