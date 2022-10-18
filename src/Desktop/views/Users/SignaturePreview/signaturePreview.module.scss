@@ -64,6 +64,7 @@
 }
 
 .row {
+    height: 100%;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -121,13 +122,13 @@
     border-radius: 20px;
     padding: 2rem;
     margin-bottom: auto;
-    overflow: auto;
     h2 {
         font-size: 1.2rem;
         margin-bottom: 2rem;
         margin-top: 0;
     }
     > div {
+        overflow: auto;
         margin-bottom: 2rem;
     }
     .groupName {

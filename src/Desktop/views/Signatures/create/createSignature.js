@@ -838,19 +838,23 @@ function CreateSignatureComponent() {
                     </div>
                     <div className={classes.col}>
                         <div className={classes.signatureContainer}>
-                            <div className={classes.browserHeader}>
-                                <ul className={classes.btnsContainer}>
-                                    <li className={classes.close}></li>
-                                    <li className={classes.reduce}></li>
-                                    <li className={classes.fullscreen}></li>
-                                </ul>
-                            </div>
-                            <div className={classes.lazyLoadingLong}></div>
-                            <div className={classes.lazyLoadingShort}></div>
-                            <div className={classes.lazyLoadingMedium}></div>
-                            <br />
-                            <div className={classes.signaturePreview}>
-                                {selectedTemplate && preview}
+                            <div className={classes.previewContainer}>
+                                <div className={classes.browserHeader}>
+                                    <ul className={classes.btnsContainer}>
+                                        <li className={classes.close}></li>
+                                        <li className={classes.reduce}></li>
+                                        <li className={classes.fullscreen}></li>
+                                    </ul>
+                                </div>
+                                <div className={classes.lazyLoadingLong}></div>
+                                <div className={classes.lazyLoadingShort}></div>
+                                <div
+                                    className={classes.lazyLoadingMedium}
+                                ></div>
+                                <br />
+                                <div className={classes.signaturePreview}>
+                                    {selectedTemplate && preview}
+                                </div>
                             </div>
                             <div className={classes.CTAsContainer}>
                                 <Button
