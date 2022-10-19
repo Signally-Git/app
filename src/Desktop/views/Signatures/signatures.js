@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { FiTrash } from "react-icons/fi";
+import { AiOutlineEdit } from "react-icons/ai";
 import Button from "Utils/Button/btn";
 import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
@@ -544,7 +545,21 @@ function Team() {
                                                             classes.actionsContainer
                                                         }
                                                     >
-                                                        {/* <AiOutlineEdit /> */}
+                                                        <AiOutlineEdit
+                                                            onClick={() =>
+                                                                JSON.parse(
+                                                                    localStorage.getItem(
+                                                                        "user"
+                                                                    )
+                                                                ).roles[1] !==
+                                                                "ROLE_RH"
+                                                                    ? history.push(
+                                                                          "/edit-signature/" +
+                                                                              signature.id
+                                                                      )
+                                                                    : ""
+                                                            }
+                                                        />
                                                         <FiTrash
                                                             onClick={() =>
                                                                 handleModal(
