@@ -29,11 +29,9 @@ export default function TemplateSelection(props) {
         const organisationId = JSON.parse(
             localStorage.getItem("user")
         )?.organisation;
-        request.get("signature_templates").then((res) => {
-            setTemplatesList(res.data["hydra:member"]);
-            setFetching(false);
-        });
         request.get(organisationId).then((res) => {
+            setTemplatesList(res.data.signaturesTemplate);
+            setFetching(false);
             setOrganisation(res.data);
         });
     }, []);

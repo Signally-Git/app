@@ -60,7 +60,7 @@ function CreateSignatureComponent() {
         custom: { enabled: false },
         eco: { value: "Ecoresponsability", enabled: false },
         followUs: { value: "Follow us", enabled: false, disabled: true },
-        bgColor: "#FCE750",
+        bgColor: "#ff7954",
         bannerTop: { url: "test", enabled: false, padding: 10 },
         event: { list: [], selected: [], enabled: false, padding: 12 },
         socials: {
