@@ -26,79 +26,29 @@ export default function Preview({
         }
     }, [organisation]);
 
-    const handleLink = (item) => {
-        switch (item) {
-            case "pinterest":
-                return "https://www.pinterest.fr/mamashelter/";
-            case "facebook":
-                return "https://www.facebook.com/MamaShelterOfficial/";
-            case "twitter":
-                return "https://twitter.com/mama_shelter/";
-            case "instagram":
-                return "https://www.instagram.com/mamashelter/";
-            case "linkedin":
-                return "https://www.linkedin.com/company/mama-shelter";
-            case "snapchat":
-                return "https://www.snapchat.com/add/mamashelter";
-            default:
-                break;
-        }
-    };
-
-    const handleImg = (item) => {
-        switch (item) {
-            case "pinterest":
-                return "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/iconmonstr-pinterest-1-48.png";
-            case "facebook":
-                return "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/iconmonstr-facebook-4-48.png";
-            case "twitter":
-                return "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/iconmonstr-twitter-4-48.png";
-            case "instagram":
-                return "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/iconmonstr-instagram-14-48.png";
-            case "linkedin":
-                return "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/iconmonstr-linkedin-4-48.png";
-            case "snapchat":
-                return "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/iconmonstr-snapchat-4-48.png";
-            default:
-                break;
-        }
-    };
-
     const socialNetworks = renderToStaticMarkup(
-        socials.map((item) => (
+        socials.map((item, index) => (
             <td
-                height="24"
-                width="24"
                 style={{
-                    height: "24px",
-                    width: "24px",
-                    textAlign: "left",
-                    padding: "0",
+                    height: "18px",
+                    width: "18px",
                 }}
-                valign="top"
             >
                 <a
-                    href={handleLink(item.name)}
-                    height="24"
-                    width="24"
-                    style={{ height: "24px", width: "24px" }}
-                    alt={item.name}
+                    href={item.url}
+                    style={{ height: "18px", width: "18px" }}
+                    title={item.name}
                 >
                     <img
-                        height="24"
-                        width="24"
                         style={{
-                            verticalAlign: "middle",
-                            display: "block",
-                            height: "24px",
-                            width: "24px",
-                            lineHeight: "24px",
-                            margin: "0 3px",
+                            height: "18px",
+                            width: "18px",
                         }}
-                        src={handleImg(item.name)}
-                        alt=""
+                        src={item.image}
+                        alt={item.name}
                     />
                 </a>
+                {index < socials.length - 1 && <td></td>}
             </td>
         ))
     );
@@ -308,9 +258,9 @@ export default function Preview({
     replaced = replaced.replaceAll(
         greeting,
         options?.salutation?.enabled
-            ? `<p style="padding-bottom: ${options?.salutation?.padding}px;"}>${
-                  options?.salutation.value || "Cordialement,"
-              }</p>`
+            ? `<p style="padding-bottom: ${
+                  options?.salutation?.padding
+              }px;"} >${options?.salutation.value || "Cordialement,"}</p>`
             : ""
     );
     var disclaimer = /{# START DISCLAIMERS #}.*{# END DISCLAIMERS #}/gis;
@@ -326,24 +276,26 @@ export default function Preview({
     );
 
     // socials
+    if (!options?.socials?.enabled)
+        replaced = replaced.replaceAll(
+            /{# START SOCIALS #}.*{# END SOCIALS #}/gis,
+            ``
+        );
     replaced = replaced.replaceAll(
-        /{# START SOCIALS #}.*{# END SOCIALS #}/gis,
-        `		<td style="width:230px; border: none; background:black; padding: 0cm; height: 24px;" height="24" valign="middle" nowrap>
-    <table class="x_MsoTableGrid" border="0" cellspacing="0" cellpadding="0" height="24">
-        <tbody height="24">
-            <tr height="24">` +
-            socialNetworks +
-            `			</tr>
-            </tbody>
-        </table>
-    </td>`
+        /{# START SOCIALSLIST #}.*{# END SOCIALSLIST #}/gis,
+        socialNetworks
     );
+    replaced = replaced.replaceAll(
+        /{# START SOCIALS #}.*{% if socialMediaAccounts %}/gis,
+        ``
+    );
+    replaced = replaced.replaceAll(/{% endif %}.*{# END SOCIALS #}/gis, ``);
 
     if (options?.event?.enabled) {
         replaced = replaced.replaceAll(/{% if event or isPreview %}/gi, "");
         replaced = replaced.replaceAll(/{% if event %}/gi, "");
         replaced = replaced.replaceAll(
-            /{% if styles\['event'\]\['enabled'\] is same as\( 'true' \) %}/gi,
+            /{% if styles\['event']\['enabled'] is same as\( 'true' \) %}/gi,
             ""
         );
         replaced = replaced.replaceAll(/{% endif %}/gi, "");
