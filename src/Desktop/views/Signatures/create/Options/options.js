@@ -201,98 +201,6 @@ export default function Options(props) {
                     )}
                 </div>
 
-                {/* Banner */}
-                {/* <div className={classes.checkToText}>
-                    <div className={classes.row}>
-                        <label htmlFor="bannerTop">
-                            <h4>Bannière supérieure</h4>
-                        </label>
-                        <label className={classes.switch}>
-                            <input
-                                type="checkbox"
-                                autoFocus
-                                id="bannerTop"
-                                checked={props.data.bannerTop.enabled}
-                                onChange={(e) => {
-                                    props.setData({
-                                        ...props.data,
-                                        bannerTop:
-                                            { ...props.data.bannerTop, enabled: e.target.checked }
-                                    })
-                                }}
-                            />
-                            <span className={`${classes.slider} ${classes.round}`}></span>
-                        </label>
-                    </div>
-                    {/* {props.data.bannerTop.enabled ? */}
-                {/* <> */}
-                {/* <div className={classes.fileUpload}>
-                                <UploadFile file={props.data.bannerTop.data}
-                                    setFile={(e) => props.setData({
-                                        ...props.data, bannerTop: { ...props.data.bannerTop, data: e }
-                                    })}
-                                    placeholder="Importer une image"
-                                    type="image/*"
-                                    style={{ maxWidth: "70%" }} /> */}
-                {/* {props.data.bannerTop.data?.name?.length > 0 ? (
-                                    <div className={classes.uploadedFile}>
-                                        <span>{props.data.bannerTop.data?.name}</span>{" "}
-                                        <IoMdClose
-                                            onClick={() => {
-                                                props.setData({
-                                                    ...props.data,
-                                                    bannerTop:
-                                                        { ...props.data.bannerTop, data: "" }
-                                                })
-                                            }}
-                                        />
-                                    </div>
-                                ) : (
-                                    <>
-                                        <input
-                                            type="file"
-                                            onChange={(e) => {
-                                                props.setData({
-                                                    ...props.data,
-                                                    bannerTop:
-                                                        { ...props.data.bannerTop, data: e.target.files[0] }
-                                                })
-                                            }}
-                                        />
-                                        <span>
-                                            <BsUpload />
-                                            Importer une image
-                                        </span>
-                                    </>
-                                )} */}
-                {/* </div> */}
-                {/* <div className={classes.spacing}>
-                                <h6>Espacement</h6>
-                                <Range
-                                    step={2}
-                                    min={0}
-                                    max={50}
-                                    values={[props.data.bannerTop.padding]}
-                                    onChange={(range) => props.setData({ ...props.data, bannerTop: { ...props.data.bannerTop, padding: range } })}
-                                    renderTrack={({ props, children }) => (
-                                        <div {...props} className={classes.rangeSlider} style={{
-                                            ...props.style,
-                                        }}>
-                                            {children}
-                                        </div>
-                                    )}
-                                    renderThumb={({ props }) => (
-                                        <div {...props} style={{
-                                            ...props.style,
-                                        }}
-                                        />
-                                    )}
-                                />
-                            </div> */}
-                {/* </> */}
-                {/* : ""} */}
-                {/* </div> */}
-
                 {/* Bonus changeable elements of the template */}
                 <div className={classes.custom}>
                     <div className={classes.row}>
@@ -444,11 +352,6 @@ export default function Options(props) {
                     )}
                 </div>
 
-                {/* Footer */}
-                {/* <div className={classes.inputContainer}>
-                    <h4>Footer</h4>
-                </div> */}
-
                 {/* Socials */}
                 <div className={classes.row}>
                     <label htmlFor="socials">
@@ -459,7 +362,6 @@ export default function Options(props) {
                             type="checkbox"
                             autoFocus
                             id="socials"
-                            disabled
                             checked={props.data.socials.enabled}
                             onChange={(e) => {
                                 props.setData({
@@ -476,38 +378,33 @@ export default function Options(props) {
                         ></span>
                     </label>
                 </div>
-                {/* <div className={classes.checkToText}>
-                    {props.data.socials.enabled ?
-                        <>
-                            <input type="text"
-                                autoFocus
-                                className={props.data.followUs.disabled ? classes.disabledInput : ""}
-                                disabled={props.data.followUs.disabled}
-                                onChange={(e) => {
-                                    props.setData({
-                                        ...props.data,
-                                        followUs:
-                                            { ...props.data.followUs, value: e.target.value }
-                                    })
-                                }}
-                                defaultValue={props.data.followUs.value} />
-                            {/* <div className={classes.inputStyle}>
-                                <span>Couleur de fond</span>
-                                <div className={classes.previewContainer}>
-                                    <div title="Fill color" style={{ backgroundColor: props.data.socials.fill }} className={classes.colorPreview} onClick={() => colorSelect !== "fill" ? setColorSelect("fill") : setColorSelect("")} />
-                                </div>
-                            </div> */}
-                {/* <div className={classes.optionsContainer}>
-                                {handleColors()}
-                            </div>
 
-                            <div className={classes.socialsList}>
-                                <DndSocials data={props.data} setData={props.setData} fill={props.data.socials.fill} background={props.data.socials.backgroundColor} />
-                            </div> */}
-                {/* </> */}
-                {/* : */}
-                {/* ""} */}
-                {/* </div> */}
+                {/* vCard */}
+                <div className={classes.row}>
+                    <label htmlFor="vcard">
+                        <h4>vCard</h4>
+                    </label>
+                    <label className={classes.switch}>
+                        <input
+                            type="checkbox"
+                            autoFocus
+                            id="vcard"
+                            checked={props.data.vcard.enabled}
+                            onChange={(e) => {
+                                props.setData({
+                                    ...props.data,
+                                    vcard: {
+                                        ...props.data.vcard,
+                                        enabled: e.target.checked,
+                                    },
+                                });
+                            }}
+                        />
+                        <span
+                            className={`${classes.slider} ${classes.round}`}
+                        ></span>
+                    </label>
+                </div>
 
                 {/* Disclaimer */}
                 <div className={classes.row}>

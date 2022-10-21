@@ -291,6 +291,21 @@ export default function Preview({
     );
     replaced = replaced.replaceAll(/{% endif %}.*{# END SOCIALS #}/gis, ``);
 
+    // vCard
+    if (!options?.vcard?.enabled)
+        replaced = replaced.replaceAll(
+            /{# START VCARD #}.*{# END VCARD #}/gis,
+            ``
+        );
+    replaced = replaced.replaceAll(/{# START VCARD #}/g, ``);
+
+    replaced = replaced.replace(
+        /{% if styles\['vCardEnabled']\['enabled'] is same as\('true'\) %}/,
+        ``
+    );
+
+    replaced = replaced.replaceAll(/{% endif %}.*{# END VCARD #}/gis, ``);
+
     if (options?.event?.enabled) {
         replaced = replaced.replaceAll(/{% if event or isPreview %}/gi, "");
         replaced = replaced.replaceAll(/{% if event %}/gi, "");

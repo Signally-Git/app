@@ -63,6 +63,7 @@ function CreateSignatureComponent() {
         bgColor: "#ff7954",
         bannerTop: { url: "test", enabled: false, padding: 10 },
         event: { list: [], selected: [], enabled: false, padding: 12 },
+        vcard: { enabled: false },
         socials: {
             enabled: true,
             bgColor: "#000",
@@ -133,6 +134,7 @@ function CreateSignatureComponent() {
             followUs: { value: "Follow us", enabled: false },
             bgColor: "#FCE750",
             bannerTop: { url: "test", enabled: false, padding: 10 },
+            vcard: { enabled: false },
             event: {
                 ...signatureOption.event,
                 display: signatureOption?.event?.selected?.imageUrl,
@@ -766,6 +768,13 @@ function CreateSignatureComponent() {
                         value:
                             signatureOption.footer.padding?.toString() || "12",
                         type: "disclaimerPadding",
+                        signature: result?.data?.id,
+                    },
+                    {
+                        property: "enabled",
+                        value:
+                            signatureOption.vcard.enabled?.toString() || false,
+                        type: "vCardEnabled",
                         signature: result?.data?.id,
                     },
                 ];
