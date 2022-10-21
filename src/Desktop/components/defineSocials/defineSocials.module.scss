@@ -21,8 +21,14 @@
         font-size: 0.85rem;
     }
     .editSocials {
+        gap: 1rem;
         max-height: 3rem;
         margin-bottom: 3rem;
+        li
+        {
+            cursor: pointer;
+            max-width: 24px;
+        }
         svg {
             color: $signally-brown;
             font-size: 1.2rem;
