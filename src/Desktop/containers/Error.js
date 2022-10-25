@@ -1,10 +1,11 @@
-import ErrorPage from '../views/Error/ErrorPage'
+import ErrorPage from "../views/Error/ErrorPage";
 
 function Error() {
-    return (<>
-        <ErrorPage />
-    </>
-    )
+    return (
+        <>
+            <ErrorPage />
+        </>
+    );
 }
 
-export default Error
+export default Error;

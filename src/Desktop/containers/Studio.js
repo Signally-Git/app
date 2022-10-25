@@ -1,4 +1,4 @@
-import classes from '../components/Dashboard/dashboard.module.css'
+import classes from "../components/Dashboard/dashboard.module.css";
 
 function Studio() {
     return (
@@ -7,8 +7,7 @@ function Studio() {
                 <h1>Signally Studio</h1>
             </div>
         </div>
-
-    )
+    );
 }
 
-export default Studio
+export default Studio;

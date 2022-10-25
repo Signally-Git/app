@@ -1,17 +1,10 @@
 .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
-
 .container body {
   background: none;
 }
-
 .container button {
   margin-top: 2rem;
 }

@@ -1,11 +1,11 @@
-import classes from "./billinginfos.module.css"
+import classes from "./billinginfos.module.css";
 
 const API = {
     companyName: "Mama Shelter",
     billingName: "Jérémie Trigano",
     billingAddress: "2 rue de Bagnolet, Paris 75020, FRANCE",
-    billingMail: "jeremie.trigano@mamashelter.com"
-}
+    billingMail: "jeremie.trigano@mamashelter.com",
+};
 
 export default function BillingInfos() {
     return (
@@ -32,5 +32,5 @@ export default function BillingInfos() {
                 </ul>
             </div>
         </div>
-    )
+    );
 }

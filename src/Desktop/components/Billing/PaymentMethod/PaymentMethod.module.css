@@ -1,14 +1,12 @@
 .container {
-  background: #FFF;
+  background: #fff;
   padding: 2rem;
   border-radius: 20px;
 }
-
 .container h4 {
-  color: #FF7954;
+  color: #ff7954;
   margin-top: 0;
 }
-
 .container button {
   cursor: pointer;
   padding: 0;
@@ -18,7 +16,6 @@
   font-weight: 600;
   text-decoration: underline;
 }
-
 .container button:hover {
   text-decoration: none;
 }

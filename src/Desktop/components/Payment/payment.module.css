@@ -1,42 +1,30 @@
 .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   margin: auto;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
   min-height: 60vh;
   width: 90%;
 }
-
-.container input, .container label, .container span {
+.container input,
+.container label,
+.container span {
   font-family: "Montserrat";
   outline: none;
 }
-
 .container label {
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
-
 .container span {
   line-height: 1.75;
-  font-size: .8rem;
+  font-size: 0.8rem;
   text-align: center;
 }
-
 .container span a {
-  color: #FF7954;
+  color: #ff7954;
 }
-
-.container input[type="checkbox"] {
+.container input[type=checkbox] {
   position: absolute;
   left: 0;
   top: 0;
@@ -46,72 +34,53 @@
 .saveCard {
   position: relative;
 }
-
 .saveCard label {
   margin-left: 1.5rem;
 }
 
 .header {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem 0;
   margin-bottom: 1rem;
 }
-
 .header div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
-
 .header h2 {
   text-indent: 1rem;
   font-size: 1rem;
 }
 
 .cardHolder {
-  -webkit-transition: 0.2s;
   transition: 0.2s;
-  background: #FFF;
+  background: #fff;
   border: 1px solid transparent;
   border-radius: 10px;
   padding: 1rem;
   width: 100%;
   outline: none;
 }
-
 .cardHolder:focus {
-  border: 1px solid #FF7954;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
-          box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+  border: 1px solid #ff7954;
+  box-sizing: border-box;
+  box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }
 
 .cardInfos {
   margin: 1rem 0;
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   padding: 1rem;
-  background: #FFF;
+  background: #fff;
   border-radius: 10px;
 }
 
 input:focus .cardInfos {
-  border: 1px solid #FF7954;
+  border: 1px solid #ff7954;
 }
 
 .cardContainer {
@@ -134,7 +103,7 @@ input:focus .cardInfos {
   left: 0;
   height: 15px;
   width: 15px;
-  border: 1px solid #FF7954;
+  border: 1px solid #ff7954;
 }
 
 .checkmark:after {
@@ -142,16 +111,17 @@ input:focus .cardInfos {
   top: 2px;
   width: 3px;
   height: 6px;
-  border: solid #FF7954;
+  border: solid #ff7954;
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 
 .activated {
   margin: 1.5rem 0;
-  background: #FF7954;
-  color: #FFF;
+  background: #ff7954;
+  color: #fff;
   border: 1px solid transparent;
   border-radius: 100px;
   outline: none;
@@ -177,18 +147,15 @@ input:focus .cardInfos {
   width: 100%;
   margin-top: 1.5rem;
 }
-
 .form label > div {
-  -webkit-transition: 0.2s;
   transition: 0.2s;
   border: 1px solid transparent;
-  background: #FFF;
+  background: #fff;
   padding: 1rem;
   border-radius: 10px;
 }
 
 .focused label > div {
-  border-color: #FF7954;
-  -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
-          box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+  border-color: #ff7954;
+  box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }

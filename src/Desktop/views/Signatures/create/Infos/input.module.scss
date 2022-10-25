@@ -141,7 +141,7 @@
 
 .colorPick {
     width: 100% !important;
-    margin: 0.5 auto;
+    margin: 0.5rem auto;
 }
 
 .inputColorSize {
@@ -171,7 +171,7 @@
     margin: 0;
     background-color: #fff;
     border-radius: 30px;
-    box-shadow: 0px 2px 20px rgba(177, 176, 175, 0.8);
+    box-shadow: 0 2px 20px rgba(177, 176, 175, 0.8);
     li {
         display: flex;
         justify-content: center;
@@ -183,9 +183,16 @@
         &:nth-child(2) {
             border-left: 1px solid;
             border-right: 1px solid;
-            border-image: linear-gradient(to top, #fff 30%, #3d2b2815 30%, #3d2b2815 70%, #fff 70%) 1;
+            border-image: linear-gradient(
+                    to top,
+                    #fff 30%,
+                    #3d2b2815 30%,
+                    #3d2b2815 70%,
+                    #fff 70%
+                )
+                1;
         }
-       
+
         .inputOptions svg {
             color: $signally-brown;
         }

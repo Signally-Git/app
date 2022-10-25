@@ -92,7 +92,9 @@ function EditSignatureComponent() {
         },
         footer: {
             maxWidth: 380,
-            value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s).`,
+            value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.
+    
+    Ce message electronique et tous les fichiers joints ainsi que les informations contenues dans ce message (ci apres "le message"), sont confidentiels et destines exclusivement a l'usage de la personne a laquelle ils sont adresses. Si vous avez recu ce message par erreur, merci de le renvoyer a son emetteur et de le detruire. Toute diffusion, publication, totale ou partielle ou divulgation sous quelque forme que ce soit non expressement autorisees de ce message, sont interdites.,`,
             enabled: false,
             padding: 10,
             size: 7,
@@ -396,11 +398,16 @@ function EditSignatureComponent() {
 
         setSignatureOption({
             salutation: {
-                value: "Cordialement,",
-                enabled:
+                value:
                     defaultStyles?.filter(
                         (style) => style.type === "greetingsValue"
-                    )[0]?.value !== "false",
+                    )[0]?.value || "Cordialement,",
+                enabled:
+                    defaultStyles?.filter(
+                        (style) => style.type === "greetingsEnabled"
+                    )[0]?.value === "false"
+                        ? false
+                        : true,
                 padding: defaultStyles?.filter(
                     (style) => style.type === "greetingsPadding"
                 )[0].value,
@@ -418,7 +425,9 @@ function EditSignatureComponent() {
                 display: signatureOption.event?.selected?.imageUrl,
                 enabled:
                     defaultStyles?.filter((style) => style.type === "event")[0]
-                        ?.value !== "false",
+                        .value === "false"
+                        ? false
+                        : true,
                 padding: defaultStyles?.filter(
                     (style) => style.type === "eventPadding"
                 )[0].value,
@@ -438,11 +447,17 @@ function EditSignatureComponent() {
             },
             footer: {
                 maxWidth: 380,
-                value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s).`,
-                enabled:
+                value:
                     defaultStyles?.filter(
                         (style) => style.type === "disclaimerValue"
-                    )[0]?.value !== "false",
+                    )[0]?.value ||
+                    `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.`,
+                enabled:
+                    defaultStyles?.filter(
+                        (style) => style.type === "disclaimerEnabled"
+                    )[0]?.value === "false"
+                        ? false
+                        : true,
                 padding: defaultStyles?.filter(
                     (style) => style.type === "disclaimerPadding"
                 )[0].value,
@@ -498,7 +513,13 @@ function EditSignatureComponent() {
                 <span>
                     <div className={classes.modal}>
                         <div className={classes.slidesContainer}>
-                            <div className={classes.slide}>
+                            <form
+                                onSubmit={() => {
+                                    setModal(false);
+                                    handleSave();
+                                }}
+                                className={classes.slide}
+                            >
                                 <h4>Donner un nom à cette signature</h4>
                                 <Input
                                     autoFocus
@@ -510,19 +531,23 @@ function EditSignatureComponent() {
                                         setSignatureName(e.target.value)
                                     }
                                 />
-                                <div onClick={() => setModal(false)}>
-                                    <Button width="30%" color="brown">
-                                        Annuler
-                                    </Button>
+                                <div>
                                     <Button
                                         width="40%"
                                         color="orange"
-                                        onClick={() => handleSave()}
+                                        type="submit"
                                     >
                                         Valider
                                     </Button>
+                                    <Button
+                                        onClick={() => setModal(false)}
+                                        width="30%"
+                                        color="brown"
+                                    >
+                                        Annuler
+                                    </Button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </span>
@@ -901,8 +926,14 @@ function EditSignatureComponent() {
                         value:
                             signatureOption.salutation.enabled?.toString() ||
                             "false",
-                        type: "greetings",
-                        signature: result.data.id,
+                        type: "greetingsEnabled",
+                        signature: result?.data?.id,
+                    },
+                    {
+                        property: "value",
+                        value: signatureOption.salutation.value,
+                        type: "greetingsValue",
+                        signature: result?.data?.id,
                     },
                     {
                         property: "padding",
@@ -910,7 +941,7 @@ function EditSignatureComponent() {
                             signatureOption.salutation.padding?.toString() ||
                             "12",
                         type: "greetingsPadding",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                     // Event
                     {
@@ -932,23 +963,23 @@ function EditSignatureComponent() {
                     {
                         property: "enabled",
                         value:
-                            signatureOption.disclaimerEnabled?.toString() ||
+                            signatureOption.footer.enabled?.toString() ||
                             "false",
-                        type: "disclaimer",
-                        signature: result.data.id,
+                        type: "disclaimerEnabled",
+                        signature: result?.data?.id,
                     },
                     {
                         property: "value",
-                        value: signatureOption?.footer?.value,
-                        type: "disclaimer",
-                        signature: result.data.id,
+                        value: signatureOption.footer.value,
+                        type: "disclaimerValue",
+                        signature: result?.data?.id,
                     },
                     {
                         property: "padding",
                         value:
-                            signatureOption.disclaimerValue?.toString() || "12",
+                            signatureOption.footer.padding?.toString() || "12",
                         type: "disclaimerPadding",
-                        signature: result.data.id,
+                        signature: result?.data?.id,
                     },
                 ];
                 request.post("signature_styles/batch", styles);

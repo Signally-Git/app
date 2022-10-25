@@ -1,11 +1,11 @@
-import { ImCheckmark, ImCross } from 'react-icons/im'
-import classes from './notifications.module.css'
-import * as React from 'react'
+import { ImCheckmark, ImCross } from "react-icons/im";
+import classes from "./notifications.module.css";
+import * as React from "react";
 
-const NotificationContext = React.createContext()
+const NotificationContext = React.createContext();
 
 function NotificationProvider({ children, signup, login }) {
-    const [message, setMessage] = React.useState()
+    const [message, setMessage] = React.useState();
 
     React.useEffect(() => {
         const timeout = setTimeout(() => {
@@ -13,23 +13,35 @@ function NotificationProvider({ children, signup, login }) {
         }, 5500);
 
         return () => clearTimeout(timeout);
-    }, [message])
+    }, [message]);
 
-    return <NotificationContext.Provider value={setMessage}>
-        {message && <div className={`${signup ? classes.signup : login ? classes.login : ""} ${classes[message.status]} ${classes.container} ${message.disappear ? classes.fadeOut : ""}`}>
-            <p>{message.content}</p>
-            {message.status === "valid" ?
-                <ImCheckmark /> :
-                <ImCross />}
-        </div>}{children}</NotificationContext.Provider>
+    return (
+        <NotificationContext.Provider value={setMessage}>
+            {message && (
+                <div
+                    className={`${
+                        signup ? classes.signup : login ? classes.login : ""
+                    } ${classes[message.status]} ${classes.container} ${
+                        message.disappear ? classes.fadeOut : ""
+                    }`}
+                >
+                    <p>{message.content}</p>
+                    {message.status === "valid" ? <ImCheckmark /> : <ImCross />}
+                </div>
+            )}
+            {children}
+        </NotificationContext.Provider>
+    );
 }
 
 function useNotification() {
-    const context = React.useContext(NotificationContext)
+    const context = React.useContext(NotificationContext);
     if (context === undefined) {
-        throw new Error('useNotification must be used within a NotificationProvider')
+        throw new Error(
+            "useNotification must be used within a NotificationProvider"
+        );
     }
-    return context
+    return context;
 }
 
-export { NotificationProvider, useNotification }
+export { NotificationProvider, useNotification };

@@ -66,11 +66,11 @@
 }
 .menu .active {
   transition: 0.2s;
-  color: #FF7954;
+  color: #ff7954;
 }
 .menu .active::after {
   transition: 0.2s;
-  background-color: #FF7954;
+  background-color: #ff7954;
 }
 
 .logoCompanyDiv {
@@ -123,7 +123,7 @@
   text-align: center;
 }
 .inputContainer :disabled {
-  color: #FF7954;
+  color: #ff7954;
   font-weight: bold;
 }
 
@@ -153,11 +153,11 @@
   width: 100%;
   display: flex;
   align-items: center;
-  color: #FF7954;
+  color: #ff7954;
 }
 .socialsContainer label {
   font-size: 0.9rem;
-  color: #FF7954;
+  color: #ff7954;
 }
 .socialsContainer svg {
   cursor: pointer;

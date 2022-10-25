@@ -2,10 +2,10 @@
   position: relative;
 }
 .active * {
-  color: #FF7954 !important;
+  color: #ff7954 !important;
 }
 .active label {
-  color: #FF7954 !important;
+  color: #ff7954 !important;
   display: block !important;
 }
 
@@ -14,6 +14,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   list-style: none;
+  gap: 1rem;
   align-items: center;
   width: 100%;
   padding: 0;
@@ -33,23 +34,25 @@
 .tabMenu li * {
   color: #402927;
 }
+.tabMenu li > a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
 .tabMenu li label {
   font-size: 0.7rem;
   text-align: center;
-  position: absolute;
   font-weight: bold;
   bottom: -0.25rem;
   left: 0;
   right: 0;
   margin: auto;
   text-transform: uppercase;
-  display: none;
-}
-.tabMenu li:hover label {
-  display: block;
 }
 
 .event {
+  display: flex;
   position: relative;
 }
 .event :hover span {
@@ -64,7 +67,7 @@
   text-align: center;
   right: 0;
   left: 0;
-  bottom: 1.4rem;
+  bottom: 0.5rem;
   margin: auto;
   font-size: 0.7rem;
   position: absolute;

@@ -170,7 +170,7 @@
   align-items: center;
 }
 .styleContainer .row h6 {
-  color: #FF7954;
+  color: #ff7954;
   font-weight: normal;
   padding-right: 1rem;
   font-size: 1rem;
@@ -237,7 +237,7 @@
   border-radius: 20px 20px 0 0;
   list-style: none;
   background-color: #fff;
-  box-shadow: 0 20px 30px #EBE4E1;
+  box-shadow: 0 20px 30px #ebe4e1;
   width: 100%;
 }
 .selectFont li {
@@ -263,7 +263,7 @@
 .selectFont li:hover, .selectFont li:focus-within {
   transition: 0.2s;
   color: #402927;
-  background-color: #F4EEEF;
+  background-color: #f4eeef;
 }
 .selectFont input {
   opacity: 0;

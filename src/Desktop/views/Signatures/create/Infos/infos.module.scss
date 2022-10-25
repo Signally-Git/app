@@ -22,7 +22,7 @@
     input {
         background-color: $signally-isabelline;
         padding: 0.5rem 0.75rem;
-        font-size: .9rem;
+        font-size: 0.9rem;
         &::placeholder {
             color: $signally-brown;
         }
@@ -264,8 +264,9 @@
             cursor: pointer;
             margin: 0;
         }
-        &:hover, &:focus-within {
-            transition: .2s;
+        &:hover,
+        &:focus-within {
+            transition: 0.2s;
             color: $signally-brown;
             background-color: $signally-pink;
         }

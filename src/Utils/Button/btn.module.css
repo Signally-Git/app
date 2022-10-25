@@ -4,80 +4,64 @@
 
 .btn {
   background-color: transparent;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   border-radius: 20px;
   border: 1px solid;
   text-align: center;
-  -webkit-transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   margin: 0.5rem auto;
   padding: 0.5rem 1rem;
   font-size: 0.85rem;
   font-weight: 600;
   border-radius: 20px;
 }
-
 .btn * {
   color: inherit;
 }
 
 .orange {
-  color: #FF7954;
-  border-color: #FF7954;
+  color: #ff7954;
+  border-color: #ff7954;
   cursor: pointer;
 }
-
 .orange:hover {
-  background-color: #FF7954;
-  color: #FFF;
+  background-color: #ff7954;
+  color: #fff;
 }
-
 .orange:hover svg {
-  stroke: #FFF;
+  stroke: #fff;
 }
-
 .orange svg {
-  -webkit-transition: 0.2s;
   transition: 0.2s;
-  margin-left: .5rem;
-  stroke: #FF7954;
+  margin-left: 0.5rem;
+  stroke: #ff7954;
   stroke-width: 1px;
 }
 
 .left {
   margin-left: 0 !important;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
 .orangeFill {
-  color: #FFF;
-  background-color: #FF7954;
-  border-color: #FF7954;
+  color: #fff;
+  background-color: #ff7954;
+  border-color: #ff7954;
 }
-
 .orangeFill:hover {
   background-color: transparent;
-  color: #FF7954;
+  color: #ff7954;
   cursor: pointer;
 }
-
 .orangeFill:hover svg {
-  stroke: #FF7954;
+  stroke: #ff7954;
 }
-
 .orangeFill svg {
-  -webkit-transition: 0.2s;
   transition: 0.2s;
-  margin-left: .5rem;
-  stroke: #FFF;
+  margin-left: 0.5rem;
+  stroke: #fff;
   stroke-width: 1px;
 }
 
@@ -85,31 +69,26 @@
   color: #402927;
   border-color: #402927;
 }
-
 .brown:hover {
   cursor: pointer;
   background: #402927;
-  color: #FFF;
+  color: #fff;
 }
-
 .brown:hover svg {
-  stroke: #FFF;
+  stroke: #fff;
 }
-
 .brown svg {
-  -webkit-transition: 0.2s;
   transition: 0.2s;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   stroke: #402927;
   stroke-width: 1px;
 }
 
 .brownFill {
-  color: #FFF;
+  color: #fff;
   background-color: #402927;
   border-color: #402927;
 }
-
 .brownFill:hover {
   background-color: transparent;
   color: #402927;
@@ -118,12 +97,11 @@
 
 .white {
   border-color: transparent;
-  background-color: #FFF;
+  background-color: #fff;
   cursor: pointer;
 }
-
 .white:hover {
-  color: #FFF;
+  color: #fff;
   background-color: #402927;
 }
 

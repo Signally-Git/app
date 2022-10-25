@@ -25,26 +25,25 @@
 }
 .topLine svg:hover {
   cursor: pointer;
-  color: #FF7954;
+  color: #ff7954;
 }
 .topLine form {
   width: 45%;
 }
 .topLine form select {
-  border-color: #FF7954;
-  color: #FF7954;
+  border-color: #ff7954;
+  color: #ff7954;
   margin: 0;
   width: 100%;
 }
 
 .orangeTxt {
-  color: #FF7954;
+  color: #ff7954;
 }
 
 .groupName {
   color: rgba(64, 41, 39, 0.75) !important;
   padding: 0.25rem 0.75rem;
-  padding-top: 0.25rem !important;
   border-radius: 20px;
   background-color: rgba(64, 41, 39, 0.08);
   margin-top: 0.5rem;
@@ -61,6 +60,7 @@
 }
 
 .row {
+  height: 90%;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -73,7 +73,11 @@
   bottom: 1rem;
 }
 
-.flipcontainer {
+.signaturePreviewSelect {
+  height: 90%;
+}
+
+.flipContainer {
   perspective: 1000px;
 }
 
@@ -81,7 +85,7 @@
   transform: rotateY(180deg);
 }
 
-.flipcontainer,
+.flipContainer,
 .front,
 .back {
   min-width: 30rem;
@@ -89,7 +93,7 @@
   width: 100%;
   height: 100%;
 }
-.flipcontainer > .btnsContainer,
+.flipContainer > .btnsContainer,
 .front > .btnsContainer,
 .back > .btnsContainer {
   top: auto;
@@ -99,7 +103,7 @@
   justify-content: space-between;
   width: 36%;
 }
-.flipcontainer > .btnsContainer button,
+.flipContainer > .btnsContainer button,
 .front > .btnsContainer button,
 .back > .btnsContainer button {
   margin: 0;
@@ -110,7 +114,6 @@
   transition: 0.6s linear;
   transform-style: preserve-3d;
   height: 100%;
-  max-height: 25rem;
   position: relative;
 }
 
@@ -134,6 +137,7 @@
 }
 .front > div,
 .back > div {
+  overflow: auto;
   margin-bottom: 2rem;
 }
 .front .groupName,
@@ -226,7 +230,7 @@
   top: -25%;
 }
 
-.playlistmodal {
+.playlistModal {
   position: absolute;
   inset: 0;
   margin: auto;
@@ -241,11 +245,11 @@
   height: 40rem;
   padding: 1rem 2rem;
 }
-.playlistmodal h3 {
+.playlistModal h3 {
   font-size: 1.15rem;
   text-align: center;
 }
-.playlistmodal ul {
+.playlistModal ul {
   overflow: auto;
   max-height: 60%;
   list-style: none;
@@ -253,10 +257,10 @@
   display: flex;
   flex-direction: column;
 }
-.playlistmodal ul .active {
-  color: #FF7954;
+.playlistModal ul .active {
+  color: #ff7954;
 }
-.playlistmodal ul li {
+.playlistModal ul li {
   margin: 0.5rem 0;
   margin-left: auto;
   width: 100%;
@@ -272,7 +276,7 @@
   background: #f7f5f5;
   border-radius: 10px;
 }
-.playlistmodal ul li label {
+.playlistModal ul li label {
   display: block;
   position: relative;
   padding-left: 35px;
@@ -284,7 +288,7 @@
   user-select: none;
   line-height: 25px;
 }
-.playlistmodal ul li label input {
+.playlistModal ul li label input {
   position: absolute;
   height: 100%;
   z-index: 11;
@@ -293,10 +297,10 @@
   cursor: pointer;
   opacity: 0;
 }
-.playlistmodal ul li label input:checked ~ span:after {
+.playlistModal ul li label input:checked ~ span:after {
   display: block;
 }
-.playlistmodal ul li label span {
+.playlistModal ul li label span {
   position: absolute;
   inset: 0;
   margin: auto;
@@ -305,7 +309,7 @@
   width: 25px;
   border: 1px solid #402927;
 }
-.playlistmodal ul li label span:after {
+.playlistModal ul li label span:after {
   content: " ";
   position: absolute;
   display: none;
@@ -320,7 +324,7 @@
   inset: 0;
   margin: auto;
 }
-.playlistmodal ul li::before {
+.playlistModal ul li::before {
   content: "";
   display: block;
   position: absolute;
@@ -335,31 +339,31 @@
   background: transparent;
   transition: 0.2s;
 }
-.playlistmodal ul li > div {
+.playlistModal ul li > div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 60%;
 }
-.playlistmodal ul li > div > span > span {
+.playlistModal ul li > div > span > span {
   font-weight: normal;
   font-size: 0.75rem;
 }
-.playlistmodal ul li > div img {
+.playlistModal ul li > div img {
   height: auto;
 }
-.playlistmodal .searchContainer {
+.playlistModal .searchContainer {
   width: 100%;
   display: flex;
   position: relative;
 }
-.playlistmodal .searchContainer img {
+.playlistModal .searchContainer img {
   position: absolute;
   top: 40%;
   left: 1rem;
   transform: translateY(-20%);
 }
-.playlistmodal .searchInput {
+.playlistModal .searchInput {
   color: #402a27;
   width: 100%;
   font-family: "Montserrat";
@@ -372,25 +376,25 @@
   outline: none;
   margin: 1rem 0;
 }
-.playlistmodal .searchInput:focus {
+.playlistModal .searchInput:focus {
   background: #fff;
-  border: 1px solid #FF7954;
+  border: 1px solid #ff7954;
   box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }
-.playlistmodal .bannerPreview {
+.playlistModal .bannerPreview {
   height: auto;
   width: 30%;
   max-height: 3rem;
   padding: 0.5rem;
   margin: auto;
 }
-.playlistmodal .eventText {
+.playlistModal .eventText {
   display: flex;
   margin: auto;
   position: relative;
   margin-left: 1rem;
 }
-.playlistmodal .duration {
+.playlistModal .duration {
   margin-top: 0.25rem;
   width: 100%;
   display: flex;
@@ -398,14 +402,14 @@
   align-items: center;
   font-weight: normal;
 }
-.playlistmodal .duration .col {
+.playlistModal .duration .col {
   display: flex;
   flex-direction: column;
 }
-.playlistmodal .duration .col:first-child {
+.playlistModal .duration .col:first-child {
   margin-right: 1rem;
 }
-.playlistmodal .btnsContainer {
+.playlistModal .btnsContainer {
   position: absolute;
   bottom: 1.5rem;
   left: 0;
@@ -415,6 +419,6 @@
   width: 70%;
   justify-content: space-around;
 }
-.playlistmodal .btnsContainer button {
+.playlistModal .btnsContainer button {
   margin: 0;
 }

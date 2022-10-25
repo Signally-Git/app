@@ -17,7 +17,7 @@
 }
 .container h2 span {
   margin-left: 0.5rem;
-  color: #FF7954;
+  color: #ff7954;
 }
 .container h2 svg {
   margin-left: auto;
@@ -25,7 +25,7 @@
 .container label {
   font-size: 0.7rem;
   font-weight: 600;
-  color: #FF7954;
+  color: #ff7954;
   margin-left: 0.15rem;
 }
 .container input {
@@ -37,7 +37,7 @@
   outline: none;
 }
 .container input:focus {
-  border-color: #FF7954;
+  border-color: #ff7954;
   box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }
 .container .datePick ~ input {
@@ -61,11 +61,11 @@
 .datePick > div input {
   transition: border-color 0.3s, box-shadow 0.3s;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.8rem;
   width: 100%;
 }
 .datePick > div input:hover, .datePick > div input:focus-within {
-  border-color: #FF7954;
+  border-color: #ff7954;
   box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }
 

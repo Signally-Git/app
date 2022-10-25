@@ -65,7 +65,6 @@
     }
 }
 
-
 .mh100 {
     max-height: 100%;
 }
@@ -162,7 +161,7 @@
     .teamWithWP.editing {
         height: 6rem !important;
         .rename {
-            margin-bottom: .25rem;
+            margin-bottom: 0.25rem;
         }
     }
     .editing {
@@ -335,5 +334,5 @@
 }
 
 .btnReady .checkmark {
-    color: $signally-orange
+    color: $signally-orange;
 }

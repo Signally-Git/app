@@ -10,7 +10,8 @@
   background-color: #fff;
   padding-bottom: 3rem;
 }
-.container p, .container input {
+.container p,
+.container input {
   color: #402927;
 }
 .container .tagLine {
@@ -21,12 +22,12 @@
   text-align: justify;
 }
 .container h3 {
-  color: #FF7954;
+  color: #ff7954;
 }
 .container h4 {
   font-size: 1rem;
   margin: 0;
-  color: #FF7954;
+  color: #ff7954;
 }
 .container h4 ~ div {
   margin-top: 0.5rem;
