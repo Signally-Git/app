@@ -9,12 +9,10 @@
   margin-bottom: auto;
   position: relative;
 }
-
 .container h2 {
   margin-top: 0;
   margin-bottom: 1rem;
 }
-
 .container > div > div > div > svg {
   color: #402927;
   position: absolute;
@@ -23,14 +21,13 @@
   top: 0;
   z-index: 2;
 }
-
 .container > div > div > div > svg:hover {
-  color: #FF7954;
+  color: #ff7954;
   cursor: pointer;
 }
 
 .orangeTxt {
-  color: #FF7954;
+  color: #ff7954;
 }
 
 .bold > span {
@@ -40,27 +37,15 @@
 .duration {
   margin-top: 1rem;
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-wrap: wrap;
+  align-items: center;
   font-weight: normal;
 }
-
 .duration .col {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
-
 .duration .col:first-child {
   margin-right: 1rem;
 }

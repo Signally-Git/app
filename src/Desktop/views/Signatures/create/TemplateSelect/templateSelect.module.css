@@ -142,19 +142,19 @@
 }
 .modal .studioStore .studio,
 .modal .studioStore .store {
-  color: #FF7954;
-  border-color: #FF7954;
+  color: #ff7954;
+  border-color: #ff7954;
 }
 .modal .studioStore .studio:hover,
 .modal .studioStore .store:hover {
-  background-color: #FF7954;
+  background-color: #ff7954;
 }
 .modal .studioStore .studio input,
 .modal .studioStore .store input {
   cursor: pointer;
 }
 .modal .studioStore .activeStudio {
-  background-color: #FF7954 !important;
+  background-color: #ff7954 !important;
   color: #fff;
 }
 .modal h5 {
@@ -195,10 +195,10 @@
   margin-bottom: 2rem;
 }
 .modal .templatesContainer li:hover {
-  border-color: #FF7954;
+  border-color: #ff7954;
 }
 .modal .templatesContainer li:hover p {
-  color: #FF7954;
+  color: #ff7954;
 }
 
 .templateName {
@@ -223,7 +223,7 @@
   background: none;
 }
 .btnBackTemplate:hover {
-  color: #FF7954;
+  color: #ff7954;
 }
 .btnBackTemplate svg {
   font-size: 1.2rem;

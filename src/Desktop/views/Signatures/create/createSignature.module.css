@@ -84,7 +84,7 @@
   margin: 1.5rem 0.5rem 0 !important;
 }
 .modal .orangeTxt {
-  color: #FF7954;
+  color: #ff7954;
 }
 
 .signaturePreview {
@@ -105,7 +105,7 @@
   background: none;
 }
 .btnTemplate:hover {
-  color: #FF7954;
+  color: #ff7954;
 }
 .btnTemplate svg {
   font-size: 1.2rem;
@@ -156,7 +156,7 @@
   cursor: pointer;
 }
 .tabsContainer > button:hover {
-  color: #FF7954;
+  color: #ff7954;
 }
 .tabsContainer .switchTabs {
   cursor: pointer;
@@ -303,7 +303,7 @@
 .confirm button {
   border: none;
   background: none;
-  color: #FF7954;
+  color: #ff7954;
   padding: 0;
   font-size: 1.1rem;
   display: flex;
@@ -333,6 +333,11 @@
     opacity: 1;
   }
 }
+.previewContainer {
+  overflow: auto;
+  max-height: 100%;
+}
+
 .signatureContainer {
   display: flex;
   width: 100%;
@@ -341,6 +346,7 @@
   flex-direction: column;
   background-color: #fff;
   height: fit-content;
+  max-height: 80%;
   border-radius: 20px;
 }
 .signatureContainer .preview {
@@ -367,7 +373,7 @@
   border-radius: 50%;
 }
 .signatureContainer .browserHeader .btnsContainer .close {
-  background: #FF7954;
+  background: #ff7954;
 }
 .signatureContainer .browserHeader .btnsContainer .reduce {
   background: #ffbd44;
@@ -538,11 +544,11 @@
 }
 
 input:checked + .slider {
-  background-color: #FF7954;
+  background-color: #ff7954;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #FF7954;
+  box-shadow: 0 0 1px #ff7954;
 }
 
 input:checked + .slider:before {
@@ -623,5 +629,5 @@ input:checked + .slider:before {
 }
 
 .orangeTxt {
-  color: #FF7954;
+  color: #ff7954;
 }

@@ -29,26 +29,26 @@
     cursor: pointer;
     &:hover {
         background-color: $signally-orange;
-        color: #FFF;
+        color: #fff;
         svg {
-            stroke: #FFF;
+            stroke: #fff;
         }
     }
     svg {
         transition: 0.2s;
-        margin-left: .5rem;
+        margin-left: 0.5rem;
         stroke: $signally-orange;
         stroke-width: 1px;
     }
 }
 
 .left {
-    margin-left: 0!important;
-    margin-right: .5rem;
+    margin-left: 0 !important;
+    margin-right: 0.5rem;
 }
 
 .orangeFill {
-    color: #FFF;
+    color: #fff;
     background-color: $signally-orange;
     border-color: $signally-orange;
     &:hover {
@@ -61,8 +61,8 @@
     }
     svg {
         transition: 0.2s;
-        margin-left: .5rem;
-        stroke: #FFF;
+        margin-left: 0.5rem;
+        stroke: #fff;
         stroke-width: 1px;
     }
 }
@@ -73,21 +73,21 @@
     &:hover {
         cursor: pointer;
         background: $signally-brown;
-        color: #FFF;
+        color: #fff;
         svg {
-            stroke: #FFF;
+            stroke: #fff;
         }
     }
     svg {
         transition: 0.2s;
-        margin-left: .5rem;
+        margin-left: 0.5rem;
         stroke: $signally-brown;
         stroke-width: 1px;
     }
 }
 
 .brownFill {
-    color: #FFF;
+    color: #fff;
     background-color: $signally-brown;
     border-color: $signally-brown;
     &:hover {
@@ -99,10 +99,10 @@
 
 .white {
     border-color: transparent;
-    background-color: #FFF;
+    background-color: #fff;
     cursor: pointer;
     &:hover {
-        color: #FFF;
+        color: #fff;
         background-color: $signally-brown;
     }
 }

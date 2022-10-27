@@ -1,11 +1,10 @@
-@import '../../Assets/style/colors.scss';
+@import "../../Assets/style/colors.scss";
 
 .select {
-    font-family: "Montserrat";
+    font-family: "Montserrat", serif;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    border: none;
     outline: none;
     transition: border-color 0.3s;
     background: #fff;

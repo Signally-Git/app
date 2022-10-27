@@ -20,9 +20,9 @@ function Tiles(props) {
     const [templates, setTemplates] = useState([]);
     const [signatures, setSignatures] = useState([]);
     const [activeSignatures, setActiveSignatures] = useState(0);
-    let workplaceName = "WORKPLACE_NAME"
-    let teamName = "TEAM_NAME"
-    const [userName, setUserName] = useState("USER_NAME")
+    let workplaceName = "WORKPLACE_NAME";
+    let teamName = "TEAM_NAME";
+    const [userName, setUserName] = useState("USER_NAME");
 
     const [sendMailBtn, setSendMailBtn] = useState(
         <span>Envoyer le mail</span>
@@ -38,10 +38,18 @@ function Tiles(props) {
         });
 
         await request.get("configurations").then((res) => {
-            localStorage.setItem("configuration", JSON.stringify(res.data['hydra:member']));
-            workplaceName = res.data['hydra:member']?.filter((entity) => entity.key = workplaceName).value
-            setUserName(res.data['hydra:member']?.filter((entity) => entity.key = userName).value)
-            console.log(userName)
+            localStorage.setItem(
+                "configuration",
+                JSON.stringify(res.data["hydra:member"])
+            );
+            workplaceName = res.data["hydra:member"]?.filter(
+                (entity) => (entity.key = workplaceName)
+            ).value;
+            setUserName(
+                res.data["hydra:member"]?.filter(
+                    (entity) => (entity.key = userName)
+                ).value
+            );
         });
 
         await request
@@ -220,9 +228,18 @@ function Tiles(props) {
                     <>
                         <Link to="/teams/workplaces" className={classes.tile}>
                             <div className={classes.row}>
-                                <p>{JSON.parse(localStorage.getItem("configuration")).filter(
-                                    (item) => item.key === 'WORKPLACE_NAME'
-                                )[0].value}</p>
+                                <p>
+                                    {
+                                        JSON.parse(
+                                            localStorage.getItem(
+                                                "configuration"
+                                            )
+                                        ).filter(
+                                            (item) =>
+                                                item.key === "WORKPLACE_NAME"
+                                        )[0].value
+                                    }
+                                </p>
                                 <img src={ChevronRight} alt="View" />
                             </div>
                             <div className={classes.row}>
@@ -243,9 +260,17 @@ function Tiles(props) {
                     <>
                         <Link to="/teams/teams" className={classes.tile}>
                             <div className={classes.row}>
-                                <p>{JSON.parse(localStorage.getItem("configuration")).filter(
-                                    (item) => item.key === 'TEAM_NAME'
-                                )[0].value}</p>
+                                <p>
+                                    {
+                                        JSON.parse(
+                                            localStorage.getItem(
+                                                "configuration"
+                                            )
+                                        ).filter(
+                                            (item) => item.key === "TEAM_NAME"
+                                        )[0].value
+                                    }
+                                </p>
                                 <img src={ChevronRight} alt="View" />
                             </div>
                             <div className={classes.row}>
@@ -264,9 +289,14 @@ function Tiles(props) {
                 ) : null}
                 <Link to="/teams/users" className={classes.tile}>
                     <div className={classes.row}>
-                        <p>{JSON.parse(localStorage.getItem("configuration"))?.filter(
-                                (item) => item.key === 'USER_NAME'
-                            )[0].value}</p>
+                        <p>
+                            {
+                                JSON.parse(
+                                    localStorage.getItem("configuration")
+                                )?.filter((item) => item.key === "USER_NAME")[0]
+                                    .value
+                            }
+                        </p>
                         <img src={ChevronRight} alt="View" />
                     </div>
                     <div className={classes.row}>

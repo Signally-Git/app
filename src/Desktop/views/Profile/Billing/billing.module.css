@@ -1,23 +1,14 @@
 .container {
   width: 90%;
   margin: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
   padding-top: 7rem;
 }
-
 .container p {
   font-size: 0.9rem;
 }
-
 .container h2 {
   text-align: center;
   font-size: 1.5rem;
@@ -25,9 +16,7 @@
 
 .spaceBe {
   height: 70vh;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
 }
 
 .center {
@@ -59,14 +48,10 @@
 
 .step {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   margin: 2rem 0;
 }
-
 .step p {
   margin: 0 0 0 3rem;
   font-size: 0.9rem;
@@ -75,15 +60,12 @@
 
 .stepNumber {
   position: absolute;
-  -webkit-box-flex: 32px;
-      -ms-flex: 32px;
-          flex: 32px;
+  flex: 32px;
   height: 32px;
   width: 32px;
   border-radius: 50%;
   background: #ffcc20;
 }
-
 .stepNumber span {
   width: 32px;
   line-height: 32px;
@@ -97,46 +79,34 @@
 .greyContainer {
   width: 100%;
   margin: 1rem auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   position: relative;
   border-radius: 10px;
-  background: #F8F1F0;
+  background: #f8f1f0;
 }
 
 .whiteContainer {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
-          box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+  box-shadow: 0 12px 40px rgba(230, 208, 201, 0.28);
   border-radius: 10px;
-  padding: 1.5rem;
-  padding-bottom: 3.5rem;
+  padding: 1.5rem 1.5rem 3.5rem;
   margin-bottom: 2.5rem;
-  background: #FFF;
+  background: #fff;
   width: 100%;
 }
-
 .whiteContainer h3 {
   margin: 0;
   font-size: 1.2rem;
-  color: #FF7954;
+  color: #ff7954;
 }
-
 .whiteContainer h4 {
   line-height: 2;
   margin: 0;
   font-size: 1.3rem;
-  color: #66433E;
+  color: #66433e;
 }
-
 .whiteContainer img {
   position: absolute;
   right: 0;
@@ -148,49 +118,37 @@
 }
 
 .priceContainer {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
+  align-items: baseline;
   position: absolute;
   bottom: -1.6rem;
   max-width: 60%;
-  color: #FFF;
-  padding: .75rem;
+  color: #fff;
+  padding: 0.75rem;
   border-radius: 30px;
-  background: #402A27;
+  background: #402a27;
 }
-
 .priceContainer .price {
   font-size: 1.5rem;
   font-weight: bold;
 }
-
 .priceContainer .perMonth {
-  margin-left: .5rem;
-  font-size: .8rem;
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
 }
 
 .listAdvantages {
   list-style: none;
   margin-top: 0;
 }
-
 .listAdvantages li {
-  color: #66433E;
+  color: #66433e;
   font-weight: 600;
-  font-size: .9rem;
+  font-size: 0.9rem;
   margin: 1rem 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
-
 .listAdvantages .listStyle {
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }

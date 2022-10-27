@@ -1,61 +1,43 @@
 .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
-
 .container form {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
-
 .container form > div {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  align-items: center;
   display: flex;
 }
-
 .container form > div ~ input {
   margin-right: auto;
   margin-left: 0;
 }
-
 .container label {
   color: #402927;
   font-weight: bold;
-  font-size: .85rem;
+  font-size: 0.85rem;
 }
-
 .container .editSocials {
+  gap: 1rem;
   max-height: 3rem;
   margin-bottom: 3rem;
 }
-
+.container .editSocials li {
+  cursor: pointer;
+  max-width: 24px;
+}
 .container .editSocials svg {
   color: #402927;
   font-size: 1.2rem;
-  -webkit-transition: color .3s;
-  transition: color .3s;
+  transition: color 0.3s;
 }
-
 .container .editSocials svg:first-of-type {
   margin-left: 1rem;
 }
-
 .container .editSocials svg:hover {
-  color: #FF7954;
+  color: #ff7954;
 }
 
 .socialsList {
@@ -63,42 +45,26 @@
   margin-left: 1rem;
   padding: 0;
   height: 2rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
-
 .socialsList li {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin: 0 .25rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.25rem;
 }
-
 .socialsList li:last-child {
   height: auto;
 }
-
 .socialsList li:last-child button {
   margin: 0 0 0 1rem;
 }
-
 .socialsList li:hover svg {
-  -webkit-transition: color 0.3s, border-color .3s;
-  transition: color 0.3s, border-color .3s;
-  color: #FF7954;
-  border-color: #FF7954;
+  transition: color 0.3s, border-color 0.3s;
+  color: #ff7954;
+  border-color: #ff7954;
 }
-
 .socialsList li svg {
   height: 2rem;
   width: 2rem;
@@ -106,5 +72,5 @@
   color: #402927;
   border-radius: 50%;
   border: 1px solid #402927;
-  background-color: #FFF;
+  background-color: #fff;
 }

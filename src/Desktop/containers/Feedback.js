@@ -1,84 +1,122 @@
 import { useEffect, useState } from "react";
-import Button from "Utils/Button/btn";
 import Input from "Utils/Input/input";
 import UploadFile from "Utils/Upload/uploadFile";
-import classes from "Desktop/components/Report/report.module.css"
+import classes from "Desktop/components/Report/report.module.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import Noting from 'Assets/img/noting.png'
+import Noting from "Assets/img/noting.png";
 import request from "Utils/Request/request";
 import { useNotification } from "Utils/Notifications/notifications";
 import CustomSelect from "Utils/CustomSelect/customselect";
-import Btns from "Utils/Btns/btns";
+import Buttons from "Utils/Btns/buttons";
 
 export default function Report() {
-    const [file, setFile] = useState()
-    const [bug, setBug] = useState("")
-    const history = useHistory()
-    const [select, setSelect] = useState("SIGNALLY_APP")
+    const [file, setFile] = useState();
+    const [bug, setBug] = useState("");
+    const history = useHistory();
+    const [select, setSelect] = useState("SIGNALLY_APP");
     const table = [
         { key: "SIGNALLY_APP", name: "Problème rencontré sur l'application" },
-        { key: "OUTLOOK_DISPLAY", name: "Affichage de la signature dans Outlook" },
+        {
+            key: "OUTLOOK_DISPLAY",
+            name: "Affichage de la signature dans Outlook",
+        },
         { key: "COMMENTS", name: "Commentaire" },
         { key: "RECOMMENDATIONS", name: "Suggestion" },
-    ]
-    const notification = useNotification()
+    ];
+    const notification = useNotification();
 
     const handleSubmit = async (e) => {
         let req = {};
-        e.preventDefault()
-        const img = new FormData()
-        console.log(file)
+        e.preventDefault();
+        const img = new FormData();
+        console.log(file);
         if (file) {
-            img.append('file', file, { type: file.type })
-            await request.post(`import/file`, img, {
-                headers: { 'Content-Type': file.type }
-            }).then((res) => {
-                req = { fileUrl: res.data.path }
-                console.log(res.data.headers['Content-Type'])
-            }).catch((err) => {
-                console.log(err)
-            })
+            img.append("file", file, { type: file.type });
+            await request
+                .post(`import/file`, img, {
+                    headers: { "Content-Type": file.type },
+                })
+                .then((res) => {
+                    req = { fileUrl: res.data.path };
+                    console.log(res.data.headers["Content-Type"]);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
 
         if (bug.length > 3) {
             req = {
                 ...req,
                 subject: select,
-                description: bug
-            }
-            const feedback = await request.post('feedback', req).catch(() => notification({ content: <>Une erreur s'est produite lors de l'envoi du formulaire</>, status: "invalid" }))
+                description: bug,
+            };
+            const feedback = await request.post("feedback", req).catch(() =>
+                notification({
+                    content: (
+                        <>
+                            Une erreur s'est produite lors de l'envoi du
+                            formulaire
+                        </>
+                    ),
+                    status: "invalid",
+                })
+            );
             if (feedback?.data) {
-                notification({ content: <>Votre formulaire a bien été envoyé</>, status: "valid" })
-                history.goBack()
+                notification({
+                    content: <>Votre formulaire a bien été envoyé</>,
+                    status: "valid",
+                });
+                history.goBack();
             }
+        } else {
+            notification({
+                content: <>Vous n'avez pas rempli le formulaire</>,
+                status: "invalid",
+            });
         }
-        else {
-            notification({ content: <>Vous n'avez pas rempli le formulaire</>, status: "invalid" })
-        }
-
-    }
+    };
 
     useEffect(() => {
-        console.log(select)
-    }, [select])
+        console.log(select);
+    }, [select]);
 
-    return (<>
-        <h1>Retour d'expérience</h1>
-        <div className={classes.row}>
-            <div className={classes.container}>
-                <div className={classes.tagLine}>
-                    <h3>Bienvenue sur la Beta privée Signally !</h3>
-                    <p>Comme nous sommes en version Beta, tout n’est pas encore parfait !
-                        <br /><br />
-                        Néanmoins, grâce à vous, nous pourrons rendre la plateforme de plus en plus performante et encore plus simple à utiliser.
-                        <br />Le formulaire ci-dessous est à votre disposition pour tout problème rencontré ou bien tout simplement pour nous faire part de vos commentaires ou suggestions.
-                        <br /><br />
-                        Un grand merci pour votre aide.</p><br />
-                </div>
-                <form onSubmit={(e) => handleSubmit(e)}>
-                    <h4>Type du problème, commentaire, suggestion</h4>
-                    <CustomSelect onChange={(e) => setSelect(e)} display="name" getValue="key" items={table} defaultValue={table[0].key} />
-                    {/* <form onChange={(e) => setSelect(e.target.value)}>
+    return (
+        <>
+            <h1>Retour d'expérience</h1>
+            <div className={classes.row}>
+                <div className={classes.container}>
+                    <div className={classes.tagLine}>
+                        <h3>Bienvenue sur la Beta privée Signally !</h3>
+                        <p>
+                            Comme nous sommes en version Beta, tout n’est pas
+                            encore parfait !
+                            <br />
+                            <br />
+                            Néanmoins, grâce à vous, nous pourrons rendre la
+                            plateforme de plus en plus performante et encore
+                            plus simple à utiliser.
+                            <br />
+                            Le formulaire ci-dessous est à votre disposition
+                            pour tout problème rencontré ou bien tout simplement
+                            pour nous faire part de vos commentaires ou
+                            suggestions.
+                            <br />
+                            <br />
+                            Un grand merci pour votre aide.
+                        </p>
+                        <br />
+                    </div>
+                    <form onSubmit={(e) => handleSubmit(e)}>
+                        <h4>Type du problème, commentaire, suggestion</h4>
+                        <CustomSelect
+                            onChange={(e) => setSelect(e)}
+                            display="name"
+                            getValue="key"
+                            items={table}
+                            defaultValue={table[0].key}
+                        />
+                        {/* <form onChange={(e) => setSelect(e.target.value)}>
                         <select>
                             <option value="SIGNALLY_APP">Problème rencontré sur l'application</option>
                             <option value="OUTLOOK_DISPLAY">Problème d'affichage de la signature dans Outlook</option>
@@ -86,26 +124,55 @@ export default function Report() {
                             <option value="RECOMMENDATIONS">Suggestion</option>
                         </select>
                     </form> */}
-                    <br />
-                    <h4>{table.filter((entry) => entry.key === select)[0].name}</h4>
-                    <Input placeholder={table.filter((entry) => entry.key === select)[0].key === "SIGNALLY_APP" ? "Bonjour, comme vous pouvez le voir sur cette image en PJ, le logo de l'entreprise ne s'affiche pas sur Outlook." : ""}
-                        style={{ height: "4.5rem", resize: "none", width: '100%', marginBottom: '1.5rem' }}
-                        onChange={(e) => setBug(e.target.value)} type="textarea" />
-                    <br />
-                    <h4>Pièce jointe (capture d'écran, fichier d'import corrompu...)</h4>
-                    <UploadFile
-                        file={file}
-                        setFile={setFile}
-                        placeholder="Importer un fichier" />
-                        <Btns onConfirm={() => {}} confirmTxt="Envoyer le formulaire" onCancel={(e) => { e.preventDefault(); history.goBack() }} />
-                    {/* <div className={classes.actionsContainer}>
+                        <br />
+                        <h4>
+                            {
+                                table.filter((entry) => entry.key === select)[0]
+                                    .name
+                            }
+                        </h4>
+                        <Input
+                            placeholder={
+                                table.filter((entry) => entry.key === select)[0]
+                                    .key === "SIGNALLY_APP"
+                                    ? "Bonjour, comme vous pouvez le voir sur cette image en PJ, le logo de l'entreprise ne s'affiche pas sur Outlook."
+                                    : ""
+                            }
+                            style={{
+                                height: "4.5rem",
+                                resize: "none",
+                                width: "100%",
+                                marginBottom: "1.5rem",
+                            }}
+                            onChange={(e) => setBug(e.target.value)}
+                            type="textarea"
+                        />
+                        <br />
+                        <h4>
+                            Pièce jointe (capture d'écran, fichier d'import
+                            corrompu...)
+                        </h4>
+                        <UploadFile
+                            file={file}
+                            setFile={setFile}
+                            placeholder="Importer un fichier"
+                        />
+                        <Buttons
+                            onConfirm={() => {}}
+                            confirmTxt="Envoyer le formulaire"
+                            onCancel={(e) => {
+                                e.preventDefault();
+                                history.goBack();
+                            }}
+                        />
+                        {/* <div className={classes.actionsContainer}>
                         <Button type="submit" width={"45%"} color="orange">Envoyer</Button>
                         <Button onClick={(e) => { e.preventDefault(); history.goBack() }} width={"45%"} color="orangeFill">Annuler</Button>
                     </div> */}
-                </form>
+                    </form>
+                </div>
+                <img alt="Send your feedback" src={Noting} />
             </div>
-            <img src={Noting} />
-        </div>
-    </>
-    )
+        </>
+    );
 }

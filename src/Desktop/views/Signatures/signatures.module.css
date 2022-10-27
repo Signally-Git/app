@@ -25,7 +25,7 @@
   inset: 0;
 }
 .modalContainer > div span > span {
-  color: #FF7954;
+  color: #ff7954;
 }
 
 .row {
@@ -57,7 +57,7 @@
   height: 95%;
 }
 .teamsContainer > div > span {
-  color: #FF7954;
+  color: #ff7954;
   font-weight: bold;
   margin-top: 1rem;
   font-size: 0.9rem;
@@ -102,11 +102,11 @@
 
 .active {
   transition: 0.2s;
-  color: #FF7954;
+  color: #ff7954;
 }
 .active::after {
   transition: 0.2s;
-  background-color: #FF7954;
+  background-color: #ff7954;
 }
 
 .itemsList {
@@ -162,7 +162,7 @@
   left: -1em;
   height: 8px;
   width: 8px;
-  background: #FF7954;
+  background: #ff7954;
 }
 .itemsList li > div {
   display: flex;
@@ -179,7 +179,7 @@
 }
 
 .groupName {
-  color: #FF7954;
+  color: #ff7954;
   border-radius: 20px;
   font-weight: normal;
   font-size: 0.75rem;
@@ -217,11 +217,11 @@
   transition: 0.2s;
 }
 .search:focus {
-  border-color: #FF7954;
+  border-color: #ff7954;
 }
 
 .orangeTxt {
-  color: #FF7954;
+  color: #ff7954;
 }
 
 .signaturePreview {
@@ -266,9 +266,9 @@
   width: 60%;
   text-align: center;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-  border: 1px solid #FF7954;
+  border: 1px solid #ff7954;
   background-color: #fff !important;
-  color: #FF7954;
+  color: #ff7954;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -282,12 +282,12 @@
 .CTA svg {
   transition: 0.2s;
   margin-left: 0.5rem;
-  stroke: #FF7954;
+  stroke: #ff7954;
   stroke-width: 1px;
 }
 .btn:hover,
 .CTA:hover {
-  background-color: #FF7954 !important;
+  background-color: #ff7954 !important;
   border: 1px solid transparent;
   color: #fff;
   cursor: pointer;
@@ -318,6 +318,6 @@
   font-size: 1rem;
 }
 .actionsContainer svg:hover {
-  color: #FF7954;
+  color: #ff7954;
   opacity: 1;
 }

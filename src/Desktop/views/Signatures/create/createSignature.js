@@ -60,9 +60,10 @@ function CreateSignatureComponent() {
         custom: { enabled: false },
         eco: { value: "Ecoresponsability", enabled: false },
         followUs: { value: "Follow us", enabled: false, disabled: true },
-        bgColor: "#FCE750",
+        bgColor: "#ff7954",
         bannerTop: { url: "test", enabled: false, padding: 10 },
         event: { list: [], selected: [], enabled: false, padding: 12 },
+        vcard: { enabled: false },
         socials: {
             enabled: true,
             bgColor: "#000",
@@ -133,6 +134,7 @@ function CreateSignatureComponent() {
             followUs: { value: "Follow us", enabled: false },
             bgColor: "#FCE750",
             bannerTop: { url: "test", enabled: false, padding: 10 },
+            vcard: { enabled: false },
             event: {
                 ...signatureOption.event,
                 display: signatureOption?.event?.selected?.imageUrl,
@@ -768,6 +770,13 @@ function CreateSignatureComponent() {
                         type: "disclaimerPadding",
                         signature: result?.data?.id,
                     },
+                    {
+                        property: "enabled",
+                        value:
+                            signatureOption.vcard.enabled?.toString() || false,
+                        type: "vCardEnabled",
+                        signature: result?.data?.id,
+                    },
                 ];
                 request.post("signature_styles/batch", styles).then((r) => {
                     if (window.location.hash === "#onboarding")
@@ -838,19 +847,23 @@ function CreateSignatureComponent() {
                     </div>
                     <div className={classes.col}>
                         <div className={classes.signatureContainer}>
-                            <div className={classes.browserHeader}>
-                                <ul className={classes.btnsContainer}>
-                                    <li className={classes.close}></li>
-                                    <li className={classes.reduce}></li>
-                                    <li className={classes.fullscreen}></li>
-                                </ul>
-                            </div>
-                            <div className={classes.lazyLoadingLong}></div>
-                            <div className={classes.lazyLoadingShort}></div>
-                            <div className={classes.lazyLoadingMedium}></div>
-                            <br />
-                            <div className={classes.signaturePreview}>
-                                {selectedTemplate && preview}
+                            <div className={classes.previewContainer}>
+                                <div className={classes.browserHeader}>
+                                    <ul className={classes.btnsContainer}>
+                                        <li className={classes.close}></li>
+                                        <li className={classes.reduce}></li>
+                                        <li className={classes.fullscreen}></li>
+                                    </ul>
+                                </div>
+                                <div className={classes.lazyLoadingLong}></div>
+                                <div className={classes.lazyLoadingShort}></div>
+                                <div
+                                    className={classes.lazyLoadingMedium}
+                                ></div>
+                                <br />
+                                <div className={classes.signaturePreview}>
+                                    {selectedTemplate && preview}
+                                </div>
                             </div>
                             <div className={classes.CTAsContainer}>
                                 <Button

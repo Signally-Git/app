@@ -348,6 +348,11 @@
     }
 }
 
+.previewContainer {
+    overflow: auto;
+    max-height: 100%;
+}
+
 .signatureContainer {
     display: flex;
     .preview {
@@ -359,6 +364,7 @@
     flex-direction: column;
     background-color: #fff;
     height: fit-content;
+    max-height: 80%;
     border-radius: 20px;
     .browserHeader {
         width: 100%;
