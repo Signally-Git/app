@@ -263,7 +263,7 @@ export default function Preview({
               }px;"} >${options?.salutation.value || "Cordialement,"}</p>`
             : ""
     );
-    var disclaimer = /{# START DISCLAIMERS #}.*{# END DISCLAIMERS #}/gis;
+    var disclaimer = /{# START DISCLAIMER #}.*{# END DISCLAIMER #}/gis;
     replaced = replaced.replaceAll(
         disclaimer,
         options?.footer?.enabled

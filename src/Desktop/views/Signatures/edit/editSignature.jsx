@@ -1,5 +1,5 @@
 import classes from "../create/createSignature.module.css";
-import { useRef, useState, useEffect, useMemo } from "react";
+import { useRef, useState, useEffect } from "react";
 import Options from "../create/Options/options";
 import Infos from "../create/Infos/infos";
 import TemplateSelection from "../create/TemplateSelect/templateSelect";
@@ -18,7 +18,7 @@ function EditSignatureComponent() {
     const { signatureId } = useParams();
     const [user, setUser] = useState(null);
     const [company, setCompany] = useState(null);
-    const [events, setEvents] = useState([]);
+    const [events] = useState([]);
     const [selectedTemplate, setSelectedTemplate] = useState();
     const [defaultStyles, setDefaultStyles] = useState();
     const history = useHistory();
@@ -71,6 +71,7 @@ function EditSignatureComponent() {
         salutation: { value: "Cordialement,", enabled: false, padding: 10 },
         custom: { enabled: false },
         eco: { value: "Ecoresponsability", enabled: false },
+        vcard: { enabled: false },
         event: {
             list: events,
             selected: events[0],
@@ -115,7 +116,7 @@ function EditSignatureComponent() {
         getSignatureFromId();
     }, []);
 
-    const [templateRules, setTemplateRules] = useState({
+    const [templateRules] = useState({
         fontSize: { min: 9, max: 13, step: 1 },
     });
 
@@ -405,9 +406,7 @@ function EditSignatureComponent() {
                 enabled:
                     defaultStyles?.filter(
                         (style) => style.type === "greetingsEnabled"
-                    )[0]?.value === "false"
-                        ? false
-                        : true,
+                    )[0]?.value !== "false",
                 padding: defaultStyles?.filter(
                     (style) => style.type === "greetingsPadding"
                 )[0].value,
@@ -420,14 +419,18 @@ function EditSignatureComponent() {
                     style.type === "divColor" && style.property === "color"
             )[0].value,
             bannerTop: { url: "test", enabled: false, padding: 10 },
+            vcard: {
+                enabled:
+                    defaultStyles?.filter(
+                        (style) => style.type === "vCardEnabled"
+                    )?.[0]?.value !== "false",
+            },
             event: {
                 ...signatureOption.event,
                 display: signatureOption.event?.selected?.imageUrl,
                 enabled:
                     defaultStyles?.filter((style) => style.type === "event")[0]
-                        .value === "false"
-                        ? false
-                        : true,
+                        .value !== "false",
                 padding: defaultStyles?.filter(
                     (style) => style.type === "eventPadding"
                 )[0].value,
@@ -455,9 +458,7 @@ function EditSignatureComponent() {
                 enabled:
                     defaultStyles?.filter(
                         (style) => style.type === "disclaimerEnabled"
-                    )[0]?.value === "false"
-                        ? false
-                        : true,
+                    )[0]?.value !== "false",
                 padding: defaultStyles?.filter(
                     (style) => style.type === "disclaimerPadding"
                 )[0].value,
@@ -941,6 +942,14 @@ function EditSignatureComponent() {
                             signatureOption.salutation.padding?.toString() ||
                             "12",
                         type: "greetingsPadding",
+                        signature: result?.data?.id,
+                    },
+                    //vCard
+                    {
+                        property: "enabled",
+                        value:
+                            signatureOption.vcard.enabled?.toString() || false,
+                        type: "vCardEnabled",
                         signature: result?.data?.id,
                     },
                     // Event
