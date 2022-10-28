@@ -1,47 +1,58 @@
-import { Switch, Route } from 'react-router-dom'
-import Home from './containers/Home'
-import Error from './containers/Error'
-import Dashboard from './containers/Dashboard'
-import PrivateRoute from 'Utils/PrivateRoute/privateRoute'
-import CreateSignature from './containers/CreateSignature'
-import Users from './views/Users/users'
-import ImgUploader from './views/imgUploader/imgUploader'
-import Studio from './containers/Studio'
-import Store from './containers/Store'
-import Billing from './containers/Billing'
-import Report from './containers/Feedback'
-import Signup from './components/Landing/SignUp/SignUp'
-import { NotificationProvider } from 'Utils/Notifications/notifications'
-import ResetPassword from './views/ResetPassword/ResetPassword.jsx'
-import EditSignatureComponent from './views/Signatures/edit/editSignature'
+import { Switch, Route } from "react-router-dom";
+import Home from "./containers/Home";
+import Error from "./containers/Error";
+import Dashboard from "./containers/Dashboard";
+import PrivateRoute from "Utils/PrivateRoute/privateRoute";
+import CreateSignature from "./containers/CreateSignature";
+import Users from "./views/Users/users";
+import ImgUploader from "./views/imgUploader/imgUploader";
+import Studio from "./containers/Studio";
+import Store from "./containers/Store";
+import Billing from "./containers/Billing";
+import Report from "./containers/Feedback";
+import Signup from "./components/Landing/SignUp/SignUp";
+import { NotificationProvider } from "Utils/Notifications/notifications";
+import ResetPassword from "./views/ResetPassword/ResetPassword.jsx";
+import EditSignatureComponent from "./views/Signatures/edit/editSignature";
 import TemplateRendererPage from "./views/TemplateRenderer/TemplateRenderer.page";
 
 export default function DesktopRoutes() {
     return (
         <Switch>
             <Route exact path="/">
-            <NotificationProvider login>
-                <Home />
-            </NotificationProvider>
+                <NotificationProvider login>
+                    <Home />
+                </NotificationProvider>
             </Route>
 
             <Route exact path="/sign-in">
-            <NotificationProvider login>
-                <Home />
-            </NotificationProvider>
+                <NotificationProvider login>
+                    <Home />
+                </NotificationProvider>
             </Route>
 
             <Route exact path="/sign-up">
-            <NotificationProvider signup>
-                <Signup />
-            </NotificationProvider>
+                <NotificationProvider signup>
+                    <Signup />
+                </NotificationProvider>
             </Route>
 
             <Route path="/reset-password">
                 <ResetPassword />
             </Route>
 
-            <PrivateRoute exact path="/dashboard" page="home" component={Dashboard} />
+            <PrivateRoute
+                exact
+                path="/dashboard"
+                page="home"
+                component={Dashboard}
+            />
+
+            <PrivateRoute
+                path="/signatures"
+                page="signatures"
+                component={Dashboard}
+            />
 
             <PrivateRoute
                 exact
@@ -50,21 +61,51 @@ export default function DesktopRoutes() {
                 component={Dashboard}
             />
 
-            <PrivateRoute path="/create-signature" component={CreateSignature} />
+            <PrivateRoute
+                path="/create-signature"
+                component={CreateSignature}
+            />
 
-            <PrivateRoute path="/edit-signature/:signatureId" component={EditSignatureComponent} />
+            <PrivateRoute
+                path="/edit-signature/:signatureId"
+                component={EditSignatureComponent}
+            />
 
             <PrivateRoute path="/user/:userId" component={Users} />
 
-            <PrivateRoute exact path="/teams/:type" page="teams" component={Dashboard} />
+            <PrivateRoute
+                exact
+                path="/teams/:type"
+                page="teams"
+                component={Dashboard}
+            />
 
-            <PrivateRoute path="/profile" page="profile" component={Dashboard} />
+            <PrivateRoute
+                path="/profile"
+                page="profile"
+                component={Dashboard}
+            />
 
-            <PrivateRoute exact path="/events" page="events" component={Dashboard} />
+            <PrivateRoute
+                exact
+                path="/events"
+                page="events"
+                component={Dashboard}
+            />
 
-            <PrivateRoute exact path="/create-event" page="create-event" component={Dashboard} />
+            <PrivateRoute
+                exact
+                path="/create-event"
+                page="create-event"
+                component={Dashboard}
+            />
 
-            <PrivateRoute exact path="/past-events" page="past-events" component={Dashboard} />
+            <PrivateRoute
+                exact
+                path="/past-events"
+                page="past-events"
+                component={Dashboard}
+            />
 
             <PrivateRoute path="/billing" page="billing" component={Billing} />
 
@@ -77,12 +118,12 @@ export default function DesktopRoutes() {
             <PrivateRoute exact path="/report" component={Report} />
 
             <Route path="/users/:token" />
-            
+
             <Route path="/render-template" component={TemplateRendererPage} />
 
             <Route path="/">
                 <Error />
             </Route>
         </Switch>
-    )
+    );
 }

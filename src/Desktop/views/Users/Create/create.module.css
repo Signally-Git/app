@@ -1,101 +1,101 @@
 .container {
-  width: calc(100% - 2rem);
-  max-height: 90%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  margin: auto;
-  flex-direction: row;
+    width: calc(100% - 2rem);
+    max-height: 90%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin: auto;
+    flex-direction: row;
 }
 .container > svg {
-  height: auto;
-  max-height: 40%;
-  width: 100%;
+    height: auto;
+    max-height: 40%;
+    width: 100%;
 }
 
 .slidesContainer {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
 }
 
 .slide {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  box-sizing: border-box;
-  min-width: 100%;
-  width: 100%;
-  padding: 1rem;
-  height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    min-width: 100%;
+    width: 100%;
+    padding: 1rem;
+    height: 100%;
 }
 .slide > button {
-  margin: 0.5rem auto;
-  position: relative;
+    margin: 0.5rem auto;
+    position: relative;
 }
 .slide p {
-  padding: 0;
-  width: 100%;
-  text-align: center;
-  margin: 0 auto;
-  font-size: 0.85rem;
-  font-weight: 600;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 0.85rem;
+    font-weight: 600;
 }
-.slide input[type=file] {
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  cursor: pointer;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.slide input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    cursor: pointer;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .space {
-  justify-content: space-between;
-  height: 65%;
-  margin: auto;
+    justify-content: space-between;
+    height: 65%;
+    margin: auto;
 }
 
 .back {
-  margin-top: 5rem !important;
+    margin-top: 5rem !important;
 }
 
 .row {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 .row input {
-  max-width: 48%;
+    max-width: 48%;
 }
 
 .btnsContainer {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  justify-content: space-between;
-  position: absolute;
-  margin: auto;
-  inset: 0;
-  top: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    margin: auto;
+    inset: 0;
+    top: auto;
 }
 
 .btn {
-  display: flex;
-  color: #402927;
-  border: none;
-  background: none;
-  outline: none;
-  margin: auto;
+    display: flex;
+    color: #402927;
+    border: none;
+    background: none;
+    outline: none;
+    margin: auto;
 }
 .btn:hover {
-  cursor: pointer;
-  color: #ff7954;
+    cursor: pointer;
+    color: #ff7954;
 }
 
 .inputsContainer > div {
-  margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 }

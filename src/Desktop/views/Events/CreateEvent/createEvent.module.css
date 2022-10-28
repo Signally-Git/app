@@ -1,110 +1,111 @@
 .container {
-  width: 100%;
-  min-width: 35vw;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  background: #fff;
-  border-radius: 20px;
-  position: relative;
-  padding: 2rem;
+    width: 100%;
+    min-width: 35vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background: #fff;
+    border-radius: 20px;
+    position: relative;
+    padding: 2rem;
 }
 .container h2 {
-  width: 100%;
-  display: flex;
-  margin-top: 0;
-  color: #402927;
+    width: 100%;
+    display: flex;
+    margin-top: 0;
+    color: #402927;
 }
 .container h2 span {
-  margin-left: 0.5rem;
-  color: #ff7954;
+    margin-left: 0.5rem;
+    color: #ff7954;
 }
 .container h2 svg {
-  margin-left: auto;
+    margin-left: auto;
 }
 .container label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #ff7954;
-  margin-left: 0.15rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #ff7954;
+    margin-left: 0.15rem;
 }
 .container input {
-  border: 1px solid #f7f5f5;
-  padding: 1rem;
-  border-radius: 10px;
-  margin: 0.5rem 0;
-  margin-bottom: 1rem;
-  outline: none;
+    border: 1px solid #f7f5f5;
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 0.5rem 0;
+    margin-bottom: 1rem;
+    outline: none;
 }
 .container input:focus {
-  border-color: #ff7954;
-  box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+    border-color: #ff7954;
+    box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }
 .container .datePick ~ input {
-  margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 .container button {
-  margin-right: auto;
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-top: 1.5rem;
+    margin-right: auto;
+    margin-left: 0;
+    margin-bottom: 0;
+    margin-top: 1.5rem;
 }
 
 .datePick {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 .datePick > div {
-  width: 48%;
+    width: 48%;
 }
 .datePick > div input {
-  transition: border-color 0.3s, box-shadow 0.3s;
-  cursor: pointer;
-  font-size: 0.8rem;
-  width: 100%;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    font-size: 0.8rem;
+    width: 100%;
 }
-.datePick > div input:hover, .datePick > div input:focus-within {
-  border-color: #ff7954;
-  box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+.datePick > div input:hover,
+.datePick > div input:focus-within {
+    border-color: #ff7954;
+    box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }
 
 .row {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .currentEventPreview {
-  width: 100%;
+    width: 100%;
 }
 .currentEventPreview img {
-  margin: 0 0 1rem 0;
-  max-width: 100%;
-  max-height: 30vh;
+    margin: 0 0 1rem 0;
+    max-width: 100%;
+    max-height: 30vh;
 }
 .currentEventPreview + div {
-  width: 48%;
+    width: 48%;
 }
 
 .uploadContainer {
-  display: flex;
-  width: 100% !important;
+    display: flex;
+    width: 100% !important;
 }
 .uploadContainer > div {
-  width: 100%;
+    width: 100%;
 }
 
 .btnsContainer {
-  display: flex;
+    display: flex;
 }
 .btnsContainer button {
-  margin: 2rem 0 0;
+    margin: 2rem 0 0;
 }
 .btnsContainer button:last-child {
-  margin-left: 1rem;
+    margin-left: 1rem;
 }
 
 .eventName {
-  margin-top: 1rem;
-  width: 100%;
+    margin-top: 1rem;
+    width: 100%;
 }

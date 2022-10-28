@@ -1,277 +1,278 @@
 .infosContainer {
-  width: 100%;
+    width: 100%;
 }
 .infosContainer h4 {
-  color: #402927;
-  font-weight: bold;
-  font-size: 1rem;
-  text-align: left;
-  margin: 0.5rem 0;
+    color: #402927;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: left;
+    margin: 0.5rem 0;
 }
 
 .inputsContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.25rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25rem;
 }
 
 .inputsFlex {
-  justify-content: space-between;
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
 }
 .inputsFlex input {
-  background-color: #f8f2f0;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.9rem;
+    background-color: #f8f2f0;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
 }
 .inputsFlex input::placeholder {
-  color: #402927;
+    color: #402927;
 }
 .inputsFlex .inputContainer {
-  width: 48%;
+    width: 48%;
 }
 
 .CTAcontainer {
-  width: 100%;
-  height: 2rem;
-  padding: 1.5rem 5% 3rem 5%;
-  position: absolute;
-  z-index: 4;
-  bottom: -1.25rem;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 100%;
+    height: 2rem;
+    padding: 1.5rem 5% 3rem 5%;
+    position: absolute;
+    z-index: 4;
+    bottom: -1.25rem;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .fileUpload {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  flex-direction: column;
-  width: 100%;
-  background: #fff;
-  border-radius: 10px;
-  border: 1px solid #f7f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #f7f5f5;
 }
 .fileUpload div {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 .fileUpload .rangeUpload {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 .fileUpload input {
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  z-index: 0;
-  cursor: pointer;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 0;
+    cursor: pointer;
 }
 .fileUpload span {
-  width: 100%;
-  margin: auto;
-  font-size: 0.9rem;
-  line-height: 3rem;
+    width: 100%;
+    margin: auto;
+    font-size: 0.9rem;
+    line-height: 3rem;
 }
 .fileUpload span svg {
-  vertical-align: sub;
-  margin-right: 0.5rem;
-  margin-bottom: 2px;
-  cursor: pointer;
+    vertical-align: sub;
+    margin-right: 0.5rem;
+    margin-bottom: 2px;
+    cursor: pointer;
 }
 
 .outlineBtn {
-  width: auto;
-  padding: 1rem 2rem;
-  margin-right: 1rem;
-  background: transparent;
-  color: #402a27;
-  border: 1px solid #402a27;
+    width: auto;
+    padding: 1rem 2rem;
+    margin-right: 1rem;
+    background: transparent;
+    color: #402a27;
+    border: 1px solid #402a27;
 }
 
 .inputContainer,
 .inputColorSize {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
 }
 
 .selectColor option .color {
-  position: relative;
+    position: relative;
 }
 .selectColor option .color::before {
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  position: absolute;
-  content: " ";
-  width: 15px;
-  height: 15px;
-  background: #000;
-  border-radius: 50%;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    content: " ";
+    width: 15px;
+    height: 15px;
+    background: #000;
+    border-radius: 50%;
 }
 
 .select {
-  width: 100%;
-  border: none;
+    width: 100%;
+    border: none;
 }
 
 .closed svg {
-  transform: rotate(-90deg);
+    transform: rotate(-90deg);
 }
 
 .expandTitle {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 .expandTitle h4 {
-  cursor: pointer;
+    cursor: pointer;
 }
 .expandTitle svg {
-  cursor: pointer;
-  transition: transform 0.3s;
-  margin-left: 0.5rem;
-  font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+    margin-left: 0.5rem;
+    font-size: 1rem;
 }
 
 .colorContainer {
-  width: 100%;
-  position: relative;
+    width: 100%;
+    position: relative;
 }
 .colorContainer input {
-  text-indent: 2rem;
+    text-indent: 2rem;
 }
 
 .inputColorSize {
-  position: relative;
+    position: relative;
 }
 
 .styleContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .styleContainer .row {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 .styleContainer .row h6 {
-  color: #ff7954;
-  font-weight: normal;
-  padding-right: 1rem;
-  font-size: 1rem;
+    color: #ff7954;
+    font-weight: normal;
+    padding-right: 1rem;
+    font-size: 1rem;
 }
 .styleContainer .row > div {
-  width: 100%;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
 }
 
 .selectSize {
-  position: relative;
-  margin-left: 1rem;
-  width: 100%;
+    position: relative;
+    margin-left: 1rem;
+    width: 100%;
 }
 
 .fontSize {
-  font-size: 0.75rem;
-  position: absolute;
-  bottom: 1.5rem;
+    font-size: 0.75rem;
+    position: absolute;
+    bottom: 1.5rem;
 }
 
 .selectFontContainer {
-  width: 100%;
-  position: relative;
-  transition: 0.2s height;
+    width: 100%;
+    position: relative;
+    transition: 0.2s height;
 }
 .selectFontContainer svg {
-  font-size: 0.75rem;
-  position: absolute;
-  right: 0.5rem;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  z-index: 2;
+    font-size: 0.75rem;
+    position: absolute;
+    right: 0.5rem;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 2;
 }
 
 .selectedFont {
-  outline: none;
-  width: 100%;
-  text-indent: 0.5rem;
-  height: 3rem;
-  z-index: 1;
-  border: 1px solid #f1f1f1;
-  border-radius: 10px;
-  display: flex;
-  position: relative;
-  background: #fff;
-  cursor: pointer;
+    outline: none;
+    width: 100%;
+    text-indent: 0.5rem;
+    height: 3rem;
+    z-index: 1;
+    border: 1px solid #f1f1f1;
+    border-radius: 10px;
+    display: flex;
+    position: relative;
+    background: #fff;
+    cursor: pointer;
 }
 
 .selectFont {
-  padding: 0;
-  position: absolute;
-  z-index: 5;
-  top: auto;
-  bottom: 1.5rem;
-  left: 0;
-  max-height: 10rem;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 0.5rem 0;
-  border-radius: 20px 20px 0 0;
-  list-style: none;
-  background-color: #fff;
-  box-shadow: 0 20px 30px #ebe4e1;
-  width: 100%;
+    padding: 0;
+    position: absolute;
+    z-index: 5;
+    top: auto;
+    bottom: 1.5rem;
+    left: 0;
+    max-height: 10rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.5rem 0;
+    border-radius: 20px 20px 0 0;
+    list-style: none;
+    background-color: #fff;
+    box-shadow: 0 20px 30px #ebe4e1;
+    width: 100%;
 }
 .selectFont li {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  font-size: 0.85rem;
-  align-items: center;
-  transition: 0.2s;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    align-items: center;
+    transition: 0.2s;
 }
 .selectFont li:nth-child(even) {
-  border: 1px solid #fff;
-  border-right: none;
-  border-left: none;
+    border: 1px solid #fff;
+    border-right: none;
+    border-left: none;
 }
 .selectFont li label {
-  cursor: pointer;
-  margin: 0;
+    cursor: pointer;
+    margin: 0;
 }
-.selectFont li:hover, .selectFont li:focus-within {
-  transition: 0.2s;
-  color: #402927;
-  background-color: #f4eeef;
+.selectFont li:hover,
+.selectFont li:focus-within {
+    transition: 0.2s;
+    color: #402927;
+    background-color: #f4eeef;
 }
 .selectFont input {
-  opacity: 0;
-  z-index: 1;
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+    opacity: 0;
+    z-index: 1;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
