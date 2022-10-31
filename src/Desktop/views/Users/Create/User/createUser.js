@@ -27,6 +27,7 @@ export default function CreateUser({ setDone }) {
         position: "",
         email: "",
         phone: "",
+        urlAgenda: "",
         roles: ["ROLE_USER"],
     });
     const [hide, setHide] = useState(false);
@@ -50,7 +51,6 @@ export default function CreateUser({ setDone }) {
         await request
             .post(url, csv)
             .then(() => {
-                // console.log("RESYLT", res.data)
                 notification({
                     content: <>Votre import a été effectué avec succès</>,
                     status: "valid",
@@ -331,6 +331,14 @@ export default function CreateUser({ setDone }) {
                             }
                             type="text"
                             placeholder="Téléphone"
+                        />
+                        <Input
+                            style={{ width: "100%" }}
+                            onChange={(e) =>
+                                setUser({ ...user, urlAgenda: e.target.value })
+                            }
+                            type="text"
+                            placeholder="Lien de prise de rendez-vous"
                         />
                         <div className={classes.btnsContainer}>
                             <Button

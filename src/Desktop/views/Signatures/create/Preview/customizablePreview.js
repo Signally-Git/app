@@ -10,7 +10,6 @@ export default function Preview({
     organisation,
     ...props
 }) {
-    console.log(template);
     // Converts JSX camel Case attributes to dashed classics HTML
     const [socials, setSocials] = React.useState([
         { name: "facebook" },
@@ -289,7 +288,27 @@ export default function Preview({
         /{# START SOCIALS #}.*{% if socialMediaAccounts %}/gis,
         ``
     );
-    replaced = replaced.replaceAll(/{% endif %}.*{# END SOCIALS #}/gis, ``);
+    replaced = replaced.replaceAll(/{% endif %}\s*{# END SOCIALS #}/gis, ``);
+
+    replaced = replaced.replaceAll(
+        /{{ company.websiteUrl\|trim\('https:\/\/'\)\|trim\('http:\/\/'\) }}/g,
+        organisation?.websiteUrl.replace("https://", "").replace("http://", "")
+    );
+
+    // Calendar
+    if (!options?.calendar?.enabled)
+        replaced = replaced.replaceAll(
+            /\{# START CALENDAR #}.*\{# END CALENDAR #}/gis,
+            ""
+        );
+
+    replaced = replaced.replaceAll(/{# START CALENDAR #}/g, ``);
+
+    replaced = replaced.replace(
+        /{% if styles\['calendarEnabled']\['enabled'] is same as\('true'\) %}/,
+        ``
+    );
+    replaced = replaced.replaceAll(/{% endif %}\s*{# END CALENDAR #}/gis, ``);
 
     // vCard
     if (!options?.vcard?.enabled)
@@ -304,7 +323,7 @@ export default function Preview({
         ``
     );
 
-    replaced = replaced.replaceAll(/{% endif %}.*{# END VCARD #}/gis, ``);
+    replaced = replaced.replaceAll(/{% endif %}\s*{# END VCARD #}/gis, ``);
 
     if (options?.event?.enabled) {
         replaced = replaced.replaceAll(/{% if event or isPreview %}/gi, "");

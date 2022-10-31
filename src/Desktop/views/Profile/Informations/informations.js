@@ -21,6 +21,7 @@ function Informations() {
     const [companyAddress, setCompanyAddress] = useState("");
     const [website, setWebsite] = useState("");
     const [phone, setPhone] = useState("");
+    const [urlAgenda, setUrlAgenda] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [position, setPosition] = useState("");
@@ -56,6 +57,7 @@ function Informations() {
                 setLastName(res.data.lastName);
                 setPosition(res.data.position);
                 setMobile(res.data.phone);
+                setUrlAgenda(res.data.urlAgenda);
             });
         };
         getData();
@@ -173,6 +175,7 @@ function Informations() {
             lastName: lastName,
             position: position,
             phone: mobile,
+            urlAgenda: urlAgenda,
         };
         await request
             .patch(
@@ -462,6 +465,17 @@ function Informations() {
                                             type="tel"
                                         />
                                     </div>
+                                </div>
+                                <div className={classes.inputContainer}>
+                                    <label>Lien de prise de rendez-vous</label>
+                                    <Input
+                                        value={urlAgenda}
+                                        onChange={(e) =>
+                                            setUrlAgenda(e.target.value)
+                                        }
+                                        type="text"
+                                        placeholder="https://calendly.com/"
+                                    />
                                 </div>
                                 <div className={classes.inputContainer}>
                                     <label>Email</label>

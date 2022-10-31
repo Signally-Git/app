@@ -93,6 +93,7 @@ function UserTab({
             phone: user.phone,
             position: user.position,
             email: user.email,
+            urlAgenda: user.urlAgenda,
         };
 
         await request
@@ -219,8 +220,6 @@ function UserTab({
                                         checked={
                                             edit?.id === user.id &&
                                             edit?.name === user.name
-                                                ? true
-                                                : false
                                         }
                                         type="radio"
                                         name="user"
@@ -377,6 +376,20 @@ function UserTab({
                                                         }
                                                     />
                                                 </div>
+
+                                                <Input
+                                                    type="text"
+                                                    placeholder="Lien de prise de rendez-vous"
+                                                    defaultValue={
+                                                        user.urlAgenda
+                                                    }
+                                                    onChange={(e) =>
+                                                        handleChange(
+                                                            e.target.value,
+                                                            "urlAgenda"
+                                                        )
+                                                    }
+                                                />
                                             </div>
                                         </>
                                     ) : (

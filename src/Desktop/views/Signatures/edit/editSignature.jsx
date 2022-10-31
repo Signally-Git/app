@@ -72,6 +72,7 @@ function EditSignatureComponent() {
         custom: { enabled: false },
         eco: { value: "Ecoresponsability", enabled: false },
         vcard: { enabled: false },
+        calendar: { enabled: false },
         event: {
             list: events,
             selected: events[0],
@@ -425,6 +426,12 @@ function EditSignatureComponent() {
                         (style) => style.type === "vCardEnabled"
                     )?.[0]?.value !== "false",
             },
+            calendar: {
+                enabled:
+                    defaultStyles?.filter(
+                        (style) => style.type === "calendarEnabled"
+                    )?.[0]?.value !== "false",
+            },
             event: {
                 ...signatureOption.event,
                 display: signatureOption.event?.selected?.imageUrl,
@@ -453,8 +460,7 @@ function EditSignatureComponent() {
                 value:
                     defaultStyles?.filter(
                         (style) => style.type === "disclaimerValue"
-                    )[0]?.value ||
-                    `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.`,
+                    )[0]?.value || `Disclaimer`,
                 enabled:
                     defaultStyles?.filter(
                         (style) => style.type === "disclaimerEnabled"
@@ -944,12 +950,21 @@ function EditSignatureComponent() {
                         type: "greetingsPadding",
                         signature: result?.data?.id,
                     },
-                    //vCard
+                    // vCard
                     {
                         property: "enabled",
                         value:
                             signatureOption.vcard.enabled?.toString() || false,
                         type: "vCardEnabled",
+                        signature: result?.data?.id,
+                    },
+                    // Calendar
+                    {
+                        property: "enabled",
+                        value:
+                            signatureOption.calendar.enabled?.toString() ||
+                            false,
+                        type: "calendarEnabled",
                         signature: result?.data?.id,
                     },
                     // Event

@@ -406,6 +406,33 @@ export default function Options(props) {
                     </label>
                 </div>
 
+                {/* Calendar */}
+                <div className={classes.row}>
+                    <label htmlFor="calendar">
+                        <h4>Prise de rendez-vous</h4>
+                    </label>
+                    <label className={classes.switch}>
+                        <input
+                            type="checkbox"
+                            autoFocus
+                            id="calendar"
+                            checked={props.data.calendar.enabled}
+                            onChange={(e) => {
+                                props.setData({
+                                    ...props.data,
+                                    calendar: {
+                                        ...props.data.calendar,
+                                        enabled: e.target.checked,
+                                    },
+                                });
+                            }}
+                        />
+                        <span
+                            className={`${classes.slider} ${classes.round}`}
+                        ></span>
+                    </label>
+                </div>
+
                 {/* Disclaimer */}
                 <div className={classes.row}>
                     <label htmlFor="footer">
