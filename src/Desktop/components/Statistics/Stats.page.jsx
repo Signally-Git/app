@@ -17,8 +17,12 @@ function StatsPage() {
         );
         const yAxis = data.filter((item) => item.type === "EVENT_LINK_CLICK");
         setChartData([
-            { name: "Event affiché", value: xAxis.length },
-            { name: "Ouverture d'event", value: yAxis.length },
+            {
+                nameDisplay: "Event affiché",
+                display: xAxis.length,
+                nameClicked: "Ouverture d'event",
+                clicked: yAxis.length,
+            },
         ]);
     };
 
