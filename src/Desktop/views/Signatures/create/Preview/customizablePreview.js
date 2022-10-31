@@ -8,7 +8,6 @@ export default function Preview({
     options,
     user,
     organisation,
-    ...props
 }) {
     // Converts JSX camel Case attributes to dashed classics HTML
     const [socials, setSocials] = React.useState([
@@ -243,10 +242,10 @@ export default function Preview({
         `${infos?.fontFamily || "Helvetica"};`
     );
     replaced = replaced.replaceAll(
-        "{{ styles['generalFontSize']['fontSize'] }}",
-        `${infos?.fontSize + "px" || "11"};`
+        /\{\{ styles\['generalFontSize']\['fontSize'] }}/gis,
+        `${infos?.fontSize[0] || "11"}px;`
     );
-
+    console.log(infos?.fontSize[0]);
     //mail
     replaced = replaced.replaceAll(
         "{{ user.email }}",
@@ -259,7 +258,7 @@ export default function Preview({
         options?.salutation?.enabled
             ? `<p style="padding-bottom: ${
                   options?.salutation?.padding
-              }px;"} >${options?.salutation.value || "Cordialement,"}</p>`
+              }px;" }>${options?.salutation.value || "Cordialement,"}</p>`
             : ""
     );
     var disclaimer = /{# START DISCLAIMER #}.*{# END DISCLAIMER #}/gis;
