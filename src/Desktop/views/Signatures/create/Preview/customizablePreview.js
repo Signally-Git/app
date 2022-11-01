@@ -243,16 +243,21 @@ export default function Preview({
     );
     replaced = replaced.replaceAll(
         /\{\{ styles\['generalFontSize']\['fontSize'] }}/gis,
-        `${infos?.fontSize[0] || "11"}px;`
+        `${infos?.fontSize[0].toString() || "11"}`
     );
-    console.log(infos?.fontSize[0]);
+    console.log(
+        replaced.replaceAll(
+            /\{\{ styles\['generalFontSize']\['fontSize'] }}/gis,
+            `${infos?.fontSize[0].toString() || "11"}`
+        )
+    );
     //mail
     replaced = replaced.replaceAll(
         "{{ user.email }}",
         user?.email || "em@il.com"
     );
 
-    var greeting = /{# START GREETINGS #}.*{# END GREETINGS #}/gis;
+    let greeting = /{# START GREETINGS #}.*{# END GREETINGS #}/gis;
     replaced = replaced.replaceAll(
         greeting,
         options?.salutation?.enabled
@@ -261,7 +266,7 @@ export default function Preview({
               }px;" }>${options?.salutation.value || "Cordialement,"}</p>`
             : ""
     );
-    var disclaimer = /{# START DISCLAIMER #}.*{# END DISCLAIMER #}/gis;
+    let disclaimer = /{# START DISCLAIMER #}.*{# END DISCLAIMER #}/gis;
     replaced = replaced.replaceAll(
         disclaimer,
         options?.footer?.enabled
