@@ -1,6 +1,5 @@
 import React from "react";
 import { AiOutlineEdit } from "react-icons/ai";
-import { FaUser } from "react-icons/fa";
 import { FiCheck, FiTrash } from "react-icons/fi";
 import { HiOutlineSearch } from "react-icons/hi";
 import { Link } from "react-router-dom";
@@ -11,7 +10,6 @@ import request from "Utils/Request/request";
 import classes from "../Tab/tab.module.css";
 
 function UserTab({
-    time,
     selected,
     users,
     setUsers,
@@ -281,7 +279,7 @@ function UserTab({
                                             }
                                         >
                                             <Link to="/profile/informations/user">
-                                                <FaUser />
+                                                <AiOutlineEdit />
                                             </Link>
                                         </div>
                                     ) : (

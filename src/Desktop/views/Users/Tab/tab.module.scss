@@ -157,6 +157,17 @@
     }
 }
 
+.wpLogoContainer {
+    display: flex;
+    width: 48%;
+    gap: .25rem;
+    .logoPreview {
+        max-width: 30px;
+        max-height: 30px;
+        margin: 0;
+    }
+}
+
 .teamList {
     .teamWithWP.editing {
         height: 6rem !important;

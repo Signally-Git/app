@@ -741,26 +741,54 @@ export default function Tab({
                                                             classes.inputsContainer
                                                         }
                                                     >
-                                                        <UploadFile
-                                                            file={file}
-                                                            setFile={setFile}
-                                                            placeholder={
-                                                                workplace?.logo
-                                                                    ?.name
-                                                                    ? "Remplacer " +
-                                                                      workplace
-                                                                          .logo
-                                                                          .name
-                                                                    : "Importer un logo"
+                                                        <div
+                                                            className={
+                                                                classes.wpLogoContainer
                                                             }
-                                                            style={{
-                                                                background:
-                                                                    "#FFF",
-                                                                marginBottom:
-                                                                    ".2rem",
-                                                                width: "48%",
-                                                            }}
-                                                        />
+                                                        >
+                                                            {workplace?.logo
+                                                                .url && (
+                                                                <img
+                                                                    className={
+                                                                        classes.logoPreview
+                                                                    }
+                                                                    src={
+                                                                        workplace
+                                                                            .logo
+                                                                            .url
+                                                                    }
+                                                                    alt={
+                                                                        workplace
+                                                                            .logo
+                                                                            .name
+                                                                    }
+                                                                />
+                                                            )}
+                                                            <UploadFile
+                                                                file={file}
+                                                                setFile={
+                                                                    setFile
+                                                                }
+                                                                placeholder={
+                                                                    workplace
+                                                                        ?.logo
+                                                                        ?.name
+                                                                        ? "Remplacer " +
+                                                                          workplace
+                                                                              .logo
+                                                                              .name
+                                                                        : "Importer un logo"
+                                                                }
+                                                                style={{
+                                                                    background:
+                                                                        "#FFF",
+                                                                    marginBottom:
+                                                                        ".2rem",
+                                                                    width: "100%",
+                                                                }}
+                                                            />
+                                                        </div>
+
                                                         <Input
                                                             onChange={(e) => {
                                                                 setWebsiteUrl(
