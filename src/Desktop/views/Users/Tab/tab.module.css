@@ -1,332 +1,343 @@
 .container {
-    max-height: 60%;
+  max-height: 60%;
 }
 
 .modal {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    border-radius: 20px;
-    width: 20%;
-    padding: 0 1rem 1rem;
-    z-index: 3;
-    left: 15%;
-    overflow: hidden;
-    text-align: center;
-    right: 0;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.288);
-    backdrop-filter: blur(10px);
-    margin: auto;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 20px;
+  width: 20%;
+  padding: 0 1rem 1rem;
+  z-index: 3;
+  left: 15%;
+  overflow: hidden;
+  text-align: center;
+  right: 0;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.288);
+  backdrop-filter: blur(10px);
+  margin: auto;
 }
 .modal h4 {
-    line-height: 2rem;
+  line-height: 2rem;
 }
 .modal > div:first-child {
-    display: flex;
-    width: 70%;
+  display: flex;
+  width: 70%;
 }
 .modal > span {
-    text-align: justify;
+  text-align: justify;
 }
 .modal > div:last-child {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
 }
 
 .orangeTxt {
-    color: #ff7954 !important;
+  color: #ff7954 !important;
 }
 
 .colheader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  width: 100%;
 }
 .colheader .totalNumber {
-    color: #ff7954;
-    font-weight: bold;
-    font-size: 0.9rem;
+  color: #ff7954;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 .colheader button {
-    border: none;
-    color: #402927;
-    background: none;
-    font-size: 0.9rem;
+  border: none;
+  color: #402927;
+  background: none;
+  font-size: 0.9rem;
 }
 .colheader button:hover {
-    color: #ff7954;
-    cursor: pointer;
+  color: #ff7954;
+  cursor: pointer;
 }
 
 .mh100 {
-    max-height: 100%;
+  max-height: 100%;
 }
 
 .itemsList {
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    z-index: 0;
-    min-height: 38vh;
-    max-height: 100%;
-    margin-top: 1rem;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  z-index: 0;
+  min-height: 38vh;
+  max-height: 100%;
+  margin-top: 1rem;
+  width: 100%;
 }
 .itemsList form {
-    z-index: 0;
+  z-index: 0;
 }
 .itemsList li {
-    margin: 1rem 0;
-    margin-left: auto;
-    width: 100%;
-    height: 3.5rem;
-    transition: height 0.2s, width 0.2s;
-    z-index: 2;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    font-size: 0.85rem;
-    font-weight: 600;
-    position: relative;
-    background: #f7f5f5;
-    border-radius: 10px;
+  margin: 1rem 0;
+  margin-left: auto;
+  width: 100%;
+  height: 3.5rem;
+  transition: height 0.2s, width 0.2s;
+  z-index: 2;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  position: relative;
+  background: #f7f5f5;
+  border-radius: 10px;
 }
 .itemsList li .checkbox {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    border: none;
-    background: none;
-    opacity: 0;
-    cursor: pointer;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  border: none;
+  background: none;
+  opacity: 0;
+  cursor: pointer;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
 }
 .itemsList li .checkbox:checked ~ span::before {
-    content: "";
-    position: absolute;
-    display: block;
-    z-index: -1;
-    left: -1rem;
-    top: 0;
-    z-index: -1;
-    bottom: 0;
-    margin: auto;
-    height: 8px;
-    border-radius: 50%;
-    width: 8px;
-    background: #ff7954;
-    transition: 0.2s;
+  content: "";
+  position: absolute;
+  display: block;
+  z-index: -1;
+  left: -1rem;
+  top: 0;
+  z-index: -1;
+  bottom: 0;
+  margin: auto;
+  height: 8px;
+  border-radius: 50%;
+  width: 8px;
+  background: #ff7954;
+  transition: 0.2s;
 }
 .itemsList li:hover {
-    width: 95%;
-    transition: 0.3s;
-    cursor: pointer;
+  width: 95%;
+  transition: 0.3s;
+  cursor: pointer;
 }
 .itemsList li > div {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 .itemsList li > div span {
-    color: #402927;
+  color: #402927;
 }
 .itemsList li > div > span > span {
-    font-weight: normal;
-    font-size: 0.75rem;
+  font-weight: normal;
+  font-size: 0.75rem;
 }
 
 .renameContainer {
-    margin-bottom: auto;
-    max-width: 85%;
-    display: flex;
-    justify-content: space-between;
+  margin-bottom: auto;
+  max-width: 85%;
+  display: flex;
+  justify-content: space-between;
 }
 .renameContainer .rename {
-    max-width: 48%;
+  max-width: 48%;
+}
+
+.wpLogoContainer {
+  display: flex;
+  width: 48%;
+  gap: 0.25rem;
+}
+.wpLogoContainer .logoPreview {
+  max-width: 30px;
+  max-height: 30px;
+  margin: 0;
 }
 
 .teamList .teamWithWP.editing {
-    height: 6rem !important;
+  height: 6rem !important;
 }
 .teamList .teamWithWP.editing .rename {
-    margin-bottom: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 .teamList .editing {
-    height: 3.5rem !important;
+  height: 3.5rem !important;
 }
 .teamList .editing .rename {
-    padding: 0.5rem 1rem;
-    margin: 0 0 0 0;
-    border-radius: 20px;
+  padding: 0.5rem 1rem;
+  margin: 0 0 0 0;
+  border-radius: 20px;
 }
 .teamList .rename {
-    margin-bottom: 0;
-    padding: 0;
-    border-radius: 0;
+  margin-bottom: 0;
+  padding: 0;
+  border-radius: 0;
 }
 
 .usersList {
-    max-height: 60%;
+  max-height: 60%;
 }
 .usersList .editing {
-    height: 9.5rem !important;
+  height: 13.5rem !important;
 }
 .usersList .editing .editDiv {
-    bottom: 0.5rem;
+  bottom: 0.5rem;
 }
 .usersList .editDiv {
-    top: auto;
-    bottom: 1rem;
+  top: auto;
+  bottom: 1rem;
 }
 
 .editDiv {
-    animation: fadeIn 0.2s forwards;
-    padding: 1rem;
-    box-sizing: border-box;
-    position: absolute;
-    border-radius: 10px;
-    inset: auto 0;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-height: 70%;
-    max-height: 70%;
-    bottom: 1rem;
+  animation: fadeIn 0.2s forwards;
+  padding: 1rem;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 10px;
+  inset: auto 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 70%;
+  max-height: 70%;
+  bottom: 1rem;
 }
-.editDiv input:not(input[type="file"]) {
-    height: 1rem;
-    font-size: 0.75rem;
-    margin: 0.5rem 0 0 0;
+.editDiv input:not(input[type=file]) {
+  height: 1rem;
+  font-size: 0.75rem;
+  margin: 0.5rem 0 0 0;
 }
 .editDiv .inputsContainer {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    z-index: 5;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 5;
 }
-.editDiv .inputsContainer input:not(input[type="file"]) {
-    min-width: 48%;
-    max-width: 48%;
+.editDiv .inputsContainer input:not(input[type=file]) {
+  min-width: 48%;
+  max-width: 48%;
 }
 
 @keyframes fadeIn {
-    0% {
-        height: 0;
-    }
-    100% {
-        height: 7rem;
-    }
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 7rem;
+  }
 }
 .editing {
-    height: 17rem !important;
+  height: 17rem !important;
 }
 .editing .actionsContainer {
-    top: 1.4rem;
+  top: 1.4rem;
 }
 
 .actionsContainer,
 .actionsContainerAdmin {
-    transition: 0.2s;
-    position: absolute;
-    right: 1rem;
-    bottom: auto;
-    top: auto;
-    z-index: 2;
-    width: 2.5rem;
-    align-items: center;
+  transition: 0.2s;
+  position: absolute;
+  right: 1rem;
+  bottom: auto;
+  top: auto;
+  z-index: 2;
+  width: 2.5rem;
+  align-items: center;
 }
 .actionsContainer svg,
 .actionsContainerAdmin svg {
-    color: #402927;
-    opacity: 0.6;
+  color: #402927;
+  opacity: 0.6;
 }
 .actionsContainer svg:first-child,
 .actionsContainerAdmin svg:first-child {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 .actionsContainer svg:hover,
 .actionsContainerAdmin svg:hover {
-    color: #ff7954;
-    opacity: 1;
+  color: #ff7954;
+  opacity: 1;
 }
 
 .actionsContainerAdmin {
-    justify-content: center !important;
-    top: auto;
+  justify-content: center !important;
+  top: auto;
 }
 
 .rename:not(:disabled) {
-    z-index: 5;
-    background: #fff;
+  z-index: 5;
+  background: #fff;
 }
 
 .rename {
-    margin-bottom: auto;
-    transition: 0.2s;
-    background: none;
-    width: 80%;
-    border: none;
-    opacity: 1;
-    color: #402927;
-    font-size: 0.85rem;
-    font-weight: 600;
-    border-radius: 10px;
-    padding: 0.5rem 1rem;
+  margin-bottom: auto;
+  transition: 0.2s;
+  background: none;
+  width: 80%;
+  border: none;
+  opacity: 1;
+  color: #402927;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
 }
 
 .selected {
-    width: 95% !important;
+  width: 95% !important;
 }
 
 .groupName {
-    color: rgba(64, 41, 39, 0.75) !important;
-    padding: 0.25rem 0.75rem;
-    padding-top: 0.25rem !important;
-    border-radius: 20px;
-    background-color: rgba(64, 41, 39, 0.05);
-    margin-top: 0.5rem;
-    font-weight: 600;
-    font-size: 0.6rem !important;
+  color: rgba(64, 41, 39, 0.75) !important;
+  padding: 0.25rem 0.75rem;
+  padding-top: 0.25rem !important;
+  border-radius: 20px;
+  background-color: rgba(64, 41, 39, 0.05);
+  margin-top: 0.5rem;
+  font-weight: 600;
+  font-size: 0.6rem !important;
 }
 
 .searchInput {
-    display: flex;
-    position: relative;
+  display: flex;
+  position: relative;
 }
 .searchInput svg {
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    left: 0.75rem;
-    position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 0.75rem;
+  position: absolute;
 }
 
 .search {
-    text-indent: 2rem;
-    border-radius: 20px;
-    width: 100%;
-    outline: none;
-    border: 1px solid transparent;
-    margin: 1rem 0;
-    padding: 0.75rem 0.5rem;
-    background: #f7f5f5;
-    display: block;
-    transition: 0.2s;
+  text-indent: 2rem;
+  border-radius: 20px;
+  width: 100%;
+  outline: none;
+  border: 1px solid transparent;
+  margin: 1rem 0;
+  padding: 0.75rem 0.5rem;
+  background: #f7f5f5;
+  display: block;
+  transition: 0.2s;
 }
 .search:focus {
-    border-color: #ff7954;
+  border-color: #ff7954;
 }
 
 .btnReady .checkmark {
-    color: #ff7954;
+  color: #ff7954;
 }

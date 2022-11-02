@@ -4,56 +4,19 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c4dff9f-5d0a-4e3d-a895-082d60361406" name="Changes" comment="select signaturePreview">
-      <change afterPath="$PROJECT_DIR$/../../GitHub/templates/custom/joke.template.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../GitHub/templates/custom/mama.template.twig" afterDir="false" />
+    <list default="true" id="5c4dff9f-5d0a-4e3d-a895-082d60361406" name="Changes" comment="POC curbs">
+      <change beforePath="$PROJECT_DIR$/../../GitHub/templates/custom/ohbaby.template.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../../GitHub/templates/custom/ohbaby.template.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GitHub/templates/custom/terresdecafe.template.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../../GitHub/templates/custom/terresdecafe.template.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Assets/style/btns.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Assets/style/btns.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Billing/BillingDetails/BillingDetails.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Billing/BillingDetails/BillingDetails.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Billing/BillingHistory/billinghistory.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Billing/BillingHistory/billinghistory.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Billing/BillingInfos/billinginfos.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Billing/BillingInfos/billinginfos.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Billing/PaymentMethod/PaymentMethod.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Billing/PaymentMethod/PaymentMethod.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Billing/billing.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Billing/billing.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/CopySignature/CopySignature.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/CopySignature/CopySignature.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Dashboard/dashboard.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Dashboard/dashboard.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Dashboard/tiles.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Dashboard/tiles.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Frame/frame.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Frame/frame.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Header/header.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Header/header.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Landing/landing.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Landing/landing.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Menu/Menu.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Menu/Menu.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/News/news.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/News/news.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/News/onBoarding/onBoarding.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/News/onBoarding/onBoarding.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Payment/payment.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Payment/payment.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Report/report.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Report/report.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/SignIn/SignInForm.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/SignIn/SignInForm.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Statistics/Stats.page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Statistics/Stats.page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/defineSocials/defineSocials.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/defineSocials/defineSocials.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/CopySignature/CopySignature.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/CopySignature/CopySignature.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Events/CreateEvent/createEvent.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Events/CreateEvent/createEvent.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Events/events.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Events/events.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Profile/Billing/billing.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Profile/Billing/billing.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Profile/profile.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Profile/profile.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Infos/infos.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Infos/infos.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Infos/input.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Infos/input.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Options/options.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Options/options.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/createSignature.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/createSignature.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Profile/Informations/informations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Profile/Informations/informations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Options/options.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Options/options.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Preview/customizablePreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Preview/customizablePreview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/createSignature.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/createSignature.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/edit/editSignature.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/edit/editSignature.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/signatures.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/signatures.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Create/create.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Create/create.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/SignaturePreview/signaturePreview.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/SignaturePreview/signaturePreview.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Create/User/createUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Create/User/createUser.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/users.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/users.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/Btns/btns.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Btns/btns.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/Button/btn.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Button/btn.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/CustomSelect/customselect.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/CustomSelect/customselect.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/Input/input.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Input/input.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/Logo/logo.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Logo/logo.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/Modals/modal.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Modals/modal.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/Notifications/notifications.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Notifications/notifications.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/Select/select.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Select/select.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/Upload/uploadFile.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Upload/uploadFile.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/userTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/userTab.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +30,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -144,7 +106,6 @@
       <workItem from="1662992254096" duration="155000" />
       <workItem from="1663249823702" duration="7414000" />
       <workItem from="1663259666554" duration="47628000" />
-      <workItem from="1666873736820" duration="3244000" />
     </task>
     <task id="LOCAL-00001" summary="Changed styling to match the whole app modals">
       <created>1663253331634</created>

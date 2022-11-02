@@ -64,6 +64,7 @@ function CreateSignatureComponent() {
         bannerTop: { url: "test", enabled: false, padding: 10 },
         event: { list: [], selected: [], enabled: false, padding: 12 },
         vcard: { enabled: false },
+        calendar: { enabled: false },
         socials: {
             enabled: true,
             bgColor: "#000",
@@ -135,6 +136,7 @@ function CreateSignatureComponent() {
             bgColor: "#FCE750",
             bannerTop: { url: "test", enabled: false, padding: 10 },
             vcard: { enabled: false },
+            calendar: { enabled: false },
             event: {
                 ...signatureOption.event,
                 display: signatureOption?.event?.selected?.imageUrl,
@@ -775,6 +777,14 @@ function CreateSignatureComponent() {
                         value:
                             signatureOption.vcard.enabled?.toString() || false,
                         type: "vCardEnabled",
+                        signature: result?.data?.id,
+                    },
+                    {
+                        property: "enabled",
+                        value:
+                            signatureOption.calendar.enabled?.toString() ||
+                            false,
+                        type: "calendarEnabled",
                         signature: result?.data?.id,
                     },
                 ];

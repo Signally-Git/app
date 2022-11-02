@@ -1,5 +1,5 @@
 import classes from "../create/createSignature.module.css";
-import { useRef, useState, useEffect, useMemo } from "react";
+import { useRef, useState, useEffect } from "react";
 import Options from "../create/Options/options";
 import Infos from "../create/Infos/infos";
 import TemplateSelection from "../create/TemplateSelect/templateSelect";
@@ -18,7 +18,7 @@ function EditSignatureComponent() {
     const { signatureId } = useParams();
     const [user, setUser] = useState(null);
     const [company, setCompany] = useState(null);
-    const [events, setEvents] = useState([]);
+    const [events] = useState([]);
     const [selectedTemplate, setSelectedTemplate] = useState();
     const [defaultStyles, setDefaultStyles] = useState();
     const history = useHistory();
@@ -71,6 +71,8 @@ function EditSignatureComponent() {
         salutation: { value: "Cordialement,", enabled: false, padding: 10 },
         custom: { enabled: false },
         eco: { value: "Ecoresponsability", enabled: false },
+        vcard: { enabled: false },
+        calendar: { enabled: false },
         event: {
             list: events,
             selected: events[0],
@@ -115,7 +117,7 @@ function EditSignatureComponent() {
         getSignatureFromId();
     }, []);
 
-    const [templateRules, setTemplateRules] = useState({
+    const [templateRules] = useState({
         fontSize: { min: 9, max: 13, step: 1 },
     });
 
@@ -405,9 +407,7 @@ function EditSignatureComponent() {
                 enabled:
                     defaultStyles?.filter(
                         (style) => style.type === "greetingsEnabled"
-                    )[0]?.value === "false"
-                        ? false
-                        : true,
+                    )[0]?.value !== "false",
                 padding: defaultStyles?.filter(
                     (style) => style.type === "greetingsPadding"
                 )[0].value,
@@ -420,14 +420,24 @@ function EditSignatureComponent() {
                     style.type === "divColor" && style.property === "color"
             )[0].value,
             bannerTop: { url: "test", enabled: false, padding: 10 },
+            vcard: {
+                enabled:
+                    defaultStyles?.filter(
+                        (style) => style.type === "vCardEnabled"
+                    )?.[0]?.value !== "false",
+            },
+            calendar: {
+                enabled:
+                    defaultStyles?.filter(
+                        (style) => style.type === "calendarEnabled"
+                    )?.[0]?.value !== "false",
+            },
             event: {
                 ...signatureOption.event,
                 display: signatureOption.event?.selected?.imageUrl,
                 enabled:
                     defaultStyles?.filter((style) => style.type === "event")[0]
-                        .value === "false"
-                        ? false
-                        : true,
+                        .value !== "false",
                 padding: defaultStyles?.filter(
                     (style) => style.type === "eventPadding"
                 )[0].value,
@@ -450,14 +460,11 @@ function EditSignatureComponent() {
                 value:
                     defaultStyles?.filter(
                         (style) => style.type === "disclaimerValue"
-                    )[0]?.value ||
-                    `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.`,
+                    )[0]?.value || `Disclaimer`,
                 enabled:
                     defaultStyles?.filter(
                         (style) => style.type === "disclaimerEnabled"
-                    )[0]?.value === "false"
-                        ? false
-                        : true,
+                    )[0]?.value !== "false",
                 padding: defaultStyles?.filter(
                     (style) => style.type === "disclaimerPadding"
                 )[0].value,
@@ -943,6 +950,23 @@ function EditSignatureComponent() {
                         type: "greetingsPadding",
                         signature: result?.data?.id,
                     },
+                    // vCard
+                    {
+                        property: "enabled",
+                        value:
+                            signatureOption.vcard.enabled?.toString() || false,
+                        type: "vCardEnabled",
+                        signature: result?.data?.id,
+                    },
+                    // Calendar
+                    {
+                        property: "enabled",
+                        value:
+                            signatureOption.calendar.enabled?.toString() ||
+                            false,
+                        type: "calendarEnabled",
+                        signature: result?.data?.id,
+                    },
                     // Event
                     {
                         property: "enabled",
@@ -1082,18 +1106,24 @@ function EditSignatureComponent() {
                     </div>
                     <div className={classes.col}>
                         <div className={classes.signatureContainer}>
-                            <div className={classes.browserHeader}>
-                                <ul className={classes.btnsContainer}>
-                                    <li className={classes.close}></li>
-                                    <li className={classes.reduce}></li>
-                                    <li className={classes.fullscreen}></li>
-                                </ul>
+                            <div className={classes.previewContainer}>
+                                <div className={classes.browserHeader}>
+                                    <ul className={classes.btnsContainer}>
+                                        <li className={classes.close}></li>
+                                        <li className={classes.reduce}></li>
+                                        <li className={classes.fullscreen}></li>
+                                    </ul>
+                                </div>
+                                <div className={classes.lazyLoadingLong}></div>
+                                <div className={classes.lazyLoadingShort}></div>
+                                <div
+                                    className={classes.lazyLoadingMedium}
+                                ></div>
+                                <br />
+                                <div className={classes.signaturePreview}>
+                                    {selectedTemplate && preview}
+                                </div>
                             </div>
-                            <div className={classes.lazyLoadingLong}></div>
-                            <div className={classes.lazyLoadingShort}></div>
-                            <div className={classes.lazyLoadingMedium}></div>
-                            <br />
-                            {selectedTemplate && preview}
                             <div className={classes.CTAsContainer}>
                                 <div>
                                     <Button
