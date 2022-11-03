@@ -1,6 +1,5 @@
 import React from "react";
 import { AiOutlineEdit } from "react-icons/ai";
-import { FaUser } from "react-icons/fa";
 import { FiCheck, FiTrash } from "react-icons/fi";
 import { HiOutlineSearch } from "react-icons/hi";
 import { Link } from "react-router-dom";
@@ -11,7 +10,6 @@ import request from "Utils/Request/request";
 import classes from "../Tab/tab.module.css";
 
 function UserTab({
-    time,
     selected,
     users,
     setUsers,
@@ -93,6 +91,7 @@ function UserTab({
             phone: user.phone,
             position: user.position,
             email: user.email,
+            urlAgenda: user.urlAgenda,
         };
 
         await request
@@ -219,8 +218,6 @@ function UserTab({
                                         checked={
                                             edit?.id === user.id &&
                                             edit?.name === user.name
-                                                ? true
-                                                : false
                                         }
                                         type="radio"
                                         name="user"
@@ -282,7 +279,7 @@ function UserTab({
                                             }
                                         >
                                             <Link to="/profile/informations/user">
-                                                <FaUser />
+                                                <AiOutlineEdit />
                                             </Link>
                                         </div>
                                     ) : (
@@ -377,6 +374,20 @@ function UserTab({
                                                         }
                                                     />
                                                 </div>
+
+                                                <Input
+                                                    type="text"
+                                                    placeholder="Lien de prise de rendez-vous"
+                                                    defaultValue={
+                                                        user.urlAgenda
+                                                    }
+                                                    onChange={(e) =>
+                                                        handleChange(
+                                                            e.target.value,
+                                                            "urlAgenda"
+                                                        )
+                                                    }
+                                                />
                                             </div>
                                         </>
                                     ) : (

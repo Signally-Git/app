@@ -3,7 +3,7 @@ import Button from "Utils/Button/btn";
 import Input from "Utils/Input/input";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import classes from "./ResetPassword.module.css";
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -19,6 +19,7 @@ export default function ResetPassword() {
     const [newPass, setNewPass] = React.useState(" ");
     const [confirm, setConfirm] = React.useState("");
     const [done, setDone] = React.useState(false);
+    const [error, setError] = React.useState("");
     const history = useHistory();
 
     const handleSubmit = (e) => {
@@ -46,6 +47,10 @@ export default function ResetPassword() {
         }, 2500);
     };
 
+    useEffect(() => {
+        if (newPass === confirm) setError("");
+    }, [newPass, confirm]);
+
     return (
         <>
             <Header landing />
@@ -58,6 +63,7 @@ export default function ResetPassword() {
                         flexDirection: "column",
                         alignItems: "center",
                         justifyContent: "center",
+                        position: "relative",
                     }}
                 >
                     <h1>Réinitialisez votre mot de passe</h1>
@@ -75,11 +81,17 @@ export default function ResetPassword() {
 
                     <Input
                         onChange={(e) => setConfirm(e.target.value)}
+                        onBlur={() => {
+                            newPass !== confirm &&
+                                setError(
+                                    "Vérifiez que les mots de passe correspondent"
+                                );
+                        }}
                         style={{ width: "20rem" }}
                         type={!showPass ? "password" : "text"}
                         placeholder="Confirmer mot de passe"
                     />
-                    <br />
+                    <p className={classes.error}>{error}</p>
                     <Button
                         color={
                             newPass === confirm && newPass.length > 1
@@ -87,11 +99,7 @@ export default function ResetPassword() {
                                 : "orange"
                         }
                         disabled={
-                            newPass !== confirm
-                                ? true
-                                : false || newPass.length > 1
-                                ? false
-                                : true
+                            newPass !== confirm ? true : !(newPass.length > 1)
                         }
                     >
                         Réinitialiser

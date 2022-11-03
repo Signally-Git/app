@@ -8,9 +8,7 @@ export default function Preview({
     options,
     user,
     organisation,
-    ...props
 }) {
-    console.log(template);
     // Converts JSX camel Case attributes to dashed classics HTML
     const [socials, setSocials] = React.useState([
         { name: "facebook" },
@@ -244,26 +242,31 @@ export default function Preview({
         `${infos?.fontFamily || "Helvetica"};`
     );
     replaced = replaced.replaceAll(
-        "{{ styles['generalFontSize']['fontSize'] }}",
-        `${infos?.fontSize + "px" || "11"};`
+        /\{\{ styles\['generalFontSize']\['fontSize'] }}/gis,
+        `${infos?.fontSize[0].toString() || "11"}`
     );
-
+    console.log(
+        replaced.replaceAll(
+            /\{\{ styles\['generalFontSize']\['fontSize'] }}/gis,
+            `${infos?.fontSize[0].toString() || "11"}`
+        )
+    );
     //mail
     replaced = replaced.replaceAll(
         "{{ user.email }}",
         user?.email || "em@il.com"
     );
 
-    var greeting = /{# START GREETINGS #}.*{# END GREETINGS #}/gis;
+    let greeting = /{# START GREETINGS #}.*{# END GREETINGS #}/gis;
     replaced = replaced.replaceAll(
         greeting,
         options?.salutation?.enabled
             ? `<p style="padding-bottom: ${
                   options?.salutation?.padding
-              }px;"} >${options?.salutation.value || "Cordialement,"}</p>`
+              }px;" }>${options?.salutation.value || "Cordialement,"}</p>`
             : ""
     );
-    var disclaimer = /{# START DISCLAIMER #}.*{# END DISCLAIMER #}/gis;
+    let disclaimer = /{# START DISCLAIMER #}.*{# END DISCLAIMER #}/gis;
     replaced = replaced.replaceAll(
         disclaimer,
         options?.footer?.enabled
@@ -289,7 +292,27 @@ export default function Preview({
         /{# START SOCIALS #}.*{% if socialMediaAccounts %}/gis,
         ``
     );
-    replaced = replaced.replaceAll(/{% endif %}.*{# END SOCIALS #}/gis, ``);
+    replaced = replaced.replaceAll(/{% endif %}\s*{# END SOCIALS #}/gis, ``);
+
+    replaced = replaced.replaceAll(
+        /{{ company.websiteUrl\|trim\('https:\/\/'\)\|trim\('http:\/\/'\) }}/g,
+        organisation?.websiteUrl.replace("https://", "").replace("http://", "")
+    );
+
+    // Calendar
+    if (!options?.calendar?.enabled)
+        replaced = replaced.replaceAll(
+            /\{# START CALENDAR #}.*\{# END CALENDAR #}/gis,
+            ""
+        );
+
+    replaced = replaced.replaceAll(/{# START CALENDAR #}/g, ``);
+
+    replaced = replaced.replace(
+        /{% if styles\['calendarEnabled']\['enabled'] is same as\('true'\) %}/,
+        ``
+    );
+    replaced = replaced.replaceAll(/{% endif %}\s*{# END CALENDAR #}/gis, ``);
 
     // vCard
     if (!options?.vcard?.enabled)
@@ -304,7 +327,7 @@ export default function Preview({
         ``
     );
 
-    replaced = replaced.replaceAll(/{% endif %}.*{# END VCARD #}/gis, ``);
+    replaced = replaced.replaceAll(/{% endif %}\s*{# END VCARD #}/gis, ``);
 
     if (options?.event?.enabled) {
         replaced = replaced.replaceAll(/{% if event or isPreview %}/gi, "");
