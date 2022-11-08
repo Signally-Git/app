@@ -1,0 +1,37 @@
+@import "../../../Assets/style/colors.scss";
+
+h3 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.container {
+    padding-top: 2rem;
+    position: relative;
+    display: flex;
+    height: 40rem;
+    width: 100%;
+    gap: 2rem;
+}
+
+.chartContainer {
+    width: 70%;
+    height: 75%;
+}
+
+.eventSelection {
+    display: flex;
+    flex-direction: column;
+    max-width: 35rem;
+    right: 0;
+    left: auto;
+    > div {
+        margin-left: auto;
+        max-width: fit-content;
+    }
+    > img {
+        max-height: 10rem;
+        max-width: 20rem;
+    }
+}

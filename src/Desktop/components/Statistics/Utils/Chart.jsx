@@ -1,6 +1,11 @@
 import {
+    ResponsiveContainer,
     CartesianGrid,
     Legend,
+    Area,
+    AreaChart,
+    LineChart,
+    Line,
     Bar,
     BarChart,
     Tooltip,
@@ -9,19 +14,39 @@ import {
 } from "recharts";
 
 const Chart = ({ data }) => {
-    console.log(data);
     if (!data || !data.length) return <h2>Aucune donnée à afficher</h2>;
 
     return (
-        <BarChart width={400} height={250} data={data}>
-            <CartesianGrid strokeDasharray="1 1" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="display" fill="#ff7954" />
-            <Bar dataKey="clicked" fill="#ffc300" />
-        </BarChart>
+        <ResponsiveContainer width="100%" height="100%">
+            <LineChart width={400} height={250} data={data}>
+                <CartesianGrid strokeDasharray="1 1" />
+                <XAxis dataKey="createdAt" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                {/*<Area*/}
+                {/*    type="monotone"*/}
+                {/*    dataKey="uv"*/}
+                {/*    stackId="1"*/}
+                {/*    stroke="#8884d8"*/}
+                {/*    fill="#8884d8"*/}
+                {/*/>*/}
+                <Line
+                    type="monotone"
+                    stackId={1}
+                    dataKey="display"
+                    stroke="#ff7954"
+                    // fill="#ff7954"
+                />
+                <Line
+                    type="monotone"
+                    stackId={2}
+                    dataKey="clicked"
+                    stroke="#ffc300"
+                    // fill="#ffc300"
+                />
+            </LineChart>
+        </ResponsiveContainer>
     );
 };
 
