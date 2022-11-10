@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import classes from "./informations.module.css";
 import { useHistory, useParams } from "react-router-dom";
 import Hello from "Assets/img/hi.svg";
-import Button from "Utils/Button/btn";
 import Input from "Utils/Input/input";
 import UploadFile from "Utils/Upload/uploadFile";
 import request from "Utils/Request/request";
@@ -10,15 +9,14 @@ import { useNotification } from "Utils/Notifications/notifications";
 import DefineSocials from "Desktop/components/defineSocials/defineSocials";
 import Buttons from "Utils/Btns/buttons";
 import CompanyCustomization from "./Customization/customization";
+import TokenService from "Utils/token.service";
 
 function Informations() {
     const [active, setActive] = useState("company");
     const [organisation, setOrganisation] = useState({});
-    const [organisationId, setOrganisationId] = useState();
     const [organisationIRI, setOrganisationIRI] = useState();
     const [uploadedMedia, setUploadedMedia] = useState();
     const [companyName, setCompanyName] = useState("");
-    const [companyAddress, setCompanyAddress] = useState("");
     const [website, setWebsite] = useState("");
     const [phone, setPhone] = useState("");
     const [urlAgenda, setUrlAgenda] = useState("");
@@ -32,13 +30,12 @@ function Informations() {
     const notification = useNotification();
 
     let history = useHistory();
-    const query = new URLSearchParams(window.location.search);
     const { tab } = useParams();
 
     useEffect(() => {
         // create the preview
         if (!uploadedMedia) {
-            setPreview();
+            setPreview(null);
             return;
         }
         const objectUrl = URL.createObjectURL(uploadedMedia);
@@ -49,16 +46,13 @@ function Informations() {
     }, [uploadedMedia]);
 
     useEffect(() => {
-        const missing = query.get("missing");
         const getData = async () => {
-            await request.get(`whoami`).then((res) => {
-                localStorage.setItem("user", JSON.stringify(res.data));
-                setFirstName(res.data.firstName);
-                setLastName(res.data.lastName);
-                setPosition(res.data.position);
-                setMobile(res.data.phone);
-                setUrlAgenda(res.data.urlAgenda);
-            });
+            const user = TokenService.getUser();
+            setFirstName(user.firstName);
+            setLastName(user.lastName);
+            setPosition(user.position);
+            setMobile(user.phone);
+            setUrlAgenda(user.urlAgenda);
         };
         getData();
         setActive(tab === "user" ? "company" : "personal");
@@ -205,10 +199,9 @@ function Informations() {
     };
 
     const getValue = (search) => {
-        const result = JSON.parse(localStorage.getItem("configuration")).filter(
+        return JSON.parse(localStorage.getItem("configuration")).filter(
             (item) => item.key === search
         )[0].value;
-        return result;
     };
 
     const [wpName, setWpName] = useState(getValue("WORKPLACE_NAME"));
@@ -223,20 +216,24 @@ function Informations() {
                 { USER_NAME: userName },
             ],
         };
-        request.post("configurations", data).then((res) => console.log(res));
+        request
+            .post("configurations", data)
+            .then(() =>
+                request("configurations").then((result) =>
+                    TokenService.setConfig(result.data["hydra:member"])
+                )
+            );
     };
 
     useEffect(() => {
         request
-            .get(JSON.parse(localStorage.getItem("user")).organisation)
+            .get(TokenService.getOrganisation()["@id"])
             .then((organisation) => {
                 organisation = organisation.data;
                 setOrganisation(organisation);
                 setPreview(organisation?.logo?.url);
-                setOrganisationId(organisation.id);
                 setOrganisationIRI(organisation["@id"]);
                 setCompanyName(organisation.name);
-                setCompanyAddress(organisation.address?.street);
                 setWebsite(organisation.websiteUrl);
                 setPhone(organisation.digitalAddress.phone);
                 setSocialsList(organisation.socialMediaAccounts);

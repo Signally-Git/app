@@ -7,42 +7,33 @@ import { useEffect, useState } from "react";
 import Profile from "../views/Profile/profile";
 import Users from "../views/Users/users";
 import CreateSignature from "../views/Signatures/create/createSignature";
-import { UseEvents } from "Utils/useEvents/useEvents";
 import request from "Utils/Request/request";
 import News from "Desktop/components/News/news";
-import { useHistory } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-
-let count = 0;
+import TokenService from "../../Utils/token.service";
 
 function Dashboard(props) {
     const [isHeader, setIsHeader] = useState("");
-    const [createEvent, setCreateEvent] = useState(null);
-    const [user, setUser] = useState();
-    // const [template, setTemplate] = useState()
-    // const [templateName, setTemplateName] = useState()
-    const [data, setData] = useState([]);
-    const [organisation, setOrganisation] = useState();
+    const user = TokenService.getUser();
+    const [organisation, setOrganisation] = useState(
+        TokenService.getOrganisation()
+    );
     const [loadingTiles, setLoadingTiles] = useState(false);
     const [loadingNews, setLoadingNews] = useState(false);
 
     useEffect(() => {
-        request.get(`whoami`).then(async (res) => {
+        const getData = async () => {
             let users;
-            setUser(JSON?.parse(localStorage?.getItem("user")));
-            setUser(res.data);
-            // setTemplate(res.data?.compiledSignature)
-            // setTemplateName(res.data?.signature?.name)
-            setOrganisation(JSON?.parse(localStorage?.getItem("organisation")));
             await request.get("users").then((r) => (users = r.data));
-            await request.get(res.data?.organisation).then((r) => {
+            await request.get(user.organisation).then((r) => {
                 setOrganisation({
                     ...r.data,
                     ...organisation,
                     users: users["hydra:member"],
                 });
             });
-        });
+        };
+        getData();
     }, []);
 
     useEffect(() => {
@@ -50,36 +41,10 @@ function Dashboard(props) {
         setLoadingTiles(false);
     }, []);
 
-    useEffect(() => {
-        const getEvents = async () => {
-            const eventAPI = await UseEvents(
-                localStorage.getItem("organisation_id"),
-                "active"
-            );
-            // setActiveEvents(eventAPI)
-        };
-        getEvents();
-        count = 0;
-    }, []);
-
-    useEffect(() => {
-        setData({
-            logo: organisation?.logo?.path,
-            firstName: user?.first_name,
-            lastName: user?.last_name,
-            jobName: user?.position,
-            entity: organisation?.name,
-            address: organisation?.address,
-            mobile: user?.phone_number,
-            phone: organisation?.phone_number,
-        });
-    }, []);
-
     return (
         <>
             {props.page === "home" ? (
                 <>
-                    {/* <h1 className={classes.h1}>Bonjour {JSON.parse(localStorage.getItem('user'))?.first_name}</h1> */}
                     <h1 className={classes.title}>
                         Dashboard{" "}
                         {!loadingNews || !loadingTiles ? (
@@ -135,11 +100,7 @@ function Dashboard(props) {
                 </>
             ) : props.page === "profile" ? (
                 <>
-                    <Profile
-                        handleHeader={setIsHeader}
-                        header={isHeader}
-                        create={setCreateEvent}
-                    />
+                    <Profile handleHeader={setIsHeader} header={isHeader} />
                 </>
             ) : null}
         </>

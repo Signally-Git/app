@@ -7,6 +7,7 @@ import { Link, useParams } from "react-router-dom";
 import request from "Utils/Request/request";
 import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
 import Button from "Utils/Button/btn";
+import TokenService from "Utils/token.service";
 
 function Team() {
     const [entity, setEntity] = useState();
@@ -19,6 +20,7 @@ function Team() {
     const [otherTeam, setOtherTeam] = useState("");
     const [edit, setEdit] = useState();
     const [editInfo, setEditInfo] = useState();
+    const configuration = TokenService.getConfig();
 
     const [transition, setTransition] = useState();
 
@@ -207,9 +209,7 @@ function Team() {
                         >
                             <Link to="/teams/workplaces">
                                 {
-                                    JSON.parse(
-                                        localStorage.getItem("configuration")
-                                    ).filter(
+                                    configuration.filter(
                                         (item) => item.key === "WORKPLACE_NAME"
                                     )[0].value
                                 }
@@ -218,9 +218,7 @@ function Team() {
                         <li className={type === "teams" ? classes.active : ""}>
                             <Link to="/teams/teams">
                                 {
-                                    JSON.parse(
-                                        localStorage.getItem("configuration")
-                                    ).filter(
+                                    configuration.filter(
                                         (item) => item.key === "TEAM_NAME"
                                     )[0].value
                                 }
@@ -229,9 +227,7 @@ function Team() {
                         <li className={type === "users" ? classes.active : ""}>
                             <Link to="/teams/users">
                                 {
-                                    JSON.parse(
-                                        localStorage.getItem("configuration")
-                                    ).filter(
+                                    configuration.filter(
                                         (item) => item.key === "USER_NAME"
                                     )[0].value
                                 }
