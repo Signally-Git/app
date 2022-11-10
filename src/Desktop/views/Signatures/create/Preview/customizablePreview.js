@@ -245,12 +245,7 @@ export default function Preview({
         /\{\{ styles\['generalFontSize']\['fontSize'] }}/gis,
         `${infos?.fontSize[0].toString() || "11"}`
     );
-    console.log(
-        replaced.replaceAll(
-            /\{\{ styles\['generalFontSize']\['fontSize'] }}/gis,
-            `${infos?.fontSize[0].toString() || "11"}`
-        )
-    );
+
     //mail
     replaced = replaced.replaceAll(
         "{{ user.email }}",

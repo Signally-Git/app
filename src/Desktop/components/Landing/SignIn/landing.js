@@ -12,6 +12,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios from "axios";
 import { ImCross } from "react-icons/im";
+import TokenService from "Utils/token.service";
 
 function useQuery() {
     const { search } = useLocation();
@@ -39,12 +40,12 @@ const Login = () => {
         return String(email)
             .toLowerCase()
             .match(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             );
     };
 
     useEffect(() => {
-        if (localStorage.getItem("token")) history.push("/dashboard");
+        if (TokenService.getLocalToken()) history.push("/dashboard");
     });
 
     useEffect(() => {
@@ -62,11 +63,10 @@ const Login = () => {
                 const magicLink = await request.get(
                     `sign_in${window.location.search}`
                 );
-                localStorage.setItem("token", magicLink.data.token);
-                localStorage.setItem(
-                    "refresh_token",
-                    magicLink.data.refresh_token
-                );
+                localStorage.setItem("user", { token: magicLink.data.token });
+                localStorage.setItem("user", {
+                    refresh_token: magicLink.data.refresh_token,
+                });
                 history.push("/dashboard");
             }
         }
@@ -133,10 +133,22 @@ const Login = () => {
 
         await axios
             .post(`${process.env.REACT_APP_API_URL}/token/auth`, req)
-            .then((res) => {
-                localStorage.setItem("token", res.data.token);
-                localStorage.setItem("refresh_token", res.data.refresh_token);
-                history.go(0);
+            .then((response) => {
+                if (response.data.token) {
+                    axios
+                        .get(`${process.env.REACT_APP_API_URL}/whoami`, {
+                            headers: {
+                                Authorization: `Bearer ${response.data.token}`,
+                            },
+                        })
+                        .then((result) => {
+                            TokenService.setUser({
+                                ...response.data,
+                                ...result.data,
+                            });
+                            history.go(0);
+                        });
+                }
             })
             .catch(() => {
                 setError({
@@ -148,7 +160,6 @@ const Login = () => {
                     disappear: false,
                 });
                 setLoading(false);
-                return;
             });
     };
     if (query.get("user")) return <></>;
@@ -211,7 +222,11 @@ const Login = () => {
             <div className={classes.container}>
                 <div className={classes.logInContainer}>
                     <div className={classes.textIllustration}>
-                        <img className={classes.takeoff} src={Takeoff} />
+                        <img
+                            alt="Take off"
+                            className={classes.takeoff}
+                            src={Takeoff}
+                        />
                         <div className={classes.descriptionBeta}>
                             <h1>Bienvenue sur la Beta privée Signally !</h1>
                             <p>
@@ -238,10 +253,12 @@ const Login = () => {
                             <br />
                             <div>
                                 <img
+                                    alt="Outlook"
                                     className={classes.plugins}
                                     src={PluginsOutlook}
                                 />
                                 <img
+                                    alt="Soon Gmail & Apple Mail"
                                     className={classes.plugins}
                                     src={PluginsSoon}
                                 />
@@ -310,9 +327,7 @@ const Login = () => {
                                             <Input
                                                 autoFocus={false}
                                                 autoCorrect="off"
-                                                disabled={
-                                                    logging ? false : true
-                                                }
+                                                disabled={!logging}
                                                 autoCapitalize="off"
                                                 autoComplete="current-password"
                                                 defaultValue={code}

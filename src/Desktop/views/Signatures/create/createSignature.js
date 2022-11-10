@@ -11,13 +11,14 @@ import { useHistory } from "react-router";
 import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
+import TokenService from "Utils/token.service";
 
 // Component handling the creation of signature, selection of template
 
 function CreateSignatureComponent() {
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null);
-    const [company, setCompany] = useState(null);
+    const user = TokenService.getUser();
+    const company = TokenService.getOrganisation();
     const [selectedTemplate, setSelectedTemplate] = useState();
     const history = useHistory();
     const notification = useNotification();
@@ -168,13 +169,6 @@ function CreateSignatureComponent() {
 
     useEffect(() => {
         const getUser = async () => {
-            const user = await request.get("whoami");
-            const company = await request.get(
-                JSON.parse(localStorage.getItem("user")).organisation
-            );
-
-            setUser(user);
-            setCompany(company);
             setSignatureInfo({
                 logo: company?.logo,
                 firstName: {

@@ -5,6 +5,7 @@ import { Range } from "react-range";
 import { FiChevronDown } from "react-icons/fi";
 import request from "Utils/Request/request";
 import CustomSelect from "Utils/CustomSelect/customselect";
+import TokenService from "Utils/token.service";
 
 // Informations tab, allows to change texts to preview long or short ones
 // Styles every text with color & decoration, and family + size for the whole template
@@ -14,17 +15,8 @@ export default function Infos(props) {
     // Template banner
     const [profile, setProfile] = useState(true);
     const [organisation, setOrganisation] = useState(false);
-    const [user, setUser] = useState({});
-    const [organisationInfos, setOrganisationInfos] = useState({});
-
-    React.useEffect(async () => {
-        await request.get("whoami").then(async (res) => {
-            setUser(res.data);
-            await request
-                .get(res.data.organisation)
-                .then((res) => setOrganisationInfos(res.data));
-        });
-    }, []);
+    const user = TokenService.getUser();
+    const organisationInfos = useState({});
 
     // Template informations
     const inputs = [
