@@ -50,6 +50,12 @@ const removeConfig = () => {
     localStorage.removeItem("configuration");
 };
 
+const clearLocalStorage = () => {
+    removeUser();
+    removeOrganisation();
+    removeConfig();
+};
+
 const TokenService = {
     getLocalRefreshToken,
     getLocalToken,
@@ -63,6 +69,7 @@ const TokenService = {
     getConfig,
     setConfig,
     removeConfig,
+    clearLocalStorage,
 };
 
 export default TokenService;
