@@ -8,7 +8,6 @@ import Informations from "./Informations/informations";
 function Profile(props) {
     useEffect(() => {
         props.handleHeader("Compte");
-        props.create("");
     }, []);
 
     return (
