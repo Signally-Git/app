@@ -15,6 +15,7 @@ import { NotificationProvider } from "Utils/Notifications/notifications";
 import ResetPassword from "./views/ResetPassword/ResetPassword.jsx";
 import EditSignatureComponent from "./views/Signatures/edit/editSignature";
 import TemplateRendererPage from "./views/TemplateRenderer/TemplateRenderer.page";
+import { TemplateBuilderPage } from "./views/TemplateBuilder";
 
 export default function DesktopRoutes() {
     return (
@@ -57,6 +58,11 @@ export default function DesktopRoutes() {
             <PrivateRoute
                 path="/create-signature"
                 component={CreateSignature}
+            />
+
+            <PrivateRoute
+                path="/create-template"
+                component={TemplateBuilderPage}
             />
 
             <PrivateRoute
