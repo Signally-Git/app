@@ -44,7 +44,7 @@ request.interceptors.response.use(
                 } catch (_error) {
                     return Promise.reject(_error);
                 }
-            } else {
+            } else if (err.response.status === 401) {
                 TokenService.clearLocalStorage();
                 window.location.replace("/sign-in");
             }
