@@ -124,19 +124,17 @@ export default function TemplateSelection(props) {
                                     name="template"
                                     value={JSON.stringify(template)}
                                 />
-                                <div className={classes.templatePreview}>
-                                    <Template
-                                        options={{
-                                            event: { enabled: true },
-                                        }}
-                                        template={template.html}
-                                        socials={props.icons}
-                                        organisation={organisation}
-                                        user={JSON.parse(
-                                            localStorage.getItem("user")
-                                        )}
-                                    />
-                                </div>
+                                <Template
+                                    options={{
+                                        event: { enabled: true },
+                                    }}
+                                    template={template.html}
+                                    socials={props.icons}
+                                    organisation={organisation}
+                                    user={JSON.parse(
+                                        localStorage.getItem("user")
+                                    )}
+                                />
                             </li>
                         );
                     })}
