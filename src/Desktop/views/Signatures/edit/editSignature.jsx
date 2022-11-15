@@ -395,8 +395,19 @@ function EditSignatureComponent() {
                     )[0].value,
                 },
             },
-            fontSize: [11],
-            fontFamily: "Helvetica",
+            fontSize: [
+                defaultStyles?.filter(
+                    (style) =>
+                        style.type === "generalFontSize" &&
+                        style.property === "fontSize"
+                )[0].value || 11,
+            ],
+            fontFamily:
+                defaultStyles?.filter(
+                    (style) =>
+                        style.type === "generalFontFamily" &&
+                        style.property === "fontFamily"
+                )[0].value || "Helvetica",
         });
 
         setSignatureOption({
@@ -476,7 +487,7 @@ function EditSignatureComponent() {
 
     useEffect(() => {
         if (defaultStyles) handlePopulate();
-    }, [defaultStyles, selectedTemplate, company]);
+    }, [defaultStyles, selectedTemplate]);
 
     // Menu
     const [tab, setTab] = useState(true);
@@ -1048,7 +1059,7 @@ function EditSignatureComponent() {
                     organisation={company?.data}
                 />
             );
-    }, [signatureInfo, signatureOption, selectedTemplate, company]);
+    }, [signatureInfo, signatureOption, selectedTemplate]);
 
     return (
         <div className={classes.container} ref={elem}>
