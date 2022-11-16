@@ -23,7 +23,7 @@ export default function Frame(props) {
 
                 function getRealtimeData(data) {
                     setOrganisation(data);
-                    localStorage.setItem("organisation", data);
+                    localStorage.setItem("organisation", JSON.stringify(data));
                 }
                 sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
 
