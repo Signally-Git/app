@@ -46,25 +46,31 @@ export default function Preview({
         socials.map((item, index) => (
             <td
                 style={{
-                    height: "18px",
-                    width: "18px",
+                    height: "25px",
+                    width: "25px",
                 }}
             >
                 <a
                     href={item.url}
-                    style={{ height: "18px", width: "18px" }}
+                    style={{ height: "25px", width: "25px" }}
                     title={item.name}
                 >
                     <img
                         style={{
-                            height: "18px",
-                            width: "18px",
+                            height: "25px",
+                            width: "25px",
                         }}
                         src={item.image}
                         alt={item.name}
                     />
                 </a>
-                {index < socials.length - 1 && <td></td>}
+                {index < socials.length - 1 && (
+                    <td
+                        style={{
+                            width: "12px",
+                        }}
+                    ></td>
+                )}
             </td>
         ))
     );
