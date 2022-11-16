@@ -11,12 +11,30 @@ export default function Preview({
 }) {
     // Converts JSX camel Case attributes to dashed classics HTML
     const [socials, setSocials] = React.useState([
-        { name: "facebook" },
-        { name: "linkedin" },
-        { name: "twitter" },
-        { name: "instagram" },
-        { name: "snapchat" },
-        { name: "pinterest" },
+        {
+            name: "facebook",
+            image: "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/facebook.png",
+        },
+        {
+            name: "linkedin",
+            image: "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/linkedin.png",
+        },
+        {
+            name: "twitter",
+            image: "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/twitter.png",
+        },
+        {
+            name: "instagram",
+            image: "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/instagram.png",
+        },
+        {
+            name: "snapchat",
+            image: "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/snapchat.png",
+        },
+        {
+            name: "pinterest",
+            image: "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/pinterest.png",
+        },
     ]);
     React.useEffect(() => {
         if (organisation?.socialMediaAccounts?.length > 0) {
@@ -34,19 +52,25 @@ export default function Preview({
             >
                 <a
                     href={item.url}
-                    style={{ height: "18px", width: "18px" }}
+                    style={{ height: "25px", width: "25px" }}
                     title={item.name}
                 >
                     <img
                         style={{
-                            height: "18px",
-                            width: "18px",
+                            height: "25px",
+                            width: "25px",
                         }}
                         src={item.image}
                         alt={item.name}
                     />
                 </a>
-                {index < socials.length - 1 && <td></td>}
+                {index < socials.length - 1 && (
+                    <td
+                        style={{
+                            width: "12px",
+                        }}
+                    ></td>
+                )}
             </td>
         ))
     );
