@@ -7,7 +7,7 @@ import Modal from "Utils/Modals/modal";
 import { BsBroadcastPin } from "react-icons/bs";
 import { useNotification } from "Utils/Notifications/notifications";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import TokenService from "../../../Utils/token.service";
+import { TokenService } from "Utils/index";
 
 function Tiles(props) {
     const [events, setEvents] = useState([]);

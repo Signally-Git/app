@@ -4,7 +4,7 @@ import { Suspense, useEffect, useState } from "react";
 import classes from "./frame.module.scss";
 import request from "Utils/Request/request";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import TokenService from "Utils/token.service";
+import { TokenService } from "Utils/index";
 
 export default function Frame(props) {
     const [user, setUser] = useState(TokenService.getUser);

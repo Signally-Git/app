@@ -10,7 +10,8 @@ import CreateSignature from "../views/Signatures/create/createSignature";
 import request from "Utils/Request/request";
 import News from "Desktop/components/News/news";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import TokenService from "../../Utils/token.service";
+import { TokenService } from "Utils/index";
+import StatsPage from "Desktop/components/Statistics/Stats.page";
 
 function Dashboard(props) {
     const [isHeader, setIsHeader] = useState("");

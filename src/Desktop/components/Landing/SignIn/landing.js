@@ -12,7 +12,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios from "axios";
 import { ImCross } from "react-icons/im";
-import TokenService from "Utils/token.service";
+import { TokenService } from "Utils/index";
 
 function useQuery() {
     const { search } = useLocation();

@@ -11,7 +11,7 @@ import { useHistory } from "react-router";
 import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
-import TokenService from "Utils/token.service";
+import { TokenService } from "Utils/index";
 
 // Component handling the creation of signature, selection of template
 

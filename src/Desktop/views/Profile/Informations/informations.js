@@ -9,7 +9,7 @@ import { useNotification } from "Utils/Notifications/notifications";
 import DefineSocials from "Desktop/components/defineSocials/defineSocials";
 import Buttons from "Utils/Btns/buttons";
 import CompanyCustomization from "./Customization/customization";
-import TokenService from "Utils/token.service";
+import { TokenService } from "Utils/index";
 
 function Informations() {
     const [active, setActive] = useState("company");

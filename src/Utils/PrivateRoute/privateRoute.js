@@ -2,7 +2,7 @@ import Frame from "Desktop/components/Frame/frame";
 import { useState } from "react";
 import { Redirect, Route } from "react-router";
 import { NotificationProvider } from "Utils/Notifications/notifications";
-import TokenService from "../token.service";
+import { TokenService } from "Utils/index";
 
 // Checks if user is logged in by search at localStorage for a user token.
 // If none, redirects to Sign in page else to the requested page.

@@ -13,7 +13,7 @@ import CreateTeam from "../Create/Team/createTeam";
 import CreateUser from "../Create/User/createUser";
 import CreateWorkplace from "../Create/Workplace/createWorkplace";
 import UserTab from "./userTab";
-import tokenService from "Utils/token.service";
+import { TokenService } from "Utils/index";
 
 // Displays the current list
 // Workplaces by default
@@ -50,7 +50,7 @@ export default function Tab({
     const [fax, setFax] = useState("");
     const [websiteUrl, setWebsiteUrl] = useState("");
     const [done, setDone] = useState(false);
-    const configuration = tokenService.getConfig();
+    const configuration = TokenService.getConfig();
     let time;
 
     const notification = useNotification();

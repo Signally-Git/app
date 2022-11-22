@@ -5,7 +5,7 @@ import { Range } from "react-range";
 import { FiChevronDown } from "react-icons/fi";
 import request from "Utils/Request/request";
 import CustomSelect from "Utils/CustomSelect/customselect";
-import TokenService from "Utils/token.service";
+import { TokenService } from "Utils/index";
 
 // Informations tab, allows to change texts to preview long or short ones
 // Styles every text with color & decoration, and family + size for the whole template

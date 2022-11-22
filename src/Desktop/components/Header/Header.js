@@ -4,7 +4,7 @@ import classes from "./header.module.css";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import { FaUser } from "react-icons/fa";
-import TokenService from "../../../Utils/token.service";
+import { TokenService } from "Utils/index";
 
 // DATA ATTRIBUTES
 

@@ -7,7 +7,7 @@ import { Link, useParams } from "react-router-dom";
 import request from "Utils/Request/request";
 import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
 import Button from "Utils/Button/btn";
-import TokenService from "Utils/token.service";
+import { TokenService } from "Utils/index";
 
 function Team() {
     const [entity, setEntity] = useState();

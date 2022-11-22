@@ -72,4 +72,4 @@ const TokenService = {
     clearLocalStorage,
 };
 
-export default TokenService;
+export { TokenService };

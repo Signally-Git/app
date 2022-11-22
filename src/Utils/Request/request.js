@@ -1,5 +1,5 @@
 import axios from "axios";
-import TokenService from "../token.service";
+import { TokenService } from "Utils/index";
 
 const request = axios.create({
     baseURL: process.env.REACT_APP_API_URL,

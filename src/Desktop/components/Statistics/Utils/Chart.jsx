@@ -34,7 +34,7 @@ const Chart = ({ data }) => {
                 <Line
                     type="monotone"
                     stackId={1}
-                    dataKey="totalItems"
+                    dataKey="displayed"
                     stroke="#ff7954"
                     // fill="#ff7954"
                 />
