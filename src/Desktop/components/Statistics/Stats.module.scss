@@ -23,6 +23,7 @@ h3 {
 .eventSelection {
     display: flex;
     flex-direction: column;
+    min-width: 10rem;
     max-width: 35rem;
     right: 0;
     left: auto;

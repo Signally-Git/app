@@ -20,7 +20,7 @@ const Chart = ({ data }) => {
         <ResponsiveContainer width="100%" height="100%">
             <LineChart width={400} height={250} data={data}>
                 <CartesianGrid strokeDasharray="1 1" />
-                <XAxis dataKey="createdAt" />
+                <XAxis dataKey="day_created_date" />
                 <YAxis />
                 <Tooltip />
                 <Legend />
@@ -34,7 +34,7 @@ const Chart = ({ data }) => {
                 <Line
                     type="monotone"
                     stackId={1}
-                    dataKey="display"
+                    dataKey="totalItems"
                     stroke="#ff7954"
                     // fill="#ff7954"
                 />
