@@ -4,6 +4,7 @@ import classes from "./header.module.css";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import { FaUser } from "react-icons/fa";
+import TokenService from "../../../Utils/token.service";
 
 // DATA ATTRIBUTES
 
@@ -84,7 +85,7 @@ function Header(props) {
                                 stroke={"#66433e"}
                                 strokeWidth={"15px"}
                                 onClick={() => {
-                                    localStorage.clear();
+                                    TokenService.clearLocalStorage();
                                     history.push("/");
                                 }}
                             />

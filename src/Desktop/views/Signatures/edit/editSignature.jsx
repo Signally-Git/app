@@ -11,13 +11,14 @@ import { useHistory, useParams } from "react-router";
 import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
+import TokenService from "Utils/token.service";
 
 // Component handling the modification of signature, selection of template
 
 function EditSignatureComponent() {
     const { signatureId } = useParams();
-    const [user, setUser] = useState(null);
-    const [company, setCompany] = useState(null);
+    const user = TokenService.getUser();
+    const company = TokenService.getOrganisation();
     const [events] = useState([]);
     const [selectedTemplate, setSelectedTemplate] = useState();
     const [defaultStyles, setDefaultStyles] = useState();
@@ -394,8 +395,19 @@ function EditSignatureComponent() {
                     )[0].value,
                 },
             },
-            fontSize: [11],
-            fontFamily: "Helvetica",
+            fontSize: [
+                defaultStyles?.filter(
+                    (style) =>
+                        style.type === "generalFontSize" &&
+                        style.property === "fontSize"
+                )[0].value || 11,
+            ],
+            fontFamily:
+                defaultStyles?.filter(
+                    (style) =>
+                        style.type === "generalFontFamily" &&
+                        style.property === "fontFamily"
+                )[0].value || "Helvetica",
         });
 
         setSignatureOption({
@@ -474,22 +486,8 @@ function EditSignatureComponent() {
     };
 
     useEffect(() => {
-        const getUser = async () => {
-            const user = await request.get("whoami");
-            const company = await request.get(
-                JSON.parse(localStorage.getItem("user")).organisation
-            );
-
-            setUser(user);
-            setCompany(company);
-        };
-
-        getUser();
-    }, []);
-
-    useEffect(() => {
         if (defaultStyles) handlePopulate();
-    }, [defaultStyles, selectedTemplate, company]);
+    }, [defaultStyles, selectedTemplate]);
 
     // Menu
     const [tab, setTab] = useState(true);
@@ -1061,7 +1059,7 @@ function EditSignatureComponent() {
                     organisation={company?.data}
                 />
             );
-    }, [signatureInfo, signatureOption, selectedTemplate, company]);
+    }, [signatureInfo, signatureOption, selectedTemplate]);
 
     return (
         <div className={classes.container} ref={elem}>
