@@ -747,20 +747,20 @@ export default function Tab({
                                                             }
                                                         >
                                                             {workplace?.logo
-                                                                .url && (
+                                                                ?.url && (
                                                                 <img
                                                                     className={
                                                                         classes.logoPreview
                                                                     }
                                                                     src={
                                                                         workplace
-                                                                            .logo
-                                                                            .url
+                                                                            ?.logo
+                                                                            ?.url
                                                                     }
                                                                     alt={
                                                                         workplace
-                                                                            .logo
-                                                                            .name
+                                                                            ?.logo
+                                                                            ?.name
                                                                     }
                                                                 />
                                                             )}
