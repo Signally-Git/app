@@ -709,7 +709,7 @@ export default function Tab({
                                                 onClick={() =>
                                                     setModal({
                                                         name: workplace?.name,
-                                                        id: workplace.id,
+                                                        id: workplace?.id,
                                                         type: "workplaces",
                                                     })
                                                 }
@@ -731,20 +731,20 @@ export default function Tab({
                                                             }
                                                         >
                                                             {workplace?.logo
-                                                                .url && (
+                                                                ?.url && (
                                                                 <img
                                                                     className={
                                                                         classes.logoPreview
                                                                     }
                                                                     src={
                                                                         workplace
-                                                                            .logo
-                                                                            .url
+                                                                            ?.logo
+                                                                            ?.url
                                                                     }
                                                                     alt={
                                                                         workplace
-                                                                            .logo
-                                                                            .name
+                                                                            ?.logo
+                                                                            ?.name
                                                                     }
                                                                 />
                                                             )}
@@ -759,8 +759,8 @@ export default function Tab({
                                                                         ?.name
                                                                         ? "Remplacer " +
                                                                           workplace
-                                                                              .logo
-                                                                              .name
+                                                                              ?.logo
+                                                                              ?.name
                                                                         : "Importer un logo"
                                                                 }
                                                                 style={{
