@@ -13,24 +13,28 @@ import { TokenService } from "Utils/index";
 
 function Informations() {
     const [active, setActive] = useState("company");
-    const [organisation, setOrganisation] = useState({});
-    const [organisationIRI, setOrganisationIRI] = useState();
+    const [organisation, setOrganisation] = useState(
+        TokenService.getOrganisation()
+    );
+    const user = TokenService.getUser();
     const [uploadedMedia, setUploadedMedia] = useState();
     const [companyName, setCompanyName] = useState("");
     const [website, setWebsite] = useState("");
     const [phone, setPhone] = useState("");
-    const [urlAgenda, setUrlAgenda] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [position, setPosition] = useState("");
-    const [mobile, setMobile] = useState("");
-    const [socialsList, setSocialsList] = useState([]);
+    const [firstName, setFirstName] = useState(user?.firstName);
+    const [lastName, setLastName] = useState(user?.lastName);
+    const [position, setPosition] = useState(user?.position);
+    const [mobile, setMobile] = useState(user?.phone);
+    const [urlAgenda, setUrlAgenda] = useState(user?.urlAgenda);
+    const [socialsList, setSocialsList] = useState(
+        TokenService.getOrganisation().socialMediaAccounts || []
+    );
     const [preview, setPreview] = useState();
 
     const notification = useNotification();
 
     let history = useHistory();
-    const { tab } = useParams();
+    let { tab } = useParams();
 
     useEffect(() => {
         // create the preview
@@ -46,15 +50,6 @@ function Informations() {
     }, [uploadedMedia]);
 
     useEffect(() => {
-        const getData = async () => {
-            const user = TokenService.getUser();
-            setFirstName(user.firstName);
-            setLastName(user.lastName);
-            setPosition(user.position);
-            setMobile(user.phone);
-            setUrlAgenda(user.urlAgenda);
-        };
-        getData();
         setActive(tab === "user" ? "company" : "personal");
     }, []);
 
@@ -68,7 +63,7 @@ function Informations() {
                     const requestLogo = {
                         name: uploadedMedia.name,
                         path: res.data.path,
-                        organisation: organisationIRI,
+                        organisation: organisation["@id"],
                     };
                     setTimeout(async () => {
                         await request.post("logos", requestLogo).catch(() =>
@@ -91,7 +86,7 @@ function Informations() {
                         socialMediaAccounts: socialsList,
                     };
                     await request
-                        .patch(organisationIRI, req, {
+                        .patch(organisation["@id"], req, {
                             headers: {
                                 "Content-Type": "application/merge-patch+json",
                             },
@@ -143,7 +138,7 @@ function Informations() {
                 socialMediaAccounts: socialsList,
             };
             await request
-                .patch(organisationIRI, req, {
+                .patch(organisation["@id"], req, {
                     headers: { "Content-Type": "application/merge-patch+json" },
                 })
                 .then(() => {
@@ -199,9 +194,8 @@ function Informations() {
     };
 
     const getValue = (search) => {
-        return JSON.parse(localStorage.getItem("configuration")).filter(
-            (item) => item.key === search
-        )[0].value;
+        return TokenService.getConfig().filter((item) => item.key === search)[0]
+            .value;
     };
 
     const [wpName, setWpName] = useState(getValue("WORKPLACE_NAME"));
@@ -226,18 +220,14 @@ function Informations() {
     };
 
     useEffect(() => {
-        request
-            .get(TokenService.getOrganisation()["@id"])
-            .then((organisation) => {
-                organisation = organisation.data;
-                setOrganisation(organisation);
-                setPreview(organisation?.logo?.url);
-                setOrganisationIRI(organisation["@id"]);
-                setCompanyName(organisation.name);
-                setWebsite(organisation.websiteUrl);
-                setPhone(organisation.digitalAddress.phone);
-                setSocialsList(organisation.socialMediaAccounts);
-            });
+        request.get(TokenService.getOrganisation()["@id"]).then((org) => {
+            org = org?.data;
+            setOrganisation(org);
+            setPreview(org?.logo?.url);
+            setCompanyName(org?.name);
+            setWebsite(org?.websiteUrl);
+            setPhone(org?.digitalAddress?.phone);
+        });
     }, []);
 
     return (
