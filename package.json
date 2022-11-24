@@ -38,7 +38,8 @@
         "react-swipeable": "^6.1.2",
         "react-time-input": "^0.0.19",
         "recharts": "^2.1.15",
-        "sass": "^1.54.9",
+        "sass": "^1.56.1",
+        "scss": "^0.2.4",
         "swiper": "^8.0.7",
         "web-vitals": "^1.0.1"
     },

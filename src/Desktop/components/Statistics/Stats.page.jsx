@@ -56,7 +56,9 @@ function StatsPage() {
                     };
                 })
             );
-            setDisplayedEvent(data[0].event);
+            if (data?.[0]?.event) {
+                setDisplayedEvent(data?.[0]?.event);
+            }
         };
         handleSwap();
     }, [fetchEvent]);
