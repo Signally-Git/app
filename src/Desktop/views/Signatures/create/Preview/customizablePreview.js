@@ -141,8 +141,7 @@ export default function Preview({
 
     replaced = replaced.replaceAll(
         "{{ logo }}",
-        infos?.logo?.path ||
-            organisation?.logo?.url ||
+        organisation?.logo?.url ||
             "https://fakeimg.pl/108?font=noto&font_size=12"
     );
 
@@ -241,7 +240,7 @@ export default function Preview({
     );
 
     replaced = replaced.replaceAll(
-        /{% if isPreview %}\s*0123456789\s*{% else %}\s*{{ user.phone }}\s*{% endif %}/gis,
+        /{% if isPreview %}.*0123456789.*{% else %}\s*{{ user.phone }}\s*{% endif %}/gis,
         "0102030405"
     );
     replaced = replaced.replaceAll(
@@ -312,6 +311,10 @@ export default function Preview({
         ``
     );
     replaced = replaced.replaceAll(/{% endif %}\s*{# END SOCIALS #}/gis, ``);
+    replaced = replaced.replaceAll(
+        /{% endif %}\s*<\/td>\s*<\/tr>\s*{# END SOCIALS #}/gis,
+        ``
+    );
 
     replaced = replaced.replaceAll(
         /{{ company.websiteUrl\|trim\('https:\/\/'\)\|trim\('http:\/\/'\) }}/g,
@@ -377,6 +380,10 @@ export default function Preview({
     replaced = replaced.replace(
         /{# START PHONE #}.*{% if user.phone %}.*{% if user.phone or isPreview %}/gis,
         ""
+    );
+    replaced = replaced.replace(
+        /{% if isPreview %}.*0123456789.*{% else %}.*{{ user.phone }}/gis,
+        "0123456789"
     );
     replaced = replaced.replace(/{% endif %}.*{# END PHONE #}/gis, "");
     replaced = replaced.replace(/{# END PHONE #}/gis, "");

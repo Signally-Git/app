@@ -9,6 +9,7 @@ import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
 import parse from "html-react-parser";
 import Modal from "Utils/Modals/modal";
+import { TokenService } from "Utils";
 
 function Team() {
     const [templates, setTemplates] = useState([]);
@@ -16,16 +17,16 @@ function Team() {
     const [deleted, setDeleted] = useState(false);
     const [selected, setSelected] = useState({});
     const [active, setActive] = useState("active");
-    const [user, setUser] = useState();
+    const user = TokenService.getUser();
     const [template, setTemplate] = useState();
     const [modal, setModal] = useState();
     const [signatureInfo, setSignatureInfo] = useState({});
     const [signatureOption, setSignatureOption] = useState({});
     const [defaultStyles, setDefaultStyles] = useState();
     const [data, setData] = useState({
-        firstName: localStorage.getItem("user")?.first_name,
-        lastName: localStorage.getItem("user")?.last_name,
-        position: localStorage.getItem("user")?.position,
+        firstName: user?.first_name,
+        lastName: user?.last_name,
+        position: user?.position,
     });
 
     const [organisation, setOrganisation] = useState();
@@ -37,7 +38,7 @@ function Team() {
         const signatures = await request.get(`signatures`);
 
         await request
-            .get(localStorage.getItem("user").organisation)
+            .get(user?.organisation)
             .then((res) => setOrganisation(res.data));
         signatures.data["hydra:totalItems"] < 1
             ? history.push("/create-signature")
@@ -408,7 +409,7 @@ function Team() {
             phone: organisation?.phone_number,
             event: `https://fakeimg.pl/380x126?font=noto&amp;font_size=14`,
         });
-    }, [user, template]);
+    }, [template]);
 
     const handleModal = (id) => {
         setModal(
@@ -480,8 +481,7 @@ function Team() {
                         </ul>
                         {active === "active" ? (
                             <div>
-                                {JSON.parse(localStorage.getItem("user"))
-                                    .roles[1] !== "ROLE_RH" ? (
+                                {user?.roles[1] !== "ROLE_RH" ? (
                                     <Button color="orange" arrow={true}>
                                         <Link to="create-signature">
                                             Ajouter une signature
@@ -537,9 +537,8 @@ function Team() {
                                                 >
                                                     {signature.name}
                                                 </span>
-                                                {JSON.parse(
-                                                    localStorage.getItem("user")
-                                                ).roles[1] !== "ROLE_RH" ? (
+                                                {user?.roles[1] !==
+                                                "ROLE_RH" ? (
                                                     <div
                                                         className={
                                                             classes.actionsContainer

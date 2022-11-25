@@ -231,9 +231,7 @@ function CreateSignatureComponent() {
 
     useEffect(() => {
         const getEvents = async () => {
-            const eventAPI = await UseEvents(
-                localStorage.getItem("organisation_id")
-            );
+            const eventAPI = await UseEvents(company.id);
             setSignatureOption(
                 {
                     ...signatureOption,
@@ -350,8 +348,7 @@ function CreateSignatureComponent() {
                 name: signatureName,
                 html: selectedTemplate.html,
                 signatureTemplate: selectedTemplate["@id"],
-                organisation: JSON.parse(localStorage.getItem("user"))
-                    .organisation,
+                organisation: company["id"],
             })
             .then(async (result) => {
                 notification({
@@ -804,8 +801,8 @@ function CreateSignatureComponent() {
                     infos={signatureInfo}
                     options={signatureOption}
                     template={selectedTemplate.html}
-                    organisation={company.data}
-                    user={user.data}
+                    organisation={company}
+                    user={user}
                 />
             );
     }, [signatureInfo, signatureOption, selectedTemplate]);

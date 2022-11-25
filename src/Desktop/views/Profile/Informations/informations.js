@@ -27,7 +27,7 @@ function Informations() {
     const [mobile, setMobile] = useState(user?.phone);
     const [urlAgenda, setUrlAgenda] = useState(user?.urlAgenda);
     const [socialsList, setSocialsList] = useState(
-        TokenService.getOrganisation().socialMediaAccounts || []
+        organisation.socialMediaAccounts || []
     );
     const [preview, setPreview] = useState();
 

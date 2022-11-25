@@ -11,7 +11,7 @@ import { useHistory, useParams } from "react-router";
 import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
-import { TokenService } from "Utils/index";
+import { TokenService } from "Utils";
 
 // Component handling the modification of signature, selection of template
 
@@ -66,7 +66,7 @@ function EditSignatureComponent() {
         mobile: { value: user?.phone_number, color: "#000", style: {} },
         phone: { value: company?.phone_number, color: "#000", style: {} },
         fontSize: [11],
-        fontFamily: "Helvetica",
+        fontFamily: "Arial",
     });
     const [signatureOption, setSignatureOption] = useState({
         salutation: { value: "Cordialement,", enabled: false, padding: 10 },
@@ -109,8 +109,9 @@ function EditSignatureComponent() {
 
     useEffect(() => {
         const getSignatureFromId = async () => {
-            await request.get("signatures/" + signatureId).then((res) => {
-                setSelectedTemplate(res.data);
+            await request.get("signatures/" + signatureId).then(async (res) => {
+                console.log(res.data);
+                setSelectedTemplate(res.data.signatureTemplate);
                 setDefaultStyles(res.data.signatureStyles);
                 setSignatureName(res.data.name);
             });
@@ -494,9 +495,7 @@ function EditSignatureComponent() {
 
     useEffect(() => {
         const getEvents = async () => {
-            const eventAPI = await UseEvents(
-                localStorage.getItem("organisation_id")
-            );
+            const eventAPI = await UseEvents(company.id);
             setSignatureOption(
                 {
                     ...signatureOption,
@@ -1050,15 +1049,18 @@ function EditSignatureComponent() {
     };
 
     useEffect(() => {
-        if (signatureInfo && signatureOption && selectedTemplate)
+        if (signatureInfo && signatureOption && selectedTemplate?.html) {
+            console.log(selectedTemplate?.html);
             setPreview(
                 <Preview
                     infos={signatureInfo}
                     options={signatureOption}
-                    template={selectedTemplate.html}
-                    organisation={company?.data}
+                    template={selectedTemplate?.html}
+                    organisation={company}
+                    user={user}
                 />
             );
+        }
     }, [signatureInfo, signatureOption, selectedTemplate]);
 
     return (
