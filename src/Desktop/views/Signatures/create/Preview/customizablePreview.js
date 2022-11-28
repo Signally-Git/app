@@ -43,13 +43,8 @@ export default function Preview({
     }, [organisation]);
 
     const socialNetworks = renderToStaticMarkup(
-        socials.map((item, index) => (
-            <td
-                style={{
-                    height: "25px",
-                    width: "25px",
-                }}
-            >
+        socials.map((item) => (
+            <>
                 <a
                     href={item.url}
                     style={{ height: "25px", width: "25px" }}
@@ -64,14 +59,8 @@ export default function Preview({
                         alt={item.name}
                     />
                 </a>
-                {index < socials.length - 1 && (
-                    <td
-                        style={{
-                            width: "12px",
-                        }}
-                    ></td>
-                )}
-            </td>
+                <span style={{ width: "12px" }}>&nbsp;</span>
+            </>
         ))
     );
     let replaced;
@@ -269,12 +258,6 @@ export default function Preview({
         /\{\{ styles\['generalFontSize']\['fontSize'] }}/gis,
         `${infos?.fontSize[0].toString() || "11"}`
     );
-    console.log(
-        replaced.replaceAll(
-            /\{\{ styles\['generalFontSize']\['fontSize'] }}/gis,
-            `${infos?.fontSize[0].toString() || "11"}`
-        )
-    );
     //mail
     replaced = replaced.replaceAll(
         "{{ user.email }}",
@@ -285,9 +268,9 @@ export default function Preview({
     replaced = replaced.replaceAll(
         greeting,
         options?.salutation?.enabled
-            ? `<p style="padding-bottom: ${
-                  options?.salutation?.padding
-              }px;" }>${options?.salutation.value || "Cordialement,"}</p>`
+            ? `<p style="padding-bottom: ${options?.salutation?.padding}px;">${
+                  options?.salutation.value || "Cordialement,"
+              }</p>`
             : ""
     );
     let disclaimer = /{# START DISCLAIMER #}.*{# END DISCLAIMER #}/gis;
@@ -303,7 +286,7 @@ export default function Preview({
     );
 
     // socials
-    if (!options?.socials?.enabled)
+    if (options?.socials?.enabled === false)
         replaced = replaced.replaceAll(
             /{# START SOCIALS #}.*{# END SOCIALS #}/gis,
             ``
@@ -317,6 +300,10 @@ export default function Preview({
         ``
     );
     replaced = replaced.replaceAll(/{% endif %}\s*{# END SOCIALS #}/gis, ``);
+    replaced = replaced.replaceAll(
+        /{% endif %}\s*<\/td>\s*<\/tr>\s*{# END SOCIALS #}/gis,
+        ``
+    );
 
     replaced = replaced.replaceAll(
         /{{ company.websiteUrl\|trim\('https:\/\/'\)\|trim\('http:\/\/'\) }}/g,
@@ -339,7 +326,7 @@ export default function Preview({
     replaced = replaced.replaceAll(/{% endif %}\s*{# END CALENDAR #}/gis, ``);
 
     // vCard
-    if (!options?.vcard?.enabled)
+    if (options?.vcard?.enabled === false)
         replaced = replaced.replaceAll(
             /{# START VCARD #}.*{# END VCARD #}/gis,
             ``
@@ -382,6 +369,10 @@ export default function Preview({
     replaced = replaced.replace(
         /{# START PHONE #}.*{% if user.phone %}.*{% if user.phone or isPreview %}/gis,
         ""
+    );
+    replaced = replaced.replaceAll(
+        /{% if isPreview %}.*0123456789.*{% else %}.*{{ user.phone }}/gis,
+        "0123456789"
     );
     replaced = replaced.replace(/{% endif %}.*{# END PHONE #}/gis, "");
     replaced = replaced.replace(/{# END PHONE #}/gis, "");

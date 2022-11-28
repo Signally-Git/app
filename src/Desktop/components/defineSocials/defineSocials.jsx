@@ -15,7 +15,7 @@ export default function DefineSocials({ setList, defaultValue }) {
     );
     const [select, setSelect] = React.useState(defaultValue.length || 0);
     const [value, setValue] = React.useState("");
-    const [customIcon, setCustomIcon] = React.useState("");
+    const [image, setImage] = React.useState("");
     const socialLink = React.useRef(null);
     const notification = useNotification();
 
@@ -29,21 +29,17 @@ export default function DefineSocials({ setList, defaultValue }) {
     };
 
     const renderSocial = (social) => {
-        return (
-            socialIcons[social.name.toUpperCase()] || (
-                <img src={social.image} alt={social.name} />
-            )
-        );
+        return socialIcons[social.name.toUpperCase()];
     };
 
-    const getName = (string) => {
-        let name;
+    const getDomainName = (string) => {
+        let domain;
         try {
-            name = new URL(string).hostname
+            domain = new URL(string).hostname
                 .replace("www.", "")
                 .replace(".com", "")
                 .replace(`^(?:.*://)?(?:.*?.)?([^:/]*?.[^:/]*).*$`, "");
-            return name;
+            return domain;
         } catch (_) {
             return false;
         }
@@ -51,13 +47,13 @@ export default function DefineSocials({ setList, defaultValue }) {
 
     const handleChange = (e) => {
         e.preventDefault();
-        const name = getName(e.target.value);
+        const name = getDomainName(e.target.value);
         let newArr = [...socials];
         newArr[select] = {
             url: e.target.value,
             name: name,
             image:
-                customIcon ||
+                image ||
                 "https://signally-images.s3.eu-west-1.amazonaws.com/MAMA+SHELTER/" +
                     name +
                     ".png",
@@ -66,30 +62,15 @@ export default function DefineSocials({ setList, defaultValue }) {
         setValue(e.target.value || "");
     };
 
-    const handleChangeIcon = (e) => {
-        e.preventDefault();
-        const name = getName(value);
-        let newArr = [...socials];
-        newArr[select] = {
-            url: value,
-            name: name,
-            image: e.target.value,
-        };
-        setCustomIcon(e.target.value);
-        setSocials(newArr);
-    };
-
     const handleSwap = (social) => {
         setSelect(socials.findIndex((x) => x === social));
+        setImage(socials[socials.findIndex((x) => x === social)]?.image || "");
         setValue(socials[socials.findIndex((x) => x === social)]?.url || "");
-        setCustomIcon(
-            socials[socials.findIndex((x) => x === social)]?.image || ""
-        );
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!getName(value)) {
+        if (!getDomainName(value)) {
             notification({
                 content: <>Réseau social non disponible</>,
                 status: "invalid",
@@ -97,26 +78,25 @@ export default function DefineSocials({ setList, defaultValue }) {
             return;
         }
         if (
-            socials.filter(
-                (social) =>
-                    getName(value) === social?.name ||
-                    socials.filter((social) => value.url === social?.url)
-            ).length !== 1
+            socials.filter((social) => getDomainName(value) === social?.name)
+                .length !== 1
         ) {
-            setSelect(socials.length);
-            setValue("");
-            setCustomIcon("");
-            socialLink.current.focus();
             notification({
-                content: <>{getName(value)} enregistré</>,
-                status: "valid",
-            });
-        } else {
-            notification({
-                content: <>Il existe déjà un réseau social {getName(value)}</>,
+                content: (
+                    <>Il existe déjà un réseau social {getDomainName(value)}</>
+                ),
                 status: "invalid",
             });
             return;
+        } else {
+            setSelect(socials.length);
+            setValue("");
+            setImage("");
+            socialLink.current.focus();
+            notification({
+                content: <>{getDomainName(value)} enregistré</>,
+                status: "valid",
+            });
         }
         const req = {
             ...socials[select],
@@ -140,7 +120,7 @@ export default function DefineSocials({ setList, defaultValue }) {
             1
         );
         setValue("");
-        setCustomIcon("");
+        setImage("");
         setSelect(socials.length);
     };
 
@@ -166,18 +146,18 @@ export default function DefineSocials({ setList, defaultValue }) {
                 <div className={classes.editSocials}>
                     <Input
                         ref={socialLink}
-                        style={{ width: "15rem" }}
+                        style={{ width: "20rem" }}
                         value={value}
                         onChange={(e) => handleChange(e)}
                         type="text"
                         placeholder="URL"
                     />
                     <Input
-                        style={{ width: "12rem" }}
-                        value={customIcon}
-                        onChange={(e) => handleChangeIcon(e)}
+                        style={{ width: "10rem" }}
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
                         type="text"
-                        placeholder="Lien de l'icône"
+                        placeholder="URL"
                     />
                     <FiCheck onClick={(e) => handleSubmit(e)} />
                     {socials[0]?.url?.length > 1 && (
