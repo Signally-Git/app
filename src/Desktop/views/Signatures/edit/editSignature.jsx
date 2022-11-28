@@ -123,6 +123,7 @@ function EditSignatureComponent() {
 
     const handlePopulate = () => {
         setSignatureInfo({
+            ...signatureInfo,
             logo: company?.logo,
             firstName: {
                 value: user?.first_name,
@@ -394,8 +395,26 @@ function EditSignatureComponent() {
                     )[0].value,
                 },
             },
-            fontSize: [11],
-            fontFamily: "Helvetica",
+            fontSize: [
+                defaultStyles?.filter(
+                    (style) =>
+                        style.type === "generalFontSize" &&
+                        style.property === "fontSize"
+                )[0].value || 11,
+            ],
+            fontFamily:
+                defaultStyles?.filter((style) => {
+                    if (
+                        style.type === "generalFontFamily" &&
+                        style.property === "fontFamily"
+                    ) {
+                        console.log(style);
+                        return (
+                            style.type === "generalFontFamily" &&
+                            style.property === "fontFamily"
+                        );
+                    }
+                })[0].value || "Helvetica",
         });
 
         setSignatureOption({
@@ -1061,7 +1080,13 @@ function EditSignatureComponent() {
                     organisation={company?.data}
                 />
             );
-    }, [signatureInfo, signatureOption, selectedTemplate, company]);
+    }, [
+        signatureInfo,
+        signatureOption,
+        selectedTemplate,
+        defaultStyles,
+        company,
+    ]);
 
     return (
         <div className={classes.container} ref={elem}>
