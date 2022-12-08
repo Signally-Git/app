@@ -16,11 +16,10 @@ export default function CustomSelect({
     callback,
 }) {
     const [value, setValue] = useState([
-        defaultValue || items[0]?.[getValue] || items[0]?.[display],
+        defaultValue || items?.[0]?.[getValue] || items?.[0]?.[display] || null,
     ]);
     const click = useRef(null);
     const [isOpen, setIsOpen] = useState(false);
-
     useEffect(() => {
         function handleClickOutside(event) {
             if (click.current && !click.current.contains(event.target)) {
@@ -32,7 +31,7 @@ export default function CustomSelect({
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [value]);
-
+    if (!items) return <></>;
     return (
         <>
             <div

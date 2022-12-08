@@ -1,9 +1,11 @@
 import request from "../../../Utils/Request/request";
 
-function getStatisticsFromEntity(type, id) {
-    return request.get(`statistics?${type}=${id}`).then((res) => {
-        return res.data["hydra:member"];
-    });
+function getStatisticsFromEntity(type, id, entityType, entityId) {
+    return request
+        .get(`statistics?${type}=${id}&${entityType.toLowerCase()}=${entityId}`)
+        .then((res) => {
+            return res.data["hydra:member"];
+        });
 }
 
 function mergeArrays(arr1 = [], arr2 = []) {
@@ -19,6 +21,17 @@ function mergeArrays(arr1 = [], arr2 = []) {
         };
     });
     return res;
+}
+
+async function getEntityList(type) {
+    return await request.get(type + "s").then((response) => {
+        if (type === "user") {
+            return response.data["hydra:member"].map((user) => {
+                return { ...user, name: `${user.firstName} ${user.lastName}` };
+            });
+        }
+        return response.data["hydra:member"];
+    });
 }
 
 async function getEntities() {
@@ -44,4 +57,4 @@ async function getEntities() {
     return entities;
 }
 
-export { getStatisticsFromEntity, getEntities, mergeArrays };
+export { getStatisticsFromEntity, getEntityList, getEntities, mergeArrays };
