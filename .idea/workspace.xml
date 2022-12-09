@@ -7,16 +7,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c4dff9f-5d0a-4e3d-a895-082d60361406" name="Changes" comment="better icon aligment">
+    <list default="true" id="5c4dff9f-5d0a-4e3d-a895-082d60361406" name="Changes" comment="handle empty data">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Statistics/Stats.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Statistics/Stats.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Statistics/Stats.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Statistics/Stats.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Profile/Informations/informations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Profile/Informations/informations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Preview/customizablePreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Preview/customizablePreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/createSignature.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/createSignature.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/edit/editSignature.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/edit/editSignature.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Statistics/EventStatistic.module.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Statistics/EventStatistic.module.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Statistics/Statistic.module.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Statistics/Statistic.module.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Statistics/Stats.page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Statistics/Stats.page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/signatures.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/signatures.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +64,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
@@ -77,6 +78,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2EUdhAVff6xkOl2mh9a74eqM9sF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -441,7 +443,21 @@
       <option name="project" value="LOCAL" />
       <updated>1669307968079</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="adds /.idea/* to silence workspace.xml">
+      <created>1670582504145</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1670582504145</updated>
+    </task>
+    <task id="LOCAL-00042" summary="new message with design to check spam after register">
+      <created>1670582638840</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1670582638840</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,9 +486,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add: preview uploaded or current logo of the organisation" />
-    <MESSAGE value="Uses the file name for the logos" />
-    <MESSAGE value="New socials link to s3" />
     <MESSAGE value="Arriving in templateSelect when creating a new signature, clean up" />
     <MESSAGE value="Add 24h to default creation event start date + style" />
     <MESSAGE value="Upgraded from http to https" />
@@ -495,7 +508,10 @@
     <MESSAGE value="update icon" />
     <MESSAGE value="update packages" />
     <MESSAGE value="better icon aligment" />
-    <option name="LAST_COMMIT_MESSAGE" value="better icon aligment" />
+    <MESSAGE value="adds /.idea/* to silence workspace.xml" />
+    <MESSAGE value="new message with design to check spam after register" />
+    <MESSAGE value="handle empty data" />
+    <option name="LAST_COMMIT_MESSAGE" value="handle empty data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

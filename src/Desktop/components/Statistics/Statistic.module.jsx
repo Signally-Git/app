@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getStatisticsFromEntity, mergeArrays } from "./Stats.utils";
+import { getStatisticsFromEntity } from "./Stats.utils";
 import Chart from "./Utils/Chart";
 import CustomSelect from "Utils/CustomSelect/customselect";
 import classes from "./Stats.module.css";
@@ -14,7 +14,7 @@ function Statistic({
     entityId,
 }) {
     const [chartData, setChartData] = useState();
-    const [selected, setSelected] = useState(entities?.[0]["id"]);
+    const [selected, setSelected] = useState(entities?.[0]?.["id"]);
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {

@@ -18,18 +18,18 @@ function Team() {
     const [selected, setSelected] = useState({});
     const [active, setActive] = useState("active");
     const user = TokenService.getUser();
-    const [template, setTemplate] = useState();
+    // const [template] = useState();
     const [modal, setModal] = useState();
-    const [signatureInfo, setSignatureInfo] = useState({});
+    // const [signatureInfo, setSignatureInfo] = useState({});
     const [signatureOption, setSignatureOption] = useState({});
     const [defaultStyles, setDefaultStyles] = useState();
-    const [data, setData] = useState({
-        firstName: user?.first_name,
-        lastName: user?.last_name,
-        position: user?.position,
-    });
+    // const [data, setData] = useState({
+    //     firstName: user?.first_name,
+    //     lastName: user?.last_name,
+    //     position: user?.position,
+    // });
 
-    const [organisation, setOrganisation] = useState();
+    // const [organisation, setOrganisation] = useState();
     const [preview, setPreview] = useState({});
     const history = useHistory();
     const [loading, setLoading] = useState(true);
@@ -37,9 +37,9 @@ function Team() {
     const getData = async () => {
         const signatures = await request.get(`signatures`);
 
-        await request
-            .get(user?.organisation)
-            .then((res) => setOrganisation(res.data));
+        // await request
+        //     .get(user?.organisation)
+        // .then((res) => setOrganisation(res.data));
         signatures.data["hydra:totalItems"] < 1
             ? history.push("/create-signature")
             : // : console.log(signatures.data["hydra:member"])
@@ -53,281 +53,281 @@ function Team() {
     };
 
     useEffect(() => {
-        setSignatureInfo({
-            logo: organisation?.logo,
-            firstName: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "firstName" && style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "firstName" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "firstName" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "firstName" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
-            },
-            lastName: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "lastName" && style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "lastName" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "lastName" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "lastName" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
-            },
-            jobName: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "jobName" && style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "jobName" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "jobName" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "jobName" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
-            },
-            company: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "companyName" &&
-                        style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "companyName" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "companyName" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "companyName" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
-            },
-            addressStreet: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "addressStreet" &&
-                        style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressStreet" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressStreet" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressStreet" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
-            },
-            addressInfo: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "addressInfo" &&
-                        style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressInfo" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressInfo" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressInfo" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
-            },
-            addressZipcode: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "addressZipcode" &&
-                        style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressZipcode" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressZipcode" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressZipcode" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
-            },
-            addressCity: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "addressCity" &&
-                        style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressCity" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressCity" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressCity" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
-            },
-            addressCountry: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "addressCountry" &&
-                        style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressCountry" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressCountry" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressCountry" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
-            },
-            mobile: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "mobile" && style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "mobile" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "mobile" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "mobile" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
-            },
-            phone: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "phone" && style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "phone" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "phone" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "phone" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
-            },
-            fontSize: [11],
-            fontFamily: "Helvetica",
-        });
+        // setSignatureInfo({
+        //     logo: organisation?.logo,
+        //     firstName: {
+        //         value: user?.first_name,
+        //         color: defaultStyles?.filter(
+        //             (style) =>
+        //                 style.type === "firstName" && style.property === "color"
+        //         )[0].value,
+        //         style: {
+        //             fontWeight: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "firstName" &&
+        //                     style.property === "fontWeight"
+        //             )[0].value,
+        //             fontStyle: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "firstName" &&
+        //                     style.property === "fontStyle"
+        //             )[0].value,
+        //             textDecoration: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "firstName" &&
+        //                     style.property === "textDecoration"
+        //             )[0].value,
+        //         },
+        //     },
+        //     lastName: {
+        //         value: user?.first_name,
+        //         color: defaultStyles?.filter(
+        //             (style) =>
+        //                 style.type === "lastName" && style.property === "color"
+        //         )[0].value,
+        //         style: {
+        //             fontWeight: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "lastName" &&
+        //                     style.property === "fontWeight"
+        //             )[0].value,
+        //             fontStyle: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "lastName" &&
+        //                     style.property === "fontStyle"
+        //             )[0].value,
+        //             textDecoration: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "lastName" &&
+        //                     style.property === "textDecoration"
+        //             )[0].value,
+        //         },
+        //     },
+        //     jobName: {
+        //         value: user?.first_name,
+        //         color: defaultStyles?.filter(
+        //             (style) =>
+        //                 style.type === "jobName" && style.property === "color"
+        //         )[0].value,
+        //         style: {
+        //             fontWeight: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "jobName" &&
+        //                     style.property === "fontWeight"
+        //             )[0].value,
+        //             fontStyle: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "jobName" &&
+        //                     style.property === "fontStyle"
+        //             )[0].value,
+        //             textDecoration: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "jobName" &&
+        //                     style.property === "textDecoration"
+        //             )[0].value,
+        //         },
+        //     },
+        //     company: {
+        //         value: user?.first_name,
+        //         color: defaultStyles?.filter(
+        //             (style) =>
+        //                 style.type === "companyName" &&
+        //                 style.property === "color"
+        //         )[0].value,
+        //         style: {
+        //             fontWeight: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "companyName" &&
+        //                     style.property === "fontWeight"
+        //             )[0].value,
+        //             fontStyle: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "companyName" &&
+        //                     style.property === "fontStyle"
+        //             )[0].value,
+        //             textDecoration: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "companyName" &&
+        //                     style.property === "textDecoration"
+        //             )[0].value,
+        //         },
+        //     },
+        //     addressStreet: {
+        //         value: user?.first_name,
+        //         color: defaultStyles?.filter(
+        //             (style) =>
+        //                 style.type === "addressStreet" &&
+        //                 style.property === "color"
+        //         )[0].value,
+        //         style: {
+        //             fontWeight: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressStreet" &&
+        //                     style.property === "fontWeight"
+        //             )[0].value,
+        //             fontStyle: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressStreet" &&
+        //                     style.property === "fontStyle"
+        //             )[0].value,
+        //             textDecoration: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressStreet" &&
+        //                     style.property === "textDecoration"
+        //             )[0].value,
+        //         },
+        //     },
+        //     addressInfo: {
+        //         value: user?.first_name,
+        //         color: defaultStyles?.filter(
+        //             (style) =>
+        //                 style.type === "addressInfo" &&
+        //                 style.property === "color"
+        //         )[0].value,
+        //         style: {
+        //             fontWeight: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressInfo" &&
+        //                     style.property === "fontWeight"
+        //             )[0].value,
+        //             fontStyle: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressInfo" &&
+        //                     style.property === "fontStyle"
+        //             )[0].value,
+        //             textDecoration: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressInfo" &&
+        //                     style.property === "textDecoration"
+        //             )[0].value,
+        //         },
+        //     },
+        //     addressZipcode: {
+        //         value: user?.first_name,
+        //         color: defaultStyles?.filter(
+        //             (style) =>
+        //                 style.type === "addressZipcode" &&
+        //                 style.property === "color"
+        //         )[0].value,
+        //         style: {
+        //             fontWeight: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressZipcode" &&
+        //                     style.property === "fontWeight"
+        //             )[0].value,
+        //             fontStyle: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressZipcode" &&
+        //                     style.property === "fontStyle"
+        //             )[0].value,
+        //             textDecoration: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressZipcode" &&
+        //                     style.property === "textDecoration"
+        //             )[0].value,
+        //         },
+        //     },
+        //     addressCity: {
+        //         value: user?.first_name,
+        //         color: defaultStyles?.filter(
+        //             (style) =>
+        //                 style.type === "addressCity" &&
+        //                 style.property === "color"
+        //         )[0].value,
+        //         style: {
+        //             fontWeight: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressCity" &&
+        //                     style.property === "fontWeight"
+        //             )[0].value,
+        //             fontStyle: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressCity" &&
+        //                     style.property === "fontStyle"
+        //             )[0].value,
+        //             textDecoration: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressCity" &&
+        //                     style.property === "textDecoration"
+        //             )[0].value,
+        //         },
+        //     },
+        //     addressCountry: {
+        //         value: user?.first_name,
+        //         color: defaultStyles?.filter(
+        //             (style) =>
+        //                 style.type === "addressCountry" &&
+        //                 style.property === "color"
+        //         )[0].value,
+        //         style: {
+        //             fontWeight: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressCountry" &&
+        //                     style.property === "fontWeight"
+        //             )[0].value,
+        //             fontStyle: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressCountry" &&
+        //                     style.property === "fontStyle"
+        //             )[0].value,
+        //             textDecoration: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "addressCountry" &&
+        //                     style.property === "textDecoration"
+        //             )[0].value,
+        //         },
+        //     },
+        //     mobile: {
+        //         value: user?.first_name,
+        //         color: defaultStyles?.filter(
+        //             (style) =>
+        //                 style.type === "mobile" && style.property === "color"
+        //         )[0].value,
+        //         style: {
+        //             fontWeight: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "mobile" &&
+        //                     style.property === "fontWeight"
+        //             )[0].value,
+        //             fontStyle: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "mobile" &&
+        //                     style.property === "fontStyle"
+        //             )[0].value,
+        //             textDecoration: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "mobile" &&
+        //                     style.property === "textDecoration"
+        //             )[0].value,
+        //         },
+        //     },
+        //     phone: {
+        //         value: user?.first_name,
+        //         color: defaultStyles?.filter(
+        //             (style) =>
+        //                 style.type === "phone" && style.property === "color"
+        //         )[0].value,
+        //         style: {
+        //             fontWeight: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "phone" &&
+        //                     style.property === "fontWeight"
+        //             )[0].value,
+        //             fontStyle: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "phone" &&
+        //                     style.property === "fontStyle"
+        //             )[0].value,
+        //             textDecoration: defaultStyles?.filter(
+        //                 (style) =>
+        //                     style.type === "phone" &&
+        //                     style.property === "textDecoration"
+        //             )[0].value,
+        //         },
+        //     },
+        //     fontSize: [11],
+        //     fontFamily: "Helvetica",
+        // });
 
         setSignatureOption({
             salutation: {
@@ -335,9 +335,7 @@ function Team() {
                 enabled:
                     defaultStyles?.filter(
                         (style) => style.type === "greetings"
-                    )[0].value === "false"
-                        ? false
-                        : true,
+                    )[0].value !== "false",
                 padding: defaultStyles?.filter(
                     (style) => style.type === "greetingsPadding"
                 )[0].value,
@@ -355,9 +353,7 @@ function Team() {
                 display: `${process.env.REACT_APP_API_URL}/${signatureOption.event?.selected?.imagePath}`,
                 enabled:
                     defaultStyles?.filter((style) => style.type === "event")[0]
-                        .value === "false"
-                        ? false
-                        : true,
+                        .value !== "false",
                 padding: defaultStyles?.filter(
                     (style) => style.type === "eventPadding"
                 )[0].value,
@@ -383,9 +379,7 @@ function Team() {
                 enabled:
                     defaultStyles?.filter(
                         (style) => style.type === "disclaimer"
-                    )[0].value === "false"
-                        ? false
-                        : true,
+                    )[0].value !== "false",
                 padding: defaultStyles?.filter(
                     (style) => style.type === "disclaimerPadding"
                 )[0].value,
@@ -398,18 +392,18 @@ function Team() {
         getData();
     }, [deleted]);
 
-    useEffect(() => {
-        setData({
-            firstName: "Prénom",
-            lastName: "Nom",
-            poste: "Poste",
-            company: organisation?.name,
-            address: organisation?.address,
-            mobile: "Mobile",
-            phone: organisation?.phone_number,
-            event: `https://fakeimg.pl/380x126?font=noto&amp;font_size=14`,
-        });
-    }, [template]);
+    // useEffect(() => {
+    //     setData({
+    //         firstName: "Prénom",
+    //         lastName: "Nom",
+    //         poste: "Poste",
+    //         company: organisation?.name,
+    //         address: organisation?.address,
+    //         mobile: "Mobile",
+    //         phone: organisation?.phone_number,
+    //         event: `https://fakeimg.pl/380x126?font=noto&amp;font_size=14`,
+    //     });
+    // }, [template]);
 
     const handleModal = (id) => {
         setModal(
@@ -432,7 +426,7 @@ function Team() {
     const handleDelete = async (id) => {
         await request
             .delete(`signatures/${id}`)
-            .then((res) => {
+            .then(() => {
                 notification({
                     content: <>La signature a été supprimée avec succès</>,
                     status: "valid",
@@ -582,19 +576,6 @@ function Team() {
                                         Ajouter une signature
                                     </Link>
                                 </Button>
-                                {/* IF PAS DE SIGNATURE INACTIVE */}
-                                {}
-                                {/* <div className={classes.searchInput}>
-                                        <HiOutlineSearch />
-                                        <input className={classes.search} type="text" placeholder="Rechercher une signature" />
-                                    </div>
-                                    <span>0 signature</span>
-                                    <ul className={classes.itemsList}> */}
-                                {/* <li tabIndex="0">
-                                            Design
-                                        </li>
-                                        <li tabIndex="0">Sales</li> */}
-                                {/* </ul> */}
                             </div>
                         ) : (
                             ""

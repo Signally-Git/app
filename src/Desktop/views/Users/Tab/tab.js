@@ -63,7 +63,6 @@ export default function Tab({
     };
 
     const getDataTeam = async () => {
-        console.log(teams);
         const teamsAPI = await request.get("teams");
         const teamsList = [];
         teamsAPI.data["hydra:member"].map((team) => {
@@ -84,7 +83,6 @@ export default function Tab({
 
     useEffect(() => {
         refreshData();
-        console.log(tab);
     }, [addedWorkplace, done, tab]);
 
     // Deletes either specified workplace, team or user

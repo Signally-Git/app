@@ -8,9 +8,9 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 // Displaying the list of bought and free templates (Studio, Store) and allows to select one to create custom signature
 
 export default function TemplateSelection(props) {
-    const [orientation, setOrientation] = useState("Horizontal");
+    // const [orientation, setOrientation] = useState("Horizontal");
     const [fetching, setFetching] = useState(true);
-    const [tag, setTag] = useState(true);
+    // const [tag, setTag] = useState(true);
     const [templatesList, setTemplatesList] = useState([]);
     const [organisation, setOrganisation] = useState();
 
@@ -18,12 +18,12 @@ export default function TemplateSelection(props) {
         props.setTemplate(JSON.parse(e.target.value));
     };
 
-    const handleAlignment = (e) => {
-        setOrientation(e.target.id);
-    };
-    const handleStudio = (e) => {
-        setTag(e.target.checked);
-    };
+    // const handleAlignment = (e) => {
+    //     setOrientation(e.target.id);
+    // };
+    // const handleStudio = (e) => {
+    //     setTag(e.target.checked);
+    // };
 
     useEffect(() => {
         const organisationId = JSON.parse(
@@ -110,53 +110,62 @@ export default function TemplateSelection(props) {
                 {/*	</form>*/}
                 {/*</div>*/}
             </div>
-            <form onChange={handleForm}>
-                <ul className={classes.templatesContainer}>
-                    {templatesList?.map((template) => {
-                        return (
-                            <li key={template.id}>
-                                <p className={classes.templateName}>
-                                    {template.name}
-                                </p>
-                                <input
-                                    readOnly
-                                    type="radio"
-                                    name="template"
-                                    value={JSON.stringify(template)}
-                                />
-                                <Template
-                                    options={{
-                                        event: { enabled: true },
-                                    }}
-                                    template={template.html}
-                                    socials={props.icons}
-                                    organisation={organisation}
-                                    user={JSON.parse(
-                                        localStorage.getItem("user")
-                                    )}
-                                />
-                            </li>
-                        );
-                    })}
-                    {!tag ? (
-                        <li style={{ width: "412px", height: "220px" }}></li>
-                    ) : (
-                        ""
-                    )}
-                </ul>
-                <div className={classes.btnContainer}>
-                    <Button
-                        color="orange"
-                        width={"5rem"}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            props.showFunction(false, "smooth");
-                        }}
-                    >
-                        Annuler
-                    </Button>
-                </div>
-            </form>
+            {!templatesList || templatesList.length === 0 ? (
+                <span>
+                    Aucun modèle disponible. Veuillez contacter votre
+                    administrateur Signally.
+                </span>
+            ) : (
+                <form onChange={handleForm}>
+                    <ul className={classes.templatesContainer}>
+                        {templatesList?.map((template) => {
+                            return (
+                                <li key={template.id}>
+                                    <p className={classes.templateName}>
+                                        {template.name}
+                                    </p>
+                                    <input
+                                        readOnly
+                                        type="radio"
+                                        name="template"
+                                        value={JSON.stringify(template)}
+                                    />
+                                    <Template
+                                        options={{
+                                            event: { enabled: true },
+                                        }}
+                                        template={template.html}
+                                        socials={props.icons}
+                                        organisation={organisation}
+                                        user={JSON.parse(
+                                            localStorage.getItem("user")
+                                        )}
+                                    />
+                                </li>
+                            );
+                        })}
+                        {/*{!tag ? (*/}
+                        {/*    <li*/}
+                        {/*        style={{ width: "412px", height: "220px" }}*/}
+                        {/*    ></li>*/}
+                        {/*) : (*/}
+                        {/*    ""*/}
+                        {/*)}*/}
+                    </ul>
+                    <div className={classes.btnContainer}>
+                        <Button
+                            color="orange"
+                            width={"5rem"}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                props.showFunction(false, "smooth");
+                            }}
+                        >
+                            Annuler
+                        </Button>
+                    </div>
+                </form>
+            )}
         </div>
     );
 }

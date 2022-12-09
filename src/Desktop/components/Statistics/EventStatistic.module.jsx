@@ -8,7 +8,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 function EventStatistic({ eventType, entities, entityType, entityId }) {
     const [chartData, setChartData] = useState();
-    const [selected, setSelected] = useState(entities?.[0]["id"]);
+    const [selected, setSelected] = useState(entities?.[0]?.["id"]);
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {

@@ -38,62 +38,86 @@ function StatsPage() {
             <h1>Statistiques</h1>
             <h3>Event</h3>
             <div>
-                <EventStatistic
-                    eventType={"event"}
-                    entities={organisation.events}
-                    entityType={entity?.["@type"]}
-                    entityId={entity?.id}
-                />
+                {organisation?.events?.length > 0 ? (
+                    <EventStatistic
+                        eventType={"event"}
+                        entities={organisation.events}
+                        entityType={entity?.["@type"]}
+                        entityId={entity?.id}
+                    />
+                ) : (
+                    <span>Aucun évènement disponible.</span>
+                )}
             </div>
             <h3>vCard</h3>
             <div>
-                <Statistic
-                    statisticType={"signature"}
-                    eventType={"VCARD_CLICK"}
-                    entities={organisation.signatures}
-                    entityType={entity?.["@type"]}
-                    entityId={entity?.id}
-                />
+                {organisation?.signatures?.length > 0 ? (
+                    <Statistic
+                        statisticType={"signature"}
+                        eventType={"VCARD_CLICK"}
+                        entities={organisation.signatures}
+                        entityType={entity?.["@type"]}
+                        entityId={entity?.id}
+                    />
+                ) : (
+                    <span>Aucune signature disponible.</span>
+                )}
             </div>
             <h3>Réseaux sociaux</h3>
             <div>
-                <Statistic
-                    statisticType={"signature"}
-                    eventType={"EVENT_SN_CLICK"}
-                    entities={organisation.signatures}
-                    entityType={entity?.["@type"]}
-                    entityId={entity?.id}
-                />
+                {organisation?.signatures?.length > 0 ? (
+                    <Statistic
+                        statisticType={"signature"}
+                        eventType={"EVENT_SN_CLICK"}
+                        entities={organisation.signatures}
+                        entityType={entity?.["@type"]}
+                        entityId={entity?.id}
+                    />
+                ) : (
+                    <span>Aucune signature disponible.</span>
+                )}
             </div>
             <h3>Rendez-vous</h3>
             <div>
-                <Statistic
-                    statisticType={"signature"}
-                    eventType={"CALENDLY_CLICK"}
-                    entities={organisation.signatures}
-                    entityType={entity?.["@type"]}
-                    entityId={entity?.id}
-                />
+                {organisation?.signatures?.length > 0 ? (
+                    <Statistic
+                        statisticType={"signature"}
+                        eventType={"CALENDLY_CLICK"}
+                        entities={organisation.signatures}
+                        entityType={entity?.["@type"]}
+                        entityId={entity?.id}
+                    />
+                ) : (
+                    <span>Aucune signature disponible.</span>
+                )}
             </div>
             <h3>Logo</h3>
             <div>
-                <Statistic
-                    statisticType={"signature"}
-                    eventType={"LOGO_CLICK"}
-                    entities={organisation.signatures}
-                    entityType={entity?.["@type"]}
-                    entityId={entity?.id}
-                />
+                {organisation?.signatures?.length > 0 ? (
+                    <Statistic
+                        statisticType={"signature"}
+                        eventType={"LOGO_CLICK"}
+                        entities={organisation.signatures}
+                        entityType={entity?.["@type"]}
+                        entityId={entity?.id}
+                    />
+                ) : (
+                    <span>Aucune signature disponible.</span>
+                )}
             </div>
             <h3>E-mails</h3>
             <div>
-                <Statistic
-                    statisticType={"signature"}
-                    eventType={"EMAIL_OPEN"}
-                    entities={organisation.signatures}
-                    entityType={entity?.["@type"]}
-                    entityId={entity?.id}
-                />
+                {organisation?.signatures?.length > 0 ? (
+                    <Statistic
+                        statisticType={"signature"}
+                        eventType={"EMAIL_OPEN"}
+                        entities={organisation.signatures}
+                        entityType={entity?.["@type"]}
+                        entityId={entity?.id}
+                    />
+                ) : (
+                    <span>Aucune signature disponible.</span>
+                )}
             </div>
             <div className={classes.entitySelectContainer}>
                 <form>
