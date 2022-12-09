@@ -14,11 +14,11 @@ import {
 } from "recharts";
 
 const Chart = ({ data }) => {
-    if (!data || !data.length) return <h2>Aucune donnée à afficher</h2>;
+    if (!data || !data.length) return <h4>Aucune donnée à afficher</h4>;
 
     return (
         <ResponsiveContainer width="100%" height="100%">
-            <LineChart width={400} height={250} data={data}>
+            <LineChart width={200} height={150} data={data}>
                 <CartesianGrid strokeDasharray="1 1" />
                 <XAxis dataKey="day_created_date" />
                 <YAxis />
