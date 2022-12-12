@@ -24,7 +24,7 @@ function CreateSignatureComponent() {
     const notification = useNotification();
     const [preview, setPreview] = useState("");
 
-    const [templateRules, setTemplateRules] = useState({
+    const [templateRules] = useState({
         fontSize: { min: 9, max: 13, step: 1 },
     });
 
@@ -291,7 +291,6 @@ function CreateSignatureComponent() {
 
     const [modal, setModal] = useState(false);
     const [modalContent, setModalContent] = useState();
-    const [templateId, setTemplateIdToPatch] = useState();
     const [signatureName, setSignatureName] = useState("test");
 
     useEffect(() => {
@@ -348,7 +347,7 @@ function CreateSignatureComponent() {
                 name: signatureName,
                 html: selectedTemplate.html,
                 signatureTemplate: selectedTemplate["@id"],
-                organisation: company["id"],
+                organisation: company["@id"],
             })
             .then(async (result) => {
                 notification({
@@ -363,7 +362,7 @@ function CreateSignatureComponent() {
                     ),
                     status: "valid",
                 });
-                setTemplateIdToPatch(result.data.id);
+
                 const styles = [
                     // COLOR FOR EACH TXT
                     {
@@ -779,7 +778,7 @@ function CreateSignatureComponent() {
                         signature: result?.data?.id,
                     },
                 ];
-                request.post("signature_styles/batch", styles).then((r) => {
+                request.post("signature_styles/batch", styles).then(() => {
                     if (window.location.hash === "#onboarding")
                         history.goBack();
                     else history.push("/signatures");
