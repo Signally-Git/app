@@ -186,6 +186,7 @@
             padding: 1rem;
             position: relative;
             max-width: 48%;
+            overflow: auto;
             border-radius: 20px;
             background-color: #fff;
             transition: border-color 0.3s;
@@ -195,7 +196,7 @@
             &:hover {
                 p {
                     color: $signally-orange;
-                }
+                } 
                 border-color: $signally-orange;
                 // box-shadow: 0 0 20px rgba(112, 112, 112, 0.6);
             }
