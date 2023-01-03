@@ -3,9 +3,8 @@ import classes from "./imgUpload.module.css";
 import { IoMdClose } from "react-icons/io";
 import { BsUpload } from "react-icons/bs";
 import axios from "axios";
-import Logo from "Utils/Logo/logo";
 import Button from "Utils/Button/btn";
-import request from "Utils/Request/request";
+import { CustomCheckbox, TokenService } from "Utils";
 
 // Custom functions
 // First one converts SVG HTML code to PNG image
@@ -13,18 +12,20 @@ import request from "Utils/Request/request";
 
 function ImgUploader() {
     const [imgName, setImgName] = useState("");
-    const [path, setPath] = useState(
-        "Cliquez ici pour copier le lien de l'image"
-    );
+    const [path, setPath] = useState({
+        path: "Cliquez ici pour copier le lien de l'image",
+    });
+    const [isForProduction, setIsForProduction] = useState(false);
     const [message, setMessage] = useState("");
     const [width, setWidth] = useState(108);
     const [height, setHeight] = useState(108);
+    const token = TokenService.getLocalToken();
 
     // SVG TO PNG
     const [svgData, setSvgData] = useState();
     const convertSvg = async (svg) => {
         await axios({
-            url: `https://svgtopng.signally.io/convert?height=${height}&width=${width}`, //your url
+            url: `https://svgtopng.signally.io/convert?height=${height}&width=${width}`,
             method: "POST",
             data: svg,
             responseType: "blob", // important
@@ -32,7 +33,7 @@ function ImgUploader() {
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement("a");
             link.href = url;
-            link.setAttribute("download", "file.png"); //or any other extension
+            link.setAttribute("download", "file.png");
             document.body.appendChild(link);
             link.click();
         });
@@ -42,21 +43,29 @@ function ImgUploader() {
     const uploadImg = async (uploadedMedia) => {
         const img = new FormData();
         img.append("file", uploadedMedia);
-        await request
-            .post(`import/file`, img)
+        const api = isForProduction
+            ? "https://api.signally.io"
+            : process.env.REACT_APP_API_URL;
+        await axios
+            .post(`${api}/import/file`, img, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             .then(async (res) => {
                 console.log(res);
-                if (res.data.path) {
+                if (res.data.url) {
                     setPath(res.data);
-                    copyToClipboard(res.data.path);
+                    copyToClipboard(res.data.url);
                 }
                 //
                 // else
                 //     setMessage(res.data)
             })
             .catch((err) => {
-                setMessage(err);
+                setMessage(err.message);
             });
+        return null;
     };
 
     // Copies image URL to clipboard and displays a success message
@@ -111,16 +120,25 @@ function ImgUploader() {
                 <input
                     type="text"
                     readOnly
-                    value={path.id}
+                    value={path.path}
                     onClick={() => copyToClipboard()}
                     disabled={
                         path.path ===
                         "Cliquez ici pour copier le lien de l'image"
                     }
                 />
+                <div className={classes.checkboxContainer}>
+                    <label htmlFor="isProduction">Production</label>
+                    <CustomCheckbox
+                        onChange={(e) => setIsForProduction(e.target.checked)}
+                        name="isProduction"
+                        id="isProduction"
+                        type="checkbox"
+                        value={isForProduction}
+                    />
+                </div>
                 <div className={classes.inputContainer}>
-                    {path.path !==
-                    "Cliquez ici pour copier le lien de l'image" ? (
+                    {path.url ? (
                         <img
                             alt={"preview"}
                             className={classes.imgPreview}
@@ -135,9 +153,9 @@ function ImgUploader() {
                                 className={classes.uploadedFile}
                                 onClick={() => {
                                     setImgName("");
-                                    setPath(
-                                        "Cliquez ici pour copier le lien de l'image"
-                                    );
+                                    setPath({
+                                        path: "Cliquez ici pour copier le lien de l'image",
+                                    });
                                 }}
                             >
                                 <span>{imgName}</span> <IoMdClose />
@@ -148,7 +166,7 @@ function ImgUploader() {
                                     type="file"
                                     onChange={(e) => {
                                         setImgName(e.target.files[0].name);
-                                        uploadImg(e.target.files[0]);
+                                        void uploadImg(e.target.files[0]);
                                     }}
                                 />
                                 <span>
@@ -159,9 +177,6 @@ function ImgUploader() {
                         )}
                     </div>
                 </div>
-            </div>
-            <div className={classes.logo}>
-                <Logo />
             </div>
         </div>
     );
