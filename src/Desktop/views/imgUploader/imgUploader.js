@@ -4,7 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import { BsUpload } from "react-icons/bs";
 import axios from "axios";
 import Button from "Utils/Button/btn";
-import { CustomCheckbox, TokenService } from "Utils";
+import { CustomCheckbox } from "Utils";
 
 // Custom functions
 // First one converts SVG HTML code to PNG image
@@ -19,7 +19,7 @@ function ImgUploader() {
     const [message, setMessage] = useState("");
     const [width, setWidth] = useState(108);
     const [height, setHeight] = useState(108);
-    const token = TokenService.getLocalToken();
+    const token = localStorage.getItem("token");
 
     // SVG TO PNG
     const [svgData, setSvgData] = useState();
