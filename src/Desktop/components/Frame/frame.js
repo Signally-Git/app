@@ -4,53 +4,43 @@ import { Suspense, useEffect, useState } from "react";
 import classes from "./frame.module.scss";
 import request from "Utils/Request/request";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { TokenService } from "Utils/index";
 
 export default function Frame(props) {
-    const [user, setUser] = useState();
+    const [user, setUser] = useState(TokenService.getUser);
     const [organisation, setOrganisation] = useState();
 
     useEffect(() => {
-        request
-            .get("whoami")
-            .then((res) => {
-                setUser(res.data);
-                const sseUser = new EventSource(
-                    `${process.env.REACT_APP_HUB_URL}${res.data["@id"]}`
-                );
-                const sse = new EventSource(
-                    `${process.env.REACT_APP_HUB_URL}${res.data["organisation"]}`
-                );
+        TokenService.setOrganisation({ "@id": user.organisation });
+        const sseUser = new EventSource(
+            `${process.env.REACT_APP_HUB_URL}${user["@id"]}`
+        );
+        const sse = new EventSource(
+            `${process.env.REACT_APP_HUB_URL}${user["organisation"]}`
+        );
 
-                function getRealtimeData(data) {
-                    setOrganisation(data);
-                    localStorage.setItem("organisation", JSON.stringify(data));
-                }
-                sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
+        function getRealtimeData(data) {
+            setOrganisation(data);
+            TokenService.setOrganisation(data);
+        }
+        sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
 
-                function getRealtimeDataUser(data) {
-                    setUser(data);
-                }
-                sseUser.onmessage = (e) =>
-                    getRealtimeDataUser(JSON.parse(e.data));
-
-                // return () => {
-                //     sse.close();
-                //     sseUser.close();
-                // };
-                request
-                    .get(res.data.organisation)
-                    .then((r) => {
-                        setOrganisation(r.data);
-                        localStorage.setItem(
-                            "organisation",
-                            JSON.stringify(r.data)
-                        );
-                    })
-                    .catch((err) => console.log(err));
-            })
-            .catch((err) => {
-                console.log(err);
+        function getRealtimeDataUser(data) {
+            setUser(data);
+            TokenService.setUser({
+                ...TokenService.getUser(),
+                ...data,
             });
+        }
+        sseUser.onmessage = (e) => getRealtimeDataUser(JSON.parse(e.data));
+
+        request
+            .get(user.organisation)
+            .then((r) => {
+                setOrganisation(r.data);
+                TokenService.setOrganisation(r.data);
+            })
+            .catch((err) => console.log(err));
     }, []);
 
     return (
@@ -73,10 +63,7 @@ export default function Frame(props) {
                                         </p>
                                     )}
                                 </div>
-                                <Menu
-                                    className={classes.menu}
-                                    page={props.path}
-                                />
+                                <Menu page={props.path} />
                             </div>
 
                             <div className={classes.dashboardContainer}>

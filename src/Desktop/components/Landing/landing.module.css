@@ -47,7 +47,7 @@
 .container input[type=email]:focus,
 .container input[type=password]:focus,
 .container select:focus {
-  box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+  box-shadow: 0 12px 40px rgba(230, 208, 201, 0.28);
   border-color: #ff7954;
 }
 .container select {
@@ -191,7 +191,7 @@
   background-color: #fbf4f2;
   border-radius: 8px;
   align-items: center;
-  font-family: Montserrat;
+  font-family: Montserrat, serif;
   flex-direction: column;
   height: 100%;
   max-height: 80vh;
@@ -229,7 +229,7 @@
 
 .formContainer h2 {
   text-align: center;
-  font-family: Trebuchet MS;
+  font-family: Trebuchet MS, serif;
   color: #402927;
   margin-top: 0;
   font-size: 1.3rem;
@@ -284,6 +284,11 @@
 }
 .congrats h2 {
   color: #ff7954;
+}
+.congrats > span {
+  animation-delay: 0.75s;
+  font-size: 0.8rem;
+  color: #402927;
 }
 
 .disappear {
@@ -350,7 +355,7 @@
   display: inline;
 }
 .modal .btnsContainer {
-  margin-top: 0rem;
+  margin-top: 0;
 }
 .modal .btnsContainer button {
   margin-top: 1rem;

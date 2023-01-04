@@ -59,8 +59,14 @@ export default function Preview({
                         alt={item.name}
                     />
                 </a>
-                <span style={{ width: "12px" }}>&nbsp;</span>
-            </>
+                {index < socials.length - 1 && (
+                    <td
+                        style={{
+                            width: "12px",
+                        }}
+                    ></td>
+                )}
+            </td>
         ))
     );
     let replaced;
@@ -130,8 +136,7 @@ export default function Preview({
 
     replaced = replaced.replaceAll(
         "{{ logo }}",
-        infos?.logo?.path ||
-            organisation?.logo?.url ||
+        organisation?.logo?.url ||
             "https://fakeimg.pl/108?font=noto&font_size=12"
     );
 
@@ -230,7 +235,7 @@ export default function Preview({
     );
 
     replaced = replaced.replaceAll(
-        /{% if isPreview %}\s*0123456789\s*{% else %}\s*{{ user.phone }}\s*{% endif %}/gis,
+        /{% if isPreview %}.*0123456789.*{% else %}\s*{{ user.phone }}\s*{% endif %}/gis,
         "0102030405"
     );
     replaced = replaced.replaceAll(
@@ -258,6 +263,7 @@ export default function Preview({
         /\{\{ styles\['generalFontSize']\['fontSize'] }}/gis,
         `${infos?.fontSize[0].toString() || "11"}`
     );
+
     //mail
     replaced = replaced.replaceAll(
         "{{ user.email }}",
@@ -370,7 +376,8 @@ export default function Preview({
         /{# START PHONE #}.*{% if user.phone %}.*{% if user.phone or isPreview %}/gis,
         ""
     );
-    replaced = replaced.replaceAll(
+
+    replaced = replaced.replace(
         /{% if isPreview %}.*0123456789.*{% else %}.*{{ user.phone }}/gis,
         "0123456789"
     );

@@ -1,23 +1,23 @@
 .select {
-  font-family: "Montserrat", serif;
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  outline: none;
-  transition: border-color 0.3s;
-  background: #fff;
-  border: 1px solid #f0e9e9;
-  border-radius: 10px;
-  padding: 1rem;
-  width: 100%;
-  display: block;
-  cursor: pointer;
-  margin: 1rem auto;
+    font-family: "Montserrat", serif;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s;
+    background: #fff;
+    border: 1px solid #f0e9e9;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    margin: 1rem auto;
 }
 .select::placeholder {
-  color: #a87069;
+    color: #a87069;
 }
 .select:focus-within {
-  box-shadow: none;
-  border-color: #ff7954;
+    box-shadow: none;
+    border-color: #ff7954;
 }

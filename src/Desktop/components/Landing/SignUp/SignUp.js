@@ -9,7 +9,6 @@ import Takeoff from "Assets/img/takeoff.png";
 
 import classes from "../landing.module.css";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { useNotification } from "Utils/Notifications/notifications";
 import axios from "axios";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { ImCross } from "react-icons/im";
@@ -48,7 +47,7 @@ const Signup = () => {
         return String(email)
             .toLowerCase()
             .match(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             );
     };
 
@@ -138,7 +137,6 @@ const Signup = () => {
                                 </>
                             ),
                         });
-                    return;
                 });
             setLoading(false);
         }
@@ -152,7 +150,11 @@ const Signup = () => {
             <div className={classes.container}>
                 <div className={classes.registerContainer}>
                     <div className={classes.textIllustration}>
-                        <img className={classes.takeoff} src={Takeoff} />
+                        <img
+                            alt="Rocket taking off"
+                            className={classes.takeoff}
+                            src={Takeoff}
+                        />
                         <div className={classes.descriptionBeta}>
                             <h1>Bienvenue sur la Beta privée Signally !</h1>
                             <p>
@@ -179,10 +181,12 @@ const Signup = () => {
                             <br />
                             <div>
                                 <img
+                                    alt="Outlook compatible and ready plugin"
                                     className={classes.plugins}
                                     src={PluginsOutlook}
                                 />
                                 <img
+                                    alt="Gmail & Apple Mail compatible and soon ready plugin"
                                     className={classes.plugins}
                                     src={PluginsSoon}
                                 />
@@ -198,6 +202,11 @@ const Signup = () => {
                                     Veuillez maintenant consulter votre boite
                                     mail et cliquer sur le lien de connexion.
                                 </p>
+                                <span>
+                                    Le mail n'apparaît pas dans votre boîte de
+                                    réception ? Merci de vérifier dans vos
+                                    messages indésirables.
+                                </span>
                             </div>
                         </>
                     ) : (

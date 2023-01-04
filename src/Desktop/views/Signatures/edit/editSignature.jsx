@@ -11,13 +11,14 @@ import { useHistory, useParams } from "react-router";
 import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
+import { TokenService } from "Utils";
 
 // Component handling the modification of signature, selection of template
 
 function EditSignatureComponent() {
     const { signatureId } = useParams();
-    const [user, setUser] = useState(null);
-    const [company, setCompany] = useState(null);
+    const user = TokenService.getUser();
+    const company = TokenService.getOrganisation();
     const [events] = useState([]);
     const [selectedTemplate, setSelectedTemplate] = useState();
     const [defaultStyles, setDefaultStyles] = useState();
@@ -65,7 +66,7 @@ function EditSignatureComponent() {
         mobile: { value: user?.phone_number, color: "#000", style: {} },
         phone: { value: company?.phone_number, color: "#000", style: {} },
         fontSize: [11],
-        fontFamily: "Helvetica",
+        fontFamily: "Arial",
     });
     const [signatureOption, setSignatureOption] = useState({
         salutation: { value: "Cordialement,", enabled: false, padding: 10 },
@@ -108,8 +109,9 @@ function EditSignatureComponent() {
 
     useEffect(() => {
         const getSignatureFromId = async () => {
-            await request.get("signatures/" + signatureId).then((res) => {
-                setSelectedTemplate(res.data);
+            await request.get("signatures/" + signatureId).then(async (res) => {
+                console.log(res.data);
+                setSelectedTemplate(res.data.signatureTemplate);
                 setDefaultStyles(res.data.signatureStyles);
                 setSignatureName(res.data.name);
             });
@@ -403,18 +405,11 @@ function EditSignatureComponent() {
                 )[0].value || 11,
             ],
             fontFamily:
-                defaultStyles?.filter((style) => {
-                    if (
+                defaultStyles?.filter(
+                    (style) =>
                         style.type === "generalFontFamily" &&
                         style.property === "fontFamily"
-                    ) {
-                        console.log(style);
-                        return (
-                            style.type === "generalFontFamily" &&
-                            style.property === "fontFamily"
-                        );
-                    }
-                })[0].value || "Helvetica",
+                )[0].value || "Helvetica",
         });
 
         setSignatureOption({
@@ -493,31 +488,15 @@ function EditSignatureComponent() {
     };
 
     useEffect(() => {
-        const getUser = async () => {
-            const user = await request.get("whoami");
-            const company = await request.get(
-                JSON.parse(localStorage.getItem("user")).organisation
-            );
-
-            setUser(user);
-            setCompany(company);
-        };
-
-        getUser();
-    }, []);
-
-    useEffect(() => {
         if (defaultStyles) handlePopulate();
-    }, [defaultStyles, selectedTemplate, company]);
+    }, [defaultStyles, selectedTemplate]);
 
     // Menu
     const [tab, setTab] = useState(true);
 
     useEffect(() => {
         const getEvents = async () => {
-            const eventAPI = await UseEvents(
-                localStorage.getItem("organisation_id")
-            );
+            const eventAPI = await UseEvents(company.id);
             setSignatureOption(
                 {
                     ...signatureOption,
@@ -1071,22 +1050,19 @@ function EditSignatureComponent() {
     };
 
     useEffect(() => {
-        if (signatureInfo && signatureOption && selectedTemplate)
+        if (signatureInfo && signatureOption && selectedTemplate?.html) {
+            console.log(selectedTemplate?.html);
             setPreview(
                 <Preview
                     infos={signatureInfo}
                     options={signatureOption}
-                    template={selectedTemplate.html}
-                    organisation={company?.data}
+                    template={selectedTemplate?.html}
+                    organisation={company}
+                    user={user}
                 />
             );
-    }, [
-        signatureInfo,
-        signatureOption,
-        selectedTemplate,
-        defaultStyles,
-        company,
-    ]);
+        }
+    }, [signatureInfo, signatureOption, selectedTemplate]);
 
     return (
         <div className={classes.container} ref={elem}>

@@ -11,19 +11,20 @@ import { useHistory } from "react-router";
 import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
+import { TokenService } from "Utils/index";
 
 // Component handling the creation of signature, selection of template
 
 function CreateSignatureComponent() {
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null);
-    const [company, setCompany] = useState(null);
+    const user = TokenService.getUser();
+    const company = TokenService.getOrganisation();
     const [selectedTemplate, setSelectedTemplate] = useState();
     const history = useHistory();
     const notification = useNotification();
     const [preview, setPreview] = useState("");
 
-    const [templateRules, setTemplateRules] = useState({
+    const [templateRules] = useState({
         fontSize: { min: 9, max: 13, step: 1 },
     });
 
@@ -168,13 +169,6 @@ function CreateSignatureComponent() {
 
     useEffect(() => {
         const getUser = async () => {
-            const user = await request.get("whoami");
-            const company = await request.get(
-                JSON.parse(localStorage.getItem("user")).organisation
-            );
-
-            setUser(user);
-            setCompany(company);
             setSignatureInfo({
                 logo: company?.logo,
                 firstName: {
@@ -237,9 +231,7 @@ function CreateSignatureComponent() {
 
     useEffect(() => {
         const getEvents = async () => {
-            const eventAPI = await UseEvents(
-                localStorage.getItem("organisation_id")
-            );
+            const eventAPI = await UseEvents(company.id);
             setSignatureOption(
                 {
                     ...signatureOption,
@@ -299,7 +291,6 @@ function CreateSignatureComponent() {
 
     const [modal, setModal] = useState(false);
     const [modalContent, setModalContent] = useState();
-    const [templateId, setTemplateIdToPatch] = useState();
     const [signatureName, setSignatureName] = useState("test");
 
     useEffect(() => {
@@ -356,8 +347,7 @@ function CreateSignatureComponent() {
                 name: signatureName,
                 html: selectedTemplate.html,
                 signatureTemplate: selectedTemplate["@id"],
-                organisation: JSON.parse(localStorage.getItem("user"))
-                    .organisation,
+                organisation: company["@id"],
             })
             .then(async (result) => {
                 notification({
@@ -372,7 +362,7 @@ function CreateSignatureComponent() {
                     ),
                     status: "valid",
                 });
-                setTemplateIdToPatch(result.data.id);
+
                 const styles = [
                     // COLOR FOR EACH TXT
                     {
@@ -788,7 +778,7 @@ function CreateSignatureComponent() {
                         signature: result?.data?.id,
                     },
                 ];
-                request.post("signature_styles/batch", styles).then((r) => {
+                request.post("signature_styles/batch", styles).then(() => {
                     if (window.location.hash === "#onboarding")
                         history.goBack();
                     else history.push("/signatures");
@@ -810,8 +800,8 @@ function CreateSignatureComponent() {
                     infos={signatureInfo}
                     options={signatureOption}
                     template={selectedTemplate.html}
-                    organisation={company.data}
-                    user={user.data}
+                    organisation={company}
+                    user={user}
                 />
             );
     }, [signatureInfo, signatureOption, selectedTemplate]);

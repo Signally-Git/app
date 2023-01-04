@@ -7,6 +7,7 @@ import Modal from "Utils/Modals/modal";
 import { BsBroadcastPin } from "react-icons/bs";
 import { useNotification } from "Utils/Notifications/notifications";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { TokenService } from "Utils/index";
 
 function Tiles(props) {
     const [events, setEvents] = useState([]);
@@ -23,6 +24,7 @@ function Tiles(props) {
     let workplaceName = "WORKPLACE_NAME";
     let teamName = "TEAM_NAME";
     const [userName, setUserName] = useState("USER_NAME");
+    const configuration = TokenService.getConfig();
 
     const [sendMailBtn, setSendMailBtn] = useState(
         <span>Envoyer le mail</span>
@@ -33,9 +35,6 @@ function Tiles(props) {
     useEffect(async () => {
         props.setLoading(false);
         props.handleHeader(" ");
-        await request.get(`whoami`).then(async (res) => {
-            localStorage.setItem("user", JSON.stringify(res.data));
-        });
 
         await request.get("configurations").then((res) => {
             localStorage.setItem(
@@ -291,10 +290,9 @@ function Tiles(props) {
                     <div className={classes.row}>
                         <p>
                             {
-                                JSON.parse(
-                                    localStorage.getItem("configuration")
-                                )?.filter((item) => item.key === "USER_NAME")[0]
-                                    .value
+                                TokenService.getConfig()?.filter(
+                                    (item) => item.key === "USER_NAME"
+                                )[0].value
                             }
                         </p>
                         <img src={ChevronRight} alt="View" />

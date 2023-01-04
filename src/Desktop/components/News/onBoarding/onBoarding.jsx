@@ -255,7 +255,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                 ),
             },
         ]);
-    }, [swiper, organisation, completed, events]);
+    }, [swiper, organisation, completed, events, users]);
 
     React.useEffect(() => {
         const missingTabs = menu.filter((element) => element.done === false);

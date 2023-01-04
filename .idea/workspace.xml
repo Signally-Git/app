@@ -3,20 +3,20 @@
   <component name="AnalysisUIOptions">
     <option name="SCOPE_TYPE" value="3" />
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c4dff9f-5d0a-4e3d-a895-082d60361406" name="Changes" comment="POC curbs">
-      <change beforePath="$PROJECT_DIR$/../../GitHub/templates/custom/ohbaby.template.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../../GitHub/templates/custom/ohbaby.template.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../GitHub/templates/custom/terresdecafe.template.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../../GitHub/templates/custom/terresdecafe.template.twig" afterDir="false" />
+    <list default="true" id="5c4dff9f-5d0a-4e3d-a895-082d60361406" name="Changes" comment="handle empty data">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Profile/Informations/informations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Profile/Informations/informations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Options/options.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Options/options.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Preview/customizablePreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/Preview/customizablePreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/createSignature.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/createSignature.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/edit/editSignature.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/edit/editSignature.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Create/User/createUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Create/User/createUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/userTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/userTab.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Statistics/EventStatistic.module.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Statistics/EventStatistic.module.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Statistics/Statistic.module.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Statistics/Statistic.module.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Statistics/Stats.page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Statistics/Stats.page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/create/TemplateSelect/templateSelect.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Signatures/signatures.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Signatures/signatures.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/views/Users/Tab/tab.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,17 +24,61 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="master" />
+              </list>
+            </value>
+          </entry>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/beta" />
+                <branch-info repo="$PROJECT_DIR$" source="origin/staging" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="feat-statistics" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="1fb35675-f385-4935-bbcb-3db97f1c0ea7" />
+        <option name="url" value="https://github.com/Signally-Git/app.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2EUdhAVff6xkOl2mh9a74eqM9sF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -49,13 +93,21 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/poro/Documents/signally/app/src/Desktop/views/Users/SignaturePreview/Select&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
     &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/poro/Documents/signally/app/node_modules/prettier&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;proofread&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JSON&quot;,
+      &quot;JavaScript&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
@@ -63,7 +115,7 @@
       <recent name="$PROJECT_DIR$/src/Desktop/views/Users/SignaturePreview/Select" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.start">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -106,6 +158,10 @@
       <workItem from="1662992254096" duration="155000" />
       <workItem from="1663249823702" duration="7414000" />
       <workItem from="1663259666554" duration="47628000" />
+      <workItem from="1669215835956" duration="1775000" />
+      <workItem from="1669217620452" duration="249000" />
+      <workItem from="1669217876926" duration="2598000" />
+      <workItem from="1669231874314" duration="24374000" />
     </task>
     <task id="LOCAL-00001" summary="Changed styling to match the whole app modals">
       <created>1663253331634</created>
@@ -345,7 +401,63 @@
       <option name="project" value="LOCAL" />
       <updated>1666112314107</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="adds CSS for statistics">
+      <created>1669218015879</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1669218015879</updated>
+    </task>
+    <task id="LOCAL-00036" summary="wip stats secure">
+      <created>1669307906471</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1669307906471</updated>
+    </task>
+    <task id="LOCAL-00037" summary="fix socials networks">
+      <created>1669307938338</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1669307938338</updated>
+    </task>
+    <task id="LOCAL-00038" summary="update icon">
+      <created>1669307945853</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1669307945853</updated>
+    </task>
+    <task id="LOCAL-00039" summary="update packages">
+      <created>1669307953108</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1669307953108</updated>
+    </task>
+    <task id="LOCAL-00040" summary="better icon aligment">
+      <created>1669307968079</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1669307968079</updated>
+    </task>
+    <task id="LOCAL-00041" summary="adds /.idea/* to silence workspace.xml">
+      <created>1670582504145</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1670582504145</updated>
+    </task>
+    <task id="LOCAL-00042" summary="new message with design to check spam after register">
+      <created>1670582638840</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1670582638840</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,15 +486,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Error handling when fail to import logo" />
-    <MESSAGE value="Removes undefined calls to hub" />
-    <MESSAGE value="Fix SSE logic" />
-    <MESSAGE value="Refresh when delete entity fixed" />
-    <MESSAGE value="clean console log" />
-    <MESSAGE value="Fixed height and width of initial loading" />
-    <MESSAGE value="Add: preview uploaded or current logo of the organisation" />
-    <MESSAGE value="Uses the file name for the logos" />
-    <MESSAGE value="New socials link to s3" />
     <MESSAGE value="Arriving in templateSelect when creating a new signature, clean up" />
     <MESSAGE value="Add 24h to default creation event start date + style" />
     <MESSAGE value="Upgraded from http to https" />
@@ -399,7 +502,16 @@
     <MESSAGE value="CSS overflow adjustments" />
     <MESSAGE value="prettier" />
     <MESSAGE value="select signaturePreview" />
-    <option name="LAST_COMMIT_MESSAGE" value="select signaturePreview" />
+    <MESSAGE value="adds CSS for statistics" />
+    <MESSAGE value="wip stats secure" />
+    <MESSAGE value="fix socials networks" />
+    <MESSAGE value="update icon" />
+    <MESSAGE value="update packages" />
+    <MESSAGE value="better icon aligment" />
+    <MESSAGE value="adds /.idea/* to silence workspace.xml" />
+    <MESSAGE value="new message with design to check spam after register" />
+    <MESSAGE value="handle empty data" />
+    <option name="LAST_COMMIT_MESSAGE" value="handle empty data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

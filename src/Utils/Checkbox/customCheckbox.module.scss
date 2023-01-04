@@ -1,4 +1,4 @@
-@import "../../Assets/style/colors.scss";
+@import "../../Assets/style/colors.scss"; 
 
 .switch {
     * {
@@ -32,7 +32,6 @@
     -webkit-transition: 0.4s;
     transition: 0.4s;
 }
-
 .slider:before {
     position: absolute;
     content: "";

@@ -55,6 +55,13 @@ export default function DesktopRoutes() {
             />
 
             <PrivateRoute
+                exact
+                path="/statistics"
+                page="statistics"
+                component={Dashboard}
+            />
+
+            <PrivateRoute
                 path="/create-signature"
                 component={CreateSignature}
             />

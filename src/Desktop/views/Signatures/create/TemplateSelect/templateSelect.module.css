@@ -11,6 +11,9 @@
 .modal h1 {
   color: #402927;
 }
+.modal > span {
+  margin: auto;
+}
 .modal .searchContainer {
   width: 100%;
   display: flex;

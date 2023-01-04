@@ -13,6 +13,7 @@ import CreateTeam from "../Create/Team/createTeam";
 import CreateUser from "../Create/User/createUser";
 import CreateWorkplace from "../Create/Workplace/createWorkplace";
 import UserTab from "./userTab";
+import { TokenService } from "Utils/index";
 
 // Displays the current list
 // Workplaces by default
@@ -49,6 +50,7 @@ export default function Tab({
     const [fax, setFax] = useState("");
     const [websiteUrl, setWebsiteUrl] = useState("");
     const [done, setDone] = useState(false);
+    const configuration = TokenService.getConfig();
     let time;
 
     const notification = useNotification();
@@ -61,7 +63,6 @@ export default function Tab({
     };
 
     const getDataTeam = async () => {
-        console.log(teams);
         const teamsAPI = await request.get("teams");
         const teamsList = [];
         teamsAPI.data["hydra:member"].map((team) => {
@@ -82,7 +83,6 @@ export default function Tab({
 
     useEffect(() => {
         refreshData();
-        console.log(tab);
     }, [addedWorkplace, done, tab]);
 
     // Deletes either specified workplace, team or user
@@ -148,11 +148,7 @@ export default function Tab({
                                             <span style={{ color: "#FF7954" }}>
                                                 {count}{" "}
                                                 {
-                                                    JSON.parse(
-                                                        localStorage.getItem(
-                                                            "configuration"
-                                                        )
-                                                    ).filter(
+                                                    configuration.filter(
                                                         (item) =>
                                                             item.key ===
                                                             "TEAM_NAME"
@@ -200,11 +196,7 @@ export default function Tab({
                                             <span style={{ color: "#FF7954" }}>
                                                 {count}{" "}
                                                 {
-                                                    JSON.parse(
-                                                        localStorage.getItem(
-                                                            "configuration"
-                                                        )
-                                                    ).filter(
+                                                    configuration.filter(
                                                         (item) =>
                                                             item.key ===
                                                             "TEAM_NAME"
@@ -315,9 +307,7 @@ export default function Tab({
                                 <span className={classes.orangeTxt}>{`${
                                     workplaces.length
                                 } ${
-                                    JSON.parse(
-                                        localStorage.getItem("configuration")
-                                    ).filter(
+                                    configuration.filter(
                                         (item) => item.key === "WORKPLACE_NAME"
                                     )[0].value
                                 }`}</span>
@@ -351,9 +341,7 @@ export default function Tab({
                                 <span className={classes.orangeTxt}>{`${
                                     teams.length
                                 } ${
-                                    JSON.parse(
-                                        localStorage.getItem("configuration")
-                                    ).filter(
+                                    configuration.filter(
                                         (item) => item.key === "TEAM_NAME"
                                     )[0].value
                                 }`}</span>
@@ -386,9 +374,7 @@ export default function Tab({
                                 <span className={classes.orangeTxt}>{`${
                                     users.length - 1
                                 } ${
-                                    JSON.parse(
-                                        localStorage.getItem("configuration")
-                                    ).filter(
+                                    configuration.filter(
                                         (item) => item.key === "USER_NAME"
                                     )[0].value
                                 }`}</span>
@@ -569,10 +555,9 @@ export default function Tab({
                     >
                         Ajouter{" "}
                         {
-                            JSON.parse(
-                                localStorage.getItem("configuration")
-                            ).filter((item) => item.key === "WORKPLACE_NAME")[0]
-                                .value
+                            configuration.filter(
+                                (item) => item.key === "WORKPLACE_NAME"
+                            )[0].value
                         }
                     </Button>
                 </Link>
@@ -585,10 +570,9 @@ export default function Tab({
                         className={classes.search}
                         type="text"
                         placeholder={`Rechercher ${
-                            JSON.parse(
-                                localStorage.getItem("configuration")
-                            ).filter((item) => item.key === "WORKPLACE_NAME")[0]
-                                .value
+                            configuration.filter(
+                                (item) => item.key === "WORKPLACE_NAME"
+                            )[0].value
                         }`}
                     />
                 </div>
@@ -601,9 +585,7 @@ export default function Tab({
                         {addedWorkplace.length > 0
                             ? addedWorkplace
                             : `${workplaces.length} ${
-                                  JSON.parse(
-                                      localStorage.getItem("configuration")
-                                  ).filter(
+                                  configuration.filter(
                                       (item) => item.key === "WORKPLACE_NAME"
                                   )[0].value
                               }`}
@@ -725,7 +707,7 @@ export default function Tab({
                                                 onClick={() =>
                                                     setModal({
                                                         name: workplace?.name,
-                                                        id: workplace.id,
+                                                        id: workplace?.id,
                                                         type: "workplaces",
                                                     })
                                                 }
@@ -775,8 +757,8 @@ export default function Tab({
                                                                         ?.name
                                                                         ? "Remplacer " +
                                                                           workplace
-                                                                              .logo
-                                                                              .name
+                                                                              ?.logo
+                                                                              ?.name
                                                                         : "Importer un logo"
                                                                 }
                                                                 style={{
@@ -959,10 +941,9 @@ export default function Tab({
                     >
                         Ajouter{" "}
                         {
-                            JSON.parse(
-                                localStorage.getItem("configuration")
-                            ).filter((item) => item.key === "TEAM_NAME")[0]
-                                .value
+                            configuration.filter(
+                                (item) => item.key === "TEAM_NAME"
+                            )[0].value
                         }
                     </Button>
                 </Link>
@@ -975,10 +956,9 @@ export default function Tab({
                         }
                         type="text"
                         placeholder={`Rechercher ${
-                            JSON.parse(
-                                localStorage.getItem("configuration")
-                            ).filter((item) => item.key === "TEAM_NAME")[0]
-                                .value
+                            configuration.filter(
+                                (item) => item.key === "TEAM_NAME"
+                            )[0].value
                         }`}
                     />
                 </div>
@@ -986,10 +966,9 @@ export default function Tab({
                     <span className={classes.totalNumber}>
                         {teams.length}{" "}
                         {
-                            JSON.parse(
-                                localStorage.getItem("configuration")
-                            ).filter((item) => item.key === "TEAM_NAME")[0]
-                                .value
+                            configuration.filter(
+                                (item) => item.key === "TEAM_NAME"
+                            )[0].value
                         }
                     </span>
                     <button onClick={() => setModal({ type: "allteams" })}>

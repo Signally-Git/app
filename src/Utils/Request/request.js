@@ -1,51 +1,56 @@
 import axios from "axios";
+import { TokenService } from "Utils/index";
 
 const request = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
 });
-if (localStorage.getItem("token"))
-    request.defaults.headers.common[
-        "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
 
-request.interceptors.response.use(
-    (response) => {
-        // console.log(response)
-        if (response.code === 401) {
-            alert("You are not authorized");
+request.interceptors.request.use(
+    (config) => {
+        const token = TokenService.getLocalToken();
+        if (token) {
+            config.headers["Authorization"] = "Bearer " + token;
         }
-        return response;
+        return config;
     },
     (error) => {
-        // if (error.response && error.response.data) {
-        if (
-            !localStorage.getItem("token") ||
-            error?.response?.data?.code === 401
-        ) {
-            axios
-                .post(`${process.env.REACT_APP_API_URL}/token/refresh`, {
-                    refresh_token: localStorage.getItem("refresh_token"),
-                })
-                .then((res) => {
-                    localStorage.setItem("token", res.data.token);
-                    localStorage.setItem(
-                        "refresh_token",
-                        res.data.refresh_token
-                    );
-                    window.location.replace("/");
-                })
-                .catch((err) => {
-                    if (err.response.data.code === 401) {
-                        localStorage.removeItem("token");
-                        localStorage.removeItem("refresh_token");
-                        window.location.replace("/");
-                    }
-                });
+        return Promise.reject(error);
+    }
+);
+
+let _retry = undefined;
+
+request.interceptors.response.use(
+    (res) => {
+        return res;
+    },
+    async (err) => {
+        const originalConfig = err.config;
+
+        if (originalConfig.url !== "/token/auth" && err.response) {
+            // Access Token was expired
+            if (err.response.status === 401 && !_retry) {
+                _retry = true;
+
+                try {
+                    const rs = await request.post("/token/refresh", {
+                        refresh_token: TokenService.getLocalRefreshToken(),
+                    });
+
+                    const { token } = rs.data;
+                    TokenService.updateLocalToken(token);
+
+                    return request(originalConfig);
+                } catch (_error) {
+                    return Promise.reject(_error);
+                }
+            } else if (err.response.status === 401) {
+                TokenService.clearLocalStorage();
+                window.location.replace("/sign-in");
+            }
         }
 
-        return Promise.reject(error?.response?.data);
-        // }
-        // return Promise.reject(error.message);
+        return Promise.reject(err);
     }
 );
 

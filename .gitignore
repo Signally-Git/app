@@ -20,6 +20,10 @@
 .env.test.local
 .env.production.local
 
+# IDE
+/.idea
+.idea/workspace.xml
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

@@ -55,7 +55,7 @@
     input[type="email"]:focus,
     input[type="password"]:focus,
     select:focus {
-        box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+        box-shadow: 0 12px 40px rgba(230, 208, 201, 0.28);
         border-color: $signally-orange;
     }
     select {
@@ -203,7 +203,7 @@
     background-color: #fbf4f2;
     border-radius: 8px;
     align-items: center;
-    font-family: Montserrat;
+    font-family: Montserrat, serif;
     flex-direction: column;
     height: 100%;
     max-height: 80vh;
@@ -243,7 +243,7 @@
 
 .formContainer h2 {
     text-align: center;
-    font-family: Trebuchet MS;
+    font-family: Trebuchet MS, serif;
     color: $signally-brown;
     margin-top: 0;
     font-size: 1.3rem;
@@ -299,6 +299,12 @@
     h2 {
         color: $signally-orange;
     }
+    > span {
+        animation-delay: 0.75s;
+        font-size: .8rem;
+        color: $signally-brown;
+    }
+    
 }
 
 .disappear {
@@ -366,7 +372,7 @@
         }
     }
     .btnsContainer {
-        margin-top: 0rem;
+        margin-top: 0;
         button {
             margin-top: 1rem;
         }
