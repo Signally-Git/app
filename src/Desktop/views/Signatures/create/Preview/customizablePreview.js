@@ -43,8 +43,13 @@ export default function Preview({
     }, [organisation]);
 
     const socialNetworks = renderToStaticMarkup(
-        socials.map((item) => (
-            <>
+        socials.map((item, index) => (
+            <td
+                style={{
+                    height: "18px",
+                    width: "18px",
+                }}
+            >
                 <a
                     href={item.url}
                     style={{ height: "25px", width: "25px" }}
@@ -274,9 +279,9 @@ export default function Preview({
     replaced = replaced.replaceAll(
         greeting,
         options?.salutation?.enabled
-            ? `<p style="padding-bottom: ${options?.salutation?.padding}px;">${
-                  options?.salutation.value || "Cordialement,"
-              }</p>`
+            ? `<p style="padding-bottom: ${
+                  options?.salutation?.padding
+              }px;" }>${options?.salutation.value || "Cordialement,"}</p>`
             : ""
     );
     let disclaimer = /{# START DISCLAIMER #}.*{# END DISCLAIMER #}/gis;
@@ -292,7 +297,7 @@ export default function Preview({
     );
 
     // socials
-    if (options?.socials?.enabled === false)
+    if (!options?.socials?.enabled)
         replaced = replaced.replaceAll(
             /{# START SOCIALS #}.*{# END SOCIALS #}/gis,
             ``
@@ -332,7 +337,7 @@ export default function Preview({
     replaced = replaced.replaceAll(/{% endif %}\s*{# END CALENDAR #}/gis, ``);
 
     // vCard
-    if (options?.vcard?.enabled === false)
+    if (!options?.vcard?.enabled)
         replaced = replaced.replaceAll(
             /{# START VCARD #}.*{# END VCARD #}/gis,
             ``
@@ -376,7 +381,6 @@ export default function Preview({
         /{# START PHONE #}.*{% if user.phone %}.*{% if user.phone or isPreview %}/gis,
         ""
     );
-
     replaced = replaced.replace(
         /{% if isPreview %}.*0123456789.*{% else %}.*{{ user.phone }}/gis,
         "0123456789"
