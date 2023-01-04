@@ -125,6 +125,7 @@ function EditSignatureComponent() {
 
     const handlePopulate = () => {
         setSignatureInfo({
+            ...signatureInfo,
             logo: company?.logo,
             firstName: {
                 value: user?.first_name,
