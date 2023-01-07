@@ -100,6 +100,7 @@ export default function Infos(props) {
     const webSafeFontList = [
         { name: "Arial", style: { fontFamily: "Arial" } },
         { name: "Arial Black", style: { fontFamily: "Arial Black" } },
+        { name: "Calibri", style: { fontFamily: "Calibri" } },
         { name: "Comic Sans MS", style: { fontFamily: "Comic Sans MS" } },
         { name: "Courier New", style: { fontFamily: "Courier New" } },
         { name: "Georgia", style: { fontFamily: "Georgia" } },
