@@ -43,7 +43,7 @@ export default function Preview({
     }, [organisation]);
 
     const socialNetworks = renderToStaticMarkup(
-        socials.map((item) => (
+        socials.map((item, index) => (
             <>
                 <a
                     href={item.url}
@@ -66,7 +66,7 @@ export default function Preview({
                         }}
                     ></td>
                 )}
-            </td>
+            </>
         ))
     );
     let replaced;
