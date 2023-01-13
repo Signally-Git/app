@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import request from "Utils/Request/request";
 import Modal from "Utils/Modals/modal";
-import { BsBroadcastPin } from "react-icons/bs";
+import { BsBroadcastPin, BsDot } from "react-icons/bs";
 import { useNotification } from "Utils/Notifications/notifications";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { TokenService } from "Utils/index";
@@ -25,6 +25,8 @@ function Tiles(props) {
     let teamName = "TEAM_NAME";
     const [userName, setUserName] = useState("USER_NAME");
     const configuration = TokenService.getConfig();
+
+    const [gmail, setGmail] = useState();
 
     const [sendMailBtn, setSendMailBtn] = useState(
         <span>Envoyer le mail</span>
@@ -112,6 +114,9 @@ function Tiles(props) {
                 props.setLoading(true);
             })
             .catch(() => {});
+        await request.get("gmail").then((res) => {
+            console.log(res);
+        });
     }, []);
 
     useEffect(() => {
@@ -344,6 +349,43 @@ function Tiles(props) {
                     <div className={classes.row}>
                         <div>
                             <span className={classes.free}>Gratuit</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    className={`${classes.tile} ${classes.gmail}`}
+                    onClick={() => setModal(true)}
+                >
+                    <div className={`${classes.row} ${classes.onUnHover}`}>
+                        {gmail ? (
+                            <div
+                                className={`${classes.row} ${classes.connected}`}
+                            >
+                                <p style={{ width: "10rem" }}>Connecté</p>
+                                <BsDot
+                                    fontSize={"1.75rem"}
+                                    style={{ margin: "auto 0 1rem 0" }}
+                                />
+                            </div>
+                        ) : (
+                            <div
+                                className={`${classes.row} ${classes.notConnected}`}
+                            >
+                                <p style={{ width: "10rem" }}>Non connecté</p>
+                                <BsDot
+                                    fontSize={"1.75rem"}
+                                    color="red"
+                                    style={{ margin: "auto 0 1rem 0" }}
+                                />
+                            </div>
+                        )}
+                    </div>
+                    <div className={`${classes.row} ${classes.onHover}`}>
+                        <p style={{ width: "10rem" }}>Connecter</p>
+                    </div>
+                    <div className={classes.row}>
+                        <div>
+                            <span className={classes.bigTxt}>Gmail</span>
                         </div>
                     </div>
                 </div>
