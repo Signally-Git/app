@@ -1,13 +1,14 @@
 import ChevronRight from "Assets/icons/chevron-right.svg";
 import classes from "./tiles.module.css";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import request from "Utils/Request/request";
 import Modal from "Utils/Modals/modal";
-import { BsBroadcastPin, BsDot } from "react-icons/bs";
+import { BsBroadcastPin } from "react-icons/bs";
 import { useNotification } from "Utils/Notifications/notifications";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { TokenService } from "Utils/index";
+import { Tile } from "./Tile";
+import { ConnectTile } from "./ConnectTile";
 
 function Tiles(props) {
     const [events, setEvents] = useState([]);
@@ -22,11 +23,9 @@ function Tiles(props) {
     const [signatures, setSignatures] = useState([]);
     const [activeSignatures, setActiveSignatures] = useState(0);
     let workplaceName = "WORKPLACE_NAME";
-    let teamName = "TEAM_NAME";
     const [userName, setUserName] = useState("USER_NAME");
-    const configuration = TokenService.getConfig();
 
-    const [gmail, setGmail] = useState();
+    const config = TokenService.getConfig() || [];
 
     const [sendMailBtn, setSendMailBtn] = useState(
         <span>Envoyer le mail</span>
@@ -126,9 +125,36 @@ function Tiles(props) {
         });
     }, [users, props.loading]);
 
+    const handleDeploy = async () => {
+        setSendMailBtn(
+            <>
+                <span style={{ opacity: 0 }}>Envoyer le mail</span>
+                <AiOutlineLoading3Quarters className={classes.loadingBtn} />
+            </>
+        );
+        await request
+            .get("user/send-token")
+            .then(() => {
+                notification({
+                    content: <>{users.length} collaborateur(s) notifiés</>,
+                    status: "valid",
+                });
+                setSendMailBtn(<>Envoyer le mail</>);
+                setModal(false);
+            })
+            .catch(() => {
+                notification({
+                    content: <>Une erreur est survenue. Veuillez réessayer</>,
+                    status: "invalid",
+                });
+                setSendMailBtn(<>Envoyer le mail</>);
+                setModal(false);
+            });
+    };
+
     return (
         <div className={classes.container}>
-            {modal ? (
+            {modal && (
                 <Modal
                     style={{ left: 0, padding: "1rem 2rem" }}
                     title={
@@ -141,176 +167,85 @@ function Tiles(props) {
                     cancel="Annuler"
                     validate={sendMailBtn}
                     onCancel={() => setModal(false)}
-                    onConfirm={() => {
-                        setSendMailBtn(
-                            <>
-                                <span style={{ opacity: 0 }}>
-                                    Envoyer le mail
-                                </span>
-                                <AiOutlineLoading3Quarters
-                                    className={classes.loadingBtn}
-                                />
-                            </>
-                        );
-                        request
-                            .get("user/send-token")
-                            .then(() => {
-                                notification({
-                                    content: (
-                                        <>
-                                            {users.length} collaborateur(s)
-                                            notifiés
-                                        </>
-                                    ),
-                                    status: "valid",
-                                });
-                                setSendMailBtn(<>Envoyer le mail</>);
-                                setModal(false);
-                            })
-                            .catch(() => {
-                                notification({
-                                    content: (
-                                        <>
-                                            Une erreur est survenue. Veuillez
-                                            réessayer
-                                        </>
-                                    ),
-                                    status: "invalid",
-                                });
-                                setSendMailBtn(<>Envoyer le mail</>);
-                                setModal(false);
-                            });
-                    }}
+                    onConfirm={handleDeploy}
                 />
-            ) : (
-                ""
             )}
             <div className={classes.tilesList}>
-                {!templates.length < 1 ? (
-                    <>
-                        <Link to="/signatures" className={classes.tile}>
-                            <div className={classes.row}>
-                                <p>Signatures</p>
-                                <img src={ChevronRight} alt="View" />
-                            </div>
-                            <div className={classes.row}>
-                                <div>
-                                    <span className={classes.bigTxt}>
-                                        {activeSignatures}
-                                    </span>
-                                    <span> /{templates?.length}</span>
-                                </div>
-                                <span className={classes.activeSpan}>
-                                    actives
-                                </span>
-                            </div>
-                        </Link>
-                    </>
-                ) : null}
-                {!events.length < 1 ? (
-                    <>
-                        <Link to="/events" className={classes.tile}>
-                            <div className={classes.row}>
-                                <p>Events</p>
-                                <img src={ChevronRight} alt="View" />
-                            </div>
-                            <div className={classes.row}>
-                                <div>
-                                    <span className={classes.bigTxt}>
-                                        {activeEvent}
-                                    </span>
-                                    <span> /{events.length}</span>
-                                </div>
-                                <span className={classes.activeSpan}>
-                                    actifs
-                                </span>
-                            </div>
-                        </Link>
-                    </>
-                ) : null}
-                {!wps.length < 1 ? (
-                    <>
-                        <Link to="/teams/workplaces" className={classes.tile}>
-                            <div className={classes.row}>
-                                <p>
-                                    {
-                                        JSON.parse(
-                                            localStorage.getItem(
-                                                "configuration"
-                                            )
-                                        ).filter(
-                                            (item) =>
-                                                item.key === "WORKPLACE_NAME"
-                                        )[0].value
-                                    }
-                                </p>
-                                <img src={ChevronRight} alt="View" />
-                            </div>
-                            <div className={classes.row}>
-                                <div>
-                                    <span className={classes.bigTxt}>
-                                        {activeWorkplaces}
-                                    </span>
-                                    <span> /{wps.length}</span>
-                                </div>
-                                <span className={classes.activeSpan}>
-                                    actifs
-                                </span>
-                            </div>
-                        </Link>
-                    </>
-                ) : null}
-                {!teamsList.length < 1 ? (
-                    <>
-                        <Link to="/teams/teams" className={classes.tile}>
-                            <div className={classes.row}>
-                                <p>
-                                    {
-                                        JSON.parse(
-                                            localStorage.getItem(
-                                                "configuration"
-                                            )
-                                        ).filter(
-                                            (item) => item.key === "TEAM_NAME"
-                                        )[0].value
-                                    }
-                                </p>
-                                <img src={ChevronRight} alt="View" />
-                            </div>
-                            <div className={classes.row}>
-                                <div>
-                                    <span className={classes.bigTxt}>
-                                        {activeTeams}
-                                    </span>
-                                    <span> /{teamsList.length}</span>
-                                </div>
-                                <span className={classes.activeSpan}>
-                                    actives
-                                </span>
-                            </div>
-                        </Link>
-                    </>
-                ) : null}
-                <Link to="/teams/users" className={classes.tile}>
-                    <div className={classes.row}>
-                        <p>
-                            {
-                                TokenService.getConfig()?.filter(
-                                    (item) => item.key === "USER_NAME"
-                                )[0].value
-                            }
-                        </p>
-                        <img src={ChevronRight} alt="View" />
-                    </div>
-                    <div className={classes.row}>
-                        <div>
-                            <span className={classes.bigTxt}>
-                                {users.length}
-                            </span>
-                        </div>
-                        <span className={classes.activeSpan}>actifs</span>
-                    </div>
-                </Link>
+                {!templates.length < 1 && (
+                    <Tile
+                        link="/signatures"
+                        title="Signatures"
+                        icon={ChevronRight}
+                        iconAlt="View"
+                        leftCorner={
+                            <>
+                                {activeSignatures}{" "}
+                                <span> /{templates?.length}</span>
+                            </>
+                        }
+                        rightCorner="actives"
+                    />
+                )}
+                {!events.length < 1 && (
+                    <Tile
+                        link="/events"
+                        title="Events"
+                        icon={ChevronRight}
+                        iconAlt="View"
+                        leftCorner={
+                            <>
+                                {activeEvent} <span> /{events.length}</span>
+                            </>
+                        }
+                        rightCorner="actifs"
+                    />
+                )}
+                {!wps.length < 1 && (
+                    <Tile
+                        link="/teams/workplaces"
+                        title={
+                            config.filter(
+                                (item) => item.key === "WORKPLACE_NAME"
+                            )[0].value
+                        }
+                        icon={ChevronRight}
+                        iconAlt="Voir workplaces"
+                        leftCorner={
+                            <>
+                                {activeWorkplaces} <span> /{wps.length}</span>
+                            </>
+                        }
+                        rightCorner="actifs"
+                    />
+                )}
+                {!teamsList.length < 1 && (
+                    <Tile
+                        link="/teams/teams"
+                        title={
+                            config.filter((item) => item.key === "TEAM_NAME")[0]
+                                .value
+                        }
+                        icon={ChevronRight}
+                        iconAlt="Voir teams"
+                        leftCorner={
+                            <>
+                                {activeTeams} <span> /{teamsList.length}</span>
+                            </>
+                        }
+                        rightCorner="actives"
+                    />
+                )}
+                <Tile
+                    link="/teams/users"
+                    title={
+                        config.filter((item) => item.key === "USER_NAME")[0]
+                            ?.value
+                    }
+                    icon={ChevronRight}
+                    iconAlt="Voir users"
+                    leftCorner={users.length}
+                    rightCorner="actifs"
+                />
                 <div
                     className={`${classes.tile} ${classes.deploy}`}
                     onClick={() => setModal(true)}
@@ -338,10 +273,7 @@ function Tiles(props) {
                         <span className={classes.activeSpan}>actifs</span>
                     </div>
                 </div>
-                <div
-                    to="#"
-                    className={`${classes.tile} ${classes.billingTile}`}
-                >
+                <div className={`${classes.tile} ${classes.billingTile}`}>
                     <div className={classes.row}>
                         <p>Abonnement</p>
                         <img src={ChevronRight} alt="View" />
@@ -352,43 +284,7 @@ function Tiles(props) {
                         </div>
                     </div>
                 </div>
-                <div
-                    className={`${classes.tile} ${classes.gmail}`}
-                    onClick={() => setModal(true)}
-                >
-                    <div className={`${classes.row} ${classes.onUnHover}`}>
-                        {gmail ? (
-                            <div
-                                className={`${classes.row} ${classes.connected}`}
-                            >
-                                <p style={{ width: "10rem" }}>Connecté</p>
-                                <BsDot
-                                    fontSize={"1.75rem"}
-                                    style={{ margin: "auto 0 1rem 0" }}
-                                />
-                            </div>
-                        ) : (
-                            <div
-                                className={`${classes.row} ${classes.notConnected}`}
-                            >
-                                <p style={{ width: "10rem" }}>Non connecté</p>
-                                <BsDot
-                                    fontSize={"1.75rem"}
-                                    color="red"
-                                    style={{ margin: "auto 0 1rem 0" }}
-                                />
-                            </div>
-                        )}
-                    </div>
-                    <div className={`${classes.row} ${classes.onHover}`}>
-                        <p style={{ width: "10rem" }}>Connecter</p>
-                    </div>
-                    <div className={classes.row}>
-                        <div>
-                            <span className={classes.bigTxt}>Gmail</span>
-                        </div>
-                    </div>
-                </div>
+                <ConnectTile organisation={TokenService.getOrganisation()} />
             </div>
         </div>
     );
