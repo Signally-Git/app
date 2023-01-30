@@ -5,11 +5,11 @@ import { Navigation, Pagination, A11y, HashNavigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ImCheckmark } from "react-icons/im";
 import { FcGoogle } from "react-icons/fc";
-import { SiMicrosoftoutlook } from "react-icons/si";
 import Button from "Utils/Button/btn";
 
 import "swiper/swiper.min.css";
 import request from "../../../../Utils/Request/request";
+import Outlook from "../../../../Assets/icons/outlook.svg";
 
 function OnBoarding({ organisation, completed, setCompleted }) {
     const [swiper, setSwiper] = React.useState(null);
@@ -275,10 +275,13 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                                         href={`${process.env.REACT_APP_API_URL}/azure/downloadapp`}
                                     >
                                         <Button color="orange">
-                                            <SiMicrosoftoutlook
-                                                color="#0072C6"
-                                                fill="#0072C6"
-                                                style={{ marginRight: ".5rem" }}
+                                            <img
+                                                style={{
+                                                    width: "15px",
+                                                    marginRight: ".5rem",
+                                                }}
+                                                alt="Microsoft Outlook"
+                                                src={Outlook}
                                             />{" "}
                                             Office 365
                                         </Button>

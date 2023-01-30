@@ -1,6 +1,6 @@
 import { Tile } from "./Tile";
 import { FcGoogle } from "react-icons/fc";
-import { SiMicrosoftoutlook } from "react-icons/si";
+import Outlook from "../../../Assets/icons/outlook.svg";
 import request from "../../../Utils/Request/request";
 import { useState } from "react";
 
@@ -50,7 +50,8 @@ export const ConnectTile = ({ organisation }) => {
                 link={"#"}
                 title={
                     <>
-                        <SiMicrosoftoutlook /> Outlook <span></span>
+                        <img alt="Microsoft Outlook" src={Outlook} /> Outlook{" "}
+                        <span></span>
                     </>
                 }
                 leftCorner={<span>Déployé</span>}
@@ -72,7 +73,11 @@ export const ConnectTile = ({ organisation }) => {
                         target="_blank"
                         href={`${process.env.REACT_APP_API_URL}/azure/downloadapp`}
                     >
-                        <SiMicrosoftoutlook />
+                        <img
+                            style={{ width: "35px" }}
+                            alt="Microsoft Outlook"
+                            src={Outlook}
+                        />
                     </a>
                 </>
             }
