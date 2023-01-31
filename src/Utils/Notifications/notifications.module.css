@@ -1,193 +1,113 @@
 .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  width: -webkit-fit-content !important;
-  width: -moz-fit-content !important;
-  width: fit-content !important;
-  height: 2.5rem !important;
-  border-radius: 10px;
-  z-index: 10;
-  top: 3.5rem;
-  position: fixed;
-  color: #402927;
-  font-weight: bold;
-  max-width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content !important;
+    height: 2.5rem !important;
+    border-radius: 10px;
+    z-index: 10;
+    top: 3.5rem;
+    position: fixed;
+    color: #402927;
+    font-weight: bold;
+    max-width: 50%;
 }
-
 .container svg {
-  border-radius: 50%;
-  padding: 4px;
-  fill: #fff;
-  font-size: 1.25rem;
+    border-radius: 50%;
+    padding: 4px;
+    fill: #fff;
+    font-size: 1.25rem;
 }
-
 .container p {
-  font-size: 1rem;
-  margin: 0;
-  margin-right: 0.5rem;
+    font-size: 1rem;
+    margin: 0;
+    margin-right: 0.5rem;
 }
 
 .signup {
-  top: 7rem;
-  right: auto;
-  left: 58.5%;
+    top: 7rem;
+    right: auto;
+    left: 58.5%;
 }
 
 .login {
-  left: 56.5%;
-  right: auto;
-  max-width: 42rem;
-  top: 30%;
-  margin-left: auto;
-  margin-right: 0;
-}
-
-@-webkit-keyframes fadeInLeft {
-  0% {
-    top: .5rem;
-    opacity: 0;
-  }
-  10% {
-    top: 3rem;
-    opacity: 1;
-  }
-  80% {
-    top: 3rem;
-    opacity: 1;
-  }
+    left: 56.5%;
+    right: auto;
+    max-width: 42rem;
+    top: 30%;
+    margin-left: auto;
+    margin-right: 0;
 }
 
 @keyframes fadeInLeft {
-  0% {
-    top: .5rem;
-    opacity: 0;
-  }
-  10% {
-    top: 3rem;
-    opacity: 1;
-  }
-  80% {
-    top: 3rem;
-    opacity: 1;
-  }
+    0% {
+        top: 0.5rem;
+        opacity: 0;
+    }
+    10% {
+        top: 3rem;
+        opacity: 1;
+    }
+    80% {
+        top: 3rem;
+        opacity: 1;
+    }
 }
-
 .fadeOut {
-  -webkit-animation: fadeOutAnimate 1s forwards ease-out !important;
-          animation: fadeOutAnimate 1s forwards ease-out !important;
-}
-
-@-webkit-keyframes fadeOutAnimate {
-  0% {
-    top: 3rem;
-    opacity: 1;
-  }
-  100% {
-    top: .5rem;
-    opacity: 0;
-  }
+    animation: fadeOutAnimate 1s forwards ease-out !important;
 }
 
 @keyframes fadeOutAnimate {
-  0% {
-    top: 3rem;
-    opacity: 1;
-  }
-  100% {
-    top: .5rem;
-    opacity: 0;
-  }
+    0% {
+        top: 3rem;
+        opacity: 1;
+    }
+    100% {
+        top: 0.5rem;
+        opacity: 0;
+    }
 }
-
 .login.fadeOut {
-  -webkit-animation: fadeOutAnimateLogin 1s forwards ease-out !important;
-          animation: fadeOutAnimateLogin 1s forwards ease-out !important;
-}
-
-@-webkit-keyframes fadeOutAnimateLogin {
-  0% {
-    top: 30%;
-    opacity: 1;
-  }
-  100% {
-    top: 25%;
-    opacity: 0;
-  }
+    animation: fadeOutAnimateLogin 1s forwards ease-out !important;
 }
 
 @keyframes fadeOutAnimateLogin {
-  0% {
-    top: 30%;
-    opacity: 1;
-  }
-  100% {
-    top: 25%;
-    opacity: 0;
-  }
+    0% {
+        top: 30%;
+        opacity: 1;
+    }
+    100% {
+        top: 25%;
+        opacity: 0;
+    }
 }
-
 .valid svg {
-  background: green;
+    background: green;
 }
 
 .invalid {
-  -webkit-animation: shakeX 1s forwards ease-in-out;
-          animation: shakeX 1s forwards ease-in-out;
+    animation: shakeX 1s forwards ease-in-out;
 }
-
 .invalid svg {
-  background: red;
-}
-
-@-webkit-keyframes shakeX {
-  from,
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-  }
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    -webkit-transform: translate3d(-10px, 0, 0);
-            transform: translate3d(-10px, 0, 0);
-  }
-  20%,
-  40%,
-  60%,
-  80% {
-    -webkit-transform: translate3d(10px, 0, 0);
-            transform: translate3d(10px, 0, 0);
-  }
+    background: red;
 }
 
 @keyframes shakeX {
-  from,
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-  }
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    -webkit-transform: translate3d(-10px, 0, 0);
-            transform: translate3d(-10px, 0, 0);
-  }
-  20%,
-  40%,
-  60%,
-  80% {
-    -webkit-transform: translate3d(10px, 0, 0);
-            transform: translate3d(10px, 0, 0);
-  }
+    from,
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translate3d(-10px, 0, 0);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translate3d(10px, 0, 0);
+    }
 }

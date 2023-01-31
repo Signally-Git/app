@@ -15,17 +15,16 @@
 }
 
 .tagline {
-    margin-top: .5rem;
+    margin-top: 0.5rem;
     display: flex;
     width: 100%;
     justify-content: space-between;
     align-items: center;
     height: 2.5rem;
-    margin-bottom: .75rem;
+    margin-bottom: 0.75rem;
     * {
-        margin: 0 0!important;
+        margin: 0 0 !important;
     }
-    
 }
 
 .overflow {
@@ -75,16 +74,20 @@
     font-weight: 600;
     margin-top: 0;
     margin-bottom: 2rem;
-    li {
+    > li {
         width: 33%;
         margin: 0 auto;
         text-align: center;
-        a {
+        > a {
             color: $signally-brown;
+            display: block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
         }
         cursor: pointer;
     }
-    li::after {
+    > li::after {
         content: " ";
         display: block;
         width: 60%;
@@ -98,11 +101,11 @@
 //     max-height: 60%;
 // }
 
-.active { 
+.active {
     color: $signally-orange;
     a {
         transition: 0.2s;
-        color: $signally-orange!important;
+        color: $signally-orange !important;
     }
     &::after {
         transition: 0.2s;
@@ -116,8 +119,8 @@
     overflow: auto;
     &::-webkit-scrollbar {
         z-index: -10;
-        width: 0;  /* Remove scrollbar space */
-        background: transparent;  /* Optional: just make scrollbar invisible */
+        width: 0; /* Remove scrollbar space */
+        background: transparent; /* Optional: just make scrollbar invisible */
     }
     /* Optional: show position indicator in red */
     &::-webkit-scrollbar-thumb {
@@ -140,7 +143,7 @@
 .transitionRight {
     animation: swipeOutLeft;
     animation-duration: 1s;
-    animation-delay: .75s;
+    animation-delay: 0.75s;
     animation-fill-mode: forwards;
 }
 
@@ -152,10 +155,10 @@
 }
 
 @keyframes swipeOutLeft {
-    0%{
+    0% {
         transform: translateX(0);
     }
-    100%{
+    100% {
         transform: translateX(-150%);
     }
 }
@@ -163,15 +166,15 @@
 .transitionRemove {
     animation: swipeOutRight;
     animation-duration: 1s;
-    animation-delay: .75s;
+    animation-delay: 0.75s;
     animation-fill-mode: forwards;
 }
 
 @keyframes swipeOutRight {
-    0%{
+    0% {
         transform: translateX(0);
     }
-    100%{
+    100% {
         transform: translateX(150%);
     }
 }
@@ -179,7 +182,7 @@
 .itemsList {
     display: flex;
     flex-direction: column;
-    overflow: auto!important;
+    overflow: auto !important;
     max-height: 65%;
     height: 100%;
     margin-top: 2rem;
@@ -271,8 +274,8 @@
         margin-bottom: 2rem;
         margin-top: 0;
         span {
-            color: $signally-orange!important;
-            font-size: 1.2rem!important;
+            color: $signally-orange !important;
+            font-size: 1.2rem !important;
         }
     }
     > div {
@@ -289,13 +292,14 @@
 }
 
 .assignItem {
-    flex-direction: row!important;
-    align-items: center!important;
-    &:hover, &:hover button {
-        color: $signally-orange
+    flex-direction: row !important;
+    align-items: center !important;
+    &:hover,
+    &:hover button {
+        color: $signally-orange;
     }
     > span {
-        padding-top: 0!important;
+        padding-top: 0 !important;
     }
     button {
         color: $signally-brown;
@@ -310,7 +314,6 @@
         text-align: center;
         vertical-align: middle;
         cursor: pointer;
-        
     }
 }
 
@@ -362,7 +365,7 @@
     outline: none;
     border: 1px solid transparent;
     margin: 1rem 0;
-    padding: .75rem 0.5rem;
+    padding: 0.75rem 0.5rem;
     background: $signally-grey;
     display: block;
     transition: 0.2s;

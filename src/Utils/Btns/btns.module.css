@@ -1,12 +1,10 @@
 .container {
-  position: absolute;
-  bottom: 1rem;
-  left: 2rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+    position: absolute;
+    bottom: 1rem;
+    left: 2rem;
+    display: flex;
+    flex-direction: row-reverse;
 }
-
-.container button:last-child {
-  margin-left: 1rem;
+.container button:first-child {
+    margin-left: 1rem;
 }

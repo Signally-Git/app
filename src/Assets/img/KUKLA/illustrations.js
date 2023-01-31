@@ -1,6 +1,7 @@
-import parse from 'html-react-parser'
-    
-export let Box = parse(`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1293" height="2309" viewBox="0 0 1293 2309" fill="none">
+import parse from "html-react-parser";
+
+export let Box =
+    parse(`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1293" height="2309" viewBox="0 0 1293 2309" fill="none">
 <mask id="mask0_1062_86" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="67" y="36" width="1120" height="2163">
     <rect x="67.502" y="36.5703" width="1118.72" height="2161.53" fill="url(#pattern0)" />
 </mask>

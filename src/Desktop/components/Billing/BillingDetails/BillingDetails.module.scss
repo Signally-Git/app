@@ -1,7 +1,7 @@
 @import "../../../../Assets/style/colors.scss";
 
 .container {
-    background: #FFF;
+    background: #fff;
     padding: 2rem;
     border-radius: 20px;
     position: relative;
@@ -15,7 +15,7 @@
     div {
         margin: 1.5rem 0;
         span {
-            font-size: .9rem;
+            font-size: 0.9rem;
         }
     }
     img {
@@ -29,10 +29,10 @@
 .totalPrice {
     border-radius: 100px;
     background: $signally-brown;
-    color: #FFF;
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: .5rem;
+    padding: 0.5rem;
     max-width: 9rem;
 }

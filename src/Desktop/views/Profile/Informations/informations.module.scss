@@ -9,7 +9,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    img {
+    > img {
         height: 85%;
         max-height: 70vh;
         margin: auto;
@@ -74,6 +74,21 @@
             background-color: $signally-orange;
         }
     }
+}
+
+.logoCompanyDiv {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    > div {
+        width: 100%;
+    }
+}
+
+.logoPreview {
+    max-width: 30px;
+    max-height: 30px;
+    margin: auto;
 }
 
 /* Rounded sliders */

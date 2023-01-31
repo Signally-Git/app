@@ -23,9 +23,6 @@
     .logoContainer {
         margin-top: 0;
     }
-    // opacity: 0;
-    // animation: fadeIn 1.5s forwards ease-in;
-    // animation-delay: 500ms;
 }
 
 .container {
@@ -111,7 +108,7 @@
         background-color: $signally-orange;
         color: #fff;
         padding: 2px;
-        font-size: .8rem;
+        font-size: 0.8rem;
         right: -9px;
         top: -9px;
         border-radius: 50%;
@@ -291,11 +288,12 @@
     > svg {
         &:hover {
             cursor: pointer;
-            filter: brightness(0) saturate(100%) invert(74%) sepia(39%) saturate(5602%) hue-rotate(324deg)
-                brightness(100%) contrast(104%);
+            filter: brightness(0) saturate(100%) invert(74%) sepia(39%)
+                saturate(5602%) hue-rotate(324deg) brightness(100%)
+                contrast(104%);
         }
     }
-    ul li a {
+    ul > li > a {
         text-transform: uppercase;
         white-space: nowrap;
         font-size: 0.8rem;
@@ -303,19 +301,14 @@
         color: $signally-brown;
         transition: 0.2s;
         margin-bottom: 1rem;
-        &:hover {
-            color: $signally-orange;
-            font-weight: 600;
-            border-color: $signally-orange;
-        }
     }
     .UserName {
         display: flex;
         padding-top: 3px;
         align-items: center;
         justify-content: center;
+        width: 100%;
         > svg {
-            margin-left: 0.5rem;
             font-size: 0.7rem;
         }
         span {
@@ -325,6 +318,7 @@
             font-size: 0.9rem;
             color: $signally-brown;
             transition: 0.2s;
+            margin-right: 0.5rem;
         }
     }
 }
@@ -334,7 +328,7 @@
     flex-direction: column;
     height: 3rem;
     text-align: center;
-    width: 8.25rem;
+    width: 7.5rem;
     position: relative;
     > div {
         transition: background-color 0.2s, border-color 0.2s;

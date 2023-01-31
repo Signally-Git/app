@@ -1,3 +1,5 @@
+@import "../../../Assets/style/colors.scss";
+
 .container {
     width: 90%;
     margin: auto;
@@ -44,7 +46,7 @@
     }
     .userMail {
         margin-top: 1rem;
-        font-size: .9rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -53,10 +55,11 @@
     bottom: 6rem;
     span {
         color: $signally-ebony-pink;
-        font-size: .9rem;
+        font-size: 0.9rem;
     }
 }
 
 .chevron {
-    filter: brightness(0) invert(24%) sepia(5%) saturate(4136%) hue-rotate(319deg) brightness(95%) contrast(78%);
+    filter: brightness(0) invert(24%) sepia(5%) saturate(4136%)
+        hue-rotate(319deg) brightness(95%) contrast(78%);
 }

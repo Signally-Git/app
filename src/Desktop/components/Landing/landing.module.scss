@@ -7,14 +7,15 @@
 
 .loading {
     animation: spin 1s 0s infinite linear forwards;
-    stroke-width: 55px!important;
+    stroke-width: 55px !important;
 }
 
-@keyframes spin { 
-    from { 
-        transform: rotate(0deg); 
-    } to { 
-        transform: rotate(360deg); 
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
 
@@ -54,7 +55,7 @@
     input[type="email"]:focus,
     input[type="password"]:focus,
     select:focus {
-        box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+        box-shadow: 0 12px 40px rgba(230, 208, 201, 0.28);
         border-color: $signally-orange;
     }
     select {
@@ -76,8 +77,8 @@
     div {
         display: flex;
         flex-direction: column;
-        img:first-child{
-            margin-bottom: .5rem;
+        img:first-child {
+            margin-bottom: 0.5rem;
         }
     }
 }
@@ -179,8 +180,8 @@
         overflow: auto;
         &::-webkit-scrollbar {
             z-index: -10;
-            width: 0;  /* Remove scrollbar space */
-            background: transparent;  /* Optional: just make scrollbar invisible */
+            width: 0; /* Remove scrollbar space */
+            background: transparent; /* Optional: just make scrollbar invisible */
         }
         /* Optional: show position indicator in red */
         &::-webkit-scrollbar-thumb {
@@ -195,7 +196,6 @@
     }
 }
 
-
 .formContainer {
     min-width: 100%;
     position: relative;
@@ -203,7 +203,7 @@
     background-color: #fbf4f2;
     border-radius: 8px;
     align-items: center;
-    font-family: Montserrat;
+    font-family: Montserrat, serif;
     flex-direction: column;
     height: 100%;
     max-height: 80vh;
@@ -243,7 +243,7 @@
 
 .formContainer h2 {
     text-align: center;
-    font-family: Trebuchet MS;
+    font-family: Trebuchet MS, serif;
     color: $signally-brown;
     margin-top: 0;
     font-size: 1.3rem;
@@ -299,6 +299,12 @@
     h2 {
         color: $signally-orange;
     }
+    > span {
+        animation-delay: 0.75s;
+        font-size: .8rem;
+        color: $signally-brown;
+    }
+    
 }
 
 .disappear {
@@ -327,9 +333,9 @@
 }
 
 .forgot {
-    font-size: .8rem;
+    font-size: 0.8rem;
     margin-left: auto;
-    padding-right: .5rem;
+    padding-right: 0.5rem;
     text-align: right;
     width: 100%;
     display: flex;
@@ -355,7 +361,7 @@
     height: 15rem;
     z-index: 10;
     margin: auto;
-    background: #FFF;
+    background: #fff;
     p {
         line-height: 1.5rem;
         text-align: center;
@@ -366,7 +372,7 @@
         }
     }
     .btnsContainer {
-        margin-top: 0rem;
+        margin-top: 0;
         button {
             margin-top: 1rem;
         }
@@ -374,7 +380,7 @@
 }
 
 .fadeOut {
-    animation: fadeOutAnimate 1s forwards ease-out!important;
+    animation: fadeOutAnimate 1s forwards ease-out !important;
 }
 
 @keyframes fadeOutAnimate {
@@ -394,16 +400,15 @@
     display: flex;
     align-items: center;
     animation: shakeX 1s forwards ease-in-out;
-     > svg {
-         font-size: 1.5rem;;
-         margin-left: .5rem;
-         background: red;
-         color: #FFF;
-         border-radius: 50%;
-         padding: 5px;
-     }
+    > svg {
+        font-size: 1.5rem;
+        margin-left: 0.5rem;
+        background: red;
+        color: #fff;
+        border-radius: 50%;
+        padding: 5px;
+    }
 }
-
 
 @keyframes shakeX {
     from,

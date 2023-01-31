@@ -1,4 +1,4 @@
-import classes from '../components/Dashboard/dashboard.module.css'
+import classes from "../components/Dashboard/dashboard.module.css";
 
 function Store() {
     return (
@@ -7,7 +7,7 @@ function Store() {
                 <h1>Signally Store</h1>
             </div>
         </div>
-    )
+    );
 }
 
-export default Store
+export default Store;

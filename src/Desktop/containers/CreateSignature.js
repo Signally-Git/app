@@ -2,12 +2,14 @@
 // import SignaturePreview from '../../components/Dashboard/Home/signaturePreview'
 // import CreateSignatureComponent from '../../components/Dashboard/Signatures/createSignature/createSignature'
 // import CreateSignatureComponentDesktop from '../../components/Dashboard/Signatures/createSignatureDesktop/createSignature'
-import Dashboard from './Dashboard'
+import Dashboard from "./Dashboard";
 
 function CreateSignature() {
-    return (<>
+    return (
+        <>
             <Dashboard page="create-signature" />
-          </>)
+        </>
+    );
 }
 
-export default CreateSignature
+export default CreateSignature;

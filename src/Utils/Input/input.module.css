@@ -1,16 +1,14 @@
 .input {
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-  background: #fff;
-  border: 1px solid #f0e9e9;
-  padding: 1rem;
-  font-size: .8rem;
-  border-radius: 10px;
-  margin: 0.5rem 0;
-  outline: none;
-  font-family: inherit;
+    transition: 0.2s;
+    background: #fff;
+    border: 1px solid #f0e9e9;
+    padding: 1rem;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    margin: 0.5rem 0;
+    outline: none;
+    font-family: inherit;
 }
-
 .input:focus {
-  border-color: #FF7954;
+    border-color: #ff7954;
 }
