@@ -1,4 +1,4 @@
-name: Publish to S3
+name: Build & publish to S3 - Staging
 
 # Controls when the workflow will run
 on:
