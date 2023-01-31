@@ -1,327 +1,327 @@
 .container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 .container select {
-    width: 100%;
-    border: 1px solid #f7f5f5;
-    border-radius: 10px;
-    padding: 0.5rem 0.5rem;
-    width: 75%;
-    outline: none;
+  width: 100%;
+  border: 1px solid #f7f5f5;
+  border-radius: 10px;
+  padding: 0.5rem 0.5rem;
+  width: 75%;
+  outline: none;
 }
 .container h6 {
-    color: #bdb6b0;
-    font-size: 0.95rem;
-    font-weight: normal;
+  color: #bdb6b0;
+  font-size: 0.95rem;
+  font-weight: normal;
 }
 .container h4 {
-    color: #402927;
-    font-weight: bold;
-    font-size: 1rem;
-    text-align: left;
+  color: #402927;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: left;
 }
 .container label {
-    font-size: 0.7rem;
+  font-size: 0.7rem;
 }
 
 .row {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .spacing {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 75%;
-    height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 75%;
+  height: 2.5rem;
 }
 
 .rangeSlider {
-    height: 6px;
-    width: 100%;
-    background-color: #f7f5f5;
-    margin: auto;
-    margin-right: 0;
-    margin-left: 1.25rem;
-    border-radius: 50px;
+  height: 6px;
+  width: 100%;
+  background-color: #f7f5f5;
+  margin: auto;
+  margin-right: 0;
+  margin-left: 1.25rem;
+  border-radius: 50px;
 }
 .rangeSlider > div {
-    transition: 200ms;
-    height: 25px;
-    width: 25px;
-    background-color: #ff7954;
-    border: 3px solid #fff;
-    border-radius: 50%;
-    outline: none;
-    box-shadow: 1px 1px 3px rgba(255, 121, 84, 0.5333333333);
+  transition: 200ms;
+  height: 25px;
+  width: 25px;
+  background-color: #ff7954;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  outline: none;
+  box-shadow: 1px 1px 3px rgba(255, 121, 84, 0.5333333333);
 }
 
 .checkToText {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
 }
-.checkToText > input[type="text"] {
-    background: none;
-    border: 1px solid #f7f5f5;
-    border-radius: 10px;
-    padding: 0.5rem 0.5rem;
-    margin-left: 0rem;
-    width: 75%;
-    outline: none;
-    font-size: 0.9rem;
+.checkToText > input[type=text] {
+  background: none;
+  border: 1px solid #f7f5f5;
+  border-radius: 10px;
+  padding: 0.5rem 0.5rem;
+  margin-left: 0rem;
+  width: 75%;
+  outline: none;
+  font-size: 0.9rem;
 }
 
 .disabledInput {
-    cursor: not-allowed;
-    opacity: 0.5;
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .textArea {
-    background: none;
-    border: 1px solid #f7f5f5;
-    border-radius: 10px;
-    padding: 0.5rem 0.5rem;
-    margin-left: 0rem;
-    font-family: "Helvetica";
-    min-height: 125px;
-    outline: none;
-    resize: vertical;
+  background: none;
+  border: 1px solid #f7f5f5;
+  border-radius: 10px;
+  padding: 0.5rem 0.5rem;
+  margin-left: 0rem;
+  font-family: "Helvetica";
+  min-height: 125px;
+  outline: none;
+  resize: vertical;
 }
 
 .previewContainer {
-    display: flex;
-    margin-left: auto;
+  display: flex;
+  margin-left: auto;
 }
 .previewContainer > div {
-    cursor: pointer;
-    margin-left: 0.1rem;
+  cursor: pointer;
+  margin-left: 0.1rem;
 }
 
 .inputStyle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.75rem;
-    width: 75%;
-    border: 1px solid #f7f5f5;
-    border-radius: 10px;
-    padding: 0.5rem 0.5rem;
-    margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  width: 75%;
+  border: 1px solid #f7f5f5;
+  border-radius: 10px;
+  padding: 0.5rem 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .colorPreview {
-    cursor: pointer;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.55);
 }
 
 .colorContainer {
-    flex-direction: column-reverse;
-    padding: 0.5rem;
-    height: 10rem;
-    max-width: 9rem;
-    background: #fff;
-    box-shadow: 0 12px 40px rgba(230, 208, 201, 0.8);
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    bottom: 0;
-    left: 2rem;
-    margin: auto;
+  flex-direction: column-reverse;
+  padding: 0.5rem;
+  height: 10rem;
+  max-width: 9rem;
+  background: #fff;
+  box-shadow: 0 12px 40px rgba(230, 208, 201, 0.8);
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 2rem;
+  margin: auto;
 }
 .colorContainer > div {
-    width: 100%;
+  width: 100%;
 }
-.colorContainer div[aria-label="Hue"] > div {
-    border-radius: 0 !important;
-    width: 10px;
-    opacity: 1;
-    border: 1px solid rgb(255, 255, 255);
-    height: 26px;
+.colorContainer div[aria-label=Hue] > div {
+  border-radius: 0 !important;
+  width: 10px;
+  opacity: 1;
+  border: 1px solid rgb(255, 255, 255);
+  height: 26px;
 }
 .colorContainer input {
-    width: 100%;
-    padding: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
 }
 
 .custom {
-    position: relative;
+  position: relative;
 }
 
 .optionsContainer {
-    background: #fff;
-    border-radius: 0 0 10px 10px;
+  background: #fff;
+  border-radius: 0 0 10px 10px;
 }
 
 .optionContainer {
-    position: absolute;
-    display: flex;
-    width: 75%;
-    top: -1rem;
-    right: auto;
-    z-index: 2;
+  position: absolute;
+  display: flex;
+  width: 75%;
+  top: -1rem;
+  right: auto;
+  z-index: 2;
 }
 .optionContainer form {
-    width: 100%;
+  width: 100%;
 }
 .optionContainer button {
-    border: none;
-    cursor: pointer;
-    background: none;
-    outline: none;
+  border: none;
+  cursor: pointer;
+  background: none;
+  outline: none;
 }
 
 .switch {
-    transform: scale(0.6) translateX(30%);
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
+  transform: scale(0.6) translateX(30%);
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
 .switch * {
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-    outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  outline: none;
 }
 
 /* Hide default HTML checkbox */
 .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 /* The slider */
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
-    background-color: #ff7954;
+  background-color: #ff7954;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #ff7954;
+  box-shadow: 0 0 1px #ff7954;
 }
 
 input:checked + .slider:before {
-    transform: translateX(26px);
+  transform: translateX(26px);
 }
 
 .slider.round {
-    border-radius: 34px;
+  border-radius: 34px;
 }
 
 .slider.round:before {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .socialsList {
-    animation: fadeInAnimation ease 1s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-    padding-top: 1rem;
-    left: 0;
-    right: 0;
-    margin: auto;
-    display: flex;
+  animation: fadeInAnimation ease 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  padding-top: 1rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: flex;
 }
 .socialsList > div {
-    position: relative;
+  position: relative;
 }
 .socialsList > div:not(:first-child) {
-    margin: 0 0.25rem !important;
+  margin: 0 0.25rem !important;
 }
 .socialsList > div:first-child {
-    margin: 0 !important;
-    margin-right: 0.25rem !important;
+  margin: 0 !important;
+  margin-right: 0.25rem !important;
 }
-.socialsList > div[role="button"] {
-    cursor: grab;
-    padding: 0.5rem 0.5rem 0 0.75rem;
-    border: 1px solid #f5f5f5;
-    border-radius: 10px;
+.socialsList > div[role=button] {
+  cursor: grab;
+  padding: 0.5rem 0.5rem 0 0.75rem;
+  border: 1px solid #f5f5f5;
+  border-radius: 10px;
 }
-.socialsList > div[role="button"]::before {
-    color: grey;
-    content: "|||";
-    font-size: 0.5rem;
-    font-weight: bold;
-    display: block;
-    position: absolute;
-    transform: rotate(90deg);
-    top: 0.25rem;
-    left: 0.25rem;
+.socialsList > div[role=button]::before {
+  color: grey;
+  content: "|||";
+  font-size: 0.5rem;
+  font-weight: bold;
+  display: block;
+  position: absolute;
+  transform: rotate(90deg);
+  top: 0.25rem;
+  left: 0.25rem;
 }
-.socialsList > div:last-child:not([role="button"]) {
-    cursor: grabbing;
+.socialsList > div:last-child:not([role=button]) {
+  cursor: grabbing;
 }
 .socialsList svg {
-    width: 24px;
+  width: 24px;
 }
 
 .followUs {
-    justify-content: flex-start;
-    width: 100%;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .footerDragContainer {
-    background: red;
-    width: 75%;
+  background: red;
+  width: 75%;
 }
 .footerDragContainer > div {
-    display: flex;
-    position: relative;
+  display: flex;
+  position: relative;
 }
 .footerDragContainer > div input {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 .footerDragContainer button {
-    border: none;
-    background: none;
-    transform: rotate(90deg);
+  border: none;
+  background: none;
+  transform: rotate(90deg);
 }
 
 @keyframes fadeInAnimation {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
