@@ -44,12 +44,7 @@ export default function Preview({
 
     const socialNetworks = renderToStaticMarkup(
         socials.map((item, index) => (
-            <td
-                style={{
-                    height: "18px",
-                    width: "18px",
-                }}
-            >
+            <>
                 <a
                     href={item.url}
                     style={{ height: "25px", width: "25px" }}
@@ -71,7 +66,7 @@ export default function Preview({
                         }}
                     ></td>
                 )}
-            </td>
+            </>
         ))
     );
     let replaced;

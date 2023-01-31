@@ -38,7 +38,7 @@ export default function CreateUser({ setDone }) {
         return String(email)
             .toLowerCase()
             .match(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             );
     };
 
@@ -107,12 +107,13 @@ export default function CreateUser({ setDone }) {
                 setDone(true);
                 history.push("/teams/users");
             })
-            .catch((err) => {
-                // notification({ content: <><span style={{ color: "#FF7954" }}>{user.firstName} {user.lastName}</span> n'a pas pu être créé</>, status: "invalid" }))
+            .catch(({ response }) => {
+                const error = response.data;
                 if (
-                    err?.title ===
+                    error.title ===
                     "App\\Exception\\User\\UserWithSameEmailAlreadyExistsDomainException"
-                )
+                ) {
+                    console.log(error);
                     notification({
                         content: (
                             <>
@@ -124,11 +125,17 @@ export default function CreateUser({ setDone }) {
                         ),
                         status: "invalid",
                     });
-                else {
-                    console.log(err);
-                    // notification({
-                    //     content: <><span style={{ color: "#FF7954" }}>{err}</span></>, status: "invalid"
-                    // })
+                } else {
+                    notification({
+                        content: (
+                            <>
+                                <span style={{ color: "#FF7954" }}>
+                                    {error.detail}
+                                </span>
+                            </>
+                        ),
+                        status: "invalid",
+                    });
                 }
             });
     };

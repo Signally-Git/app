@@ -1,250 +1,272 @@
 @media screen and (max-width: 680px) {
-    .container {
-        padding-bottom: 10rem;
-        min-height: 100vh;
-        padding-top: 2rem;
-        position: relative;
-        margin: auto;
-    }
+  .container {
+    padding-bottom: 10rem;
+    min-height: 100vh;
+    padding-top: 2rem;
+    position: relative;
+    margin: auto;
+  }
 }
 .container {
-    display: flex;
-    flex-direction: column;
-    margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
 }
 .container h1 {
-    flex: 100%;
-    margin-left: 0.5rem;
-    color: #402927;
-    font-size: 1.75rem;
+  flex: 100%;
+  margin-left: 0.5rem;
+  color: #402927;
+  font-size: 1.75rem;
 }
 
 .tilesList {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .tile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 48%;
-    height: 9rem;
-    flex: 48%;
-    max-width: 48%;
-    padding: 1rem 1rem;
-    border-radius: 10px;
-    margin: 0.5rem 0;
-    background: #fff;
-    box-shadow: 0px 20px 20px rgba(206, 142, 124, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 48%;
+  height: 9rem;
+  flex: 48%;
+  max-width: 48%;
+  padding: 1rem 1rem;
+  border-radius: 10px;
+  margin: 0.5rem 0;
+  background: #fff;
+  box-shadow: 0px 20px 20px rgba(206, 142, 124, 0.15);
 }
 .tile * {
-    font-family: "Montserrat";
-    color: #402927;
-    margin: 0;
-    padding: 0;
+  font-family: "Montserrat";
+  color: #402927;
+  margin: 0;
+  padding: 0;
 }
 .tile:first-of-type {
-    background-color: #ff7954;
+  background-color: #ff7954;
 }
 .tile:first-of-type span,
 .tile:first-of-type p,
 .tile:first-of-type svg,
 .tile:first-of-type svg path {
-    color: #fff !important;
+  color: #fff !important;
 }
 .tile:nth-of-type(2) {
-    background-color: #ffc300;
+  background-color: #ffc300;
 }
 .tile:nth-of-type(2) span,
 .tile:nth-of-type(2) p {
-    color: #fff;
+  color: #fff;
 }
 .tile p,
 .tile span {
-    font-size: 1rem;
-    font-weight: 400;
+  font-size: 1rem;
+  font-weight: 400;
 }
 .tile p {
-    line-height: 2.5;
+  line-height: 2.5;
 }
 
 .orangeTxt {
-    color: #ff7954;
+  color: #ff7954;
 }
 
 .loadingBtn {
-    animation: spin infinite 1s linear;
-    font-size: 1rem;
-    position: absolute;
-    margin-left: auto !important;
-    margin-right: auto;
-    margin: auto;
-    inset: 0;
+  animation: spin infinite 1s linear;
+  font-size: 1rem;
+  position: absolute;
+  margin-left: auto !important;
+  margin-right: auto;
+  margin: auto;
+  inset: 0;
 }
 
 @keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
+.gmail {
+  cursor: pointer;
+}
+.gmail .connected svg * {
+  color: #00ca4e;
+}
+.gmail .notConnected svg * {
+  color: #ff7954;
+}
+.gmail svg {
+  animation: flash infinite ease 2s;
+}
+.gmail .onHover {
+  display: none;
+}
+.gmail .onHover svg {
+  animation: none;
+}
+.gmail:hover > .onHover {
+  display: flex;
+}
+.gmail:hover > .onUnHover {
+  display: none;
+}
+
 .deploy {
-    cursor: pointer;
-    background-color: #e87e41 !important;
+  cursor: pointer;
+  background-color: #e87e41 !important;
 }
 .deploy .onHover {
-    display: none;
+  display: none;
 }
 .deploy .onHover svg {
-    animation: flash infinite ease 2s;
+  animation: flash infinite ease 2s;
 }
 .deploy:hover > .onHover {
-    display: flex;
+  display: flex;
 }
 .deploy:hover > .onUnHover {
-    display: none;
+  display: none;
 }
 
 @keyframes flash {
-    from,
-    50%,
-    to {
-        opacity: 1;
-    }
-    25%,
-    75% {
-        opacity: 0;
-    }
+  from, 50%, to {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
 }
 .syncTile {
-    perspective: 1000px;
-    position: relative;
-    height: 6rem;
-    transition: transform 0.1s;
-    flex: 100%;
-    width: 100%;
+  perspective: 1000px;
+  position: relative;
+  height: 6rem;
+  transition: transform 0.1s;
+  flex: 100%;
+  width: 100%;
 }
 .syncTile h4 {
-    font-size: 1.2rem;
-    line-height: 2rem;
-    vertical-align: middle;
+  font-size: 1.2rem;
+  line-height: 2rem;
+  vertical-align: middle;
 }
 
 .rotating {
-    animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
 }
 
 .syncContainer {
-    position: relative;
+  position: relative;
 }
 
 .syncBtn {
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 2;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
 }
 
 .syncTileInner {
-    position: relative;
-    width: 100%;
-    min-height: 7rem;
-    height: 100%;
-    text-align: center;
-    transition: transform 1s;
-    transform-style: preserve-3d;
+  position: relative;
+  width: 100%;
+  min-height: 7rem;
+  height: 100%;
+  text-align: center;
+  transition: transform 1s;
+  transform-style: preserve-3d;
 }
 
 .fliping {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 .syncFront,
 .syncBack {
-    position: absolute;
-    width: 100%;
-    padding: 1rem;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    -webkit-backface-visibility: hidden; /* Safari */
-    backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  padding: 1rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
 }
 
 .syncBack {
-    background: red;
-    transform: rotateY(180deg);
+  background: red;
+  transform: rotateY(180deg);
 }
 
 @keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 .billingTile {
-    background: #402927 !important;
+  background: #402927 !important;
 }
 .billingTile * {
-    color: #fff;
+  color: #fff;
 }
 
 .bigTxt {
-    line-height: 1.5;
-    font-size: 2.5rem !important;
-    font-weight: 600 !important;
+  line-height: 1.5;
+  font-size: 2.5rem !important;
+  font-weight: 600 !important;
 }
 
 .free {
-    line-height: 3rem;
-    font-size: 1.2rem !important;
-    font-weight: 600 !important;
+  line-height: 3rem;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
 }
 
 .row {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    max-height: 40%;
-    align-items: baseline;
-    justify-content: space-between;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-height: 40%;
+  align-items: baseline;
+  justify-content: space-between;
 }
 
 .blackImg {
-    filter: contrast(0);
+  filter: contrast(0);
 }
 
 .watermark {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 5rem;
-    line-height: 28px;
-    color: rgba(101, 68, 62, 0.03);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  line-height: 28px;
+  color: rgba(101, 68, 62, 0.03);
 }
 
 .syncContainer {
-    padding: 2rem 0 0rem 0;
+  padding: 2rem 0 0rem 0;
 }
 
 .activeSpan {
-    text-transform: uppercase;
-    font-weight: 600 !important;
-    font-size: 0.8rem !important;
+  text-transform: uppercase;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
 }
 
 .fliping {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }

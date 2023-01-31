@@ -99,15 +99,23 @@
     }
 }
 
-.deploy {
+.gmail {
+    .connected svg *{
+        color: #00ca4e;
+    }
+    .notConnected svg * {
+        color: #ff7954;
+    }
+    svg {
+        animation: flash infinite ease 2s;
+    }
     .onHover {
         display: none;
         svg {
-            animation: flash infinite ease 2s;
+            animation: none;
         }
     }
     cursor: pointer;
-    background-color: #e87e41 !important;
     &:hover {
         > .onHover {
             display: flex;
@@ -116,6 +124,25 @@
             display: none;
         }
     }
+}
+
+.deploy{
+    .onHover {
+        display: none;
+        svg {
+            animation: flash infinite ease 2s;
+        }
+    }
+    cursor: pointer;
+    &:hover {
+        > .onHover {
+            display: flex;
+        }
+        > .onUnHover {
+            display: none;
+        }
+    }
+    background-color: #e87e41 !important;
 }
 
 @keyframes flash {

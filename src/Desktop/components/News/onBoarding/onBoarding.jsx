@@ -4,10 +4,12 @@ import { useHistory } from "react-router-dom";
 import { Navigation, Pagination, A11y, HashNavigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ImCheckmark } from "react-icons/im";
+import { FcGoogle } from "react-icons/fc";
 import Button from "Utils/Button/btn";
 
 import "swiper/swiper.min.css";
 import request from "../../../../Utils/Request/request";
+import Outlook from "../../../../Assets/icons/outlook.svg";
 
 function OnBoarding({ organisation, completed, setCompleted }) {
     const [swiper, setSwiper] = React.useState(null);
@@ -250,6 +252,59 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                                     </Button>
                                 </div>
                             </>
+                        )}
+                    </>
+                ),
+            },
+            {
+                link: <>Connexion</>,
+                title: "Connexion",
+                done:
+                    organisation.google === true ||
+                    organisation.office365 === true,
+                content: (
+                    <>
+                        {organisation.google !== true &&
+                        organisation.office365 !== true ? (
+                            <>
+                                Installez le plugin Signally sur Office 365
+                                Azure ou Gmail.
+                                <div className={classes.btnsContainer}>
+                                    <a
+                                        target="_blank"
+                                        href={`${process.env.REACT_APP_API_URL}/azure/downloadapp`}
+                                    >
+                                        <Button color="orange">
+                                            <img
+                                                style={{
+                                                    width: "15px",
+                                                    marginRight: ".5rem",
+                                                }}
+                                                alt="Microsoft Outlook"
+                                                src={Outlook}
+                                            />{" "}
+                                            Office 365
+                                        </Button>
+                                    </a>
+                                    <a
+                                        target="_blank"
+                                        href={`${process.env.REACT_APP_API_URL}/google/downloadapp`}
+                                    >
+                                        <Button color="orange">
+                                            <FcGoogle
+                                                style={{ marginRight: ".5rem" }}
+                                            />{" "}
+                                            Google
+                                        </Button>
+                                    </a>
+                                </div>
+                            </>
+                        ) : organisation.google === true ? (
+                            <>Le plugin Google est installé</>
+                        ) : organisation.office365 === true ? (
+                            <>Le plugin Outlook 365 est installé</>
+                        ) : (
+                            <>Les deux plugins sont installés </>
                         )}
                     </>
                 ),

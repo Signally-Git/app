@@ -21,6 +21,7 @@ function Informations() {
     const [companyName, setCompanyName] = useState("");
     const [website, setWebsite] = useState("");
     const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState(user?.firstName);
     const [lastName, setLastName] = useState(user?.lastName);
     const [position, setPosition] = useState(user?.position);
@@ -82,6 +83,7 @@ function Informations() {
                         },
                         digitalAddress: {
                             phone: phone,
+                            email: email,
                         },
                         socialMediaAccounts: socialsList,
                     };
@@ -134,6 +136,7 @@ function Informations() {
                 },
                 digitalAddress: {
                     phone: phone,
+                    email: email,
                 },
                 socialMediaAccounts: socialsList,
             };
@@ -227,6 +230,7 @@ function Informations() {
             setCompanyName(org?.name);
             setWebsite(org?.websiteUrl);
             setPhone(org?.digitalAddress?.phone);
+            setEmail(org?.digitalAddress?.email);
         });
     }, []);
 
@@ -267,6 +271,7 @@ function Informations() {
                                     <div className={classes.logoCompanyDiv}>
                                         {preview && (
                                             <img
+                                                alt={`Logo ${companyName}`}
                                                 className={classes.logoPreview}
                                                 src={preview}
                                             />
@@ -387,6 +392,14 @@ function Informations() {
                                     />
                                 </div>
                             </div>
+                            <div className={classes.inputContainer}>
+                                <label>Adresse mail administrateur</label>
+                                <Input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </div>
                             <div className={classes.socialsContainer}>
                                 <CompanyCustomization
                                     wpName={wpName}
@@ -493,7 +506,7 @@ function Informations() {
                     handleSaveCustomization();
                 }}
             />
-            <img src={Hello} />
+            <img alt="Greetings image" src={Hello} />
         </div>
     );
 }
