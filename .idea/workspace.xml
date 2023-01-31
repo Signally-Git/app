@@ -7,13 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c4dff9f-5d0a-4e3d-a895-082d60361406" name="Changes" comment="poc gmail card">
-      <change afterPath="$PROJECT_DIR$/src/Desktop/components/Dashboard/ConnectTile.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Desktop/components/Dashboard/Tile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/Dashboard/tiles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/Dashboard/tiles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/components/News/onBoarding/onBoarding.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/components/News/onBoarding/onBoarding.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="5c4dff9f-5d0a-4e3d-a895-082d60361406" name="Changes" comment="merge staging" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -463,28 +457,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670582638840</updated>
     </task>
-    <task id="LOCAL-00043" summary="fix">
-      <created>1673637615364</created>
+    <task id="LOCAL-00043" summary="merge staging">
+      <created>1672819534891</created>
       <option name="number" value="00043" />
       <option name="presentableId" value="LOCAL-00043" />
       <option name="project" value="LOCAL" />
-      <updated>1673637615364</updated>
+      <updated>1672819534891</updated>
     </task>
-    <task id="LOCAL-00044" summary="edit css - vertical templates">
-      <created>1673637629142</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1673637629142</updated>
-    </task>
-    <task id="LOCAL-00045" summary="poc gmail card">
-      <created>1673637641597</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1673637641597</updated>
-    </task>
-    <option name="localTasksCounter" value="46" />
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -513,6 +493,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add 24h to default creation event start date + style" />
+    <MESSAGE value="Upgraded from http to https" />
     <MESSAGE value="Wait for signature to be completely created before pushing to dashboard" />
     <MESSAGE value="remove console.log" />
     <MESSAGE value="preview admin's data if available" />
@@ -535,9 +517,18 @@
     <MESSAGE value="adds /.idea/* to silence workspace.xml" />
     <MESSAGE value="new message with design to check spam after register" />
     <MESSAGE value="handle empty data" />
-    <MESSAGE value="fix" />
-    <MESSAGE value="edit css - vertical templates" />
-    <MESSAGE value="poc gmail card" />
-    <option name="LAST_COMMIT_MESSAGE" value="poc gmail card" />
+    <MESSAGE value="merge staging" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge staging" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/Desktop/components/Dashboard/tiles.js</url>
+          <line>34</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
