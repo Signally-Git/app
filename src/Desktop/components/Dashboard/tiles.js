@@ -113,9 +113,6 @@ function Tiles(props) {
                 props.setLoading(true);
             })
             .catch(() => {});
-        await request.get("gmail").then((res) => {
-            console.log(res);
-        });
     }, []);
 
     useEffect(() => {
