@@ -276,7 +276,7 @@ export default function Preview({
         options?.salutation?.enabled
             ? `<p style="padding-bottom: ${
                   options?.salutation?.padding
-              }px;" }>${options?.salutation.value || "Cordialement,"}</p>`
+              }px;">${options?.salutation.value || "Cordialement,"}</p>`
             : ""
     );
     let disclaimer = /{# START DISCLAIMER #}.*{# END DISCLAIMER #}/gis;
@@ -313,7 +313,7 @@ export default function Preview({
 
     replaced = replaced.replaceAll(
         /{{ company.websiteUrl\|trim\('https:\/\/'\)\|trim\('http:\/\/'\) }}/g,
-        organisation?.websiteUrl.replace("https://", "").replace("http://", "")
+        organisation?.websiteUrl?.replace("https://", "").replace("http://", "")
     );
 
     // Calendar
