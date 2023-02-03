@@ -10,6 +10,7 @@ request.interceptors.request.use(
         const token = TokenService.getLocalToken();
         if (token) {
             config.headers["Authorization"] = "Bearer " + token;
+            config.headers["Access-Control-Allow-Origin"] = "*";
         }
         return config;
     },
