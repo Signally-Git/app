@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Button from "Utils/Button/btn";
 import Template from "../Preview/customizablePreview";
 import request from "Utils/Request/request";
+import { TokenService } from "Utils/index";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 // Displaying the list of bought and free templates (Studio, Store) and allows to select one to create custom signature
@@ -12,7 +13,6 @@ export default function TemplateSelection(props) {
     const [fetching, setFetching] = useState(true);
     // const [tag, setTag] = useState(true);
     const [templatesList, setTemplatesList] = useState([]);
-    const [organisation, setOrganisation] = useState();
 
     const handleForm = (e) => {
         props.setTemplate(JSON.parse(e.target.value));
@@ -26,14 +26,12 @@ export default function TemplateSelection(props) {
     // };
 
     useEffect(() => {
-        const organisationId = JSON.parse(
-            localStorage.getItem("user")
-        )?.organisation;
-        request.get(organisationId).then((res) => {
-            setTemplatesList(res.data.signaturesTemplate);
+        request.get('signature_templates').then(({data}) => {
+            setTemplatesList(data['hydra:member']);
+            console.log(templatesList)
             setFetching(false);
-            setOrganisation(res.data);
         });
+        // request.get('signature_templates').then(({ data }) => console.log(data))
     }, []);
 
     if (fetching)
@@ -136,7 +134,7 @@ export default function TemplateSelection(props) {
                                         }}
                                         template={template.html}
                                         socials={props.icons}
-                                        organisation={organisation}
+                                        organisation={TokenService.getOrganisation()}
                                         user={JSON.parse(
                                             localStorage.getItem("user")
                                         )}
