@@ -54,7 +54,7 @@ export default function DefineSocials({ setList, defaultValue }) {
             name: name,
             image:
                 image ||
-                "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/" +
+                "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/default" +
                     name +
                     ".png",
         };
