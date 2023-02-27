@@ -37,9 +37,6 @@ function Input(props) {
     const color = useRef(null);
 
     useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
         function handleClickOutside(event) {
             if (color.current && !color.current.contains(event.target)) {
                 setOption("");

@@ -3,7 +3,6 @@ import Input from "./Input";
 import classes from "./infos.module.css";
 import { Range } from "react-range";
 import { FiChevronDown } from "react-icons/fi";
-import request from "Utils/Request/request";
 import CustomSelect from "Utils/CustomSelect/customselect";
 import { TokenService } from "Utils/index";
 
@@ -268,22 +267,6 @@ export default function Infos(props) {
                             getValue={"name"}
                             display={"name"}
                         />
-                        {/* <div className={classes.selectFontContainer}>
-                            <input style={{ fontFamily: selectedFont }} className={classes.selectedFont}
-                                type="text" readOnly value={selectedFont} onClick={() => setShowFonts(!showFonts)} />
-                            <BsChevronDown />
-                            <form onChange={(e) => handleFont(e)}>
-                                {showFonts ? <ul className={classes.selectFont}>
-                                    {webSafeFontList.map((font) => {
-                                        return (
-                                            <li>
-                                                <input type="radio" value={font} id={font} name="font" />
-                                                <label htmlFor={font} style={{ fontFamily: font }}>{font}</label>
-                                            </li>)
-                                    })}
-                                </ul> : ""}
-                            </form>
-                        </div> */}
                         <div className={classes.selectSize}>
                             <div className={classes.row}>
                                 <div>

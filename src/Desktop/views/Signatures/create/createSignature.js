@@ -84,7 +84,8 @@ function CreateSignatureComponent() {
             value: `Disclaimer`,
             enabled: false,
             padding: 10,
-            size: 7,
+            color: "#000",
+            fontSize: 7,
         },
     });
 
@@ -162,7 +163,7 @@ function CreateSignatureComponent() {
                 value: `Disclaimer`,
                 enabled: false,
                 padding: 10,
-                size: 7,
+                fontSize: 7,
             },
         });
     };
@@ -760,6 +761,19 @@ function CreateSignatureComponent() {
                         value:
                             signatureOption.footer.padding?.toString() || "12",
                         type: "disclaimerPadding",
+                        signature: result?.data?.id,
+                    },
+                    {
+                        property: "color",
+                        value: signatureOption.footer.color,
+                        type: "disclaimerColor",
+                        signature: result?.data?.id,
+                    },
+                    {
+                        property: "fontSize",
+                        value:
+                            signatureOption.footer.fontSize?.toString() || "7",
+                        type: "disclaimerFontSize",
                         signature: result?.data?.id,
                     },
                     {
