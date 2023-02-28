@@ -43,7 +43,7 @@ export default function CopySignature() {
     return (
         <>
             <div className={classes.container}>
-                {signature?.length > 0 && parse(signature)}
+                <div contentEditable={true}>{signature?.length > 0 && parse(signature)}</div>
                 <Button
                     onClick={(e) => handleCopy(e)}
                     disabled={btnText === "Signature copiée"}
