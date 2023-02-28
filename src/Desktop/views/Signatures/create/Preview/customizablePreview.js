@@ -274,18 +274,20 @@ export default function Preview({
     replaced = replaced.replaceAll(
         greeting,
         options?.salutation?.enabled
-            ? `<p style="padding-bottom: ${
-                  options?.salutation?.padding
-              }px;">${options?.salutation.value || "Cordialement,"}</p>`
+            ? `<p style="padding-bottom: ${options?.salutation?.padding}px;">${
+                  options?.salutation.value || "Cordialement,"
+              }</p>`
             : ""
     );
     let disclaimer = /{# START DISCLAIMER #}.*{# END DISCLAIMER #}/gis;
     replaced = replaced.replaceAll(
         disclaimer,
         options?.footer?.enabled
-            ? `<p style="box-sizing: border-box; margin-top:${
-                  options?.footer?.padding
-              }px; font-size:${options?.footer?.size}px; max-width: ${
+            ? `<p style="box-sizing: border-box; color: ${
+                  options?.footer?.color
+              }; margin-top:${options?.footer?.padding}px; font-size:${
+                  options?.footer?.fontSize
+              }px; max-width: ${
                   options?.footer?.maxWidth
               }px;">${options?.footer?.value.replace(/\n/g, "<br />")}</p>`
             : ""
@@ -391,6 +393,10 @@ export default function Preview({
     replaced = replaced.replaceAll(
         "{{ styles['divColor']['color'] }}",
         options?.bgColor || "#FCE750"
+    );
+    replaced = replaced.replaceAll(
+        "{{ styles['disclaimer']['fontSize'] }}",
+        options?.footer?.fontSize || 7
     );
     replaced = replaced.replaceAll(
         "{{ styles['eventPadding']['padding'] }}",

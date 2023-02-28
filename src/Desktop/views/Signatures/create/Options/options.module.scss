@@ -8,7 +8,6 @@ $max-width: 75%;
     flex-direction: column;
     min-height: 100%;
     select {
-        width: 100%;
         border: 1px solid $signally-grey;
         border-radius: 10px;
         padding: 0.5rem 0.5rem;
@@ -38,12 +37,33 @@ $max-width: 75%;
     justify-content: space-between;
 }
 
-.spacing {
+.spacing, .size, .footerColor {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: $max-width;
     height: 2.5rem;
+}
+
+.footerColor {
+    h6 {
+        padding-right: .5rem;
+    }
+    width: auto!important;
+    margin-right: auto;
+}
+
+.size h6{
+    white-space: nowrap;
+}
+
+.colorPreview {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.356);
+    border-radius: 50%;
+    border: none;
+    margin: 0.2rem;
+    width: 20px;
+    height: 20px;
 }
 
 .rangeSlider {
@@ -76,7 +96,7 @@ $max-width: 75%;
         border: 1px solid $signally-grey;
         border-radius: 10px;
         padding: 0.5rem 0.5rem;
-        margin-left: 0rem;
+        margin-left: 0;
         width: $max-width;
         outline: none;
         font-size: 0.9rem;
@@ -93,8 +113,8 @@ $max-width: 75%;
     border: 1px solid $signally-grey;
     border-radius: 10px;
     padding: 0.5rem 0.5rem;
-    margin-left: 0rem;
-    font-family: "Helvetica";
+    margin-left: 0;
+    font-family: "Helvetica", serif;
     min-height: 125px;
     outline: none;
     resize: vertical;

@@ -239,61 +239,30 @@
   margin-right: 0.65rem;
 }
 
-/* Customize the label (the radioCtr) */
-.radioCtr {
-  display: block;
-  position: relative;
-  padding-left: 1.5rem;
+.filters {
+  display: flex;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  gap: 0.5rem;
+}
+
+.filter label {
+  transition: 200ms;
+  font-size: 0.9rem;
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  padding: 0.25rem 0.5rem;
+  color: #402927;
+  border: 1px solid #402927;
+  border-radius: 20px;
 }
-
-/* Hide the browser's default radio button */
-.radioCtr input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
+.filter label:hover {
+  color: #ff7954;
+  border-color: #ff7954;
 }
-
-/* Create a custom radio button */
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 18px;
-  width: 18px;
-  border: 2px solid #402927;
-  border-radius: 50%;
-}
-
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the indicator (dot/circle) when checked */
-.radioCtr input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the indicator (dot/circle) */
-.radioCtr .checkmark:after {
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: #402927;
+.filter input:checked ~ label {
+  color: #FFF;
+  border-color: #ff7954;
+  background: #ff7954;
 }
 
 .loading {

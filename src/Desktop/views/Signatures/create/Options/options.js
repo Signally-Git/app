@@ -13,6 +13,7 @@ import CustomSelect from "Utils/CustomSelect/customselect";
 
 export default function Options(props) {
     const [colorSelect, setColorSelect] = useState();
+    // const [selectColor, setSelectColor] = useState(false)
     const color = useRef(null);
 
     useEffect(() => {
@@ -464,7 +465,6 @@ export default function Options(props) {
                         <>
                             <textarea
                                 className={classes.textArea}
-                                type="text"
                                 autoFocus
                                 onChange={(e) => {
                                     props.setData({
@@ -477,6 +477,88 @@ export default function Options(props) {
                                 }}
                                 defaultValue={props.data.footer.value}
                             />
+                            <div className={classes.footerColor}>
+                            <h6>Couleur</h6>
+                            <button
+                                className={classes.colorPreview}
+                                onClick={() =>
+                                    colorSelect !== "footer"
+                                        ? setColorSelect("footer")
+                                        : setColorSelect("")
+                                }
+                                style={{ background: props.data.footer.color }}
+                            />
+                            </div>
+                            {colorSelect === 'footer' && <>
+                                <div
+                                    className={`${classes.optionContainer} ${classes.colorContainer}`}
+                                    ref={color}
+                                >
+                                    <HexColorInput
+                                        className={classes.input}
+                                        color={props.data.footer.color}
+                                        onChange={(e) =>
+                                            props.setData({
+                                                ...props.data,
+                                                footer: {
+                                                    ...props.data.footer,
+                                                    color: e,
+                                                },
+                                            })
+                                        }
+                                    />
+                                    <HexColorPicker
+                                        className={classes.colorPick}
+                                        color={props.data.footer.color}
+                                        onChange={(e) =>
+                                            props.setData({
+                                                ...props.data,
+                                                footer: {
+                                                    ...props.data.footer,
+                                                    color: e,
+                                                },
+                                            })
+                                        }
+                                    />{" "}
+                                </div>
+                            </>}
+                            <div className={classes.size}>
+                                <h6>Taille ({props.data.footer.fontSize}px)</h6>
+                                <Range
+                                    step={1}
+                                    min={7}
+                                    max={22}
+                                    values={[props.data.footer.fontSize]}
+                                    onChange={(size) =>
+                                        props.setData({
+                                            ...props.data,
+                                            footer: {
+                                                ...props.data.footer,
+                                                fontSize: size,
+                                            },
+                                        })
+                                    }
+                                    renderTrack={({ props, children }) => (
+                                        <div
+                                            className={classes.rangeSlider}
+                                            {...props}
+                                            style={{
+                                                ...props.style,
+                                            }}
+                                        >
+                                            {children}
+                                        </div>
+                                    )}
+                                    renderThumb={({ props }) => (
+                                        <div
+                                            {...props}
+                                            style={{
+                                                ...props.style,
+                                            }}
+                                        />
+                                    )}
+                                />
+                            </div>
                             <div className={classes.spacing}>
                                 <h6>Espacement</h6>
                                 <Range

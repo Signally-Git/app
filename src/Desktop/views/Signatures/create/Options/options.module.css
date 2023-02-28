@@ -5,7 +5,6 @@
   min-height: 100%;
 }
 .container select {
-  width: 100%;
   border: 1px solid #f7f5f5;
   border-radius: 10px;
   padding: 0.5rem 0.5rem;
@@ -34,12 +33,33 @@
   justify-content: space-between;
 }
 
-.spacing {
+.spacing, .size, .footerColor {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 75%;
   height: 2.5rem;
+}
+
+.footerColor {
+  width: auto !important;
+  margin-right: auto;
+}
+.footerColor h6 {
+  padding-right: 0.5rem;
+}
+
+.size h6 {
+  white-space: nowrap;
+}
+
+.colorPreview {
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.356);
+  border-radius: 50%;
+  border: none;
+  margin: 0.2rem;
+  width: 20px;
+  height: 20px;
 }
 
 .rangeSlider {
@@ -73,7 +93,7 @@
   border: 1px solid #f7f5f5;
   border-radius: 10px;
   padding: 0.5rem 0.5rem;
-  margin-left: 0rem;
+  margin-left: 0;
   width: 75%;
   outline: none;
   font-size: 0.9rem;
@@ -89,8 +109,8 @@
   border: 1px solid #f7f5f5;
   border-radius: 10px;
   padding: 0.5rem 0.5rem;
-  margin-left: 0rem;
-  font-family: "Helvetica";
+  margin-left: 0;
+  font-family: "Helvetica", serif;
   min-height: 125px;
   outline: none;
   resize: vertical;

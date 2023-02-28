@@ -95,12 +95,11 @@ function EditSignatureComponent() {
         },
         footer: {
             maxWidth: 380,
-            value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.
-    
-    Ce message electronique et tous les fichiers joints ainsi que les informations contenues dans ce message (ci apres "le message"), sont confidentiels et destines exclusivement a l'usage de la personne a laquelle ils sont adresses. Si vous avez recu ce message par erreur, merci de le renvoyer a son emetteur et de le detruire. Toute diffusion, publication, totale ou partielle ou divulgation sous quelque forme que ce soit non expressement autorisees de ce message, sont interdites.,`,
+            value: `Disclaimer`,
             enabled: false,
             padding: 10,
-            size: 7,
+            color: "#000",
+            fontSize: 7,
         },
     });
     const [modal, setModal] = useState(false);
@@ -410,7 +409,7 @@ function EditSignatureComponent() {
                         style.property === "fontFamily"
                 )[0].value || "Helvetica",
         });
-
+        
         setSignatureOption({
             salutation: {
                 value:
@@ -470,6 +469,10 @@ function EditSignatureComponent() {
             },
             footer: {
                 maxWidth: 380,
+                color:
+                    defaultStyles?.filter(
+                        (style) => style.type === "disclaimerColor"
+                    )[0]?.value || '#000',
                 value:
                     defaultStyles?.filter(
                         (style) => style.type === "disclaimerValue"
@@ -481,7 +484,10 @@ function EditSignatureComponent() {
                 padding: defaultStyles?.filter(
                     (style) => style.type === "disclaimerPadding"
                 )[0].value,
-                size: 7,
+                fontSize:
+                    defaultStyles?.filter(
+                        (style) => style.type === "disclaimerFontSize"
+                    )[0]?.value
             },
         });
     };
@@ -993,6 +999,19 @@ function EditSignatureComponent() {
                         property: "value",
                         value: signatureOption.footer.value,
                         type: "disclaimerValue",
+                        signature: result?.data?.id,
+                    },
+                    {
+                        property: "color",
+                        value: signatureOption.footer.color,
+                        type: "disclaimerColor",
+                        signature: result?.data?.id,
+                    },
+                    {
+                        property: "fontSize",
+                        value:
+                            signatureOption.footer.fontSize?.toString() || "7",
+                        type: "disclaimerFontSize",
                         signature: result?.data?.id,
                     },
                     {
