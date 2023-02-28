@@ -82,8 +82,7 @@ export default function TemplateSelection(props) {
                                 return (
                                     <li key={template.id}>
                                         <p className={classes.templateName}>
-                                            {template.name} -{" "}
-                                            {template.visibility}
+                                            {template.name}
                                         </p>
                                         <input
                                             readOnly
