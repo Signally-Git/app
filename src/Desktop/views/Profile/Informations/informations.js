@@ -26,7 +26,7 @@ function Informations() {
     const [lastName, setLastName] = useState(user?.lastName);
     const [position, setPosition] = useState(user?.position);
     const [mobile, setMobile] = useState(user?.phone);
-    const [urlAgenda, setUrlAgenda] = useState(user?.urlAgenda);
+    const [urlAgenda, setUrlAgenda] = useState(user?.urlAgenda || "");
     const [socialsList, setSocialsList] = useState(
         organisation.socialMediaAccounts || []
     );
@@ -171,7 +171,7 @@ function Informations() {
         };
         await request
             .patch(
-                `users/${JSON.parse(localStorage.getItem("user")).id}`,
+                `users/${user.id}`,
                 req,
                 {
                     headers: { "Content-Type": "application/merge-patch+json" },
@@ -481,11 +481,7 @@ function Informations() {
                                     <label>Email</label>
                                     <Input
                                         disabled
-                                        defaultValue={
-                                            JSON.parse(
-                                                localStorage.getItem("user")
-                                            )?.email
-                                        }
+                                        value={user.email}
                                         type="mail"
                                     />
                                 </div>
@@ -506,7 +502,7 @@ function Informations() {
                     handleSaveCustomization();
                 }}
             />
-            <img alt="Greetings image" src={Hello} />
+            <img alt="Greetings" src={Hello} />
         </div>
     );
 }

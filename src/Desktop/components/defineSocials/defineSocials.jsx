@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "Utils/Input/input";
 import classes from "./defineSocials.module.css";
 import { useNotification } from "Utils/Notifications/notifications";
-import { TiSocialLinkedin, TiSocialPinterest } from "react-icons/ti";
-import { GrFacebookOption } from "react-icons/gr";
-import { AiOutlineInstagram, AiOutlineTwitter } from "react-icons/ai";
-import { BsSnapchat } from "react-icons/bs";
 import { FiCheck, FiTrash } from "react-icons/fi";
 import request from "Utils/Request/request";
+import UploadFile from "../../../Utils/Upload/uploadFile";
 
 export default function DefineSocials({ setList, defaultValue }) {
     const [socials, setSocials] = React.useState(
@@ -15,22 +12,11 @@ export default function DefineSocials({ setList, defaultValue }) {
     );
     const [select, setSelect] = React.useState(defaultValue.length || 0);
     const [value, setValue] = React.useState("");
-    const [image, setImage] = React.useState("");
+    // const [image, setImage] = React.useState("");
     const socialLink = React.useRef(null);
     const notification = useNotification();
-
-    const socialIcons = {
-        FACEBOOK: <GrFacebookOption style={{ padding: "5px" }} />,
-        INSTAGRAM: <AiOutlineInstagram style={{ padding: "4px" }} />,
-        LINKEDIN: <TiSocialLinkedin style={{ padding: "1px" }} />,
-        PINTEREST: <TiSocialPinterest />,
-        SNAPCHAT: <BsSnapchat style={{ padding: "6px" }} />,
-        TWITTER: <AiOutlineTwitter style={{ padding: "4px" }} />,
-    };
-
-    const renderSocial = (social) => {
-        return socialIcons[social.name.toUpperCase()];
-    };
+    const [uploadedMedia, setUploadedMedia] = React.useState(null);
+    const [preview, setPreview] = React.useState(null);
 
     const getDomainName = (string) => {
         let domain;
@@ -52,11 +38,7 @@ export default function DefineSocials({ setList, defaultValue }) {
         newArr[select] = {
             url: e.target.value,
             name: name,
-            image:
-                image ||
-                "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/default/" +
-                    name +
-                    ".png",
+            image: preview
         };
         setSocials(newArr);
         setValue(e.target.value || "");
@@ -64,11 +46,20 @@ export default function DefineSocials({ setList, defaultValue }) {
 
     const handleSwap = (social) => {
         setSelect(socials.findIndex((x) => x === social));
-        setImage(socials[socials.findIndex((x) => x === social)]?.image || "");
+        // setImage(socials[socials.findIndex((x) => x === social)]?.image || "");
         setValue(socials[socials.findIndex((x) => x === social)]?.url || "");
     };
 
-    const handleSubmit = (e) => {
+    const handleSaveIcon = async () => {
+        if (!uploadedMedia) return null;
+        const img = new FormData();
+        img.append("file", uploadedMedia);
+
+        const { data } = await request.post(`import/file`, img);
+        return data.url;
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!getDomainName(value)) {
             notification({
@@ -91,20 +82,25 @@ export default function DefineSocials({ setList, defaultValue }) {
         } else {
             setSelect(socials.length);
             setValue("");
-            setImage("");
+            // setImage("");
+            setUploadedMedia(null);
             socialLink.current.focus();
             notification({
                 content: <>{getDomainName(value)} enregistré</>,
                 status: "valid",
             });
         }
+        const image = await handleSaveIcon();
         const req = {
             ...socials[select],
+            image: image,
             organisation: JSON.parse(localStorage.getItem("user")).organisation,
         };
 
-        if (socials[select]["@id"]) request.patch(socials[select]["@id"], req);
-        else request.post("social_media_accounts", req);
+        if (socials[select]["@id"])
+            await request.patch(socials[select]["@id"], req);
+        else 
+            await request.post("social_media_accounts", req);
         setList(socials);
     };
 
@@ -120,9 +116,27 @@ export default function DefineSocials({ setList, defaultValue }) {
             1
         );
         setValue("");
-        setImage("");
+        // setImage("");
         setSelect(socials.length);
     };
+
+    useEffect(() => {
+        if (!uploadedMedia) {
+            setPreview(null);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(uploadedMedia);
+        setPreview(objectUrl);
+
+        let newArr = [...socials];
+        newArr[select] = {
+            ...newArr[select],
+            image: objectUrl
+        };
+        setSocials(newArr);
+
+        // return () => URL.revokeObjectURL(objectUrl);
+    }, [uploadedMedia]);
 
     return (
         <div className={classes.container}>
@@ -137,7 +151,14 @@ export default function DefineSocials({ setList, defaultValue }) {
                                     title={social?.url}
                                     onClick={() => handleSwap(social)}
                                 >
-                                    {social?.name ? renderSocial(social) : ""}
+                                    {social?.image ? (
+                                        <img
+                                            alt={social?.name.toString()}
+                                            src={social?.image}
+                                        />
+                                    ) : (
+                                        ""
+                                    )}
                                 </li>
                             );
                         })}
@@ -146,18 +167,24 @@ export default function DefineSocials({ setList, defaultValue }) {
                 <div className={classes.editSocials}>
                     <Input
                         ref={socialLink}
-                        style={{ width: "20rem" }}
+                        style={{ width: "15rem" }}
                         value={value}
                         onChange={(e) => handleChange(e)}
                         type="text"
                         placeholder="URL"
                     />
-                    <Input
-                        style={{ width: "10rem" }}
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
-                        type="text"
-                        placeholder="URL"
+                    <UploadFile
+                        file={uploadedMedia}
+                        setFile={(e) => setUploadedMedia(e)}
+                        style={{
+                            width: "15rem",
+                            paddingLeft: 0,
+                            paddingRight: 0,
+                            paddingTop: ".8rem",
+                            paddingBottom: ".8rem",
+                        }}
+                        type="image/*"
+                        placeholder="Icône personnalisée"
                     />
                     <FiCheck onClick={(e) => handleSubmit(e)} />
                     {socials[0]?.url?.length > 1 && (

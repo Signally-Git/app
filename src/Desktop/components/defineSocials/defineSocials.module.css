@@ -2,15 +2,15 @@
   display: flex;
   flex-direction: column;
 }
-.container form {
+.container > form {
   display: flex;
   flex-direction: column;
 }
-.container form > div {
+.container > form > div {
   align-items: center;
   display: flex;
 }
-.container form > div ~ input {
+.container > form > div ~ input {
   margin-right: auto;
   margin-left: 0;
 }
@@ -20,7 +20,7 @@
   font-size: 0.85rem;
 }
 .container .editSocials {
-  gap: 1rem;
+  gap: 0.5rem;
   max-height: 3rem;
   margin-bottom: 3rem;
 }
@@ -34,7 +34,7 @@
   transition: color 0.3s;
 }
 .container .editSocials svg:first-of-type {
-  margin-left: 1rem;
+  margin-left: 0.5rem;
 }
 .container .editSocials svg:hover {
   color: #ff7954;
@@ -42,9 +42,11 @@
 
 .socialsList {
   list-style: none;
+  border-radius: 20px;
+  background: #f8f2f0;
   margin-left: 1rem;
-  padding: 0;
-  height: 2rem;
+  padding: 0.25rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
 }
@@ -60,17 +62,12 @@
 .socialsList li:last-child button {
   margin: 0 0 0 1rem;
 }
-.socialsList li:hover svg {
-  transition: color 0.3s, border-color 0.3s;
-  color: #ff7954;
-  border-color: #ff7954;
+.socialsList li:hover img {
+  transition: opacity 300ms;
+  opacity: 0.5;
 }
-.socialsList li svg {
-  height: 2rem;
-  width: 2rem;
-  font-size: 1.5rem;
-  color: #402927;
-  border-radius: 50%;
-  border: 1px solid #402927;
-  background-color: #fff;
+.socialsList li img {
+  cursor: pointer;
+  height: 1.75rem;
+  width: 1.75rem;
 }

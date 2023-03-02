@@ -24,6 +24,7 @@
     border-radius: 20px;
     overflow: auto;
     width: 50%;
+    min-width: 40rem;
     height: 80%;
     display: flex;
     flex-direction: column;
@@ -156,7 +157,6 @@
     width: 100%;
     display: flex;
     align-items: center;
-    color: $signally-orange;
     label {
         font-size: 0.9rem;
         color: $signally-orange;
@@ -194,4 +194,11 @@
     > button:last-child {
         margin-left: 1rem;
     }
+}
+
+@media screen and (max-width: 1180px) {
+    .container > img {
+        display: none;
+    }
+    
 }
