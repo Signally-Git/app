@@ -3,7 +3,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    form {
+    > form {
         display: flex;
         flex-direction: column;
         > div {
@@ -21,7 +21,7 @@
         font-size: 0.85rem;
     }
     .editSocials {
-        gap: 1rem;
+        gap: .5rem;
         max-height: 3rem;
         margin-bottom: 3rem;
         li {
@@ -33,7 +33,7 @@
             font-size: 1.2rem;
             transition: color 0.3s;
             &:first-of-type {
-                margin-left: 1rem;
+                margin-left: .5rem;
             }
             &:hover {
                 color: $signally-orange;
@@ -44,11 +44,12 @@
 
 .socialsList {
     list-style: none;
+    border-radius: 20px;
+    background: $signally-isabelline;
     margin-left: 1rem;
-    padding: 0;
-    height: 2rem;
+    padding: .25rem;
+    height: 2.5rem;
     display: flex;
-
     align-items: center;
     li {
         display: flex;
@@ -63,19 +64,14 @@
                 margin: 0 0 0 1rem;
             }
         }
-        &:hover svg {
-            transition: color 0.3s, border-color 0.3s;
-            color: $signally-orange;
-            border-color: $signally-orange;
+        &:hover img {
+            transition: opacity 300ms;
+            opacity: .5;
         }
-        svg {
-            height: 2rem;
-            width: 2rem;
-            font-size: 1.5rem;
-            color: $signally-brown;
-            border-radius: 50%;
-            border: 1px solid $signally-brown;
-            background-color: #fff;
+        img {
+            cursor: pointer;
+            height: 1.75rem;
+            width: 1.75rem;
         }
     }
 }
