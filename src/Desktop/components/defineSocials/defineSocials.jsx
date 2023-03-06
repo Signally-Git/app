@@ -96,7 +96,10 @@ export default function DefineSocials({ setList, defaultValue }) {
         const image = await handleSaveIcon();
         const req = {
             ...socials[select],
-            image: image,
+            image: image ||
+                "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/default/" +
+                getDomainName(value) +
+                ".png",
             organisation: JSON.parse(localStorage.getItem("user")).organisation,
         };
 
