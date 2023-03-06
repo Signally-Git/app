@@ -63,11 +63,19 @@ const Login = () => {
                 const magicLink = await request.get(
                     `sign_in${window.location.search}`
                 );
-                console.log(magicLink)
-                TokenService.setUser({
-                    ...magicLink.data,
-                });
-                history.push("/dashboard");
+                axios
+                    .get(`${process.env.REACT_APP_API_URL}/whoami`, {
+                        headers: {
+                            Authorization: `Bearer ${magicLink.data.token}`,
+                        },
+                    })
+                    .then((result) => {
+                        TokenService.setUser({
+                            ...magicLink.data,
+                            ...result.data,
+                        });
+                        history.push("/dashboard");
+                    });
             }
         }
         redirectIfLogged();
