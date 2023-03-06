@@ -63,9 +63,9 @@ const Login = () => {
                 const magicLink = await request.get(
                     `sign_in${window.location.search}`
                 );
-                localStorage.setItem("user", { token: magicLink.data.token });
-                localStorage.setItem("user", {
-                    refresh_token: magicLink.data.refresh_token,
+                console.log(magicLink)
+                TokenService.setUser({
+                    ...magicLink.data,
                 });
                 history.push("/dashboard");
             }
