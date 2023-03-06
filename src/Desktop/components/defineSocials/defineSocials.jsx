@@ -38,7 +38,10 @@ export default function DefineSocials({ setList, defaultValue }) {
         newArr[select] = {
             url: e.target.value,
             name: name,
-            image: preview
+            image: preview ||
+                "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/default/" +
+                    name +
+                    ".png"
         };
         setSocials(newArr);
         setValue(e.target.value || "");
