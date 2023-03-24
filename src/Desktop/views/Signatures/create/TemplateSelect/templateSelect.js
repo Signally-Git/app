@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import Button from "Utils/Button/btn";
 import Template from "../Preview/customizablePreview";
 import request from "Utils/Request/request";
-import { TokenService } from "Utils/index";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { getStyles } from "../createSignature.utils";
 
 // Displaying the list of bought and free templates (Studio, Store) and allows to select one to create custom signature
 
-export default function TemplateSelection(props) {
+export default function TemplateSelection({ setTemplate, showFunction, signatureOption, signatureInfo, company, user }) {
     const [fetching, setFetching] = useState(true);
     const [templatesList, setTemplatesList] = useState([]);
     const [visibility, setVisibility] = useState("");
@@ -21,7 +21,7 @@ export default function TemplateSelection(props) {
         if (e.target.id === visibility) setVisibility("");
     };
     const handleForm = (e) => {
-        props.setTemplate(JSON.parse(e.target.value));
+        setTemplate(JSON.parse(e.target.value));
     };
 
     useEffect(() => {
@@ -91,15 +91,8 @@ export default function TemplateSelection(props) {
                                             value={JSON.stringify(template)}
                                         />
                                         <Template
-                                            options={{
-                                                event: { enabled: true },
-                                            }}
-                                            template={template.html}
-                                            socials={props.icons}
-                                            organisation={TokenService.getOrganisation()}
-                                            user={JSON.parse(
-                                                localStorage.getItem("user")
-                                            )}
+                                            twig={template.html}
+                                            styles={getStyles(signatureInfo, signatureOption, company, user)}
                                         />
                                     </li>
                                 );
@@ -112,7 +105,7 @@ export default function TemplateSelection(props) {
                             width={"5rem"}
                             onClick={(e) => {
                                 e.preventDefault();
-                                props.showFunction(false, "smooth");
+                                showFunction(false, "smooth");
                             }}
                         >
                             Annuler
