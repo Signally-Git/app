@@ -18,6 +18,7 @@ export default function CreateUser({ setDone }) {
     const [roles] = useState([
         { name: "Utilisateur", value: "ROLE_USER" },
         { name: "RH", value: "ROLE_RH" },
+        { name: "Administrateur", value: "ROLE_ADMIN" },
     ]);
     const [role, setRole] = useState();
     const [team, setTeam] = useState("");
@@ -310,7 +311,7 @@ export default function CreateUser({ setDone }) {
                                     roles:
                                         role === "ROLE_USER"
                                             ? ["ROLE_USER"]
-                                            : ["ROLE_USER", "ROLE_RH"],
+                                            : ["ROLE_USER", e],
                                 });
                             }}
                             defaultValue={role}
