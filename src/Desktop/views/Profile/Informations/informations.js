@@ -223,7 +223,7 @@ function Informations() {
     };
 
     useEffect(() => {
-        request.get(TokenService.getOrganisation()["@id"]).then((org) => {
+        request.get(organisation["@id"]).then((org) => {
             org = org?.data;
             setOrganisation(org);
             setPreview(org?.logo?.url);

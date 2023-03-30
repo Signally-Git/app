@@ -18,9 +18,6 @@ export default function Frame(props) {
         const sse = new EventSource(
             `${process.env.REACT_APP_HUB_URL}${user["organisation"]}`
         );
-        const sseSocials = new EventSource(
-            `${process.env.REACT_APP_HUB_URL}/social_media_accounts`
-        );
 
         function getRealtimeData(data) {
             setOrganisation(data);
@@ -37,16 +34,12 @@ export default function Frame(props) {
         }
         sseUser.onmessage = (e) => getRealtimeDataUser(JSON.parse(e.data));
 
-        function getRealtimeDataSocials(data) {
-            setOrganisation({ ...organisation, socialMediaAccounts: data });
-            TokenService.setOrganisation({ ...organisation, socialMediaAccounts: data });
-        }
-        sseSocials.onmessage = (e) => getRealtimeDataSocials(JSON.parse(e.data));
         request
             .get(user.organisation)
             .then((r) => {
-                setOrganisation(r.data);
-                TokenService.setOrganisation(r.data);
+                const org = { ...r.data, '@id': user.organisation }
+                setOrganisation(org);
+                TokenService.setOrganisation(org);
             })
             .catch((err) => console.log(err));
     }, []);
