@@ -59,6 +59,7 @@ export const ConnectTile = ({ organisation }) => {
         );
     return (
         <Tile
+            link={"#"}
             title={<>Non connecté</>}
             leftCorner={
                 <>

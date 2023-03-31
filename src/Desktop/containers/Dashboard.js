@@ -10,37 +10,31 @@ import CreateSignature from "../views/Signatures/create/createSignature";
 import request from "Utils/Request/request";
 import News from "Desktop/components/News/news";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { TokenService } from "Utils/index";
+import { TokenService, useOrganisation } from "Utils/index";
 import StatsPage from "Desktop/components/Statistics/Stats.page";
 
 function Dashboard(props) {
     const [isHeader, setIsHeader] = useState("");
     const user = TokenService.getUser();
-    const [organisation, setOrganisation] = useState(
-        TokenService.getOrganisation()
-    );
+    const organisation = useOrganisation(user);
     const [loadingTiles, setLoadingTiles] = useState(false);
-    const [loadingNews, setLoadingNews] = useState(false);
+    const [loadingNews, setLoadingNews] = useState(0);
 
     useEffect(() => {
-        const getData = async () => {
-            let users;
-            await request.get("users").then((r) => (users = r.data));
-            await request.get(user.organisation).then((r) => {
-                setOrganisation({
-                    ...r.data,
-                    ...organisation,
-                    users: users["hydra:member"],
-                });
-            });
-        };
-        getData();
-    }, []);
-
-    useEffect(() => {
-        setLoadingNews(false);
-        setLoadingTiles(false);
-    }, []);
+        // const getData = async () => {
+        //     let users;
+        //     await request.get("users").then((r) => (users = r.data));
+        //     await request.get(user.organisation).then((r) => {
+        //         setOrganisation({
+        //             ...r.data,
+        //             ...organisation,
+        //             users: users["hydra:member"],
+        //         });
+        //     });
+        // };
+        // getData();
+        // console.log(loadingNews, loadingTiles)
+    }, [organisation]);
 
     return (
         <>
@@ -60,13 +54,10 @@ function Dashboard(props) {
                             !loadingNews || !loadingTiles ? classes.load : ""
                         }`}
                     >
-                        {organisation ? (
-                            <News
-                                organisation={organisation}
-                                loading={loadingNews}
-                                setLoading={setLoadingNews}
-                            />
-                        ) : null}
+                        <News
+                            loading={loadingNews}
+                            setLoading={setLoadingNews}
+                        />
                         <div className={classes.col}>
                             <div className={classes.tilesContainer}>
                                 <Tiles

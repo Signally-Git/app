@@ -15,16 +15,7 @@ export default function Frame(props) {
         const sseUser = new EventSource(
             `${process.env.REACT_APP_HUB_URL}${user["@id"]}`
         );
-        const sse = new EventSource(
-            `${process.env.REACT_APP_HUB_URL}${user["organisation"]}`
-        );
-
-        function getRealtimeData(data) {
-            setOrganisation(data);
-            TokenService.setOrganisation(data);
-        }
-        sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
-
+        
         function getRealtimeDataUser(data) {
             setUser(data);
             TokenService.setUser({

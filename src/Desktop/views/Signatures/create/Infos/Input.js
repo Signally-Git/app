@@ -11,6 +11,7 @@ function Input(props) {
     // Takes current states and updates it
 
     const [option, setOption] = useState("");
+    const [selectedColor, setSelectedColor] = useState("")
 
     // Styles weight, underline and italic or not
     const handleFontStyle = (e) => {

@@ -67,42 +67,6 @@ export default function Options(props) {
                 </>
             );
     };
-
-    const handleColors = () => {
-        if (colorSelect === "fill")
-            return (
-                <>
-                    <div
-                        ref={color}
-                        className={`${classes.optionContainer} ${classes.colorContainer}`}
-                    >
-                        <HexColorInput
-                            autoFocus
-                            name="color"
-                            className={classes.input}
-                            color={props.data.socials.fill}
-                            onChange={(e) =>
-                                props.setData({
-                                    ...props.data,
-                                    socials: { ...props.data.socials, fill: e },
-                                })
-                            }
-                        />
-                        <HexColorPicker
-                            name="color"
-                            className={classes.colorPick}
-                            color={props.data.socials.fill}
-                            onChange={(e) =>
-                                props.setData({
-                                    ...props.data,
-                                    socials: { ...props.data.socials, fill: e },
-                                })
-                            }
-                        />{" "}
-                    </div>
-                </>
-            );
-    };
     useEffect(() => {
         props.setData({
             ...props.data,
@@ -478,50 +442,54 @@ export default function Options(props) {
                                 defaultValue={props.data.footer.value}
                             />
                             <div className={classes.footerColor}>
-                            <h6>Couleur</h6>
-                            <button
-                                className={classes.colorPreview}
-                                onClick={() =>
-                                    colorSelect !== "footer"
-                                        ? setColorSelect("footer")
-                                        : setColorSelect("")
-                                }
-                                style={{ background: props.data.footer.color }}
-                            />
+                                <h6>Couleur</h6>
+                                <button
+                                    className={classes.colorPreview}
+                                    onClick={() =>
+                                        colorSelect !== "footer"
+                                            ? setColorSelect("footer")
+                                            : setColorSelect("")
+                                    }
+                                    style={{
+                                        background: props.data.footer.color,
+                                    }}
+                                />
                             </div>
-                            {colorSelect === 'footer' && <>
-                                <div
-                                    className={`${classes.optionContainer} ${classes.colorContainer}`}
-                                    ref={color}
-                                >
-                                    <HexColorInput
-                                        className={classes.input}
-                                        color={props.data.footer.color}
-                                        onChange={(e) =>
-                                            props.setData({
-                                                ...props.data,
-                                                footer: {
-                                                    ...props.data.footer,
-                                                    color: e,
-                                                },
-                                            })
-                                        }
-                                    />
-                                    <HexColorPicker
-                                        className={classes.colorPick}
-                                        color={props.data.footer.color}
-                                        onChange={(e) =>
-                                            props.setData({
-                                                ...props.data,
-                                                footer: {
-                                                    ...props.data.footer,
-                                                    color: e,
-                                                },
-                                            })
-                                        }
-                                    />{" "}
-                                </div>
-                            </>}
+                            {colorSelect === "footer" && (
+                                <>
+                                    <div
+                                        className={`${classes.optionContainer} ${classes.colorContainer}`}
+                                        ref={color}
+                                    >
+                                        <HexColorInput
+                                            className={classes.input}
+                                            color={props.data.footer.color}
+                                            onChange={(e) =>
+                                                props.setData({
+                                                    ...props.data,
+                                                    footer: {
+                                                        ...props.data.footer,
+                                                        color: e,
+                                                    },
+                                                })
+                                            }
+                                        />
+                                        <HexColorPicker
+                                            className={classes.colorPick}
+                                            color={props.data.footer.color}
+                                            onChange={(e) =>
+                                                props.setData({
+                                                    ...props.data,
+                                                    footer: {
+                                                        ...props.data.footer,
+                                                        color: e,
+                                                    },
+                                                })
+                                            }
+                                        />{" "}
+                                    </div>
+                                </>
+                            )}
                             <div className={classes.size}>
                                 <h6>Taille ({props.data.footer.fontSize}px)</h6>
                                 <Range

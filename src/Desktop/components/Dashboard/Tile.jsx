@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import classes from "./tiles.module.css";
 export const Tile = ({
     title,
@@ -8,8 +8,9 @@ export const Tile = ({
     rightCorner,
     link,
 }) => {
+    const history = useHistory()
     return (
-        <Link to={link} className={classes.tile}>
+        <div onClick={() => history.push(link)} className={classes.tile}>
             <div className={classes.row}>
                 <p>{title}</p>
                 <img src={icon} alt={iconAlt} />
@@ -20,6 +21,6 @@ export const Tile = ({
                 </div>
                 <span className={classes.activeSpan}>{rightCorner}</span>
             </div>
-        </Link>
+        </div>
     );
 };
