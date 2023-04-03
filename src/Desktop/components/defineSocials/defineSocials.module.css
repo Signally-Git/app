@@ -19,6 +19,12 @@
   font-weight: bold;
   font-size: 0.85rem;
 }
+.container .addSocials {
+  background: none;
+  border: none;
+  display: flex;
+  margin-left: -0.5rem;
+}
 .container .editSocials {
   gap: 0.5rem;
   max-height: 3rem;

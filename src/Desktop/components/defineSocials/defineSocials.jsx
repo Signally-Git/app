@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import Input from "Utils/Input/input";
 import classes from "./defineSocials.module.css";
 import { useNotification } from "Utils/Notifications/notifications";
-import { FiCheck, FiTrash } from "react-icons/fi";
+import { FiCheck, FiPlusCircle, FiTrash } from "react-icons/fi";
 import request from "Utils/Request/request";
 import UploadFile from "../../../Utils/Upload/uploadFile";
+import { TokenService } from "../../../Utils";
 
 export default function DefineSocials({ setList, defaultValue }) {
     const [socials, setSocials] = React.useState(
@@ -46,6 +47,12 @@ export default function DefineSocials({ setList, defaultValue }) {
         setSocials(newArr);
         setValue(e.target.value || "");
     };
+    
+    const handleAdd = (e) => {
+        e.preventDefault()
+        setSelect(socials.length)
+        setValue("")
+    }
 
     const handleSwap = (social) => {
         setSelect(socials.findIndex((x) => x === social));
@@ -111,19 +118,22 @@ export default function DefineSocials({ setList, defaultValue }) {
     };
 
     const handleRemove = () => {
-        request.delete(socials[select]["@id"]).catch(() =>
+        let index = select >= socials.length ? socials.length - 1 : select 
+        request.delete(socials[index]["@id"]).then(() => {
+            socials.splice(
+                socials.findIndex((x) => x?.url === value),
+                1
+            );
+            setValue("");
+            // setImage("");
+            setSelect(socials.length);
+        }).catch(() =>
             notification({
-                content: <>Impossible de supprimer {socials[select].name}</>,
+                content: <>Impossible de supprimer {socials[index].name}</>,
                 status: "invalid",
             })
         );
-        socials.splice(
-            socials.findIndex((x) => x?.url === value),
-            1
-        );
-        setValue("");
-        // setImage("");
-        setSelect(socials.length);
+        
     };
 
     useEffect(() => {
@@ -144,6 +154,18 @@ export default function DefineSocials({ setList, defaultValue }) {
         // return () => URL.revokeObjectURL(objectUrl);
     }, [uploadedMedia]);
 
+    useEffect(() => {
+        const sse = new EventSource(
+            `${process.env.REACT_APP_HUB_URL}${TokenService.getUser()["organisation"]}`
+        )
+        sse.onmessage = (e) => {
+            const org = { ...JSON.parse(e.data), '@id': TokenService.getUser().organisation }
+            TokenService.setOrganisation(org);
+            setSocials(JSON.parse(e.data).socialMediaAccounts);
+            setList(JSON.parse(e.data).socialMediaAccounts)
+        };
+    }, [])
+    
     return (
         <div className={classes.container}>
             <form onSubmit={(e) => handleSubmit(e)}>
@@ -169,6 +191,9 @@ export default function DefineSocials({ setList, defaultValue }) {
                             );
                         })}
                     </ul>
+                    <button className={classes.addSocials} type="button" onClick={handleAdd}>
+                        <FiPlusCircle />
+                    </button>
                 </div>
                 <div className={classes.editSocials}>
                     <Input

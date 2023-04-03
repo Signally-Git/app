@@ -8,11 +8,11 @@ import request from "Utils/Request/request";
 import moment from "moment";
 
 import "swiper/swiper.min.css";
+import { TokenService, useOrganisation } from "Utils";
 
-function News({ organisation, loading, setLoading }) {
-    const [org, setOrg] = React.useState(organisation);
-    const [users, setUsers] = React.useState(organisation?.users);
-    const [events, setEvents] = React.useState(organisation?.events);
+function News({ loading, setLoading }) {
+    const user = TokenService.getUser()
+    const organisation = useOrganisation(user);
     const [slides, setSlides] = React.useState([""]);
     const [swipe, setSwipe] = React.useState();
     const [admin, setAdmin] = React.useState({
@@ -21,29 +21,21 @@ function News({ organisation, loading, setLoading }) {
     });
     const [onboardingComplete, setOnboardingComplete] = React.useState(false);
 
-    const refreshOrganisation = () => {
-        request.get("users").then((r) => {
-            setUsers(r.data["hydra:member"]);
-        });
-        request.get(localStorage.getItem("organisation")?.["@id"]).then((r) => {
-            setUsers(r.data["hydra:member"]);
-        });
-    };
-
     React.useEffect(() => {
-        setAdmin(localStorage.getItem("user"));
-        refreshOrganisation();
+        setAdmin(user);
         setLoading(loading + 1);
     }, [organisation]);
 
     React.useEffect(() => {
+        if (!organisation)
+            return;
         setSlides([]);
         const toPush = [];
 
         toPush.push(
             <>
                 <OnBoarding
-                    organisation={org}
+                    organisation={organisation}
                     completed={onboardingComplete}
                     setCompleted={setOnboardingComplete}
                 />
@@ -107,7 +99,7 @@ function News({ organisation, loading, setLoading }) {
                 </>
             );
         setSlides(toPush);
-    }, [onboardingComplete, organisation, admin, org]);
+    }, [onboardingComplete, admin, organisation ]);
 
     React.useEffect(() => {
         setTimeout(() => {
@@ -124,7 +116,6 @@ function News({ organisation, loading, setLoading }) {
                 allowTouchMove={false}
                 autoHeight={true}
                 onInit={(e) => {
-                    refreshOrganisation();
                     setSwipe(e);
                 }}
                 pagination={{ type: "bullets", clickable: true }}

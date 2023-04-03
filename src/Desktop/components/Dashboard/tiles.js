@@ -37,16 +37,13 @@ function Tiles(props) {
         props.setLoading(false);
         props.handleHeader(" ");
 
-        await request.get("configurations").then((res) => {
-            localStorage.setItem(
-                "configuration",
-                JSON.stringify(res.data["hydra:member"])
-            );
-            workplaceName = res.data["hydra:member"]?.filter(
+        await request.get("configurations").then(({ data }) => {
+            TokenService.setConfig(data["hydra:member"])
+            workplaceName = data["hydra:member"]?.filter(
                 (entity) => (entity.key = workplaceName)
             ).value;
             setUserName(
-                res.data["hydra:member"]?.filter(
+                data["hydra:member"]?.filter(
                     (entity) => (entity.key = userName)
                 ).value
             );
