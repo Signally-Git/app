@@ -12,6 +12,7 @@ import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
 import { TokenService } from "Utils";
+import { getStyles } from "../create/createSignature.utils";
 
 // Component handling the modification of signature, selection of template
 
@@ -109,7 +110,6 @@ function EditSignatureComponent() {
     useEffect(() => {
         const getSignatureFromId = async () => {
             await request.get("signatures/" + signatureId).then(async (res) => {
-                console.log(res.data);
                 setSelectedTemplate(res.data.signatureTemplate);
                 setDefaultStyles(res.data.signatureStyles);
                 setSignatureName(res.data.name);
@@ -1044,8 +1044,10 @@ function EditSignatureComponent() {
                 <TemplateSelection
                     showFunction={showTemplates}
                     setTemplate={setSelectedTemplate}
-                    icons={signatureOption.socials}
-                    organisation={company?.data}
+                    signatureOption={signatureOption}
+                    signatureInfo={signatureInfo}
+                    company={company}
+                    user={user}
                 />
             );
             setTimeout(() => {
@@ -1069,14 +1071,10 @@ function EditSignatureComponent() {
 
     useEffect(() => {
         if (signatureInfo && signatureOption && selectedTemplate?.html) {
-            console.log(selectedTemplate?.html);
             setPreview(
                 <Preview
-                    infos={signatureInfo}
-                    options={signatureOption}
-                    template={selectedTemplate?.html}
-                    organisation={company}
-                    user={user}
+                    twig={selectedTemplate?.html}
+                    styles={getStyles(signatureInfo, signatureOption, company, user)}
                 />
             );
         }
