@@ -12,7 +12,7 @@ import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
 import { TokenService } from "Utils";
-import { getStyles } from "../create/createSignature.utils";
+import { defaultOptions, getStyles } from "../create/createSignature.utils";
 
 // Component handling the modification of signature, selection of template
 
@@ -69,40 +69,7 @@ function EditSignatureComponent() {
         fontSize: [11],
         fontFamily: "Arial",
     });
-    const [signatureOption, setSignatureOption] = useState({
-        salutation: { value: "Cordialement,", enabled: false, padding: 10 },
-        custom: { enabled: false },
-        eco: { value: "Ecoresponsability", enabled: false },
-        vcard: { enabled: false },
-        calendar: { enabled: false },
-        event: {
-            list: events,
-            selected: events[0],
-            enabled: false,
-            padding: 12,
-        },
-        socials: {
-            enabled: false,
-            bgColor: "#000",
-            fill: "#FFF",
-            items: [
-                "facebook",
-                "linkedin",
-                "twitter",
-                "instagram",
-                "snapchat",
-                "pinterest",
-            ],
-        },
-        footer: {
-            maxWidth: 380,
-            value: `Disclaimer`,
-            enabled: false,
-            padding: 10,
-            color: "#000",
-            fontSize: 7,
-        },
-    });
+    const [signatureOption, setSignatureOption] = useState(defaultOptions());
     const [modal, setModal] = useState(false);
     const [modalContent, setModalContent] = useState();
     const [signatureName, setSignatureName] = useState("");
@@ -1064,7 +1031,7 @@ function EditSignatureComponent() {
                 behavior: "smooth",
             });
             setTimeout(() => {
-                setTemplates();
+                setTemplates(false);
             }, 1000);
         }
     };
