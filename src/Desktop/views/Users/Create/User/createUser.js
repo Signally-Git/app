@@ -296,6 +296,7 @@ export default function CreateUser({ setDone }) {
                 </div>
                 <div className={classes.slide}>
                     <form onSubmit={(e) => handleSlide(e, 2)}>
+                        <div>
                         <CustomSelect
                             display="name"
                             getValue="value"
@@ -348,6 +349,7 @@ export default function CreateUser({ setDone }) {
                             type="text"
                             placeholder="Lien de prise de rendez-vous"
                         />
+                        </div>
                         <div className={classes.btnsContainer}>
                             <Button
                                 disabled={
