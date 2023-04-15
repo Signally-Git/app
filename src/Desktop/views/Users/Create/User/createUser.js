@@ -339,8 +339,9 @@ export default function CreateUser({ setDone }) {
                                 setUser({ ...user, phone: e.target.value })
                             }
                             type="text"
-                            placeholder="Téléphone"
+                            placeholder="Mobile"
                         />
+                        {/* Todo: add a Phone number - default is organisation's */}
                         <Input
                             style={{ width: "100%" }}
                             onChange={(e) =>
