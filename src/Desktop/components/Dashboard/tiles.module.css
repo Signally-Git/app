@@ -136,6 +136,9 @@
 .deploy:hover > .onUnHover {
   display: none;
 }
+.deploy * {
+  color: #FFFFFF !important;
+}
 
 @keyframes flash {
   from, 50%, to {
