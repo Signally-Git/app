@@ -25,7 +25,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
   box-sizing: border-box;
   min-width: 100%;
   width: 100%;
@@ -74,10 +74,10 @@
 
 .btnsContainer {
   display: flex;
+  gap: 0.5rem;
   flex-direction: row-reverse;
   align-items: center;
   justify-content: space-between;
-  position: absolute;
   margin: auto;
   inset: 0;
   top: auto;

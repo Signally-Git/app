@@ -977,9 +977,11 @@ export default function Tab({
                 </div>
                 <ul className={`${classes.itemsList} ${classes.teamList}`}>
                     <form
-                        onChange={(e) =>
+                        onSubmit={(e) => e.preventDefault()}
+                        onChange={(e) => {
                             e.target.type === "radio" &&
-                            setSelected(JSON.parse(e.target.value))
+                            setSelected(JSON.parse(e.target.value));
+                        }
                         }
                     >
                         {teams?.map((team, index) => {

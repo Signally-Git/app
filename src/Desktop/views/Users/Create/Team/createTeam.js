@@ -21,6 +21,8 @@ export default function CreateTeam({ setDone }) {
     const notification = useNotification();
 
     const handleSave = async () => {
+        if (!teamName)
+            return;
         const req =
             workplace !== "Aucun groupe" && workplace !== ""
                 ? {
@@ -40,7 +42,6 @@ export default function CreateTeam({ setDone }) {
                 status: "invalid",
             })
         );
-        console.log(create);
         create?.data &&
             notification({
                 content: (
@@ -147,6 +148,7 @@ export default function CreateTeam({ setDone }) {
                         <div className={classes.btnsContainer}>
                             <Button
                                 width={width}
+                                disabled={teamName.length < 1}
                                 color="orangeFill"
                                 color={
                                     teamName.length < 1
@@ -157,9 +159,6 @@ export default function CreateTeam({ setDone }) {
                                     handleSave();
                                     handleSlide(e, 3);
                                 }}
-                                className={`${classes.btn} ${
-                                    teamName.length < 1 ? classes.disabled : ""
-                                }`}
                             >
                                 Valider
                             </Button>

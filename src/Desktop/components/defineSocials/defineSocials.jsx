@@ -181,7 +181,7 @@ export default function DefineSocials({ setList, defaultValue }) {
                                 >
                                     {social?.image ? (
                                         <img
-                                            alt={social?.name.toString()}
+                                            alt={social?.name?.toString()}
                                             src={social?.image}
                                         />
                                     ) : (

@@ -392,14 +392,14 @@ function Informations() {
                                     />
                                 </div>
                             </div>
-                            <div className={classes.inputContainer}>
-                                <label>Adresse mail administrateur</label>
+                            {!organisation?.azure && <div className={classes.inputContainer}>
+                                <label>Adresse mail administrateur Google</label>
                                 <Input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
-                            </div>
+                            </div>}
                             <div className={classes.socialsContainer}>
                                 <CompanyCustomization
                                     wpName={wpName}
