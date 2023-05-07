@@ -1,0 +1,38 @@
+@import "../../../Assets/style/colors";
+
+.container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 20px;
+    position: relative;
+    h4 {
+        color: $signally-orange;
+        margin-top: 0;
+    }
+    h3 {
+        margin: 0;
+    }
+    div {
+        margin: 1.5rem 0;
+        span {
+            font-size: 0.9rem;
+        }
+    }
+    img {
+        position: absolute;
+        right: -2rem;
+        top: -2rem;
+        transform: scaleX(-1);
+    }
+}
+
+.totalPrice {
+    border-radius: 100px;
+    background: $signally-brown;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    max-width: 9rem;
+}

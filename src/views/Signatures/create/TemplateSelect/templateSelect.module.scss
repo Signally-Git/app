@@ -1,0 +1,292 @@
+@import "../../../../Assets/style/colors";
+
+.modal {
+    h1 {
+        color: $signally-brown;
+    }
+    > span {
+        margin: auto;
+    }
+    width: 100%;
+    margin-left: 3rem;
+    height: 100%;
+    padding-left: 1rem;
+    max-height: 80vh;
+    background-color: #f5eef0;
+    display: flex;
+    flex-direction: column;
+    .searchContainer {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        border-radius: 20px;
+    }
+    input {
+        padding: 3rem 10rem;
+        width: 100%;
+        text-indent: 1rem;
+        height: 3rem;
+        font-size: 0.9rem;
+        color: grey;
+        border-radius: 30px;
+        background: transparent;
+        border: none;
+        &:focus {
+            border: none;
+            outline: none;
+        }
+    }
+    form {
+        margin-right: auto;
+        width: 100%;
+    }
+    > button {
+        cursor: pointer;
+        margin-right: auto;
+        margin-left: 0;
+        padding: 0;
+    }
+    .orientationContainer {
+        width: 100%;
+    }
+    .orientationContainer form {
+        display: flex;
+        margin-top: 3rem;
+        margin-left: 2px;
+        align-items: center;
+        input {
+            width: 10px;
+        }
+        label {
+            margin-right: 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            color: $signally-brown;
+            line-height: 1.65rem;
+            text-indent: 0.35rem;
+        }
+    }
+    .tagsContainer {
+        display: flex;
+        align-items: center;
+        input {
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+    }
+    .tagsContainer .otherTags,
+    .studioStore {
+        padding: 0;
+        height: 1.5rem;
+        display: flex;
+        list-style: none;
+        font-size: 0.7rem;
+        li {
+            position: relative;
+            transition: 0.2s;
+            text-transform: uppercase;
+            border-radius: 20px;
+            border: 1px solid $signally-brown;
+            color: $signally-brown;
+            padding: 0.25rem 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin: 0 0.5rem;
+            &::before {
+                content: "";
+                display: block;
+            }
+            &:hover {
+                background: $signally-brown;
+                color: #fff;
+                cursor: pointer;
+            }
+        }
+        .active {
+            font-weight: bold;
+            background: $signally-brown;
+            color: #fff;
+        }
+    }
+    .otherTagsContainer {
+        display: flex;
+        align-items: center;
+        svg {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    }
+    .otherTags {
+        max-height: 2rem;
+        margin: 0;
+        margin-right: auto;
+        flex-wrap: nowrap;
+        display: flex;
+        overflow: auto;
+        overflow-y: hidden;
+        padding-bottom: 1rem;
+        &::-webkit-scrollbar {
+            background: transparent;
+            height: 0;
+        }
+    }
+    .studioStore {
+        & li:first-child {
+            margin-left: 0;
+        }
+        .studio,
+        .store {
+            color: $signally-orange;
+            border-color: $signally-orange;
+            &:hover {
+                background-color: $signally-orange;
+            }
+            input {
+                cursor: pointer;
+            }
+        }
+        .activeStudio {
+            background-color: $signally-orange !important;
+            color: #fff;
+        }
+    }
+    h5 {
+        color: $signally-brown;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+    .templatesContainer {
+        margin-bottom: -2rem;
+        padding: 0;
+        list-style: none;
+        width: 100%;
+        max-height: 65vh;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        overflow: auto;
+        input {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            &:hover {
+                cursor: pointer !important;
+            }
+        }
+        li {
+            padding: 1rem;
+            position: relative;
+            border-radius: 20px;
+            background-color: #fff;
+            transition: border-color 0.3s;
+            border: 1px solid transparent;
+            margin-right: 2rem;
+            margin-bottom: 2rem;
+            &:hover {
+                p {
+                    color: $signally-orange;
+                }
+                border-color: $signally-orange;
+                // box-shadow: 0 0 20px rgba(112, 112, 112, 0.6);
+            }
+            // width: 17rem;
+            // height: 10rem;
+        }
+    }
+}
+
+.templateName {
+    margin-top: 0;
+    transition: color 0.3s;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.btnBackTemplate {
+    cursor: pointer;
+    transition: 0.2s;
+    margin-bottom: 1rem;
+    display: flex;
+    margin-left: auto;
+    justify-content: space-evenly;
+    border: none;
+    font-weight: bold;
+    font-size: 1rem;
+    color: $signally-brown;
+    background: none;
+    &:hover {
+        color: $signally-orange;
+    }
+    svg {
+        font-size: 1.2rem;
+        margin-left: 0.65rem;
+    }
+}
+
+.btnBackTemplate {
+    svg {
+        margin-left: 0;
+        margin-right: 0.65rem;
+    }
+}
+
+.filters {
+    display: flex;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    gap: 0.5rem;
+}
+
+.filter {
+    label {
+        transition: 200ms;
+        font-size: 0.9rem;
+
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        color: $signally-brown;
+        border: 1px solid $signally-brown;
+        border-radius: 20px;
+        &:hover {
+            color: $signally-orange;
+            border-color: $signally-orange;
+        }
+    }
+    input:checked ~ label {
+        color: #fff;
+        border-color: $signally-orange;
+        background: $signally-orange;
+    }
+}
+
+.loading {
+    margin: auto;
+    animation: rotate 1s infinite ease;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+.btnContainer button {
+    margin-right: auto;
+    margin-left: 0;
+    margin-top: 3rem;
+}

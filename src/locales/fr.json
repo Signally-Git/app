@@ -1,0 +1,350 @@
+{
+    "dashboard": "Tableau de bord",
+    "statistics": "Statistiques",
+    "signatures": "Signatures",
+    "teams": "Équipes",
+    "workplaces": "Bureaux",
+    "employees": "Collaborateurs",
+    "events": "Campagnes",
+    "account": "Compte",
+    "logo": "Logo",
+
+    "event": "Campagne",
+    "event_playlist_title": "Programmer la diffusion de plusieurs events",
+    "edit_event": "Modifier la campagne {event}",
+    "create_event": "Créer une campagne",
+    "add_playlist": "Ajouter une playlist",
+    "event_name": "Nom de la campagne",
+    "event_search": "Rechercher une campagne",
+    "past": "Passé",
+    "present": "En cours",
+    "future": "À venir",
+    "start_date_placeholder": "Date et heure de début",
+    "end_date_placeholder": "Date et heure de fin",
+    
+    "vcard": "vCard",
+    "greetings": "Salutations",
+    "calendar": "Prise de rendez-vous",
+    "disclaimer": "Disclaimer",
+    "color": "Couleur",
+    "custom": "Personnalisation",
+    "size": "Taille",
+    "billing": "Abonnement",
+    "free": "Gratuit",
+
+    "socials": {
+        "title": "Réseaux sociaux",
+        "link_placeholder": "URL",
+        "icon_placeholder": "Icône personnalisée"
+    },
+    
+    "address": "Adresse",
+    "city": "Ville",
+    "zipcode": "Code postal",
+    "country": "Pays",
+    "phone": "Téléphone",
+    "website": "Site internet",
+    "company": "Société",
+    "siren": "SIREN",
+    "number_of_employees": "Nombre de collaborateurs",
+
+    "enter_password": "Entrez votre mot de passe",
+    "password": "Mot de passe",
+    "reset_password": "Réinitialisez votre mot de passe",
+    "new_password": "Nouveau mot de passe",
+    "check_passwords": "Vérifiez que les mots de passe correspondent",
+    "confirm_new_password": "Confirmer mot de passe",
+    "reset_password.thanks": "Merci.",
+    "reset_password.password_reset": "Votre mot de passe a bien été réinitialisé.",
+    "reset_password.redirect": "Redirection vers la page de connexion...",
+    
+    "add_blank": "Ajouter des",
+    "members": "{count, plural, =0 {membre} one {membre} other {membres}}",
+    "search": "Rechercher",
+    "workplace_name": "Nom du workplace",
+    "team_name": "Nom de l'équipe",
+    
+    "workplaces_description": " Administrez les signatures de vos équipes par pays, villes, filiales, départements etc. selon la structure de votre organisation.",
+    "teams_description": "Créez vos équipes (Marketing, Vente, Corporate, Design, etc.). Ajoutez les membres de chaque équipe et associez leur une signature de mail spécifique.",
+    "users_description": " Ajoutez l’ensemble de vos collaborateurs par l’import d’un simple fichier CSV ou manuellement.",
+    
+    "no_workplace": "Aucun groupe",
+    "no_team": "Aucune équipe",
+    "roles": {
+        "user": "Utilisateur",
+        "rh": "RH",
+        "administrator": "Administrateur"
+    },
+    
+    "code": "code",
+    "forgotten_password": "Mot de passe oublié",
+    "firstname": "Prénom",
+    "lastname": "Nom",
+    "position": "Poste / Fonction",
+    "mobile": "Téléphone mobile",
+    "link": "Lien",
+    "url_agenda": "Lien de prise de rendez-vous",
+    "email": "Email",
+
+    "signature": {
+        "title": "Signature",
+        "number": "{count, plural, =0 {Aucune signature} one {# signature} other {# signatures}}",
+        "options": {
+            "spacing": "Espacement",
+            "background_color": "Couleur de fond"
+        },
+        "choose": "Choisissez une signature",
+        "event_or_playlist": "Ajouter un event ou une playlist",
+        "active_for": "Signature active pour ",
+        "name_signature": "Donner un nom à cette signature",
+        "create": "Créer une signature",
+        "edit": "Modifier",
+        "template_select": {
+            "title": "Choisissez votre modèle de signature",
+            "public": "Public",
+            "private": "Privé",
+            "no_template": "Aucun modèle disponible. Veuillez contacter votre administrateur Signally."
+        },
+        "spacing": "Espacement"
+    },
+    
+    "statistic": {
+        "no_event": "Aucune campagne disponible.",
+        "no_signature": "Aucune signature disponible."
+    },
+
+    "profile": {
+        "title": "Profil",
+        "company": {
+            "title": "Société",
+            "name": "Nom de l'entreprise"
+        },
+        "informations": {
+            "title": "Informations du profil",
+            "custom_labels": "Personnalisation des libellés",
+            "google_email_address": "Adresse mail de l'administrateur Google",
+            "lang": "Langue"
+        }
+    },
+    
+    "company_informations_title": "Informations de la société",
+    "style": "Style",
+    "options": "Options",
+    "style_size_text": "Style et taille du texte",
+
+    "copy": "Copier",
+    "templates": "modèles",
+    "add_signature": "Ajouter une signature",
+    "search_signature": "Rechercher une signature",
+    "copySignature": "Copiez votre signature",
+    "signatureCopied": "Signature copiée",
+
+    "activated": {
+        "male": "{count, plural, =0 {actif} one {actif} other {actifs}}",
+        "female": "{count, plural, =0 {active} one {actives} other {actives}}"
+    },
+    "deploy": {
+        "title": "Déploiement",
+        "cta": "Déployer",
+        "send_mail": {
+            "title": "Envoyer le lien par mail à tous les collaborateurs",
+            "description": "Le déploiement permet à vos collaborateurs de copier directement leur signature dans leur client mail (mobile ou desktop)"
+        }
+    },
+
+    "signup": {
+        "magic_link": "Pour récupérer votre signature et pouvoir la modifier vous devez vous connecter à Signally",
+        "no_mail": "Vous n’avez pas reçu de mail ?",
+        "check_email": "Vérifiez votre adresse mail",
+        "congratulations": "Félicitations {firstname}.",
+        "accountCreated": "Votre compte a bien été créé.",
+        "checkMail": "Veuillez maintenant consulter votre boite mail et cliquer sur le lien de connexion.",
+        "mailNotReceived": "Le mail n'apparaît pas dans votre boîte de réception ? Merci de vérifier dans vos messages indésirables.",
+        "number_of_employees_options": {
+            "1-5": "1 à 5",
+            "5-20": "5 à 20",
+            "20-50": "20 à 50",
+            "50-100": "50 à 100",
+            "100+": "100+"
+        }
+    },
+
+    "welcome": {
+        "welcome": "Bienvenue",
+        "title": "Bienvenue sur la Beta privée Signally !",
+        "intro": "Nous sommes très heureux de vous compter parmi nos premiers utilisateurs.",
+        "description1": "Avec vous, nous souhaitons faire de Signally, l’application la plus intuitive et la plus innovante du marché tout en répondant au mieux à vos objectifs de communication et de marketing.",
+        "description2": "Comme nous sommes en version Beta, tout n’est pas encore parfait ! Néanmoins, grâce à vous, nous pourrons rendre la plateforme de plus en plus performante et encore plus simple à utiliser.",
+        "thanks": "Un grand merci pour votre aide.",
+        "signature": "-- L'équipe Signally"
+    },
+    
+    "feedback" : {
+        "title": "Retour d'expérience",
+        "tagline": "Bienvenue sur la Beta privée Signally !",
+        "text1": "Comme nous sommes en version Beta, tout n’est pas encore parfait !",
+        "text2": "Néanmoins, grâce à vous, nous pourrons rendre la plateforme de plus en plus performante et encore plus simple à utiliser.",
+        "formHeader": "Type du problème, commentaire, suggestion",
+        "selectPlaceholder": "Sélectionnez une option...",
+        "bugHeader": "Type de problème",
+        "bugPlaceholder": "Bonjour, comme vous pouvez le voir sur cette image en PJ, le logo de l'entreprise ne s'affiche pas sur Outlook.",
+        "attachmentHeader": "Pièce jointe (capture d'écran, fichier d'import corrompu...)",
+        "attachmentPlaceholder": "Importer un fichier",
+        "submitButton": "Envoyer le formulaire"
+    },
+    
+    "onboarding": {
+        "congratulations": "Félicitations",
+        "congratulations_description": "Vous avez complété votre profil Signally avec succès.",
+        "complete": "Votre profil contient toutes les informations nécessaires aux templates des signatures.",
+        "completed": {
+            "plugins": {
+                "generic": "Les deux plugins sont installés.",
+                "google": "Le plugin Google est installé.",
+                "office365": "Le plugin Outlook 365 est installé."
+            },
+            "events": "Vous avez actuellement créé {events, plural, one {# campagne} other {# campagnes}}.",
+            "employees": "Vous avez déjà importé des collaborateurs.",
+            "signature": "Vous avez déjà créé une première signature ! Vous pouvez y accéder dans l'onglet \"Signatures\"."
+        },
+        "missing": {
+            "plugins": {
+                "generic": "Installez le plugin Signally sur Office 365 Azure ou Gmail."
+            },
+            "events": "Vous n'avez pas encore créé d'event. Cliquez ci-dessous pour en ajouter et programmer des campagnes de promotion",
+            "employees": "Vous n'avez pas encore importé d'autres collaborateurs. Cliquez ci-dessous pour en ajouter et commencer à gérer vos équipes",
+            "signature": "Vous n'avez pas encore créé de signature. Cliquez ci-dessous pour en ajouter une !"
+        },
+        "missing_informations": "Vous n'avez pas renseigné toutes les informations requises par certaines templates de signature "
+    },
+    
+    "report": {
+        "private_beta": "Beta privée",
+        "bug": "Signaler un bug"
+    },
+
+    "sign_in": "Connexion",
+    "sign_up": "Inscription",
+    "loading": "Chargement",
+    "logout": "Déconnexion",
+
+    "buttons": {
+        "placeholder": {
+            "confirm": "Valider",
+            "save": "Sauvegarder",
+            "end": "Terminer",
+            "send": "Envoyer",
+            "add": "Ajouter",
+            "add_all": "Ajouter tout",
+            "skip": "Passer cette étape",
+            "edit_profile": "Éditer mon profil",
+            "reset": "Réinitialiser",
+            "delete": "Supprimer",
+            "delete_all": "Supprimer tout",
+            "cancel": "Annuler",
+            "reset_password": "Réinitialiser mon mot de passe",
+            "report_bug": "Signaler un problème",
+            "send_mail": "Envoyer le mail",
+            "complete_profile": "Compléter mon profil",
+            "sign_up": "S'inscrire",
+            "create_signature": "Créer une signature",
+            "choose_template": "Choisir un modèle de signature",
+            "edit_signatures": "Gérer mes signatures",
+            "create_employees": "Ajouter des collaborateurs",
+            "edit_employees": "Gérer mes collaborateurs",
+            "edit_events": "Gérer mes campagnes",
+            "unassign_all": "Retirer tout",
+            "unassign_child_from_parent": "Retirer {child} dans {parent}",
+            "create_events": "Ajouter une campagne",
+            "restart_onboarding": "Relancer l'onboarding",
+            "magic_link": "Envoyez moi un Magic Link",
+            "sign_in": "Se connecter",
+            "manual": "Manuellement",
+            "from_csv": "A partir d'un fichier .csv",
+            "import": {
+                "logo": "Importer un logo",
+                "image": "Importer une image",
+                "banner": "Importer une bannière",
+                "other_banner": "Importer une autre bannière"
+            }
+        }
+    },
+
+    "import": {
+        "title": "Import",
+        "pending": "Import en cours",
+        "failed": "Échec de l'import",
+        "success": "Importé"
+    },
+    "google": {
+        "connection": {
+            "none": "Non connecté",
+            "connected": "Connecté",
+            "check": "Vérifier connexion"
+        }
+    },
+    "office": {
+        "connection": {
+            "none": "Non connecté",
+            "connected": "Déployé",
+            "check": "Vérifier connexion"
+        }
+    },
+
+    "message": {
+        "warning": {
+            "delete": "Vous allez supprimer",
+            "report": "Vous n'avez pas rempli le formulaire",
+            "wrong_event_link": "Le lien de l'évènement doit être formatté avec un \"https://liendelevenement\"",
+            "no_event_name": "Veuillez remplir le nom de l'event"
+        },
+        "error": {
+            "404": {
+                "title": "404 - Page non trouvée",
+                "description": "Il semblerait que cette page soit indisponible."
+            },
+            "teams": {"part1": "L'équipe", "part2":  "n'a pas pu être créée"},
+            "generic": "Une erreur est survenue. Veuillez réessayer",
+            "logo": "Erreur lors de l'import du logo.",
+            "image": "Erreur lors de l'import de l'image.",
+            "edit": "Impossible d'éditer",
+            "add": "Erreur lors de l'ajout de",
+            "delete": "Impossible de supprimer",
+            "invalid_email": "Le format d'email n'est pas valide",
+            "email": "Veuillez vérifier votre adresse mail",
+            "siren": "Veuillez vérifier votre SIREN",
+            "company_already_created": "Cette société est déjà enregistrée sur Signally",
+            "user_already_created": "Cet utilisateur est déjà enregistré sur Signally",
+            "invalid_user_email": "ne semble pas être une adresse mail valide",
+            "credentials": "Email ou mot de passe invalide",
+            "report": "Une erreur s'est produite lors de l'envoi du formulaire"
+        },
+        "success": {
+            "signature": {
+                "delete": "La signature a bien été supprimée",
+                "edit_part1": "Votre signature",
+                "edit_variant1": "Signature de",
+                "edit_part2": "a été modifiée avec succès"
+            },
+            "teams": {
+                "edit_part1": "L'équipe ",
+                "edit_part2": "a été créée avec succès"
+            },
+            "users": {
+                "edit_part1": "Le collaborateur ",
+                "edit_part2": "a été créé avec succès"
+            },
+            "report": "Votre formulaire a bien été envoyé",
+            "sign_up": {
+                "part1": "Un message a été envoyé à",
+                "part2": " avec un lien pour réinitialiser votre mot de passe.",
+                "magic_link": "Un code vous à été envoyé à l’adresse : {email}"
+            },
+            "added": "Ajouté",
+            "removed": "Retiré",
+            "delete": "supprimé avec succès",
+            "created": "créé avec succès",
+            "edit": "édité avec succès"
+        }
+    }
+}
