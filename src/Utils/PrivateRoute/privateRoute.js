@@ -1,4 +1,4 @@
-import Frame from "Desktop/components/Frame/frame";
+import Frame from "components/Frame/frame";
 import { useState } from "react";
 import { Redirect, Route } from "react-router";
 import { NotificationProvider } from "Utils/Notifications/notifications";

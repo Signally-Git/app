@@ -1,0 +1,96 @@
+@import "../../../Assets/style/colors";
+
+.container {
+    width: 100%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    > h5 {
+        text-transform: uppercase;
+        text-align: left;
+        margin: 0;
+        .orangeTxt {
+            color: $signally-orange;
+        }
+    }
+    > p {
+        font-size: 1rem;
+    }
+}
+
+.swiperContainer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.disabled {
+    opacity: 0.3;
+}
+
+.enabled {
+    opacity: 1;
+}
+
+.active {
+    opacity: 1;
+    color: $signally-orange;
+}
+
+.menuLinks {
+    padding: 0;
+    width: calc(25% - 2rem);
+    height: 7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    list-style: none;
+    li {
+        display: flex;
+        svg {
+            margin-left: 0.5rem;
+        }
+        font-weight: 600;
+        font-size: 0.9rem;
+        &:hover {
+            opacity: 1;
+            color: $signally-orange;
+            cursor: pointer;
+        }
+    }
+}
+
+.swiper {
+    position: relative;
+    max-height: 10rem;
+    height: 10rem;
+}
+
+.btnsContainer {
+    position: absolute;
+    bottom: 0;
+    left: 2rem;
+    display: flex;
+    margin-top: auto;
+    gap: 1rem;
+    margin-right: auto;
+    :first-child {
+        margin-left: 0;
+    }
+}
+
+.content {
+    font-size: 0.9rem;
+    max-height: 12rem;
+    padding: 1.5rem calc(25% - 2rem) 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    > button {
+        margin-left: 0;
+        position: absolute;
+        bottom: 0;
+        left: 2rem;
+        display: flex;
+        margin-top: auto;
+    }
+}
