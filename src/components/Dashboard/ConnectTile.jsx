@@ -1,13 +1,15 @@
 import { Tile } from "./Tile";
 import { FcGoogle } from "react-icons/fc";
+import { MdCloudSync } from "react-icons/md";
 import Outlook from "../../Assets/icons/outlook.svg";
 import request from "../../Utils/Request/request";
 import { useState } from "react";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 export const ConnectTile = ({ organisation }) => {
     const [connectionStatus, setConnectionStatus] = useState(null);
     const [importStatus, setImportStatus] = useState(null);
+    const intl = useIntl();
 
     const importUsers = async () => {
         setImportStatus(<FormattedMessage id="import.pending" />);
@@ -62,6 +64,7 @@ export const ConnectTile = ({ organisation }) => {
     };
 
     if (organisation?.google === true) {
+        fetchGoogleStatus();
         return (
             <Tile
                 link={"#"}
@@ -69,8 +72,21 @@ export const ConnectTile = ({ organisation }) => {
                     <>
                         <FcGoogle /> Gmail <span></span>
                         {importStatus || (
-                            <button onClick={importUsers}>
-                                <FormattedMessage id="import.title" />
+                            <button
+                                style={{
+                                    cursor: "pointer",
+                                    border: "none",
+                                    background: "none",
+                                }}
+                                title={intl.formatMessage({
+                                    id: "import.title",
+                                })}
+                                onClick={importUsers}
+                            >
+                                <MdCloudSync
+                                    style={{ verticalAlign: "bottom" }}
+                                    fontSize={"1.5rem"}
+                                />
                             </button>
                         )}
                     </>
