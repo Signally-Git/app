@@ -152,6 +152,9 @@
         }
     },
 
+    "signin": {
+        "connect_to": "Connectez-vous à votre espace"
+    },
     "signup": {
         "magic_link": "Pour récupérer votre signature et pouvoir la modifier vous devez vous connecter à Signally",
         "no_mail": "Vous n’avez pas reçu de mail ?",

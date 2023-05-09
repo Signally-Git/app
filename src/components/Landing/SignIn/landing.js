@@ -288,7 +288,7 @@ const Login = () => {
                         >
                             <div className={classes.formContainer}>
                                 <h2>
-                                    Connectez-vous à votre espace{" "}
+                                    <FormattedMessage id="signin.connect_to" />{" "}
                                     <span>Signally</span>
                                 </h2>
                                 <form onSubmit={(e) => handleSubmit(e)}>
@@ -319,7 +319,7 @@ const Login = () => {
                                         type="submit"
                                         arrow
                                     >
-                                        Connexion
+                                        <FormattedMessage id="buttons.placeholder.sign_in" />
                                     </Button>
                                 </form>
                             </div>

@@ -150,7 +150,9 @@
                 "description": "Deployment allows your employees to directly copy their signature in their mail client (mobile or desktop)"
             }
         },
-
+            "signin": {
+                "connect_to": "Connect to"
+            },
         "signup": {
             "magic_link": "To retrieve your signature and be able to modify it, you must log in to Signally",
             "no_mail": "Didn't receive an email?",
