@@ -316,7 +316,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                                     className={
                                                         classes.bannerPreview
                                                     }
-                                                    src={`${process.env.REACT_APP_API_URL}/${event.imageUrl}`}
+                                                    src={event.imageUrl}
                                                 />
                                                 <div
                                                     className={
@@ -346,7 +346,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                                                 )
                                                                 .local(false)
                                                                 .format(
-                                                                    "HH:mm"
+                                                                    "DD/MM"
                                                                 )}`}</span>
                                                             <span>{`au ${moment
                                                                 .utc(
@@ -354,8 +354,8 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                                                 )
                                                                 .local(false)
                                                                 .format(
-                                                                    "HH:mm"
-                                                                )}}`}</span>
+                                                                    "D/MM"
+                                                                )}`}</span>
                                                         </div>
                                                         <div
                                                             className={
