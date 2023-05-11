@@ -1,5 +1,5 @@
 import classes from "../create/createSignature.module.css";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import Options from "../create/Options/options";
 import Infos from "../create/Infos/infos";
 import TemplateSelection from "../create/TemplateSelect/templateSelect";
@@ -7,17 +7,18 @@ import Preview from "../create/Preview/customizablePreview";
 import { BsArrowRight } from "react-icons/bs";
 import Button from "Utils/Button/btn";
 import Input from "Utils/Input/input";
-import { useHistory, useParams } from "react-router";
+import { useHistory, useParams } from "react-router-dom";
 import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
 import { TokenService } from "Utils";
 import {
     defaultOptions,
+    defaultValues,
     getStyles,
-    handleSave,
 } from "../create/createSignature.utils";
 import { FormattedMessage } from "react-intl";
+import { extractStyle, extractValue } from "./editSignature.utils";
 
 // Component handling the modification of signature, selection of template
 
@@ -25,7 +26,7 @@ function EditSignatureComponent() {
     const { signatureId } = useParams();
     const user = TokenService.getUser();
     const company = TokenService.getOrganisation();
-    const [events] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [selectedTemplate, setSelectedTemplate] = useState();
     const [defaultStyles, setDefaultStyles] = useState();
     const history = useHistory();
@@ -35,384 +36,96 @@ function EditSignatureComponent() {
     // Used to handle transition
     const elem = useRef(null);
     const [templates, setTemplates] = useState(false);
-    const [signatureInfo, setSignatureInfo] = useState({
-        logo: company?.logo,
-        firstName: {
-            value: user?.first_name,
-            color: defaultStyles?.filter((style) => style.type === "firstName")
-                .color,
-            style: {
-                fontWeight: defaultStyles?.filter(
-                    (style) => style.type === "firstName"
-                ).fontWeight,
-                fontStyle: defaultStyles?.filter(
-                    (style) => style.type === "firstName"
-                ).fontStyle,
-                textDecoration: defaultStyles?.filter(
-                    (style) => style.type === "firstName"
-                ).textDecoration,
-            },
-        },
-        lastName: {
-            value: user?.last_name,
-            color: "#000",
-            style: { fontWeight: "bold" },
-        },
-        jobName: { value: user?.position, color: "#000", style: {} },
-        company: {
-            value: company?.name,
-            color: "#000",
-            style: { fontWeight: "bold" },
-        },
-        addressStreet: { value: company?.street, color: "#000", style: {} },
-        addressInfo: { value: company?.streetInfo, color: "#000", style: {} },
-        addressZipcode: { value: company?.zipCode, color: "#000", style: {} },
-        addressCity: { value: company?.city, color: "#000", style: {} },
-        addressCountry: { value: company?.country, color: "#000", style: {} },
-        mobile: { value: user?.phone_number, color: "#000", style: {} },
-        phone: { value: company?.phone_number, color: "#000", style: {} },
-        fontSize: [11],
-        fontFamily: "Arial",
-    });
+    const [signatureInfo, setSignatureInfo] = useState(
+        defaultValues(company, user)
+    );
     const [signatureOption, setSignatureOption] = useState(defaultOptions());
     const [modal, setModal] = useState(false);
     const [modalContent, setModalContent] = useState();
     const [signatureName, setSignatureName] = useState("");
 
-    useEffect(() => {
-        const getSignatureFromId = async () => {
-            await request.get("signatures/" + signatureId).then(async (res) => {
-                setSelectedTemplate(res.data.signatureTemplate);
-                setDefaultStyles(res.data.signatureStyles);
-                setSignatureName(res.data.name);
-            });
-        };
-        getSignatureFromId();
-    }, []);
-
-    const [templateRules] = useState({
-        fontSize: { min: 9, max: 13, step: 1 },
-    });
-
-    const handlePopulate = () => {
+    const handlePopulate = (styles) => {
         setSignatureInfo({
             logo: company?.logo,
             firstName: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "firstName" && style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "firstName" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "firstName" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "firstName" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
+                color: extractValue(styles, "firstName", "color"),
+                style: extractStyle(styles, "firstName"),
             },
             lastName: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "lastName" && style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "lastName" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "lastName" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "lastName" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
+                color: extractValue(styles, "lastName", "color"),
+                style: extractStyle(styles, "lastName"),
             },
             jobName: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "jobName" && style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "jobName" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "jobName" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "jobName" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
+                color: extractValue(styles, "jobName", "color"),
+                style: extractStyle(styles, "jobName"),
             },
             company: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "companyName" &&
-                        style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "companyName" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "companyName" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "companyName" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
+                color: extractValue(styles, "companyName", "color"),
+                style: extractStyle(styles, "companyName"),
             },
             addressStreet: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "addressStreet" &&
-                        style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressStreet" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressStreet" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressStreet" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
+                color: extractValue(styles, "addressStreet", "color"),
+                style: extractStyle(styles, "addressStreet"),
             },
             addressInfo: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "addressInfo" &&
-                        style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressInfo" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressInfo" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressInfo" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
+                color: extractValue(styles, "addressInfo", "color"),
+                style: extractStyle(styles, "addressInfo"),
             },
             addressZipcode: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "addressZipcode" &&
-                        style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressZipcode" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressZipcode" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressZipcode" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
+                color: extractValue(styles, "addressZipcode", "color"),
+                style: extractStyle(styles, "addressZipcode"),
             },
             addressCity: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "addressCity" &&
-                        style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressCity" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressCity" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressCity" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
+                color: extractValue(styles, "addressCity", "color"),
+                style: extractStyle(styles, "addressCity"),
             },
             addressCountry: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "addressCountry" &&
-                        style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressCountry" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressCountry" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "addressCountry" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
+                color: extractValue(styles, "addressCountry", "color"),
+                style: extractStyle(styles, "addressCountry"),
             },
             mobile: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "mobile" && style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "mobile" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "mobile" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "mobile" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
+                color: extractValue(styles, "mobile", "color"),
+                style: extractStyle(styles, "mobile"),
             },
             phone: {
-                value: user?.first_name,
-                color: defaultStyles?.filter(
-                    (style) =>
-                        style.type === "phone" && style.property === "color"
-                )[0].value,
-                style: {
-                    fontWeight: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "phone" &&
-                            style.property === "fontWeight"
-                    )[0].value,
-                    fontStyle: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "phone" &&
-                            style.property === "fontStyle"
-                    )[0].value,
-                    textDecoration: defaultStyles?.filter(
-                        (style) =>
-                            style.type === "phone" &&
-                            style.property === "textDecoration"
-                    )[0].value,
-                },
+                color: extractValue(styles, "phone", "color"),
+                style: extractStyle(styles, "phone"),
             },
             fontSize: [
-                defaultStyles?.filter(
-                    (style) =>
-                        style.type === "generalFontSize" &&
-                        style.property === "fontSize"
-                )[0].value || 11,
+                extractValue(styles, "generalFontSize", "fontSize") || 11,
             ],
             fontFamily:
-                defaultStyles?.filter(
-                    (style) =>
-                        style.type === "generalFontFamily" &&
-                        style.property === "fontFamily"
-                )[0].value || "Helvetica",
+                extractValue(styles, "generalFontFamily", "fontFamily") ||
+                "Helvetica",
         });
-
         setSignatureOption({
             salutation: {
                 value:
-                    defaultStyles?.filter(
+                    styles?.filter(
                         (style) => style.type === "greetingsValue"
                     )[0]?.value || "Cordialement,",
                 enabled:
-                    defaultStyles?.filter(
+                    styles?.filter(
                         (style) => style.type === "greetingsEnabled"
                     )[0]?.value !== "false",
-                padding: defaultStyles?.filter(
+                padding: styles?.filter(
                     (style) => style.type === "greetingsPadding"
                 )[0].value,
             },
             custom: { enabled: false },
             eco: { value: "Ecoresponsability", enabled: false },
             followUs: { value: "Follow us", enabled: false },
-            bgColor: defaultStyles?.filter(
-                (style) =>
-                    style.type === "divColor" && style.property === "color"
-            )[0].value,
+            bgColor: extractValue(styles, "divColor", "color"),
             bannerTop: { url: "test", enabled: false, padding: 10 },
             vcard: {
                 enabled:
-                    defaultStyles?.filter(
+                    styles?.filter(
                         (style) => style.type === "vCardEnabled"
                     )?.[0]?.value !== "false",
             },
             calendar: {
                 enabled:
-                    defaultStyles?.filter(
+                    styles?.filter(
                         (style) => style.type === "calendarEnabled"
                     )?.[0]?.value !== "false",
             },
@@ -420,9 +133,9 @@ function EditSignatureComponent() {
                 ...signatureOption.event,
                 display: signatureOption.event?.selected?.imageUrl,
                 enabled:
-                    defaultStyles?.filter((style) => style.type === "event")[0]
+                    styles?.filter((style) => style.type === "event")[0]
                         .value !== "false",
-                padding: defaultStyles?.filter(
+                padding: styles?.filter(
                     (style) => style.type === "eventPadding"
                 )[0].value,
             },
@@ -442,21 +155,21 @@ function EditSignatureComponent() {
             footer: {
                 maxWidth: 380,
                 color:
-                    defaultStyles?.filter(
+                    styles?.filter(
                         (style) => style.type === "disclaimerColor"
                     )[0]?.value || "#000",
                 value:
-                    defaultStyles?.filter(
+                    styles?.filter(
                         (style) => style.type === "disclaimerValue"
                     )[0]?.value || `Disclaimer`,
                 enabled:
-                    defaultStyles?.filter(
+                    styles?.filter(
                         (style) => style.type === "disclaimerEnabled"
                     )[0]?.value !== "false",
-                padding: defaultStyles?.filter(
+                padding: styles?.filter(
                     (style) => style.type === "disclaimerPadding"
                 )[0].value,
-                fontSize: defaultStyles?.filter(
+                fontSize: styles?.filter(
                     (style) => style.type === "disclaimerFontSize"
                 )[0]?.value,
             },
@@ -464,8 +177,27 @@ function EditSignatureComponent() {
     };
 
     useEffect(() => {
-        if (defaultStyles) handlePopulate();
-    }, [defaultStyles, selectedTemplate]);
+        const getSignatureFromId = async () => {
+            await request
+                .get("signatures/" + signatureId)
+                .then(async ({ data }) => {
+                    handlePopulate(data.signatureStyles);
+                    setSelectedTemplate(data.signatureTemplate);
+                    setDefaultStyles(data.signatureStyles);
+                    setSignatureName(data.name);
+                });
+        };
+        setLoading(true);
+        getSignatureFromId().then(() => setLoading(false));
+    }, []);
+
+    const [templateRules] = useState({
+        fontSize: { min: 9, max: 13, step: 1 },
+    });
+
+    // useEffect(() => {
+    //     if (defaultStyles) handlePopulate();
+    // }, [defaultStyles, selectedTemplate]);
 
     // Menu
     const [tab, setTab] = useState(true);
@@ -518,6 +250,7 @@ function EditSignatureComponent() {
                                     style={{ width: "75%" }}
                                     placeholder="Nom de la signature"
                                     type="text"
+                                    defaultValue={signatureName}
                                     onChange={(e) =>
                                         setSignatureName(e.target.value)
                                     }
@@ -548,13 +281,13 @@ function EditSignatureComponent() {
     }, [modal, signatureName]);
 
     const handleSave = async () => {
+        console.log(selectedTemplate);
         await request
             .patch(
                 `signatures/` + signatureId,
                 {
                     name: signatureName,
-                    signatureTemplate:
-                        selectedTemplate?.signatureTemplate?.["@id"],
+                    signatureTemplate: selectedTemplate["@id"],
                 },
                 {
                     headers: { "Content-Type": "application/merge-patch+json" },
@@ -1051,7 +784,8 @@ function EditSignatureComponent() {
         }
     };
 
-    useEffect(() => {
+    useMemo(() => {
+        if (loading) setPreview(<h3>Loading</h3>);
         if (signatureInfo && signatureOption && selectedTemplate?.html) {
             setPreview(
                 <Preview
@@ -1095,7 +829,9 @@ function EditSignatureComponent() {
                                 />
                                 <div className={classes.sliderTabs}></div>
                             </label>
-                            <button onClick={() => handlePopulate()}>
+                            <button
+                                onClick={() => handlePopulate(defaultStyles)}
+                            >
                                 <FormattedMessage id="buttons.placeholder.reset" />
                             </button>
                         </div>
