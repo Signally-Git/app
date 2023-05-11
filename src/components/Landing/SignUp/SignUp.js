@@ -24,7 +24,11 @@ const Signup = () => {
     const [siren, setSiren] = useState("");
     const [societyName, setSocietyName] = useState("");
     const [password, setPassword] = useState("");
-    const [nbPerson, setNbPerson] = useState();
+    const [nbPerson, setNbPerson] = useState(
+        intl.formatMessage({
+            id: "signup.number_of_employees_options.1-5",
+        })
+    );
     const [showPass, setShowPass] = useState(false);
     const [valid, setValid] = useState(false);
     const [sent, setSent] = useState(false);
