@@ -1,28 +1,28 @@
 .container {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 20px;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 20px;
 }
 .container h4 {
-    color: #ff7954;
-    margin-top: 0;
+  color: #ff7954;
+  margin-top: 0;
 }
 .container h5 {
-    margin: 0.25rem 0;
-    width: 5rem;
-    font-size: 1rem;
+  margin: 0.25rem 0;
+  width: 5rem;
+  font-size: 1rem;
 }
 .container ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 .container ul li {
-    margin: 0;
-    display: flex;
-    align-items: center;
+  margin: 0;
+  display: flex;
+  align-items: center;
 }
 .container ul li span {
-    margin-left: 0.5rem;
-    font-size: 0.9rem;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
 }
