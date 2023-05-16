@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { LangContext } from "contexts/LangContext";
 import request from "Utils/Request/request";
 
-export default function SwitchLang() {
+export default function SwitchLang({ setUserLanguage }) {
     const { locale, setLocale } = useContext(LangContext);
     const [languages, setLanguages] = useState([]);
 
@@ -16,10 +16,13 @@ export default function SwitchLang() {
         getLanguages();
     }, []);
 
-    function handleSwitch(lang) {
-        // console.log(lang);
-        setLocale(lang);
+    function handleSwitch(selectedLang) {
+        setLocale(selectedLang);
+        setUserLanguage(
+            languages.find((lang) => lang.isoCode === selectedLang)?.["@id"]
+        );
     }
+
     return (
         <CustomSelect
             getValue="isoCode"

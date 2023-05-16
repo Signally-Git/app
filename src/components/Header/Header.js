@@ -6,6 +6,7 @@ import { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { TokenService } from "Utils";
 import { FormattedMessage, useIntl } from "react-intl";
+import SwitchLang from "../../views/Profile/Informations/SwitchLang";
 
 // DATA ATTRIBUTES
 
@@ -104,6 +105,9 @@ function Header(props) {
             ) : (
                 <>
                     <ul className={`${classes.nonLogged}`}>
+                        <li>
+                            <SwitchLang />
+                        </li>
                         <li>
                             <Link to="/dashboard">
                                 <FormattedMessage id="sign_in" />

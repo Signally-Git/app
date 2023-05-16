@@ -28,6 +28,7 @@ function Informations() {
     const [lastName, setLastName] = useState(user?.lastName);
     const [position, setPosition] = useState(user?.position);
     const [mobile, setMobile] = useState(user?.phone);
+    const [language, setLanguage] = useState(user?.lang || "");
     const [urlAgenda, setUrlAgenda] = useState(user?.urlAgenda || "");
     const [socialsList, setSocialsList] = useState(
         organisation.socialMediaAccounts || []
@@ -173,6 +174,7 @@ function Informations() {
             position: position,
             phone: mobile,
             urlAgenda: urlAgenda,
+            lang: language,
         };
         await request
             .patch(`users/${user.id}`, req, {
@@ -527,7 +529,7 @@ function Informations() {
                                 <label>
                                     <FormattedMessage id="profile.informations.lang" />
                                 </label>
-                                <SwitchLang />
+                                <SwitchLang setUserLanguage={setLanguage} />
                             </div>
                         </div>
                     </>

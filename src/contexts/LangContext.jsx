@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TokenService } from "../Utils";
+import { detectBrowserLanguage, TokenService } from "Utils";
 
 export const LangContext = React.createContext();
 
@@ -18,8 +18,10 @@ function flattenMessages(nestedMessages, prefix = "") {
     }, {});
 }
 export const LangProvider = ({ children }) => {
-    console.log(TokenService.getUser());
-    const [locale, setLocale] = useState("fr");
+    const [locale, setLocale] = useState(
+        TokenService.getUser()?.lang?.isoCode || detectBrowserLanguage() || "fr"
+    );
+
     function getMessages(locale) {
         switch (locale) {
             case "fr":
