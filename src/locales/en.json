@@ -318,7 +318,8 @@
             "user_already_created": "This user is already registered on Signally",
             "invalid_user_email": "doesn't seem to be a valid email address",
             "credentials": "Invalid email or password",
-            "report": "An error occurred while submitting the form"
+            "report": "An error occurred while submitting the form",
+            "social_unknown": "{social} non reconnu. Merci de télécharger un logo personnalisé."
         },
         "success": {
             "signature": {
@@ -345,7 +346,8 @@
             "removed": "Removed",
             "delete": "deleted successfully",
             "created": "created successfully",
-            "edit": "edited successfully"
+            "edit": "edited successfully",
+            "saved": "enregistré"
         }
     }
   }
