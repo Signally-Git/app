@@ -1,4 +1,5 @@
 import classes from "./btns.module.css";
+import { FormattedMessage } from "react-intl";
 
 const { default: Button } = require("Utils/Button/btn");
 
@@ -10,10 +11,10 @@ function Buttons({ cancelTxt, confirmTxt, onCancel, onConfirm, ...props }) {
                 onClick={(e) => onConfirm(e)}
                 type="submit"
             >
-                {confirmTxt || "Confirmer"}
+                {confirmTxt || <FormattedMessage id="buttons.placeholder.save" />}
             </Button>
             <Button color={"brown"} onClick={(e) => onCancel(e)}>
-                {cancelTxt || "Annuler"}
+                {cancelTxt || <FormattedMessage id="buttons.placeholder.cancel" />}
             </Button>
         </div>
     );

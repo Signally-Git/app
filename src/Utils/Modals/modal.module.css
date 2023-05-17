@@ -1,33 +1,33 @@
 .container {
-  background: #fff;
-  box-shadow: 0 0 40px rgba(64, 41, 39, 0.3);
-  width: 60%;
-  max-height: 15rem;
-  max-width: 30rem;
-  border-radius: 20px;
-  position: absolute;
-  padding: 1rem;
-  inset: 0;
-  z-index: 10;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  left: -100%;
-  top: -25%;
-  align-items: center;
-  justify-content: space-evenly;
+    background: #fff;
+    box-shadow: 0 0 40px rgba(64, 41, 39, 0.3);
+    width: 60%;
+    max-height: 15rem;
+    max-width: 30rem;
+    border-radius: 20px;
+    position: absolute;
+    padding: 1rem;
+    inset: 0;
+    z-index: 10;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    left: -100%;
+    top: -25%;
+    align-items: center;
+    justify-content: space-evenly;
 }
 .container h3 {
-  margin: 0;
-  text-align: center;
+    margin: 0;
+    text-align: center;
 }
 
 .btnsContainer {
-  display: flex;
-  width: 70%;
-  justify-content: space-around;
+    display: flex;
+    width: 70%;
+    justify-content: space-around;
 }
 .btnsContainer button {
-  position: relative;
-  margin: 0 0.75rem;
+    position: relative;
+    margin: 0 0.75rem;
 }

@@ -1,0 +1,285 @@
+.modal {
+  width: 100%;
+  margin-left: 3rem;
+  height: 100%;
+  padding-left: 1rem;
+  max-height: 80vh;
+  background-color: #f5eef0;
+  display: flex;
+  flex-direction: column;
+}
+.modal h1 {
+  color: #402927;
+}
+.modal > span {
+  margin: auto;
+}
+.modal .searchContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 20px;
+}
+.modal input {
+  padding: 3rem 10rem;
+  width: 100%;
+  text-indent: 1rem;
+  height: 3rem;
+  font-size: 0.9rem;
+  color: grey;
+  border-radius: 30px;
+  background: transparent;
+  border: none;
+}
+.modal input:focus {
+  border: none;
+  outline: none;
+}
+.modal form {
+  margin-right: auto;
+  width: 100%;
+}
+.modal > button {
+  cursor: pointer;
+  margin-right: auto;
+  margin-left: 0;
+  padding: 0;
+}
+.modal .orientationContainer {
+  width: 100%;
+}
+.modal .orientationContainer form {
+  display: flex;
+  margin-top: 3rem;
+  margin-left: 2px;
+  align-items: center;
+}
+.modal .orientationContainer form input {
+  width: 10px;
+}
+.modal .orientationContainer form label {
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #402927;
+  line-height: 1.65rem;
+  text-indent: 0.35rem;
+}
+.modal .tagsContainer {
+  display: flex;
+  align-items: center;
+}
+.modal .tagsContainer input {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.modal .tagsContainer .otherTags,
+.modal .studioStore {
+  padding: 0;
+  height: 1.5rem;
+  display: flex;
+  list-style: none;
+  font-size: 0.7rem;
+}
+.modal .tagsContainer .otherTags li,
+.modal .studioStore li {
+  position: relative;
+  transition: 0.2s;
+  text-transform: uppercase;
+  border-radius: 20px;
+  border: 1px solid #402927;
+  color: #402927;
+  padding: 0.25rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin: 0 0.5rem;
+}
+.modal .tagsContainer .otherTags li::before,
+.modal .studioStore li::before {
+  content: "";
+  display: block;
+}
+.modal .tagsContainer .otherTags li:hover,
+.modal .studioStore li:hover {
+  background: #402927;
+  color: #fff;
+  cursor: pointer;
+}
+.modal .tagsContainer .otherTags .active,
+.modal .studioStore .active {
+  font-weight: bold;
+  background: #402927;
+  color: #fff;
+}
+.modal .otherTagsContainer {
+  display: flex;
+  align-items: center;
+}
+.modal .otherTagsContainer svg {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.modal .otherTags {
+  max-height: 2rem;
+  margin: 0;
+  margin-right: auto;
+  flex-wrap: nowrap;
+  display: flex;
+  overflow: auto;
+  overflow-y: hidden;
+  padding-bottom: 1rem;
+}
+.modal .otherTags::-webkit-scrollbar {
+  background: transparent;
+  height: 0;
+}
+.modal .studioStore li:first-child {
+  margin-left: 0;
+}
+.modal .studioStore .studio,
+.modal .studioStore .store {
+  color: #ff7954;
+  border-color: #ff7954;
+}
+.modal .studioStore .studio:hover,
+.modal .studioStore .store:hover {
+  background-color: #ff7954;
+}
+.modal .studioStore .studio input,
+.modal .studioStore .store input {
+  cursor: pointer;
+}
+.modal .studioStore .activeStudio {
+  background-color: #ff7954 !important;
+  color: #fff;
+}
+.modal h5 {
+  color: #402927;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+}
+.modal .templatesContainer {
+  margin-bottom: -2rem;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  max-height: 65vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: auto;
+}
+.modal .templatesContainer input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+}
+.modal .templatesContainer input:hover {
+  cursor: pointer !important;
+}
+.modal .templatesContainer li {
+  padding: 1rem;
+  position: relative;
+  border-radius: 20px;
+  background-color: #fff;
+  transition: border-color 0.3s;
+  border: 1px solid transparent;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+}
+.modal .templatesContainer li:hover {
+  border-color: #ff7954;
+}
+.modal .templatesContainer li:hover p {
+  color: #ff7954;
+}
+
+.templateName {
+  margin-top: 0;
+  transition: color 0.3s;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.btnBackTemplate {
+  cursor: pointer;
+  transition: 0.2s;
+  margin-bottom: 1rem;
+  display: flex;
+  margin-left: auto;
+  justify-content: space-evenly;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #402927;
+  background: none;
+}
+.btnBackTemplate:hover {
+  color: #ff7954;
+}
+.btnBackTemplate svg {
+  font-size: 1.2rem;
+  margin-left: 0.65rem;
+}
+
+.btnBackTemplate svg {
+  margin-left: 0;
+  margin-right: 0.65rem;
+}
+
+.filters {
+  display: flex;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  gap: 0.5rem;
+}
+
+.filter label {
+  transition: 200ms;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  color: #402927;
+  border: 1px solid #402927;
+  border-radius: 20px;
+}
+.filter label:hover {
+  color: #ff7954;
+  border-color: #ff7954;
+}
+.filter input:checked ~ label {
+  color: #fff;
+  border-color: #ff7954;
+  background: #ff7954;
+}
+
+.loading {
+  margin: auto;
+  animation: rotate 1s infinite ease;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+.btnContainer button {
+  margin-right: auto;
+  margin-left: 0;
+  margin-top: 3rem;
+}

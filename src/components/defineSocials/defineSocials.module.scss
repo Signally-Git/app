@@ -1,0 +1,83 @@
+@import "../../Assets/style/colors";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    > form {
+        display: flex;
+        flex-direction: column;
+        > div {
+            align-items: center;
+            display: flex;
+            & ~ input {
+                margin-right: auto;
+                margin-left: 0;
+            }
+        }
+    }
+    label {
+        color: $signally-brown;
+        font-weight: bold;
+        font-size: 0.85rem;
+    }
+    .addSocials {
+        background: none;
+        border: none;
+        display: flex;
+        margin-left: -0.5rem;
+    }
+    .editSocials {
+        gap: 0.5rem;
+        max-height: 3rem;
+        margin-bottom: 3rem;
+        li {
+            cursor: pointer;
+            max-width: 24px;
+        }
+        svg {
+            color: $signally-brown;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+            &:first-of-type {
+                margin-left: 0.5rem;
+            }
+            &:hover {
+                color: $signally-orange;
+            }
+        }
+    }
+}
+
+.socialsList {
+    list-style: none;
+    border-radius: 20px;
+    background: $signally-isabelline;
+    margin-left: 1rem;
+    padding: 0.25rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 0.25rem;
+    }
+    li {
+        &:last-child {
+            height: auto;
+            button {
+                margin: 0 0 0 1rem;
+            }
+        }
+        &:hover img {
+            transition: opacity 300ms;
+            opacity: 0.5;
+        }
+        img {
+            cursor: pointer;
+            height: 1.75rem;
+            width: 1.75rem;
+        }
+    }
+}
