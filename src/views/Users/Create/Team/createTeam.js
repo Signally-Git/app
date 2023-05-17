@@ -44,7 +44,7 @@ export default function CreateTeam({ setDone }) {
                 status: "invalid",
             })
         );
-        create?.data &&
+        if (create.data) {
             notification({
                 content: (
                     <>
@@ -55,8 +55,9 @@ export default function CreateTeam({ setDone }) {
                 ),
                 status: "valid",
             });
+            history.push("/teams/teams");
+        }
         setDone(true);
-        history.push("/teams/teams");
     };
 
     const handleSlide = async (e, multiple) => {

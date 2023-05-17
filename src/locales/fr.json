@@ -193,7 +193,13 @@
         "bugPlaceholder": "Bonjour, comme vous pouvez le voir sur cette image en PJ, le logo de l'entreprise ne s'affiche pas sur Outlook.",
         "attachmentHeader": "Pièce jointe (capture d'écran, fichier d'import corrompu...)",
         "attachmentPlaceholder": "Importer un fichier",
-        "submitButton": "Envoyer le formulaire"
+        "submitButton": "Envoyer le formulaire",
+        "form": {
+            "signally_app": "Problème rencontré sur l'application",
+            "outlook_display": "Affichage de la signature dans Outlook",
+            "comments": "Commentaire",
+            "suggestions": "Suggestion"
+        }
     },
     
     "onboarding": {
@@ -299,7 +305,8 @@
             "delete": "Vous allez supprimer",
             "report": "Vous n'avez pas rempli le formulaire",
             "wrong_event_link": "Le lien de l'évènement doit être formatté avec un \"https://liendelevenement\"",
-            "no_event_name": "Veuillez remplir le nom de l'event"
+            "no_event_name": "Veuillez remplir le nom de l'event",
+            "no_data": "Aucune donnée à afficher"
         },
         "error": {
             "404": {

@@ -6,9 +6,10 @@ import EventStatistic from "./EventStatistic.module";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Input from "Utils/Input/input";
 import Statistic from "./Statistic.module";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 function StatsPage() {
+    const intl = useIntl();
     const organisation = TokenService.getOrganisation();
     const configuration = TokenService.getConfig();
     const [isLoading, setLoading] = useState(false);
@@ -252,7 +253,9 @@ function StatsPage() {
                                 <Input
                                     type="text"
                                     onChange={(e) => setSearch(e.target.value)}
-                                    placeholder={`Rechercher ${
+                                    placeholder={`${intl.formatMessage({
+                                        id: "search",
+                                    })} ${
                                         configuration.filter(
                                             (item) =>
                                                 item.key ===

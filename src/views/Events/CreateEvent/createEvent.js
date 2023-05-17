@@ -10,9 +10,10 @@ import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
 import Buttons from "Utils/Btns/buttons";
 import { useHistory } from "react-router-dom";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 export default function CreateEvent({ setDone, event }) {
+    const intl = useIntl();
     const [startDate, setStartDate] = useState(
         event?.startAt ? new Date(event?.startAt) : new Date()
     );
@@ -282,7 +283,7 @@ export default function CreateEvent({ setDone, event }) {
                     value={eventName}
                     onChange={(e) => setEventName(e.target.value)}
                     style={{ width: "48%" }}
-                    placeholder={<FormattedMessage id="event_name" />}
+                    placeholder={intl.formatMessage({ id: "event_name" })}
                     type="text"
                     ref={eventNameRef}
                 />
@@ -292,7 +293,7 @@ export default function CreateEvent({ setDone, event }) {
                     onBlur={(e) => checkEventLink(e.target.value)}
                     onChange={(e) => setEventLink(e.target.value)}
                     style={{ width: "48%" }}
-                    placeholder={<FormattedMessage id="link" />}
+                    placeholder={intl.formatMessage({ id: "link" })}
                     type="text"
                 />
             </div>
@@ -310,11 +311,13 @@ export default function CreateEvent({ setDone, event }) {
                     type="image/*"
                     file={banner}
                     placeholder={
-                        event ? (
-                            <FormattedMessage id="buttons.placeholder.import.banner" />
-                        ) : (
-                            <FormattedMessage id="buttons.placeholder.import.other_banner" />
-                        )
+                        event
+                            ? intl.formatMessage({
+                                  id: "buttons.placeholder.import.other_banner",
+                              })
+                            : intl.formatMessage({
+                                  id: "buttons.placeholder.import.banner",
+                              })
                     }
                     setFile={setBanner}
                 />

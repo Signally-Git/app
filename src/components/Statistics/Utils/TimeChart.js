@@ -8,10 +8,11 @@ import {
     XAxis,
     YAxis,
 } from "recharts";
+import { FormattedMessage } from "react-intl";
 
 const Chart = ({ data }) => {
-    console.log(data);
-    if (!data || !data.length) return <h2>Aucune donnée à afficher</h2>;
+    if (!data || !data.length)
+        return <FormattedMessage tagName="h2" id="message.warning.no_data" />;
 
     return (
         <ResponsiveContainer width="100%" height="100%">

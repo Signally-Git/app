@@ -8,21 +8,31 @@ import request from "Utils/Request/request";
 import { useNotification } from "Utils/Notifications/notifications";
 import CustomSelect from "Utils/CustomSelect/customselect";
 import Buttons from "Utils/Btns/buttons";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 export default function Report() {
+    const intl = useIntl();
     const [file, setFile] = useState();
     const [bug, setBug] = useState("");
     const history = useHistory();
     const [select, setSelect] = useState("SIGNALLY_APP");
     const table = [
-        { key: "SIGNALLY_APP", name: "Problème rencontré sur l'application" },
+        {
+            key: "SIGNALLY_APP",
+            name: intl.formatMessage({ id: "feedback.form.signally_app" }),
+        },
         {
             key: "OUTLOOK_DISPLAY",
-            name: "Affichage de la signature dans Outlook",
+            name: intl.formatMessage({ id: "feedback.form.outlook_display" }),
         },
-        { key: "COMMENTS", name: "Commentaire" },
-        { key: "RECOMMENDATIONS", name: "Suggestion" },
+        {
+            key: "COMMENTS",
+            name: intl.formatMessage({ id: "feedback.form.comments" }),
+        },
+        {
+            key: "RECOMMENDATIONS",
+            name: intl.formatMessage({ id: "feedback.form.suggestions" }),
+        },
     ];
     const notification = useNotification();
 
@@ -93,13 +103,8 @@ export default function Report() {
                             <br />
                             <FormattedMessage id="feedback.text2" />
                             <br />
-                            <FormattedMessage id="feedback.formHeader" />
                             <br />
-                            <br />
-                            <FormattedMessage id="feedback.formDescription" />
-                            <br />
-                            <br />
-                            <FormattedMessage id="feedback.thanks" />
+                            <FormattedMessage id="welcome.thanks" />
                         </p>
                         <br />
                     </div>
@@ -113,9 +118,9 @@ export default function Report() {
                             getValue="key"
                             items={table}
                             defaultValue={table[0].key}
-                            placeholder={
-                                <FormattedMessage id="feedback.selectPlaceholder" />
-                            }
+                            placeholder={intl.formatMessage({
+                                id: "feedback.selectPlaceholder",
+                            })}
                         />
                         <br />
                         <h4>
@@ -127,11 +132,11 @@ export default function Report() {
                         <Input
                             placeholder={
                                 table.filter((entry) => entry.key === select)[0]
-                                    .key === "SIGNALLY_APP" ? (
-                                    <FormattedMessage id="feedback.bugPlaceholder" />
-                                ) : (
-                                    ""
-                                )
+                                    .key === "SIGNALLY_APP"
+                                    ? intl.formatMessage({
+                                          id: "feedback.bugPlaceholder",
+                                      })
+                                    : ""
                             }
                             style={{
                                 height: "4.5rem",

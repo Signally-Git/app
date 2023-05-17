@@ -189,7 +189,13 @@
         "bugPlaceholder": "Hello, as you can see in this attachment, the company logo doesn't display on Outlook.",
         "attachmentHeader": "Attachment (screenshot, corrupted import file...)",
         "attachmentPlaceholder": "Upload file",
-        "submitButton": "Submit form"
+        "submitButton": "Submit form",
+        "form": {
+            "signally_app": "Issue encountered on the application",
+            "outlook_display": "Signature display in Outlook",
+            "comments": "Comments",
+            "suggestions": "Suggestions"
+        }
     },
     "onboarding": {
         "congratulations": "Congratulations",
@@ -290,7 +296,8 @@
             "delete": "You are about to delete",
             "report": "You have not filled in the form",
             "wrong_event_link": "The event link should be formatted with \"https://eventlink\"",
-            "no_event_name": "Please fill in the event name"
+            "no_event_name": "Please fill in the event name",
+            "no_data": "No data to display"
         },
         "error": {
             "404": {
