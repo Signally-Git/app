@@ -1,114 +1,114 @@
 .whiteBg {
-  background-color: #fff;
+    background-color: #fff;
 }
 
 .btn {
-  background-color: transparent;
-  display: flex;
-  border-radius: 20px;
-  border: 1px solid;
-  text-align: center;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-  justify-content: center;
-  align-items: center;
-  margin: 0.5rem auto;
-  padding: 0.5rem 1rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  border-radius: 20px;
+    background-color: transparent;
+    display: flex;
+    border-radius: 20px;
+    border: 1px solid;
+    text-align: center;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem auto;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 20px;
 }
 .btn * {
-  color: inherit;
+    color: inherit;
 }
 
 .orange {
-  color: #ff7954;
-  border-color: #ff7954;
-  cursor: pointer;
+    color: #ff7954;
+    border-color: #ff7954;
+    cursor: pointer;
 }
 .orange:hover {
-  background-color: #ff7954;
-  color: #fff;
+    background-color: #ff7954;
+    color: #fff;
 }
 .orange:hover svg {
-  stroke: #fff;
+    stroke: #fff;
 }
 .orange svg {
-  transition: 0.2s;
-  margin-left: 0.5rem;
-  stroke: #ff7954;
-  stroke-width: 1px;
+    transition: 0.2s;
+    margin-left: 0.5rem;
+    stroke: #ff7954;
+    stroke-width: 1px;
 }
 
 .left {
-  margin-left: 0 !important;
-  margin-right: 0.5rem;
+    margin-left: 0 !important;
+    margin-right: 0.5rem;
 }
 
 .orangeFill {
-  color: #fff;
-  background-color: #ff7954;
-  border-color: #ff7954;
+    color: #fff;
+    background-color: #ff7954;
+    border-color: #ff7954;
 }
 .orangeFill:hover {
-  background-color: transparent;
-  color: #ff7954;
-  cursor: pointer;
+    background-color: transparent;
+    color: #ff7954;
+    cursor: pointer;
 }
 .orangeFill:hover svg {
-  stroke: #ff7954;
+    stroke: #ff7954;
 }
 .orangeFill svg {
-  transition: 0.2s;
-  margin-left: 0.5rem;
-  stroke: #fff;
-  stroke-width: 1px;
+    transition: 0.2s;
+    margin-left: 0.5rem;
+    stroke: #fff;
+    stroke-width: 1px;
 }
 
 .brown {
-  color: #402927;
-  border-color: #402927;
+    color: #402927;
+    border-color: #402927;
 }
 .brown:hover {
-  cursor: pointer;
-  background: #402927;
-  color: #fff;
+    cursor: pointer;
+    background: #402927;
+    color: #fff;
 }
 .brown:hover svg {
-  stroke: #fff;
+    stroke: #fff;
 }
 .brown svg {
-  transition: 0.2s;
-  margin-left: 0.5rem;
-  stroke: #402927;
-  stroke-width: 1px;
+    transition: 0.2s;
+    margin-left: 0.5rem;
+    stroke: #402927;
+    stroke-width: 1px;
 }
 
 .brownFill {
-  color: #fff;
-  background-color: #402927;
-  border-color: #402927;
+    color: #fff;
+    background-color: #402927;
+    border-color: #402927;
 }
 .brownFill:hover {
-  background-color: transparent;
-  color: #402927;
-  cursor: pointer;
+    background-color: transparent;
+    color: #402927;
+    cursor: pointer;
 }
 
 .white {
-  border-color: transparent;
-  background-color: #fff;
-  cursor: pointer;
+    border-color: transparent;
+    background-color: #fff;
+    cursor: pointer;
 }
 .white:hover {
-  color: #fff;
-  background-color: #402927;
+    color: #fff;
+    background-color: #402927;
 }
 
 .disabled {
-  pointer-events: none;
+    pointer-events: none;
 }
 
 .hidden {
-  opacity: 0;
+    opacity: 0;
 }

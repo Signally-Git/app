@@ -1,0 +1,105 @@
+@import "../../../Assets/style/colors";
+
+.container {
+    width: calc(100% - 2rem);
+    max-height: 90%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin: auto;
+    flex-direction: row;
+    > svg {
+        height: auto;
+        max-height: 40%;
+        width: 100%;
+    }
+}
+
+.slidesContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.slide {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    min-width: 100%;
+    width: 100%;
+    padding: 1rem;
+    height: 100%;
+    > button {
+        margin: 0.5rem auto;
+        position: relative;
+    }
+    p {
+        padding: 0;
+        width: 100%;
+        text-align: center;
+        margin: 0 auto;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+    input[type="file"] {
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        cursor: pointer;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.space {
+    justify-content: space-between;
+    height: 65%;
+    margin: auto;
+}
+
+.back {
+    margin-top: 5rem !important;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    input {
+        max-width: 48%;
+    }
+}
+
+.btnsContainer {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    inset: 0;
+    top: auto;
+}
+
+.btn {
+    display: flex;
+    color: $signally-brown;
+    border: none;
+    background: none;
+    outline: none;
+    margin: auto;
+    &:hover {
+        cursor: pointer;
+        color: $signally-orange;
+    }
+}
+
+.inputsContainer {
+    > div {
+        margin-bottom: 0.5rem;
+    }
+}
