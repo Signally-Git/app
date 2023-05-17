@@ -65,7 +65,12 @@ function Tiles(props) {
                 setActiveEvent(count);
                 setEvents(res.data["hydra:member"]);
             })
-            .catch(() => {});
+            .catch(() => {
+                notification({
+                    content: <FormattedMessage id="message.error.generic" />,
+                    status: "invalid",
+                });
+            });
         await request
             .get(`teams`)
             .then((res) => {
@@ -76,7 +81,12 @@ function Tiles(props) {
                 setActiveTeams(count);
                 setTeamsList(res.data["hydra:member"]);
             })
-            .catch(() => {});
+            .catch(() => {
+                notification({
+                    content: <FormattedMessage id="message.error.generic" />,
+                    status: "invalid",
+                });
+            });
         await request
             .get(`workplaces`)
             .then((res) => {
@@ -87,13 +97,23 @@ function Tiles(props) {
                 setActiveWorkplaces(count);
                 setWPs(res.data["hydra:member"]);
             })
-            .catch(() => {});
+            .catch(() => {
+                notification({
+                    content: <FormattedMessage id="message.error.generic" />,
+                    status: "invalid",
+                });
+            });
         await request
             .get(`users`)
             .then((res) => {
                 setUsers(res.data["hydra:member"]);
             })
-            .catch(() => {});
+            .catch(() => {
+                notification({
+                    content: <FormattedMessage id="message.error.generic" />,
+                    status: "invalid",
+                });
+            });
         await request
             .get(`signatures`)
             .then((res) => {
@@ -108,9 +128,14 @@ function Tiles(props) {
                 });
                 setActiveSignatures(count);
                 setTemplates(res.data["hydra:member"]);
-                props.setLoading(true);
             })
-            .catch(() => {});
+            .catch(() => {
+                notification({
+                    content: <FormattedMessage id="message.error.generic" />,
+                    status: "invalid",
+                });
+            });
+        props.setLoading(true);
     }, []);
 
     useEffect(() => {
