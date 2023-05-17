@@ -4,11 +4,13 @@ import classes from "./defineSocials.module.css";
 import { useNotification } from "Utils/Notifications/notifications";
 import { FiCheck, FiPlusCircle, FiTrash } from "react-icons/fi";
 import request from "Utils/Request/request";
-import UploadFile from "../../Utils/Upload/uploadFile";
-import { TokenService } from "../../Utils";
+import UploadFile from "Utils/Upload/uploadFile";
+import { checkImageExists, TokenService } from "Utils";
 import { FormattedMessage, useIntl } from "react-intl";
 
 export default function DefineSocials({ setList, defaultValue }) {
+    const socialBaseUrl =
+        "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/default/";
     const [socials, setSocials] = React.useState(
         defaultValue || [{ url: "", name: "" }]
     );
@@ -70,9 +72,10 @@ export default function DefineSocials({ setList, defaultValue }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const image = await handleSaveIcon();
         if (!getDomainName(value)) {
             notification({
-                content: <>Réseau social non disponible</>,
+                content: <FormattedMessage id="message.error.generic" />,
                 status: "invalid",
             });
             return;
@@ -88,6 +91,22 @@ export default function DefineSocials({ setList, defaultValue }) {
                 status: "invalid",
             });
             return;
+        } else if (
+            !image &&
+            !(await checkImageExists(
+                `${socialBaseUrl}${getDomainName(value)}.png`
+            ))
+        ) {
+            notification({
+                content: (
+                    <FormattedMessage
+                        id="message.error.social_unknown"
+                        values={{ social: getDomainName(value) }}
+                    />
+                ),
+                status: "invalid",
+            });
+            return;
         } else {
             setSelect(socials.length);
             setValue("");
@@ -99,17 +118,11 @@ export default function DefineSocials({ setList, defaultValue }) {
                 status: "valid",
             });
         }
-        const image = await handleSaveIcon();
         const req = {
             ...socials[select],
-            image:
-                image ||
-                "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/default/" +
-                    getDomainName(value) +
-                    ".png",
+            image: image || `${socialBaseUrl}${getDomainName(value)}.png`,
             organisation: JSON.parse(localStorage.getItem("user")).organisation,
         };
-
         if (socials[select]["@id"])
             await request.patch(socials[select]["@id"], req);
         else await request.post("social_media_accounts", req);
@@ -125,13 +138,27 @@ export default function DefineSocials({ setList, defaultValue }) {
                     socials.findIndex((x) => x?.url === value),
                     1
                 );
+                notification({
+                    content: (
+                        <>
+                            {socials[index].name}{" "}
+                            <FormattedMessage id="message.error.delete" />
+                        </>
+                    ),
+                    status: "invalid",
+                });
                 setValue("");
                 // setImage("");
                 setSelect(socials.length);
             })
             .catch(() =>
                 notification({
-                    content: <>Impossible de supprimer {socials[index].name}</>,
+                    content: (
+                        <>
+                            <FormattedMessage id="message.success.delete" />
+                            {socials[index].name}
+                        </>
+                    ),
                     status: "invalid",
                 })
             );
