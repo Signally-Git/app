@@ -78,6 +78,7 @@ function CreateSignatureComponent() {
         if (isOpen) {
             setTemplates(
                 <TemplateSelection
+                    template={selectedTemplate}
                     showFunction={showTemplates}
                     setTemplate={setSelectedTemplate}
                     signatureOption={signatureOption}

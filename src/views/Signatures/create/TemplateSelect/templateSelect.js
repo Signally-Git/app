@@ -6,10 +6,12 @@ import request from "Utils/Request/request";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { getStyles } from "../createSignature.utils";
 import { FormattedMessage } from "react-intl";
+import { useHistory } from "react-router-dom";
 
 // Displaying the list of bought and free templates (Studio, Store) and allows to select one to create custom signature
 
 export default function TemplateSelection({
+    template,
     setTemplate,
     showFunction,
     signatureOption,
@@ -20,6 +22,7 @@ export default function TemplateSelection({
     const [fetching, setFetching] = useState(true);
     const [templatesList, setTemplatesList] = useState([]);
     const [visibility, setVisibility] = useState("");
+    const history = useHistory();
 
     const handleFilterChange = (e) => {
         setVisibility(e.target.id);
@@ -125,7 +128,9 @@ export default function TemplateSelection({
                             width={"5rem"}
                             onClick={(e) => {
                                 e.preventDefault();
-                                showFunction(false, "smooth");
+                                template
+                                    ? showFunction(false, "smooth")
+                                    : history.goBack();
                             }}
                         >
                             <FormattedMessage id="buttons.placeholder.cancel" />
