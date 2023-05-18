@@ -18,9 +18,10 @@ export default function SwitchLang({ setUserLanguage }) {
 
     function handleSwitch(selectedLang) {
         setLocale(selectedLang);
-        setUserLanguage(
-            languages.find((lang) => lang.isoCode === selectedLang)?.["@id"]
-        );
+        if (setUserLanguage)
+            setUserLanguage(
+                languages.find((lang) => lang.isoCode === selectedLang)?.["@id"]
+            );
     }
 
     return (
