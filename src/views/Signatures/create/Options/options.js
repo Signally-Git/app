@@ -127,7 +127,10 @@ export default function Options(props) {
                                 defaultValue={props.data.salutation.value}
                             />
                             <div className={classes.spacing}>
-                                <h6>Espacement</h6>
+                                <FormattedMessage
+                                    id="signature.options.spacing"
+                                    tagName="h6"
+                                />
                                 <Range
                                     step={2}
                                     min={0}

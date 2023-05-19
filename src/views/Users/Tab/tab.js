@@ -14,7 +14,7 @@ import CreateUser from "../Create/User/createUser";
 import CreateWorkplace from "../Create/Workplace/createWorkplace";
 import UserTab from "./userTab";
 import { TokenService } from "Utils";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 // Displays the current list
 // Workplaces by default
@@ -30,6 +30,7 @@ export default function Tab({
     editInfo,
     setEditInfo,
 }) {
+    const intl = useIntl();
     const [changed, setChanged] = useState(false);
     const [addedWorkplace, setAddedWorkplace] = useState("");
     const [searchWorkplace, setSearchWorkplace] = useState("");
@@ -571,7 +572,7 @@ export default function Tab({
                         }
                         className={classes.search}
                         type="text"
-                        placeholder={`Rechercher ${
+                        placeholder={`${intl.formatMessage({ id: "search" })} ${
                             configuration.filter(
                                 (item) => item.key === "WORKPLACE_NAME"
                             )[0].value
@@ -957,7 +958,7 @@ export default function Tab({
                             setSearchTeam(e.target.value.toLowerCase())
                         }
                         type="text"
-                        placeholder={`Rechercher ${
+                        placeholder={`${intl.formatMessage({ id: "search" })} ${
                             configuration.filter(
                                 (item) => item.key === "TEAM_NAME"
                             )[0].value

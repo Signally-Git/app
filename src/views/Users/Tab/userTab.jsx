@@ -147,7 +147,7 @@ function UserTab({
                     className={classes.search}
                     onChange={(e) => setSearch(e.target.value)}
                     type="text"
-                    placeholder={`Rechercher ${
+                    placeholder={`${intl.formatMessage({ id: "search" })} ${
                         JSON.parse(
                             localStorage.getItem("configuration")
                         ).filter((item) => item.key === "USER_NAME")[0].value

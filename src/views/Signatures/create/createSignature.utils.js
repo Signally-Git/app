@@ -1,4 +1,5 @@
 import request from "Utils/Request/request";
+import { useIntl } from "react-intl";
 
 async function getPreview(twig, styles) {
     return await request
@@ -64,9 +65,14 @@ function defaultValues(company, user) {
     };
 }
 
-function defaultOptions() {
+function useDefaultOptions() {
+    const intl = useIntl();
     return {
-        salutation: { value: "Cordialement,", enabled: false, padding: 10 },
+        salutation: {
+            value: intl.formatMessage({ id: "signature.default_greetings" }),
+            enabled: false,
+            padding: 10,
+        },
         custom: { enabled: false },
         eco: { value: "Ecoresponsability", enabled: false },
         followUs: { value: "Follow us", enabled: false, disabled: true },
@@ -850,4 +856,4 @@ const handleSave = async (
         });
 };
 
-export { getPreview, defaultValues, getStyles, defaultOptions, handleSave };
+export { getPreview, defaultValues, getStyles, useDefaultOptions, handleSave };

@@ -93,6 +93,7 @@
             "spacing": "Spacing",
             "background_color": "Background color"
         },
+        "default_greetings": "Regards,",
         "choose": "Choose a signature",
         "event_or_playlist": "Add an event or playlist",
         "active_for": "Signature active for ",

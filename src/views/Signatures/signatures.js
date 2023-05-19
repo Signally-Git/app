@@ -10,9 +10,10 @@ import request from "Utils/Request/request";
 import parse from "html-react-parser";
 import Modal from "Utils/Modals/modal";
 import { TokenService } from "Utils";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 function Team() {
+    const intl = useIntl();
     const [templates, setTemplates] = useState([]);
     const notification = useNotification();
     const [deleted, setDeleted] = useState(false);
@@ -44,7 +45,9 @@ function Team() {
     useEffect(() => {
         setSignatureOption({
             salutation: {
-                value: "Cordialement,",
+                value: intl.formatMessage({
+                    id: "signature.default_greetings",
+                }),
                 enabled:
                     defaultStyles?.filter(
                         (style) => style.type === "greetings"

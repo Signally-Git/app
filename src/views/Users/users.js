@@ -301,7 +301,9 @@ function Team() {
                                                         e.target.value
                                                     )
                                                 }
-                                                placeholder={`Rechercher ${
+                                                placeholder={`${intl.formatMessage(
+                                                    { id: "search" }
+                                                )} ${
                                                     JSON.parse(
                                                         localStorage.getItem(
                                                             "configuration"
@@ -537,7 +539,9 @@ function Team() {
                                                         e.target.value
                                                     )
                                                 }
-                                                placeholder={`Rechercher ${
+                                                placeholder={`${intl.formatMessage(
+                                                    { id: "search" }
+                                                )} ${
                                                     JSON.parse(
                                                         localStorage.getItem(
                                                             "configuration"
@@ -669,7 +673,9 @@ function Team() {
                                                 onChange={(e) =>
                                                     setOtherUser(e.target.value)
                                                 }
-                                                placeholder={`Rechercher ${
+                                                placeholder={`${intl.formatMessage(
+                                                    { id: "search" }
+                                                )} ${
                                                     JSON.parse(
                                                         localStorage.getItem(
                                                             "configuration"

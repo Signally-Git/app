@@ -12,7 +12,7 @@ import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import { TokenService } from "Utils";
 import {
-    defaultOptions,
+    useDefaultOptions,
     defaultValues,
     getStyles,
     handleSave,
@@ -36,11 +36,11 @@ function CreateSignatureComponent() {
     const [signatureInfo, setSignatureInfo] = useState(
         defaultValues(company, user)
     );
-    const [signatureOption, setSignatureOption] = useState(defaultOptions());
+    const [signatureOption, setSignatureOption] = useState(useDefaultOptions());
 
     const handlePopulate = () => {
         setSignatureInfo(defaultValues(company, user));
-        setSignatureOption(defaultOptions());
+        setSignatureOption(useDefaultOptions());
     };
 
     useEffect(() => {
