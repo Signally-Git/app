@@ -38,7 +38,7 @@ function CreateSignatureComponent() {
     );
     const [signatureOption, setSignatureOption] = useState(useDefaultOptions());
 
-    const handlePopulate = () => {
+    const useHandlePopulate = () => {
         setSignatureInfo(defaultValues(company, user));
         setSignatureOption(useDefaultOptions());
     };
@@ -221,7 +221,7 @@ function CreateSignatureComponent() {
                                 />
                                 <div className={classes.sliderTabs}></div>
                             </label>
-                            <button onClick={() => handlePopulate()}>
+                            <button onClick={() => useHandlePopulate()}>
                                 <FormattedMessage id="buttons.placeholder.reset" />
                             </button>
                         </div>
