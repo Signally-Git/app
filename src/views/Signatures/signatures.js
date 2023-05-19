@@ -184,11 +184,11 @@ function Team() {
                         {active === "active" ? (
                             <div>
                                 {user?.roles[1] !== "ROLE_RH" ? (
-                                    <Button color="orange" arrow={true}>
-                                        <Link to="create-signature">
+                                    <Link to="create-signature">
+                                        <Button color="orange" arrow={true}>
                                             <FormattedMessage id="add_signature" />
-                                        </Link>
-                                    </Button>
+                                        </Button>
+                                    </Link>
                                 ) : (
                                     ""
                                 )}
