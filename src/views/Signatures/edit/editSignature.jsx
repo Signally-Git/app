@@ -13,7 +13,7 @@ import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
 import { TokenService } from "Utils";
 import {
-    useDefaultOptions,
+    defaultOptions,
     defaultValues,
     getStyles,
 } from "../create/createSignature.utils";
@@ -39,7 +39,7 @@ function EditSignatureComponent() {
     const [signatureInfo, setSignatureInfo] = useState(
         defaultValues(company, user)
     );
-    const [signatureOption, setSignatureOption] = useState(useDefaultOptions());
+    const [signatureOption, setSignatureOption] = useState(defaultOptions());
     const [modal, setModal] = useState(false);
     const [modalContent, setModalContent] = useState();
     const [signatureName, setSignatureName] = useState("");

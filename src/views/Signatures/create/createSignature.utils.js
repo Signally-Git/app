@@ -1,5 +1,5 @@
 import request from "Utils/Request/request";
-import { useIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 async function getPreview(twig, styles) {
     return await request
@@ -65,11 +65,10 @@ function defaultValues(company, user) {
     };
 }
 
-function useDefaultOptions() {
-    const intl = useIntl();
+function defaultOptions() {
     return {
         salutation: {
-            value: intl.formatMessage({ id: "signature.default_greetings" }),
+            value: <FormattedMessage id="signature.default_greetings" />,
             enabled: false,
             padding: 10,
         },
@@ -856,4 +855,4 @@ const handleSave = async (
         });
 };
 
-export { getPreview, defaultValues, getStyles, useDefaultOptions, handleSave };
+export { getPreview, defaultValues, getStyles, defaultOptions, handleSave };

@@ -12,7 +12,7 @@ import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import { TokenService } from "Utils";
 import {
-    useDefaultOptions,
+    defaultOptions,
     defaultValues,
     getStyles,
     handleSave,
@@ -36,11 +36,11 @@ function CreateSignatureComponent() {
     const [signatureInfo, setSignatureInfo] = useState(
         defaultValues(company, user)
     );
-    const [signatureOption, setSignatureOption] = useState(useDefaultOptions());
+    const [signatureOption, setSignatureOption] = useState(defaultOptions());
 
-    const useHandlePopulate = () => {
+    const handlePopulate = () => {
         setSignatureInfo(defaultValues(company, user));
-        setSignatureOption(useDefaultOptions());
+        setSignatureOption(defaultOptions());
     };
 
     useEffect(() => {
@@ -221,7 +221,7 @@ function CreateSignatureComponent() {
                                 />
                                 <div className={classes.sliderTabs}></div>
                             </label>
-                            <button onClick={() => useHandlePopulate()}>
+                            <button onClick={() => handlePopulate()}>
                                 <FormattedMessage id="buttons.placeholder.reset" />
                             </button>
                         </div>
