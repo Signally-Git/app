@@ -12,11 +12,7 @@ import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
 import { TokenService } from "Utils";
-import {
-    defaultOptions,
-    defaultValues,
-    getStyles,
-} from "../create/createSignature.utils";
+import { defaultOptions, getStyles } from "../create/createSignature.utils";
 import { FormattedMessage } from "react-intl";
 import { extractStyle, extractValue } from "./editSignature.utils";
 
@@ -36,9 +32,7 @@ function EditSignatureComponent() {
     // Used to handle transition
     const elem = useRef(null);
     const [templates, setTemplates] = useState(false);
-    const [signatureInfo, setSignatureInfo] = useState(
-        defaultValues(company, user)
-    );
+    const [signatureInfo, setSignatureInfo] = useState();
     const [signatureOption, setSignatureOption] = useState(defaultOptions());
     const [modal, setModal] = useState(false);
     const [modalContent, setModalContent] = useState();
@@ -94,9 +88,7 @@ function EditSignatureComponent() {
             fontSize: [
                 extractValue(styles, "generalFontSize", "fontSize") || 11,
             ],
-            fontFamily:
-                extractValue(styles, "generalFontFamily", "fontFamily") ||
-                "Helvetica",
+            fontFamily: extractValue(styles, "generalFontFamily", "fontFamily"),
         });
         setSignatureOption({
             salutation: {
@@ -281,7 +273,6 @@ function EditSignatureComponent() {
     }, [modal, signatureName]);
 
     const handleSave = async () => {
-        console.log(selectedTemplate);
         await request
             .patch(
                 `signatures/` + signatureId,

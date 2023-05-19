@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "./Input";
 import classes from "./infos.module.css";
 import { Range } from "react-range";
@@ -11,13 +11,18 @@ import { FormattedMessage, useIntl } from "react-intl";
 // Styles every text with color & decoration, and family + size for the whole template
 // Change group's logo
 
-export default function Infos(props) {
+export default function Infos({ content, setContent, templateRules, style }) {
     // Template banner
     const [profile, setProfile] = useState(true);
     const [organisation, setOrganisation] = useState(false);
     const user = TokenService.getUser();
     const intl = useIntl();
     const organisationInfos = useState({});
+    const [selectedFont, setSelectedFont] = useState(content?.fontFamily);
+
+    if (!user || !content) {
+        return <></>;
+    }
 
     // Template informations
     const inputs = [
@@ -26,7 +31,7 @@ export default function Infos(props) {
                 user.firstName || intl.formatMessage({ id: "firstname" }),
             type: "text",
             toChange: "firstName",
-            value: props.content.firstName,
+            value: content.firstName,
             disabled: true,
         },
         {
@@ -34,7 +39,7 @@ export default function Infos(props) {
                 user.lastName || intl.formatMessage({ id: "lastname" }),
             type: "text",
             toChange: "lastName",
-            value: props.content.lastName,
+            value: content.lastName,
             disabled: true,
         },
         {
@@ -42,14 +47,14 @@ export default function Infos(props) {
                 user.position || intl.formatMessage({ id: "position" }),
             type: "text",
             toChange: "jobName",
-            value: props.content.jobName,
+            value: content.jobName,
             disabled: true,
         },
         {
             placeholder: user.phone || intl.formatMessage({ id: "mobile" }),
             type: "tel",
             toChange: "mobile",
-            value: props.content.mobile,
+            value: content.mobile,
             disabled: true,
         },
     ];
@@ -60,7 +65,7 @@ export default function Infos(props) {
                 organisationInfos.name || intl.formatMessage({ id: "company" }),
             type: "text",
             toChange: "company",
-            value: props.content.company,
+            value: content.company,
             disabled: true,
         },
         {
@@ -69,7 +74,7 @@ export default function Infos(props) {
                 intl.formatMessage({ id: "address" }),
             type: "text",
             toChange: "addressStreet",
-            value: props.content.addressStreet,
+            value: content.addressStreet,
             disabled: true,
         },
         {
@@ -78,7 +83,7 @@ export default function Infos(props) {
                 intl.formatMessage({ id: "zipcode" }),
             type: "text",
             toChange: "addressZipcode",
-            value: props.content.addressZipcode,
+            value: content.addressZipcode,
             disabled: true,
         },
         {
@@ -87,7 +92,7 @@ export default function Infos(props) {
                 intl.formatMessage({ id: "city" }),
             type: "text",
             toChange: "addressCity",
-            value: props.content.addressCity,
+            value: content.addressCity,
             disabled: true,
         },
         {
@@ -96,7 +101,7 @@ export default function Infos(props) {
                 intl.formatMessage({ id: "country" }),
             type: "text",
             toChange: "addressCountry",
-            value: props.content.addressCountry,
+            value: content.addressCountry,
             disabled: true,
         },
         {
@@ -105,7 +110,7 @@ export default function Infos(props) {
                 intl.formatMessage({ id: "phone" }),
             type: "tel",
             toChange: "phone",
-            value: props.content.phone,
+            value: content.phone,
             disabled: true,
         },
     ];
@@ -136,17 +141,14 @@ export default function Infos(props) {
         { name: "Verdana", style: { fontFamily: "Verdana" } },
     ];
     // Handling font-family selection
-    const [selectedFont, setSelectedFont] = useState("Arial");
-    const [showFonts, setShowFonts] = useState(false);
 
     const handleFont = (event) => {
         setSelectedFont(event);
-        props.setContent({ ...props.content, fontFamily: event });
-        setShowFonts(false);
+        setContent({ ...content, fontFamily: event });
     };
     // Choosing font-size
     const handleRange = (range) => {
-        props.setContent({ ...props.content, fontSize: range });
+        setContent({ ...content, fontSize: range });
     };
 
     return (
@@ -191,8 +193,8 @@ export default function Infos(props) {
                                             defaultColor={input.value.color}
                                             defaultStyle={input.value.style}
                                             toChange={input.toChange}
-                                            content={props.content}
-                                            setContent={props.setContent}
+                                            content={content}
+                                            setContent={setContent}
                                             title={input.placeholder}
                                         />
                                     </div>
@@ -245,8 +247,8 @@ export default function Infos(props) {
                                             defaultColor={input.value.color}
                                             defaultStyle={input.value.style}
                                             toChange={input.toChange}
-                                            content={props.content}
-                                            setContent={props.setContent}
+                                            content={content}
+                                            setContent={setContent}
                                         />
                                     </div>
                                 );
@@ -264,6 +266,7 @@ export default function Infos(props) {
                         <CustomSelect
                             styleList={{ height: "10rem" }}
                             onChange={(e) => handleFont(e)}
+                            defaultValue={content.fontFamily}
                             items={webSafeFontList}
                             getValue={"name"}
                             display={"name"}
@@ -272,19 +275,19 @@ export default function Infos(props) {
                             <div className={classes.row}>
                                 <div>
                                     <span className={classes.fontSize}>
-                                        {props.content.fontSize} px
+                                        {content.fontSize} px
                                     </span>
                                     <Range
-                                        step={props.templateRules.fontSize.step}
-                                        min={props.templateRules.fontSize.min}
-                                        max={props.templateRules.fontSize.max}
-                                        values={props.content.fontSize}
+                                        step={templateRules.fontSize.step}
+                                        min={templateRules.fontSize.min}
+                                        max={templateRules.fontSize.max}
+                                        values={content.fontSize}
                                         onChange={(range) => handleRange(range)}
                                         renderTrack={({ props, children }) => (
                                             <div
                                                 {...props}
                                                 style={{
-                                                    ...props.style,
+                                                    ...style,
                                                     height: "6px",
                                                     width: "100%",
                                                     backgroundColor: "#F1ECEA",
@@ -299,7 +302,7 @@ export default function Infos(props) {
                                             <div
                                                 {...props}
                                                 style={{
-                                                    ...props.style,
+                                                    ...style,
                                                     transition: "0.2s",
                                                     height: "25px",
                                                     width: "25px",

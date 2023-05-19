@@ -34,11 +34,12 @@
     display: flex;
     width: 100%;
     input[type="text"] {
+        text-overflow: ellipsis;
         z-index: 6;
         width: 100%;
         font-weight: bold;
         color: $signally-brown;
-        padding: 0.65rem 1rem;
+        padding: 0.65rem 2rem .65rem 1rem;
     }
     svg {
         transition: 0.2s;
