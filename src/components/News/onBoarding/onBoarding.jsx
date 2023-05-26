@@ -71,7 +71,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                 link: <FormattedMessage id="account" />,
                 title: (
                     <>
-                        <FormattedMessage id="welcome" />
+                        <FormattedMessage id="welcome.welcome" />
                         <span className={classes.orangeTxt}>
                             {" "}
                             {organisation.name}
