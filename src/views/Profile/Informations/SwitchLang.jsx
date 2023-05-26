@@ -8,12 +8,18 @@ export default function SwitchLang({ setUserLanguage }) {
     const [languages, setLanguages] = useState([]);
 
     useEffect(() => {
+        const source = request.cancelToken.source();
         const getLanguages = async () => {
-            request.get("langs").then(({ data }) => {
-                setLanguages(data["hydra:member"]);
-            });
+            request
+                .get("langs", { cancelToken: source.token })
+                .then(({ data }) => {
+                    setLanguages(data["hydra:member"]);
+                });
         };
         getLanguages();
+        return () => {
+            source.cancel("Component unmounted");
+        };
     }, []);
 
     function handleSwitch(selectedLang) {
