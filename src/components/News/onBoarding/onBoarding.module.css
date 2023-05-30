@@ -10,7 +10,7 @@
   margin: 0;
 }
 .container > h5 .orangeTxt {
-  color: #ff7954;
+  color: #244EFF;
 }
 .container > p {
   font-size: 1rem;
@@ -32,7 +32,7 @@
 
 .active {
   opacity: 1;
-  color: #ff7954;
+  color: #244EFF;
 }
 
 .menuLinks {
@@ -54,7 +54,7 @@
 }
 .menuLinks li:hover {
   opacity: 1;
-  color: #ff7954;
+  color: #244EFF;
   cursor: pointer;
 }
 

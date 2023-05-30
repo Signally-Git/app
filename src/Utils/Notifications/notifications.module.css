@@ -4,16 +4,16 @@
   justify-content: center;
   width: fit-content !important;
   height: 2.5rem !important;
-  border-radius: 10px;
+  border-radius: 5px;
   z-index: 10;
   top: 3.5rem;
   position: fixed;
-  color: #402927;
+  color: #1B335E;
   font-weight: bold;
   max-width: 50%;
 }
 .container svg {
-  border-radius: 50%;
+  border-radius: 20px;
   padding: 4px;
   fill: #fff;
   font-size: 1.25rem;

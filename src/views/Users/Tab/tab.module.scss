@@ -4,6 +4,10 @@
     max-height: 60%;
 }
 
+.colorPrimary {
+    color: $color-primary;
+}
+
 .modal {
     position: fixed;
     display: flex;
@@ -11,7 +15,7 @@
     align-items: center;
     justify-content: center;
     background: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     width: 20%;
     padding: 0 1rem 1rem;
     z-index: 3;
@@ -97,7 +101,7 @@
         font-weight: 600;
         position: relative;
         background: $color-lighter-accent;
-        border-radius: 10px;
+        border-radius: $smallBorderRadius;
         .checkbox {
             width: 100%;
             height: 100%;
@@ -121,7 +125,7 @@
                 bottom: 0;
                 margin: auto;
                 height: 8px;
-                border-radius: 50%;
+                border-radius: $hugeRadius;
                 width: 8px;
                 background: $color-primary;
                 transition: 0.2s;
@@ -182,7 +186,7 @@
     .editing .rename {
         padding: 0.5rem 1rem;
         margin: 0 0 0 0;
-        border-radius: 20px;
+        border-radius: $borderRadius;
     }
     .rename {
         margin-bottom: 0;
@@ -212,7 +216,7 @@
     padding: 1rem;
     box-sizing: border-box;
     position: absolute;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     inset: auto 0;
     margin: auto;
     display: flex;
@@ -297,7 +301,7 @@
     color: $color-dark-accent;
     font-size: 0.85rem;
     font-weight: 600;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     padding: 0.5rem 1rem;
 }
 
@@ -309,7 +313,7 @@
     color: rgba($color-dark-accent, 0.75) !important;
     padding: 0.25rem 0.75rem;
     padding-top: 0.25rem !important;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     background-color: rgba($color-dark-accent, 0.05);
     margin-top: 0.5rem;
     font-weight: 600;
@@ -330,7 +334,7 @@
 
 .search {
     text-indent: 2rem;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     width: 100%;
     outline: none;
     border: 1px solid transparent;

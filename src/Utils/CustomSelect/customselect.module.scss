@@ -22,7 +22,7 @@
 .open {
     input {
         // border-bottom: none;
-        border-radius: 10px 10px 0 0;
+        border-radius: $smallBorderRadius $smallBorderRadius 0 0;
     }
     .inputContainer > svg {
         transform: rotate(-180deg);
@@ -73,9 +73,8 @@
     width: 100%;
     background-color: #fff;
     box-shadow: 0 20px 30px $color-light-accent-variation;
-    border-radius: 0 0 10px 10px;
-    padding: 0;
-    padding-top: 2.65rem;
+    border-radius: 0 0 $smallBorderRadius $smallBorderRadius;
+    padding: 2.65rem 0 0;
     list-style: none;
     opacity: 0;
     max-height: inherit !important;

@@ -55,7 +55,7 @@
         background: #fff;
         border: 1px solid transparent;
         padding: 1rem;
-        border-radius: 10px;
+        border-radius: $smallBorderRadius;
         margin: 0.5rem 0;
         font-family: "Montserrat", serif;
         outline: none;
@@ -124,7 +124,7 @@
     flex-direction: column;
     width: 100%;
     background: #fff;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     .rangeUpload {
         display: flex;
         flex-direction: column;

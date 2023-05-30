@@ -79,7 +79,9 @@ export default function CreateUser({ setDone }) {
             notification({
                 content: (
                     <>
-                        <span style={{ color: "#FF7954" }}>{user.email} </span>
+                        <span className={classes.primaryColor}>
+                            {user.email}{" "}
+                        </span>
                         <FormattedMessage id="message.error.invalid_user_email" />
                     </>
                 ),
@@ -102,7 +104,7 @@ export default function CreateUser({ setDone }) {
                     content: (
                         <>
                             <FormattedMessage id="message.success.teams.edit_part1" />
-                            <span style={{ color: "#FF7954" }}>
+                            <span className={classes.primaryColor}>
                                 {" "}
                                 {user.firstName} {user.lastName}{" "}
                             </span>
@@ -131,7 +133,7 @@ export default function CreateUser({ setDone }) {
                     notification({
                         content: (
                             <>
-                                <span style={{ color: "#FF7954" }}>
+                                <span className={classes.primaryColor}>
                                     {error.detail}
                                 </span>
                             </>

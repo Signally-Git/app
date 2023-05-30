@@ -8,7 +8,7 @@
   padding-bottom: 5rem;
 }
 .container span {
-  color: #66433e;
+  color: #0F1E4C;
   font-weight: 600;
 }
 .container ul {
@@ -26,7 +26,7 @@
   align-items: center;
   justify-content: space-between;
   font-weight: bold;
-  color: #66433e;
+  color: #0F1E4C;
 }
 .container ul li:not(:last-child) {
   border-bottom: 1px solid rgba(101, 68, 62, 0.14);
@@ -53,7 +53,7 @@
   bottom: 6rem;
 }
 .footer span {
-  color: #66433e;
+  color: #0F1E4C;
   font-size: 0.9rem;
 }
 

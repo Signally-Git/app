@@ -1,5 +1,6 @@
 import request from "Utils/Request/request";
-import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
+import classes from "./createSignature.module.css";
 
 async function getPreview(twig, styles) {
     return await request
@@ -434,7 +435,7 @@ const handleSave = async (
                 content: (
                     <>
                         Votre signature{" "}
-                        <span style={{ color: "#FF7954" }}>
+                        <span className={classes.primaryColor}>
                             {signatureName}
                         </span>{" "}
                         a été créée avec succès

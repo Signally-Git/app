@@ -144,7 +144,7 @@ function Team() {
                     content: (
                         <>
                             <FormattedMessage id="message.error.delete" />
-                            <span style={{ color: "#FF7954" }}>
+                            <span className={classes.primaryColor}>
                                 {" "}
                                 {preview.name}
                             </span>

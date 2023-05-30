@@ -5,7 +5,6 @@
 .btn {
   background-color: transparent;
   display: flex;
-  border-radius: 20px;
   border: 1px solid;
   text-align: center;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
@@ -15,19 +14,19 @@
   padding: 0.5rem 1rem;
   font-size: 0.85rem;
   font-weight: 600;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 .btn * {
   color: inherit;
 }
 
 .orange {
-  color: #ff7954;
-  border-color: #ff7954;
+  color: #244EFF;
+  border-color: #244EFF;
   cursor: pointer;
 }
 .orange:hover {
-  background-color: #ff7954;
+  background-color: #244EFF;
   color: #fff;
 }
 .orange:hover svg {
@@ -36,7 +35,7 @@
 .orange svg {
   transition: 0.2s;
   margin-left: 0.5rem;
-  stroke: #ff7954;
+  stroke: #244EFF;
   stroke-width: 1px;
 }
 
@@ -47,16 +46,16 @@
 
 .orangeFill {
   color: #fff;
-  background-color: #ff7954;
-  border-color: #ff7954;
+  background-color: #244EFF;
+  border-color: #244EFF;
 }
 .orangeFill:hover {
   background-color: transparent;
-  color: #ff7954;
+  color: #244EFF;
   cursor: pointer;
 }
 .orangeFill:hover svg {
-  stroke: #ff7954;
+  stroke: #244EFF;
 }
 .orangeFill svg {
   transition: 0.2s;
@@ -66,12 +65,12 @@
 }
 
 .brown {
-  color: #402927;
-  border-color: #402927;
+  color: #1B335E;
+  border-color: #1B335E;
 }
 .brown:hover {
   cursor: pointer;
-  background: #402927;
+  background: #1B335E;
   color: #fff;
 }
 .brown:hover svg {
@@ -80,18 +79,18 @@
 .brown svg {
   transition: 0.2s;
   margin-left: 0.5rem;
-  stroke: #402927;
+  stroke: #1B335E;
   stroke-width: 1px;
 }
 
 .brownFill {
   color: #fff;
-  background-color: #402927;
-  border-color: #402927;
+  background-color: #1B335E;
+  border-color: #1B335E;
 }
 .brownFill:hover {
   background-color: transparent;
-  color: #402927;
+  color: #1B335E;
   cursor: pointer;
 }
 
@@ -102,7 +101,7 @@
 }
 .white:hover {
   color: #fff;
-  background-color: #402927;
+  background-color: #1B335E;
 }
 
 .disabled {

@@ -40,7 +40,7 @@
 
 .teamsContainer {
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     min-width: 25rem;
     margin-bottom: 1rem;
     max-width: 45%;
@@ -202,7 +202,7 @@
         font-weight: 600;
         position: relative;
         background: $color-lighter-accent;
-        border-radius: 10px;
+        border-radius: $smallBorderRadius;
         &::before {
             content: "";
             display: block;
@@ -213,7 +213,7 @@
             bottom: 0;
             margin: auto;
             height: 4px;
-            border-radius: 50%;
+            border-radius: $hugeRadius;
             width: 4px;
             background: transparent;
             transition: 0.2s;
@@ -247,7 +247,7 @@
 
 .groupName {
     color: $color-primary !important;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     font-weight: normal;
     font-size: 0.75rem;
 }
@@ -265,7 +265,7 @@
 
 .teamAssignment {
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     padding: 1rem 2rem;
     margin-bottom: auto;
     h2 {
@@ -339,7 +339,7 @@
         position: absolute;
         left: -1em;
         height: 8px;
-        border-radius: 50%;
+        border-radius: $hugeRadius;
         width: 8px;
         background: $color-primary;
     }
@@ -359,7 +359,7 @@
 
 .search {
     text-indent: 2rem;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     width: 100%;
     outline: none;
     border: 1px solid transparent;

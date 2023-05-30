@@ -14,12 +14,16 @@
   margin: auto;
 }
 
+.primaryColor {
+  color: #244EFF;
+}
+
 .tabContainer {
   padding: 2rem;
   margin-bottom: auto;
   position: relative;
   background: #fff;
-  border-radius: 20px;
+  border-radius: 5px;
   overflow: auto;
   width: 50%;
   min-width: 40rem;
@@ -67,11 +71,11 @@
 }
 .menu .active {
   transition: 0.2s;
-  color: #ff7954;
+  color: #244EFF;
 }
 .menu .active::after {
   transition: 0.2s;
-  background-color: #ff7954;
+  background-color: #244EFF;
 }
 
 .logoCompanyDiv {
@@ -91,11 +95,11 @@
 
 /* Rounded sliders */
 .slider {
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .slider:before {
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .inputsContainer {
@@ -105,7 +109,7 @@
   flex-direction: column;
 }
 .inputsContainer label {
-  color: #c9847c;
+  color: #5c74b2;
   font-weight: 400;
   font-size: 0.8rem;
 }
@@ -124,7 +128,7 @@
   text-align: center;
 }
 .inputContainer :disabled {
-  color: #ff7954;
+  color: #244EFF;
   font-weight: bold;
 }
 
@@ -133,7 +137,7 @@
   width: 100%;
   background: #fff;
   flex-wrap: wrap;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 1rem;
   display: flex;
   align-items: center;
@@ -157,7 +161,7 @@
 }
 .socialsContainer label {
   font-size: 0.9rem;
-  color: #ff7954;
+  color: #244EFF;
 }
 .socialsContainer svg {
   cursor: pointer;

@@ -58,14 +58,14 @@
     transition: width 1s;
     display: flex;
     background: #fff;
-    border-radius: 30px;
+    border-radius: $mediumBorderRadius;
     padding: 1.5rem 1.5rem;
     flex-wrap: nowrap;
     overflow: hidden;
 }
 
 .h1 {
-    color: #402a27;
+    color: $background-color;
     flex: 100%;
     font-size: 1.75rem;
 }
@@ -95,7 +95,7 @@
     margin-bottom: 3rem;
     padding: 2rem;
     background: #fff;
-    border-radius: 30px;
+    border-radius: $mediumBorderRadius;
     > div {
         transform: scale(0.9);
         transform-origin: left;

@@ -46,7 +46,7 @@
     flex: 48%;
     max-width: 48%;
     padding: 1rem 1rem;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     margin: 0.5rem 0;
     background: #fff;
     box-shadow: 0 20px 20px rgba(206, 142, 124, 0.15);
@@ -143,7 +143,7 @@
     * {
         color: #ffffff !important;
     }
-    background-color: #e87e41 !important;
+    background-color: $color-thirdary !important;
 }
 
 @keyframes flash {

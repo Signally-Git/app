@@ -38,7 +38,7 @@
 
 .teamsContainer {
   background-color: #fff;
-  border-radius: 20px;
+  border-radius: 5px;
   min-width: 25rem;
   margin-bottom: 1rem;
   max-width: 45%;
@@ -79,7 +79,7 @@
   cursor: pointer;
 }
 .menu > li > a {
-  color: #402927;
+  color: #1B335E;
   display: block;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -95,15 +95,15 @@
 }
 
 .active {
-  color: #ff7954;
+  color: #244EFF;
 }
 .active a {
   transition: 0.2s;
-  color: #ff7954 !important;
+  color: #244EFF !important;
 }
 .active::after {
   transition: 0.2s;
-  background-color: #ff7954;
+  background-color: #244EFF;
 }
 
 .slider {
@@ -141,7 +141,7 @@
 }
 
 .added {
-  color: #ff7954;
+  color: #244EFF;
   height: 1.65rem;
   display: flex;
   align-items: center;
@@ -193,8 +193,8 @@
   font-size: 0.85rem;
   font-weight: 600;
   position: relative;
-  background: #f7f5f5;
-  border-radius: 10px;
+  background: #F4F7FC;
+  border-radius: 5px;
 }
 .itemsList li::before {
   content: "";
@@ -206,7 +206,7 @@
   bottom: 0;
   margin: auto;
   height: 4px;
-  border-radius: 50%;
+  border-radius: 20px;
   width: 4px;
   background: transparent;
   transition: 0.2s;
@@ -224,7 +224,7 @@
   left: -1em;
   height: 8px;
   width: 8px;
-  background: #ff7954;
+  background: #244EFF;
 }
 .itemsList li > div {
   display: flex;
@@ -237,8 +237,8 @@
 }
 
 .groupName {
-  color: #ff7954 !important;
-  border-radius: 20px;
+  color: #244EFF !important;
+  border-radius: 5px;
   font-weight: normal;
   font-size: 0.75rem;
 }
@@ -251,12 +251,12 @@
 }
 
 .orangeTxt {
-  color: #ff7954;
+  color: #244EFF;
 }
 
 .teamAssignment {
   background-color: #fff;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 1rem 2rem;
   margin-bottom: auto;
 }
@@ -266,7 +266,7 @@
   margin-top: 0;
 }
 .teamAssignment h2 span {
-  color: #ff7954 !important;
+  color: #244EFF !important;
   font-size: 1.2rem !important;
 }
 .teamAssignment > div {
@@ -286,13 +286,13 @@
   align-items: center !important;
 }
 .assignItem:hover, .assignItem:hover button {
-  color: #ff7954;
+  color: #244EFF;
 }
 .assignItem > span {
   padding-top: 0 !important;
 }
 .assignItem button {
-  color: #402927;
+  color: #1B335E;
   transition: 0.2s;
   background: none;
   border: none;
@@ -330,9 +330,9 @@
   position: absolute;
   left: -1em;
   height: 8px;
-  border-radius: 50%;
+  border-radius: 20px;
   width: 8px;
-  background: #ff7954;
+  background: #244EFF;
 }
 
 .searchInput {
@@ -349,18 +349,18 @@
 
 .search {
   text-indent: 2rem;
-  border-radius: 20px;
+  border-radius: 5px;
   width: 100%;
   outline: none;
   border: 1px solid transparent;
   margin: 1rem 0;
   padding: 0.75rem 0.5rem;
-  background: #f7f5f5;
+  background: #F4F7FC;
   display: block;
   transition: 0.2s;
 }
 .search:focus {
-  border-color: #ff7954;
+  border-color: #244EFF;
 }
 
 .all {
@@ -369,5 +369,5 @@
   float: right;
 }
 .all:hover {
-  color: #ff7954;
+  color: #244EFF;
 }

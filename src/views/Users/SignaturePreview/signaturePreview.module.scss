@@ -47,7 +47,7 @@
 .groupName {
     color: rgba($color-dark-accent, 0.75) !important;
     padding: 0.25rem 0.75rem;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     background-color: rgba($color-dark-accent, 0.08);
     margin-top: 0.5rem;
     font-weight: 600;
@@ -121,7 +121,7 @@
 .back {
     backface-visibility: hidden;
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     padding: 2rem;
     margin-bottom: auto;
     h2 {
@@ -167,7 +167,7 @@
         margin-bottom: 1rem;
         padding: 0.5rem;
         /* border: none; */
-        border-radius: 10px;
+        border-radius: $smallBorderRadius;
     }
     > button:last-child {
         margin-right: auto;
@@ -235,7 +235,7 @@
     box-shadow: 0 0 30px rgba($color-dark-accent, 0.4);
     width: 35rem;
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     height: 40rem;
     padding: 1rem 2rem;
     h3 {
@@ -266,7 +266,7 @@
             font-weight: 600;
             position: relative;
             background: $color-lighter-accent;
-            border-radius: 10px;
+            border-radius: $smallBorderRadius;
             label {
                 display: block;
                 position: relative;
@@ -297,7 +297,7 @@
                     position: absolute;
                     inset: 0;
                     margin: auto;
-                    border-radius: 50%;
+                    border-radius: $hugeRadius;
                     height: 25px;
                     width: 25px;
                     border: 1px solid $color-dark-accent;
@@ -309,7 +309,7 @@
                         white-space: nowrap;
                         vertical-align: baseline;
                         background: $color-dark-accent;
-                        border-radius: 50%;
+                        border-radius: $hugeRadius;
                         padding: 0;
                         height: 15px;
                         width: 15px;
@@ -328,7 +328,7 @@
                 bottom: 0;
                 margin: auto;
                 height: 6px;
-                border-radius: 50%;
+                border-radius: $hugeRadius;
                 width: 6px;
                 background: transparent;
                 transition: 0.2s;
@@ -360,13 +360,13 @@
         }
     }
     .searchInput {
-        color: #402a27;
+        color: $background-color;
         width: 100%;
         font-family: "Montserrat";
         text-indent: 2.5rem;
         transition: 0.2s;
         padding: 0.75rem;
-        border-radius: 30px;
+        border-radius: $mediumBorderRadius;
         background: $color-lighter-accent;
         border: 1px solid transparent;
         outline: none;

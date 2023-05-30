@@ -51,7 +51,7 @@ function Events() {
                 content: (
                     <>
                         <FormattedMessage id="message.error.delete" />
-                        <span style={{ color: "#FF7954" }}>
+                        <span className={classes.primaryColor}>
                             {" "}
                             {preview.name}
                         </span>
@@ -66,7 +66,9 @@ function Events() {
         notification({
             content: (
                 <>
-                    <span style={{ color: "#FF7954" }}>{preview.name} </span>
+                    <span className={classes.primaryColor}>
+                        {preview.name}{" "}
+                    </span>
                     <FormattedMessage id="message.success.delete" />
                 </>
             ),

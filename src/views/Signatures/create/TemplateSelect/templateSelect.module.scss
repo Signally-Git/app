@@ -19,7 +19,7 @@
         width: 100%;
         display: flex;
         flex-wrap: wrap;
-        border-radius: 20px;
+        border-radius: $borderRadius;
     }
     input {
         padding: 3rem 10rem;
@@ -28,7 +28,7 @@
         height: 3rem;
         font-size: 0.9rem;
         color: grey;
-        border-radius: 30px;
+        border-radius: $mediumBorderRadius;
         background: transparent;
         border: none;
         &:focus {
@@ -90,7 +90,7 @@
             position: relative;
             transition: 0.2s;
             text-transform: uppercase;
-            border-radius: 20px;
+            border-radius: $borderRadius;
             border: 1px solid $color-dark-accent;
             color: $color-dark-accent;
             padding: 0.25rem 0.75rem;
@@ -187,7 +187,7 @@
         li {
             padding: 1rem;
             position: relative;
-            border-radius: 20px;
+            border-radius: $borderRadius;
             background-color: #fff;
             transition: border-color 0.3s;
             border: 1px solid transparent;
@@ -258,7 +258,7 @@
         padding: 0.25rem 0.5rem;
         color: $color-dark-accent;
         border: 1px solid $color-dark-accent;
-        border-radius: 20px;
+        border-radius: $borderRadius;
         &:hover {
             color: $color-primary;
             border-color: $color-primary;

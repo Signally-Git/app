@@ -12,6 +12,10 @@
     }
 }
 
+.primaryColor {
+    color: $color-primary;
+}
+
 .modalContainer {
     display: flex;
     margin: auto;
@@ -46,7 +50,7 @@
     max-width: 25rem;
     min-width: 25rem;
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     padding: 2rem;
     position: relative;
     height: 85%;
@@ -141,7 +145,7 @@
         cursor: pointer;
         position: relative;
         background: $color-lighter-accent;
-        border-radius: 10px;
+        border-radius: $smallBorderRadius;
         &::before {
             content: "";
             display: block;
@@ -152,7 +156,7 @@
             bottom: 0;
             margin: auto;
             height: 8px;
-            border-radius: 50%;
+            border-radius: $hugeRadius;
             width: 8px;
             background: transparent;
             transition: 0.2s;
@@ -186,7 +190,7 @@
 
 .groupName {
     color: $color-primary;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     font-weight: normal;
     font-size: 0.75rem;
 }
@@ -212,7 +216,7 @@
 
 .search {
     text-indent: 2rem;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     width: 100%;
     outline: none;
     border: 1px solid transparent;
@@ -233,7 +237,7 @@
 .signaturePreview {
     margin-left: 3rem;
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     // max-width: 30rem;
     padding: 0 2rem;
     margin-bottom: auto;
@@ -283,7 +287,7 @@
     padding: 0.75rem;
     font-size: 0.85rem;
     font-weight: 600;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     svg {
         transition: 0.2s;
         margin-left: 0.5rem;

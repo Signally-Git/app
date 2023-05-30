@@ -62,7 +62,7 @@ export default function CreateWorkplace({ setDone }) {
                 content: (
                     <>
                         <FormattedMessage id="message.error.add" />
-                        <span style={{ color: "#FF7954" }}>
+                        <span className={classes.primaryColor}>
                             {workplace.name}
                         </span>
                     </>
@@ -74,7 +74,7 @@ export default function CreateWorkplace({ setDone }) {
             notification({
                 content: (
                     <>
-                        <span style={{ color: "#FF7954" }}>
+                        <span className={classes.primaryColor}>
                             {workplace.name}
                         </span>{" "}
                         <FormattedMessage id="message.success.created" />

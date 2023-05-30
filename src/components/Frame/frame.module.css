@@ -1,6 +1,6 @@
 .desktop {
   animation: fadeIn 0.5s forwards;
-  background-color: #e3d8d8;
+  background-color: #d8dce3;
   height: 100vh;
   margin: 0;
   box-sizing: border-box;
@@ -13,7 +13,7 @@
   height: 95%;
   position: relative;
   margin: auto;
-  border-radius: 30px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   background-color: #fbf8f7;
@@ -65,7 +65,7 @@
   width: 100%;
   font-size: 0.9rem;
   text-align: center;
-  color: #402927;
+  color: #1B335E;
 }
 .userInfos p {
   line-height: 0.5rem;
@@ -93,16 +93,16 @@
   height: 100%;
   padding: 2rem;
   padding-top: 1rem;
-  background-color: #f4eeef;
+  background-color: #efeef4;
   position: relative;
-  border-radius: 20px;
+  border-radius: 5px;
   align-content: flex-start;
   opacity: 0;
   animation: fadeIn 1s 1s forwards;
 }
 .dashboardContainer h1 {
   flex: 100%;
-  color: #402927;
+  color: #1B335E;
 }
 .dashboardContainer .tilesContainer {
   width: 26vw;

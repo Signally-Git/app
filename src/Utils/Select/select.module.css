@@ -6,8 +6,8 @@
   outline: none;
   transition: border-color 0.3s;
   background: #fff;
-  border: 1px solid #f0e9e9;
-  border-radius: 10px;
+  border: 1px solid #E7EEF8;
+  border-radius: 5px;
   padding: 1rem;
   width: 100%;
   display: block;
@@ -19,5 +19,5 @@
 }
 .select:focus-within {
   box-shadow: none;
-  border-color: #ff7954;
+  border-color: #244EFF;
 }

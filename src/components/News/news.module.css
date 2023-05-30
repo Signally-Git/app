@@ -1,6 +1,6 @@
 .container {
-  border-radius: 20px;
-  color: #402927;
+  border-radius: 5px;
+  color: #1B335E;
   background-color: #fff;
   width: 55%;
   padding: 2rem;
@@ -14,7 +14,7 @@
   margin-bottom: 1rem;
 }
 .container > div > div > div > svg {
-  color: #402927;
+  color: #1B335E;
   position: absolute;
   right: 0rem;
   font-size: 1.25rem;
@@ -22,12 +22,12 @@
   z-index: 2;
 }
 .container > div > div > div > svg:hover {
-  color: #ff7954;
+  color: #244EFF;
   cursor: pointer;
 }
 
 .orangeTxt {
-  color: #ff7954;
+  color: #244EFF;
 }
 
 .bold > span {

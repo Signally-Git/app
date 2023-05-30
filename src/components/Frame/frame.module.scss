@@ -2,7 +2,7 @@
 
 .desktop {
     animation: fadeIn 0.5s forwards;
-    background-color: #e3d8d8;
+    background-color: $backdrop-color;
     height: 100vh;
     margin: 0;
     box-sizing: border-box;
@@ -14,7 +14,7 @@
         height: 95%;
         position: relative;
         margin: auto;
-        border-radius: 30px;
+        border-radius: $mediumBorderRadius;
         display: flex;
         flex-direction: column;
         > div {
@@ -96,9 +96,9 @@
     height: 100%;
     padding: 2rem;
     padding-top: 1rem;
-    background-color: #f4eeef;
+    background-color: $background-color;
     position: relative;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     align-content: flex-start;
     opacity: 0;
     animation: fadeIn 1s 1s forwards;

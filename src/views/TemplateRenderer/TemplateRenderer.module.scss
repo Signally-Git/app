@@ -1,3 +1,5 @@
+@import "../../Assets/style/colors";
+
 .container {
     width: 80%;
     height: 90vh;
@@ -28,7 +30,7 @@
                 > button {
                     background-color: transparent;
                     cursor: pointer;
-                    border-radius: 50%;
+                    border-radius: $hugeRadius;
                     height: 2rem;
                     width: 2rem;
                     font-size: 1rem;

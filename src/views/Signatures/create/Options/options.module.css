@@ -5,8 +5,8 @@
   min-height: 100%;
 }
 .container select {
-  border: 1px solid #f7f5f5;
-  border-radius: 10px;
+  border: 1px solid #F4F7FC;
+  border-radius: 5px;
   padding: 0.5rem 0.5rem;
   width: 75%;
   outline: none;
@@ -17,7 +17,7 @@
   font-weight: normal;
 }
 .container h4 {
-  color: #402927;
+  color: #1B335E;
   font-weight: bold;
   font-size: 1rem;
   text-align: left;
@@ -57,7 +57,7 @@
 
 .colorPreview {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.356);
-  border-radius: 50%;
+  border-radius: 20px;
   border: none;
   margin: 0.2rem;
   width: 20px;
@@ -67,7 +67,7 @@
 .rangeSlider {
   height: 6px;
   width: 100%;
-  background-color: #f7f5f5;
+  background-color: #F4F7FC;
   margin: auto;
   margin-right: 0;
   margin-left: 1.25rem;
@@ -77,9 +77,9 @@
   transition: 200ms;
   height: 25px;
   width: 25px;
-  background-color: #ff7954;
+  background-color: #244EFF;
   border: 3px solid #fff;
-  border-radius: 50%;
+  border-radius: 20px;
   outline: none;
   box-shadow: 1px 1px 3px rgba(255, 121, 84, 0.5333333333);
 }
@@ -92,8 +92,8 @@
 }
 .checkToText > input[type=text] {
   background: none;
-  border: 1px solid #f7f5f5;
-  border-radius: 10px;
+  border: 1px solid #F4F7FC;
+  border-radius: 5px;
   padding: 0.5rem 0.5rem;
   margin-left: 0;
   width: 75%;
@@ -108,8 +108,8 @@
 
 .textArea {
   background: none;
-  border: 1px solid #f7f5f5;
-  border-radius: 10px;
+  border: 1px solid #F4F7FC;
+  border-radius: 5px;
   padding: 0.5rem 0.5rem;
   margin-left: 0;
   font-family: "Helvetica", serif;
@@ -133,15 +133,15 @@
   justify-content: space-between;
   font-size: 0.75rem;
   width: 75%;
-  border: 1px solid #f7f5f5;
-  border-radius: 10px;
+  border: 1px solid #F4F7FC;
+  border-radius: 5px;
   padding: 0.5rem 0.5rem;
   margin-top: 0.5rem;
 }
 
 .colorPreview {
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 20px;
   width: 20px;
   height: 20px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.55);
@@ -154,7 +154,7 @@
   max-width: 9rem;
   background: #fff;
   box-shadow: 0 12px 40px rgba(230, 208, 201, 0.8);
-  border-radius: 10px;
+  border-radius: 5px;
   justify-content: center;
   align-items: center;
   top: 0;
@@ -250,11 +250,11 @@
 }
 
 input:checked + .slider {
-  background-color: #ff7954;
+  background-color: #244EFF;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #ff7954;
+  box-shadow: 0 0 1px #244EFF;
 }
 
 input:checked + .slider:before {
@@ -266,7 +266,7 @@ input:checked + .slider:before {
 }
 
 .slider.round:before {
-  border-radius: 50%;
+  border-radius: 20px;
 }
 
 .socialsList {
@@ -293,7 +293,7 @@ input:checked + .slider:before {
   cursor: grab;
   padding: 0.5rem 0.5rem 0 0.75rem;
   border: 1px solid #f5f5f5;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .socialsList > div[role=button]::before {
   color: grey;

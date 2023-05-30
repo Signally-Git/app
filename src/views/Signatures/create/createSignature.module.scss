@@ -17,6 +17,11 @@
         background: transparent;
     }
 }
+
+.primaryColor {
+    color: $color-primary;
+}
+
 .container > div {
     display: flex;
     overflow: hidden;
@@ -40,7 +45,7 @@
     align-items: center;
     justify-content: center;
     background: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     width: 25%;
     height: 13rem;
     padding: 0 1rem 1rem;
@@ -127,7 +132,7 @@
     max-height: 65vh;
     overflow: auto;
     background: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     width: 40%;
     min-width: 15rem;
     padding-top: 5.5rem;
@@ -245,11 +250,11 @@
         transition: 0.4s;
     }
     .sliderTabs {
-        border-radius: 30px;
+        border-radius: $mediumBorderRadius;
     }
 
     .sliderTabs:before {
-        border-radius: 30px;
+        border-radius: $mediumBorderRadius;
     }
 }
 
@@ -308,7 +313,7 @@
         background: $color-dark-accent;
         padding: 0.15rem 0.75rem !important;
         border: $color-dark-accent;
-        border-radius: 20px;
+        border-radius: $borderRadius;
         color: #fff;
         margin-left: 1rem;
     }
@@ -365,7 +370,7 @@
     background-color: #fff;
     height: fit-content;
     max-height: 80%;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     .browserHeader {
         width: 100%;
         height: 1.75rem;
@@ -382,7 +387,7 @@
             > li {
                 min-width: 10px;
                 min-height: 10px;
-                border-radius: 50%;
+                border-radius: $hugeRadius;
             }
             .close {
                 background: $color-primary;
@@ -401,14 +406,14 @@
             height: 1.5rem;
             font-size: 0.7rem;
             color: grey;
-            border-radius: 10px;
+            border-radius: $smallBorderRadius;
             border: none;
         }
     }
     .lazyLoadingLong,
     .lazyLoadingShort,
     .lazyLoadingMedium {
-        border-radius: 20px;
+        border-radius: $borderRadius;
         background: #f1f1f1;
         width: 100%;
         height: 1rem;
@@ -438,7 +443,7 @@
     margin: auto;
     flex-direction: column;
     align-items: center;
-    color: #402a27;
+    color: $background-color;
     text-align: center;
     padding: 0;
     > div {
@@ -485,13 +490,13 @@
     flex: 100%;
     background: #fff;
     width: 100%;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
 }
 
 .placeholderImg,
 .placeholderBanner {
     background: rgba(184, 184, 184, 0.596);
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     margin-right: 40%;
     height: 38px;
     flex: 100%;
@@ -579,7 +584,7 @@ input:checked + .slider:before {
 }
 
 .slider.round:before {
-    border-radius: 50%;
+    border-radius: $hugeRadius;
 }
 
 .iconsContainer {
@@ -597,7 +602,7 @@ input:checked + .slider:before {
         border: 1px solid $color-lighter-accent;
         padding: 1rem;
         padding-right: 5rem;
-        border-radius: 10px;
+        border-radius: $smallBorderRadius;
         margin: 0.5rem 0;
         font-family: "Montserrat";
         outline: none;

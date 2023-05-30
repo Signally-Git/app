@@ -30,12 +30,16 @@
   font-size: 0.9rem;
 }
 .container .plugins {
-  max-width: 40%;
-  margin-left: -2px;
+  max-height: 2rem;
+  width: auto;
+  margin-right: auto;
 }
-.container .takeoff {
-  max-width: 25vw;
-  margin-right: 1rem;
+.container ul {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  align-items: center;
+  padding: 0;
 }
 .container form {
   width: 100%;
@@ -48,19 +52,18 @@
 .container input[type=password]:focus,
 .container select:focus {
   box-shadow: 0 12px 40px rgba(230, 208, 201, 0.28);
-  border-color: #ff7954;
+  border-color: #244EFF;
 }
 .container select {
   padding: 0.9rem;
   margin-top: -0.35rem;
   outline: none;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 100%;
   border-color: transparent;
 }
 
 .descriptionBeta {
-  max-width: 60%;
   overflow: auto;
 }
 .descriptionBeta p {
@@ -117,10 +120,6 @@
 .logInContainer .inputContainer > div {
   position: relative;
 }
-.registerContainer .textIllustration,
-.logInContainer .textIllustration {
-  margin: 0;
-}
 
 .spacing {
   height: 1rem;
@@ -158,12 +157,12 @@
 
 .inputContainer .inputTitle {
   margin-bottom: 6px;
-  color: #402a27;
+  color: #1B335E;
 }
 
 .slider {
   position: relative;
-  width: 40%;
+  width: 100%;
 }
 .slider > div {
   display: flex;
@@ -188,7 +187,7 @@
   min-width: 100%;
   position: relative;
   display: flex;
-  background-color: #fbf4f2;
+  background-color: #F9F5F4;
   border-radius: 8px;
   align-items: center;
   font-family: Montserrat, serif;
@@ -230,38 +229,36 @@
 .formContainer h2 {
   text-align: center;
   font-family: Trebuchet MS, serif;
-  color: #402927;
+  color: #1B335E;
   margin-top: 0;
   font-size: 1.3rem;
 }
 
 .formContainer h2 span {
-  color: #ff7954;
+  color: #244EFF;
 }
 
-.textIllustration {
+.landingContainer {
   display: flex;
-  flex-direction: row-reverse;
-  width: 60%;
   margin-right: 2rem;
   align-items: center;
 }
 
-.textIllustration h1 {
-  color: #ff7954;
+.landingContainer h1 {
+  color: #244EFF;
   margin-bottom: 2rem;
 }
 
-.textIllustration p {
-  color: #402927;
+.landingContainer p {
+  color: #1B335E;
 }
 
-.textIllustration p span {
-  color: #ff7954;
+.landingContainer p span {
+  color: #244EFF;
   font-weight: bold;
 }
 
-.textIllustration .takeoff {
+.landingContainer .takeoff {
   height: auto;
   margin-left: -45px;
 }
@@ -283,12 +280,12 @@
   animation-delay: 0.75s;
 }
 .congrats h2 {
-  color: #ff7954;
+  color: #244EFF;
 }
 .congrats > span {
   animation-delay: 0.75s;
   font-size: 0.8rem;
-  color: #402927;
+  color: #1B335E;
 }
 
 .disappear {
@@ -323,10 +320,10 @@
   display: flex;
   justify-content: right;
   cursor: pointer;
-  color: #402927;
+  color: #1B335E;
 }
 .forgot:hover {
-  color: #ff7954;
+  color: #244EFF;
 }
 
 .modal {
@@ -336,8 +333,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 40px rgba(64, 41, 39, 0.3);
-  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(27, 51, 94, 0.3);
+  border-radius: 5px;
   inset: 0;
   width: 25rem;
   height: 15rem;
@@ -350,7 +347,7 @@
   text-align: center;
 }
 .modal p .orangeTxt {
-  color: #ff7954;
+  color: #244EFF;
   font-weight: bold;
   display: inline;
 }
@@ -387,7 +384,7 @@
   margin-left: 0.5rem;
   background: red;
   color: #fff;
-  border-radius: 50%;
+  border-radius: 20px;
   padding: 5px;
 }
 

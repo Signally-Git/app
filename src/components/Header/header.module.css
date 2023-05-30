@@ -30,7 +30,7 @@
   left: 12rem;
   padding: 1rem 5%;
   z-index: 5;
-  border-radius: 20px 20px 0px 0px;
+  border-radius: 5px 5px 0 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -39,7 +39,7 @@
 }
 .container h2 {
   font-size: 1.35rem;
-  color: #402927;
+  color: #1B335E;
   line-height: 0;
 }
 
@@ -58,25 +58,25 @@
   font-weight: 600;
   margin-right: 1rem;
   padding: 0.25rem 1rem;
-  border-radius: 20px;
+  border-radius: 5px;
   font-size: 0.9rem;
-  color: #402927;
+  color: #1B335E;
   transition: 0.2s;
 }
 .nonLogged li:last-child a {
-  border: 1px solid #ff7954;
-  color: #ff7954;
+  border: 1px solid #244EFF;
+  color: #244EFF;
 }
 .nonLogged li:last-child a:hover {
-  border-color: #ff7954;
-  background: #ff7954;
+  border-color: #244EFF;
+  background: #244EFF;
   color: #fff;
 }
 .nonLogged li:hover {
   cursor: pointer;
 }
 .nonLogged li:hover a {
-  color: #ff7954;
+  color: #244EFF;
 }
 
 .notif {
@@ -92,23 +92,20 @@
   width: 15px;
   height: 15px;
   text-align: center;
-  background-color: #ff7954;
+  background-color: #244EFF;
   color: #fff;
   padding: 2px;
   font-size: 0.8rem;
   right: -9px;
   top: -9px;
-  border-radius: 50%;
-  border: 1px solid #ff7954;
+  border-radius: 20px;
+  border: 1px solid #244EFF;
 }
 
 .pageTitle {
   background: #f5eeef;
-  border-radius: 20px 40px 0 0;
-  padding-bottom: 1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  padding-top: 0.5rem;
+  border-radius: 5px 10px 0 0;
+  padding: 0.5rem 2rem 1rem;
   margin-left: 3.25rem;
   margin-top: 6rem;
   z-index: 2;
@@ -120,38 +117,38 @@
   margin-right: 1rem;
   display: flex;
   align-items: center;
-  border-right: 1px solid #402927;
+  border-right: 1px solid #1B335E;
 }
 .btnsContainer .studio {
-  border: 1px solid #ff7954;
-  color: #ff7954;
+  border: 1px solid #244EFF;
+  color: #244EFF;
 }
 .btnsContainer .studio:hover {
   color: #fff;
-  background: #ff7954;
+  background: #244EFF;
 }
 .btnsContainer .store {
-  border: 1px solid #ff7954;
-  color: #ff7954;
+  border: 1px solid #244EFF;
+  color: #244EFF;
 }
 .btnsContainer .store:hover {
   color: #fff;
-  background: #ff7954;
-  border-color: #ff7954;
+  background: #244EFF;
+  border-color: #244EFF;
 }
 .btnsContainer a {
   font-weight: 600;
   margin-right: 1rem;
   padding: 0.25rem 1rem;
-  border: 1px solid #402927;
-  border-radius: 20px;
+  border: 1px solid #1B335E;
+  border-radius: 5px;
   font-size: 0.9rem;
-  color: #402927;
+  color: #1B335E;
   transition: 0.2s;
 }
 .btnsContainer a:hover {
-  color: #ff7954;
-  border-color: #ff7954;
+  color: #244EFF;
+  border-color: #244EFF;
 }
 
 .searchContainer {
@@ -178,10 +175,10 @@
 }
 
 .headerSpan {
-  color: #ff7954;
+  color: #244EFF;
 }
 .headerSpan a {
-  color: #ff7954;
+  color: #244EFF;
   text-decoration: underline;
 }
 
@@ -193,9 +190,9 @@
   height: 25px;
   color: #fff;
   font-size: 26px;
-  border-radius: 50%;
+  border-radius: 20px;
   margin: 0;
-  background: #ff7954;
+  background: #244EFF;
 }
 
 .options {
@@ -205,22 +202,22 @@
   top: 2.5rem;
   background: rgb(255, 255, 255);
   padding: 0.5rem 1rem;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
   display: flex;
   flex-direction: column;
 }
 .options li {
   font-size: 1rem;
-  color: #402927;
+  color: #1B335E;
   font-family: "Trebuchet MS";
   padding: 0.5rem 0;
 }
 .options li a {
-  color: #402927;
+  color: #1B335E;
 }
 .options li:not(:last-of-type) {
-  border-bottom: 1px solid #402927;
+  border-bottom: 1px solid #1B335E;
 }
 
 .rightSide {
@@ -244,7 +241,7 @@
   background: #fbf8f7;
   padding: 0;
   padding: 0 1rem;
-  border: 1px solid #402927;
+  border: 1px solid #1B335E;
   border-radius: 15px;
   list-style: none;
   max-height: 1.7rem;
@@ -274,7 +271,7 @@
   white-space: nowrap;
   font-size: 0.8rem;
   font-weight: 500;
-  color: #402927;
+  color: #1B335E;
   transition: 0.2s;
   margin-bottom: 1rem;
 }
@@ -293,7 +290,7 @@
   font-weight: 600;
   white-space: nowrap;
   font-size: 0.9rem;
-  color: #402927;
+  color: #1B335E;
   transition: 0.2s;
   margin-right: 0.5rem;
 }
@@ -308,29 +305,29 @@
 }
 .reportContainer > div {
   transition: background-color 0.2s, border-color 0.2s;
-  color: #402927;
-  background: #f4eeef;
-  border: 1px solid #f4eeef;
+  color: #1B335E;
+  background: #ECEFF6;
+  border: 1px solid #ECEFF6;
   font-weight: bold;
   font-size: 0.9rem;
   width: 100%;
   margin: 0;
   margin-top: 1.25rem;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 0.5rem 0.55rem;
   display: flex;
   flex-direction: column;
 }
 .reportContainer > div:hover {
-  border-color: #402927;
+  border-color: #1B335E;
   color: #fff;
-  background-color: #402927;
+  background-color: #1B335E;
 }
 .reportContainer > div:hover button {
   color: #fff;
 }
 .reportContainer button {
-  color: #402927;
+  color: #1B335E;
   font-size: 0.6rem;
   margin-top: 0.15rem;
   cursor: pointer;

@@ -1,7 +1,7 @@
 @import "../../Assets/style/colors";
 
 .container {
-    border-radius: 20px;
+    border-radius: $borderRadius;
     color: $color-dark-accent;
     background-color: #fff;
     width: 55%;

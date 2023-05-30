@@ -1,13 +1,13 @@
 .container {
   width: auto;
   position: relative;
-  border: 1px solid #f0e9e9;
-  border-radius: 10px;
+  border: 1px solid #E7EEF8;
+  border-radius: 5px;
   padding: 0.5rem;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 .container:hover {
-  border-color: #ff7954;
+  border-color: #244EFF;
 }
 .container input {
   top: 0;

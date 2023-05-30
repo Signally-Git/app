@@ -2,16 +2,13 @@ import {
     ResponsiveContainer,
     CartesianGrid,
     Legend,
-    Area,
-    AreaChart,
     LineChart,
     Line,
-    Bar,
-    BarChart,
     Tooltip,
     XAxis,
     YAxis,
 } from "recharts";
+import classes from "../Stats.module.css";
 import { FormattedMessage } from "react-intl";
 
 const Chart = ({ data }) => {
@@ -26,27 +23,13 @@ const Chart = ({ data }) => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                {/*<Area*/}
-                {/*    type="monotone"*/}
-                {/*    dataKey="uv"*/}
-                {/*    stackId="1"*/}
-                {/*    stroke="#8884d8"*/}
-                {/*    fill="#8884d8"*/}
-                {/*/>*/}
                 <Line
+                    // stroke={classes["color-primary"]}
                     type="monotone"
                     stackId={1}
                     dataKey="displayed"
-                    stroke="#ff7954"
-                    // fill="#ff7954"
                 />
-                <Line
-                    type="monotone"
-                    stackId={2}
-                    dataKey="clicked"
-                    stroke="#ffc300"
-                    // fill="#ffc300"
-                />
+                <Line type="monotone" stackId={2} dataKey="clicked" />
             </LineChart>
         </ResponsiveContainer>
     );

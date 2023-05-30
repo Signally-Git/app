@@ -1,7 +1,7 @@
 .container {
   margin-bottom: auto;
   min-width: 55%;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 1rem 2rem 1rem 2rem;
   max-height: 95%;
   display: flex;
@@ -12,7 +12,7 @@
 }
 .container p,
 .container input {
-  color: #402927;
+  color: #1B335E;
 }
 .container .tagLine {
   text-align: center;
@@ -22,12 +22,12 @@
   text-align: justify;
 }
 .container h3 {
-  color: #ff7954;
+  color: #244EFF;
 }
 .container h4 {
   font-size: 1rem;
   margin: 0;
-  color: #ff7954;
+  color: #244EFF;
 }
 .container h4 ~ div {
   margin-top: 0.5rem;
@@ -37,9 +37,9 @@
   transition: 0.2s;
   background: #fff;
   width: 55%;
-  border: 1px solid #f0e9e9;
+  border: 1px solid #E7EEF8;
   padding: 1rem;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 0.5rem 0;
   outline: none;
   font-family: inherit;

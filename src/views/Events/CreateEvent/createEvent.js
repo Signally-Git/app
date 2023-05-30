@@ -94,7 +94,7 @@ export default function CreateEvent({ setDone, event }) {
                             notification({
                                 content: (
                                     <>
-                                        <span style={{ color: "#FF7954" }}>
+                                        <span className={classes.primaryColor}>
                                             {eventName}{" "}
                                         </span>
                                         <FormattedMessage id="message.success.created" />
@@ -111,7 +111,7 @@ export default function CreateEvent({ setDone, event }) {
                                 content: (
                                     <>
                                         <FormattedMessage id="message.error.add" />
-                                        <span style={{ color: "#FF7954" }}>
+                                        <span className={classes.primaryColor}>
                                             {" "}
                                             {eventName}
                                         </span>
@@ -158,7 +158,9 @@ export default function CreateEvent({ setDone, event }) {
                                 notification({
                                     content: (
                                         <>
-                                            <span style={{ color: "#FF7954" }}>
+                                            <span
+                                                className={classes.primaryColor}
+                                            >
                                                 {eventName}
                                             </span>{" "}
                                             <FormattedMessage id="message.success.edit" />
@@ -172,7 +174,9 @@ export default function CreateEvent({ setDone, event }) {
                                     content: (
                                         <>
                                             <FormattedMessage id="message.error.edit" />
-                                            <span style={{ color: "#FF7954" }}>
+                                            <span
+                                                className={classes.primaryColor}
+                                            >
                                                 {" "}
                                                 {eventName}
                                             </span>
@@ -209,7 +213,7 @@ export default function CreateEvent({ setDone, event }) {
                         notification({
                             content: (
                                 <>
-                                    <span style={{ color: "#FF7954" }}>
+                                    <span className={classes.primaryColor}>
                                         {eventName}
                                     </span>{" "}
                                     <FormattedMessage id="message.success.edit" />
@@ -223,7 +227,7 @@ export default function CreateEvent({ setDone, event }) {
                             content: (
                                 <>
                                     <FormattedMessage id="message.error.edit" />
-                                    <span style={{ color: "#FF7954" }}>
+                                    <span className={classes.primaryColor}>
                                         {" "}
                                         {eventName}
                                     </span>

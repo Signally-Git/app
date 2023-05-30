@@ -1,11 +1,11 @@
 .container {
   background: #fff;
   padding: 2rem;
-  border-radius: 20px;
+  border-radius: 5px;
   position: relative;
 }
 .container h4 {
-  color: #ff7954;
+  color: #244EFF;
   margin-top: 0;
 }
 .container h3 {
@@ -26,7 +26,7 @@
 
 .totalPrice {
   border-radius: 100px;
-  background: #402927;
+  background: #1B335E;
   color: #fff;
   display: flex;
   align-items: center;

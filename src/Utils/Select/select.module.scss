@@ -9,7 +9,7 @@
     transition: border-color 0.3s;
     background: #fff;
     border: 1px solid $color-light-accent;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     padding: 1rem;
     width: 100%;
     display: block;

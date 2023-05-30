@@ -38,12 +38,16 @@
         font-size: 0.9rem;
     }
     .plugins {
-        max-width: 40%;
-        margin-left: -2px;
+        max-height: 2rem;
+        width: auto;
+        margin-right: auto;
     }
-    .takeoff {
-        max-width: 25vw;
-        margin-right: 1rem;
+    ul {
+        display: flex;
+        list-style: none;
+        gap: 1rem;
+        align-items: center;
+        padding: 0;
     }
     form {
         width: 100%;
@@ -62,14 +66,13 @@
         padding: 0.9rem;
         margin-top: -0.35rem;
         outline: none;
-        border-radius: 10px;
+        border-radius: $smallBorderRadius;
         width: 100%;
         border-color: transparent;
     }
 }
 
 .descriptionBeta {
-    max-width: 60%;
     overflow: auto;
     p {
         font-size: 1.1rem;
@@ -127,9 +130,6 @@
             position: relative;
         }
     }
-    .textIllustration {
-        margin: 0;
-    }
 }
 
 .spacing {
@@ -168,12 +168,12 @@
 
 .inputContainer .inputTitle {
     margin-bottom: 6px;
-    color: #402a27;
+    color: $color-dark-accent;
 }
 
 .slider {
     position: relative;
-    width: 40%;
+    width: 100%;
     > div {
         display: flex;
         justify-content: space-between;
@@ -200,7 +200,7 @@
     min-width: 100%;
     position: relative;
     display: flex;
-    background-color: #fbf4f2;
+    background-color: $color-lighter-accent-variation;
     border-radius: 8px;
     align-items: center;
     font-family: Montserrat, serif;
@@ -253,30 +253,28 @@
     color: $color-primary;
 }
 
-.textIllustration {
+.landingContainer {
     display: flex;
-    flex-direction: row-reverse;
-    width: 60%;
     margin-right: 2rem;
     align-items: center;
     // flex-direction: column;
 }
 
-.textIllustration h1 {
+.landingContainer h1 {
     color: $color-primary;
     margin-bottom: 2rem;
 }
 
-.textIllustration p {
+.landingContainer p {
     color: $color-dark-accent;
 }
 
-.textIllustration p span {
+.landingContainer p span {
     color: $color-primary;
     font-weight: bold;
 }
 
-.textIllustration .takeoff {
+.landingContainer .takeoff {
     height: auto;
     margin-left: -45px;
 }
@@ -354,7 +352,7 @@
     justify-content: center;
     align-items: center;
     box-shadow: 0 0 40px rgba($color-dark-accent, 0.3);
-    border-radius: 20px;
+    border-radius: $borderRadius;
     inset: 0;
     width: 25rem;
     height: 15rem;
@@ -404,7 +402,7 @@
         margin-left: 0.5rem;
         background: red;
         color: #fff;
-        border-radius: 50%;
+        border-radius: $hugeRadius;
         padding: 5px;
     }
 }

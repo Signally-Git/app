@@ -95,7 +95,7 @@ export default function Tab({
                 notification({
                     content: (
                         <>
-                            <span style={{ color: "#FF7954" }}>{name}</span>{" "}
+                            <span className={classes.primaryColor}>{name}</span>{" "}
                             <FormattedMessage id="message.success.delete" />
                         </>
                     ),
@@ -108,7 +108,7 @@ export default function Tab({
                     content: (
                         <>
                             <FormattedMessage id="message.error.delete" />{" "}
-                            <span style={{ color: "#FF7954" }}>{name}</span>
+                            <span className={classes.primaryColor}>{name}</span>
                         </>
                     ),
                     status: "invalid",
@@ -134,7 +134,7 @@ export default function Tab({
                             notification({
                                 content: (
                                     <>
-                                        <span style={{ color: "#FF7954" }}>
+                                        <span className={classes.primaryColor}>
                                             {element.name}
                                         </span>{" "}
                                         <FormattedMessage id="message.success.delete" />
@@ -147,7 +147,9 @@ export default function Tab({
                                 notification({
                                     content: (
                                         <>
-                                            <span style={{ color: "#FF7954" }}>
+                                            <span
+                                                className={classes.primaryColor}
+                                            >
                                                 {count}{" "}
                                                 {
                                                     configuration.filter(
@@ -172,7 +174,7 @@ export default function Tab({
                                 content: (
                                     <>
                                         <FormattedMessage id="message.error.delete" />{" "}
-                                        <span style={{ color: "#FF7954" }}>
+                                        <span className={classes.primaryColor}>
                                             {element.name}
                                         </span>
                                     </>
@@ -195,7 +197,9 @@ export default function Tab({
                                 notification({
                                     content: (
                                         <>
-                                            <span style={{ color: "#FF7954" }}>
+                                            <span
+                                                className={classes.primaryColor}
+                                            >
                                                 {count}{" "}
                                                 {
                                                     configuration.filter(
@@ -220,7 +224,7 @@ export default function Tab({
                                 content: (
                                     <>
                                         <FormattedMessage id="message.error.delete" />{" "}
-                                        <span style={{ color: "#FF7954" }}>
+                                        <span className={classes.primaryColor}>
                                             {element.name}
                                         </span>
                                     </>
@@ -247,7 +251,9 @@ export default function Tab({
                                         content: (
                                             <>
                                                 <span
-                                                    style={{ color: "#FF7954" }}
+                                                    className={
+                                                        classes.primaryColor
+                                                    }
                                                 >
                                                     {count}{" "}
                                                     <FormattedMessage id="employees" />
@@ -268,7 +274,9 @@ export default function Tab({
                                     content: (
                                         <>
                                             <FormattedMessage id="message.error.delete" />{" "}
-                                            <span style={{ color: "#FF7954" }}>
+                                            <span
+                                                className={classes.primaryColor}
+                                            >
                                                 {element.firstName}{" "}
                                                 {element.lastName}
                                             </span>
@@ -286,7 +294,7 @@ export default function Tab({
             notification({
                 content: (
                     <>
-                        <span style={{ color: "#FF7954" }}>
+                        <span className={classes.primaryColor}>
                             {count} {type}
                         </span>{" "}
                         <FormattedMessage id="message.success.delete" />
@@ -486,7 +494,7 @@ export default function Tab({
                 notification({
                     content: (
                         <>
-                            <span style={{ color: "#FF7954" }}>
+                            <span className={classes.primaryColor}>
                                 {workplace.name}
                             </span>{" "}
                             <FormattedMessage id="message.success.edit" />
@@ -518,7 +526,7 @@ export default function Tab({
                     notification({
                         content: (
                             <>
-                                <span style={{ color: "#FF7954" }}>
+                                <span className={classes.primaryColor}>
                                     {team.name}
                                 </span>{" "}
                                 <FormattedMessage id="message.success.edit" />
@@ -535,7 +543,7 @@ export default function Tab({
                         content: (
                             <>
                                 <FormattedMessage id="message.error.edit" />{" "}
-                                <span style={{ color: "#FF7954" }}>
+                                <span className={classes.primaryColor}>
                                     {team.name}
                                 </span>
                             </>

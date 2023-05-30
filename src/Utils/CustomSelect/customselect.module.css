@@ -18,7 +18,7 @@
 }
 
 .open input {
-  border-radius: 10px 10px 0 0;
+  border-radius: 5px 5px 0 0;
 }
 .open .inputContainer > svg {
   transform: rotate(-180deg);
@@ -34,7 +34,7 @@
   z-index: 6;
   width: 100%;
   font-weight: bold;
-  color: #402927;
+  color: #1B335E;
   padding: 0.65rem 2rem 0.65rem 1rem;
 }
 .inputContainer svg {
@@ -46,12 +46,12 @@
   top: 0;
   margin: auto;
   position: absolute;
-  color: #402927;
+  color: #1B335E;
 }
 
 .splitter {
   font-size: 0.8rem;
-  color: #ff7954;
+  color: #244EFF;
   font-weight: bold;
 }
 
@@ -64,13 +64,12 @@
   right: 0;
   z-index: 5;
   margin: 0 auto;
-  border: 1px solid #ebe4e1;
+  border: 1px solid #DDE5F1;
   width: 100%;
   background-color: #fff;
-  box-shadow: 0 20px 30px #ebe4e1;
-  border-radius: 0 0 10px 10px;
-  padding: 0;
-  padding-top: 2.65rem;
+  box-shadow: 0 20px 30px #DDE5F1;
+  border-radius: 0 0 5px 5px;
+  padding: 2.65rem 0 0;
   list-style: none;
   opacity: 0;
   max-height: inherit !important;
@@ -86,20 +85,20 @@
   justify-content: space-between;
   font-size: 0.9rem;
   font-weight: normal;
-  color: #402927;
+  color: #1B335E;
 }
 .list li input,
 .list li input + svg {
   opacity: 0;
-  color: #ff7954;
+  color: #244EFF;
 }
 .list li input:checked + svg {
   opacity: 1;
 }
 .list li:hover, .list li:focus-within {
   transition: 0.2s;
-  color: #402927;
-  background-color: #f4eeef;
+  color: #1B335E;
+  background-color: #ECEFF6;
 }
 
 @keyframes dropDown {

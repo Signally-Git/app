@@ -16,6 +16,10 @@
   background: transparent;
 }
 
+.primaryColor {
+  color: #244EFF;
+}
+
 .container > div {
   display: flex;
   overflow: hidden;
@@ -39,7 +43,7 @@
   align-items: center;
   justify-content: center;
   background: #fff;
-  border-radius: 20px;
+  border-radius: 5px;
   width: 25%;
   height: 13rem;
   padding: 0 1rem 1rem;
@@ -84,7 +88,7 @@
   margin: 1.5rem 0.5rem 0 !important;
 }
 .modal .orangeTxt {
-  color: #ff7954;
+  color: #244EFF;
 }
 
 .signaturePreview {
@@ -101,11 +105,11 @@
   border: none;
   font-weight: bold;
   font-size: 1rem;
-  color: #402927;
+  color: #1B335E;
   background: none;
 }
 .btnTemplate:hover {
-  color: #ff7954;
+  color: #244EFF;
 }
 .btnTemplate svg {
   font-size: 1.2rem;
@@ -126,7 +130,7 @@
   max-height: 65vh;
   overflow: auto;
   background: #fff;
-  border-radius: 20px;
+  border-radius: 5px;
   width: 40%;
   min-width: 15rem;
   padding-top: 5.5rem;
@@ -152,11 +156,11 @@
   border: none;
   outline: none;
   background: none;
-  color: #402927;
+  color: #1B335E;
   cursor: pointer;
 }
 .tabsContainer > button:hover {
-  color: #ff7954;
+  color: #244EFF;
 }
 .tabsContainer .switchTabs {
   cursor: pointer;
@@ -204,7 +208,7 @@
 .tabsContainer .tabTitles span {
   width: 50%;
   line-height: 4.5rem;
-  color: #66433e;
+  color: #0F1E4C;
   font-size: 0.85rem;
   font-weight: bold;
 }
@@ -213,11 +217,11 @@
   width: 100%;
   position: relative;
   cursor: pointer;
-  background-color: #f8f2f0;
+  background-color: #F3F7FB;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  border-left: 12px solid #f8f2f0;
-  border-right: 12px solid #f8f2f0;
+  border-left: 12px solid #F3F7FB;
+  border-right: 12px solid #F3F7FB;
 }
 .tabsContainer .sliderTabs:before {
   position: absolute;
@@ -234,10 +238,10 @@
   transition: 0.4s;
 }
 .tabsContainer .sliderTabs {
-  border-radius: 30px;
+  border-radius: 10px;
 }
 .tabsContainer .sliderTabs:before {
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .col {
@@ -293,17 +297,17 @@
   cursor: pointer;
 }
 .confirm .noBgBtn {
-  background: #402927;
+  background: #1B335E;
   padding: 0.15rem 0.75rem !important;
-  border: #402927;
-  border-radius: 20px;
+  border: #1B335E;
+  border-radius: 5px;
   color: #fff;
   margin-left: 1rem;
 }
 .confirm button {
   border: none;
   background: none;
-  color: #ff7954;
+  color: #244EFF;
   padding: 0;
   font-size: 1.1rem;
   display: flex;
@@ -311,7 +315,7 @@
   margin: 0 0 0 0.25rem;
 }
 .confirm button:last-child {
-  color: #402927;
+  color: #1B335E;
 }
 
 @keyframes blink {
@@ -347,7 +351,7 @@
   background-color: #fff;
   height: fit-content;
   max-height: 80%;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 .signatureContainer .preview {
   pointer-events: none;
@@ -370,10 +374,10 @@
 .signatureContainer .browserHeader .btnsContainer > li {
   min-width: 10px;
   min-height: 10px;
-  border-radius: 50%;
+  border-radius: 20px;
 }
 .signatureContainer .browserHeader .btnsContainer .close {
-  background: #ff7954;
+  background: #244EFF;
 }
 .signatureContainer .browserHeader .btnsContainer .reduce {
   background: #ffbd44;
@@ -388,13 +392,13 @@
   height: 1.5rem;
   font-size: 0.7rem;
   color: grey;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
 }
 .signatureContainer .lazyLoadingLong,
 .signatureContainer .lazyLoadingShort,
 .signatureContainer .lazyLoadingMedium {
-  border-radius: 20px;
+  border-radius: 5px;
   background: #f1f1f1;
   width: 100%;
   height: 1rem;
@@ -422,7 +426,7 @@
   margin: auto;
   flex-direction: column;
   align-items: center;
-  color: #402a27;
+  color: #efeef4;
   text-align: center;
   padding: 0;
 }
@@ -469,13 +473,13 @@
   flex: 100%;
   background: #fff;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .placeholderImg,
 .placeholderBanner {
   background: rgba(184, 184, 184, 0.596);
-  border-radius: 10px;
+  border-radius: 5px;
   margin-right: 40%;
   height: 38px;
   flex: 100%;
@@ -544,11 +548,11 @@
 }
 
 input:checked + .slider {
-  background-color: #ff7954;
+  background-color: #244EFF;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #ff7954;
+  box-shadow: 0 0 1px #244EFF;
 }
 
 input:checked + .slider:before {
@@ -563,7 +567,7 @@ input:checked + .slider:before {
 }
 
 .slider.round:before {
-  border-radius: 50%;
+  border-radius: 20px;
 }
 
 .iconsContainer {
@@ -579,10 +583,10 @@ input:checked + .slider:before {
 .iconsContainer .borderInput {
   transition: 0.2s;
   background: #fff;
-  border: 1px solid #f7f5f5;
+  border: 1px solid #F4F7FC;
   padding: 1rem;
   padding-right: 5rem;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 0.5rem 0;
   font-family: "Montserrat";
   outline: none;
@@ -629,5 +633,5 @@ input:checked + .slider:before {
 }
 
 .orangeTxt {
-  color: #ff7954;
+  color: #244EFF;
 }

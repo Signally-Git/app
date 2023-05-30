@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import classes from "../landing.module.css";
 
-import Takeoff from "Assets/img/takeoff.png";
 import PluginsOutlook from "Assets/img/Plugins-Outlook.png";
-import PluginsSoon from "Assets/img/Plugins-GA.png";
+import PluginGmail from "Assets/icons/gmail.svg";
+import Apple from "Assets/icons/appstore.svg";
 import Button from "Utils/Button/btn";
 import Input from "Utils/Input/input";
 import { useHistory, useLocation } from "react-router-dom";
@@ -235,12 +235,7 @@ const Login = () => {
             )}
             <div className={classes.container}>
                 <div className={classes.logInContainer}>
-                    <div className={classes.textIllustration}>
-                        <img
-                            alt="Take off"
-                            className={classes.takeoff}
-                            src={Takeoff}
-                        />
+                    <div className={classes.landingContainer}>
                         <div className={classes.descriptionBeta}>
                             <FormattedMessage id="welcome.title" tagName="h1" />
                             <FormattedMessage id="welcome.intro" tagName="p" />
@@ -258,18 +253,29 @@ const Login = () => {
                                 tagName="p"
                             />
                             <br />
-                            <div>
-                                <img
-                                    alt="Outlook"
-                                    className={classes.plugins}
-                                    src={PluginsOutlook}
-                                />
-                                <img
-                                    alt="Soon Gmail & Apple Mail"
-                                    className={classes.plugins}
-                                    src={PluginsSoon}
-                                />
-                            </div>
+                            <ul>
+                                <li>
+                                    <img
+                                        alt="Gmail"
+                                        className={classes.plugins}
+                                        src={PluginGmail}
+                                    />
+                                </li>
+                                <li>
+                                    <img
+                                        alt="Apple"
+                                        className={classes.plugins}
+                                        src={Apple}
+                                    />
+                                </li>
+                                <li>
+                                    <img
+                                        alt="Outlook"
+                                        className={classes.plugins}
+                                        src={PluginsOutlook}
+                                    />
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div className={classes.slider}>

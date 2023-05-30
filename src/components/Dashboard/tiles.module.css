@@ -15,7 +15,7 @@
 .container h1 {
   flex: 100%;
   margin-left: 0.5rem;
-  color: #402927;
+  color: #1B335E;
   font-size: 1.75rem;
 }
 
@@ -37,19 +37,19 @@
   flex: 48%;
   max-width: 48%;
   padding: 1rem 1rem;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 0.5rem 0;
   background: #fff;
   box-shadow: 0 20px 20px rgba(206, 142, 124, 0.15);
 }
 .tile * {
   font-family: "Montserrat", serif;
-  color: #402927;
+  color: #1B335E;
   margin: 0;
   padding: 0;
 }
 .tile:first-of-type {
-  background-color: #ff7954;
+  background-color: #244EFF;
 }
 .tile:first-of-type span,
 .tile:first-of-type p,
@@ -58,7 +58,7 @@
   color: #fff !important;
 }
 .tile:nth-of-type(2) {
-  background-color: #ffc300;
+  background-color: #FFBE00;
 }
 .tile:nth-of-type(2) span,
 .tile:nth-of-type(2) p {
@@ -74,7 +74,7 @@
 }
 
 .orangeTxt {
-  color: #ff7954;
+  color: #244EFF;
 }
 
 .loadingBtn {
@@ -120,7 +120,7 @@
 
 .deploy {
   cursor: pointer;
-  background-color: #e87e41 !important;
+  background-color: #e79388 !important;
 }
 .deploy .onHover {
   display: none;
@@ -217,7 +217,7 @@
   }
 }
 .billingTile {
-  background: #402927 !important;
+  background: #1B335E !important;
 }
 .billingTile * {
   color: #fff;

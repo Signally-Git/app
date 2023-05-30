@@ -7,7 +7,7 @@
     justify-content: center;
     width: fit-content !important;
     height: 2.5rem !important;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     z-index: 10;
     // padding: 0.5rem 3rem;
     // inset: 3rem 0 0 15rem;
@@ -17,7 +17,7 @@
     font-weight: bold;
     max-width: 50%;
     svg {
-        border-radius: 50%;
+        border-radius: $hugeRadius;
         padding: 4px;
         fill: #fff;
         font-size: 1.25rem;

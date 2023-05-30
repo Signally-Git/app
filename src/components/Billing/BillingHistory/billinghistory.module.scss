@@ -3,7 +3,7 @@
 .container {
     background: #fff;
     padding: 2rem;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     h4 {
         color: $color-primary;
         margin-top: 0;

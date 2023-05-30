@@ -37,7 +37,10 @@ export default function CreateTeam({ setDone }) {
                 content: (
                     <>
                         <FormattedMessage id="message.error.teams.part1" />
-                        <span style={{ color: "#FF7954" }}> {teamName} </span>
+                        <span className={classes.primaryColor}>
+                            {" "}
+                            {teamName}{" "}
+                        </span>
                         <FormattedMessage id="message.error.teams.part2" />
                     </>
                 ),
@@ -49,7 +52,7 @@ export default function CreateTeam({ setDone }) {
                 content: (
                     <>
                         <FormattedMessage id="message.success.teams.edit_part1" />
-                        <span style={{ color: "#FF7954" }}>{teamName}</span>
+                        <span className={classes.primaryColor}>{teamName}</span>
                         <FormattedMessage id="message.success.teams.edit_part2" />
                     </>
                 ),

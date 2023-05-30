@@ -58,7 +58,7 @@
     flex-direction: column;
     width: 100%;
     background: #fff;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     border: 1px solid $color-lighter-accent;
     div {
         display: flex;
@@ -99,8 +99,8 @@
     padding: 1rem 2rem;
     margin-right: 1rem;
     background: transparent;
-    color: #402a27;
-    border: 1px solid #402a27;
+    color: $background-color;
+    border: 1px solid $background-color;
 }
 
 .inputContainer,
@@ -124,7 +124,7 @@
                 width: 15px;
                 height: 15px;
                 background: #000;
-                border-radius: 50%;
+                border-radius: $hugeRadius;
             }
         }
     }
@@ -222,7 +222,7 @@
     height: 3rem;
     z-index: 1;
     border: 1px solid #f1f1f1;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     display: flex;
     position: relative;
     background: #fff;

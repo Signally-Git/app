@@ -38,7 +38,7 @@
     width: 180px;
     height: 180px;
     background: #fff;
-    border-radius: 50%;
+    border-radius: $hugeRadius;
 }
 
 .subtitle {
@@ -65,7 +65,7 @@
     flex: 32px;
     height: 32px;
     width: 32px;
-    border-radius: 50%;
+    border-radius: $hugeRadius;
     background: #ffcc20;
     span {
         width: 32px;
@@ -84,7 +84,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     background: #f8f1f0;
 }
 
@@ -92,7 +92,7 @@
     position: relative;
     display: flex;
     box-shadow: 0 12px 40px rgba(230, 208, 201, 0.28);
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     padding: 1.5rem 1.5rem 3.5rem;
     margin-bottom: 2.5rem;
     background: #fff;
@@ -129,8 +129,8 @@
     max-width: 60%;
     color: #fff;
     padding: 0.75rem;
-    border-radius: 30px;
-    background: #402a27;
+    border-radius: $mediumBorderRadius;
+    background: $background-color;
     .price {
         font-size: 1.5rem;
         font-weight: bold;

@@ -16,12 +16,16 @@
     }
 }
 
+.primaryColor {
+    color: $color-primary;
+}
+
 .tabContainer {
     padding: 2rem;
     margin-bottom: auto;
     position: relative;
     background: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     overflow: auto;
     width: 50%;
     min-width: 40rem;
@@ -94,11 +98,11 @@
 
 /* Rounded sliders */
 .slider {
-    border-radius: 30px;
+    border-radius: $mediumBorderRadius;
 }
 
 .slider:before {
-    border-radius: 30px;
+    border-radius: $mediumBorderRadius;
 }
 
 .inputsContainer {
@@ -107,7 +111,7 @@
     display: flex;
     flex-direction: column;
     label {
-        color: #c9847c;
+        color: $color-primary-variant;
         font-weight: 400;
         font-size: 0.8rem;
     }
@@ -136,7 +140,7 @@
     width: 100%;
     background: #fff;
     flex-wrap: wrap;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     padding: 1rem;
     display: flex;
     align-items: center;

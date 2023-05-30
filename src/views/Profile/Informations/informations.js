@@ -102,7 +102,7 @@ function Informations() {
                             notification({
                                 content: (
                                     <>
-                                        <span style={{ color: "#FF7954" }}>
+                                        <span className={classes.primaryColor}>
                                             {companyName}{" "}
                                         </span>
                                         <FormattedMessage id="message.success.edit" />
@@ -117,7 +117,7 @@ function Informations() {
                                 content: (
                                     <>
                                         <FormattedMessage id="message.error.edit" />
-                                        <span style={{ color: "#FF7954" }}>
+                                        <span className={classes.primaryColor}>
                                             {" "}
                                             {companyName}
                                         </span>
@@ -154,7 +154,7 @@ function Informations() {
                     notification({
                         content: (
                             <>
-                                <span style={{ color: "#FF7954" }}>
+                                <span className={classes.primaryColor}>
                                     {companyName}{" "}
                                 </span>
                                 <FormattedMessage id="message.success.edit" />
@@ -185,7 +185,7 @@ function Informations() {
                     content: (
                         <>
                             <FormattedMessage id="message.error.edit" />
-                            <span style={{ color: "#FF7954" }}>
+                            <span className={classes.primaryColor}>
                                 {" "}
                                 {firstName} {lastName}
                             </span>
@@ -547,7 +547,6 @@ function Informations() {
                     handleSaveCustomization();
                 }}
             />
-            <img alt="Greetings" src={Hello} />
         </div>
     );
 }
