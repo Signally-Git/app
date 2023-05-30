@@ -3,3 +3,4 @@ export { CustomCheckbox } from "./Checkbox";
 export { useOrganisation } from "./useSSE";
 export { detectBrowserLanguage } from "./DetectBrowserLanguage";
 export { checkImageExists } from "./detectSocialMediaImage";
+export { handleScroll } from "./HandleScroll";
