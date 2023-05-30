@@ -156,7 +156,7 @@
 }
 
 .opened svg {
-    color: $signally-orange !important;
+    color: $color-primary !important;
 }
 
 .textStyle {
@@ -194,11 +194,11 @@
         }
 
         .inputOptions svg {
-            color: $signally-brown;
+            color: $color-dark-accent;
         }
         &:hover {
             span {
-                color: $signally-orange;
+                color: $color-primary;
             }
         }
         &:last-child {
@@ -215,7 +215,7 @@
                 height: 1rem;
                 font-size: 0.65rem;
                 margin: 0;
-                background-color: $signally-orange;
+                background-color: $color-primary;
             }
         }
         span {

@@ -2,7 +2,7 @@
 
 .container {
     border-radius: 20px;
-    color: $signally-brown;
+    color: $color-dark-accent;
     background-color: #fff;
     width: 55%;
     padding: 2rem;
@@ -15,21 +15,21 @@
         margin-bottom: 1rem;
     }
     > div > div > div > svg {
-        color: $signally-brown;
+        color: $color-dark-accent;
         position: absolute;
         right: 0rem;
         font-size: 1.25rem;
         top: 0;
         z-index: 2;
         &:hover {
-            color: $signally-orange;
+            color: $color-primary;
             cursor: pointer;
         }
     }
 }
 
 .orangeTxt {
-    color: $signally-orange;
+    color: $color-primary;
 }
 
 .bold > span {

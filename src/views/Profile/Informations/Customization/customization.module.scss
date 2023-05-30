@@ -22,7 +22,7 @@
             margin-right: auto;
         }
         > div:first-child > label {
-            color: $signally-brown;
+            color: $color-dark-accent;
             font-weight: bold;
             margin-bottom: 0.5rem;
             font-size: 0.85rem;
@@ -50,7 +50,7 @@
             text-align: center;
         }
         :disabled {
-            color: $signally-orange;
+            color: $color-primary;
             font-weight: bold;
         }
     }

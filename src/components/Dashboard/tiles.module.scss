@@ -17,7 +17,7 @@
     h1 {
         flex: 100%;
         margin-left: 0.5rem;
-        color: $signally-brown;
+        color: $color-dark-accent;
         font-size: 1.75rem;
     }
 }
@@ -33,7 +33,7 @@
 .tile {
     * {
         font-family: "Montserrat", serif;
-        color: $signally-brown;
+        color: $color-dark-accent;
         margin: 0;
         padding: 0;
     }
@@ -51,7 +51,7 @@
     background: #fff;
     box-shadow: 0 20px 20px rgba(206, 142, 124, 0.15);
     &:first-of-type {
-        background-color: $signally-orange;
+        background-color: $color-primary;
         span,
         p,
         svg,
@@ -60,7 +60,7 @@
         }
     }
     &:nth-of-type(2) {
-        background-color: $signally-yellow;
+        background-color: $color-secondary;
         span,
         p {
             color: #fff;
@@ -77,7 +77,7 @@
 }
 
 .orangeTxt {
-    color: $signally-orange;
+    color: $color-primary;
 }
 
 .loadingBtn {
@@ -231,7 +231,7 @@
 }
 
 .billingTile {
-    background: $signally-brown !important;
+    background: $color-dark-accent !important;
     * {
         color: #fff;
     }

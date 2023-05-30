@@ -56,7 +56,7 @@
     input[type="password"]:focus,
     select:focus {
         box-shadow: 0 12px 40px rgba(230, 208, 201, 0.28);
-        border-color: $signally-orange;
+        border-color: $color-primary;
     }
     select {
         padding: 0.9rem;
@@ -244,13 +244,13 @@
 .formContainer h2 {
     text-align: center;
     font-family: Trebuchet MS, serif;
-    color: $signally-brown;
+    color: $color-dark-accent;
     margin-top: 0;
     font-size: 1.3rem;
 }
 
 .formContainer h2 span {
-    color: $signally-orange;
+    color: $color-primary;
 }
 
 .textIllustration {
@@ -263,16 +263,16 @@
 }
 
 .textIllustration h1 {
-    color: $signally-orange;
+    color: $color-primary;
     margin-bottom: 2rem;
 }
 
 .textIllustration p {
-    color: $signally-brown;
+    color: $color-dark-accent;
 }
 
 .textIllustration p span {
-    color: $signally-orange;
+    color: $color-primary;
     font-weight: bold;
 }
 
@@ -297,12 +297,12 @@
         animation-delay: 0.75s;
     }
     h2 {
-        color: $signally-orange;
+        color: $color-primary;
     }
     > span {
         animation-delay: 0.75s;
         font-size: 0.8rem;
-        color: $signally-brown;
+        color: $color-dark-accent;
     }
 }
 
@@ -340,9 +340,9 @@
     display: flex;
     justify-content: right;
     cursor: pointer;
-    color: $signally-brown;
+    color: $color-dark-accent;
     &:hover {
-        color: $signally-orange;
+        color: $color-primary;
     }
 }
 
@@ -353,7 +353,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 40px rgba($signally-brown, 0.3);
+    box-shadow: 0 0 40px rgba($color-dark-accent, 0.3);
     border-radius: 20px;
     inset: 0;
     width: 25rem;
@@ -365,7 +365,7 @@
         line-height: 1.5rem;
         text-align: center;
         .orangeTxt {
-            color: $signally-orange;
+            color: $color-primary;
             font-weight: bold;
             display: inline;
         }

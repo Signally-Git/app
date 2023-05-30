@@ -3,10 +3,10 @@
 .active {
     position: relative;
     * {
-        color: $signally-orange !important;
+        color: $color-primary !important;
     }
     label {
-        color: $signally-orange !important;
+        color: $color-primary !important;
         display: block !important;
     }
 }
@@ -32,7 +32,7 @@
             height: 2rem !important;
         }
         * {
-            color: $signally-brown;
+            color: $color-dark-accent;
         }
         > a {
             display: flex;
@@ -57,14 +57,14 @@
     display: flex;
     position: relative;
     & :hover span {
-        color: $signally-ebony-pink;
+        color: $color-darker-accent;
     }
     svg {
         font-size: 1rem;
     }
     span {
         font-weight: 600;
-        color: $signally-ebony-pink;
+        color: $color-darker-accent;
         text-align: center;
         right: 0;
         left: 0;

@@ -9,7 +9,7 @@
     padding-top: 6rem;
     padding-bottom: 5rem;
     span {
-        color: $signally-ebony-pink;
+        color: $color-darker-accent;
         font-weight: 600;
     }
     ul {
@@ -24,7 +24,7 @@
                 align-items: center;
                 justify-content: space-between;
                 font-weight: bold;
-                color: $signally-ebony-pink;
+                color: $color-darker-accent;
             }
             padding: 1.5rem 0;
             &:not(:last-child) {
@@ -54,7 +54,7 @@
     position: fixed;
     bottom: 6rem;
     span {
-        color: $signally-ebony-pink;
+        color: $color-darker-accent;
         font-size: 0.9rem;
     }
 }

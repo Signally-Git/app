@@ -16,7 +16,7 @@
         }
     }
     label {
-        color: $signally-brown;
+        color: $color-dark-accent;
         font-weight: bold;
         font-size: 0.85rem;
     }
@@ -35,14 +35,14 @@
             max-width: 24px;
         }
         svg {
-            color: $signally-brown;
+            color: $color-dark-accent;
             font-size: 1.2rem;
             transition: color 0.3s;
             &:first-of-type {
                 margin-left: 0.5rem;
             }
             &:hover {
-                color: $signally-orange;
+                color: $color-primary;
             }
         }
     }
@@ -51,7 +51,7 @@
 .socialsList {
     list-style: none;
     border-radius: 20px;
-    background: $signally-isabelline;
+    background: $color-light-accent-variation2;
     margin-left: 1rem;
     padding: 0.25rem;
     height: 2.5rem;

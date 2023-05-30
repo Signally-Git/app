@@ -81,6 +81,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     }, [edit]);
 
     useEffect(() => {
+        handleSwapSignature(show?.signature?.["@id"]);
         const sse = new EventSource(
             `${process.env.REACT_APP_HUB_URL}${show?.["@id"]}`
         );

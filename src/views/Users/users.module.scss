@@ -78,7 +78,7 @@
         margin: 0 auto;
         text-align: center;
         > a {
-            color: $signally-brown;
+            color: $color-dark-accent;
             display: block;
             text-overflow: ellipsis;
             overflow: hidden;
@@ -101,14 +101,14 @@
 // }
 
 .active {
-    color: $signally-orange;
+    color: $color-primary;
     a {
         transition: 0.2s;
-        color: $signally-orange !important;
+        color: $color-primary !important;
     }
     &::after {
         transition: 0.2s;
-        background-color: $signally-orange;
+        background-color: $color-primary;
     }
 }
 
@@ -147,7 +147,7 @@
 }
 
 .added {
-    color: $signally-orange;
+    color: $color-primary;
     height: 1.65rem;
     display: flex;
     align-items: center;
@@ -201,7 +201,7 @@
         font-size: 0.85rem;
         font-weight: 600;
         position: relative;
-        background: $signally-grey;
+        background: $color-lighter-accent;
         border-radius: 10px;
         &::before {
             content: "";
@@ -230,7 +230,7 @@
                 left: -1em;
                 height: 8px;
                 width: 8px;
-                background: $signally-orange;
+                background: $color-primary;
             }
         }
         > div {
@@ -246,7 +246,7 @@
 }
 
 .groupName {
-    color: $signally-orange !important;
+    color: $color-primary !important;
     border-radius: 20px;
     font-weight: normal;
     font-size: 0.75rem;
@@ -260,7 +260,7 @@
 }
 
 .orangeTxt {
-    color: $signally-orange;
+    color: $color-primary;
 }
 
 .teamAssignment {
@@ -273,7 +273,7 @@
         margin-bottom: 2rem;
         margin-top: 0;
         span {
-            color: $signally-orange !important;
+            color: $color-primary !important;
             font-size: 1.2rem !important;
         }
     }
@@ -295,13 +295,13 @@
     align-items: center !important;
     &:hover,
     &:hover button {
-        color: $signally-orange;
+        color: $color-primary;
     }
     > span {
         padding-top: 0 !important;
     }
     button {
-        color: $signally-brown;
+        color: $color-dark-accent;
         transition: 0.2s;
         background: none;
         border: none;
@@ -341,7 +341,7 @@
         height: 8px;
         border-radius: 50%;
         width: 8px;
-        background: $signally-orange;
+        background: $color-primary;
     }
 }
 
@@ -365,11 +365,11 @@
     border: 1px solid transparent;
     margin: 1rem 0;
     padding: 0.75rem 0.5rem;
-    background: $signally-grey;
+    background: $color-lighter-accent;
     display: block;
     transition: 0.2s;
     &:focus {
-        border-color: $signally-orange;
+        border-color: $color-primary;
     }
 }
 
@@ -379,6 +379,6 @@
     float: right;
 
     &:hover {
-        color: $signally-orange;
+        color: $color-primary;
     }
 }

@@ -87,14 +87,14 @@
 
 .btn {
     display: flex;
-    color: $signally-brown;
+    color: $color-dark-accent;
     border: none;
     background: none;
     outline: none;
     margin: auto;
     &:hover {
         cursor: pointer;
-        color: $signally-orange;
+        color: $color-primary;
     }
 }
 

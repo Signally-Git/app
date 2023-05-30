@@ -3,12 +3,12 @@
 .container {
     width: auto;
     position: relative;
-    border: 1px solid $signally-lightgrey;
+    border: 1px solid $color-light-accent;
     border-radius: 10px;
     padding: 0.5rem;
     transition: border-color 0.3s, box-shadow 0.3s;
     &:hover {
-        border-color: $signally-orange;
+        border-color: $color-primary;
     }
     input {
         top: 0;

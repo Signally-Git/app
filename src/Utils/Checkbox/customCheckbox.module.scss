@@ -46,11 +46,11 @@
 }
 
 input:checked + .slider {
-    background-color: $signally-orange;
+    background-color: $color-primary;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px $signally-orange;
+    box-shadow: 0 0 1px $color-primary;
 }
 
 input:checked + .slider:before {

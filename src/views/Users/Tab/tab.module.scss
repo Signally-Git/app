@@ -39,7 +39,7 @@
 }
 
 .orangeTxt {
-    color: $signally-orange !important;
+    color: $color-primary !important;
 }
 
 .colheader {
@@ -49,17 +49,17 @@
     margin-top: 1rem;
     width: 100%;
     .totalNumber {
-        color: $signally-orange;
+        color: $color-primary;
         font-weight: bold;
         font-size: 0.9rem;
     }
     button {
         border: none;
-        color: $signally-brown;
+        color: $color-dark-accent;
         background: none;
         font-size: 0.9rem;
         &:hover {
-            color: $signally-orange;
+            color: $color-primary;
             cursor: pointer;
         }
     }
@@ -96,7 +96,7 @@
         font-size: 0.85rem;
         font-weight: 600;
         position: relative;
-        background: $signally-grey;
+        background: $color-lighter-accent;
         border-radius: 10px;
         .checkbox {
             width: 100%;
@@ -123,7 +123,7 @@
                 height: 8px;
                 border-radius: 50%;
                 width: 8px;
-                background: $signally-orange;
+                background: $color-primary;
                 transition: 0.2s;
             }
         }
@@ -131,13 +131,13 @@
             width: 95%;
             transition: 0.3s;
             cursor: pointer;
-            // background: rgba($signally-orange, 0.3);
+            // background: rgba($color-primary, 0.3);
         }
         > div {
             display: flex;
             justify-content: space-between;
             span {
-                color: $signally-brown;
+                color: $color-dark-accent;
             }
             > span > span {
                 font-weight: normal;
@@ -265,14 +265,14 @@
     width: 2.5rem;
     align-items: center;
     svg {
-        color: $signally-brown;
+        color: $color-dark-accent;
         opacity: 0.6;
     }
     svg:first-child {
         font-size: 1rem;
     }
     svg:hover {
-        color: $signally-orange;
+        color: $color-primary;
         opacity: 1;
     }
 }
@@ -294,7 +294,7 @@
     width: 80%;
     border: none;
     opacity: 1;
-    color: $signally-brown;
+    color: $color-dark-accent;
     font-size: 0.85rem;
     font-weight: 600;
     border-radius: 10px;
@@ -306,11 +306,11 @@
 }
 
 .groupName {
-    color: rgba($signally-brown, 0.75) !important;
+    color: rgba($color-dark-accent, 0.75) !important;
     padding: 0.25rem 0.75rem;
     padding-top: 0.25rem !important;
     border-radius: 20px;
-    background-color: rgba($signally-brown, 0.05);
+    background-color: rgba($color-dark-accent, 0.05);
     margin-top: 0.5rem;
     font-weight: 600;
     font-size: 0.6rem !important;
@@ -336,14 +336,14 @@
     border: 1px solid transparent;
     margin: 1rem 0;
     padding: 0.75rem 0.5rem;
-    background: $signally-grey;
+    background: $color-lighter-accent;
     display: block;
     transition: 0.2s;
     &:focus {
-        border-color: $signally-orange;
+        border-color: $color-primary;
     }
 }
 
 .btnReady .checkmark {
-    color: $signally-orange;
+    color: $color-primary;
 }

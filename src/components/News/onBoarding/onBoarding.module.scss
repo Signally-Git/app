@@ -10,7 +10,7 @@
         text-align: left;
         margin: 0;
         .orangeTxt {
-            color: $signally-orange;
+            color: $color-primary;
         }
     }
     > p {
@@ -34,7 +34,7 @@
 
 .active {
     opacity: 1;
-    color: $signally-orange;
+    color: $color-primary;
 }
 
 .menuLinks {
@@ -54,7 +54,7 @@
         font-size: 0.9rem;
         &:hover {
             opacity: 1;
-            color: $signally-orange;
+            color: $color-primary;
             cursor: pointer;
         }
     }

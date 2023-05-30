@@ -84,7 +84,7 @@
         }
     }
     .orangeTxt {
-        color: $signally-orange;
+        color: $color-primary;
     }
 }
 
@@ -102,10 +102,10 @@
     border: none;
     font-weight: bold;
     font-size: 1rem;
-    color: $signally-brown;
+    color: $color-dark-accent;
     background: none;
     &:hover {
-        color: $signally-orange;
+        color: $color-primary;
     }
     svg {
         font-size: 1.2rem;
@@ -152,10 +152,10 @@
         border: none;
         outline: none;
         background: none;
-        color: $signally-brown;
+        color: $color-dark-accent;
         cursor: pointer;
         &:hover {
-            color: $signally-orange;
+            color: $color-primary;
         }
     }
     .switchTabs {
@@ -212,7 +212,7 @@
         span {
             width: 50%;
             line-height: 4.5rem;
-            color: $signally-ebony-pink;
+            color: $color-darker-accent;
             font-size: 0.85rem;
             font-weight: bold;
         }
@@ -223,11 +223,11 @@
         width: 100%;
         position: relative;
         cursor: pointer;
-        background-color: $signally-isabelline;
+        background-color: $color-light-accent-variation2;
         -webkit-transition: 0.4s;
         transition: 0.4s;
-        border-left: 12px solid $signally-isabelline;
-        border-right: 12px solid $signally-isabelline;
+        border-left: 12px solid $color-light-accent-variation2;
+        border-right: 12px solid $color-light-accent-variation2;
     }
 
     .sliderTabs:before {
@@ -305,9 +305,9 @@
         }
     }
     .noBgBtn {
-        background: $signally-brown;
+        background: $color-dark-accent;
         padding: 0.15rem 0.75rem !important;
-        border: $signally-brown;
+        border: $color-dark-accent;
         border-radius: 20px;
         color: #fff;
         margin-left: 1rem;
@@ -315,14 +315,14 @@
     button {
         border: none;
         background: none;
-        color: $signally-orange;
+        color: $color-primary;
         padding: 0;
         font-size: 1.1rem;
         display: flex;
         align-items: center;
         margin: 0 0 0 0.25rem;
         &:last-child {
-            color: $signally-brown;
+            color: $color-dark-accent;
         }
     }
 }
@@ -385,7 +385,7 @@
                 border-radius: 50%;
             }
             .close {
-                background: $signally-orange;
+                background: $color-primary;
             }
             .reduce {
                 background: #ffbd44;
@@ -560,11 +560,11 @@
 }
 
 input:checked + .slider {
-    background-color: $signally-orange;
+    background-color: $color-primary;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px $signally-orange;
+    box-shadow: 0 0 1px $color-primary;
 }
 
 input:checked + .slider:before {
@@ -594,7 +594,7 @@ input:checked + .slider:before {
     .borderInput {
         transition: 0.2s;
         background: #fff;
-        border: 1px solid $signally-grey;
+        border: 1px solid $color-lighter-accent;
         padding: 1rem;
         padding-right: 5rem;
         border-radius: 10px;
@@ -645,5 +645,5 @@ input:checked + .slider:before {
 }
 
 .orangeTxt {
-    color: $signally-orange;
+    color: $color-primary;
 }

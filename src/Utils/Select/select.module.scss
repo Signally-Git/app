@@ -8,7 +8,7 @@
     outline: none;
     transition: border-color 0.3s;
     background: #fff;
-    border: 1px solid $signally-lightgrey;
+    border: 1px solid $color-light-accent;
     border-radius: 10px;
     padding: 1rem;
     width: 100%;
@@ -20,6 +20,6 @@
     }
     &:focus-within {
         box-shadow: none;
-        border-color: $signally-orange;
+        border-color: $color-primary;
     }
 }

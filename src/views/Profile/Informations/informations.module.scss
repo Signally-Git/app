@@ -69,10 +69,10 @@
     }
     .active {
         transition: 0.2s;
-        color: $signally-orange;
+        color: $color-primary;
         &::after {
             transition: 0.2s;
-            background-color: $signally-orange;
+            background-color: $color-primary;
         }
     }
 }
@@ -126,7 +126,7 @@
         text-align: center;
     }
     :disabled {
-        color: $signally-orange;
+        color: $color-primary;
         font-weight: bold;
     }
 }
@@ -159,7 +159,7 @@
     align-items: center;
     label {
         font-size: 0.9rem;
-        color: $signally-orange;
+        color: $color-primary;
     }
     svg {
         cursor: pointer;

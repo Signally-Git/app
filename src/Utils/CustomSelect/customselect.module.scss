@@ -38,7 +38,7 @@
         z-index: 6;
         width: 100%;
         font-weight: bold;
-        color: $signally-brown;
+        color: $color-dark-accent;
         padding: 0.65rem 2rem .65rem 1rem;
     }
     svg {
@@ -50,13 +50,13 @@
         top: 0;
         margin: auto;
         position: absolute;
-        color: $signally-brown;
+        color: $color-dark-accent;
     }
 }
 
 .splitter {
     font-size: 0.8rem;
-    color: $signally-orange;
+    color: $color-primary;
     font-weight: bold;
 }
 
@@ -69,10 +69,10 @@
     right: 0;
     z-index: 5;
     margin: 0 auto;
-    border: 1px solid $signally-darkgrey;
+    border: 1px solid $color-light-accent-variation;
     width: 100%;
     background-color: #fff;
-    box-shadow: 0 20px 30px $signally-darkgrey;
+    box-shadow: 0 20px 30px $color-light-accent-variation;
     border-radius: 0 0 10px 10px;
     padding: 0;
     padding-top: 2.65rem;
@@ -90,11 +90,11 @@
         justify-content: space-between;
         font-size: 0.9rem;
         font-weight: normal;
-        color: $signally-brown;
+        color: $color-dark-accent;
         input,
         input + svg {
             opacity: 0;
-            color: $signally-orange;
+            color: $color-primary;
         }
         input:checked + svg {
             opacity: 1;
@@ -102,8 +102,8 @@
         &:hover,
         &:focus-within {
             transition: 0.2s;
-            color: $signally-brown;
-            background-color: $signally-pink;
+            color: $color-dark-accent;
+            background-color: $color-light-accent-variation1;
         }
     }
 }

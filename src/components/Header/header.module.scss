@@ -42,7 +42,7 @@
     backdrop-filter: none;
     h2 {
         font-size: 1.35rem;
-        color: $signally-brown;
+        color: $color-dark-accent;
         line-height: 0;
     }
 }
@@ -62,22 +62,22 @@
             padding: 0.25rem 1rem;
             border-radius: 20px;
             font-size: 0.9rem;
-            color: $signally-brown;
+            color: $color-dark-accent;
             transition: 0.2s;
         }
         &:last-child a {
-            border: 1px solid $signally-orange;
-            color: $signally-orange;
+            border: 1px solid $color-primary;
+            color: $color-primary;
             &:hover {
-                border-color: $signally-orange;
-                background: $signally-orange;
+                border-color: $color-primary;
+                background: $color-primary;
                 color: #fff;
             }
         }
         &:hover {
             cursor: pointer;
             a {
-                color: $signally-orange;
+                color: $color-primary;
             }
         }
     }
@@ -85,8 +85,8 @@
 
 // .beta {
 //     color: #fff;
-//     background: $signally-brown;
-//     border: 1px solid $signally-brown;
+//     background: $color-dark-accent;
+//     border: 1px solid $color-dark-accent;
 //     font-weight: bold;
 //     font-size: 0.8rem;
 //     margin-top: 1rem;
@@ -106,14 +106,14 @@
         width: 15px;
         height: 15px;
         text-align: center;
-        background-color: $signally-orange;
+        background-color: $color-primary;
         color: #fff;
         padding: 2px;
         font-size: 0.8rem;
         right: -9px;
         top: -9px;
         border-radius: 50%;
-        border: 1px solid $signally-orange;
+        border: 1px solid $color-primary;
     }
 }
 
@@ -135,36 +135,36 @@
     margin-right: 1rem;
     display: flex;
     align-items: center;
-    border-right: 1px solid $signally-brown;
+    border-right: 1px solid $color-dark-accent;
     .studio {
-        border: 1px solid $signally-orange;
-        color: $signally-orange;
+        border: 1px solid $color-primary;
+        color: $color-primary;
         &:hover {
             color: #fff;
-            background: $signally-orange;
+            background: $color-primary;
         }
     }
     .store {
-        border: 1px solid $signally-orange;
-        color: $signally-orange;
+        border: 1px solid $color-primary;
+        color: $color-primary;
         &:hover {
             color: #fff;
-            background: $signally-orange;
-            border-color: $signally-orange;
+            background: $color-primary;
+            border-color: $color-primary;
         }
     }
     a {
         font-weight: 600;
         margin-right: 1rem;
         padding: 0.25rem 1rem;
-        border: 1px solid $signally-brown;
+        border: 1px solid $color-dark-accent;
         border-radius: 20px;
         font-size: 0.9rem;
-        color: $signally-brown;
+        color: $color-dark-accent;
         transition: 0.2s;
         &:hover {
-            color: $signally-orange;
-            border-color: $signally-orange;
+            color: $color-primary;
+            border-color: $color-primary;
         }
     }
 }
@@ -193,9 +193,9 @@
 }
 
 .headerSpan {
-    color: $signally-orange;
+    color: $color-primary;
     a {
-        color: $signally-orange;
+        color: $color-primary;
         text-decoration: underline;
     }
 }
@@ -210,7 +210,7 @@
     font-size: 26px;
     border-radius: 50%;
     margin: 0;
-    background: $signally-orange;
+    background: $color-primary;
 }
 
 .options {
@@ -226,14 +226,14 @@
     flex-direction: column;
     li {
         a {
-            color: $signally-brown;
+            color: $color-dark-accent;
         }
         font-size: 1rem;
-        color: $signally-brown;
+        color: $color-dark-accent;
         font-family: "Trebuchet MS";
         padding: 0.5rem 0;
         &:not(:last-of-type) {
-            border-bottom: 1px solid $signally-brown;
+            border-bottom: 1px solid $color-dark-accent;
         }
     }
 }
@@ -262,7 +262,7 @@
         background: #fbf8f7;
         padding: 0;
         padding: 0 1rem;
-        border: 1px solid $signally-brown;
+        border: 1px solid $color-dark-accent;
         border-radius: 15px;
         list-style: none;
         max-height: 1.7rem;
@@ -299,7 +299,7 @@
         white-space: nowrap;
         font-size: 0.8rem;
         font-weight: 500;
-        color: $signally-brown;
+        color: $color-dark-accent;
         transition: 0.2s;
         margin-bottom: 1rem;
     }
@@ -317,7 +317,7 @@
             font-weight: 600;
             white-space: nowrap;
             font-size: 0.9rem;
-            color: $signally-brown;
+            color: $color-dark-accent;
             transition: 0.2s;
             margin-right: 0.5rem;
         }
@@ -333,9 +333,9 @@
     position: relative;
     > div {
         transition: background-color 0.2s, border-color 0.2s;
-        color: $signally-brown;
-        background: $signally-pink;
-        border: 1px solid $signally-pink;
+        color: $color-dark-accent;
+        background: $color-light-accent-variation1;
+        border: 1px solid $color-light-accent-variation1;
         font-weight: bold;
         font-size: 0.9rem;
         width: 100%;
@@ -346,16 +346,16 @@
         display: flex;
         flex-direction: column;
         &:hover {
-            border-color: $signally-brown;
+            border-color: $color-dark-accent;
             color: #fff;
-            background-color: $signally-brown;
+            background-color: $color-dark-accent;
             button {
                 color: #fff;
             }
         }
     }
     button {
-        color: $signally-brown;
+        color: $color-dark-accent;
         font-size: 0.6rem;
         margin-top: 0.15rem;
         cursor: pointer;

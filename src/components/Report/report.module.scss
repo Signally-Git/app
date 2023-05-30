@@ -3,7 +3,7 @@
 .container {
     p,
     input {
-        color: $signally-brown;
+        color: $color-dark-accent;
     }
     margin-bottom: auto;
     min-width: 55%;
@@ -23,12 +23,12 @@
         text-align: justify;
     }
     h3 {
-        color: $signally-orange;
+        color: $color-primary;
     }
     h4 {
         font-size: 1rem;
         margin: 0;
-        color: $signally-orange;
+        color: $color-primary;
     }
     h4 ~ div {
         margin-top: 0.5rem;
@@ -38,7 +38,7 @@
         transition: 0.2s;
         background: #fff;
         width: 55%;
-        border: 1px solid $signally-lightgrey;
+        border: 1px solid $color-light-accent;
         padding: 1rem;
         border-radius: 10px;
         margin: 0.5rem 0;

@@ -25,7 +25,7 @@
         width: fit-content;
         inset: 0;
         span > span {
-            color: $signally-orange;
+            color: $color-primary;
         }
     }
 }
@@ -59,7 +59,7 @@
         flex-direction: column;
         height: 95%;
         > span {
-            color: $signally-orange;
+            color: $color-primary;
             font-weight: bold;
             margin-top: 1rem;
             font-size: 0.9rem;
@@ -108,10 +108,10 @@
 
 .active {
     transition: 0.2s;
-    color: $signally-orange;
+    color: $color-primary;
     &::after {
         transition: 0.2s;
-        background-color: $signally-orange;
+        background-color: $color-primary;
     }
 }
 
@@ -140,7 +140,7 @@
         font-weight: 600;
         cursor: pointer;
         position: relative;
-        background: $signally-grey;
+        background: $color-lighter-accent;
         border-radius: 10px;
         &::before {
             content: "";
@@ -165,7 +165,7 @@
                 left: -1em;
                 height: 8px;
                 width: 8px;
-                background: $signally-orange;
+                background: $color-primary;
             }
         }
         > div {
@@ -185,7 +185,7 @@
 }
 
 .groupName {
-    color: $signally-orange;
+    color: $color-primary;
     border-radius: 20px;
     font-weight: normal;
     font-size: 0.75rem;
@@ -218,16 +218,16 @@
     border: 1px solid transparent;
     margin: 1rem 0;
     padding: 0.5rem;
-    background: $signally-grey;
+    background: $color-lighter-accent;
     display: block;
     transition: 0.2s;
     &:focus {
-        border-color: $signally-orange;
+        border-color: $color-primary;
     }
 }
 
 .orangeTxt {
-    color: $signally-orange;
+    color: $color-primary;
 }
 
 .signaturePreview {
@@ -273,9 +273,9 @@
     width: 60%;
     text-align: center;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-    border: 1px solid $signally-orange;
+    border: 1px solid $color-primary;
     background-color: #fff !important;
-    color: $signally-orange;
+    color: $color-primary;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -287,11 +287,11 @@
     svg {
         transition: 0.2s;
         margin-left: 0.5rem;
-        stroke: $signally-orange;
+        stroke: $color-primary;
         stroke-width: 1px;
     }
     &:hover {
-        background-color: $signally-orange !important;
+        background-color: $color-primary !important;
         border: 1px solid transparent;
         color: #fff;
         svg {
@@ -314,14 +314,14 @@
     justify-content: center;
     align-items: center;
     svg {
-        color: $signally-brown;
+        color: $color-dark-accent;
         opacity: 0.6;
     }
     svg:first-child {
         font-size: 1rem;
     }
     svg:hover {
-        color: $signally-orange;
+        color: $color-primary;
         opacity: 1;
     }
 }

@@ -6,7 +6,7 @@
     border-radius: 20px;
     position: relative;
     h4 {
-        color: $signally-orange;
+        color: $color-primary;
         margin-top: 0;
     }
     h3 {
@@ -28,7 +28,7 @@
 
 .totalPrice {
     border-radius: 100px;
-    background: $signally-brown;
+    background: $color-dark-accent;
     color: #fff;
     display: flex;
     align-items: center;

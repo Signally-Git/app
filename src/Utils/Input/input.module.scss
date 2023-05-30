@@ -3,7 +3,7 @@
 .input {
     transition: 0.2s;
     background: #fff;
-    border: 1px solid $signally-lightgrey;
+    border: 1px solid $color-light-accent;
     padding: 1rem;
     font-size: 0.8rem;
     border-radius: 10px;
@@ -11,7 +11,7 @@
     outline: none;
     font-family: inherit;
     &:focus {
-        border-color: $signally-orange;
+        border-color: $color-primary;
         // box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
     }
 }

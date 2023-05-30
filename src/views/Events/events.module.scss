@@ -7,7 +7,7 @@
     h1 {
         width: 100%;
     }
-    color: $signally-brown;
+    color: $color-dark-accent;
 }
 
 .infosContainer {
@@ -60,7 +60,7 @@
     right: 0;
     margin: auto;
     &:hover {
-        color: $signally-orange;
+        color: $color-primary;
     }
     svg {
         opacity: 0.6;
@@ -95,10 +95,10 @@
 .active {
     transition: 0.2s;
     margin-bottom: 0.5rem;
-    color: $signally-orange;
+    color: $color-primary;
     &::after {
         transition: 0.2s;
-        background-color: $signally-orange;
+        background-color: $color-primary;
     }
 }
 
@@ -162,7 +162,7 @@
 
 .boldOrange {
     font-weight: bold;
-    color: $signally-orange !important;
+    color: $color-primary !important;
 }
 
 .itemsList {
@@ -208,7 +208,7 @@
                 height: 8px;
                 border-radius: 50%;
                 width: 8px;
-                background: $signally-orange;
+                background: $color-primary;
                 transition: 0.2s;
             }
         }
@@ -216,7 +216,7 @@
         font-size: 0.85rem;
         font-weight: 600;
         position: relative;
-        background: $signally-grey;
+        background: $color-lighter-accent;
         border-radius: 10px;
         &::before {
             content: "";
@@ -261,7 +261,7 @@
         left: -1rem !important;
         height: 8px !important;
         width: 8px !important;
-        background: $signally-orange !important;
+        background: $color-primary !important;
     }
 }
 
@@ -292,16 +292,16 @@
     border: 1px solid transparent;
     margin: 1rem 0;
     padding: 0.75rem 0.5rem;
-    background: $signally-grey;
+    background: $color-lighter-accent;
     display: block;
     transition: 0.2s;
     &:focus {
-        border-color: $signally-orange;
+        border-color: $color-primary;
     }
 }
 
 .orangeTxt {
-    color: $signally-orange;
+    color: $color-primary;
 }
 
 .createEventContainer {
@@ -370,7 +370,7 @@
         margin-top: 0;
         svg:hover {
             cursor: pointer;
-            color: $signally-orange;
+            color: $color-primary;
         }
     }
     > div {

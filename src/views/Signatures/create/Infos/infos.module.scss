@@ -3,7 +3,7 @@
 .infosContainer {
     width: 100%;
     h4 {
-        color: $signally-brown;
+        color: $color-dark-accent;
         font-weight: bold;
         font-size: 1rem;
         text-align: left;
@@ -20,11 +20,11 @@
 
 .inputsFlex {
     input {
-        background-color: $signally-isabelline;
+        background-color: $color-light-accent-variation2;
         padding: 0.5rem 0.75rem;
         font-size: 0.9rem;
         &::placeholder {
-            color: $signally-brown;
+            color: $color-dark-accent;
         }
     }
     .inputContainer {
@@ -59,7 +59,7 @@
     width: 100%;
     background: #fff;
     border-radius: 10px;
-    border: 1px solid $signally-grey;
+    border: 1px solid $color-lighter-accent;
     div {
         display: flex;
         align-items: center;
@@ -174,7 +174,7 @@
         justify-content: space-between;
         align-items: center;
         h6 {
-            color: $signally-orange;
+            color: $color-primary;
             font-weight: normal;
             padding-right: 1rem;
             font-size: 1rem;
@@ -243,7 +243,7 @@
     border-radius: 20px 20px 0 0;
     list-style: none;
     background-color: #fff;
-    box-shadow: 0 20px 30px $signally-darkgrey;
+    box-shadow: 0 20px 30px $color-light-accent-variation;
     width: 100%;
     li {
         position: relative;
@@ -267,8 +267,8 @@
         &:hover,
         &:focus-within {
             transition: 0.2s;
-            color: $signally-brown;
-            background-color: $signally-pink;
+            color: $color-dark-accent;
+            background-color: $color-light-accent-variation1;
         }
     }
     input {
