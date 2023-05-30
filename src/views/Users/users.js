@@ -3,12 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import Tab from "./Tab/tab";
 import SignaturePreview from "./SignaturePreview/signaturePreview";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import request from "Utils/Request/request";
 import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
 import Button from "Utils/Button/btn";
-import { TokenService } from "Utils";
+import { handleScroll, TokenService } from "Utils";
 import { FormattedMessage, useIntl } from "react-intl";
+import { getMenuLink } from "./users.utils";
 
 function Team() {
     const [entity, setEntity] = useState();
@@ -29,174 +30,126 @@ function Team() {
 
     const slider = useRef(null);
 
-    useEffect(async () => {
-        const listUsers = await request.get("users?exists[team]=false");
-        setUsers(listUsers.data["hydra:member"]);
-    }, [entity]);
-
-    useEffect(async () => {
-        const listTeams = await request.get("teams?exists[workplace]=false");
-        setTeams(listTeams.data["hydra:member"]);
-    }, [entity]);
-
-    // HANDLING REAL TIME USERS IN TEAM
     useEffect(() => {
-        const sse = new EventSource(
+        const fetchData = async () => {
+            const [listUsers, listTeams] = await Promise.all([
+                request.get("users?exists[team]=false"),
+                request.get("teams?exists[workplace]=false"),
+            ]);
+            setUsers(listUsers.data["hydra:member"]);
+            setTeams(listTeams.data["hydra:member"]);
+        };
+
+        fetchData();
+    }, [entity]);
+
+    useEffect(() => {
+        const sseAssignTeam = new EventSource(
             `${process.env.REACT_APP_HUB_URL}${entity?.["@id"]}`
         );
-        if (edit === "assign-team") {
-            sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
-        }
-        function getRealtimeData(data) {
-            setTimeout(() => {
-                setEntity({ ...entity, users: data.users });
-            }, 1500);
-        }
-
-        return () => {
-            sse.close();
-        };
-    }, [edit]);
-
-    // HANDLING REAL TIME USERS WITHOUT TEAM
-    useEffect(() => {
-        const sse = new EventSource(
+        const sseUsersWithoutTeam = new EventSource(
             `${process.env.REACT_APP_HUB_URL}/users/users-without-team`
         );
-        sse.onmessage = (e) => getRealtimeDataWOutTeam(JSON.parse(e.data));
+        const sseTeamsWithoutWP = new EventSource(
+            `${process.env.REACT_APP_HUB_URL}/users/teams-without-workplace`
+        );
 
-        function getRealtimeDataWOutTeam(data) {
+        sseAssignTeam.onmessage = (e) =>
+            handleRealtimeData(setEntity, "users", JSON.parse(e.data));
+        sseUsersWithoutTeam.onmessage = (e) =>
+            handleRealtimeData(setUsers, null, JSON.parse(e.data));
+        sseTeamsWithoutWP.onmessage = (e) =>
+            handleRealtimeData(setTeams, null, JSON.parse(e.data));
+
+        function handleRealtimeData(setData, key, data) {
             setTimeout(() => {
-                setUsers(data);
+                if (key) {
+                    setData((prevData) => ({ ...prevData, [key]: data.users }));
+                } else {
+                    setData(data);
+                }
             }, 1500);
         }
 
         return () => {
-            sse.close();
+            sseAssignTeam.close();
+            sseUsersWithoutTeam.close();
+            sseTeamsWithoutWP.close();
         };
     }, [edit]);
 
     useEffect(() => {
-        const sse = new EventSource(
-            `${process.env.REACT_APP_HUB_URL}/users/teams-without-workplace`
-        );
-        sse.onmessage = (e) => getRealtimeDataWOutWP(JSON.parse(e.data));
-
-        function getRealtimeDataWOutWP(data) {
-            setTimeout(() => {
-                setTeams(data);
-            }, 1500);
-        }
-
-        return () => {
-            sse.close();
-        };
-    }, [edit]);
+        setEntity(null);
+        setEdit(null);
+    }, [type]);
 
     const handleAddTeam = (team) => {
-        request
-            .patch(
-                `teams/${team.id}`,
-                { workplace: entity?.["@id"] },
-                {
-                    headers: { "Content-Type": "application/merge-patch+json" },
-                }
-            )
-            .then(() => {
-                setTransition(team.id);
-                setTimeout(() => {
-                    setTransition("done");
-                }, 1500);
-            });
+        updateTeam(team.id, { workplace: entity?.["@id"] });
     };
 
     const handleRemoveTeam = (team) => {
         const removedTeams = entity.teams.filter(
-            (teamCheck) => teamCheck["id"] !== team["id"]
+            (teamCheck) => teamCheck.id !== team.id
         );
-        request
-            .delete(
-                `${entity["@id"]}/teams/${team.id}`,
-                { workplace: null },
-                {
-                    headers: { "Content-Type": "application/merge-patch+json" },
-                }
-            )
-            .then(() => {
-                setTransition(team.id);
-                setTimeout(() => {
-                    setEntity({ ...entity, teams: removedTeams });
-                    setTransition("done");
-                }, 1500);
-            });
+        updateTeam(team.id, { workplace: null });
+        setEntity((prevEntity) => ({ ...prevEntity, teams: removedTeams }));
     };
 
     const handleUpdateAll = (users, action) => {
-        users?.map((user) => {
+        users?.forEach((user) => {
             handleUpdate(user, action);
         });
     };
 
     const handleUpdate = (user, action) => {
+        const handleRemove = () => {
+            const removedUsers = entity.users.filter(
+                (userCheck) => userCheck.id !== user.id
+            );
+            updateUser(user.id, { team: null });
+            setEntity((prevEntity) => ({ ...prevEntity, users: removedUsers }));
+        };
+
+        const handleAdd = () => {
+            updateUser(user.id, { team: entity?.["@id"] });
+        };
+
         switch (action) {
             case "remove":
-                const removedUsers = entity.users.filter(
-                    (userCheck) => userCheck["id"] !== user["id"]
-                );
-                request
-                    .delete(
-                        `${entity["@id"]}/users/${user.id}`,
-                        { team: null },
-                        {
-                            headers: {
-                                "Content-Type": "application/merge-patch+json",
-                            },
-                        }
-                    )
-                    .then(() => {
-                        setTransition(user.id);
-                        setTimeout(() => {
-                            setEntity({ ...entity, users: removedUsers });
-                            setTransition("done");
-                        }, 1500);
-                    });
+                handleRemove();
                 break;
-
             case "add":
-                request
-                    .patch(
-                        `users/${user.id}`,
-                        { team: entity?.["@id"] },
-                        {
-                            headers: {
-                                "Content-Type": "application/merge-patch+json",
-                            },
-                        }
-                    )
-                    .then(() => {
-                        setTransition(user.id);
-                        setTimeout(() => {
-                            setTransition("done");
-                        }, 1500);
-                    });
+                handleAdd();
                 break;
             default:
                 break;
         }
     };
 
-    useEffect(() => {
-        setEntity();
-        setEdit();
-    }, [type]);
+    const updateTeam = (teamId, data) => {
+        request
+            .patch(`teams/${teamId}`, data, {
+                headers: { "Content-Type": "application/merge-patch+json" },
+            })
+            .then(() => {
+                setTransition(teamId);
+                setTimeout(() => {
+                    setTransition("done");
+                }, 1500);
+            });
+    };
 
-    const handleScroll = (e, scroll) => {
-        e.preventDefault();
-        slider.current.scroll({
-            top: 0,
-            left: scroll,
-            behavior: "smooth",
-        });
+    const updateUser = (userId, data) => {
+        request
+            .patch(`users/${userId}`, data, {
+                headers: { "Content-Type": "application/merge-patch+json" },
+            })
+            .then(() => {
+                setTransition(userId);
+                setTimeout(() => {
+                    setTransition("done");
+                }, 1500);
+            });
     };
 
     return (
@@ -205,37 +158,9 @@ function Team() {
                 <h1>Teams</h1>
                 <div className={classes.teamsContainer}>
                     <ul className={classes.menu}>
-                        <li
-                            className={
-                                type === "workplaces" ? classes.active : ""
-                            }
-                        >
-                            <Link to="/teams/workplaces">
-                                {
-                                    configuration.filter(
-                                        (item) => item.key === "WORKPLACE_NAME"
-                                    )[0].value
-                                }
-                            </Link>
-                        </li>
-                        <li className={type === "teams" ? classes.active : ""}>
-                            <Link to="/teams/teams">
-                                {
-                                    configuration.filter(
-                                        (item) => item.key === "TEAM_NAME"
-                                    )[0].value
-                                }
-                            </Link>
-                        </li>
-                        <li className={type === "users" ? classes.active : ""}>
-                            <Link to="/teams/users">
-                                {
-                                    configuration.filter(
-                                        (item) => item.key === "USER_NAME"
-                                    )[0].value
-                                }
-                            </Link>
-                        </li>
+                        {getMenuLink(type, "WORKPLACE_NAME", "workplaces")}
+                        {getMenuLink(type, "TEAM_NAME", "teams")}
+                        {getMenuLink(type, "USER_NAME", "users")}
                     </ul>
                     <Tab
                         tab={type}
@@ -263,11 +188,7 @@ function Team() {
                                                     {entity?.teams?.length || 0}
                                                 </span>{" "}
                                                 {
-                                                    JSON.parse(
-                                                        localStorage.getItem(
-                                                            "configuration"
-                                                        )
-                                                    ).filter(
+                                                    configuration.filter(
                                                         (item) =>
                                                             item.key ===
                                                             "TEAM_NAME"
@@ -304,11 +225,7 @@ function Team() {
                                                 placeholder={`${intl.formatMessage(
                                                     { id: "search" }
                                                 )} ${
-                                                    JSON.parse(
-                                                        localStorage.getItem(
-                                                            "configuration"
-                                                        )
-                                                    ).filter(
+                                                    configuration.filter(
                                                         (item) =>
                                                             item.key ===
                                                             "TEAM_NAME"
@@ -377,16 +294,12 @@ function Team() {
                                             color={"orange"}
                                             arrow
                                             onClick={(e) =>
-                                                handleScroll(e, 2000)
+                                                handleScroll(e, 2000, slider)
                                             }
                                         >
                                             Ajouter des{" "}
                                             {
-                                                JSON.parse(
-                                                    localStorage.getItem(
-                                                        "configuration"
-                                                    )
-                                                ).filter(
+                                                configuration.filter(
                                                     (item) =>
                                                         item.key === "TEAM_NAME"
                                                 )[0].value
@@ -398,11 +311,7 @@ function Team() {
                                             <h2>
                                                 <FormattedMessage id="add_blank" />{" "}
                                                 {
-                                                    JSON.parse(
-                                                        localStorage.getItem(
-                                                            "configuration"
-                                                        )
-                                                    ).filter(
+                                                    configuration.filter(
                                                         (item) =>
                                                             item.key ===
                                                             "TEAM_NAME"
@@ -420,11 +329,7 @@ function Team() {
                                                     setOtherTeam(e.target.value)
                                                 }
                                                 placeholder={`<FormattedMessage id="search" /> ${
-                                                    JSON.parse(
-                                                        localStorage.getItem(
-                                                            "configuration"
-                                                        )
-                                                    ).filter(
+                                                    configuration.filter(
                                                         (item) =>
                                                             item.key ===
                                                             "USER_NAME"
@@ -481,7 +386,9 @@ function Team() {
                                         </ul>
                                         <Button
                                             color={"orange"}
-                                            onClick={(e) => handleScroll(e, 0)}
+                                            onClick={(e) =>
+                                                handleScroll(e, 0, slider)
+                                            }
                                         >
                                             <FormattedMessage id="buttons.placeholder.end" />
                                         </Button>
@@ -542,11 +449,7 @@ function Team() {
                                                 placeholder={`${intl.formatMessage(
                                                     { id: "search" }
                                                 )} ${
-                                                    JSON.parse(
-                                                        localStorage.getItem(
-                                                            "configuration"
-                                                        )
-                                                    ).filter(
+                                                    configuration.filter(
                                                         (item) =>
                                                             item.key ===
                                                             "USER_NAME"
@@ -631,16 +534,12 @@ function Team() {
                                             color={"orange"}
                                             arrow
                                             onClick={(e) =>
-                                                handleScroll(e, 2000)
+                                                handleScroll(e, 2000, slider)
                                             }
                                         >
                                             <FormattedMessage id="buttons.placeholder.add" />{" "}
                                             {
-                                                JSON.parse(
-                                                    localStorage.getItem(
-                                                        "configuration"
-                                                    )
-                                                ).filter(
+                                                configuration.filter(
                                                     (item) =>
                                                         item.key === "USER_NAME"
                                                 )[0].value
@@ -652,11 +551,7 @@ function Team() {
                                             <h2>
                                                 <FormattedMessage id="buttons.placeholder.add" />{" "}
                                                 {
-                                                    JSON.parse(
-                                                        localStorage.getItem(
-                                                            "configuration"
-                                                        )
-                                                    ).filter(
+                                                    configuration.filter(
                                                         (item) =>
                                                             item.key ===
                                                             "USER_NAME"
@@ -676,11 +571,7 @@ function Team() {
                                                 placeholder={`${intl.formatMessage(
                                                     { id: "search" }
                                                 )} ${
-                                                    JSON.parse(
-                                                        localStorage.getItem(
-                                                            "configuration"
-                                                        )
-                                                    ).filter(
+                                                    configuration.filter(
                                                         (item) =>
                                                             item.key ===
                                                             "TEAM_NAME"
@@ -750,7 +641,9 @@ function Team() {
                                         </ul>
                                         <Button
                                             color={"orange"}
-                                            onClick={(e) => handleScroll(e, 0)}
+                                            onClick={(e) =>
+                                                handleScroll(e, 0, slider)
+                                            }
                                         >
                                             <FormattedMessage id="buttons.placeholder.end" />
                                         </Button>
