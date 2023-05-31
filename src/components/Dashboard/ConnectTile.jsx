@@ -64,7 +64,7 @@ export const ConnectTile = ({ organisation }) => {
     };
 
     if (organisation?.google === true) {
-        fetchGoogleStatus();
+        !connectionStatus && fetchGoogleStatus();
         return (
             <Tile
                 link={"#"}
