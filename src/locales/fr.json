@@ -240,10 +240,14 @@
 
     "buttons": {
         "placeholder": {
+            "no_account": "Créer un compte",
             "confirm": "Valider",
             "save": "Sauvegarder",
             "end": "Terminer",
             "send": "Envoyer",
+            "legals": "Mentions légales",
+            "tos": "Conditions Générales de Vente",
+            "go_back": "Retour",
             "add": "Ajouter",
             "add_all": "Ajouter tout",
             "skip": "Passer cette étape",
