@@ -13,7 +13,7 @@ import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
 import { TokenService } from "Utils";
 import { defaultOptions, getStyles } from "../create/createSignature.utils";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { extractStyle, extractValue } from "./editSignature.utils";
 
 // Component handling the modification of signature, selection of template
@@ -28,6 +28,7 @@ function EditSignatureComponent() {
     const history = useHistory();
     const notification = useNotification();
     const [preview, setPreview] = useState("");
+    const intl = useIntl();
 
     // Used to handle transition
     const elem = useRef(null);
@@ -240,7 +241,9 @@ function EditSignatureComponent() {
                                 <Input
                                     autoFocus
                                     style={{ width: "75%" }}
-                                    placeholder="Nom de la signature"
+                                    placeholder={intl.formatMessage({
+                                        id: "signature.title",
+                                    })}
                                     type="text"
                                     defaultValue={signatureName}
                                     onChange={(e) =>
@@ -811,7 +814,7 @@ function EditSignatureComponent() {
                                         tagName="span"
                                     />
                                     <FormattedMessage
-                                        id="style"
+                                        id="options"
                                         tagName="span"
                                     />
                                 </div>

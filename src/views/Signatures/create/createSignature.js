@@ -17,11 +17,12 @@ import {
     getStyles,
     handleSave,
 } from "./createSignature.utils";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 // Component handling the creation of signature, selection of template
 function CreateSignatureComponent() {
     const [loading, setLoading] = useState(true);
+    const intl = useIntl();
     const user = TokenService.getUser();
     const company = TokenService.getOrganisation();
     const [selectedTemplate, setSelectedTemplate] = useState();
@@ -119,7 +120,7 @@ function CreateSignatureComponent() {
 
     const [modal, setModal] = useState(false);
     const [modalContent, setModalContent] = useState();
-    const [signatureName, setSignatureName] = useState("test");
+    const [signatureName, setSignatureName] = useState("Signally");
 
     useEffect(() => {
         const handleModal = () => {
@@ -149,7 +150,9 @@ function CreateSignatureComponent() {
                                 <Input
                                     autoFocus
                                     style={{ width: "75%" }}
-                                    placeholder="Nom de la signature"
+                                    placeholder={intl.formatMessage({
+                                        id: "signature.title",
+                                    })}
                                     type="text"
                                     onChange={(e) =>
                                         setSignatureName(e.target.value)
@@ -211,7 +214,7 @@ function CreateSignatureComponent() {
                                         tagName="span"
                                     />
                                     <FormattedMessage
-                                        id="style"
+                                        id="options"
                                         tagName="span"
                                     />
                                 </div>
