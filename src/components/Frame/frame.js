@@ -6,6 +6,7 @@ import request from "Utils/Request/request";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { TokenService } from "Utils";
 import { FormattedMessage } from "react-intl";
+import { Footer } from "../Footer/Footer";
 
 export default function Frame(props) {
     const [user, setUser] = useState(TokenService.getUser);
@@ -70,6 +71,7 @@ export default function Frame(props) {
                                     {props.children}
                                 </Suspense>
                             </div>
+                            <Footer />
                         </div>
                     </div>
                 </div>
