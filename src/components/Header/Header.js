@@ -4,9 +4,8 @@ import classes from "./header.module.css";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import { FaUser } from "react-icons/fa";
-import { TokenService } from "Utils";
+import { TokenService, SwitchLang } from "Utils";
 import { FormattedMessage, useIntl } from "react-intl";
-import SwitchLang from "../../views/Profile/Informations/SwitchLang";
 
 // DATA ATTRIBUTES
 
@@ -27,28 +26,7 @@ function Header(props) {
                 props.landing ? classes.landing : ""
             }`}
         >
-            <div className={classes.logoContainer}>
-                <Logo />
-                {!props.landing ? (
-                    <Link to="/report" className={classes.reportContainer}>
-                        <div>
-                            <span
-                                title={intl.formatMessage({ id: "report.bug" })}
-                                className={classes.beta}
-                            >
-                                <FormattedMessage id="report.private_beta" />
-                            </span>
-                            {props.landing !== true && (
-                                <button>
-                                    <FormattedMessage id="buttons.placeholder.report_bug" />
-                                </button>
-                            )}
-                        </div>
-                    </Link>
-                ) : (
-                    ""
-                )}
-            </div>
+            <Logo />
             {props.landing !== true ? (
                 <>
                     <div className={classes.rightSide}>
@@ -78,7 +56,7 @@ function Header(props) {
                                     <FaUser />
                                 </li>
                                 <li>
-                                    <Link to="/profile/informations/user">
+                                    <Link to="/account/user">
                                         <FormattedMessage id="account" />
                                     </Link>
                                 </li>
@@ -90,7 +68,7 @@ function Header(props) {
                             </ul>
                             <IoPower
                                 title={intl.formatMessage({ id: "logout" })}
-                                color={"#66433e"}
+                                className={classes.logout}
                                 size={"1.2rem"}
                                 stroke={"#66433e"}
                                 strokeWidth={"15px"}
@@ -107,16 +85,6 @@ function Header(props) {
                     <ul className={`${classes.nonLogged}`}>
                         <li>
                             <SwitchLang />
-                        </li>
-                        <li>
-                            <Link to="/dashboard">
-                                <FormattedMessage id="sign_in" />
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/sign-up">
-                                <FormattedMessage id="sign_up" />
-                            </Link>
                         </li>
                     </ul>
                 </>
