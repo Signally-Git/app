@@ -281,7 +281,7 @@ function UserTab({
                                                 classes.actionsContainerAdmin
                                             }
                                         >
-                                            <Link to="/profile/informations/user">
+                                            <Link to="/account/user">
                                                 <AiOutlineEdit />
                                             </Link>
                                         </div>
