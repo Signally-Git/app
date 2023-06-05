@@ -22,7 +22,7 @@ export const guestRoutes = [
 
     <Route exact path="/sign-up">
         <NotificationProvider signup>
-            <Signup />
+            <Home />
         </NotificationProvider>
     </Route>,
 

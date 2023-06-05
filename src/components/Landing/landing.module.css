@@ -12,14 +12,14 @@
   }
 }
 .container {
+  background: #F4F7FC;
   display: flex;
   flex-direction: row-reverse;
-  padding-top: 1rem;
-  height: 80vh;
-  max-width: 95%;
+  height: 100vh;
+  width: 100%;
   justify-content: center;
-  margin: auto;
   align-items: center;
+  z-index: 0;
   position: relative;
 }
 .container h1 {
@@ -91,24 +91,20 @@
   align-items: center;
   min-width: 40%;
 }
-.logInContainer h2 {
-  margin-bottom: 2rem;
-}
-.logInContainer > .slider > div > .formContainer button {
-  margin-top: 2rem;
-}
 
 .registerContainer,
 .logInContainer {
   display: flex;
+  height: 100%;
   max-height: 100%;
+  width: 100%;
   max-width: 100vw;
   justify-content: space-between;
 }
 .registerContainer > .formContainer,
 .logInContainer > .formContainer {
-  min-width: 40% !important;
-  max-width: 48%;
+  min-width: 40rem !important;
+  width: 100%;
   margin: 0;
 }
 .registerContainer input,
@@ -161,10 +157,16 @@
 }
 
 .slider {
+  display: flex;
+  align-items: center;
   position: relative;
+  height: 100%;
   width: 100%;
 }
 .slider > div {
+  height: 100%;
+  width: 100%;
+  align-items: center;
   display: flex;
   justify-content: space-between;
   overflow: auto;
@@ -187,31 +189,40 @@
   min-width: 100%;
   position: relative;
   display: flex;
-  background-color: #F9F5F4;
-  border-radius: 8px;
-  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+  align-items: baseline;
   font-family: Montserrat, serif;
   flex-direction: column;
   height: 100%;
-  max-height: 80vh;
   margin: auto;
-  padding: 2rem;
+  padding: 5rem;
 }
-.formContainer:first-child {
+.slider .formContainer:first-child {
   margin-right: 1rem;
+}
+
+.submitContainer {
+  display: flex;
+  max-width: 30rem;
+  padding-top: 1rem;
+  align-items: center;
+  vertical-align: center;
+}
+.submitContainer > button {
+  margin: 0;
 }
 
 .btnsContainer {
   display: flex;
+  max-width: 30rem;
+  gap: 1rem;
+  padding: 1rem 0 0;
   flex-direction: row-reverse;
-  width: 100%;
-  padding: 0 2rem;
-  margin: auto;
-  justify-content: space-around;
+  justify-content: flex-end;
 }
 .btnsContainer button {
   margin: 0;
-  margin-top: 2rem;
 }
 .btnsContainer button:last-child:not(:hover) {
   background: none;
@@ -227,11 +238,10 @@
 }
 
 .formContainer h2 {
-  text-align: center;
   font-family: Trebuchet MS, serif;
   color: #1B335E;
   margin-top: 0;
-  font-size: 1.3rem;
+  font-size: 2rem;
 }
 
 .formContainer h2 span {
@@ -240,7 +250,8 @@
 
 .landingContainer {
   display: flex;
-  margin-right: 2rem;
+  height: 100%;
+  padding: 5rem;
   align-items: center;
 }
 
@@ -315,7 +326,6 @@
   font-size: 0.8rem;
   margin-left: auto;
   padding-right: 0.5rem;
-  text-align: right;
   width: 100%;
   display: flex;
   justify-content: right;
@@ -336,7 +346,7 @@
   box-shadow: 0 0 40px rgba(27, 51, 94, 0.3);
   border-radius: 5px;
   inset: 0;
-  width: 25rem;
+  max-width: 25rem;
   height: 15rem;
   z-index: 10;
   margin: auto;
@@ -372,15 +382,16 @@
 }
 .error {
   position: absolute;
-  left: 1rem;
-  top: -3rem;
-  font-weight: bold;
+  z-index: 2;
+  right: 1rem;
+  bottom: 1.5rem;
   display: flex;
   align-items: center;
   animation: shakeX 1s forwards ease-in-out;
+  font-size: 0.9rem;
 }
 .error > svg {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin-left: 0.5rem;
   background: red;
   color: #fff;
@@ -393,9 +404,9 @@
     transform: translate3d(0, 0, 0);
   }
   10%, 30%, 50%, 70%, 90% {
-    transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-5px, 0, 0);
   }
   20%, 40%, 60%, 80% {
-    transform: translate3d(10px, 0, 0);
+    transform: translate3d(5px, 0, 0);
   }
 }

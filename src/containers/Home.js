@@ -1,5 +1,5 @@
 import Header from "../components/Header/Header";
-import Landing from "../components/Landing/SignIn/landing";
+import Landing from "../components/Landing/landing";
 
 function Home() {
     return (
