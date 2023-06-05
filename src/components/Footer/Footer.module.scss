@@ -1,0 +1,17 @@
+@import "../../Assets/style/global";
+
+.footer {
+    opacity: .5;
+    position: absolute;
+    bottom: -1.25rem;
+    right: 3rem;
+    padding: 0!important;
+    gap: .5rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    a {
+        color: $color-primary-variant;
+        font-size: .8rem;
+    }
+}
