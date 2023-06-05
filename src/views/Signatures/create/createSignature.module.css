@@ -377,7 +377,7 @@
   border-radius: 20px;
 }
 .signatureContainer .browserHeader .btnsContainer .close {
-  background: #244EFF;
+  background: #ff5d24;
 }
 .signatureContainer .browserHeader .btnsContainer .reduce {
   background: #ffbd44;
@@ -426,7 +426,7 @@
   margin: auto;
   flex-direction: column;
   align-items: center;
-  color: #efeef4;
+  color: #1B335E;
   text-align: center;
   padding: 0;
 }

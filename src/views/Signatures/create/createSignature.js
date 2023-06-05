@@ -12,7 +12,7 @@ import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import { TokenService } from "Utils";
 import {
-    defaultOptions,
+    useDefaultOptions,
     defaultValues,
     getStyles,
     handleSave,
@@ -22,6 +22,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 // Component handling the creation of signature, selection of template
 function CreateSignatureComponent() {
     const [loading, setLoading] = useState(true);
+    const defaultOptions = useDefaultOptions();
     const intl = useIntl();
     const user = TokenService.getUser();
     const company = TokenService.getOrganisation();
@@ -37,11 +38,11 @@ function CreateSignatureComponent() {
     const [signatureInfo, setSignatureInfo] = useState(
         defaultValues(company, user)
     );
-    const [signatureOption, setSignatureOption] = useState(defaultOptions());
+    const [signatureOption, setSignatureOption] = useState(defaultOptions);
 
     const handlePopulate = () => {
         setSignatureInfo(defaultValues(company, user));
-        setSignatureOption(defaultOptions());
+        setSignatureOption(defaultOptions);
     };
 
     useEffect(() => {

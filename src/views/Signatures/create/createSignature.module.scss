@@ -1,4 +1,4 @@
-@import "../../../Assets/style/colors";
+@import "../../../Assets/style/global";
 
 .container {
     animation: fadeIn 1000ms linear forwards;
@@ -390,7 +390,7 @@
                 border-radius: $hugeRadius;
             }
             .close {
-                background: $color-primary;
+                background: #ff5d24;
             }
             .reduce {
                 background: #ffbd44;
@@ -443,7 +443,7 @@
     margin: auto;
     flex-direction: column;
     align-items: center;
-    color: $background-color;
+    color: $color-dark-accent;
     text-align: center;
     padding: 0;
     > div {

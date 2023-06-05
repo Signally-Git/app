@@ -1,5 +1,5 @@
 import request from "Utils/Request/request";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import classes from "./createSignature.module.css";
 
 async function getPreview(twig, styles) {
@@ -66,10 +66,11 @@ function defaultValues(company, user) {
     };
 }
 
-function defaultOptions() {
+function useDefaultOptions() {
+    const intl = useIntl();
     return {
         salutation: {
-            value: <FormattedMessage id="signature.default_greetings" />,
+            value: intl.formatMessage({ id: "signature.default_greetings" }),
             enabled: false,
             padding: 10,
         },
@@ -856,4 +857,4 @@ const handleSave = async (
         });
 };
 
-export { getPreview, defaultValues, getStyles, defaultOptions, handleSave };
+export { getPreview, defaultValues, getStyles, useDefaultOptions, handleSave };
