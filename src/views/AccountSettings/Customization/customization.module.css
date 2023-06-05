@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  width: 100%;
+}
+.container form {
+  display: flex;
+  flex-direction: column;
+}
+.container form > div {
+  align-items: center;
+  display: flex;
+}
+.container form > div ~ input {
+  margin-right: 0;
+  margin-left: 0;
+}
+.container .inputsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.container .inputsContainer > div:first-child {
+  margin-right: auto;
+}
+.container .inputsContainer > div:first-child > label {
+  color: #1B335E;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+.container .inputsContainer label {
+  color: #5c74b2;
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+.container .inputsContainer ~ button {
+  margin-top: 1.5rem !important;
+}
+.container .inputContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+}
+.container .inputContainer > div {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+.container .inputContainer :disabled {
+  color: #244EFF;
+  font-weight: bold;
+}
