@@ -12,7 +12,7 @@ import { UseEvents } from "Utils/useEvents/useEvents";
 import { useNotification } from "Utils/Notifications/notifications";
 import request from "Utils/Request/request";
 import { TokenService } from "Utils";
-import { defaultOptions, getStyles } from "../create/createSignature.utils";
+import { useDefaultOptions, getStyles } from "../create/createSignature.utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import { extractStyle, extractValue } from "./editSignature.utils";
 
@@ -34,7 +34,7 @@ function EditSignatureComponent() {
     const elem = useRef(null);
     const [templates, setTemplates] = useState(false);
     const [signatureInfo, setSignatureInfo] = useState();
-    const [signatureOption, setSignatureOption] = useState(defaultOptions());
+    const [signatureOption, setSignatureOption] = useState(useDefaultOptions());
     const [modal, setModal] = useState(false);
     const [modalContent, setModalContent] = useState();
     const [signatureName, setSignatureName] = useState("");
