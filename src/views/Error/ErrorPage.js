@@ -1,10 +1,14 @@
 import Header from "../../components/Header/Header";
 import classes from "./errorpage.module.css";
 import { FormattedMessage } from "react-intl";
+import { useHistory } from "react-router-dom";
+import Button from "../../Utils/Button/btn";
 
 // Page displaying front errors
 
 function ErrorPage() {
+    const history = useHistory();
+
     return (
         <div>
             <Header />
@@ -14,6 +18,10 @@ function ErrorPage() {
                     id="message.error.404.description"
                     tagName="p"
                 />
+                <br />
+                <Button color={"orange"} onClick={() => history.goBack()}>
+                    <FormattedMessage id="buttons.placeholder.go_back" />
+                </Button>
             </div>
         </div>
     );
