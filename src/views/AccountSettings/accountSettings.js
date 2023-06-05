@@ -35,19 +35,19 @@ function AccountSettings() {
                         onClick={() => handleTabChange("company")}
                         className={active === "company" ? classes.active : ""}
                     >
-                        Company
+                        <FormattedMessage id="company" />
                     </li>
                     <li
                         onClick={() => handleTabChange("user")}
                         className={active === "user" ? classes.active : ""}
                     >
-                        User
+                        <FormattedMessage id="profile.title" />
                     </li>
                     <li
                         onClick={() => handleTabChange("custom")}
                         className={active === "custom" ? classes.active : ""}
                     >
-                        Custom Settings
+                        <FormattedMessage id="custom" />
                     </li>
                 </ul>
                 {tab === "user" ? (
