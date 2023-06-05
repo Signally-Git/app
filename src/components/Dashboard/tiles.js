@@ -36,7 +36,6 @@ function Tiles(props) {
 
     useEffect(async () => {
         props.setLoading(false);
-        props.handleHeader(" ");
 
         await request.get("configurations").then(({ data }) => {
             TokenService.setConfig(data["hydra:member"]);
