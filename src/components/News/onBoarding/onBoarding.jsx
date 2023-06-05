@@ -98,9 +98,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                                 <Button
                                     color="orange"
                                     onClick={() =>
-                                        history.push(
-                                            "/profile/informations/organisation"
-                                        )
+                                        history.push("/account/company")
                                     }
                                 >
                                     <FormattedMessage id="buttons.placeholder.edit_profile" />
@@ -121,9 +119,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                                 <Button
                                     color="orange"
                                     onClick={() =>
-                                        history.push(
-                                            "/profile/informations/organisation"
-                                        )
+                                        history.push("/account/company")
                                     }
                                 >
                                     <FormattedMessage id="buttons.placeholder.complete_profile" />
@@ -159,7 +155,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                                         )
                                     }
                                 >
-                                    <FormattedMessage id="buttons.placeholder.create_signatures" />
+                                    <FormattedMessage id="buttons.placeholder.create_signature" />
                                 </Button>
                             </>
                         )}
