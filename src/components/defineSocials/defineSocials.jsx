@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Input from "Utils/Input/input";
 import classes from "./defineSocials.module.css";
 import { useNotification } from "Utils/Notifications/notifications";
@@ -7,28 +7,31 @@ import request from "Utils/Request/request";
 import UploadFile from "Utils/Upload/uploadFile";
 import { checkImageExists, TokenService } from "Utils";
 import { FormattedMessage, useIntl } from "react-intl";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-export default function DefineSocials({ setList, defaultValue }) {
+export default function DefineSocials({ setList }) {
     const socialBaseUrl =
         "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/default/";
-    const [socials, setSocials] = React.useState(
-        defaultValue || [{ url: "", name: "" }]
-    );
-    const [select, setSelect] = React.useState(defaultValue.length || 0);
-    const [value, setValue] = React.useState("");
-    // const [image, setImage] = React.useState("");
-    const socialLink = React.useRef(null);
-    const notification = useNotification();
-    const [uploadedMedia, setUploadedMedia] = React.useState(null);
-    const [preview, setPreview] = React.useState(null);
+
+    const [socials, setSocials] = useState([{ url: "", name: "" }]);
+    const [select, setSelect] = useState(0);
+    const [value, setValue] = useState("");
+    const [uploadedMedia, setUploadedMedia] = useState(null);
+    const [preview, setPreview] = useState(null);
+    const [loading, setLoading] = useState(true);
+
     const intl = useIntl();
+
+    const socialLink = useRef(null);
+
+    const notification = useNotification();
 
     const getDomainName = (string) => {
         let domain;
         try {
             domain = new URL(string).hostname
                 .replace("www.", "")
-                .replace(".com", "")
+                .replace(".com" || ".fr", "")
                 .replace(`^(?:.*://)?(?:.*?.)?([^:/]*?.[^:/]*).*$`, "");
             return domain;
         } catch (_) {
@@ -39,13 +42,13 @@ export default function DefineSocials({ setList, defaultValue }) {
     const handleChange = (e) => {
         e.preventDefault();
         const name = getDomainName(e.target.value);
-        let newArr = [...socials];
-        newArr[select] = {
+        const updatedSocials = [...socials];
+        updatedSocials[select] = {
             url: e.target.value,
             name: name,
             image: preview,
         };
-        setSocials(newArr);
+        setSocials(updatedSocials);
         setValue(e.target.value || "");
     };
 
@@ -56,9 +59,9 @@ export default function DefineSocials({ setList, defaultValue }) {
     };
 
     const handleSwap = (social) => {
-        setSelect(socials.findIndex((x) => x === social));
-        // setImage(socials[socials.findIndex((x) => x === social)]?.image || "");
-        setValue(socials[socials.findIndex((x) => x === social)]?.url || "");
+        const selectedIndex = socials.findIndex((x) => x === social);
+        setSelect(selectedIndex);
+        setValue(socials[selectedIndex]?.url || "");
     };
 
     const handleSaveIcon = async () => {
@@ -110,7 +113,6 @@ export default function DefineSocials({ setList, defaultValue }) {
         } else {
             setSelect(socials.length);
             setValue("");
-            // setImage("");
             setUploadedMedia(null);
             socialLink.current.focus();
             notification({
@@ -118,19 +120,21 @@ export default function DefineSocials({ setList, defaultValue }) {
                 status: "valid",
             });
         }
-        const req = {
+        const updatedSocial = {
             ...socials[select],
             image: image || `${socialBaseUrl}${getDomainName(value)}.png`,
-            organisation: JSON.parse(localStorage.getItem("user")).organisation,
+            organisation: TokenService.getUser().organisation,
         };
-        if (socials[select]["@id"])
-            await request.patch(socials[select]["@id"], req);
-        else await request.post("social_media_accounts", req);
+        if (socials[select]["@id"]) {
+            await request.patch(socials[select]["@id"], updatedSocial);
+        } else {
+            await request.post("social_media_accounts", updatedSocial);
+        }
         setList(socials);
     };
 
     const handleRemove = () => {
-        let index = select >= socials.length ? socials.length - 1 : select;
+        const index = select >= socials.length ? socials.length - 1 : select;
         request
             .delete(socials[index]["@id"])
             .then(() => {
@@ -141,28 +145,35 @@ export default function DefineSocials({ setList, defaultValue }) {
                 notification({
                     content: (
                         <>
-                            {socials[index].name}{" "}
-                            <FormattedMessage id="message.error.delete" />
+                            {socials[index]?.name}{" "}
+                            <FormattedMessage id="message.success.delete" />
                         </>
                     ),
                     status: "invalid",
                 });
                 setValue("");
-                // setImage("");
                 setSelect(socials.length);
             })
             .catch(() =>
                 notification({
                     content: (
                         <>
-                            <FormattedMessage id="message.success.delete" />
-                            {socials[index].name}
+                            <FormattedMessage id="message.error.delete" />
+                            {socials[index]?.name}
                         </>
                     ),
                     status: "invalid",
                 })
             );
     };
+
+    useEffect(() => {
+        request.get(TokenService.getUser().organisation).then((org) => {
+            setSocials(org.data.socialMediaAccounts);
+            setSelect(org.data.socialMediaAccounts.length);
+            setLoading(false);
+        });
+    }, []);
 
     useEffect(() => {
         if (!uploadedMedia) {
@@ -172,60 +183,43 @@ export default function DefineSocials({ setList, defaultValue }) {
         const objectUrl = URL.createObjectURL(uploadedMedia);
         setPreview(objectUrl);
 
-        let newArr = [...socials];
-        newArr[select] = {
-            ...newArr[select],
+        const updatedSocials = [...socials];
+        updatedSocials[select] = {
+            ...updatedSocials[select],
             image: objectUrl,
         };
-        setSocials(newArr);
-
-        // return () => URL.revokeObjectURL(objectUrl);
+        setSocials(updatedSocials);
     }, [uploadedMedia]);
-
-    useEffect(() => {
-        const sse = new EventSource(
-            `${process.env.REACT_APP_HUB_URL}${
-                TokenService.getUser()["organisation"]
-            }`
-        );
-        sse.onmessage = (e) => {
-            const org = {
-                ...JSON.parse(e.data),
-                "@id": TokenService.getUser().organisation,
-            };
-            TokenService.setOrganisation(org);
-            setSocials(JSON.parse(e.data).socialMediaAccounts);
-            setList(JSON.parse(e.data).socialMediaAccounts);
-        };
-    }, []);
 
     return (
         <div className={classes.container}>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label>
                         <FormattedMessage id="socials.title" />
                     </label>
-                    <ul className={classes.socialsList}>
-                        {socials?.map((social, index) => {
-                            return (
+                    {loading ? (
+                        <AiOutlineLoading3Quarters
+                            className={classes.loading}
+                        />
+                    ) : (
+                        <ul className={classes.socialsList}>
+                            {socials?.map((social, index) => (
                                 <li
                                     key={index}
                                     title={social?.url}
                                     onClick={() => handleSwap(social)}
                                 >
-                                    {social?.image ? (
+                                    {social?.image && (
                                         <img
                                             alt={social?.name?.toString()}
                                             src={social?.image}
                                         />
-                                    ) : (
-                                        ""
                                     )}
                                 </li>
-                            );
-                        })}
-                    </ul>
+                            ))}
+                        </ul>
+                    )}
                     <button
                         className={classes.addSocials}
                         type="button"
@@ -239,7 +233,7 @@ export default function DefineSocials({ setList, defaultValue }) {
                         ref={socialLink}
                         style={{ width: "15rem" }}
                         value={value}
-                        onChange={(e) => handleChange(e)}
+                        onChange={handleChange}
                         type="text"
                         placeholder={intl.formatMessage({
                             id: "socials.link_placeholder",
@@ -247,7 +241,7 @@ export default function DefineSocials({ setList, defaultValue }) {
                     />
                     <UploadFile
                         file={uploadedMedia}
-                        setFile={(e) => setUploadedMedia(e)}
+                        setFile={setUploadedMedia}
                         style={{
                             width: "15rem",
                             paddingLeft: 0,
@@ -260,13 +254,13 @@ export default function DefineSocials({ setList, defaultValue }) {
                             id: "socials.icon_placeholder",
                         })}
                     />
-                    <FiCheck onClick={(e) => handleSubmit(e)} />
+                    <FiCheck onClick={handleSubmit} />
                     {socials[0]?.url?.length > 1 && (
                         <FiTrash
                             title={`Supprimer ${
                                 socials[select]?.url || socials[select - 1].url
                             }`}
-                            onClick={() => handleRemove()}
+                            onClick={handleRemove}
                         />
                     )}
                 </div>
