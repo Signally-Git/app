@@ -3,28 +3,22 @@ import Tiles from "../components/Dashboard/tiles";
 import Signatures from "../views/Signatures/signatures";
 import Events from "../views/Events/events";
 import CreateEvent from "../views/Events/CreateEvent/createEvent";
-import { useEffect, useState } from "react";
-import Profile from "../views/Profile/profile";
+import { useState } from "react";
 import Users from "../views/Users/users";
 import CreateSignature from "../views/Signatures/create/createSignature";
 import News from "components/News/news";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { TokenService, useOrganisation } from "Utils";
 import StatsPage from "components/Statistics/Stats.page";
 import { FormattedMessage } from "react-intl";
+import AccountSettings from "../views/AccountSettings/accountSettings";
 
-function Dashboard(props) {
-    const [isHeader, setIsHeader] = useState("");
-    const user = TokenService.getUser();
-    const organisation = useOrganisation(user);
+function Dashboard({ page }) {
     const [loadingTiles, setLoadingTiles] = useState(false);
     const [loadingNews, setLoadingNews] = useState(0);
 
-    useEffect(() => {}, [organisation]);
-
     return (
         <>
-            {props.page === "home" ? (
+            {page === "home" ? (
                 <>
                     <h1 className={classes.title}>
                         <FormattedMessage id="dashboard" />{" "}
@@ -47,42 +41,40 @@ function Dashboard(props) {
                         <div className={classes.col}>
                             <div className={classes.tilesContainer}>
                                 <Tiles
-                                    handleHeader={setIsHeader}
                                     loading={loadingTiles}
                                     setLoading={setLoadingTiles}
                                 />
                             </div>
                         </div>
                     </div>
-                    {/* <div className={classes.spacer}></div> */}
                 </>
-            ) : props.page === "teams" ? (
+            ) : page === "teams" ? (
                 <>
                     <Users />
                 </>
-            ) : props.page === "statistics" ? (
+            ) : page === "statistics" ? (
                 <>
                     <StatsPage />
                 </>
-            ) : props.page === "signatures" ? (
+            ) : page === "signatures" ? (
                 <>
                     <Signatures />
                 </>
-            ) : props.page === "create-signature" ? (
+            ) : page === "create-signature" ? (
                 <>
                     <CreateSignature />
                 </>
-            ) : props.page === "events" ? (
+            ) : page === "events" ? (
                 <>
                     <Events />
                 </>
-            ) : props.page === "create-event" ? (
+            ) : page === "create-event" ? (
                 <>
-                    <CreateEvent handleHeader={setIsHeader} />
+                    <CreateEvent />
                 </>
-            ) : props.page === "profile" ? (
+            ) : page === "account" ? (
                 <>
-                    <Profile handleHeader={setIsHeader} header={isHeader} />
+                    <AccountSettings />
                 </>
             ) : null}
         </>
