@@ -328,7 +328,7 @@ export default function CreateEvent({ setDone, event }) {
             </div>
             <div>
                 <Buttons
-                    style={{ left: ".5rem", bottom: "-3rem" }}
+                    style={{ left: ".5rem", bottom: "-4rem" }}
                     confirmTxt={
                         <FormattedMessage id="buttons.placeholder.save" />
                     }
