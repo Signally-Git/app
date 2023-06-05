@@ -46,6 +46,19 @@
   color: #244EFF;
 }
 
+.loading {
+  animation: spin infinite 1s linear;
+  height: 5rem;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 .socialsList {
   list-style: none;
   border-radius: 5px;

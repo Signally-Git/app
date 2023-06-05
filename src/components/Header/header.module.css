@@ -17,6 +17,10 @@
   z-index: 5;
 }
 
+.landing {
+  position: absolute;
+  z-index: 1;
+}
 .landing .logoContainer {
   margin-top: 0;
 }
@@ -238,8 +242,7 @@
 }
 .name ul {
   z-index: 3;
-  background: #fbf8f7;
-  padding: 0;
+  background: #f7f8fb;
   padding: 0 1rem;
   border: 1px solid #1B335E;
   border-radius: 15px;
@@ -277,6 +280,7 @@
 }
 .name .UserName {
   display: flex;
+  color: #1B335E;
   padding-top: 3px;
   align-items: center;
   justify-content: center;
@@ -293,6 +297,10 @@
   color: #1B335E;
   transition: 0.2s;
   margin-right: 0.5rem;
+}
+
+.logout {
+  color: #5c74b2;
 }
 
 .reportContainer {

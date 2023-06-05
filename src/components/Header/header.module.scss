@@ -1,4 +1,4 @@
-@import "../../Assets/style/colors";
+@import "../../Assets/style/global";
 
 .dashboardContainer {
     width: 100%;
@@ -20,6 +20,8 @@
 }
 
 .landing {
+    position: absolute;
+    z-index: 1;
     .logoContainer {
         margin-top: 0;
     }
@@ -256,8 +258,7 @@
     position: relative;
     ul {
         z-index: 3;
-        background: #fbf8f7;
-        padding: 0;
+        background: $outter-background-color;
         padding: 0 1rem;
         border: 1px solid $color-dark-accent;
         border-radius: 15px;
@@ -302,6 +303,7 @@
     }
     .UserName {
         display: flex;
+        color: $color-dark-accent;
         padding-top: 3px;
         align-items: center;
         justify-content: center;
@@ -319,6 +321,11 @@
             margin-right: 0.5rem;
         }
     }
+}
+
+
+.logout {
+    color: $color-primary-variant
 }
 
 .reportContainer {

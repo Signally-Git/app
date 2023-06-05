@@ -1,4 +1,4 @@
-@import "../../Assets/style/colors";
+@import "../../Assets/style/global";
 
 .container {
     display: flex;
@@ -46,14 +46,16 @@
 }
 
 .teamsContainer {
-    width: 45%;
-    max-width: 25rem;
-    min-width: 25rem;
+    width: $leftColMinWidth;
+    max-width: $leftColMinWidth;
+    min-width: $leftColMinWidth;
     background-color: #fff;
     border-radius: $borderRadius;
     padding: 2rem;
     position: relative;
-    height: 85%;
+    min-height: $leftColMinHeight;
+    height: $leftColHeight;
+    max-height: $leftColMaxHeight;
     ul {
         padding: 0;
         list-style: none;
@@ -63,7 +65,7 @@
         flex-direction: column;
         height: 95%;
         > span {
-            color: $color-primary;
+            color: $color-primary-variant;
             font-weight: bold;
             margin-top: 1rem;
             font-size: 0.9rem;

@@ -1,4 +1,4 @@
-@import "../../Assets/style/colors";
+@import "../../Assets/style/global";
 
 .container {
     border-radius: $borderRadius;
@@ -22,14 +22,14 @@
         top: 0;
         z-index: 2;
         &:hover {
-            color: $color-primary;
+            color: $color-primary-variant;
             cursor: pointer;
         }
     }
 }
 
 .orangeTxt {
-    color: $color-primary;
+    color: $color-primary-variant;
 }
 
 .bold > span {

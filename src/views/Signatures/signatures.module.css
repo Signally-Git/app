@@ -44,14 +44,16 @@
 }
 
 .teamsContainer {
-  width: 45%;
-  max-width: 25rem;
-  min-width: 25rem;
+  width: 40rem;
+  max-width: 40rem;
+  min-width: 40rem;
   background-color: #fff;
   border-radius: 5px;
   padding: 2rem;
   position: relative;
-  height: 85%;
+  min-height: 50rem;
+  height: 65%;
+  max-height: 50rem;
 }
 .teamsContainer ul {
   padding: 0;
@@ -63,7 +65,7 @@
   height: 95%;
 }
 .teamsContainer > div > span {
-  color: #244EFF;
+  color: #5c74b2;
   font-weight: bold;
   margin-top: 1rem;
   font-size: 0.9rem;

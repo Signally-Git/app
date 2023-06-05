@@ -1,4 +1,4 @@
-@import "../../../Assets/style/colors";
+@import "../../../Assets/style/global";
 
 .container {
     width: 100%;
@@ -17,7 +17,7 @@
         color: $color-dark-accent;
         span {
             margin-left: 0.5rem;
-            color: $color-primary;
+            color: $color-primary-variant;
         }
         svg {
             margin-left: auto;
@@ -26,7 +26,7 @@
     label {
         font-size: 0.7rem;
         font-weight: 600;
-        color: $color-primary;
+        color: $color-primary-variant;
         margin-left: 0.15rem;
     }
     input {

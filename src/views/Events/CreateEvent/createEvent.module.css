@@ -17,7 +17,7 @@
 }
 .container h2 span {
   margin-left: 0.5rem;
-  color: #244EFF;
+  color: #5c74b2;
 }
 .container h2 svg {
   margin-left: auto;
@@ -25,7 +25,7 @@
 .container label {
   font-size: 0.7rem;
   font-weight: 600;
-  color: #244EFF;
+  color: #5c74b2;
   margin-left: 0.15rem;
 }
 .container input {

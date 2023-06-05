@@ -1,4 +1,4 @@
-@import "../../Assets/style/colors";
+@import "../../Assets/style/global";
 
 .container {
     display: flex;
@@ -45,6 +45,20 @@
                 color: $color-primary;
             }
         }
+    }
+}
+
+.loading {
+    animation: spin infinite 1s linear;
+    height: 5rem;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
 

@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+@import './Assets/style/global';
+
 * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -8,19 +10,8 @@
     box-sizing: border-box;
 }
 
-/* SOON FEATURES */
-.disabled {
-    filter: grayscale(0.8);
-    cursor: default !important;
-    pointer-events: none;
-    color: #ff7954 !important;
-}
-.disabled a {
-    opacity: 0.2;
-}
-
 .rdtActive {
-    background-color: #ff7954 !important;
+    background-color: $color-primary !important;
 }
 
 .rdtPicker {
@@ -45,11 +36,11 @@
 }
 
 .rdtToday::before {
-    border-bottom-color: #ff7954 !important;
+    border-bottom-color: $color-primary !important;
 }
 
 .rdtCounter .rdtBtn {
-    color: #ff7954;
+    color: $color-primary;
 }
 
 .rdtSwitch {
@@ -90,7 +81,8 @@ html {
 }
 
 body {
-    background: #fdf8f7;
+    background: $outter-background-color;
+    color: $color-darker-accent;
     margin: 0;
     padding: 0;
     font-size: 1rem;
@@ -104,7 +96,7 @@ body {
 }
 
 .orangeBg {
-    background: #fdf8f7;
+    background: $outter-background-color;
 }
 
 h1,
@@ -140,7 +132,7 @@ h6 {
 }
 
 .rdrStartEdge + span {
-    border: 22px solid #ff7954;
+    border: 22px solid $color-primary;
     width: 44px !important;
     height: 44px !important;
     top: -50% !important;
@@ -161,7 +153,7 @@ h6 {
 
 .rdrEndEdge {
     color: #fff !important;
-    border: 1px solid #ff7954 !important;
+    border: 1px solid $color-primary !important;
     width: 44px !important;
     height: 44px !important;
     border-radius: 50% !important;
@@ -184,7 +176,7 @@ h6 {
 
 .rdrDayStartPreview .rdrDayEndPreview {
     border-radius: 50% !important;
-    border: 1px solid #ff7954 !important;
+    border: 1px solid $color-primary !important;
 }
 
 .rdrInRange,

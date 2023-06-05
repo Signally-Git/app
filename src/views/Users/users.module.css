@@ -39,10 +39,13 @@
 .teamsContainer {
   background-color: #fff;
   border-radius: 5px;
-  min-width: 25rem;
+  min-width: 40rem;
+  width: 65%;
+  max-width: 40rem;
+  min-height: 50rem;
+  height: 65%;
+  max-height: 50rem;
   margin-bottom: 1rem;
-  max-width: 45%;
-  width: 100%;
   margin-right: 2rem;
   padding: 2rem;
   position: relative;

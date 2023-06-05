@@ -1,4 +1,4 @@
-@import "../../Assets/style/colors";
+@import "../../Assets/style/global";
 
 .container {
     display: flex;
@@ -41,10 +41,13 @@
 .teamsContainer {
     background-color: #fff;
     border-radius: $borderRadius;
-    min-width: 25rem;
+    min-width: $leftColMinWidth;
+    width: $leftColWidth;
+    max-width: $leftColMaxWidth;
+    min-height: $leftColMinHeight;
+    height: $leftColHeight;
+    max-height: $leftColMaxHeight;
     margin-bottom: 1rem;
-    max-width: 45%;
-    width: 100%;
     margin-right: 2rem;
     padding: 2rem;
     position: relative;
