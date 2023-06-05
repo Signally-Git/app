@@ -1,7 +1,3 @@
-.whiteBg {
-  background-color: #fff;
-}
-
 .btn {
   background-color: transparent;
   display: flex;
@@ -18,6 +14,18 @@
 }
 .btn * {
   color: inherit;
+}
+
+.link-primary {
+  border-color: transparent;
+}
+.link-primary:hover {
+  color: #244EFF;
+  cursor: pointer;
+}
+
+.whiteBg {
+  background-color: #fff;
 }
 
 .orange {

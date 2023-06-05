@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useIntl } from "react-intl";
 import classes from "./Footer.module.css";
 
