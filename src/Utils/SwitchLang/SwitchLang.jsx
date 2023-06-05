@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { LangContext } from "contexts/LangContext";
 import request from "Utils/Request/request";
 
-export default function SwitchLang({ setUserLanguage }) {
+export function SwitchLang({ setUserLanguage }) {
     const { locale, setLocale } = useContext(LangContext);
     const [languages, setLanguages] = useState([]);
 
