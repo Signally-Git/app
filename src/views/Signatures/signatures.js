@@ -24,6 +24,7 @@ function Team() {
     const [signatureOption, setSignatureOption] = useState({});
     const [defaultStyles, setDefaultStyles] = useState();
     const [preview, setPreview] = useState({});
+    const [search, setSearch] = useState("");
     const history = useHistory();
     const [loading, setLoading] = useState(true);
 
@@ -32,8 +33,7 @@ function Team() {
 
         signatures.data["hydra:totalItems"] < 1
             ? history.push("/create-signature")
-            : // : console.log(signatures.data["hydra:member"])
-              setTemplates(signatures.data["hydra:member"]);
+            : setTemplates(signatures.data["hydra:member"]);
         signatures.data["hydra:member"].map((template, index) => {
             request.get(template["@id"]).then((r) => {
                 signatures[index] = r.data;
@@ -170,17 +170,6 @@ function Team() {
                         ""
                     )}
                     <div className={classes.teamsContainer}>
-                        <ul className={classes.menu}>
-                            {/*<li*/}
-                            {/*    onClick={() => setActive("active")}*/}
-                            {/*    className={*/}
-                            {/*        active === "active" ? classes.active : ""*/}
-                            {/*    }*/}
-                            {/*>*/}
-                            {/*    Actives*/}
-                            {/*</li>*/}
-                            {/* <li onClick={() => setActive("inactive")} className={`${active === "inactive" ? classes.active : ""}`}>Inactives</li> */}
-                        </ul>
                         {active === "active" ? (
                             <div>
                                 {user?.roles[1] !== "ROLE_RH" ? (
@@ -197,6 +186,9 @@ function Team() {
                                     <FormattedMessage id="search_signature">
                                         {(placeholder) => (
                                             <input
+                                                onChange={(e) =>
+                                                    setSearch(e.target.value)
+                                                }
                                                 className={classes.search}
                                                 type="text"
                                                 placeholder={placeholder}
@@ -212,77 +204,81 @@ function Team() {
                                 </span>
                                 <ul className={classes.itemsList}>
                                     {templates.map((signature) => {
-                                        return (
-                                            <li
-                                                onMouseEnter={() => {
-                                                    setSelected(signature);
-                                                    request
-                                                        .get(signature["@id"])
-                                                        .then((res) =>
-                                                            setPreview(res.data)
-                                                        );
-                                                    setDefaultStyles(
-                                                        signature.signatureStyles
-                                                    );
-                                                }}
-                                                key={signature.id}
-                                                className={
-                                                    selected === signature
-                                                        ? classes.selected
-                                                        : ""
-                                                }
-                                            >
-                                                <span
-                                                    onClick={() =>
-                                                        JSON.parse(
-                                                            localStorage.getItem(
-                                                                "user"
+                                        if (
+                                            signature.name.search(
+                                                search.toLowerCase()
+                                            ) !== -1
+                                        )
+                                            return (
+                                                <li
+                                                    onMouseEnter={() => {
+                                                        setSelected(signature);
+                                                        request
+                                                            .get(
+                                                                signature["@id"]
                                                             )
-                                                        ).roles[1] !== "ROLE_RH"
-                                                            ? history.push(
-                                                                  "/edit-signature/" +
-                                                                      signature.id
-                                                              )
+                                                            .then((res) =>
+                                                                setPreview(
+                                                                    res.data
+                                                                )
+                                                            );
+                                                        setDefaultStyles(
+                                                            signature.signatureStyles
+                                                        );
+                                                    }}
+                                                    key={signature.id}
+                                                    className={
+                                                        selected === signature
+                                                            ? classes.selected
                                                             : ""
                                                     }
                                                 >
-                                                    {signature.name}
-                                                </span>
-                                                {user?.roles[1] !==
-                                                "ROLE_RH" ? (
-                                                    <div
-                                                        className={
-                                                            classes.actionsContainer
+                                                    <span
+                                                        onClick={() =>
+                                                            TokenService.getUser()
+                                                                .roles[1] !==
+                                                            "ROLE_RH"
+                                                                ? history.push(
+                                                                      "/edit-signature/" +
+                                                                          signature.id
+                                                                  )
+                                                                : ""
                                                         }
                                                     >
-                                                        <AiOutlineEdit
-                                                            onClick={() =>
-                                                                JSON.parse(
-                                                                    localStorage.getItem(
-                                                                        "user"
+                                                        {signature.name}
+                                                    </span>
+                                                    {user?.roles[1] !==
+                                                    "ROLE_RH" ? (
+                                                        <div
+                                                            className={
+                                                                classes.actionsContainer
+                                                            }
+                                                        >
+                                                            <AiOutlineEdit
+                                                                onClick={() =>
+                                                                    TokenService.getUser()
+                                                                        .roles[1] !==
+                                                                    "ROLE_RH"
+                                                                        ? history.push(
+                                                                              "/edit-signature/" +
+                                                                                  signature.id
+                                                                          )
+                                                                        : ""
+                                                                }
+                                                            />
+                                                            <FiTrash
+                                                                onClick={() =>
+                                                                    handleModal(
+                                                                        signature.id
                                                                     )
-                                                                ).roles[1] !==
-                                                                "ROLE_RH"
-                                                                    ? history.push(
-                                                                          "/edit-signature/" +
-                                                                              signature.id
-                                                                      )
-                                                                    : ""
-                                                            }
-                                                        />
-                                                        <FiTrash
-                                                            onClick={() =>
-                                                                handleModal(
-                                                                    signature.id
-                                                                )
-                                                            }
-                                                        />
-                                                    </div>
-                                                ) : (
-                                                    ""
-                                                )}
-                                            </li>
-                                        );
+                                                                }
+                                                            />
+                                                        </div>
+                                                    ) : (
+                                                        ""
+                                                    )}
+                                                </li>
+                                            );
                                     })}
                                 </ul>
                             </div>
@@ -300,7 +296,6 @@ function Team() {
                     </div>
                     {preview.html?.length > 0 ? (
                         <div className={classes.signaturePreview}>
-                            {/* <h2>Design</h2> */}
                             <ul>
                                 <li>
                                     <h5>
@@ -310,10 +305,6 @@ function Team() {
                                         </span>
                                     </h5>
                                     {parse(preview.preview)}
-                                    {/* <Preview infos={signatureInfo} options={signatureOption} template={preview.html} organisation={organisation} /> */}
-                                    {/* <ReadOnlyPreview infos={data} template={preview.html} /> */}
-                                    {/* <p className={classes.groupName}>Team Design</p>
-                                    <span className={classes.groupName}>#Mama Los Angeles</span> */}
                                 </li>
                             </ul>
                         </div>
