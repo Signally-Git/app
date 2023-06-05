@@ -19,7 +19,7 @@ export const dashboardRoutes = [
         component={Dashboard}
     />,
 
-    <PrivateRoute path="/profile" page="profile" component={Dashboard} />,
+    <PrivateRoute path="/account/:tab" page="account" component={Dashboard} />,
 
     <PrivateRoute exact path="/events" page="events" component={Dashboard} />,
 
