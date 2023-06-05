@@ -188,7 +188,7 @@ export default function CreateUser({ setDone }) {
                         <FormattedMessage id="users_description" />
                         <Button
                             width="15rem"
-                            color="orange"
+                            color="primary"
                             arrow={true}
                             onClick={(e) => {
                                 handleAccept(e);
@@ -203,14 +203,18 @@ export default function CreateUser({ setDone }) {
                 <div className={classes.slide}>
                     <Button
                         width={width}
-                        color="orangeFill"
+                        color="primaryFill"
                         arrow={true}
                         className={classes.btn}
                         onClick={(e) => handleSlide(e, 2)}
                     >
                         <FormattedMessage id="manual" />
                     </Button>
-                    <Button width={width} color="brown" className={classes.btn}>
+                    <Button
+                        width={width}
+                        color="secondary"
+                        className={classes.btn}
+                    >
                         {" "}
                         <input
                             type="file"
@@ -275,8 +279,8 @@ export default function CreateUser({ setDone }) {
                                 color={
                                     user.firstName.length < 1 ||
                                     user.lastName.length < 1
-                                        ? "orange"
-                                        : "orangeFill"
+                                        ? "primary"
+                                        : "primaryFill"
                                 }
                                 arrow={true}
                                 className={`${classes.btn}`}
@@ -285,7 +289,7 @@ export default function CreateUser({ setDone }) {
                             </Button>
                             <Button
                                 width={width}
-                                color="orange"
+                                color="primary"
                                 className={`${classes.btn}`}
                                 onClick={(e) => handleSlide(e, 1)}
                             >
@@ -375,8 +379,8 @@ export default function CreateUser({ setDone }) {
                                 color={
                                     user.position.length < 1 ||
                                     user.email.length < 1
-                                        ? "orange"
-                                        : "orangeFill"
+                                        ? "primary"
+                                        : "primaryFill"
                                 }
                                 onClick={(e) => {
                                     handleSave();
@@ -388,7 +392,7 @@ export default function CreateUser({ setDone }) {
                             </Button>
                             <Button
                                 width={width}
-                                color="orange"
+                                color="primary"
                                 className={`${classes.btn}`}
                                 onClick={(e) => handleSlide(e, 2)}
                             >

@@ -101,8 +101,8 @@ export default function ResetPassword() {
                     <Button
                         color={
                             newPass === confirm && newPass.length > 1
-                                ? "orangeFill"
-                                : "orange"
+                                ? "primaryFill"
+                                : "primary"
                         }
                         disabled={
                             newPass !== confirm ? true : !(newPass.length > 1)

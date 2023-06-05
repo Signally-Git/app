@@ -187,7 +187,7 @@ function Tiles(props) {
                 <Modal
                     style={{ left: 0, padding: "1rem 2rem" }}
                     title={
-                        <span className={classes.orangeTxt}>
+                        <span className={classes.primaryTxt}>
                             <FormattedMessage id="deploy.send_mail.title" />
                         </span>
                     }

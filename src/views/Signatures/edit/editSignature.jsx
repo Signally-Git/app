@@ -253,7 +253,7 @@ function EditSignatureComponent() {
                                 <div>
                                     <Button
                                         width="40%"
-                                        color="orange"
+                                        color="primary"
                                         type="submit"
                                     >
                                         <FormattedMessage id="buttons.placeholder.save" />
@@ -261,7 +261,7 @@ function EditSignatureComponent() {
                                     <Button
                                         onClick={() => setModal(false)}
                                         width="30%"
-                                        color="brown"
+                                        color="secondary"
                                     >
                                         <FormattedMessage id="buttons.placeholder.cancel" />
                                     </Button>
@@ -802,7 +802,7 @@ function EditSignatureComponent() {
             <div>
                 <h1>
                     <FormattedMessage id="signature.edit" />
-                    <span className={classes.orangeTxt}> {signatureName}</span>
+                    <span className={classes.primaryTxt}> {signatureName}</span>
                 </h1>
                 <div className={classes.row}>
                     <div className={classes.options}>
@@ -868,7 +868,7 @@ function EditSignatureComponent() {
                             <div className={classes.CTAsContainer}>
                                 <div>
                                     <Button
-                                        color="brown"
+                                        color="secondary"
                                         onClick={() => history.goBack()}
                                         style={{
                                             opacity: selectedTemplate ? 1 : 0,
@@ -880,7 +880,7 @@ function EditSignatureComponent() {
                                         <FormattedMessage id="buttons.placeholder.cancel" />
                                     </Button>
                                     <Button
-                                        color="orange"
+                                        color="primary"
                                         onClick={() => setModal(true)}
                                         style={{
                                             opacity: selectedTemplate ? 1 : 0,
@@ -893,7 +893,7 @@ function EditSignatureComponent() {
                                     </Button>
                                 </div>
                                 <Button
-                                    color="brown"
+                                    color="secondary"
                                     onClick={() => showTemplates(true)}
                                 >
                                     <FormattedMessage id="buttons.placeholder.choose_template" />

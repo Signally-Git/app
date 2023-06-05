@@ -124,7 +124,7 @@ export default function TemplateSelection({
                     </ul>
                     <div className={classes.btnContainer}>
                         <Button
-                            color="orange"
+                            color="primary"
                             width={"5rem"}
                             onClick={(e) => {
                                 e.preventDefault();

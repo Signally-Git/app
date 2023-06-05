@@ -131,7 +131,7 @@ export default function CreateWorkplace({ setDone }) {
                         />
                         <Button
                             width="15rem"
-                            color="orange"
+                            color="primary"
                             arrow={true}
                             onClick={(e) => {
                                 handleAccept(e);
@@ -146,14 +146,18 @@ export default function CreateWorkplace({ setDone }) {
                 <div className={classes.slide}>
                     <Button
                         width={width}
-                        color="orangeFill"
+                        color="primaryFill"
                         arrow={true}
                         className={classes.btn}
                         onClick={(e) => handleSlide(e, 2)}
                     >
                         <FormattedMessage id="manual" />
                     </Button>
-                    <Button width={width} color="brown" className={classes.btn}>
+                    <Button
+                        width={width}
+                        color="secondary"
+                        className={classes.btn}
+                    >
                         {" "}
                         <input
                             type="file"
@@ -208,8 +212,8 @@ export default function CreateWorkplace({ setDone }) {
                                 width={width}
                                 color={
                                     workplace.name.length < 1
-                                        ? "orange"
-                                        : "orangeFill"
+                                        ? "primary"
+                                        : "primaryFill"
                                 }
                                 arrow={true}
                                 type="submit"
@@ -219,7 +223,7 @@ export default function CreateWorkplace({ setDone }) {
                             </Button>
                             <Button
                                 width={width}
-                                color="orange"
+                                color="primary"
                                 className={`${classes.btn}`}
                                 onClick={(e) => handleSlide(e, 1)}
                             >
@@ -319,8 +323,8 @@ export default function CreateWorkplace({ setDone }) {
                                 color={
                                     workplace.address.street.length < 5 ||
                                     workplace.digitalAddress.mobile.length < 9
-                                        ? "orange"
-                                        : "orangeFill"
+                                        ? "primary"
+                                        : "primaryFill"
                                 }
                                 type="submit"
                                 className={`${classes.btn} ${
@@ -331,7 +335,7 @@ export default function CreateWorkplace({ setDone }) {
                             </Button>
                             <Button
                                 width={width}
-                                color="orange"
+                                color="primary"
                                 className={`${classes.btn}`}
                                 onClick={(e) => handleSlide(e, 2)}
                             >

@@ -7,14 +7,18 @@ function Buttons({ cancelTxt, confirmTxt, onCancel, onConfirm, ...props }) {
     return (
         <div className={classes.container} {...props}>
             <Button
-                color={"orange"}
+                color={"primary"}
                 onClick={(e) => onConfirm(e)}
                 type="submit"
             >
-                {confirmTxt || <FormattedMessage id="buttons.placeholder.save" />}
+                {confirmTxt || (
+                    <FormattedMessage id="buttons.placeholder.save" />
+                )}
             </Button>
-            <Button color={"brown"} onClick={(e) => onCancel(e)}>
-                {cancelTxt || <FormattedMessage id="buttons.placeholder.cancel" />}
+            <Button color={"secondary"} onClick={(e) => onCancel(e)}>
+                {cancelTxt || (
+                    <FormattedMessage id="buttons.placeholder.cancel" />
+                )}
             </Button>
         </div>
     );

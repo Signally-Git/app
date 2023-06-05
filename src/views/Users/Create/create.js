@@ -64,7 +64,7 @@ export default function Create(props) {
                     <p>{props.fill.subTxt}</p>
                     <Button
                         width="15rem"
-                        color="orange"
+                        color="primary"
                         arrow={true}
                         onClick={(e) => handleSlide(e, 1)}
                     >
@@ -75,7 +75,7 @@ export default function Create(props) {
                     <div className={classes.slide}>
                         <Button
                             width={width}
-                            color="orangeFill"
+                            color="primaryFill"
                             arrow={true}
                             className={classes.btn}
                             onClick={(e) => handleSlide(e, 2)}
@@ -84,7 +84,7 @@ export default function Create(props) {
                         </Button>
                         <Button
                             width={width}
-                            color="brown"
+                            color="secondary"
                             className={classes.btn}
                         >
                             {" "}
@@ -113,7 +113,7 @@ export default function Create(props) {
                         />
                         <Button
                             width={width}
-                            color="orangeFill"
+                            color="primaryFill"
                             arrow={true}
                             onClick={(e) => {
                                 createGroup();
@@ -168,7 +168,7 @@ export default function Create(props) {
                             </div>
                             <Button
                                 width={"10rem"}
-                                color="orangeFill"
+                                color="primaryFill"
                                 onClick={() => handleSave()}
                                 className={`${classes.btn} ${
                                     groupName.length === 0
@@ -203,8 +203,8 @@ export default function Create(props) {
                         Importer un fichier
                     </span>
                 </div>
-                <Button width={width} color="orangeFill" arrow={true} onClick={() => handleSave()}>Valider</Button>
-                <Button width={width} color="brown" onClick={(e) => handleSlide(e, 1)}>Retour</Button>
+                <Button width={width} color="primaryFill" arrow={true} onClick={() => handleSave()}>Valider</Button>
+                <Button width={width} color="secondary" onClick={(e) => handleSlide(e, 1)}>Retour</Button>
             </div> */}
             </div>
         </div>

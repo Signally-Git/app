@@ -109,7 +109,7 @@ function ImgUploader() {
                 />
                 <Button
                     style={{ width: "30%" }}
-                    color="orangeFill"
+                    color="primaryFill"
                     onClick={() => convertSvg(svgData)}
                     className={classes.btn}
                 >

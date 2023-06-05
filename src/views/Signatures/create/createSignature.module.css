@@ -87,7 +87,7 @@
 .modal .slide > div button {
   margin: 1.5rem 0.5rem 0 !important;
 }
-.modal .orangeTxt {
+.modal .primaryTxt {
   color: #244EFF;
 }
 
@@ -632,6 +632,6 @@ input:checked + .slider:before {
   cursor: move;
 }
 
-.orangeTxt {
+.primaryTxt {
   color: #244EFF;
 }

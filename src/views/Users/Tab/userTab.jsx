@@ -132,7 +132,7 @@ function UserTab({
     return (
         <div className={classes.mh100}>
             <Link to="create-user">
-                <Button style={{ width: "15rem" }} color="orange" arrow={true}>
+                <Button style={{ width: "15rem" }} color="primary" arrow={true}>
                     <FormattedMessage id="buttons.placeholder.add" />{" "}
                     {
                         JSON.parse(

@@ -395,7 +395,7 @@ const Signup = () => {
                                     width: "40%",
                                 }}
                                 defaultBgColor={"transparent"}
-                                color={valid ? "orangeFill" : "orange"}
+                                color={valid ? "primaryFill" : "primary"}
                                 type="submit"
                             >
                                 {loading ? (

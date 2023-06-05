@@ -27,11 +27,11 @@ export const ForgottenPassword = ({ isOpen, setIsOpen }) => {
             <div className={classes.modal}>
                 <p>
                     <FormattedMessage id="message.success.sign_up.part1" />
-                    <span className={classes.orangeTxt}> {email} </span>
+                    <span className={classes.primaryTxt}> {email} </span>
                     <FormattedMessage id="message.success.sign_up.part2" />
                 </p>
                 <Button
-                    color={"orange"}
+                    color={"primary"}
                     width={"40%"}
                     onClick={() => setIsOpen(null)}
                 >
@@ -58,12 +58,12 @@ export const ForgottenPassword = ({ isOpen, setIsOpen }) => {
                     placeholder={intl.formatMessage({ id: "email" })}
                 />
                 <div className={classes.btnsContainer}>
-                    <Button type="submit" color={"orangeFill"} width={"40%"}>
+                    <Button type="submit" color={"primaryFill"} width={"40%"}>
                         <FormattedMessage id="buttons.placeholder.send" />
                     </Button>
                     <Button
                         type="button"
-                        color={"orange"}
+                        color={"primary"}
                         width={"40%"}
                         onClick={() => setIsOpen(null)}
                     >

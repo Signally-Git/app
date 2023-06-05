@@ -315,7 +315,7 @@ export default function Tab({
                             <h4>
                                 <FormattedMessage id="message.warning.delete" />
                                 <br />
-                                <span className={classes.orangeTxt}>{`${
+                                <span className={classes.primaryTxt}>{`${
                                     workplaces.length
                                 } ${
                                     configuration.filter(
@@ -325,7 +325,7 @@ export default function Tab({
                             </h4>
                             <div>
                                 <Button
-                                    color="orange"
+                                    color="primary"
                                     onClick={() =>
                                         setModal({ type: "", name: "", id: "" })
                                     }
@@ -333,7 +333,7 @@ export default function Tab({
                                     <FormattedMessage id="buttons.placeholder.cancel" />
                                 </Button>
                                 <Button
-                                    color="orangeFill"
+                                    color="primaryFill"
                                     onClick={() =>
                                         handleDeleteAll("workplaces")
                                     }
@@ -349,7 +349,7 @@ export default function Tab({
                             <h4>
                                 <FormattedMessage id="message.warning.delete" />
                                 <br />
-                                <span className={classes.orangeTxt}>{`${
+                                <span className={classes.primaryTxt}>{`${
                                     teams.length
                                 } ${
                                     configuration.filter(
@@ -360,7 +360,7 @@ export default function Tab({
                             <br />
                             <div>
                                 <Button
-                                    color="orange"
+                                    color="primary"
                                     onClick={() =>
                                         setModal({ type: "", name: "", id: "" })
                                     }
@@ -368,7 +368,7 @@ export default function Tab({
                                     <FormattedMessage id="buttons.placeholder.cancel" />
                                 </Button>
                                 <Button
-                                    color="orangeFill"
+                                    color="primaryFill"
                                     onClick={() => handleDeleteAll("teams")}
                                 >
                                     <FormattedMessage id="buttons.placeholder.delete" />
@@ -382,7 +382,7 @@ export default function Tab({
                             <h4>
                                 <FormattedMessage id="message.warning.delete" />
                                 <br />
-                                <span className={classes.orangeTxt}>{`${
+                                <span className={classes.primaryTxt}>{`${
                                     users.length - 1
                                 } ${
                                     configuration.filter(
@@ -392,7 +392,7 @@ export default function Tab({
                             </h4>
                             <div>
                                 <Button
-                                    color="orange"
+                                    color="primary"
                                     onClick={() =>
                                         setModal({ type: "", name: "", id: "" })
                                     }
@@ -400,7 +400,7 @@ export default function Tab({
                                     <FormattedMessage id="buttons.placeholder.cancel" />
                                 </Button>
                                 <Button
-                                    color="orangeFill"
+                                    color="primaryFill"
                                     onClick={() => handleDeleteAll("users")}
                                 >
                                     <FormattedMessage id="buttons.placeholder.delete" />
@@ -414,13 +414,13 @@ export default function Tab({
                             <h4>
                                 <FormattedMessage id="message.warning.delete" />
                                 <br />
-                                <span className={classes.orangeTxt}>
+                                <span className={classes.primaryTxt}>
                                     {toDelete?.name}
                                 </span>
                             </h4>
                             <div>
                                 <Button
-                                    color="orange"
+                                    color="primary"
                                     onClick={() =>
                                         setModal({ type: "", name: "", id: "" })
                                     }
@@ -428,7 +428,7 @@ export default function Tab({
                                     <FormattedMessage id="buttons.placeholder.cancel" />
                                 </Button>
                                 <Button
-                                    color="orangeFill"
+                                    color="primaryFill"
                                     onClick={() =>
                                         handleDelete(
                                             toDelete?.id,
@@ -561,7 +561,7 @@ export default function Tab({
                 <Link to="create-workplace">
                     <Button
                         style={{ width: "15rem" }}
-                        color="orange"
+                        color="primary"
                         arrow={true}
                     >
                         <FormattedMessage id="buttons.placeholder.add" />{" "}
@@ -590,7 +590,7 @@ export default function Tab({
                 <div className={classes.colheader}>
                     <span
                         className={`${classes.totalNumber} ${
-                            addedWorkplace.length > 0 ? classes.orangeTxt : ""
+                            addedWorkplace.length > 0 ? classes.primaryTxt : ""
                         }`}
                     >
                         {addedWorkplace.length > 0
@@ -947,7 +947,7 @@ export default function Tab({
                 <Link to="create-team">
                     <Button
                         style={{ width: "15rem" }}
-                        color="orange"
+                        color="primary"
                         arrow={true}
                     >
                         <FormattedMessage id="buttons.placeholder.add" />{" "}

@@ -30,7 +30,7 @@
     background-color: #fff;
 }
 
-.orange {
+.primary {
     color: $color-primary;
     border-color: $color-primary;
     cursor: pointer;
@@ -54,7 +54,7 @@
     margin-right: 0.5rem;
 }
 
-.orangeFill {
+.primaryFill {
     color: #fff;
     background-color: $color-primary;
     border-color: $color-primary;
@@ -74,7 +74,7 @@
     }
 }
 
-.brown {
+.secondary {
     color: $color-dark-accent;
     border-color: $color-dark-accent;
     &:hover {
@@ -93,7 +93,7 @@
     }
 }
 
-.brownFill {
+.secondaryFill {
     color: #fff;
     background-color: $color-dark-accent;
     border-color: $color-dark-accent;

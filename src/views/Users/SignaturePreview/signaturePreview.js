@@ -249,7 +249,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                     content: (
                         <>
                             <FormattedMessage id="message.success.signature.edit_variant1" />
-                            <span className={classes.orangeTxt}>
+                            <span className={classes.primaryTxt}>
                                 {type === "user"
                                     ? element.firstName + " " + element.lastName
                                     : element.name}
@@ -418,13 +418,13 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                         <>
                             Vous allez mettre en ligne <br />
                             la signature{" "}
-                            <span className={classes.orangeTxt}>
+                            <span className={classes.primaryTxt}>
                                 {selectedTemplate?.name}
                             </span>{" "}
                             <br />
                             <br />
                             pour{" "}
-                            <span className={classes.orangeTxt}>
+                            <span className={classes.primaryTxt}>
                                 {show.name ||
                                     `${show.firstName} ${show.lastName}`}
                             </span>
@@ -450,7 +450,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                     <div className={classes.topLine}>
                         <h2>
                             <FormattedMessage id="signature.active_for" />
-                            <span className={classes.orangeTxt}>
+                            <span className={classes.primaryTxt}>
                                 {show.name ||
                                     `${show.firstName} ${show.lastName}`}
                             </span>
@@ -475,14 +475,14 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                             <div className={classes.topLine}>
                                 <h2>
                                     <FormattedMessage id="signature.edit" />{" "}
-                                    <span className={classes.orangeTxt}>
+                                    <span className={classes.primaryTxt}>
                                         {show.name ||
                                             `${show.firstName} ${show.lastName}`}
                                     </span>
                                 </h2>
                                 {show["@type"] === "Team" ? (
                                     <Button
-                                        color="brown"
+                                        color="secondary"
                                         onClick={() => {
                                             setEdit("assign-team");
                                         }}
@@ -491,7 +491,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                     </Button>
                                 ) : show["@type"] === "Workplace" ? (
                                     <Button
-                                        color="brown"
+                                        color="secondary"
                                         onClick={() => {
                                             setEdit("assign-workplace");
                                         }}
@@ -573,7 +573,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                                 onClick={() => {
                                                     setChoosePlaylist(true);
                                                 }}
-                                                color="orange"
+                                                color="primary"
                                                 style={{
                                                     borderRadius: "10px",
                                                     margin: 0,

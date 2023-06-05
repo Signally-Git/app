@@ -56,8 +56,8 @@ export default function CopySignature() {
                     }
                     color={
                         btnText === <FormattedMessage id={"signatureCopied"} />
-                            ? "orangeFill"
-                            : "orange"
+                            ? "primaryFill"
+                            : "primary"
                     }
                 >
                     {btnText}

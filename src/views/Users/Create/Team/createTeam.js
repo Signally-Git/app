@@ -107,7 +107,7 @@ export default function CreateTeam({ setDone }) {
                         <FormattedMessage id="teams_description" tagName="p" />
                         <Button
                             width="15rem"
-                            color="orange"
+                            color="primary"
                             arrow={true}
                             onClick={(e) => {
                                 handleAccept(e);
@@ -151,11 +151,11 @@ export default function CreateTeam({ setDone }) {
                             <Button
                                 width={width}
                                 disabled={teamName.length < 1}
-                                color="orangeFill"
+                                color="primaryFill"
                                 color={
                                     teamName.length < 1
-                                        ? "orange"
-                                        : "orangeFill"
+                                        ? "primary"
+                                        : "primaryFill"
                                 }
                                 onClick={(e) => {
                                     handleSave();

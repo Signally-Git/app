@@ -19,7 +19,7 @@ function ErrorPage() {
                     tagName="p"
                 />
                 <br />
-                <Button color={"orange"} onClick={() => history.goBack()}>
+                <Button color={"primary"} onClick={() => history.goBack()}>
                     <FormattedMessage id="buttons.placeholder.go_back" />
                 </Button>
             </div>

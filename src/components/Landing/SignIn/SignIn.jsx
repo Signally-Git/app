@@ -152,7 +152,7 @@ export const SignIn = () => {
                             <div className={classes.submitContainer}>
                                 <Button
                                     width={"50%"}
-                                    color="orangeFill"
+                                    color="primaryFill"
                                     type="submit"
                                     arrow
                                 >
@@ -232,7 +232,7 @@ export const SignIn = () => {
                             <div className={classes.btnsContainer}>
                                 <Button
                                     width={"50%"}
-                                    color="orangeFill"
+                                    color="primaryFill"
                                     type="submit"
                                 >
                                     {loading ? (
@@ -248,7 +248,7 @@ export const SignIn = () => {
                                 </Button>
                                 <Button
                                     width={"50%"}
-                                    color="orange"
+                                    color="primary"
                                     onClick={(e) => {
                                         handleScroll(e, 0);
                                     }}

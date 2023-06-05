@@ -15,10 +15,10 @@ export default function Modal({
             <h3>{title}</h3>
             {content ? <p>{content}</p> : ""}
             <div className={classes.btnsContainer}>
-                <Button color="brown" onClick={() => onCancel()}>
+                <Button color="secondary" onClick={() => onCancel()}>
                     {cancel}
                 </Button>
-                <Button color="orange" onClick={() => onConfirm()}>
+                <Button color="primary" onClick={() => onConfirm()}>
                     {validate}
                 </Button>
             </div>

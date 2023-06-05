@@ -162,7 +162,7 @@ function CreateSignatureComponent() {
                                 <div>
                                     <Button
                                         width="40%"
-                                        color="orange"
+                                        color="primary"
                                         type="submit"
                                     >
                                         <FormattedMessage id="buttons.placeholder.save" />
@@ -170,7 +170,7 @@ function CreateSignatureComponent() {
                                     <Button
                                         onClick={() => setModal(false)}
                                         width="30%"
-                                        color="brown"
+                                        color="secondary"
                                     >
                                         <FormattedMessage id="buttons.placeholder.cancel" />
                                     </Button>
@@ -266,7 +266,7 @@ function CreateSignatureComponent() {
                             </div>
                             <div className={classes.CTAsContainer}>
                                 <Button
-                                    color="orange"
+                                    color="primary"
                                     onClick={() => setModal(true)}
                                     style={{
                                         opacity: selectedTemplate ? 1 : 0,
@@ -278,7 +278,7 @@ function CreateSignatureComponent() {
                                     <FormattedMessage id="buttons.placeholder.save" />
                                 </Button>
                                 <Button
-                                    color="brown"
+                                    color="secondary"
                                     onClick={() =>
                                         showTemplates(true, "smooth")
                                     }

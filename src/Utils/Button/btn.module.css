@@ -28,19 +28,19 @@
   background-color: #fff;
 }
 
-.orange {
+.primary {
   color: #244EFF;
   border-color: #244EFF;
   cursor: pointer;
 }
-.orange:hover {
+.primary:hover {
   background-color: #244EFF;
   color: #fff;
 }
-.orange:hover svg {
+.primary:hover svg {
   stroke: #fff;
 }
-.orange svg {
+.primary svg {
   transition: 0.2s;
   margin-left: 0.5rem;
   stroke: #244EFF;
@@ -52,51 +52,51 @@
   margin-right: 0.5rem;
 }
 
-.orangeFill {
+.primaryFill {
   color: #fff;
   background-color: #244EFF;
   border-color: #244EFF;
 }
-.orangeFill:hover {
+.primaryFill:hover {
   background-color: transparent;
   color: #244EFF;
   cursor: pointer;
 }
-.orangeFill:hover svg {
+.primaryFill:hover svg {
   stroke: #244EFF;
 }
-.orangeFill svg {
+.primaryFill svg {
   transition: 0.2s;
   margin-left: 0.5rem;
   stroke: #fff;
   stroke-width: 1px;
 }
 
-.brown {
+.secondary {
   color: #1B335E;
   border-color: #1B335E;
 }
-.brown:hover {
+.secondary:hover {
   cursor: pointer;
   background: #1B335E;
   color: #fff;
 }
-.brown:hover svg {
+.secondary:hover svg {
   stroke: #fff;
 }
-.brown svg {
+.secondary svg {
   transition: 0.2s;
   margin-left: 0.5rem;
   stroke: #1B335E;
   stroke-width: 1px;
 }
 
-.brownFill {
+.secondaryFill {
   color: #fff;
   background-color: #1B335E;
   border-color: #1B335E;
 }
-.brownFill:hover {
+.secondaryFill:hover {
   background-color: transparent;
   color: #1B335E;
   cursor: pointer;

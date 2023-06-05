@@ -72,7 +72,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                 title: (
                     <>
                         <FormattedMessage id="welcome.welcome" />
-                        <span className={classes.orangeTxt}>
+                        <span className={classes.primaryTxt}>
                             {" "}
                             {organisation.name}
                         </span>
@@ -90,13 +90,13 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                             <FormattedMessage id="onboarding.complete" />
                             <div className={classes.btnsContainer}>
                                 <Button
-                                    color="brown"
+                                    color="secondary"
                                     onClick={() => handleSkip()}
                                 >
                                     <FormattedMessage id="buttons.placeholder.skip" />
                                 </Button>
                                 <Button
-                                    color="orange"
+                                    color="primary"
                                     onClick={() =>
                                         history.push("/account/company")
                                     }
@@ -111,13 +111,13 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                             ({missing.join(", ")})
                             <div className={classes.btnsContainer}>
                                 <Button
-                                    color="brown"
+                                    color="secondary"
                                     onClick={() => handleSkip()}
                                 >
                                     <FormattedMessage id="buttons.placeholder.skip" />
                                 </Button>
                                 <Button
-                                    color="orange"
+                                    color="primary"
                                     onClick={() =>
                                         history.push("/account/company")
                                     }
@@ -138,7 +138,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                             <>
                                 <FormattedMessage id="onboarding.completed.signature" />
                                 <Button
-                                    color="orange"
+                                    color="primary"
                                     onClick={() => history.push("/signatures")}
                                 >
                                     <FormattedMessage id="buttons.placeholder.edit_signatures" />
@@ -148,7 +148,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                             <>
                                 <FormattedMessage id="onboarding.missing.signature" />
                                 <Button
-                                    color="orange"
+                                    color="primary"
                                     onClick={() =>
                                         history.push(
                                             "/create-signature#onboarding"
@@ -172,7 +172,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                             <>
                                 <FormattedMessage id="onboarding.completed.employees" />
                                 <Button
-                                    color="orange"
+                                    color="primary"
                                     onClick={() => history.push("/teams/users")}
                                 >
                                     <FormattedMessage id="buttons.placeholder.edit_employees" />
@@ -182,7 +182,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                             <>
                                 <FormattedMessage id="onboarding.missing.employees" />
                                 <Button
-                                    color="orange"
+                                    color="primary"
                                     onClick={() =>
                                         history.push(
                                             "/teams/create-user#onboarding"
@@ -210,13 +210,13 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                                 />
                                 <div className={classes.btnsContainer}>
                                     <Button
-                                        color="brown"
+                                        color="secondary"
                                         onClick={() => handleSkip()}
                                     >
                                         <FormattedMessage id="buttons.placeholder.skip" />
                                     </Button>
                                     <Button
-                                        color="orange"
+                                        color="primary"
                                         onClick={() => history.push("/events")}
                                     >
                                         <FormattedMessage id="buttons.placeholder.edit_events" />
@@ -228,13 +228,13 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                                 <FormattedMessage id="onboarding.missing.events" />
                                 <div className={classes.btnsContainer}>
                                     <Button
-                                        color="brown"
+                                        color="secondary"
                                         onClick={() => handleSkip()}
                                     >
                                         <FormattedMessage id="buttons.placeholder.skip" />
                                     </Button>
                                     <Button
-                                        color="orange"
+                                        color="primary"
                                         onClick={() =>
                                             history.push("/events#onboarding")
                                         }
@@ -264,7 +264,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                                         target="_blank"
                                         href={`${process.env.REACT_APP_API_URL}/azure/downloadapp`}
                                     >
-                                        <Button color="orange">
+                                        <Button color="primary">
                                             <img
                                                 style={{
                                                     width: "15px",
@@ -280,7 +280,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                                         target="_blank"
                                         href={`${process.env.REACT_APP_API_URL}/google/downloadapp`}
                                     >
-                                        <Button color="orange">
+                                        <Button color="primary">
                                             <FcGoogle
                                                 style={{ marginRight: ".5rem" }}
                                             />{" "}
@@ -327,7 +327,7 @@ function OnBoarding({ organisation, completed, setCompleted }) {
                     tagName="p"
                 />
                 <Button
-                    color="orange"
+                    color="primary"
                     style={{ marginRight: "auto", marginLeft: 0 }}
                     onClick={() => setCompleted("show")}
                 >

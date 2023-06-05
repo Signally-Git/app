@@ -182,7 +182,7 @@ function Team() {
                                             <h2>
                                                 <span
                                                     className={
-                                                        classes.orangeTxt
+                                                        classes.primaryTxt
                                                     }
                                                 >
                                                     {entity?.teams?.length || 0}
@@ -196,14 +196,14 @@ function Team() {
                                                 }{" "}
                                                 <span
                                                     className={
-                                                        classes.orangeTxt
+                                                        classes.primaryTxt
                                                     }
                                                 >
                                                     {entity?.name}
                                                 </span>
                                             </h2>
                                             <Button
-                                                color="brown"
+                                                color="secondary"
                                                 onClick={() => {
                                                     setEdit("assign-signature");
                                                 }}
@@ -291,7 +291,7 @@ function Team() {
                                             })}
                                         </ul>
                                         <Button
-                                            color={"orange"}
+                                            color={"primary"}
                                             arrow
                                             onClick={(e) =>
                                                 handleScroll(e, 2000, slider)
@@ -385,7 +385,7 @@ function Team() {
                                             })}
                                         </ul>
                                         <Button
-                                            color={"orange"}
+                                            color={"primary"}
                                             onClick={(e) =>
                                                 handleScroll(e, 0, slider)
                                             }
@@ -403,7 +403,7 @@ function Team() {
                                             <h2>
                                                 <span
                                                     className={
-                                                        classes.orangeTxt
+                                                        classes.primaryTxt
                                                     }
                                                 >
                                                     {entity?.users?.length || 0}
@@ -418,14 +418,14 @@ function Team() {
                                                 />{" "}
                                                 <span
                                                     className={
-                                                        classes.orangeTxt
+                                                        classes.primaryTxt
                                                     }
                                                 >
                                                     {entity?.name}
                                                 </span>
                                             </h2>
                                             <Button
-                                                color="brown"
+                                                color="secondary"
                                                 onClick={() => {
                                                     setEdit("assign-signature");
                                                 }}
@@ -531,7 +531,7 @@ function Team() {
                                             })}
                                         </ul>
                                         <Button
-                                            color={"orange"}
+                                            color={"primary"}
                                             arrow
                                             onClick={(e) =>
                                                 handleScroll(e, 2000, slider)
@@ -640,7 +640,7 @@ function Team() {
                                             })}
                                         </ul>
                                         <Button
-                                            color={"orange"}
+                                            color={"primary"}
                                             onClick={(e) =>
                                                 handleScroll(e, 0, slider)
                                             }

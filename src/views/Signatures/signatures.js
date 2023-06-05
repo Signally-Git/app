@@ -174,7 +174,7 @@ function Team() {
                             <div>
                                 {user?.roles[1] !== "ROLE_RH" ? (
                                     <Link to="create-signature">
-                                        <Button color="orange" arrow={true}>
+                                        <Button color="primary" arrow={true}>
                                             <FormattedMessage id="add_signature" />
                                         </Button>
                                     </Link>
@@ -284,7 +284,7 @@ function Team() {
                             </div>
                         ) : active === "inactive" ? (
                             <div>
-                                <Button color="orange" arrow={true}>
+                                <Button color="primary" arrow={true}>
                                     <Link to="create-signature">
                                         <FormattedMessage id="add_signature" />
                                     </Link>
@@ -300,7 +300,7 @@ function Team() {
                                 <li>
                                     <h5>
                                         <FormattedMessage id="signature.title" />{" "}
-                                        <span className={classes.orangeTxt}>
+                                        <span className={classes.primaryTxt}>
                                             {preview.name}
                                         </span>
                                     </h5>
