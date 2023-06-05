@@ -6,12 +6,15 @@ $color-dark-accent: #1B335E;
 $color-darker-accent: #0F1E4C;
 $color-lighter-accent: #F4F7FC;
 $background-color: #efeef4;
+$outter-background-color: #f7f8fb;
 $backdrop-color: #d8dce3;
 $color-light-accent: #E7EEF8;
 $color-light-accent-variation: #DDE5F1;
 $color-light-accent-variation1: #ECEFF6;
 $color-light-accent-variation2: #F3F7FB;
 $color-lighter-accent-variation: #F9F5F4;
+$pureLight: #FFFFFF;
+$pureDark: #000000;
 
 $smallBorderRadius: 5px;
 $borderRadius: 5px;
@@ -19,14 +22,9 @@ $mediumBorderRadius: 10px;
 $largeBorderRadius: 10px;
 $hugeRadius: 20px;
 
-
-
-//$color-primary: #ff7954;
-//$color-secondary: #ffc300;
-//$color-dark-accent: #402927;
-//$color-darker-accent: #66433e;
-//$color-lighter-accent: #f7f5f5;
-//$color-light-accent: #f0e9e9;
-//$color-light-accent-variation: #ebe4e1;
-//$color-light-accent-variation1: #f4eeef;
-//$color-light-accent-variation2: #f8f2f0;
+$leftColHeight: 65%;
+$leftColMinHeight: 50rem;
+$leftColMaxHeight: 50rem;
+$leftColWidth: 65%;
+$leftColMinWidth: 40rem;
+$leftColMaxWidth: 40rem;
