@@ -286,13 +286,9 @@ export default function Infos({ content, setContent, templateRules, style }) {
                                         renderTrack={({ props, children }) => (
                                             <div
                                                 {...props}
+                                                className={classes.range}
                                                 style={{
                                                     ...style,
-                                                    height: "6px",
-                                                    width: "100%",
-                                                    backgroundColor: "#F1ECEA",
-                                                    margin: "0",
-                                                    borderRadius: "50px",
                                                 }}
                                             >
                                                 {children}
@@ -301,17 +297,9 @@ export default function Infos({ content, setContent, templateRules, style }) {
                                         renderThumb={({ props }) => (
                                             <div
                                                 {...props}
+                                                className={classes.rangeThumb}
                                                 style={{
                                                     ...style,
-                                                    transition: "0.2s",
-                                                    height: "25px",
-                                                    width: "25px",
-                                                    backgroundColor: "#FF7954",
-                                                    border: "3px solid #FFF",
-                                                    borderRadius: "50%",
-                                                    outline: "none",
-                                                    boxShadow:
-                                                        "1px 1px 3px #FF795488",
                                                 }}
                                             />
                                         )}
