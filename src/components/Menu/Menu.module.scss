@@ -1,4 +1,4 @@
-@import "../../Assets/style/colors";
+@import "../../Assets/style/global";
 
 .active {
     position: relative;
@@ -16,7 +16,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     list-style: none;
-    gap: 1rem;
+    gap: 1.35rem;
     align-items: center;
     width: 100%;
     padding: 0;
