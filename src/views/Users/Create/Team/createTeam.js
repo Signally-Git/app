@@ -6,7 +6,6 @@ import classes from "../create.module.css";
 import { useHistory } from "react-router-dom";
 import request from "Utils/Request/request";
 import { useNotification } from "Utils/Notifications/notifications";
-import { Box } from "Assets/img/KUKLA/illustrations";
 import CustomSelect from "Utils/CustomSelect/customselect";
 import { FormattedMessage, useIntl } from "react-intl";
 
@@ -102,7 +101,6 @@ export default function CreateTeam({ setDone }) {
 
     return (
         <div className={classes.container}>
-            {Box}
             <div className={classes.slidesContainer} ref={slide}>
                 {!localStorage.getItem("understand_team") && hide === false ? (
                     <div className={`${classes.slide} ${classes.space}`}>

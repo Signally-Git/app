@@ -6,7 +6,6 @@ import classes from "../create.module.css";
 import { useHistory } from "react-router-dom";
 import request from "Utils/Request/request";
 import { useNotification } from "Utils/Notifications/notifications";
-import { Box } from "Assets/img/KUKLA/illustrations";
 import UploadFile from "Utils/Upload/uploadFile";
 import { FormattedMessage, useIntl } from "react-intl";
 
@@ -122,7 +121,6 @@ export default function CreateWorkplace({ setDone }) {
 
     return (
         <div className={classes.container}>
-            {Box}
             <div className={classes.slidesContainer} ref={slide}>
                 {!localStorage.getItem("understand_workplace") &&
                 hide === false ? (

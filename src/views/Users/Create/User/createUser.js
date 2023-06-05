@@ -7,7 +7,6 @@ import { useHistory } from "react-router-dom";
 import request from "Utils/Request/request";
 import CustomSelect from "Utils/CustomSelect/customselect";
 import { useNotification } from "Utils/Notifications/notifications";
-import { Box } from "Assets/img/KUKLA/illustrations";
 import { FormattedMessage, useIntl } from "react-intl";
 
 export default function CreateUser({ setDone }) {
@@ -183,7 +182,6 @@ export default function CreateUser({ setDone }) {
 
     return (
         <div className={classes.container}>
-            {Box}
             <div className={classes.slidesContainer} ref={slide}>
                 {!localStorage.getItem("understand_user") && hide === false ? (
                     <div className={`${classes.slide} ${classes.space}`}>
