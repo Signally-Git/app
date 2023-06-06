@@ -1,9 +1,7 @@
 import classes from "../accountSettings.module.css";
-import Input from "Utils/Input/input";
-import { TokenService } from "Utils";
-import DefineSocials from "../../../components/defineSocials/defineSocials";
-import request from "../../../Utils/Request/request";
-import Buttons from "../../../Utils/Btns/buttons";
+import { Input, NavigationButtons } from "components";
+import { TokenService, request } from "utils";
+import DefineSocials from "../Customization/DefineSocials";
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
@@ -72,11 +70,11 @@ function CustomSettings() {
             <div className={classes.socialsContainer}>
                 <DefineSocials setList={setSocialsList} />
             </div>
-            <Buttons
+            <NavigationButtons
                 onCancel={() => {
                     history.goBack();
                 }}
-                confirmTxt=<FormattedMessage id="buttons.placeholder.save" />
+                confirmTxt=<FormattedMessage id="NavigationButtons.placeholder.save" />
                 onConfirm={(e) => {
                     e.preventDefault();
                     handleSaveCustomization();

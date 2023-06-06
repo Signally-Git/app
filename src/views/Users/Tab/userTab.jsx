@@ -1,14 +1,12 @@
 import React from "react";
-import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineEdit, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FiCheck, FiTrash } from "react-icons/fi";
 import { HiOutlineSearch } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import Button from "Utils/Button/btn";
-import Input from "Utils/Input/input";
-import { useNotification } from "Utils/Notifications/notifications";
-import request from "Utils/Request/request";
+import { Button, Input } from "components";
 import classes from "./tab.module.css";
 import { FormattedMessage, useIntl } from "react-intl";
+import { TokenService, validateEmail, useNotification, request } from "utils";
 
 function UserTab({
     selected,
@@ -26,6 +24,7 @@ function UserTab({
     const [search, setSearch] = React.useState("");
     const [changed, setChanged] = React.useState(false);
     const [usersList, setUsersList] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
     const toFocus = React.useRef(null);
     const notification = useNotification();
     const intl = useIntl();
@@ -33,7 +32,7 @@ function UserTab({
     const sortUsers = (usersList) => {
         let admin;
         usersList.map((user, index) => {
-            if (user["@id"] === JSON.parse(localStorage.getItem("user"))["@id"])
+            if (user["@id"] === TokenService.getUser()["@id"])
                 admin = usersList.splice(index, 1);
         });
         setUsersList(
@@ -54,7 +53,10 @@ function UserTab({
     const getDataUser = async () => {
         await request
             .get(`users`)
-            .then((res) => sortUsers(res.data["hydra:member"]));
+            .then((res) => sortUsers(res.data["hydra:member"]))
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     React.useMemo(() => {
@@ -64,14 +66,6 @@ function UserTab({
     const handleChange = (e, data) => {
         setChanged(true);
         setUser({ ...user, [data]: e });
-    };
-
-    const validateEmail = (email) => {
-        return String(email)
-            .toLowerCase()
-            .match(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            );
     };
 
     const handleSubmit = async (e, id) => {
@@ -179,234 +173,249 @@ function UserTab({
                         setSelected(JSON.parse(e.target.value))
                     }
                 >
-                    {usersList.map((user) => {
-                        const fullName =
-                            user.firstName.toLowerCase() +
-                            " " +
-                            user.lastName.toLowerCase();
-                        if (fullName.search(search.toLowerCase()) !== -1)
-                            return (
-                                <li
-                                    onMouseMove={() => {
-                                        if (!edit) {
-                                            setSelected(user);
-                                        }
-                                    }}
-                                    key={user.id}
-                                    className={`${
-                                        editInfo === user &&
-                                        user?.id !==
-                                            JSON.parse(
-                                                localStorage.getItem("user")
-                                            )?.id
-                                            ? classes.editing
-                                            : ""
-                                    } ${
-                                        selected?.id === user.id &&
-                                        selected?.name === user.name
-                                            ? classes.selected
-                                            : ""
-                                    }`}
-                                >
-                                    <input
-                                        className={classes.checkbox}
-                                        onChange={(e) => {
-                                            setEdit(user);
-                                            setSelected(user);
-                                        }}
-                                        checked={
-                                            edit?.id === user.id &&
-                                            edit?.name === user.name
-                                        }
-                                        type="radio"
-                                        name="user"
-                                        value={JSON.stringify(user)}
-                                    />
-                                    {editInfo === user &&
-                                    user?.id !==
-                                        JSON.parse(localStorage.getItem("user"))
-                                            ?.id ? (
-                                        <>
-                                            <div
-                                                className={
-                                                    classes.renameContainer
-                                                }
-                                            >
-                                                <input
-                                                    placeholder={intl.formatMessage(
-                                                        { id: "firstname" }
-                                                    )}
-                                                    className={classes.rename}
-                                                    ref={toFocus}
-                                                    type="text"
-                                                    defaultValue={`${user.firstName}`}
-                                                    onChange={(e) =>
-                                                        handleChange(
-                                                            e.target.value,
-                                                            "firstName"
-                                                        )
-                                                    }
-                                                />
-                                                <input
-                                                    placeholder={intl.formatMessage(
-                                                        { id: "lastname" }
-                                                    )}
-                                                    className={classes.rename}
-                                                    ref={toFocus}
-                                                    type="text"
-                                                    defaultValue={`${user.lastName}`}
-                                                    onChange={(e) =>
-                                                        handleChange(
-                                                            e.target.value,
-                                                            "lastName"
-                                                        )
-                                                    }
-                                                />
-                                            </div>
-                                        </>
-                                    ) : (
-                                        <input
-                                            className={classes.rename}
-                                            disabled
-                                            type="text"
-                                            value={`${user.firstName} ${user.lastName}`}
-                                        />
-                                    )}
-                                    <span></span>
-                                    {user?.id ===
-                                    JSON.parse(localStorage.getItem("user"))
-                                        ?.id ? (
-                                        <div
-                                            className={
-                                                classes.actionsContainerAdmin
+                    {loading ? (
+                        <AiOutlineLoading3Quarters
+                            className={classes.loading}
+                        />
+                    ) : (
+                        usersList.map((user) => {
+                            const fullName =
+                                user.firstName.toLowerCase() +
+                                " " +
+                                user.lastName.toLowerCase();
+                            if (fullName.search(search.toLowerCase()) !== -1)
+                                return (
+                                    <li
+                                        onMouseMove={() => {
+                                            if (!edit) {
+                                                setSelected(user);
                                             }
-                                        >
-                                            <Link to="/account/user">
-                                                <AiOutlineEdit />
-                                            </Link>
-                                        </div>
-                                    ) : (
-                                        <div
-                                            className={`${
-                                                classes.actionsContainer
-                                            } ${
-                                                changed === true
-                                                    ? classes.btnReady
-                                                    : ""
-                                            }`}
-                                        >
-                                            {editInfo === user ? (
-                                                <FiCheck
-                                                    className={
-                                                        classes.checkmark
-                                                    }
-                                                    strokeWidth={"4"}
-                                                    onClick={(e) => {
-                                                        handleSubmit(
-                                                            e,
-                                                            user["@id"]
-                                                        );
-                                                    }}
-                                                />
-                                            ) : (
-                                                <AiOutlineEdit
-                                                    onClick={(e) => {
-                                                        e.preventDefault();
-                                                        setEditInfo(user);
-                                                        setUser(user);
-                                                    }}
-                                                />
-                                            )}
-                                            <FiTrash
-                                                onClick={() =>
-                                                    setModal({
-                                                        name: `${user.firstName} ${user.lastName}`,
-                                                        id: user.id,
-                                                        type: "users",
-                                                    })
-                                                }
-                                            />
-                                        </div>
-                                    )}
-                                    {editInfo === user &&
-                                    user?.id !==
-                                        JSON.parse(localStorage.getItem("user"))
-                                            ?.id ? (
-                                        <>
-                                            <div className={classes.editDiv}>
-                                                <Input
-                                                    type="text"
-                                                    placeholder={intl.formatMessage(
-                                                        { id: "email" }
-                                                    )}
-                                                    defaultValue={user.email}
-                                                    onChange={(e) =>
-                                                        handleChange(
-                                                            e.target.value,
-                                                            "email"
-                                                        )
-                                                    }
-                                                />
+                                        }}
+                                        key={user.id}
+                                        className={`${
+                                            editInfo === user &&
+                                            user?.id !==
+                                                JSON.parse(
+                                                    localStorage.getItem("user")
+                                                )?.id
+                                                ? classes.editing
+                                                : ""
+                                        } ${
+                                            selected?.id === user.id &&
+                                            selected?.name === user.name
+                                                ? classes.selected
+                                                : ""
+                                        }`}
+                                    >
+                                        <input
+                                            className={classes.checkbox}
+                                            onChange={(e) => {
+                                                setEdit(user);
+                                                setSelected(user);
+                                            }}
+                                            checked={
+                                                edit?.id === user.id &&
+                                                edit?.name === user.name
+                                            }
+                                            type="radio"
+                                            name="user"
+                                            value={JSON.stringify(user)}
+                                        />
+                                        {editInfo === user &&
+                                        user?.id !==
+                                            TokenService.getUser()?.id ? (
+                                            <>
                                                 <div
                                                     className={
-                                                        classes.inputsContainer
+                                                        classes.renameContainer
                                                     }
                                                 >
-                                                    <Input
-                                                        type="text"
+                                                    <input
                                                         placeholder={intl.formatMessage(
-                                                            { id: "position" }
+                                                            { id: "firstname" }
                                                         )}
-                                                        defaultValue={
-                                                            user.position
+                                                        className={
+                                                            classes.rename
                                                         }
+                                                        ref={toFocus}
+                                                        type="text"
+                                                        defaultValue={`${user.firstName}`}
                                                         onChange={(e) =>
                                                             handleChange(
                                                                 e.target.value,
-                                                                "position"
+                                                                "firstName"
                                                             )
                                                         }
                                                     />
-                                                    <Input
-                                                        type="tel"
+                                                    <input
                                                         placeholder={intl.formatMessage(
-                                                            { id: "mobile" }
+                                                            { id: "lastname" }
                                                         )}
-                                                        defaultValue={
-                                                            user.phone
+                                                        className={
+                                                            classes.rename
                                                         }
+                                                        ref={toFocus}
+                                                        type="text"
+                                                        defaultValue={`${user.lastName}`}
                                                         onChange={(e) =>
                                                             handleChange(
                                                                 e.target.value,
-                                                                "phone"
+                                                                "lastName"
                                                             )
                                                         }
                                                     />
                                                 </div>
-
-                                                <Input
-                                                    type="text"
-                                                    placeholder={intl.formatMessage(
-                                                        { id: "url_agenda" }
-                                                    )}
-                                                    defaultValue={
-                                                        user.urlAgenda
-                                                    }
-                                                    onChange={(e) =>
-                                                        handleChange(
-                                                            e.target.value,
-                                                            "urlAgenda"
-                                                        )
+                                            </>
+                                        ) : (
+                                            <input
+                                                className={classes.rename}
+                                                disabled
+                                                type="text"
+                                                value={`${user.firstName} ${user.lastName}`}
+                                            />
+                                        )}
+                                        <span></span>
+                                        {user?.id ===
+                                        TokenService.getUser()?.id ? (
+                                            <div
+                                                className={
+                                                    classes.actionsContainerAdmin
+                                                }
+                                            >
+                                                <Link to="/account/user">
+                                                    <AiOutlineEdit />
+                                                </Link>
+                                            </div>
+                                        ) : (
+                                            <div
+                                                className={`${
+                                                    classes.actionsContainer
+                                                } ${
+                                                    changed === true
+                                                        ? classes.btnReady
+                                                        : ""
+                                                }`}
+                                            >
+                                                {editInfo === user ? (
+                                                    <FiCheck
+                                                        className={
+                                                            classes.checkmark
+                                                        }
+                                                        strokeWidth={"4"}
+                                                        onClick={(e) => {
+                                                            handleSubmit(
+                                                                e,
+                                                                user["@id"]
+                                                            );
+                                                        }}
+                                                    />
+                                                ) : (
+                                                    <AiOutlineEdit
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            setEditInfo(user);
+                                                            setUser(user);
+                                                        }}
+                                                    />
+                                                )}
+                                                <FiTrash
+                                                    onClick={() =>
+                                                        setModal({
+                                                            name: `${user.firstName} ${user.lastName}`,
+                                                            id: user.id,
+                                                            type: "users",
+                                                        })
                                                     }
                                                 />
                                             </div>
-                                        </>
-                                    ) : (
-                                        <></>
-                                    )}
-                                </li>
-                            );
-                    })}
+                                        )}
+                                        {editInfo === user &&
+                                        user?.id !==
+                                            TokenService.getUser()?.id ? (
+                                            <>
+                                                <div
+                                                    className={classes.editDiv}
+                                                >
+                                                    <Input
+                                                        type="text"
+                                                        placeholder={intl.formatMessage(
+                                                            { id: "email" }
+                                                        )}
+                                                        defaultValue={
+                                                            user.email
+                                                        }
+                                                        onChange={(e) =>
+                                                            handleChange(
+                                                                e.target.value,
+                                                                "email"
+                                                            )
+                                                        }
+                                                    />
+                                                    <div
+                                                        className={
+                                                            classes.inputsContainer
+                                                        }
+                                                    >
+                                                        <Input
+                                                            type="text"
+                                                            placeholder={intl.formatMessage(
+                                                                {
+                                                                    id: "position",
+                                                                }
+                                                            )}
+                                                            defaultValue={
+                                                                user.position
+                                                            }
+                                                            onChange={(e) =>
+                                                                handleChange(
+                                                                    e.target
+                                                                        .value,
+                                                                    "position"
+                                                                )
+                                                            }
+                                                        />
+                                                        <Input
+                                                            type="tel"
+                                                            placeholder={intl.formatMessage(
+                                                                { id: "mobile" }
+                                                            )}
+                                                            defaultValue={
+                                                                user.phone
+                                                            }
+                                                            onChange={(e) =>
+                                                                handleChange(
+                                                                    e.target
+                                                                        .value,
+                                                                    "phone"
+                                                                )
+                                                            }
+                                                        />
+                                                    </div>
+
+                                                    <Input
+                                                        type="text"
+                                                        placeholder={intl.formatMessage(
+                                                            { id: "url_agenda" }
+                                                        )}
+                                                        defaultValue={
+                                                            user.urlAgenda
+                                                        }
+                                                        onChange={(e) =>
+                                                            handleChange(
+                                                                e.target.value,
+                                                                "urlAgenda"
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <></>
+                                        )}
+                                    </li>
+                                );
+                        })
+                    )}
                 </form>
             </ul>
         </div>

@@ -1,5 +1,5 @@
-import request from "Utils/Request/request";
-import { FormattedMessage, useIntl } from "react-intl";
+import { request } from "utils";
+import { useIntl } from "react-intl";
 import classes from "./createSignature.module.css";
 
 async function getPreview(twig, styles) {

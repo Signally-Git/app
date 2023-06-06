@@ -3,17 +3,13 @@ import React, { useEffect, useRef, useState } from "react";
 import classes from "./tab.module.css";
 import { FiCheck, FiTrash } from "react-icons/fi";
 import { AiOutlineEdit } from "react-icons/ai";
-import Button from "Utils/Button/btn";
+import { Button, Input, UploadFile } from "components";
 import { Link } from "react-router-dom";
-import Input from "Utils/Input/input";
-import request from "Utils/Request/request";
-import { useNotification } from "Utils/Notifications/notifications";
-import UploadFile from "Utils/Upload/uploadFile";
-import CreateTeam from "../Create/Team/createTeam";
-import CreateUser from "../Create/User/createUser";
-import CreateWorkplace from "../Create/Workplace/createWorkplace";
+import CreateTeam from "../Create/createTeam";
+import CreateUser from "../Create/createUser";
+import CreateWorkplace from "../Create/createWorkplace";
 import UserTab from "./userTab";
-import { TokenService } from "Utils";
+import { TokenService, request, useNotification } from "utils";
 import { FormattedMessage, useIntl } from "react-intl";
 
 // Displays the current list
@@ -305,7 +301,7 @@ export default function Tab({
         setModal({ type: "", name: "", id: "" });
     };
 
-    // Modals confirmation
+    // Modal confirmation
     useEffect(() => {
         const handleModal = (toDelete) => {
             switch (toDelete.type) {

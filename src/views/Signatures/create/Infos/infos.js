@@ -3,8 +3,8 @@ import Input from "./Input";
 import classes from "./infos.module.css";
 import { Range } from "react-range";
 import { FiChevronDown } from "react-icons/fi";
-import CustomSelect from "Utils/CustomSelect/customselect";
-import { TokenService } from "Utils";
+import { CustomSelect } from "components";
+import { TokenService } from "utils";
 import { FormattedMessage, useIntl } from "react-intl";
 
 // Informations tab, allows to change texts to preview long or short ones

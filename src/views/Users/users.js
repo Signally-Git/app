@@ -4,14 +4,13 @@ import { HiOutlineSearch } from "react-icons/hi";
 import Tab from "./Tab/tab";
 import SignaturePreview from "./SignaturePreview/signaturePreview";
 import { useParams } from "react-router-dom";
-import request from "Utils/Request/request";
 import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
-import Button from "Utils/Button/btn";
-import { handleScroll, TokenService } from "Utils";
+import { Button } from "components";
+import { handleScroll, TokenService, request } from "utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import { getMenuLink } from "./users.utils";
 
-function Team() {
+function Signatures() {
     const [entity, setEntity] = useState();
     const { type } = useParams();
     const [users, setUsers] = useState([]);
@@ -669,4 +668,4 @@ function Team() {
     );
 }
 
-export default Team;
+export default Signatures;

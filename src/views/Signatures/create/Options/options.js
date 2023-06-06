@@ -2,7 +2,7 @@ import classes from "./options.module.css";
 import { HexColorInput, HexColorPicker } from "react-colorful";
 import { Range } from "react-range";
 import { useEffect, useRef, useState } from "react";
-import CustomSelect from "Utils/CustomSelect/customselect";
+import { CustomSelect } from "components";
 import { FormattedMessage } from "react-intl";
 
 // Options tab

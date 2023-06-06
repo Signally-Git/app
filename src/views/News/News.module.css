@@ -1,0 +1,51 @@
+.container {
+  border-radius: 5px;
+  color: #1B335E;
+  background-color: #fff;
+  width: 55%;
+  padding: 2rem;
+  margin-right: 2rem;
+  height: auto;
+  margin-bottom: auto;
+  position: relative;
+}
+.container h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.container > div > div > div > svg {
+  color: #1B335E;
+  position: absolute;
+  right: 0;
+  font-size: 1.25rem;
+  top: 0;
+  z-index: 2;
+}
+.container > div > div > div > svg:hover {
+  color: #5c74b2;
+  cursor: pointer;
+}
+
+.primaryTxt {
+  color: #5c74b2;
+}
+
+.bold > span {
+  font-weight: bold;
+}
+
+.duration {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-weight: normal;
+}
+.duration .col {
+  display: flex;
+  flex-direction: column;
+}
+.duration .col:first-child {
+  margin-right: 1rem;
+}

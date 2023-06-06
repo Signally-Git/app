@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { detectBrowserLanguage, TokenService } from "Utils";
+import { detectBrowserLanguage, TokenService } from "utils";
 
 export const LangContext = React.createContext();
 

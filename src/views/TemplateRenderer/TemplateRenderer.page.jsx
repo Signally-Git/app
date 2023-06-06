@@ -1,11 +1,10 @@
-import Input from "../../Utils/Input/input";
+import { Input, Button } from "components";
 import classes from "./TemplateRenderer.module.scss";
 import renderTemplate from "./TemplateRenderer.utils";
 import parse from "html-react-parser";
 import { defaultStyles } from "./TemplateRenderer.const";
 import { useState } from "react";
-import Button from "../../Utils/Button/btn";
-import request from "../../Utils/Request/request";
+import { request } from "utils";
 
 function TemplateRenderer() {
     const [twig, setTwig] = useState();

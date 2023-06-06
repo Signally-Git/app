@@ -1,4 +1,4 @@
-@import "../../../Assets/style/global";
+@import "../../../assets/style/global";
 
 .container {
     max-height: 60%;
@@ -350,4 +350,22 @@
 
 .btnReady .checkmark {
     color: $color-primary;
+}
+
+
+.loading {
+    display: flex;
+    margin: 5rem auto auto;
+    color: $color-primary;
+    animation: spin 1s 0s infinite linear forwards;
+
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

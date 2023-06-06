@@ -1,5 +1,5 @@
 import classes from "./customization.module.scss";
-import Input from "Utils/Input/input";
+import { Input } from "components";
 import { FormattedMessage, useIntl } from "react-intl";
 
 function CompanyCustomization({

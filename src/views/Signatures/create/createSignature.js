@@ -5,12 +5,10 @@ import Infos from "./Infos/infos";
 import TemplateSelection from "./TemplateSelect/templateSelect";
 import Preview from "./Preview/customizablePreview";
 import { BsArrowRight } from "react-icons/bs";
-import Button from "Utils/Button/btn";
-import Input from "Utils/Input/input";
+import { Button } from "components";
+import { Input } from "components";
 import { useHistory } from "react-router";
-import { UseEvents } from "Utils/useEvents/useEvents";
-import { useNotification } from "Utils/Notifications/notifications";
-import { TokenService } from "Utils";
+import { TokenService, getEvents, useNotification } from "utils";
 import {
     useDefaultOptions,
     defaultValues,
@@ -53,12 +51,12 @@ function CreateSignatureComponent() {
         getUser();
     }, []);
 
-    // Menu
+    // AppMenu
     const [tab, setTab] = useState(true);
 
     useEffect(() => {
-        const getEvents = async () => {
-            const eventAPI = await UseEvents(company.id);
+        const fetchEvents = async () => {
+            const eventAPI = await getEvents(company.id);
             setSignatureOption(
                 {
                     ...signatureOption,
@@ -71,7 +69,7 @@ function CreateSignatureComponent() {
                 "active"
             );
         };
-        getEvents();
+        fetchEvents();
     }, [signatureOption?.event.enabled]);
 
     // Used to handle transition

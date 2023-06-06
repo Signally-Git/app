@@ -1,12 +1,10 @@
 import classes from "./events.module.css";
 import { useEffect, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
-import Button from "Utils/Button/btn";
+import { Button, Modal } from "components";
 import CreateEvent from "./CreateEvent/createEvent";
 import { FiTrash } from "react-icons/fi";
-import { useNotification } from "Utils/Notifications/notifications";
-import request from "Utils/Request/request";
-import Modal from "Utils/Modals/modal";
+import { useNotification, request } from "utils";
 import moment from "moment";
 import { FormattedMessage, useIntl } from "react-intl";
 

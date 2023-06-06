@@ -1,7 +1,6 @@
 import { useIntl } from "react-intl";
 import classes from "./Footer.module.css";
-
-export const Footer = () => {
+const Footer = () => {
     const intl = useIntl();
 
     return (
@@ -28,3 +27,5 @@ export const Footer = () => {
         </ul>
     );
 };
+
+export default Footer;

@@ -1,13 +1,9 @@
 import classes from "./signaturePreview.module.css";
 import { useEffect, useState } from "react";
-import Button from "Utils/Button/btn";
-import request from "Utils/Request/request";
-import { useNotification } from "Utils/Notifications/notifications";
-import CopySignature from "components/CopySignature/CopySignature";
-import Search from "Assets/icons/search.svg";
-import CustomSelect from "Utils/CustomSelect/customselect";
-import Modal from "Utils/Modals/modal";
-import Buttons from "Utils/Btns/buttons";
+import { request, useNotification } from "utils";
+import CopySignature from "views/CopySignature/CopySignature.jsx";
+import Search from "assets/icons/search.svg";
+import { Button, CustomSelect, Modal, NavigationButtons } from "components";
 import parse from "html-react-parser";
 import moment from "moment";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -398,7 +394,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                 })}
                             </ul>
                         </div>
-                        <Buttons
+                        <NavigationButtons
                             onCancel={() => {
                                 setChoosePlaylist(false);
                             }}
@@ -588,7 +584,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                     )}
                                 </div>
                             </div>
-                            <Buttons
+                            <NavigationButtons
                                 style={{ left: ".5rem", bottom: "-5rem" }}
                                 onCancel={() => {
                                     setEdit();

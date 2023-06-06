@@ -1,4 +1,4 @@
-import { TokenService } from "Utils";
+import { TokenService } from "utils";
 import classes from "./users.module.css";
 import { Link } from "react-router-dom";
 

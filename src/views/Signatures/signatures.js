@@ -4,15 +4,12 @@ import { useEffect, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { FiTrash } from "react-icons/fi";
 import { AiOutlineEdit } from "react-icons/ai";
-import Button from "Utils/Button/btn";
-import { useNotification } from "Utils/Notifications/notifications";
-import request from "Utils/Request/request";
+import { Button, Modal } from "components";
 import parse from "html-react-parser";
-import Modal from "Utils/Modals/modal";
-import { TokenService } from "Utils";
+import { TokenService, useNotification, request } from "utils";
 import { FormattedMessage, useIntl } from "react-intl";
 
-function Team() {
+function Signatures() {
     const intl = useIntl();
     const [templates, setTemplates] = useState([]);
     const notification = useNotification();
@@ -26,20 +23,37 @@ function Team() {
     const [preview, setPreview] = useState({});
     const [search, setSearch] = useState("");
     const history = useHistory();
-    const [loading, setLoading] = useState(true);
 
     const getData = async () => {
-        const signatures = await request.get(`signatures`);
+        const organisationSignatures =
+            TokenService.getOrganisation().signatures;
+        if (organisationSignatures && organisationSignatures.length > 0) {
+            setTemplates(organisationSignatures);
+        }
 
-        signatures.data["hydra:totalItems"] < 1
-            ? history.push("/create-signature")
-            : setTemplates(signatures.data["hydra:member"]);
-        signatures.data["hydra:member"].map((template, index) => {
-            request.get(template["@id"]).then((r) => {
-                signatures[index] = r.data;
-            });
-        });
-        setLoading(false);
+        try {
+            const response = await request.get(`signatures`);
+            const signatures = response.data["hydra:member"];
+
+            if (signatures.length > 0) {
+                setTemplates(signatures);
+            } else {
+                history.push("/create-signature");
+            }
+
+            const signaturePromises = signatures.map((template) =>
+                request.get(template["@id"])
+            );
+
+            const signatureResponses = await Promise.all(signaturePromises);
+            const signatureData = signatureResponses.map(
+                (response) => response.data
+            );
+
+            setTemplates(signatureData);
+        } catch (error) {
+            console.error("Error fetching signatures:", error);
+        }
     };
 
     useEffect(() => {
@@ -156,7 +170,6 @@ function Team() {
         setModal();
     };
 
-    if (loading) return <div></div>;
     return (
         <div>
             <div className={classes.container}>
@@ -294,7 +307,7 @@ function Team() {
                             ""
                         )}
                     </div>
-                    {preview.html?.length > 0 ? (
+                    {preview.html?.length > 0 && (
                         <div className={classes.signaturePreview}>
                             <ul>
                                 <li>
@@ -308,8 +321,6 @@ function Team() {
                                 </li>
                             </ul>
                         </div>
-                    ) : (
-                        ""
                     )}
                 </div>
             </div>
@@ -317,4 +328,4 @@ function Team() {
     );
 }
 
-export default Team;
+export default Signatures;

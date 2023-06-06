@@ -1,8 +1,8 @@
 import classes from "./templateSelect.module.css";
 import { useState, useEffect } from "react";
-import Button from "Utils/Button/btn";
+import { Button } from "components";
 import Template from "../Preview/customizablePreview";
-import request from "Utils/Request/request";
+import { request } from "utils";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { getStyles } from "../createSignature.utils";
 import { FormattedMessage } from "react-intl";

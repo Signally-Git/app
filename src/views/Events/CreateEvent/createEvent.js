@@ -2,13 +2,10 @@ import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import classes from "./createEvent.module.css";
 import "moment/locale/fr";
-import Input from "Utils/Input/input";
+import { Input, NavigationButtons, UploadFile } from "components";
 import { useEffect, useRef, useState } from "react";
 import moment from "moment";
-import UploadFile from "Utils/Upload/uploadFile";
-import { useNotification } from "Utils/Notifications/notifications";
-import request from "Utils/Request/request";
-import Buttons from "Utils/Btns/buttons";
+import { useNotification, request } from "utils";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
 
@@ -327,7 +324,7 @@ export default function CreateEvent({ setDone, event }) {
                 />
             </div>
             <div>
-                <Buttons
+                <NavigationButtons
                     style={{ left: ".5rem", bottom: "-4rem" }}
                     confirmTxt={
                         <FormattedMessage id="buttons.placeholder.save" />

@@ -1,11 +1,8 @@
 import { useState } from "react";
 import classes from "../accountSettings.module.css";
 import { useHistory } from "react-router-dom";
-import Input from "Utils/Input/input";
-import request from "Utils/Request/request";
-import { useNotification } from "Utils/Notifications/notifications";
-import Buttons from "Utils/Btns/buttons";
-import { TokenService, SwitchLang } from "Utils";
+import { Input, SwitchLang, NavigationButtons } from "components";
+import { TokenService, request, useNotification } from "utils";
 import { FormattedMessage } from "react-intl";
 
 function UserSettings() {
@@ -122,7 +119,7 @@ function UserSettings() {
                     <SwitchLang setUserLanguage={setLanguage} />
                 </div>
             </div>
-            <Buttons
+            <NavigationButtons
                 onCancel={() => {
                     history.goBack();
                 }}

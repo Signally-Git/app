@@ -5,13 +5,9 @@ import Infos from "../create/Infos/infos";
 import TemplateSelection from "../create/TemplateSelect/templateSelect";
 import Preview from "../create/Preview/customizablePreview";
 import { BsArrowRight } from "react-icons/bs";
-import Button from "Utils/Button/btn";
-import Input from "Utils/Input/input";
+import { Button, Input } from "components";
 import { useHistory, useParams } from "react-router-dom";
-import { UseEvents } from "Utils/useEvents/useEvents";
-import { useNotification } from "Utils/Notifications/notifications";
-import request from "Utils/Request/request";
-import { TokenService } from "Utils";
+import { TokenService, useNotification, request, getEvents } from "utils";
 import { useDefaultOptions, getStyles } from "../create/createSignature.utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import { extractStyle, extractValue } from "./editSignature.utils";
@@ -192,12 +188,12 @@ function EditSignatureComponent() {
     //     if (defaultStyles) handlePopulate();
     // }, [defaultStyles, selectedTemplate]);
 
-    // Menu
+    // AppMenu
     const [tab, setTab] = useState(true);
 
     useEffect(() => {
-        const getEvents = async () => {
-            const eventAPI = await UseEvents(company.id);
+        const fetchEvents = async () => {
+            const eventAPI = await getEvents(company.id);
             setSignatureOption(
                 {
                     ...signatureOption,
@@ -210,7 +206,7 @@ function EditSignatureComponent() {
                 "active"
             );
         };
-        getEvents();
+        fetchEvents();
     }, []);
 
     useEffect(() => {

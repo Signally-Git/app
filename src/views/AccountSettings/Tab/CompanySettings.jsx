@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import classes from "../accountSettings.module.css";
 import { useHistory } from "react-router-dom";
-import Input from "Utils/Input/input";
-import UploadFile from "Utils/Upload/uploadFile";
-import request from "Utils/Request/request";
-import { useNotification } from "Utils/Notifications/notifications";
-import Buttons from "Utils/Btns/buttons";
-import { TokenService } from "Utils";
+import { Input, UploadFile, NavigationButtons } from "components";
+import { TokenService, request, useNotification } from "utils";
 import { FormattedMessage } from "react-intl";
 
 function CompanySettings() {
@@ -328,7 +324,7 @@ function CompanySettings() {
                     </div>
                 )}
             </div>
-            <Buttons
+            <NavigationButtons
                 onCancel={() => {
                     history.goBack();
                 }}

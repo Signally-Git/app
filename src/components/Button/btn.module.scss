@@ -1,0 +1,123 @@
+@import "../../assets/style/global";
+
+.btn {
+    background-color: transparent;
+    display: flex;
+    border: 1px solid;
+    text-align: center;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem auto;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: $borderRadius;
+    * {
+        color: inherit;
+    }
+}
+
+.link-primary{
+    border-color: transparent;
+    &:hover{
+        color: $color-primary;
+        cursor: pointer;
+    }
+}
+
+.whiteBg {
+    background-color: #fff;
+}
+
+.primary {
+    color: $color-primary;
+    border-color: $color-primary;
+    cursor: pointer;
+    &:hover {
+        background-color: $color-primary;
+        color: #fff;
+        svg {
+            stroke: #fff;
+        }
+    }
+    svg {
+        transition: 0.2s;
+        margin-left: 0.5rem;
+        stroke: $color-primary;
+        stroke-width: 1px;
+    }
+}
+
+.left {
+    margin-left: 0 !important;
+    margin-right: 0.5rem;
+}
+
+.primaryFill {
+    color: #fff;
+    background-color: $color-primary;
+    border-color: $color-primary;
+    &:hover {
+        background-color: transparent;
+        color: $color-primary;
+        cursor: pointer;
+        svg {
+            stroke: $color-primary;
+        }
+    }
+    svg {
+        transition: 0.2s;
+        margin-left: 0.5rem;
+        stroke: #fff;
+        stroke-width: 1px;
+    }
+}
+
+.secondary {
+    color: $color-dark-accent;
+    border-color: $color-dark-accent;
+    &:hover {
+        cursor: pointer;
+        background: $color-dark-accent;
+        color: #fff;
+        svg {
+            stroke: #fff;
+        }
+    }
+    svg {
+        transition: 0.2s;
+        margin-left: 0.5rem;
+        stroke: $color-dark-accent;
+        stroke-width: 1px;
+    }
+}
+
+.secondaryFill {
+    color: #fff;
+    background-color: $color-dark-accent;
+    border-color: $color-dark-accent;
+    &:hover {
+        background-color: transparent;
+        color: $color-dark-accent;
+        cursor: pointer;
+    }
+}
+
+.white {
+    border-color: transparent;
+    background-color: #fff;
+    cursor: pointer;
+    &:hover {
+        color: #fff;
+        background-color: $color-dark-accent;
+    }
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+.hidden {
+    opacity: 0;
+}
