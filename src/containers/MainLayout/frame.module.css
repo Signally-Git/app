@@ -1,6 +1,6 @@
 .desktop {
   animation: fadeIn 0.5s forwards;
-  height: 98vh;
+  height: 100vh;
   margin: 0;
   box-sizing: border-box;
   display: flex;
@@ -33,7 +33,7 @@
   max-height: 100vh;
   overflow: hidden;
   height: 100%;
-  margin: 0 2rem 2rem;
+  margin: 0 2rem 3rem;
   display: flex;
 }
 .mainContent > ul {
