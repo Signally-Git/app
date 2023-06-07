@@ -849,7 +849,6 @@ const handleSave = async (
             });
         })
         .catch((err) => {
-            console.log(err);
             notification({
                 content: <>Une erreur s'est produite. Veuillez réessayer</>,
                 status: "invalid",

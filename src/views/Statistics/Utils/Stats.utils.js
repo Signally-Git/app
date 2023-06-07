@@ -42,7 +42,6 @@ async function getEntities() {
     await request.get(`teams`).then((r) => {
         r.data["hydra:member"].map((tm) => {
             return entities.push(tm);
-            // console.log(tm);
         });
     });
     await request.get(`users`).then((r) => {

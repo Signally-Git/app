@@ -1,7 +1,6 @@
 import { request } from "utils";
 
 function renderTemplate(twig, styles) {
-    console.log(twig);
     return request
         .post("signature_compile", { twig, styles })
         .then((res) => {

@@ -118,7 +118,6 @@ export default function CreateUser({ setDone }) {
                     error.title ===
                     "App\\Exception\\User\\UserWithSameEmailAlreadyExistsDomainException"
                 ) {
-                    console.log(error);
                     notification({
                         content: (
                             <FormattedMessage id="message.error.user_already_created" />

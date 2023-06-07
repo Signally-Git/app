@@ -74,7 +74,7 @@ function CustomSettings() {
                 onCancel={() => {
                     history.goBack();
                 }}
-                confirmTxt=<FormattedMessage id="NavigationButtons.placeholder.save" />
+                confirmTxt=<FormattedMessage id="buttons.placeholder.save" />
                 onConfirm={(e) => {
                     e.preventDefault();
                     handleSaveCustomization();

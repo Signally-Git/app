@@ -180,8 +180,8 @@ const MenuLinks = (props) => {
         {
             to: "/account/company",
             icon: <MdOutlineAccountCircle />,
-            label: <FormattedMessage tagName="label" id="profile.title" />,
-            isActive: page.search("profile") !== -1,
+            label: <FormattedMessage tagName="label" id="account" />,
+            isActive: page.search("account") !== -1,
         },
         {
             to: "/help",

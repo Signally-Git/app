@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AppMenu, Header, Footer } from "components";
-import classes from "./frame.module.scss";
+import classes from "./MainLayout.module.scss";
 import { TokenService, request } from "utils";
 
 export default function MainLayout({ path, children }) {
@@ -8,34 +8,29 @@ export default function MainLayout({ path, children }) {
     const [organisation, setOrganisation] = useState(null);
 
     useEffect(() => {
+        TokenService.setOrganisation({ "@id": user.organisation });
         const sseUser = new EventSource(
             `${process.env.REACT_APP_HUB_URL}${user["@id"]}`
         );
 
-        const fetchOrganisation = async () => {
-            try {
-                const response = await request.get(user.organisation);
-                const org = { ...response.data, "@id": user.organisation };
+        function getRealtimeDataUser(data) {
+            setUser(data);
+            TokenService.setUser({
+                ...TokenService.getUser(),
+                ...data,
+            });
+        }
+        sseUser.onmessage = (e) => getRealtimeDataUser(JSON.parse(e.data));
+
+        request
+            .get(user.organisation)
+            .then((r) => {
+                const org = { ...r.data, "@id": user.organisation };
                 setOrganisation(org);
                 TokenService.setOrganisation(org);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        const handleRealtimeData = (data) => {
-            setUser((prevUser) => ({ ...prevUser, ...data }));
-            TokenService.setUser((prevUser) => ({ ...prevUser, ...data }));
-        };
-
-        sseUser.onmessage = (e) => handleRealtimeData(JSON.parse(e.data));
-
-        fetchOrganisation();
-
-        return () => {
-            sseUser.close();
-        };
-    }, [user]);
+            })
+            .catch((err) => console.log(err));
+    }, []);
 
     return (
         <div className={classes.desktop}>

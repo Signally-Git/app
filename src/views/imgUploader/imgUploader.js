@@ -53,7 +53,6 @@ function ImgUploader() {
                 },
             })
             .then(async (res) => {
-                console.log(res);
                 if (res.data.url) {
                     setPath(res.data);
                     copyToClipboard(res.data.url);

@@ -24,11 +24,24 @@ function UserSettings() {
             position: position,
             phone: mobile,
             urlAgenda: urlAgenda,
-            lang: language,
+            lang: language["@id"] || language,
         };
         await request
             .patch(`users/${user.id}`, req, {
                 headers: { "Content-Type": "application/merge-patch+json" },
+            })
+            .then(() => {
+                notification({
+                    content: (
+                        <>
+                            <span className={classes.primaryColor}>
+                                {firstName} {lastName}{" "}
+                            </span>
+                            <FormattedMessage id="message.success.edit" />
+                        </>
+                    ),
+                    status: "valid",
+                });
             })
             .catch(() => {
                 notification({

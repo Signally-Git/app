@@ -86,9 +86,7 @@ export default function CreateWorkplace({ setDone }) {
                     path: res?.data.path,
                     workplace: create?.data["@id"],
                 };
-                await request.post("logos", requestLogo).then((res) => {
-                    console.log(res?.data);
-                });
+                await request.post("logos", requestLogo);
             });
         setDone(true);
         history.push("/teams/workplaces");

@@ -73,7 +73,6 @@ export default function DefineSocials({ setList }) {
 
     const handleSwap = (social) => {
         const selectedIndex = socials.findIndex((x) => x === social);
-        console.log(socials[selectedIndex]);
         setUploadedMedia(socials[selectedIndex]?.image);
         setSelect(selectedIndex);
         setValue(socials[selectedIndex]?.url || "");
@@ -161,7 +160,6 @@ export default function DefineSocials({ setList }) {
 
     const handleRemove = () => {
         const index = select >= socials.length ? socials.length - 1 : select;
-        console.log(index, socials[index]);
         const oldSocial = socials[index];
         request
             .delete(socials[index]["@id"])
