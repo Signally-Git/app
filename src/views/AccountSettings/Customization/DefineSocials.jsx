@@ -13,8 +13,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function DefineSocials({ setList }) {
-    const socialBaseUrl =
-        "https://s3.eu-west-3.amazonaws.com/files.signally.io/socials/default/";
+    const socialBaseUrl = "https://files.signally.io/socials/default/";
 
     const [socials, setSocials] = useState([{ url: "", name: "" }]);
     const [select, setSelect] = useState(0);
@@ -28,17 +27,7 @@ export default function DefineSocials({ setList }) {
     const socialLink = useRef(null);
 
     const notification = useNotification();
-    async function convertImageToBlobUrl(imageUrl) {
-        try {
-            const response = await fetch(imageUrl);
-            const blob = await response.blob();
-            const blobUrl = URL.createObjectURL(blob);
-            return blobUrl;
-        } catch (error) {
-            console.error("Failed to convert image to Blob URL:", error);
-            return null;
-        }
-    }
+
     const getDomainName = (string) => {
         let domain;
         try {
