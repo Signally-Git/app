@@ -152,7 +152,7 @@ export default function DefineSocials({ setList }) {
         const oldSocial = socials[index];
         request
             .delete(socials[index]["@id"])
-            .then((res) => {
+            .then(() => {
                 socials.splice(
                     socials.findIndex((x) => x?.url === value),
                     1
