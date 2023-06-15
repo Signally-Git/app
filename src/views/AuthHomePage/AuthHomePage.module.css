@@ -276,8 +276,15 @@
 .congrats {
   width: 100%;
   margin: auto;
-  max-width: 30%;
+  display: flex;
+  max-width: 100%;
   font-size: 1.25rem;
+  flex-direction: column;
+  padding-left: 5rem;
+  background: #FFF;
+  height: 100%;
+  justify-content: center;
+  text-align: left;
 }
 .congrats * {
   opacity: 0;
@@ -291,6 +298,12 @@
 }
 .congrats h2 {
   color: #244EFF;
+}
+.congrats button {
+  margin-left: 0;
+  margin-right: auto;
+  margin-top: 2rem;
+  animation-delay: 0.75s;
 }
 .congrats > span {
   animation-delay: 0.75s;
@@ -396,6 +409,12 @@
   color: #fff;
   border-radius: 20px;
   padding: 5px;
+}
+
+.registerContainer .error {
+  top: 1.85rem;
+  left: 5rem;
+  bottom: auto;
 }
 
 @keyframes shakeX {

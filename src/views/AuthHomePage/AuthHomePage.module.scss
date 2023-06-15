@@ -285,8 +285,15 @@
 .congrats {
     width: 100%;
     margin: auto;
-    max-width: 30%;
+    display: flex;
+    max-width: 100%;
     font-size: 1.25rem;
+    flex-direction: column;
+    padding-left: 5rem;
+    background: #FFF;
+    height: 100%;
+    justify-content: center;
+    text-align: left;
     * {
         opacity: 0;
         animation: fadeIn ease 2s;
@@ -299,6 +306,12 @@
     }
     h2 {
         color: $color-primary;
+    }
+    button {
+        margin-left: 0;
+        margin-right: auto;
+        margin-top: 2rem;
+        animation-delay: 0.75s;
     }
     > span {
         animation-delay: 0.75s;
@@ -408,6 +421,12 @@
         border-radius: $hugeRadius;
         padding: 5px;
     }
+}
+
+.registerContainer .error {
+    top: 1.85rem;
+    left: 5rem;
+    bottom: auto;
 }
 
 @keyframes shakeX {

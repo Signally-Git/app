@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "components";
-import { Input } from "components";
-import { CustomSelect } from "components";
-
 import classes from "../AuthHomePage.module.css";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import axios from "axios";
@@ -11,6 +7,7 @@ import { ImCross } from "react-icons/im";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useHistory } from "react-router-dom";
 import { validateEmail, validateSiren } from "utils";
+import { CustomSelect, Input, Button } from "components";
 
 const Signup = () => {
     const intl = useIntl();
@@ -173,6 +170,16 @@ const Signup = () => {
                             id="signup.mailNotReceived"
                             tagName="span"
                         />
+                        <Button
+                            width={"30%"}
+                            color="primary"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                history.push("/");
+                            }}
+                        >
+                            <FormattedMessage id="buttons.placeholder.sign_in" />
+                        </Button>
                     </div>
                 </>
             ) : (
