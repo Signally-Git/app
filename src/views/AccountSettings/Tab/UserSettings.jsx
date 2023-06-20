@@ -127,7 +127,7 @@ function UserSettings() {
                         <label>
                             <FormattedMessage id="email" />
                         </label>
-                        <Input disabled value={user.email} type="mail" />
+                        <Input disabled value={user?.email} type="mail" />
                     </div>
                 </div>
                 <div className={classes.inputContainer}>

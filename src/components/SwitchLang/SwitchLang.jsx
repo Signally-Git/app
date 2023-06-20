@@ -7,8 +7,17 @@ function SwitchLang({ setUserLanguage }) {
     const { locale, setLocale } = useContext(LangContext);
     const [languages, setLanguages] = useState([]);
     const isMountedRef = useRef(true);
+    function findLocale(arr, locale) {
+        for (const obj of arr) {
+            if (obj.locale === locale) {
+                return obj;
+            }
+        }
+        return null; // Retourne null si aucune correspondance n'est trouvée
+    }
 
     useEffect(() => {
+        console.log(locale);
         return () => {
             // Lorsque le composant est démonté, mettez la référence à false
             isMountedRef.current = false;
@@ -21,6 +30,11 @@ function SwitchLang({ setUserLanguage }) {
                 const response = await request.get("langs");
                 if (isMountedRef.current) {
                     setLanguages(response.data["hydra:member"]);
+                    const foundLocale = findLocale(
+                        response.data["hydra:member"],
+                        locale
+                    );
+                    setUserLanguage(foundLocale);
                 }
             } catch (error) {
                 // Gérer les erreurs de requête ici
