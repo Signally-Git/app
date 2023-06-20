@@ -283,52 +283,52 @@ export default function Options(props) {
                                     })}
                                 </select>
                             </form> */}
-                            <div className={classes.spacing}>
-                                <h6>
-                                    <FormattedMessage id="signature.options.spacing" />
-                                </h6>
-                                <Range
-                                    step={2}
-                                    min={0}
-                                    max={50}
-                                    values={[props.data.event.padding]}
-                                    onChange={(range) =>
-                                        props.setData({
-                                            ...props.data,
-                                            event: {
-                                                ...props.data.event,
-                                                padding: range,
-                                                display:
-                                                    props?.data?.event?.selected
-                                                        .imageUrl,
-                                            },
-                                        })
-                                    }
-                                    renderTrack={({ props, children }) => (
-                                        <div
-                                            {...props}
-                                            className={classes.rangeSlider}
-                                            style={{
-                                                ...props.style,
-                                            }}
-                                        >
-                                            {children}
-                                        </div>
-                                    )}
-                                    renderThumb={({ props }) => (
-                                        <div
-                                            {...props}
-                                            style={{
-                                                ...props.style,
-                                            }}
-                                        />
-                                    )}
-                                />
-                            </div>
                         </>
                     ) : (
                         ""
                     )}
+                    <div className={classes.spacing}>
+                        <h6>
+                            <FormattedMessage id="signature.options.spacing" />
+                        </h6>
+                        <Range
+                            step={2}
+                            min={0}
+                            max={50}
+                            values={[props.data.event.padding]}
+                            onChange={(range) =>
+                                props.setData({
+                                    ...props.data,
+                                    event: {
+                                        ...props.data.event,
+                                        padding: range,
+                                        display:
+                                            props?.data?.event?.selected
+                                                .imageUrl,
+                                    },
+                                })
+                            }
+                            renderTrack={({ props, children }) => (
+                                <div
+                                    {...props}
+                                    className={classes.rangeSlider}
+                                    style={{
+                                        ...props.style,
+                                    }}
+                                >
+                                    {children}
+                                </div>
+                            )}
+                            renderThumb={({ props }) => (
+                                <div
+                                    {...props}
+                                    style={{
+                                        ...props.style,
+                                    }}
+                                />
+                            )}
+                        />
+                    </div>
                 </div>
 
                 {/* Socials */}
