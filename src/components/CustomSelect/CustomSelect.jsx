@@ -9,15 +9,13 @@ export default function CustomSelect({
     display,
     displayinlist,
     getValue,
-    multiple,
     defaultValue,
     onChange,
     styleList,
-    callback,
 }) {
-    const [value, setValue] = useState([
-        defaultValue || items?.[0]?.[getValue] || items?.[0]?.[display] || null,
-    ]);
+    const [value, setValue] = useState(
+        defaultValue || items?.[0]?.[getValue] || items?.[0]?.[display] || ""
+    );
     const click = useRef(null);
     const [isOpen, setIsOpen] = useState(false);
     useEffect(() => {
@@ -51,11 +49,9 @@ export default function CustomSelect({
                             })?.["style"]
                         }
                         value={
-                            value.length > 1
-                                ? `${value.length} évènements`
-                                : Object?.values(items)?.find((obj) => {
-                                      return obj[getValue] == value;
-                                  })?.[display]
+                            Object?.values(items)?.find((obj) => {
+                                return obj[getValue] == value;
+                            })?.[display]
                         }
                     />
                     <VscTriangleDown />
@@ -64,15 +60,7 @@ export default function CustomSelect({
                     style={{ maxHeight: styleList?.maxHeight }}
                     onChange={(e) => {
                         onChange(e.target.value);
-                        multiple
-                            ? e.target.checked
-                                ? setValue([...value, e.target.value])
-                                : setValue(
-                                      value.filter(
-                                          (val) => val !== e.target.value
-                                      )
-                                  )
-                            : setValue([e.target.value]);
+                        setValue(e.target.value);
                     }}
                 >
                     {isOpen ? (
@@ -91,13 +79,11 @@ export default function CustomSelect({
                                     >
                                         <input
                                             defaultChecked={
-                                                item[getValue] === value[0]
+                                                item[getValue] === value
                                             }
                                             name="item"
                                             value={item[getValue]}
-                                            type={
-                                                multiple ? "checkbox" : "radio"
-                                            }
+                                            type={"radio"}
                                         />
                                         {item[displayinlist] || item[display]}
                                         <ImCheckmark

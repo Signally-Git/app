@@ -1,6 +1,6 @@
 import ChevronRight from "assets/icons/chevron-right.svg";
 import classes from "./tiles.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Modal } from "components";
 import { BsBroadcastPin } from "react-icons/bs";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -32,6 +32,14 @@ function Tiles(props) {
 
     const notification = useNotification();
 
+    const isMountedRef = useRef(true); // Utiliser une référence pour suivre le montage/démontage du composant
+
+    useEffect(() => {
+        return () => {
+            isMountedRef.current = false; // Mettre à jour la référence lorsque le composant est démonté
+        };
+    }, []);
+
     useEffect(async () => {
         props.setLoading(false);
 
@@ -59,14 +67,20 @@ function Tiles(props) {
                     )
                         count++;
                 });
-                setActiveEvent(count);
-                setEvents(res.data["hydra:member"]);
+                if (isMountedRef.current) {
+                    setActiveEvent(count);
+                    setEvents(res.data["hydra:member"]);
+                }
             })
             .catch(() => {
-                notification({
-                    content: <FormattedMessage id="message.error.generic" />,
-                    status: "invalid",
-                });
+                if (isMountedRef.current) {
+                    notification({
+                        content: (
+                            <FormattedMessage id="message.error.generic" />
+                        ),
+                        status: "invalid",
+                    });
+                }
             });
         await request
             .get(`teams`)
@@ -75,14 +89,20 @@ function Tiles(props) {
                 res.data["hydra:member"].map((team) => {
                     if (team.users.length > 0) count++;
                 });
-                setActiveTeams(count);
-                setTeamsList(res.data["hydra:member"]);
+                if (isMountedRef.current) {
+                    setActiveTeams(count);
+                    setTeamsList(res.data["hydra:member"]);
+                }
             })
             .catch(() => {
-                notification({
-                    content: <FormattedMessage id="message.error.generic" />,
-                    status: "invalid",
-                });
+                if (isMountedRef.current) {
+                    notification({
+                        content: (
+                            <FormattedMessage id="message.error.generic" />
+                        ),
+                        status: "invalid",
+                    });
+                }
             });
         await request
             .get(`workplaces`)
@@ -91,25 +111,37 @@ function Tiles(props) {
                 res.data["hydra:member"].map((wp) => {
                     if (wp.teams.length > 0) count++;
                 });
-                setActiveWorkplaces(count);
-                setWPs(res.data["hydra:member"]);
+                if (isMountedRef.current) {
+                    setActiveWorkplaces(count);
+                    setWPs(res.data["hydra:member"]);
+                }
             })
             .catch(() => {
-                notification({
-                    content: <FormattedMessage id="message.error.generic" />,
-                    status: "invalid",
-                });
+                if (isMountedRef.current) {
+                    notification({
+                        content: (
+                            <FormattedMessage id="message.error.generic" />
+                        ),
+                        status: "invalid",
+                    });
+                }
             });
         await request
             .get(`users`)
             .then((res) => {
-                setUsers(res.data["hydra:member"]);
+                if (isMountedRef.current) {
+                    setUsers(res.data["hydra:member"]);
+                }
             })
             .catch(() => {
-                notification({
-                    content: <FormattedMessage id="message.error.generic" />,
-                    status: "invalid",
-                });
+                if (isMountedRef.current) {
+                    notification({
+                        content: (
+                            <FormattedMessage id="message.error.generic" />
+                        ),
+                        status: "invalid",
+                    });
+                }
             });
         await request
             .get(`signatures`)
@@ -123,14 +155,20 @@ function Tiles(props) {
                     )
                         count++;
                 });
-                setActiveSignatures(count);
-                setTemplates(res.data["hydra:member"]);
+                if (isMountedRef.current) {
+                    setActiveSignatures(count);
+                    setTemplates(res.data["hydra:member"]);
+                }
             })
             .catch(() => {
-                notification({
-                    content: <FormattedMessage id="message.error.generic" />,
-                    status: "invalid",
-                });
+                if (isMountedRef.current) {
+                    notification({
+                        content: (
+                            <FormattedMessage id="message.error.generic" />
+                        ),
+                        status: "invalid",
+                    });
+                }
             });
         props.setLoading(true);
     }, []);
@@ -154,28 +192,32 @@ function Tiles(props) {
         await request
             .get("user/send-token")
             .then(() => {
-                notification({
-                    content: <>{users.length} collaborateur(s) notifiés</>,
-                    status: "valid",
-                });
-                setSendMailBtn(
-                    <FormattedMessage id="buttons.placeholder.send_mail" />
-                );
-                setModal(false);
+                if (isMountedRef.current) {
+                    notification({
+                        content: <>{users.length} collaborateur(s) notifiés</>,
+                        status: "valid",
+                    });
+                    setSendMailBtn(
+                        <FormattedMessage id="buttons.placeholder.send_mail" />
+                    );
+                    setModal(false);
+                }
             })
             .catch(() => {
-                notification({
-                    content: (
-                        <FormattedMessage id="buttons.placeholder.send_mail" />
-                    ),
-                    status: "invalid",
-                });
-                setSendMailBtn(
-                    <>
-                        <FormattedMessage id="buttons.placeholder.send_mail" />
-                    </>
-                );
-                setModal(false);
+                if (isMountedRef.current) {
+                    notification({
+                        content: (
+                            <FormattedMessage id="buttons.placeholder.send_mail" />
+                        ),
+                        status: "invalid",
+                    });
+                    setSendMailBtn(
+                        <>
+                            <FormattedMessage id="buttons.placeholder.send_mail" />
+                        </>
+                    );
+                    setModal(false);
+                }
             });
     };
 

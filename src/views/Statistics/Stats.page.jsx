@@ -141,7 +141,7 @@ function StatsPage() {
                     <ul>
                         <li>
                             <input
-                                id={organisation["@id"]}
+                                id={organisation?.["@id"]}
                                 value="organisation"
                                 type="radio"
                                 name="entityType"
@@ -150,7 +150,7 @@ function StatsPage() {
                                 }
                                 defaultChecked={true}
                             />
-                            <label htmlFor={organisation["@id"]}>
+                            <label htmlFor={organisation?.["@id"]}>
                                 <FormattedMessage id="company" />
                             </label>
                         </li>

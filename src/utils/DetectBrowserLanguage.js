@@ -7,9 +7,7 @@ export const detectBrowserLanguage = () => {
         undefined;
 
     if (browserLanguage) {
-        // en-GB transforms in en
-        const languageCode = browserLanguage.split("-")[0];
-        return languageCode;
+        return browserLanguage;
     }
 
     return undefined;

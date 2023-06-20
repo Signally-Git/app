@@ -246,10 +246,11 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                         <>
                             <FormattedMessage id="message.success.signature.edit_variant1" />
                             <span className={classes.primaryTxt}>
+                                {" "}
                                 {type === "user"
                                     ? element.firstName + " " + element.lastName
-                                    : element.name}
-                            </span>{" "}
+                                    : element.name}{" "}
+                            </span>
                             <FormattedMessage id="message.success.signature.edit_part2" />
                         </>
                     ),

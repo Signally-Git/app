@@ -10,11 +10,12 @@ function CompanySettings() {
         TokenService.getOrganisation()
     );
     const [uploadedMedia, setUploadedMedia] = useState();
-    const [companyName, setCompanyName] = useState("");
-    const [website, setWebsite] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
+    const [companyName, setCompanyName] = useState(organisation?.name || "");
+    const [website, setWebsite] = useState(organisation?.websiteUrl || "");
+    const [phone, setPhone] = useState(organisation?.address?.phone || "");
+    const [email, setEmail] = useState(organisation?.address?.email || "");
     const [preview, setPreview] = useState();
+    const [loading, setLoading] = useState(false);
 
     const notification = useNotification();
     let history = useHistory();
@@ -33,6 +34,7 @@ function CompanySettings() {
     }, [uploadedMedia]);
 
     const handleSaveCompany = async () => {
+        setLoading(true);
         const img = new FormData();
         img.append("file", uploadedMedia);
         if (uploadedMedia) {
@@ -84,7 +86,6 @@ function CompanySettings() {
                                 ),
                                 status: "valid",
                             });
-                            history.goBack();
                         })
                         .catch(() =>
                             notification({
@@ -106,7 +107,10 @@ function CompanySettings() {
                         content: <FormattedMessage id="message.error.logo" />,
                         status: "invalid",
                     })
-                );
+                )
+                .finally(() => {
+                    setLoading(false);
+                });
         } else {
             const req = {
                 name: companyName,
@@ -135,13 +139,15 @@ function CompanySettings() {
                         ),
                         status: "valid",
                     });
-                    history.goBack();
+                })
+                .finally(() => {
+                    setLoading(false);
                 });
         }
     };
 
     useEffect(() => {
-        request.get(organisation["@id"]).then((org) => {
+        request.get(organisation?.["@id"]).then((org) => {
             org = org?.data;
             setOrganisation(org);
             setPreview(org?.logo?.url);
@@ -187,7 +193,7 @@ function CompanySettings() {
                         />
                         <Input
                             type="text"
-                            value={companyName}
+                            value={companyName || ""}
                             onChange={(e) => setCompanyName(e.target.value)}
                         />
                     </div>
@@ -195,7 +201,7 @@ function CompanySettings() {
                         <FormattedMessage tagName="label" id="siren" />
                         <Input
                             type="text"
-                            value={organisation.siren}
+                            value={organisation?.siren || ""}
                             disabled
                         />
                     </div>
@@ -206,7 +212,7 @@ function CompanySettings() {
                     </label>
                     <Input
                         type="text"
-                        value={organisation.address?.street}
+                        value={organisation?.address?.street || ""}
                         onChange={(e) =>
                             setOrganisation({
                                 ...organisation,
@@ -228,7 +234,7 @@ function CompanySettings() {
                         </label>
                         <Input
                             type="text"
-                            value={organisation.address?.zipCode}
+                            value={organisation?.address?.zipCode || ""}
                             onChange={(e) =>
                                 setOrganisation({
                                     ...organisation,
@@ -249,7 +255,7 @@ function CompanySettings() {
                         </label>
                         <Input
                             type="text"
-                            value={organisation.address?.city}
+                            value={organisation?.address?.city || ""}
                             onChange={(e) =>
                                 setOrganisation({
                                     ...organisation,
@@ -270,7 +276,7 @@ function CompanySettings() {
                         </label>
                         <Input
                             type="text"
-                            value={organisation.address?.country}
+                            value={organisation?.address?.country || ""}
                             onChange={(e) =>
                                 setOrganisation({
                                     ...organisation,
@@ -293,7 +299,7 @@ function CompanySettings() {
                         </label>
                         <Input
                             type="tel"
-                            value={phone}
+                            value={phone || ""}
                             onChange={(e) => setPhone(e.target.value)}
                         />
                     </div>
@@ -306,7 +312,7 @@ function CompanySettings() {
                         </label>
                         <Input
                             type="text"
-                            value={website}
+                            value={website || ""}
                             onChange={(e) => setWebsite(e.target.value)}
                         />
                     </div>
@@ -318,7 +324,7 @@ function CompanySettings() {
                         </label>
                         <Input
                             type="email"
-                            value={email}
+                            value={email || ""}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
@@ -328,6 +334,7 @@ function CompanySettings() {
                 onCancel={() => {
                     history.goBack();
                 }}
+                loading={loading}
                 confirmTxt=<FormattedMessage id="buttons.placeholder.save" />
                 onConfirm={(e) => {
                     e.preventDefault();

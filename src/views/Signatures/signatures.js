@@ -1,6 +1,6 @@
 import classes from "./signatures.module.css";
 import { Link, useHistory } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { FiTrash } from "react-icons/fi";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -41,9 +41,12 @@ function Signatures() {
                 history.push("/create-signature");
             }
 
-            const signaturePromises = signatures.map((template) =>
-                request.get(template["@id"])
-            );
+            const signaturePromises = signatures.map((template) => {
+                request.get(`signatures`).then(({ data }) => {
+                    console.log(data);
+                });
+                return request.get(template["@id"]);
+            });
 
             const signatureResponses = await Promise.all(signaturePromises);
             const signatureData = signatureResponses.map(
@@ -103,9 +106,7 @@ function Signatures() {
             },
             footer: {
                 maxWidth: 380,
-                value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.
-      
-      Ce message electronique et tous les fichiers joints ainsi que les informations contenues dans ce message (ci apres "le message"), sont confidentiels et destines exclusivement a l'usage de la personne a laquelle ils sont adresses. Si vous avez recu ce message par erreur, merci de le renvoyer a son emetteur et de le detruire. Toute diffusion, publication, totale ou partielle ou divulgation sous quelque forme que ce soit non expressement autorisees de ce message, sont interdites.,`,
+                value: `Disclaimer`,
                 enabled:
                     defaultStyles?.filter(
                         (style) => style.type === "disclaimer"
@@ -216,7 +217,7 @@ function Signatures() {
                                     />
                                 </span>
                                 <ul className={classes.itemsList}>
-                                    {templates.map((signature) => {
+                                    {templates.map((signature, index) => {
                                         if (
                                             signature.name.search(
                                                 search.toLowerCase()
@@ -292,6 +293,13 @@ function Signatures() {
                                                     )}
                                                 </li>
                                             );
+                                        else {
+                                            return (
+                                                <Fragment
+                                                    key={index}
+                                                ></Fragment>
+                                            );
+                                        }
                                     })}
                                 </ul>
                             </div>

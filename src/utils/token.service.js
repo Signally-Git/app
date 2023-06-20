@@ -29,6 +29,7 @@ const removeUser = () => {
 };
 
 const getOrganisation = () => {
+    if (localStorage.getItem("organisation") === "undefined") return;
     return JSON.parse(localStorage.getItem("organisation"));
 };
 

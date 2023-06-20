@@ -7,10 +7,11 @@ import { FormattedMessage } from "react-intl";
 
 function UserSettings() {
     const user = TokenService.getUser();
-    const [firstName, setFirstName] = useState(user?.firstName);
-    const [lastName, setLastName] = useState(user?.lastName);
-    const [position, setPosition] = useState(user?.position);
-    const [mobile, setMobile] = useState(user?.phone);
+    const [loading, setLoading] = useState(false);
+    const [firstName, setFirstName] = useState(user?.firstName || "");
+    const [lastName, setLastName] = useState(user?.lastName || "");
+    const [position, setPosition] = useState(user?.position || "");
+    const [mobile, setMobile] = useState(user?.phone || "");
     const [language, setLanguage] = useState(user?.lang || "");
     const [urlAgenda, setUrlAgenda] = useState(user?.urlAgenda || "");
 
@@ -18,6 +19,7 @@ function UserSettings() {
     let history = useHistory();
 
     const handleSavePersonal = async () => {
+        setLoading(true);
         const req = {
             firstName: firstName,
             lastName: lastName,
@@ -56,6 +58,9 @@ function UserSettings() {
                     ),
                     status: "invalid",
                 });
+            })
+            .finally(() => {
+                setLoading(false);
             });
     };
 
@@ -136,6 +141,7 @@ function UserSettings() {
                 onCancel={() => {
                     history.goBack();
                 }}
+                loading={loading}
                 confirmTxt=<FormattedMessage id="buttons.placeholder.save" />
                 onConfirm={(e) => {
                     e.preventDefault();

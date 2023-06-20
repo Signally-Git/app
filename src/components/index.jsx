@@ -1,6 +1,6 @@
 export { default as AppMenu } from "views/AppMenu/AppMenu";
 export { default as Header } from "./Header/Header";
-export { default as Button } from "./Button/btn";
+export { default as Button } from "./Button/Button";
 export { default as NavigationButtons } from "./NavigationButtons/buttons";
 export { default as CustomCheckbox } from "./Checkbox/customCheckbox";
 export { default as CustomSelect } from "./CustomSelect/CustomSelect";

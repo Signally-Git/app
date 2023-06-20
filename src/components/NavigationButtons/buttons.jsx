@@ -5,6 +5,7 @@ import { Button } from "components";
 function NavigationButtons({
     cancelTxt,
     confirmTxt,
+    loading,
     onCancel,
     onConfirm,
     ...props
@@ -12,6 +13,7 @@ function NavigationButtons({
     return (
         <div className={classes.container} {...props}>
             <Button
+                loading={loading}
                 color={"primary"}
                 onClick={(e) => onConfirm(e)}
                 type="submit"

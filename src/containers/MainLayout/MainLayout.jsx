@@ -4,33 +4,65 @@ import classes from "./MainLayout.module.scss";
 import { TokenService, request } from "utils";
 
 export default function MainLayout({ path, children }) {
-    const [user, setUser] = useState(TokenService.getUser);
+    const [user, setUser] = useState(TokenService.getUser());
     const [organisation, setOrganisation] = useState(null);
 
     useEffect(() => {
-        TokenService.setOrganisation({ "@id": user.organisation });
         const sseUser = new EventSource(
             `${process.env.REACT_APP_HUB_URL}${user["@id"]}`
         );
+        const sseOrganisation = new EventSource(
+            `${process.env.REACT_APP_HUB_URL}${user.organisation}`
+        );
 
-        function getRealtimeDataUser(data) {
-            setUser(data);
-            TokenService.setUser({
-                ...TokenService.getUser(),
+        const getRealtimeDataOrganisation = (data) => {
+            setOrganisation((prevOrganisation) => ({
+                ...prevOrganisation,
                 ...data,
-            });
-        }
-        sseUser.onmessage = (e) => getRealtimeDataUser(JSON.parse(e.data));
+            }));
+            TokenService.setOrganisation((prevOrganisation) => ({
+                ...prevOrganisation,
+                ...data,
+            }));
+        };
+
+        sseOrganisation.onmessage = (e) => {
+            const data = JSON.parse(e.data);
+            getRealtimeDataOrganisation(data);
+        };
+
+        const getRealtimeDataUser = (data) => {
+            setUser((prevUser) => ({
+                ...prevUser,
+                ...data,
+            }));
+            TokenService.setUser((prevUser) => ({
+                ...prevUser,
+                ...data,
+            }));
+        };
+
+        sseUser.onmessage = (e) => {
+            const data = JSON.parse(e.data);
+            getRealtimeDataUser(data);
+        };
 
         request
             .get(user.organisation)
-            .then((r) => {
-                const org = { ...r.data, "@id": user.organisation };
+            .then((response) => {
+                const org = { ...response.data, "@id": user.organisation };
                 setOrganisation(org);
                 TokenService.setOrganisation(org);
             })
             .catch((err) => console.log(err));
     }, []);
+
+    const renderOrganisationLogo = () => {
+        if (organisation?.logo?.url) {
+            return <img src={organisation.logo.url} alt={organisation.name} />;
+        }
+        return <p className={classes.capitalize}>{organisation?.name}</p>;
+    };
 
     return (
         <div className={classes.desktop}>
@@ -39,16 +71,7 @@ export default function MainLayout({ path, children }) {
                 <div className={classes.mainContent}>
                     <div className={classes.menuContainer}>
                         <div className={classes.userInfos}>
-                            {organisation?.logo?.url ? (
-                                <img
-                                    src={organisation.logo.url}
-                                    alt={organisation.name}
-                                />
-                            ) : (
-                                <p className={classes.capitalize}>
-                                    {organisation?.name}
-                                </p>
-                            )}
+                            {renderOrganisationLogo()}
                         </div>
                         <AppMenu page={path} />
                     </div>

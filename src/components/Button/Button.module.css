@@ -112,10 +112,21 @@
   background-color: #1B335E;
 }
 
-.disabled {
+.disabled, .loading {
   pointer-events: none;
 }
+.disabled .loadingCircle, .loading .loadingCircle {
+  animation: spin infinite 1s linear;
+}
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 .hidden {
   opacity: 0;
 }

@@ -1,5 +1,5 @@
 import classes from "./templateSelect.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { Button } from "components";
 import Template from "../Preview/customizablePreview";
 import { request } from "utils";
@@ -60,6 +60,7 @@ export default function TemplateSelection({
                         <input
                             hidden
                             checked={visibility === "PUBLIC"}
+                            onChange={() => {}}
                             onClick={handleFilterUntick}
                             id="PUBLIC"
                             type="radio"
@@ -72,6 +73,7 @@ export default function TemplateSelection({
                     <div className={classes.filter}>
                         <input
                             hidden
+                            onChange={() => {}}
                             checked={visibility === "PRIVATE"}
                             onClick={handleFilterUntick}
                             id="PRIVATE"
@@ -92,7 +94,7 @@ export default function TemplateSelection({
             ) : (
                 <form onChange={handleForm}>
                     <ul className={classes.templatesContainer}>
-                        {templatesList?.map((template) => {
+                        {templatesList?.map((template, index) => {
                             if (
                                 !visibility ||
                                 visibility === template.visibility
@@ -119,7 +121,7 @@ export default function TemplateSelection({
                                         />
                                     </li>
                                 );
-                            return <></>;
+                            return <Fragment key={index}></Fragment>;
                         })}
                     </ul>
                     <div className={classes.btnContainer}>

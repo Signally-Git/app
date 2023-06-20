@@ -19,14 +19,15 @@ function flattenMessages(nestedMessages, prefix = "") {
 }
 export const LangProvider = ({ children }) => {
     const [locale, setLocale] = useState(
-        TokenService.getUser()?.lang?.isoCode || detectBrowserLanguage() || "fr"
+        TokenService.getUser()?.lang?.locale || detectBrowserLanguage() || "fr"
     );
 
     function getMessages(locale) {
         switch (locale) {
-            case "fr":
+            case "fr-FR":
                 return require("locales/fr.json");
-            case "en":
+            case "en-US":
+            case "en-GB":
                 return require("locales/en.json");
             default:
                 return require("locales/en.json");

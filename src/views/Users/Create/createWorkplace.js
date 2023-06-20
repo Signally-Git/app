@@ -145,7 +145,7 @@ export default function CreateWorkplace({ setDone }) {
                         className={classes.btn}
                         onClick={(e) => handleSlide(e, 2)}
                     >
-                        <FormattedMessage id="manual" />
+                        <FormattedMessage id="buttons.placeholder.manual" />
                     </Button>
                     <Button
                         width={width}
@@ -161,7 +161,7 @@ export default function CreateWorkplace({ setDone }) {
                                 handleCSV(e.target.files[0]);
                             }}
                         />
-                        <FormattedMessage id="from_csv" />
+                        <FormattedMessage id="buttons.placeholder.from_csv" />
                     </Button>
                 </div>
                 <form

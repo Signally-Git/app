@@ -413,6 +413,11 @@ const getStyles = (signatureInfo, signatureOption, company, user) => {
             value: signatureOption.calendar.enabled?.toString() || false,
             type: "calendarEnabled",
         },
+        {
+            property: "enabled",
+            value: signatureOption.socials.enabled?.toString() || false,
+            type: "socialsEnabled",
+        },
     ];
 };
 const handleSave = async (
