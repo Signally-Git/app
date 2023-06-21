@@ -63,7 +63,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
 
         setIncEvents(
             events.data["hydra:member"]
-                .filter((data) => new Date(data.startAt) > new Date())
+                .filter((data) => new Date(data.endAt) > new Date())
                 .sort(function (a, b) {
                     if (a.startAt < b.startAt) {
                         return -1;
