@@ -160,8 +160,9 @@
 
 .wpLogoContainer {
   display: flex;
-  width: 48%;
+  width: 40%;
   gap: 0.25rem;
+  align-items: center;
 }
 .wpLogoContainer .logoPreview {
   max-width: 30px;
