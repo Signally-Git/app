@@ -42,9 +42,7 @@ function Signatures() {
             }
 
             const signaturePromises = signatures.map((template) => {
-                request.get(`signatures`).then(({ data }) => {
-                    console.log(data);
-                });
+                request.get(`signatures`).then(({ data }) => {});
                 return request.get(template["@id"]);
             });
 

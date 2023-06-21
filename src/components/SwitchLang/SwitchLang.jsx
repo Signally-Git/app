@@ -17,7 +17,6 @@ function SwitchLang({ setUserLanguage }) {
     }
 
     useEffect(() => {
-        console.log(locale);
         return () => {
             // Lorsque le composant est démonté, mettez la référence à false
             isMountedRef.current = false;

@@ -11,7 +11,6 @@ import { LangContext } from "contexts/LangContext";
 
 export default function CreateEvent({ setDone, event }) {
     const { locale } = useContext(LangContext);
-    console.log(locale);
     const intl = useIntl();
     const [lc, setLc] = useState(
         locale === "en-US" || locale === "en" ? "en" : "fr"
@@ -53,13 +52,11 @@ export default function CreateEvent({ setDone, event }) {
     }, [banner]);
 
     useEffect(() => {
-        console.log(lc);
         // Charger dynamiquement le fichier de locale approprié en fonction de la langue sélectionnée
         if (lc === "en-US") moment.locale("en-us");
         else
             import(`moment/locale/${lc}`).then((module) => {
                 moment.locale(locale, module.default);
-                console.log("here");
             });
     }, [lc]);
 

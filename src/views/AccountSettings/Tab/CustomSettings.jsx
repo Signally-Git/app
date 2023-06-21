@@ -17,7 +17,7 @@ function CustomSettings() {
     const [teamName, setTeamName] = useState(getValue("TEAM_NAME") || "");
     const [userName, setUserName] = useState(getValue("USER_NAME") || "");
     const [socialsList, setSocialsList] = useState(
-        TokenService.getOrganisation().socialMediaAccounts
+        TokenService.getOrganisation()?.socialMediaAccounts
     );
     const [loading, setLoading] = useState(false);
 
