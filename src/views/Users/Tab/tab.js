@@ -3,14 +3,18 @@ import React, { useEffect, useRef, useState } from "react";
 import classes from "./tab.module.css";
 import { FiCheck, FiTrash } from "react-icons/fi";
 import { AiOutlineEdit } from "react-icons/ai";
-import { Button, Input, UploadFile } from "components";
+import Button from "Utils/Button/btn";
 import { Link } from "react-router-dom";
-import CreateTeam from "../Create/createTeam";
-import CreateUser from "../Create/createUser";
-import CreateWorkplace from "../Create/createWorkplace";
+import Input from "Utils/Input/input";
+import request from "Utils/Request/request";
+import { useNotification } from "Utils/Notifications/notifications";
+import UploadFile from "Utils/Upload/uploadFile";
+import CreateTeam from "../Create/Team/createTeam";
+import CreateUser from "../Create/User/createUser";
+import CreateWorkplace from "../Create/Workplace/createWorkplace";
 import UserTab from "./userTab";
-import { TokenService, request, useNotification } from "utils";
-import { FormattedMessage, useIntl } from "react-intl";
+import { TokenService } from "Utils";
+import { FormattedMessage } from "react-intl";
 
 // Displays the current list
 // Workplaces by default
@@ -26,7 +30,6 @@ export default function Tab({
     editInfo,
     setEditInfo,
 }) {
-    const intl = useIntl();
     const [changed, setChanged] = useState(false);
     const [addedWorkplace, setAddedWorkplace] = useState("");
     const [searchWorkplace, setSearchWorkplace] = useState("");
@@ -91,7 +94,7 @@ export default function Tab({
                 notification({
                     content: (
                         <>
-                            <span className={classes.primaryColor}>{name}</span>{" "}
+                            <span style={{ color: "#FF7954" }}>{name}</span>{" "}
                             <FormattedMessage id="message.success.delete" />
                         </>
                     ),
@@ -104,7 +107,7 @@ export default function Tab({
                     content: (
                         <>
                             <FormattedMessage id="message.error.delete" />{" "}
-                            <span className={classes.primaryColor}>{name}</span>
+                            <span style={{ color: "#FF7954" }}>{name}</span>
                         </>
                     ),
                     status: "invalid",
@@ -130,7 +133,7 @@ export default function Tab({
                             notification({
                                 content: (
                                     <>
-                                        <span className={classes.primaryColor}>
+                                        <span style={{ color: "#FF7954" }}>
                                             {element.name}
                                         </span>{" "}
                                         <FormattedMessage id="message.success.delete" />
@@ -143,9 +146,7 @@ export default function Tab({
                                 notification({
                                     content: (
                                         <>
-                                            <span
-                                                className={classes.primaryColor}
-                                            >
+                                            <span style={{ color: "#FF7954" }}>
                                                 {count}{" "}
                                                 {
                                                     configuration.filter(
@@ -170,7 +171,7 @@ export default function Tab({
                                 content: (
                                     <>
                                         <FormattedMessage id="message.error.delete" />{" "}
-                                        <span className={classes.primaryColor}>
+                                        <span style={{ color: "#FF7954" }}>
                                             {element.name}
                                         </span>
                                     </>
@@ -193,9 +194,7 @@ export default function Tab({
                                 notification({
                                     content: (
                                         <>
-                                            <span
-                                                className={classes.primaryColor}
-                                            >
+                                            <span style={{ color: "#FF7954" }}>
                                                 {count}{" "}
                                                 {
                                                     configuration.filter(
@@ -220,7 +219,7 @@ export default function Tab({
                                 content: (
                                     <>
                                         <FormattedMessage id="message.error.delete" />{" "}
-                                        <span className={classes.primaryColor}>
+                                        <span style={{ color: "#FF7954" }}>
                                             {element.name}
                                         </span>
                                     </>
@@ -247,9 +246,7 @@ export default function Tab({
                                         content: (
                                             <>
                                                 <span
-                                                    className={
-                                                        classes.primaryColor
-                                                    }
+                                                    style={{ color: "#FF7954" }}
                                                 >
                                                     {count}{" "}
                                                     <FormattedMessage id="employees" />
@@ -270,9 +267,7 @@ export default function Tab({
                                     content: (
                                         <>
                                             <FormattedMessage id="message.error.delete" />{" "}
-                                            <span
-                                                className={classes.primaryColor}
-                                            >
+                                            <span style={{ color: "#FF7954" }}>
                                                 {element.firstName}{" "}
                                                 {element.lastName}
                                             </span>
@@ -290,7 +285,7 @@ export default function Tab({
             notification({
                 content: (
                     <>
-                        <span className={classes.primaryColor}>
+                        <span style={{ color: "#FF7954" }}>
                             {count} {type}
                         </span>{" "}
                         <FormattedMessage id="message.success.delete" />
@@ -301,7 +296,7 @@ export default function Tab({
         setModal({ type: "", name: "", id: "" });
     };
 
-    // Modal confirmation
+    // Modals confirmation
     useEffect(() => {
         const handleModal = (toDelete) => {
             switch (toDelete.type) {
@@ -311,7 +306,7 @@ export default function Tab({
                             <h4>
                                 <FormattedMessage id="message.warning.delete" />
                                 <br />
-                                <span className={classes.primaryTxt}>{`${
+                                <span className={classes.orangeTxt}>{`${
                                     workplaces.length
                                 } ${
                                     configuration.filter(
@@ -321,7 +316,7 @@ export default function Tab({
                             </h4>
                             <div>
                                 <Button
-                                    color="primary"
+                                    color="orange"
                                     onClick={() =>
                                         setModal({ type: "", name: "", id: "" })
                                     }
@@ -329,7 +324,7 @@ export default function Tab({
                                     <FormattedMessage id="buttons.placeholder.cancel" />
                                 </Button>
                                 <Button
-                                    color="primaryFill"
+                                    color="orangeFill"
                                     onClick={() =>
                                         handleDeleteAll("workplaces")
                                     }
@@ -345,7 +340,7 @@ export default function Tab({
                             <h4>
                                 <FormattedMessage id="message.warning.delete" />
                                 <br />
-                                <span className={classes.primaryTxt}>{`${
+                                <span className={classes.orangeTxt}>{`${
                                     teams.length
                                 } ${
                                     configuration.filter(
@@ -356,7 +351,7 @@ export default function Tab({
                             <br />
                             <div>
                                 <Button
-                                    color="primary"
+                                    color="orange"
                                     onClick={() =>
                                         setModal({ type: "", name: "", id: "" })
                                     }
@@ -364,7 +359,7 @@ export default function Tab({
                                     <FormattedMessage id="buttons.placeholder.cancel" />
                                 </Button>
                                 <Button
-                                    color="primaryFill"
+                                    color="orangeFill"
                                     onClick={() => handleDeleteAll("teams")}
                                 >
                                     <FormattedMessage id="buttons.placeholder.delete" />
@@ -378,7 +373,7 @@ export default function Tab({
                             <h4>
                                 <FormattedMessage id="message.warning.delete" />
                                 <br />
-                                <span className={classes.primaryTxt}>{`${
+                                <span className={classes.orangeTxt}>{`${
                                     users.length - 1
                                 } ${
                                     configuration.filter(
@@ -388,7 +383,7 @@ export default function Tab({
                             </h4>
                             <div>
                                 <Button
-                                    color="primary"
+                                    color="orange"
                                     onClick={() =>
                                         setModal({ type: "", name: "", id: "" })
                                     }
@@ -396,7 +391,7 @@ export default function Tab({
                                     <FormattedMessage id="buttons.placeholder.cancel" />
                                 </Button>
                                 <Button
-                                    color="primaryFill"
+                                    color="orangeFill"
                                     onClick={() => handleDeleteAll("users")}
                                 >
                                     <FormattedMessage id="buttons.placeholder.delete" />
@@ -410,13 +405,13 @@ export default function Tab({
                             <h4>
                                 <FormattedMessage id="message.warning.delete" />
                                 <br />
-                                <span className={classes.primaryTxt}>
+                                <span className={classes.orangeTxt}>
                                     {toDelete?.name}
                                 </span>
                             </h4>
                             <div>
                                 <Button
-                                    color="primary"
+                                    color="orange"
                                     onClick={() =>
                                         setModal({ type: "", name: "", id: "" })
                                     }
@@ -424,7 +419,7 @@ export default function Tab({
                                     <FormattedMessage id="buttons.placeholder.cancel" />
                                 </Button>
                                 <Button
-                                    color="primaryFill"
+                                    color="orangeFill"
                                     onClick={() =>
                                         handleDelete(
                                             toDelete?.id,
@@ -490,7 +485,7 @@ export default function Tab({
                 notification({
                     content: (
                         <>
-                            <span className={classes.primaryColor}>
+                            <span style={{ color: "#FF7954" }}>
                                 {workplace.name}
                             </span>{" "}
                             <FormattedMessage id="message.success.edit" />
@@ -522,7 +517,7 @@ export default function Tab({
                     notification({
                         content: (
                             <>
-                                <span className={classes.primaryColor}>
+                                <span style={{ color: "#FF7954" }}>
                                     {team.name}
                                 </span>{" "}
                                 <FormattedMessage id="message.success.edit" />
@@ -539,7 +534,7 @@ export default function Tab({
                         content: (
                             <>
                                 <FormattedMessage id="message.error.edit" />{" "}
-                                <span className={classes.primaryColor}>
+                                <span style={{ color: "#FF7954" }}>
                                     {team.name}
                                 </span>
                             </>
@@ -557,7 +552,7 @@ export default function Tab({
                 <Link to="create-workplace">
                     <Button
                         style={{ width: "15rem" }}
-                        color="primary"
+                        color="orange"
                         arrow={true}
                     >
                         <FormattedMessage id="buttons.placeholder.add" />{" "}
@@ -576,7 +571,7 @@ export default function Tab({
                         }
                         className={classes.search}
                         type="text"
-                        placeholder={`${intl.formatMessage({ id: "search" })} ${
+                        placeholder={`Rechercher ${
                             configuration.filter(
                                 (item) => item.key === "WORKPLACE_NAME"
                             )[0].value
@@ -586,7 +581,7 @@ export default function Tab({
                 <div className={classes.colheader}>
                     <span
                         className={`${classes.totalNumber} ${
-                            addedWorkplace.length > 0 ? classes.primaryTxt : ""
+                            addedWorkplace.length > 0 ? classes.orangeTxt : ""
                         }`}
                     >
                         {addedWorkplace.length > 0
@@ -943,7 +938,7 @@ export default function Tab({
                 <Link to="create-team">
                     <Button
                         style={{ width: "15rem" }}
-                        color="primary"
+                        color="orange"
                         arrow={true}
                     >
                         <FormattedMessage id="buttons.placeholder.add" />{" "}
@@ -962,7 +957,7 @@ export default function Tab({
                             setSearchTeam(e.target.value.toLowerCase())
                         }
                         type="text"
-                        placeholder={`${intl.formatMessage({ id: "search" })} ${
+                        placeholder={`Rechercher ${
                             configuration.filter(
                                 (item) => item.key === "TEAM_NAME"
                             )[0].value

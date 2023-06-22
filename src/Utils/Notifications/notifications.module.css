@@ -4,16 +4,16 @@
   justify-content: center;
   width: fit-content !important;
   height: 2.5rem !important;
-  border-radius: 5px;
+  border-radius: 10px;
   z-index: 10;
-  top: 1rem;
+  top: 3.5rem;
   position: fixed;
-  color: #1B335E;
+  color: #402927;
   font-weight: bold;
   max-width: 50%;
 }
 .container svg {
-  border-radius: 20px;
+  border-radius: 50%;
   padding: 4px;
   fill: #fff;
   font-size: 1.25rem;
@@ -31,7 +31,12 @@
 }
 
 .login {
-  position: absolute;
+  left: 56.5%;
+  right: auto;
+  max-width: 42rem;
+  top: 30%;
+  margin-left: auto;
+  margin-right: 0;
 }
 
 @keyframes fadeInLeft {
@@ -54,11 +59,25 @@
 
 @keyframes fadeOutAnimate {
   0% {
-    top: 1rem;
+    top: 3rem;
     opacity: 1;
   }
   100% {
-    top: 0rem;
+    top: 0.5rem;
+    opacity: 0;
+  }
+}
+.login.fadeOut {
+  animation: fadeOutAnimateLogin 1s forwards ease-out !important;
+}
+
+@keyframes fadeOutAnimateLogin {
+  0% {
+    top: 30%;
+    opacity: 1;
+  }
+  100% {
+    top: 25%;
     opacity: 0;
   }
 }

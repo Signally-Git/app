@@ -2,7 +2,7 @@ import classes from "./options.module.css";
 import { HexColorInput, HexColorPicker } from "react-colorful";
 import { Range } from "react-range";
 import { useEffect, useRef, useState } from "react";
-import { CustomSelect } from "components";
+import CustomSelect from "Utils/CustomSelect/customselect";
 import { FormattedMessage } from "react-intl";
 
 // Options tab
@@ -127,10 +127,7 @@ export default function Options(props) {
                                 defaultValue={props.data.salutation.value}
                             />
                             <div className={classes.spacing}>
-                                <FormattedMessage
-                                    id="signature.options.spacing"
-                                    tagName="h6"
-                                />
+                                <h6>Espacement</h6>
                                 <Range
                                     step={2}
                                     min={0}
@@ -283,52 +280,52 @@ export default function Options(props) {
                                     })}
                                 </select>
                             </form> */}
+                            <div className={classes.spacing}>
+                                <h6>
+                                    <FormattedMessage id="signature.options.spacing" />
+                                </h6>
+                                <Range
+                                    step={2}
+                                    min={0}
+                                    max={50}
+                                    values={[props.data.event.padding]}
+                                    onChange={(range) =>
+                                        props.setData({
+                                            ...props.data,
+                                            event: {
+                                                ...props.data.event,
+                                                padding: range,
+                                                display:
+                                                    props?.data?.event?.selected
+                                                        .imageUrl,
+                                            },
+                                        })
+                                    }
+                                    renderTrack={({ props, children }) => (
+                                        <div
+                                            {...props}
+                                            className={classes.rangeSlider}
+                                            style={{
+                                                ...props.style,
+                                            }}
+                                        >
+                                            {children}
+                                        </div>
+                                    )}
+                                    renderThumb={({ props }) => (
+                                        <div
+                                            {...props}
+                                            style={{
+                                                ...props.style,
+                                            }}
+                                        />
+                                    )}
+                                />
+                            </div>
                         </>
                     ) : (
                         ""
                     )}
-                    <div className={classes.spacing}>
-                        <h6>
-                            <FormattedMessage id="signature.options.spacing" />
-                        </h6>
-                        <Range
-                            step={2}
-                            min={0}
-                            max={50}
-                            values={[props.data.event.padding]}
-                            onChange={(range) =>
-                                props.setData({
-                                    ...props.data,
-                                    event: {
-                                        ...props.data.event,
-                                        padding: range,
-                                        display:
-                                            props?.data?.event?.selected
-                                                .imageUrl,
-                                    },
-                                })
-                            }
-                            renderTrack={({ props, children }) => (
-                                <div
-                                    {...props}
-                                    className={classes.rangeSlider}
-                                    style={{
-                                        ...props.style,
-                                    }}
-                                >
-                                    {children}
-                                </div>
-                            )}
-                            renderThumb={({ props }) => (
-                                <div
-                                    {...props}
-                                    style={{
-                                        ...props.style,
-                                    }}
-                                />
-                            )}
-                        />
-                    </div>
                 </div>
 
                 {/* Socials */}

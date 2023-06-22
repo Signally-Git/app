@@ -1,4 +1,4 @@
-@import "../../assets/style/global";
+@import "../../Assets/style/colors";
 
 .container {
     display: flex;
@@ -40,17 +40,15 @@
 
 .teamsContainer {
     background-color: #fff;
-    border-radius: $borderRadius;
-    min-width: $leftColMinWidth;
-    width: $leftColWidth;
-    max-width: $leftColMaxWidth;
-    min-height: $leftColMinHeight;
-    height: $leftColHeight;
-    max-height: $leftColMaxHeight;
+    border-radius: 20px;
+    min-width: 25rem;
     margin-bottom: 1rem;
+    max-width: 45%;
+    width: 100%;
     margin-right: 2rem;
     padding: 2rem;
     position: relative;
+    height: 100%;
     ul {
         padding: 0;
         list-style: none;
@@ -81,7 +79,7 @@
         margin: 0 auto;
         text-align: center;
         > a {
-            color: $color-dark-accent;
+            color: $signally-brown;
             display: block;
             text-overflow: ellipsis;
             overflow: hidden;
@@ -104,14 +102,14 @@
 // }
 
 .active {
-    color: $color-primary;
+    color: $signally-orange;
     a {
         transition: 0.2s;
-        color: $color-primary !important;
+        color: $signally-orange !important;
     }
     &::after {
         transition: 0.2s;
-        background-color: $color-primary;
+        background-color: $signally-orange;
     }
 }
 
@@ -150,7 +148,7 @@
 }
 
 .added {
-    color: $color-primary;
+    color: $signally-orange;
     height: 1.65rem;
     display: flex;
     align-items: center;
@@ -204,8 +202,8 @@
         font-size: 0.85rem;
         font-weight: 600;
         position: relative;
-        background: $color-lighter-accent;
-        border-radius: $smallBorderRadius;
+        background: $signally-grey;
+        border-radius: 10px;
         &::before {
             content: "";
             display: block;
@@ -216,7 +214,7 @@
             bottom: 0;
             margin: auto;
             height: 4px;
-            border-radius: $hugeRadius;
+            border-radius: 50%;
             width: 4px;
             background: transparent;
             transition: 0.2s;
@@ -233,7 +231,7 @@
                 left: -1em;
                 height: 8px;
                 width: 8px;
-                background: $color-primary;
+                background: $signally-orange;
             }
         }
         > div {
@@ -249,8 +247,8 @@
 }
 
 .groupName {
-    color: $color-primary !important;
-    border-radius: $borderRadius;
+    color: $signally-orange !important;
+    border-radius: 20px;
     font-weight: normal;
     font-size: 0.75rem;
 }
@@ -262,13 +260,13 @@
     margin-top: 0.25rem;
 }
 
-.primaryTxt {
-    color: $color-primary;
+.orangeTxt {
+    color: $signally-orange;
 }
 
 .teamAssignment {
     background-color: #fff;
-    border-radius: $borderRadius;
+    border-radius: 20px;
     padding: 1rem 2rem;
     margin-bottom: auto;
     h2 {
@@ -276,7 +274,7 @@
         margin-bottom: 2rem;
         margin-top: 0;
         span {
-            color: $color-primary !important;
+            color: $signally-orange !important;
             font-size: 1.2rem !important;
         }
     }
@@ -298,13 +296,13 @@
     align-items: center !important;
     &:hover,
     &:hover button {
-        color: $color-primary;
+        color: $signally-orange;
     }
     > span {
         padding-top: 0 !important;
     }
     button {
-        color: $color-dark-accent;
+        color: $signally-brown;
         transition: 0.2s;
         background: none;
         border: none;
@@ -342,9 +340,9 @@
         position: absolute;
         left: -1em;
         height: 8px;
-        border-radius: $hugeRadius;
+        border-radius: 50%;
         width: 8px;
-        background: $color-primary;
+        background: $signally-orange;
     }
 }
 
@@ -362,17 +360,17 @@
 
 .search {
     text-indent: 2rem;
-    border-radius: $borderRadius;
+    border-radius: 20px;
     width: 100%;
     outline: none;
     border: 1px solid transparent;
     margin: 1rem 0;
     padding: 0.75rem 0.5rem;
-    background: $color-lighter-accent;
+    background: $signally-grey;
     display: block;
     transition: 0.2s;
     &:focus {
-        border-color: $color-primary;
+        border-color: $signally-orange;
     }
 }
 
@@ -382,6 +380,6 @@
     float: right;
 
     &:hover {
-        color: $color-primary;
+        color: $signally-orange;
     }
 }

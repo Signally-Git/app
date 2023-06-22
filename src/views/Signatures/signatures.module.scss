@@ -1,4 +1,4 @@
-@import "../../assets/style/global";
+@import "../../Assets/style/colors";
 
 .container {
     display: flex;
@@ -10,10 +10,6 @@
     h1 {
         width: 100%;
     }
-}
-
-.primaryColor {
-    color: $color-primary;
 }
 
 .modalContainer {
@@ -29,7 +25,7 @@
         width: fit-content;
         inset: 0;
         span > span {
-            color: $color-primary;
+            color: $signally-orange;
         }
     }
 }
@@ -46,16 +42,14 @@
 }
 
 .teamsContainer {
-    width: $leftColMinWidth;
-    max-width: $leftColMinWidth;
-    min-width: $leftColMinWidth;
+    width: 45%;
+    max-width: 25rem;
+    min-width: 25rem;
     background-color: #fff;
-    border-radius: $borderRadius;
+    border-radius: 20px;
     padding: 2rem;
     position: relative;
-    min-height: $leftColMinHeight;
-    height: $leftColHeight;
-    max-height: $leftColMaxHeight;
+    height: 85%;
     ul {
         padding: 0;
         list-style: none;
@@ -65,7 +59,7 @@
         flex-direction: column;
         height: 95%;
         > span {
-            color: $color-primary-variant;
+            color: $signally-orange;
             font-weight: bold;
             margin-top: 1rem;
             font-size: 0.9rem;
@@ -114,10 +108,10 @@
 
 .active {
     transition: 0.2s;
-    color: $color-primary;
+    color: $signally-orange;
     &::after {
         transition: 0.2s;
-        background-color: $color-primary;
+        background-color: $signally-orange;
     }
 }
 
@@ -146,8 +140,8 @@
         font-weight: 600;
         cursor: pointer;
         position: relative;
-        background: $color-lighter-accent;
-        border-radius: $smallBorderRadius;
+        background: $signally-grey;
+        border-radius: 10px;
         &::before {
             content: "";
             display: block;
@@ -158,7 +152,7 @@
             bottom: 0;
             margin: auto;
             height: 8px;
-            border-radius: $hugeRadius;
+            border-radius: 50%;
             width: 8px;
             background: transparent;
             transition: 0.2s;
@@ -171,7 +165,7 @@
                 left: -1em;
                 height: 8px;
                 width: 8px;
-                background: $color-primary;
+                background: $signally-orange;
             }
         }
         > div {
@@ -191,8 +185,8 @@
 }
 
 .groupName {
-    color: $color-primary;
-    border-radius: $borderRadius;
+    color: $signally-orange;
+    border-radius: 20px;
     font-weight: normal;
     font-size: 0.75rem;
 }
@@ -218,28 +212,28 @@
 
 .search {
     text-indent: 2rem;
-    border-radius: $borderRadius;
+    border-radius: 20px;
     width: 100%;
     outline: none;
     border: 1px solid transparent;
     margin: 1rem 0;
     padding: 0.5rem;
-    background: $color-lighter-accent;
+    background: $signally-grey;
     display: block;
     transition: 0.2s;
     &:focus {
-        border-color: $color-primary;
+        border-color: $signally-orange;
     }
 }
 
-.primaryTxt {
-    color: $color-primary;
+.orangeTxt {
+    color: $signally-orange;
 }
 
 .signaturePreview {
     margin-left: 3rem;
     background-color: #fff;
-    border-radius: $borderRadius;
+    border-radius: 20px;
     // max-width: 30rem;
     padding: 0 2rem;
     margin-bottom: auto;
@@ -279,9 +273,9 @@
     width: 60%;
     text-align: center;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-    border: 1px solid $color-primary;
+    border: 1px solid $signally-orange;
     background-color: #fff !important;
-    color: $color-primary;
+    color: $signally-orange;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -289,15 +283,15 @@
     padding: 0.75rem;
     font-size: 0.85rem;
     font-weight: 600;
-    border-radius: $borderRadius;
+    border-radius: 20px;
     svg {
         transition: 0.2s;
         margin-left: 0.5rem;
-        stroke: $color-primary;
+        stroke: $signally-orange;
         stroke-width: 1px;
     }
     &:hover {
-        background-color: $color-primary !important;
+        background-color: $signally-orange !important;
         border: 1px solid transparent;
         color: #fff;
         svg {
@@ -320,14 +314,14 @@
     justify-content: center;
     align-items: center;
     svg {
-        color: $color-dark-accent;
+        color: $signally-brown;
         opacity: 0.6;
     }
     svg:first-child {
         font-size: 1rem;
     }
     svg:hover {
-        color: $color-primary;
+        color: $signally-orange;
         opacity: 1;
     }
 }

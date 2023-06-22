@@ -5,11 +5,19 @@ import Infos from "../create/Infos/infos";
 import TemplateSelection from "../create/TemplateSelect/templateSelect";
 import Preview from "../create/Preview/customizablePreview";
 import { BsArrowRight } from "react-icons/bs";
-import { Button, Input } from "components";
+import Button from "Utils/Button/btn";
+import Input from "Utils/Input/input";
 import { useHistory, useParams } from "react-router-dom";
-import { TokenService, useNotification, request, getEvents } from "utils";
-import { useDefaultOptions, getStyles } from "../create/createSignature.utils";
-import { FormattedMessage, useIntl } from "react-intl";
+import { UseEvents } from "Utils/useEvents/useEvents";
+import { useNotification } from "Utils/Notifications/notifications";
+import request from "Utils/Request/request";
+import { TokenService } from "Utils";
+import {
+    defaultOptions,
+    defaultValues,
+    getStyles,
+} from "../create/createSignature.utils";
+import { FormattedMessage } from "react-intl";
 import { extractStyle, extractValue } from "./editSignature.utils";
 
 // Component handling the modification of signature, selection of template
@@ -24,13 +32,14 @@ function EditSignatureComponent() {
     const history = useHistory();
     const notification = useNotification();
     const [preview, setPreview] = useState("");
-    const intl = useIntl();
 
     // Used to handle transition
     const elem = useRef(null);
     const [templates, setTemplates] = useState(false);
-    const [signatureInfo, setSignatureInfo] = useState();
-    const [signatureOption, setSignatureOption] = useState(useDefaultOptions());
+    const [signatureInfo, setSignatureInfo] = useState(
+        defaultValues(company, user)
+    );
+    const [signatureOption, setSignatureOption] = useState(defaultOptions());
     const [modal, setModal] = useState(false);
     const [modalContent, setModalContent] = useState();
     const [signatureName, setSignatureName] = useState("");
@@ -85,7 +94,9 @@ function EditSignatureComponent() {
             fontSize: [
                 extractValue(styles, "generalFontSize", "fontSize") || 11,
             ],
-            fontFamily: extractValue(styles, "generalFontFamily", "fontFamily"),
+            fontFamily:
+                extractValue(styles, "generalFontFamily", "fontFamily") ||
+                "Helvetica",
         });
         setSignatureOption({
             salutation: {
@@ -188,12 +199,12 @@ function EditSignatureComponent() {
     //     if (defaultStyles) handlePopulate();
     // }, [defaultStyles, selectedTemplate]);
 
-    // AppMenu
+    // Menu
     const [tab, setTab] = useState(true);
 
     useEffect(() => {
-        const fetchEvents = async () => {
-            const eventAPI = await getEvents(company.id);
+        const getEvents = async () => {
+            const eventAPI = await UseEvents(company.id);
             setSignatureOption(
                 {
                     ...signatureOption,
@@ -206,7 +217,7 @@ function EditSignatureComponent() {
                 "active"
             );
         };
-        fetchEvents();
+        getEvents();
     }, []);
 
     useEffect(() => {
@@ -237,9 +248,7 @@ function EditSignatureComponent() {
                                 <Input
                                     autoFocus
                                     style={{ width: "75%" }}
-                                    placeholder={intl.formatMessage({
-                                        id: "signature.title",
-                                    })}
+                                    placeholder="Nom de la signature"
                                     type="text"
                                     defaultValue={signatureName}
                                     onChange={(e) =>
@@ -249,7 +258,7 @@ function EditSignatureComponent() {
                                 <div>
                                     <Button
                                         width="40%"
-                                        color="primary"
+                                        color="orange"
                                         type="submit"
                                     >
                                         <FormattedMessage id="buttons.placeholder.save" />
@@ -257,7 +266,7 @@ function EditSignatureComponent() {
                                     <Button
                                         onClick={() => setModal(false)}
                                         width="30%"
-                                        color="secondary"
+                                        color="brown"
                                     >
                                         <FormattedMessage id="buttons.placeholder.cancel" />
                                     </Button>
@@ -272,6 +281,7 @@ function EditSignatureComponent() {
     }, [modal, signatureName]);
 
     const handleSave = async () => {
+        console.log(selectedTemplate);
         await request
             .patch(
                 `signatures/` + signatureId,
@@ -747,7 +757,6 @@ function EditSignatureComponent() {
         if (isOpen) {
             setTemplates(
                 <TemplateSelection
-                    template={selectedTemplate}
                     showFunction={showTemplates}
                     setTemplate={setSelectedTemplate}
                     signatureOption={signatureOption}
@@ -798,7 +807,7 @@ function EditSignatureComponent() {
             <div>
                 <h1>
                     <FormattedMessage id="signature.edit" />
-                    <span className={classes.primaryTxt}> {signatureName}</span>
+                    <span className={classes.orangeTxt}> {signatureName}</span>
                 </h1>
                 <div className={classes.row}>
                     <div className={classes.options}>
@@ -810,7 +819,7 @@ function EditSignatureComponent() {
                                         tagName="span"
                                     />
                                     <FormattedMessage
-                                        id="options"
+                                        id="style"
                                         tagName="span"
                                     />
                                 </div>
@@ -864,7 +873,7 @@ function EditSignatureComponent() {
                             <div className={classes.CTAsContainer}>
                                 <div>
                                     <Button
-                                        color="secondary"
+                                        color="brown"
                                         onClick={() => history.goBack()}
                                         style={{
                                             opacity: selectedTemplate ? 1 : 0,
@@ -876,7 +885,7 @@ function EditSignatureComponent() {
                                         <FormattedMessage id="buttons.placeholder.cancel" />
                                     </Button>
                                     <Button
-                                        color="primary"
+                                        color="orange"
                                         onClick={() => setModal(true)}
                                         style={{
                                             opacity: selectedTemplate ? 1 : 0,
@@ -889,7 +898,7 @@ function EditSignatureComponent() {
                                     </Button>
                                 </div>
                                 <Button
-                                    color="secondary"
+                                    color="brown"
                                     onClick={() => showTemplates(true)}
                                 >
                                     <FormattedMessage id="buttons.placeholder.choose_template" />

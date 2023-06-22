@@ -1,6 +1,4 @@
-import { request } from "utils";
-import { useIntl } from "react-intl";
-import classes from "./createSignature.module.css";
+import request from "Utils/Request/request";
 
 async function getPreview(twig, styles) {
     return await request
@@ -66,14 +64,9 @@ function defaultValues(company, user) {
     };
 }
 
-function useDefaultOptions() {
-    const intl = useIntl();
+function defaultOptions() {
     return {
-        salutation: {
-            value: intl.formatMessage({ id: "signature.default_greetings" }),
-            enabled: false,
-            padding: 10,
-        },
+        salutation: { value: "Cordialement,", enabled: false, padding: 10 },
         custom: { enabled: false },
         eco: { value: "Ecoresponsability", enabled: false },
         followUs: { value: "Follow us", enabled: false, disabled: true },
@@ -413,11 +406,6 @@ const getStyles = (signatureInfo, signatureOption, company, user) => {
             value: signatureOption.calendar.enabled?.toString() || false,
             type: "calendarEnabled",
         },
-        {
-            property: "enabled",
-            value: signatureOption.socials.enabled?.toString() || false,
-            type: "socialsEnabled",
-        },
     ];
 };
 const handleSave = async (
@@ -441,7 +429,7 @@ const handleSave = async (
                 content: (
                     <>
                         Votre signature{" "}
-                        <span className={classes.primaryColor}>
+                        <span style={{ color: "#FF7954" }}>
                             {signatureName}
                         </span>{" "}
                         a été créée avec succès
@@ -854,6 +842,7 @@ const handleSave = async (
             });
         })
         .catch((err) => {
+            console.log(err);
             notification({
                 content: <>Une erreur s'est produite. Veuillez réessayer</>,
                 status: "invalid",
@@ -861,4 +850,4 @@ const handleSave = async (
         });
 };
 
-export { getPreview, defaultValues, getStyles, useDefaultOptions, handleSave };
+export { getPreview, defaultValues, getStyles, defaultOptions, handleSave };

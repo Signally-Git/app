@@ -1,0 +1,116 @@
+@import "../../Assets/style/colors.scss";
+
+.whiteBg {
+    background-color: #fff;
+}
+
+.btn {
+    background-color: transparent;
+    display: flex;
+    border-radius: 20px;
+    border: 1px solid;
+    text-align: center;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem auto;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 20px;
+    * {
+        color: inherit;
+    }
+}
+
+.orange {
+    color: $signally-orange;
+    border-color: $signally-orange;
+    cursor: pointer;
+    &:hover {
+        background-color: $signally-orange;
+        color: #fff;
+        svg {
+            stroke: #fff;
+        }
+    }
+    svg {
+        transition: 0.2s;
+        margin-left: 0.5rem;
+        stroke: $signally-orange;
+        stroke-width: 1px;
+    }
+}
+
+.left {
+    margin-left: 0 !important;
+    margin-right: 0.5rem;
+}
+
+.orangeFill {
+    color: #fff;
+    background-color: $signally-orange;
+    border-color: $signally-orange;
+    &:hover {
+        background-color: transparent;
+        color: $signally-orange;
+        cursor: pointer;
+        svg {
+            stroke: $signally-orange;
+        }
+    }
+    svg {
+        transition: 0.2s;
+        margin-left: 0.5rem;
+        stroke: #fff;
+        stroke-width: 1px;
+    }
+}
+
+.brown {
+    color: $signally-brown;
+    border-color: $signally-brown;
+    &:hover {
+        cursor: pointer;
+        background: $signally-brown;
+        color: #fff;
+        svg {
+            stroke: #fff;
+        }
+    }
+    svg {
+        transition: 0.2s;
+        margin-left: 0.5rem;
+        stroke: $signally-brown;
+        stroke-width: 1px;
+    }
+}
+
+.brownFill {
+    color: #fff;
+    background-color: $signally-brown;
+    border-color: $signally-brown;
+    &:hover {
+        background-color: transparent;
+        color: $signally-brown;
+        cursor: pointer;
+    }
+}
+
+.white {
+    border-color: transparent;
+    background-color: #fff;
+    cursor: pointer;
+    &:hover {
+        color: #fff;
+        background-color: $signally-brown;
+    }
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+.hidden {
+    opacity: 0;
+}

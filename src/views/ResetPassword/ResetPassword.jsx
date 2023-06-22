@@ -1,6 +1,6 @@
-import { Header } from "components";
-import { Button } from "components";
-import { Input } from "components";
+import Header from "components/Header/Header";
+import Button from "Utils/Button/btn";
+import Input from "Utils/Input/input";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import classes from "./ResetPassword.module.css";
 import React, { useEffect } from "react";
@@ -101,8 +101,8 @@ export default function ResetPassword() {
                     <Button
                         color={
                             newPass === confirm && newPass.length > 1
-                                ? "primaryFill"
-                                : "primary"
+                                ? "orangeFill"
+                                : "orange"
                         }
                         disabled={
                             newPass !== confirm ? true : !(newPass.length > 1)

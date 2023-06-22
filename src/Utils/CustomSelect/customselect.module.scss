@@ -1,0 +1,122 @@
+@import "../../Assets/style/colors.scss";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    li {
+        width: 100%;
+        position: relative;
+    }
+    input[type="checkbox"],
+    input[type="radio"] {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0;
+        cursor: pointer;
+    }
+}
+
+.open {
+    input {
+        // border-bottom: none;
+        border-radius: 10px 10px 0 0;
+    }
+    .inputContainer > svg {
+        transform: rotate(-180deg);
+    }
+}
+
+.inputContainer {
+    position: relative;
+    display: flex;
+    width: 100%;
+    input[type="text"] {
+        z-index: 6;
+        width: 100%;
+        font-weight: bold;
+        color: $signally-brown;
+        padding: 0.65rem 1rem;
+    }
+    svg {
+        transition: 0.2s;
+        cursor: pointer;
+        z-index: 7;
+        right: 1rem;
+        bottom: 0;
+        top: 0;
+        margin: auto;
+        position: absolute;
+        color: $signally-brown;
+    }
+}
+
+.splitter {
+    font-size: 0.8rem;
+    color: $signally-orange;
+    font-weight: bold;
+}
+
+.list {
+    position: absolute;
+    top: 1rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    margin: 0 auto;
+    border: 1px solid $signally-darkgrey;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 20px 30px $signally-darkgrey;
+    border-radius: 0 0 10px 10px;
+    padding: 0;
+    padding-top: 2.65rem;
+    list-style: none;
+    opacity: 0;
+    max-height: inherit !important;
+    animation: dropDown 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    li {
+        margin: 0;
+        padding: 1rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        font-weight: normal;
+        color: $signally-brown;
+        input,
+        input + svg {
+            opacity: 0;
+            color: $signally-orange;
+        }
+        input:checked + svg {
+            opacity: 1;
+        }
+        &:hover,
+        &:focus-within {
+            transition: 0.2s;
+            color: $signally-brown;
+            background-color: $signally-pink;
+        }
+    }
+}
+
+@keyframes dropDown {
+    0% {
+        opacity: 0;
+        max-height: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        max-height: 100vh;
+    }
+}

@@ -3,14 +3,14 @@ import { useEffect, useRef, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import Tab from "./Tab/tab";
 import SignaturePreview from "./SignaturePreview/signaturePreview";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import request from "Utils/Request/request";
 import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
-import { Button } from "components";
-import { handleScroll, TokenService, request } from "utils";
+import Button from "Utils/Button/btn";
+import { TokenService } from "Utils";
 import { FormattedMessage, useIntl } from "react-intl";
-import { getMenuLink } from "./users.utils";
 
-function Signatures() {
+function Team() {
     const [entity, setEntity] = useState();
     const { type } = useParams();
     const [users, setUsers] = useState([]);
@@ -29,126 +29,174 @@ function Signatures() {
 
     const slider = useRef(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const [listUsers, listTeams] = await Promise.all([
-                request.get("users?exists[team]=false"),
-                request.get("teams?exists[workplace]=false"),
-            ]);
-            setUsers(listUsers.data["hydra:member"]);
-            setTeams(listTeams.data["hydra:member"]);
-        };
-
-        fetchData();
+    useEffect(async () => {
+        const listUsers = await request.get("users?exists[team]=false");
+        setUsers(listUsers.data["hydra:member"]);
     }, [entity]);
 
+    useEffect(async () => {
+        const listTeams = await request.get("teams?exists[workplace]=false");
+        setTeams(listTeams.data["hydra:member"]);
+    }, [entity]);
+
+    // HANDLING REAL TIME USERS IN TEAM
     useEffect(() => {
-        const sseAssignTeam = new EventSource(
+        const sse = new EventSource(
             `${process.env.REACT_APP_HUB_URL}${entity?.["@id"]}`
         );
-        const sseUsersWithoutTeam = new EventSource(
-            `${process.env.REACT_APP_HUB_URL}/users/users-without-team`
-        );
-        const sseTeamsWithoutWP = new EventSource(
-            `${process.env.REACT_APP_HUB_URL}/users/teams-without-workplace`
-        );
-
-        sseAssignTeam.onmessage = (e) =>
-            handleRealtimeData(setEntity, "users", JSON.parse(e.data));
-        sseUsersWithoutTeam.onmessage = (e) =>
-            handleRealtimeData(setUsers, null, JSON.parse(e.data));
-        sseTeamsWithoutWP.onmessage = (e) =>
-            handleRealtimeData(setTeams, null, JSON.parse(e.data));
-
-        function handleRealtimeData(setData, key, data) {
+        if (edit === "assign-team") {
+            sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
+        }
+        function getRealtimeData(data) {
             setTimeout(() => {
-                if (key) {
-                    setData((prevData) => ({ ...prevData, [key]: data.users }));
-                } else {
-                    setData(data);
-                }
+                setEntity({ ...entity, users: data.users });
             }, 1500);
         }
 
         return () => {
-            sseAssignTeam.close();
-            sseUsersWithoutTeam.close();
-            sseTeamsWithoutWP.close();
+            sse.close();
+        };
+    }, [edit]);
+
+    // HANDLING REAL TIME USERS WITHOUT TEAM
+    useEffect(() => {
+        const sse = new EventSource(
+            `${process.env.REACT_APP_HUB_URL}/users/users-without-team`
+        );
+        sse.onmessage = (e) => getRealtimeDataWOutTeam(JSON.parse(e.data));
+
+        function getRealtimeDataWOutTeam(data) {
+            setTimeout(() => {
+                setUsers(data);
+            }, 1500);
+        }
+
+        return () => {
+            sse.close();
         };
     }, [edit]);
 
     useEffect(() => {
-        setEntity(null);
-        setEdit(null);
-    }, [type]);
+        const sse = new EventSource(
+            `${process.env.REACT_APP_HUB_URL}/users/teams-without-workplace`
+        );
+        sse.onmessage = (e) => getRealtimeDataWOutWP(JSON.parse(e.data));
+
+        function getRealtimeDataWOutWP(data) {
+            setTimeout(() => {
+                setTeams(data);
+            }, 1500);
+        }
+
+        return () => {
+            sse.close();
+        };
+    }, [edit]);
 
     const handleAddTeam = (team) => {
-        updateTeam(team.id, { workplace: entity?.["@id"] });
+        request
+            .patch(
+                `teams/${team.id}`,
+                { workplace: entity?.["@id"] },
+                {
+                    headers: { "Content-Type": "application/merge-patch+json" },
+                }
+            )
+            .then(() => {
+                setTransition(team.id);
+                setTimeout(() => {
+                    setTransition("done");
+                }, 1500);
+            });
     };
 
     const handleRemoveTeam = (team) => {
         const removedTeams = entity.teams.filter(
-            (teamCheck) => teamCheck.id !== team.id
+            (teamCheck) => teamCheck["id"] !== team["id"]
         );
-        updateTeam(team.id, { workplace: null });
-        setEntity((prevEntity) => ({ ...prevEntity, teams: removedTeams }));
+        request
+            .delete(
+                `${entity["@id"]}/teams/${team.id}`,
+                { workplace: null },
+                {
+                    headers: { "Content-Type": "application/merge-patch+json" },
+                }
+            )
+            .then(() => {
+                setTransition(team.id);
+                setTimeout(() => {
+                    setEntity({ ...entity, teams: removedTeams });
+                    setTransition("done");
+                }, 1500);
+            });
     };
 
     const handleUpdateAll = (users, action) => {
-        users?.forEach((user) => {
+        users?.map((user) => {
             handleUpdate(user, action);
         });
     };
 
     const handleUpdate = (user, action) => {
-        const handleRemove = () => {
-            const removedUsers = entity.users.filter(
-                (userCheck) => userCheck.id !== user.id
-            );
-            updateUser(user.id, { team: null });
-            setEntity((prevEntity) => ({ ...prevEntity, users: removedUsers }));
-        };
-
-        const handleAdd = () => {
-            updateUser(user.id, { team: entity?.["@id"] });
-        };
-
         switch (action) {
             case "remove":
-                handleRemove();
+                const removedUsers = entity.users.filter(
+                    (userCheck) => userCheck["id"] !== user["id"]
+                );
+                request
+                    .delete(
+                        `${entity["@id"]}/users/${user.id}`,
+                        { team: null },
+                        {
+                            headers: {
+                                "Content-Type": "application/merge-patch+json",
+                            },
+                        }
+                    )
+                    .then(() => {
+                        setTransition(user.id);
+                        setTimeout(() => {
+                            setEntity({ ...entity, users: removedUsers });
+                            setTransition("done");
+                        }, 1500);
+                    });
                 break;
+
             case "add":
-                handleAdd();
+                request
+                    .patch(
+                        `users/${user.id}`,
+                        { team: entity?.["@id"] },
+                        {
+                            headers: {
+                                "Content-Type": "application/merge-patch+json",
+                            },
+                        }
+                    )
+                    .then(() => {
+                        setTransition(user.id);
+                        setTimeout(() => {
+                            setTransition("done");
+                        }, 1500);
+                    });
                 break;
             default:
                 break;
         }
     };
 
-    const updateTeam = (teamId, data) => {
-        request
-            .patch(`teams/${teamId}`, data, {
-                headers: { "Content-Type": "application/merge-patch+json" },
-            })
-            .then(() => {
-                setTransition(teamId);
-                setTimeout(() => {
-                    setTransition("done");
-                }, 1500);
-            });
-    };
+    useEffect(() => {
+        setEntity();
+        setEdit();
+    }, [type]);
 
-    const updateUser = (userId, data) => {
-        request
-            .patch(`users/${userId}`, data, {
-                headers: { "Content-Type": "application/merge-patch+json" },
-            })
-            .then(() => {
-                setTransition(userId);
-                setTimeout(() => {
-                    setTransition("done");
-                }, 1500);
-            });
+    const handleScroll = (e, scroll) => {
+        e.preventDefault();
+        slider.current.scroll({
+            top: 0,
+            left: scroll,
+            behavior: "smooth",
+        });
     };
 
     return (
@@ -157,9 +205,37 @@ function Signatures() {
                 <h1>Teams</h1>
                 <div className={classes.teamsContainer}>
                     <ul className={classes.menu}>
-                        {getMenuLink(type, "WORKPLACE_NAME", "workplaces")}
-                        {getMenuLink(type, "TEAM_NAME", "teams")}
-                        {getMenuLink(type, "USER_NAME", "users")}
+                        <li
+                            className={
+                                type === "workplaces" ? classes.active : ""
+                            }
+                        >
+                            <Link to="/teams/workplaces">
+                                {
+                                    configuration.filter(
+                                        (item) => item.key === "WORKPLACE_NAME"
+                                    )[0].value
+                                }
+                            </Link>
+                        </li>
+                        <li className={type === "teams" ? classes.active : ""}>
+                            <Link to="/teams/teams">
+                                {
+                                    configuration.filter(
+                                        (item) => item.key === "TEAM_NAME"
+                                    )[0].value
+                                }
+                            </Link>
+                        </li>
+                        <li className={type === "users" ? classes.active : ""}>
+                            <Link to="/teams/users">
+                                {
+                                    configuration.filter(
+                                        (item) => item.key === "USER_NAME"
+                                    )[0].value
+                                }
+                            </Link>
+                        </li>
                     </ul>
                     <Tab
                         tab={type}
@@ -181,13 +257,17 @@ function Signatures() {
                                             <h2>
                                                 <span
                                                     className={
-                                                        classes.primaryTxt
+                                                        classes.orangeTxt
                                                     }
                                                 >
                                                     {entity?.teams?.length || 0}
                                                 </span>{" "}
                                                 {
-                                                    configuration.filter(
+                                                    JSON.parse(
+                                                        localStorage.getItem(
+                                                            "configuration"
+                                                        )
+                                                    ).filter(
                                                         (item) =>
                                                             item.key ===
                                                             "TEAM_NAME"
@@ -195,14 +275,14 @@ function Signatures() {
                                                 }{" "}
                                                 <span
                                                     className={
-                                                        classes.primaryTxt
+                                                        classes.orangeTxt
                                                     }
                                                 >
                                                     {entity?.name}
                                                 </span>
                                             </h2>
                                             <Button
-                                                color="secondary"
+                                                color="brown"
                                                 onClick={() => {
                                                     setEdit("assign-signature");
                                                 }}
@@ -221,10 +301,12 @@ function Signatures() {
                                                         e.target.value
                                                     )
                                                 }
-                                                placeholder={`${intl.formatMessage(
-                                                    { id: "search" }
-                                                )} ${
-                                                    configuration.filter(
+                                                placeholder={`Rechercher ${
+                                                    JSON.parse(
+                                                        localStorage.getItem(
+                                                            "configuration"
+                                                        )
+                                                    ).filter(
                                                         (item) =>
                                                             item.key ===
                                                             "TEAM_NAME"
@@ -290,15 +372,19 @@ function Signatures() {
                                             })}
                                         </ul>
                                         <Button
-                                            color={"primary"}
+                                            color={"orange"}
                                             arrow
                                             onClick={(e) =>
-                                                handleScroll(e, 2000, slider)
+                                                handleScroll(e, 2000)
                                             }
                                         >
                                             Ajouter des{" "}
                                             {
-                                                configuration.filter(
+                                                JSON.parse(
+                                                    localStorage.getItem(
+                                                        "configuration"
+                                                    )
+                                                ).filter(
                                                     (item) =>
                                                         item.key === "TEAM_NAME"
                                                 )[0].value
@@ -310,7 +396,11 @@ function Signatures() {
                                             <h2>
                                                 <FormattedMessage id="add_blank" />{" "}
                                                 {
-                                                    configuration.filter(
+                                                    JSON.parse(
+                                                        localStorage.getItem(
+                                                            "configuration"
+                                                        )
+                                                    ).filter(
                                                         (item) =>
                                                             item.key ===
                                                             "TEAM_NAME"
@@ -328,7 +418,11 @@ function Signatures() {
                                                     setOtherTeam(e.target.value)
                                                 }
                                                 placeholder={`<FormattedMessage id="search" /> ${
-                                                    configuration.filter(
+                                                    JSON.parse(
+                                                        localStorage.getItem(
+                                                            "configuration"
+                                                        )
+                                                    ).filter(
                                                         (item) =>
                                                             item.key ===
                                                             "USER_NAME"
@@ -384,10 +478,8 @@ function Signatures() {
                                             })}
                                         </ul>
                                         <Button
-                                            color={"primary"}
-                                            onClick={(e) =>
-                                                handleScroll(e, 0, slider)
-                                            }
+                                            color={"orange"}
+                                            onClick={(e) => handleScroll(e, 0)}
                                         >
                                             <FormattedMessage id="buttons.placeholder.end" />
                                         </Button>
@@ -402,7 +494,7 @@ function Signatures() {
                                             <h2>
                                                 <span
                                                     className={
-                                                        classes.primaryTxt
+                                                        classes.orangeTxt
                                                     }
                                                 >
                                                     {entity?.users?.length || 0}
@@ -417,14 +509,14 @@ function Signatures() {
                                                 />{" "}
                                                 <span
                                                     className={
-                                                        classes.primaryTxt
+                                                        classes.orangeTxt
                                                     }
                                                 >
                                                     {entity?.name}
                                                 </span>
                                             </h2>
                                             <Button
-                                                color="secondary"
+                                                color="brown"
                                                 onClick={() => {
                                                     setEdit("assign-signature");
                                                 }}
@@ -445,10 +537,12 @@ function Signatures() {
                                                         e.target.value
                                                     )
                                                 }
-                                                placeholder={`${intl.formatMessage(
-                                                    { id: "search" }
-                                                )} ${
-                                                    configuration.filter(
+                                                placeholder={`Rechercher ${
+                                                    JSON.parse(
+                                                        localStorage.getItem(
+                                                            "configuration"
+                                                        )
+                                                    ).filter(
                                                         (item) =>
                                                             item.key ===
                                                             "USER_NAME"
@@ -530,15 +624,19 @@ function Signatures() {
                                             })}
                                         </ul>
                                         <Button
-                                            color={"primary"}
+                                            color={"orange"}
                                             arrow
                                             onClick={(e) =>
-                                                handleScroll(e, 2000, slider)
+                                                handleScroll(e, 2000)
                                             }
                                         >
                                             <FormattedMessage id="buttons.placeholder.add" />{" "}
                                             {
-                                                configuration.filter(
+                                                JSON.parse(
+                                                    localStorage.getItem(
+                                                        "configuration"
+                                                    )
+                                                ).filter(
                                                     (item) =>
                                                         item.key === "USER_NAME"
                                                 )[0].value
@@ -550,7 +648,11 @@ function Signatures() {
                                             <h2>
                                                 <FormattedMessage id="buttons.placeholder.add" />{" "}
                                                 {
-                                                    configuration.filter(
+                                                    JSON.parse(
+                                                        localStorage.getItem(
+                                                            "configuration"
+                                                        )
+                                                    ).filter(
                                                         (item) =>
                                                             item.key ===
                                                             "USER_NAME"
@@ -567,10 +669,12 @@ function Signatures() {
                                                 onChange={(e) =>
                                                     setOtherUser(e.target.value)
                                                 }
-                                                placeholder={`${intl.formatMessage(
-                                                    { id: "search" }
-                                                )} ${
-                                                    configuration.filter(
+                                                placeholder={`Rechercher ${
+                                                    JSON.parse(
+                                                        localStorage.getItem(
+                                                            "configuration"
+                                                        )
+                                                    ).filter(
                                                         (item) =>
                                                             item.key ===
                                                             "TEAM_NAME"
@@ -639,10 +743,8 @@ function Signatures() {
                                             })}
                                         </ul>
                                         <Button
-                                            color={"primary"}
-                                            onClick={(e) =>
-                                                handleScroll(e, 0, slider)
-                                            }
+                                            color={"orange"}
+                                            onClick={(e) => handleScroll(e, 0)}
                                         >
                                             <FormattedMessage id="buttons.placeholder.end" />
                                         </Button>
@@ -668,4 +770,4 @@ function Signatures() {
     );
 }
 
-export default Signatures;
+export default Team;

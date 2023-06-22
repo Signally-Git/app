@@ -3,8 +3,8 @@ import classes from "./imgUpload.module.css";
 import { IoMdClose } from "react-icons/io";
 import { BsUpload } from "react-icons/bs";
 import axios from "axios";
-import { CustomCheckbox, Button } from "components";
-import { TokenService } from "utils";
+import Button from "Utils/Button/btn";
+import { CustomCheckbox, TokenService } from "Utils";
 
 // Custom functions
 // First one converts SVG HTML code to PNG image
@@ -53,6 +53,7 @@ function ImgUploader() {
                 },
             })
             .then(async (res) => {
+                console.log(res);
                 if (res.data.url) {
                     setPath(res.data);
                     copyToClipboard(res.data.url);
@@ -108,7 +109,7 @@ function ImgUploader() {
                 />
                 <Button
                     style={{ width: "30%" }}
-                    color="primaryFill"
+                    color="orangeFill"
                     onClick={() => convertSvg(svgData)}
                     className={classes.btn}
                 >

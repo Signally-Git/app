@@ -2,7 +2,7 @@
   width: 100%;
 }
 .infosContainer h4 {
-  color: #1B335E;
+  color: #402927;
   font-weight: bold;
   font-size: 1rem;
   text-align: left;
@@ -23,12 +23,12 @@
   flex-wrap: wrap;
 }
 .inputsFlex input {
-  background-color: #F3F7FB;
+  background-color: #f8f2f0;
   padding: 0.5rem 0.75rem;
   font-size: 0.9rem;
 }
 .inputsFlex input::placeholder {
-  color: #1B335E;
+  color: #402927;
 }
 .inputsFlex .inputContainer {
   width: 48%;
@@ -47,25 +47,6 @@
   justify-content: center;
 }
 
-.range {
-  height: 6px;
-  width: 100%;
-  background-color: #F1ECEA;
-  margin: 0;
-  border-radius: 20px;
-}
-
-.rangeThumb {
-  transition: 0.2s;
-  height: 25px;
-  width: 25px;
-  background-color: #244EFF;
-  border: 3px solid #FFF;
-  border-radius: 50%;
-  outline: none;
-  box-shadow: 1px 1px 3px #5c74b2;
-}
-
 .fileUpload {
   display: flex;
   justify-content: center;
@@ -74,8 +55,8 @@
   flex-direction: column;
   width: 100%;
   background: #fff;
-  border-radius: 5px;
-  border: 1px solid #F4F7FC;
+  border-radius: 10px;
+  border: 1px solid #f7f5f5;
 }
 .fileUpload div {
   display: flex;
@@ -115,8 +96,8 @@
   padding: 1rem 2rem;
   margin-right: 1rem;
   background: transparent;
-  color: #efeef4;
-  border: 1px solid #efeef4;
+  color: #402a27;
+  border: 1px solid #402a27;
 }
 
 .inputContainer,
@@ -139,7 +120,7 @@
   width: 15px;
   height: 15px;
   background: #000;
-  border-radius: 20px;
+  border-radius: 50%;
 }
 
 .select {
@@ -189,7 +170,7 @@
   align-items: center;
 }
 .styleContainer .row h6 {
-  color: #244EFF;
+  color: #ff7954;
   font-weight: normal;
   padding-right: 1rem;
   font-size: 1rem;
@@ -211,7 +192,6 @@
   font-size: 0.75rem;
   position: absolute;
   bottom: 1.5rem;
-  color: #1B335E;
 }
 
 .selectFontContainer {
@@ -236,7 +216,7 @@
   height: 3rem;
   z-index: 1;
   border: 1px solid #f1f1f1;
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   position: relative;
   background: #fff;
@@ -257,7 +237,7 @@
   border-radius: 20px 20px 0 0;
   list-style: none;
   background-color: #fff;
-  box-shadow: 0 20px 30px #DDE5F1;
+  box-shadow: 0 20px 30px #ebe4e1;
   width: 100%;
 }
 .selectFont li {
@@ -282,8 +262,8 @@
 }
 .selectFont li:hover, .selectFont li:focus-within {
   transition: 0.2s;
-  color: #1B335E;
-  background-color: #ECEFF6;
+  color: #402927;
+  background-color: #f4eeef;
 }
 .selectFont input {
   opacity: 0;

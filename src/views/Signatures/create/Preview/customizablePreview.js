@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { request } from "utils";
+import request from "Utils/Request/request";
 import parse from "html-react-parser";
 
 export default function Preview({ twig, styles }) {

@@ -1,4 +1,4 @@
-@import "../../../../assets/style/global";
+@import "../../../../Assets/style/colors";
 
 .container {
     width: 100%;
@@ -47,7 +47,7 @@
 
 .colorPreview {
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.356);
-    border-radius: $hugeRadius;
+    border-radius: 50%;
     margin: 0.2rem;
     width: 20px;
     height: 20px;
@@ -67,7 +67,7 @@
 
 .optionsContainer {
     background: #fff;
-    border-radius: 0 0 $smallBorderRadius $smallBorderRadius;
+    border-radius: 0 0 10px 10px;
 }
 
 .optionContainer {
@@ -95,7 +95,7 @@
     border: 1px solid #f6f6f6;
     padding: 1rem 5rem 1rem 1rem !important;
     text-overflow: ellipsis;
-    border-radius: $smallBorderRadius;
+    border-radius: 10px;
     margin: 0.5rem 0;
     font-family: "Montserrat";
     outline: none;
@@ -113,7 +113,7 @@
     height: 12rem;
     background: #fff;
     box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
-    border-radius: $smallBorderRadius;
+    border-radius: 10px;
     justify-content: center;
     align-items: center;
     top: 0;
@@ -134,7 +134,7 @@
 }
 
 .colorPreview {
-    border-radius: $hugeRadius;
+    border-radius: 50%;
     width: 20px;
     height: 20px;
 }
@@ -156,7 +156,7 @@
 }
 
 .opened svg {
-    color: $color-primary !important;
+    color: $signally-orange !important;
 }
 
 .textStyle {
@@ -170,7 +170,7 @@
     width: 70%;
     margin: 0;
     background-color: #fff;
-    border-radius: $mediumBorderRadius;
+    border-radius: 30px;
     box-shadow: 0 2px 20px rgba(177, 176, 175, 0.8);
     li {
         display: flex;
@@ -194,11 +194,11 @@
         }
 
         .inputOptions svg {
-            color: $color-dark-accent;
+            color: $signally-brown;
         }
         &:hover {
             span {
-                color: $color-primary;
+                color: $signally-orange;
             }
         }
         &:last-child {
@@ -210,12 +210,12 @@
                 justify-content: center;
                 color: #fff;
                 padding: 0;
-                border-radius: $hugeRadius;
+                border-radius: 50%;
                 width: 1rem;
                 height: 1rem;
                 font-size: 0.65rem;
                 margin: 0;
-                background-color: $color-primary;
+                background-color: $signally-orange;
             }
         }
         span {

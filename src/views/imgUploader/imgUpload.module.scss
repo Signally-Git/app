@@ -1,4 +1,4 @@
-@import "../../assets/style/global";
+@import "../../Assets/style/colors";
 
 .container {
     width: 90%;
@@ -31,7 +31,7 @@
     > label {
         font-weight: bold;
         text-transform: uppercase;
-        color: $color-dark-accent;
+        color: $signally-brown;
         cursor: pointer;
     }
     align-items: center;
@@ -43,7 +43,7 @@
     display: flex;
     flex-direction: column;
     > .dimensions label {
-        color: $color-primary;
+        color: $signally-orange;
         font-weight: 400;
         font-size: 0.8rem;
     }
@@ -55,12 +55,12 @@
         background: #fff;
         border: 1px solid transparent;
         padding: 1rem;
-        border-radius: $smallBorderRadius;
+        border-radius: 10px;
         margin: 0.5rem 0;
         font-family: "Montserrat", serif;
         outline: none;
         &:focus {
-            border: 1px solid $color-primary;
+            border: 1px solid $signally-orange;
             box-shadow: 0 12px 40px rgba(230, 208, 201, 0.28);
         }
     }
@@ -91,8 +91,8 @@
     text-align: center;
     border-radius: 40px;
     font-size: 1rem;
-    box-shadow: 0 2px 5px rgba($color-dark-accent, 0.4);
-    background-color: $color-primary;
+    box-shadow: 0 2px 5px rgba($signally-brown, 0.4);
+    background-color: $signally-orange;
     color: #fff;
     font-weight: bold;
     height: 3.5rem;
@@ -124,7 +124,7 @@
     flex-direction: column;
     width: 100%;
     background: #fff;
-    border-radius: $smallBorderRadius;
+    border-radius: 10px;
     .rangeUpload {
         display: flex;
         flex-direction: column;

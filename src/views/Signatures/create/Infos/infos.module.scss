@@ -1,9 +1,9 @@
-@import "../../../../assets/style/global";
+@import "../../../../Assets/style/colors";
 
 .infosContainer {
     width: 100%;
     h4 {
-        color: $color-dark-accent;
+        color: $signally-brown;
         font-weight: bold;
         font-size: 1rem;
         text-align: left;
@@ -20,11 +20,11 @@
 
 .inputsFlex {
     input {
-        background-color: $color-light-accent-variation2;
+        background-color: $signally-isabelline;
         padding: 0.5rem 0.75rem;
         font-size: 0.9rem;
         &::placeholder {
-            color: $color-dark-accent;
+            color: $signally-brown;
         }
     }
     .inputContainer {
@@ -50,25 +50,6 @@
     justify-content: center;
 }
 
-.range {
-    height: 6px;
-    width: 100%;
-    background-color: #F1ECEA;
-    margin: 0;
-    border-radius: $hugeRadius;
-}
-
-.rangeThumb {
-    transition: 0.2s;
-    height: 25px;
-    width: 25px;
-    background-color: $color-primary;
-    border: 3px solid #FFF;
-    border-radius: 50%;
-    outline: none;
-    box-shadow: 1px 1px 3px $color-primary-variant;
-}
-
 .fileUpload {
     display: flex;
     justify-content: center;
@@ -77,8 +58,8 @@
     flex-direction: column;
     width: 100%;
     background: #fff;
-    border-radius: $smallBorderRadius;
-    border: 1px solid $color-lighter-accent;
+    border-radius: 10px;
+    border: 1px solid $signally-grey;
     div {
         display: flex;
         align-items: center;
@@ -118,8 +99,8 @@
     padding: 1rem 2rem;
     margin-right: 1rem;
     background: transparent;
-    color: $background-color;
-    border: 1px solid $background-color;
+    color: #402a27;
+    border: 1px solid #402a27;
 }
 
 .inputContainer,
@@ -143,7 +124,7 @@
                 width: 15px;
                 height: 15px;
                 background: #000;
-                border-radius: $hugeRadius;
+                border-radius: 50%;
             }
         }
     }
@@ -193,7 +174,7 @@
         justify-content: space-between;
         align-items: center;
         h6 {
-            color: $color-primary;
+            color: $signally-orange;
             font-weight: normal;
             padding-right: 1rem;
             font-size: 1rem;
@@ -217,7 +198,6 @@
     font-size: 0.75rem;
     position: absolute;
     bottom: 1.5rem;
-    color: $color-dark-accent;
 }
 
 .selectFontContainer {
@@ -242,7 +222,7 @@
     height: 3rem;
     z-index: 1;
     border: 1px solid #f1f1f1;
-    border-radius: $smallBorderRadius;
+    border-radius: 10px;
     display: flex;
     position: relative;
     background: #fff;
@@ -263,7 +243,7 @@
     border-radius: 20px 20px 0 0;
     list-style: none;
     background-color: #fff;
-    box-shadow: 0 20px 30px $color-light-accent-variation;
+    box-shadow: 0 20px 30px $signally-darkgrey;
     width: 100%;
     li {
         position: relative;
@@ -287,8 +267,8 @@
         &:hover,
         &:focus-within {
             transition: 0.2s;
-            color: $color-dark-accent;
-            background-color: $color-light-accent-variation1;
+            color: $signally-brown;
+            background-color: $signally-pink;
         }
     }
     input {

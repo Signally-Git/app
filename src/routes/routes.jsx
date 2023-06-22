@@ -1,7 +1,7 @@
-import { dashboardRoutes } from "./config/dashboardRoutes";
-import { guestRoutes } from "./config/guestRoutes";
-import { signaturesRoutes } from "./config/signaturesRoutes";
-import { miscellanousRoutes } from "./config/miscellanousRoutes";
+import { dashboardRoutes } from "./dashboardRoutes";
+import { guestRoutes } from "./guestRoutes";
+import { signaturesRoutes } from "./signaturesRoutes";
+import { miscellanousRoutes } from "./miscellanousRoutes";
 
 export const routes = [
     dashboardRoutes,

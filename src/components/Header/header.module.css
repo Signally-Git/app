@@ -17,10 +17,6 @@
   z-index: 5;
 }
 
-.landing {
-  position: absolute;
-  z-index: 1;
-}
 .landing .logoContainer {
   margin-top: 0;
 }
@@ -34,7 +30,7 @@
   left: 12rem;
   padding: 1rem 5%;
   z-index: 5;
-  border-radius: 5px 5px 0 0;
+  border-radius: 20px 20px 0px 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -43,7 +39,7 @@
 }
 .container h2 {
   font-size: 1.35rem;
-  color: #1B335E;
+  color: #402927;
   line-height: 0;
 }
 
@@ -62,25 +58,25 @@
   font-weight: 600;
   margin-right: 1rem;
   padding: 0.25rem 1rem;
-  border-radius: 5px;
+  border-radius: 20px;
   font-size: 0.9rem;
-  color: #1B335E;
+  color: #402927;
   transition: 0.2s;
 }
 .nonLogged li:last-child a {
-  border: 1px solid #244EFF;
-  color: #244EFF;
+  border: 1px solid #ff7954;
+  color: #ff7954;
 }
 .nonLogged li:last-child a:hover {
-  border-color: #244EFF;
-  background: #244EFF;
+  border-color: #ff7954;
+  background: #ff7954;
   color: #fff;
 }
 .nonLogged li:hover {
   cursor: pointer;
 }
 .nonLogged li:hover a {
-  color: #244EFF;
+  color: #ff7954;
 }
 
 .notif {
@@ -96,20 +92,23 @@
   width: 15px;
   height: 15px;
   text-align: center;
-  background-color: #244EFF;
+  background-color: #ff7954;
   color: #fff;
   padding: 2px;
   font-size: 0.8rem;
   right: -9px;
   top: -9px;
-  border-radius: 20px;
-  border: 1px solid #244EFF;
+  border-radius: 50%;
+  border: 1px solid #ff7954;
 }
 
 .pageTitle {
   background: #f5eeef;
-  border-radius: 5px 10px 0 0;
-  padding: 0.5rem 2rem 1rem;
+  border-radius: 20px 40px 0 0;
+  padding-bottom: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 0.5rem;
   margin-left: 3.25rem;
   margin-top: 6rem;
   z-index: 2;
@@ -121,38 +120,38 @@
   margin-right: 1rem;
   display: flex;
   align-items: center;
-  border-right: 1px solid #1B335E;
+  border-right: 1px solid #402927;
 }
 .btnsContainer .studio {
-  border: 1px solid #244EFF;
-  color: #244EFF;
+  border: 1px solid #ff7954;
+  color: #ff7954;
 }
 .btnsContainer .studio:hover {
   color: #fff;
-  background: #244EFF;
+  background: #ff7954;
 }
 .btnsContainer .store {
-  border: 1px solid #244EFF;
-  color: #244EFF;
+  border: 1px solid #ff7954;
+  color: #ff7954;
 }
 .btnsContainer .store:hover {
   color: #fff;
-  background: #244EFF;
-  border-color: #244EFF;
+  background: #ff7954;
+  border-color: #ff7954;
 }
 .btnsContainer a {
   font-weight: 600;
   margin-right: 1rem;
   padding: 0.25rem 1rem;
-  border: 1px solid #1B335E;
-  border-radius: 5px;
+  border: 1px solid #402927;
+  border-radius: 20px;
   font-size: 0.9rem;
-  color: #1B335E;
+  color: #402927;
   transition: 0.2s;
 }
 .btnsContainer a:hover {
-  color: #244EFF;
-  border-color: #244EFF;
+  color: #ff7954;
+  border-color: #ff7954;
 }
 
 .searchContainer {
@@ -179,10 +178,10 @@
 }
 
 .headerSpan {
-  color: #244EFF;
+  color: #ff7954;
 }
 .headerSpan a {
-  color: #244EFF;
+  color: #ff7954;
   text-decoration: underline;
 }
 
@@ -194,9 +193,9 @@
   height: 25px;
   color: #fff;
   font-size: 26px;
-  border-radius: 20px;
+  border-radius: 50%;
   margin: 0;
-  background: #244EFF;
+  background: #ff7954;
 }
 
 .options {
@@ -206,22 +205,22 @@
   top: 2.5rem;
   background: rgb(255, 255, 255);
   padding: 0.5rem 1rem;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
   display: flex;
   flex-direction: column;
 }
 .options li {
   font-size: 1rem;
-  color: #1B335E;
+  color: #402927;
   font-family: "Trebuchet MS";
   padding: 0.5rem 0;
 }
 .options li a {
-  color: #1B335E;
+  color: #402927;
 }
 .options li:not(:last-of-type) {
-  border-bottom: 1px solid #1B335E;
+  border-bottom: 1px solid #402927;
 }
 
 .rightSide {
@@ -242,9 +241,10 @@
 }
 .name ul {
   z-index: 3;
-  background: #f7f8fb;
+  background: #fbf8f7;
+  padding: 0;
   padding: 0 1rem;
-  border: 1px solid #1B335E;
+  border: 1px solid #402927;
   border-radius: 15px;
   list-style: none;
   max-height: 1.7rem;
@@ -274,13 +274,12 @@
   white-space: nowrap;
   font-size: 0.8rem;
   font-weight: 500;
-  color: #1B335E;
+  color: #402927;
   transition: 0.2s;
   margin-bottom: 1rem;
 }
 .name .UserName {
   display: flex;
-  color: #1B335E;
   padding-top: 3px;
   align-items: center;
   justify-content: center;
@@ -294,13 +293,9 @@
   font-weight: 600;
   white-space: nowrap;
   font-size: 0.9rem;
-  color: #1B335E;
+  color: #402927;
   transition: 0.2s;
   margin-right: 0.5rem;
-}
-
-.logout {
-  color: #5c74b2;
 }
 
 .reportContainer {
@@ -313,29 +308,29 @@
 }
 .reportContainer > div {
   transition: background-color 0.2s, border-color 0.2s;
-  color: #1B335E;
-  background: #ECEFF6;
-  border: 1px solid #ECEFF6;
+  color: #402927;
+  background: #f4eeef;
+  border: 1px solid #f4eeef;
   font-weight: bold;
   font-size: 0.9rem;
   width: 100%;
   margin: 0;
   margin-top: 1.25rem;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 0.5rem 0.55rem;
   display: flex;
   flex-direction: column;
 }
 .reportContainer > div:hover {
-  border-color: #1B335E;
+  border-color: #402927;
   color: #fff;
-  background-color: #1B335E;
+  background-color: #402927;
 }
 .reportContainer > div:hover button {
   color: #fff;
 }
 .reportContainer button {
-  color: #1B335E;
+  color: #402927;
   font-size: 0.6rem;
   margin-top: 0.15rem;
   cursor: pointer;

@@ -1,10 +1,12 @@
 import classes from "./events.module.css";
 import { useEffect, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
-import { Button, Modal } from "components";
+import Button from "Utils/Button/btn";
 import CreateEvent from "./CreateEvent/createEvent";
 import { FiTrash } from "react-icons/fi";
-import { useNotification, request } from "utils";
+import { useNotification } from "Utils/Notifications/notifications";
+import request from "Utils/Request/request";
+import Modal from "Utils/Modals/modal";
 import moment from "moment";
 import { FormattedMessage, useIntl } from "react-intl";
 
@@ -49,7 +51,7 @@ function Events() {
                 content: (
                     <>
                         <FormattedMessage id="message.error.delete" />
-                        <span className={classes.primaryColor}>
+                        <span style={{ color: "#FF7954" }}>
                             {" "}
                             {preview.name}
                         </span>
@@ -64,9 +66,7 @@ function Events() {
         notification({
             content: (
                 <>
-                    <span className={classes.primaryColor}>
-                        {preview.name}{" "}
-                    </span>
+                    <span style={{ color: "#FF7954" }}>{preview.name} </span>
                     <FormattedMessage id="message.success.delete" />
                 </>
             ),
@@ -83,7 +83,7 @@ function Events() {
                         <>
                             <FormattedMessage id="message.warning.delete" />{" "}
                             <br />
-                            <span className={classes.primaryTxt}>
+                            <span className={classes.orangeTxt}>
                                 {toDelete?.name}
                             </span>
                         </>
@@ -255,7 +255,7 @@ function Events() {
                                     })}
                                 />
                             </div>
-                            <span className={classes.boldPrimary}>
+                            <span className={classes.boldOrange}>
                                 {" "}
                                 {handleEvents("past").length} event
                                 {handleEvents("past").length > 1 ? "s" : ""}
@@ -269,7 +269,7 @@ function Events() {
                             {JSON.parse(localStorage.getItem("user"))
                                 .roles[1] !== "ROLE_RH" ? (
                                 <Button
-                                    color="primary"
+                                    color="orange"
                                     arrow={true}
                                     onClick={() => {
                                         setPreview();
@@ -292,7 +292,7 @@ function Events() {
                                     })}
                                 />
                             </div>
-                            <span className={classes.boldPrimary}>
+                            <span className={classes.boldOrange}>
                                 {handleEvents("present").length} event
                                 {handleEvents("present").length > 1 ? "s" : ""}
                             </span>
@@ -305,7 +305,7 @@ function Events() {
                             {JSON.parse(localStorage.getItem("user"))
                                 .roles[1] !== "ROLE_RH" ? (
                                 <Button
-                                    color="primary"
+                                    color="orange"
                                     arrow={true}
                                     onClick={() => {
                                         setPreview();
@@ -328,7 +328,7 @@ function Events() {
                                     })}
                                 />
                             </div>
-                            <span className={classes.boldPrimary}>
+                            <span className={classes.boldOrange}>
                                 {handleEvents("future").length} event
                                 {handleEvents("future").length > 1 ? "s" : ""}
                             </span>
@@ -363,7 +363,7 @@ function Events() {
                                 >
                                     {/* <h3>Signature active</h3> */}
                                     <h2>
-                                        <span className={classes.primaryTxt}>
+                                        <span className={classes.orangeTxt}>
                                             {activeEvents[preview?.index].name}
                                         </span>
                                         {/* <FiEdit onClick={() => setEdit(!edit)} /> */}

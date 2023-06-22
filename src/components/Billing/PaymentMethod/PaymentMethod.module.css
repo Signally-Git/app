@@ -1,0 +1,21 @@
+.container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 20px;
+}
+.container h4 {
+  color: #ff7954;
+  margin-top: 0;
+}
+.container button {
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.container button:hover {
+  text-decoration: none;
+}

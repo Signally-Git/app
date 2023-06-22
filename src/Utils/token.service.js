@@ -4,7 +4,6 @@ const getLocalRefreshToken = () => {
 };
 
 const getLocalToken = () => {
-    if (localStorage.getItem("user") === "undefined") return;
     const user = JSON.parse(localStorage.getItem("user"));
     return user?.token;
 };
@@ -16,12 +15,11 @@ const updateLocalToken = (token) => {
 };
 
 const getUser = () => {
-    if (localStorage.getItem("user") === "undefined") return;
     return JSON.parse(localStorage.getItem("user"));
 };
 
 const setUser = (user) => {
-    user && localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
 };
 
 const removeUser = () => {
@@ -29,13 +27,11 @@ const removeUser = () => {
 };
 
 const getOrganisation = () => {
-    if (localStorage.getItem("organisation") === "undefined") return;
     return JSON.parse(localStorage.getItem("organisation"));
 };
 
 const setOrganisation = (organisation) => {
-    organisation &&
-        localStorage.setItem("organisation", JSON.stringify(organisation));
+    localStorage.setItem("organisation", JSON.stringify(organisation));
 };
 
 const removeOrganisation = () => {
@@ -47,8 +43,7 @@ const getConfig = () => {
 };
 
 const setConfig = (configuration) => {
-    configuration &&
-        localStorage.setItem("configuration", JSON.stringify(configuration));
+    localStorage.setItem("configuration", JSON.stringify(configuration));
 };
 
 const removeConfig = () => {

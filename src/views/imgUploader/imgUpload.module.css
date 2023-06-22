@@ -31,7 +31,7 @@
 .checkboxContainer > label {
   font-weight: bold;
   text-transform: uppercase;
-  color: #1B335E;
+  color: #402927;
   cursor: pointer;
 }
 
@@ -42,7 +42,7 @@
   flex-direction: column;
 }
 .inputsContainer > .dimensions label {
-  color: #244EFF;
+  color: #ff7954;
   font-weight: 400;
   font-size: 0.8rem;
 }
@@ -54,14 +54,14 @@
   background: #fff;
   border: 1px solid transparent;
   padding: 1rem;
-  border-radius: 5px;
+  border-radius: 10px;
   margin: 0.5rem 0;
   font-family: "Montserrat", serif;
   outline: none;
 }
 .inputsContainer input:focus,
 .inputsContainer textarea:focus {
-  border: 1px solid #244EFF;
+  border: 1px solid #ff7954;
   box-shadow: 0 12px 40px rgba(230, 208, 201, 0.28);
 }
 
@@ -90,8 +90,8 @@
   text-align: center;
   border-radius: 40px;
   font-size: 1rem;
-  box-shadow: 0 2px 5px rgba(27, 51, 94, 0.4);
-  background-color: #244EFF;
+  box-shadow: 0 2px 5px rgba(64, 41, 39, 0.4);
+  background-color: #ff7954;
   color: #fff;
   font-weight: bold;
   height: 3.5rem;
@@ -120,7 +120,7 @@
   flex-direction: column;
   width: 100%;
   background: #fff;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 .fileUpload .rangeUpload {
   display: flex;

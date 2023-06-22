@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Input from "./Input";
 import classes from "./infos.module.css";
 import { Range } from "react-range";
 import { FiChevronDown } from "react-icons/fi";
-import { CustomSelect } from "components";
-import { TokenService } from "utils";
+import CustomSelect from "Utils/CustomSelect/customselect";
+import { TokenService } from "Utils";
 import { FormattedMessage, useIntl } from "react-intl";
 
 // Informations tab, allows to change texts to preview long or short ones
 // Styles every text with color & decoration, and family + size for the whole template
 // Change group's logo
 
-export default function Infos({ content, setContent, templateRules, style }) {
+export default function Infos(props) {
     // Template banner
     const [profile, setProfile] = useState(true);
     const [organisation, setOrganisation] = useState(false);
     const user = TokenService.getUser();
     const intl = useIntl();
     const organisationInfos = useState({});
-    const [selectedFont, setSelectedFont] = useState(content?.fontFamily);
-
-    if (!user || !content) {
-        return <></>;
-    }
 
     // Template informations
     const inputs = [
@@ -31,7 +26,7 @@ export default function Infos({ content, setContent, templateRules, style }) {
                 user.firstName || intl.formatMessage({ id: "firstname" }),
             type: "text",
             toChange: "firstName",
-            value: content.firstName,
+            value: props.content.firstName,
             disabled: true,
         },
         {
@@ -39,7 +34,7 @@ export default function Infos({ content, setContent, templateRules, style }) {
                 user.lastName || intl.formatMessage({ id: "lastname" }),
             type: "text",
             toChange: "lastName",
-            value: content.lastName,
+            value: props.content.lastName,
             disabled: true,
         },
         {
@@ -47,14 +42,14 @@ export default function Infos({ content, setContent, templateRules, style }) {
                 user.position || intl.formatMessage({ id: "position" }),
             type: "text",
             toChange: "jobName",
-            value: content.jobName,
+            value: props.content.jobName,
             disabled: true,
         },
         {
             placeholder: user.phone || intl.formatMessage({ id: "mobile" }),
             type: "tel",
             toChange: "mobile",
-            value: content.mobile,
+            value: props.content.mobile,
             disabled: true,
         },
     ];
@@ -65,7 +60,7 @@ export default function Infos({ content, setContent, templateRules, style }) {
                 organisationInfos.name || intl.formatMessage({ id: "company" }),
             type: "text",
             toChange: "company",
-            value: content.company,
+            value: props.content.company,
             disabled: true,
         },
         {
@@ -74,7 +69,7 @@ export default function Infos({ content, setContent, templateRules, style }) {
                 intl.formatMessage({ id: "address" }),
             type: "text",
             toChange: "addressStreet",
-            value: content.addressStreet,
+            value: props.content.addressStreet,
             disabled: true,
         },
         {
@@ -83,7 +78,7 @@ export default function Infos({ content, setContent, templateRules, style }) {
                 intl.formatMessage({ id: "zipcode" }),
             type: "text",
             toChange: "addressZipcode",
-            value: content.addressZipcode,
+            value: props.content.addressZipcode,
             disabled: true,
         },
         {
@@ -92,7 +87,7 @@ export default function Infos({ content, setContent, templateRules, style }) {
                 intl.formatMessage({ id: "city" }),
             type: "text",
             toChange: "addressCity",
-            value: content.addressCity,
+            value: props.content.addressCity,
             disabled: true,
         },
         {
@@ -101,7 +96,7 @@ export default function Infos({ content, setContent, templateRules, style }) {
                 intl.formatMessage({ id: "country" }),
             type: "text",
             toChange: "addressCountry",
-            value: content.addressCountry,
+            value: props.content.addressCountry,
             disabled: true,
         },
         {
@@ -110,7 +105,7 @@ export default function Infos({ content, setContent, templateRules, style }) {
                 intl.formatMessage({ id: "phone" }),
             type: "tel",
             toChange: "phone",
-            value: content.phone,
+            value: props.content.phone,
             disabled: true,
         },
     ];
@@ -141,14 +136,17 @@ export default function Infos({ content, setContent, templateRules, style }) {
         { name: "Verdana", style: { fontFamily: "Verdana" } },
     ];
     // Handling font-family selection
+    const [selectedFont, setSelectedFont] = useState("Arial");
+    const [showFonts, setShowFonts] = useState(false);
 
     const handleFont = (event) => {
         setSelectedFont(event);
-        setContent({ ...content, fontFamily: event });
+        props.setContent({ ...props.content, fontFamily: event });
+        setShowFonts(false);
     };
     // Choosing font-size
     const handleRange = (range) => {
-        setContent({ ...content, fontSize: range });
+        props.setContent({ ...props.content, fontSize: range });
     };
 
     return (
@@ -193,8 +191,8 @@ export default function Infos({ content, setContent, templateRules, style }) {
                                             defaultColor={input.value.color}
                                             defaultStyle={input.value.style}
                                             toChange={input.toChange}
-                                            content={content}
-                                            setContent={setContent}
+                                            content={props.content}
+                                            setContent={props.setContent}
                                             title={input.placeholder}
                                         />
                                     </div>
@@ -247,8 +245,8 @@ export default function Infos({ content, setContent, templateRules, style }) {
                                             defaultColor={input.value.color}
                                             defaultStyle={input.value.style}
                                             toChange={input.toChange}
-                                            content={content}
-                                            setContent={setContent}
+                                            content={props.content}
+                                            setContent={props.setContent}
                                         />
                                     </div>
                                 );
@@ -266,7 +264,6 @@ export default function Infos({ content, setContent, templateRules, style }) {
                         <CustomSelect
                             styleList={{ height: "10rem" }}
                             onChange={(e) => handleFont(e)}
-                            defaultValue={content.fontFamily}
                             items={webSafeFontList}
                             getValue={"name"}
                             display={"name"}
@@ -275,20 +272,24 @@ export default function Infos({ content, setContent, templateRules, style }) {
                             <div className={classes.row}>
                                 <div>
                                     <span className={classes.fontSize}>
-                                        {content.fontSize} px
+                                        {props.content.fontSize} px
                                     </span>
                                     <Range
-                                        step={templateRules.fontSize.step}
-                                        min={templateRules.fontSize.min}
-                                        max={templateRules.fontSize.max}
-                                        values={content.fontSize}
+                                        step={props.templateRules.fontSize.step}
+                                        min={props.templateRules.fontSize.min}
+                                        max={props.templateRules.fontSize.max}
+                                        values={props.content.fontSize}
                                         onChange={(range) => handleRange(range)}
                                         renderTrack={({ props, children }) => (
                                             <div
                                                 {...props}
-                                                className={classes.range}
                                                 style={{
-                                                    ...style,
+                                                    ...props.style,
+                                                    height: "6px",
+                                                    width: "100%",
+                                                    backgroundColor: "#F1ECEA",
+                                                    margin: "0",
+                                                    borderRadius: "50px",
                                                 }}
                                             >
                                                 {children}
@@ -297,9 +298,17 @@ export default function Infos({ content, setContent, templateRules, style }) {
                                         renderThumb={({ props }) => (
                                             <div
                                                 {...props}
-                                                className={classes.rangeThumb}
                                                 style={{
-                                                    ...style,
+                                                    ...props.style,
+                                                    transition: "0.2s",
+                                                    height: "25px",
+                                                    width: "25px",
+                                                    backgroundColor: "#FF7954",
+                                                    border: "3px solid #FFF",
+                                                    borderRadius: "50%",
+                                                    outline: "none",
+                                                    boxShadow:
+                                                        "1px 1px 3px #FF795488",
                                                 }}
                                             />
                                         )}

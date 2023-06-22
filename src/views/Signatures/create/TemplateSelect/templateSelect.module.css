@@ -4,12 +4,12 @@
   height: 100%;
   padding-left: 1rem;
   max-height: 80vh;
-  background-color: #efeef4;
+  background-color: #f5eef0;
   display: flex;
   flex-direction: column;
 }
 .modal h1 {
-  color: #1B335E;
+  color: #402927;
 }
 .modal > span {
   margin: auto;
@@ -18,7 +18,7 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 .modal input {
   padding: 3rem 10rem;
@@ -27,7 +27,7 @@
   height: 3rem;
   font-size: 0.9rem;
   color: grey;
-  border-radius: 10px;
+  border-radius: 30px;
   background: transparent;
   border: none;
 }
@@ -64,7 +64,7 @@
   justify-content: center;
   align-items: center;
   font-size: 0.9rem;
-  color: #1B335E;
+  color: #402927;
   line-height: 1.65rem;
   text-indent: 0.35rem;
 }
@@ -91,9 +91,9 @@
   position: relative;
   transition: 0.2s;
   text-transform: uppercase;
-  border-radius: 5px;
-  border: 1px solid #1B335E;
-  color: #1B335E;
+  border-radius: 20px;
+  border: 1px solid #402927;
+  color: #402927;
   padding: 0.25rem 0.75rem;
   display: flex;
   align-items: center;
@@ -108,14 +108,14 @@
 }
 .modal .tagsContainer .otherTags li:hover,
 .modal .studioStore li:hover {
-  background: #1B335E;
+  background: #402927;
   color: #fff;
   cursor: pointer;
 }
 .modal .tagsContainer .otherTags .active,
 .modal .studioStore .active {
   font-weight: bold;
-  background: #1B335E;
+  background: #402927;
   color: #fff;
 }
 .modal .otherTagsContainer {
@@ -145,23 +145,23 @@
 }
 .modal .studioStore .studio,
 .modal .studioStore .store {
-  color: #244EFF;
-  border-color: #244EFF;
+  color: #ff7954;
+  border-color: #ff7954;
 }
 .modal .studioStore .studio:hover,
 .modal .studioStore .store:hover {
-  background-color: #244EFF;
+  background-color: #ff7954;
 }
 .modal .studioStore .studio input,
 .modal .studioStore .store input {
   cursor: pointer;
 }
 .modal .studioStore .activeStudio {
-  background-color: #244EFF !important;
+  background-color: #ff7954 !important;
   color: #fff;
 }
 .modal h5 {
-  color: #1B335E;
+  color: #402927;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1rem;
@@ -191,7 +191,7 @@
 .modal .templatesContainer li {
   padding: 1rem;
   position: relative;
-  border-radius: 5px;
+  border-radius: 20px;
   background-color: #fff;
   transition: border-color 0.3s;
   border: 1px solid transparent;
@@ -199,10 +199,10 @@
   margin-bottom: 2rem;
 }
 .modal .templatesContainer li:hover {
-  border-color: #244EFF;
+  border-color: #ff7954;
 }
 .modal .templatesContainer li:hover p {
-  color: #244EFF;
+  color: #ff7954;
 }
 
 .templateName {
@@ -223,11 +223,11 @@
   border: none;
   font-weight: bold;
   font-size: 1rem;
-  color: #1B335E;
+  color: #402927;
   background: none;
 }
 .btnBackTemplate:hover {
-  color: #244EFF;
+  color: #ff7954;
 }
 .btnBackTemplate svg {
   font-size: 1.2rem;
@@ -251,18 +251,18 @@
   font-size: 0.9rem;
   cursor: pointer;
   padding: 0.25rem 0.5rem;
-  color: #1B335E;
-  border: 1px solid #1B335E;
-  border-radius: 5px;
+  color: #402927;
+  border: 1px solid #402927;
+  border-radius: 20px;
 }
 .filter label:hover {
-  color: #244EFF;
-  border-color: #244EFF;
+  color: #ff7954;
+  border-color: #ff7954;
 }
 .filter input:checked ~ label {
   color: #fff;
-  border-color: #244EFF;
-  background: #244EFF;
+  border-color: #ff7954;
+  background: #ff7954;
 }
 
 .loading {
