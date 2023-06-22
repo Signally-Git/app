@@ -1,18 +1,16 @@
 import classes from "./signatures.module.css";
 import { Link, useHistory } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { FiTrash } from "react-icons/fi";
 import { AiOutlineEdit } from "react-icons/ai";
-import Button from "Utils/Button/btn";
-import { useNotification } from "Utils/Notifications/notifications";
-import request from "Utils/Request/request";
+import { Button, Modal } from "components";
 import parse from "html-react-parser";
-import Modal from "Utils/Modals/modal";
-import { TokenService } from "Utils";
-import { FormattedMessage } from "react-intl";
+import { TokenService, useNotification, request } from "utils";
+import { FormattedMessage, useIntl } from "react-intl";
 
-function Team() {
+function Signatures() {
+    const intl = useIntl();
     const [templates, setTemplates] = useState([]);
     const notification = useNotification();
     const [deleted, setDeleted] = useState(false);
@@ -23,28 +21,48 @@ function Team() {
     const [signatureOption, setSignatureOption] = useState({});
     const [defaultStyles, setDefaultStyles] = useState();
     const [preview, setPreview] = useState({});
+    const [search, setSearch] = useState("");
     const history = useHistory();
-    const [loading, setLoading] = useState(true);
 
     const getData = async () => {
-        const signatures = await request.get(`signatures`);
+        const organisationSignatures =
+            TokenService.getOrganisation().signatures;
+        if (organisationSignatures && organisationSignatures.length > 0) {
+            setTemplates(organisationSignatures);
+        }
 
-        signatures.data["hydra:totalItems"] < 1
-            ? history.push("/create-signature")
-            : // : console.log(signatures.data["hydra:member"])
-              setTemplates(signatures.data["hydra:member"]);
-        signatures.data["hydra:member"].map((template, index) => {
-            request.get(template["@id"]).then((r) => {
-                signatures[index] = r.data;
+        try {
+            const response = await request.get(`signatures`);
+            const signatures = response.data["hydra:member"];
+
+            if (signatures.length > 0) {
+                setTemplates(signatures);
+            } else {
+                history.push("/create-signature");
+            }
+
+            const signaturePromises = signatures.map((template) => {
+                request.get(`signatures`).then(({ data }) => {});
+                return request.get(template["@id"]);
             });
-        });
-        setLoading(false);
+
+            const signatureResponses = await Promise.all(signaturePromises);
+            const signatureData = signatureResponses.map(
+                (response) => response.data
+            );
+
+            setTemplates(signatureData);
+        } catch (error) {
+            console.error("Error fetching signatures:", error);
+        }
     };
 
     useEffect(() => {
         setSignatureOption({
             salutation: {
-                value: "Cordialement,",
+                value: intl.formatMessage({
+                    id: "signature.default_greetings",
+                }),
                 enabled:
                     defaultStyles?.filter(
                         (style) => style.type === "greetings"
@@ -86,9 +104,7 @@ function Team() {
             },
             footer: {
                 maxWidth: 380,
-                value: `This e-mail, any attachments and the information contained therein ("this message") are confidential and intended solely for the use of the addressee(s). If you have received this message in error please send it back to the sender and delete it. Unauthorized publication, use, dissemination or disclosure of this message, either in whole or in part is strictly prohibited.
-      
-      Ce message electronique et tous les fichiers joints ainsi que les informations contenues dans ce message (ci apres "le message"), sont confidentiels et destines exclusivement a l'usage de la personne a laquelle ils sont adresses. Si vous avez recu ce message par erreur, merci de le renvoyer a son emetteur et de le detruire. Toute diffusion, publication, totale ou partielle ou divulgation sous quelque forme que ce soit non expressement autorisees de ce message, sont interdites.,`,
+                value: `Disclaimer`,
                 enabled:
                     defaultStyles?.filter(
                         (style) => style.type === "disclaimer"
@@ -141,7 +157,7 @@ function Team() {
                     content: (
                         <>
                             <FormattedMessage id="message.error.delete" />
-                            <span style={{ color: "#FF7954" }}>
+                            <span className={classes.primaryColor}>
                                 {" "}
                                 {preview.name}
                             </span>
@@ -153,7 +169,6 @@ function Team() {
         setModal();
     };
 
-    if (loading) return <div></div>;
     return (
         <div>
             <div className={classes.container}>
@@ -167,25 +182,14 @@ function Team() {
                         ""
                     )}
                     <div className={classes.teamsContainer}>
-                        <ul className={classes.menu}>
-                            {/*<li*/}
-                            {/*    onClick={() => setActive("active")}*/}
-                            {/*    className={*/}
-                            {/*        active === "active" ? classes.active : ""*/}
-                            {/*    }*/}
-                            {/*>*/}
-                            {/*    Actives*/}
-                            {/*</li>*/}
-                            {/* <li onClick={() => setActive("inactive")} className={`${active === "inactive" ? classes.active : ""}`}>Inactives</li> */}
-                        </ul>
                         {active === "active" ? (
                             <div>
                                 {user?.roles[1] !== "ROLE_RH" ? (
-                                    <Button color="orange" arrow={true}>
-                                        <Link to="create-signature">
+                                    <Link to="create-signature">
+                                        <Button color="primary" arrow={true}>
                                             <FormattedMessage id="add_signature" />
-                                        </Link>
-                                    </Button>
+                                        </Button>
+                                    </Link>
                                 ) : (
                                     ""
                                 )}
@@ -194,6 +198,9 @@ function Team() {
                                     <FormattedMessage id="search_signature">
                                         {(placeholder) => (
                                             <input
+                                                onChange={(e) =>
+                                                    setSearch(e.target.value)
+                                                }
                                                 className={classes.search}
                                                 type="text"
                                                 placeholder={placeholder}
@@ -208,84 +215,95 @@ function Team() {
                                     />
                                 </span>
                                 <ul className={classes.itemsList}>
-                                    {templates.map((signature) => {
-                                        return (
-                                            <li
-                                                onMouseEnter={() => {
-                                                    setSelected(signature);
-                                                    request
-                                                        .get(signature["@id"])
-                                                        .then((res) =>
-                                                            setPreview(res.data)
-                                                        );
-                                                    setDefaultStyles(
-                                                        signature.signatureStyles
-                                                    );
-                                                }}
-                                                key={signature.id}
-                                                className={
-                                                    selected === signature
-                                                        ? classes.selected
-                                                        : ""
-                                                }
-                                            >
-                                                <span
-                                                    onClick={() =>
-                                                        JSON.parse(
-                                                            localStorage.getItem(
-                                                                "user"
+                                    {templates.map((signature, index) => {
+                                        if (
+                                            signature.name.search(
+                                                search.toLowerCase()
+                                            ) !== -1
+                                        )
+                                            return (
+                                                <li
+                                                    onMouseEnter={() => {
+                                                        setSelected(signature);
+                                                        request
+                                                            .get(
+                                                                signature["@id"]
                                                             )
-                                                        ).roles[1] !== "ROLE_RH"
-                                                            ? history.push(
-                                                                  "/edit-signature/" +
-                                                                      signature.id
-                                                              )
+                                                            .then((res) =>
+                                                                setPreview(
+                                                                    res.data
+                                                                )
+                                                            );
+                                                        setDefaultStyles(
+                                                            signature.signatureStyles
+                                                        );
+                                                    }}
+                                                    key={signature.id}
+                                                    className={
+                                                        selected === signature
+                                                            ? classes.selected
                                                             : ""
                                                     }
                                                 >
-                                                    {signature.name}
-                                                </span>
-                                                {user?.roles[1] !==
-                                                "ROLE_RH" ? (
-                                                    <div
-                                                        className={
-                                                            classes.actionsContainer
+                                                    <span
+                                                        onClick={() =>
+                                                            TokenService.getUser()
+                                                                .roles[1] !==
+                                                            "ROLE_RH"
+                                                                ? history.push(
+                                                                      "/edit-signature/" +
+                                                                          signature.id
+                                                                  )
+                                                                : ""
                                                         }
                                                     >
-                                                        <AiOutlineEdit
-                                                            onClick={() =>
-                                                                JSON.parse(
-                                                                    localStorage.getItem(
-                                                                        "user"
+                                                        {signature.name}
+                                                    </span>
+                                                    {user?.roles[1] !==
+                                                    "ROLE_RH" ? (
+                                                        <div
+                                                            className={
+                                                                classes.actionsContainer
+                                                            }
+                                                        >
+                                                            <AiOutlineEdit
+                                                                onClick={() =>
+                                                                    TokenService.getUser()
+                                                                        .roles[1] !==
+                                                                    "ROLE_RH"
+                                                                        ? history.push(
+                                                                              "/edit-signature/" +
+                                                                                  signature.id
+                                                                          )
+                                                                        : ""
+                                                                }
+                                                            />
+                                                            <FiTrash
+                                                                onClick={() =>
+                                                                    handleModal(
+                                                                        signature.id
                                                                     )
-                                                                ).roles[1] !==
-                                                                "ROLE_RH"
-                                                                    ? history.push(
-                                                                          "/edit-signature/" +
-                                                                              signature.id
-                                                                      )
-                                                                    : ""
-                                                            }
-                                                        />
-                                                        <FiTrash
-                                                            onClick={() =>
-                                                                handleModal(
-                                                                    signature.id
-                                                                )
-                                                            }
-                                                        />
-                                                    </div>
-                                                ) : (
-                                                    ""
-                                                )}
-                                            </li>
-                                        );
+                                                                }
+                                                            />
+                                                        </div>
+                                                    ) : (
+                                                        ""
+                                                    )}
+                                                </li>
+                                            );
+                                        else {
+                                            return (
+                                                <Fragment
+                                                    key={index}
+                                                ></Fragment>
+                                            );
+                                        }
                                     })}
                                 </ul>
                             </div>
                         ) : active === "inactive" ? (
                             <div>
-                                <Button color="orange" arrow={true}>
+                                <Button color="primary" arrow={true}>
                                     <Link to="create-signature">
                                         <FormattedMessage id="add_signature" />
                                     </Link>
@@ -295,27 +313,20 @@ function Team() {
                             ""
                         )}
                     </div>
-                    {preview.html?.length > 0 ? (
+                    {preview.html?.length > 0 && (
                         <div className={classes.signaturePreview}>
-                            {/* <h2>Design</h2> */}
                             <ul>
                                 <li>
                                     <h5>
                                         <FormattedMessage id="signature.title" />{" "}
-                                        <span className={classes.orangeTxt}>
+                                        <span className={classes.primaryTxt}>
                                             {preview.name}
                                         </span>
                                     </h5>
                                     {parse(preview.preview)}
-                                    {/* <Preview infos={signatureInfo} options={signatureOption} template={preview.html} organisation={organisation} /> */}
-                                    {/* <ReadOnlyPreview infos={data} template={preview.html} /> */}
-                                    {/* <p className={classes.groupName}>Team Design</p>
-                                    <span className={classes.groupName}>#Mama Los Angeles</span> */}
                                 </li>
                             </ul>
                         </div>
-                    ) : (
-                        ""
                     )}
                 </div>
             </div>
@@ -323,4 +334,4 @@ function Team() {
     );
 }
 
-export default Team;
+export default Signatures;

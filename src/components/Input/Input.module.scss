@@ -1,0 +1,17 @@
+@import "../../assets/style/global";
+
+.input {
+    transition: 0.2s;
+    background: #fff;
+    border: 1px solid $color-light-accent;
+    padding: 1rem;
+    font-size: 0.8rem;
+    border-radius: $smallBorderRadius;
+    margin: 0.5rem 0;
+    outline: none;
+    font-family: inherit;
+    &:focus {
+        border-color: $color-primary;
+        // box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+    }
+}

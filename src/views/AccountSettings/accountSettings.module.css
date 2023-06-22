@@ -1,0 +1,197 @@
+.container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  margin: auto;
+}
+
+.primaryColor {
+  color: #244EFF;
+}
+
+.tabContainer {
+  padding: 2rem;
+  margin-bottom: auto;
+  position: relative;
+  background: #fff;
+  border-radius: 5px;
+  overflow: auto;
+  min-width: 40rem;
+  width: 65%;
+  max-width: 40rem;
+  min-height: 50rem;
+  height: 65%;
+  max-height: 50rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row {
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+}
+.row > div {
+  width: 48%;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: auto;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.menu li {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  cursor: pointer;
+}
+.menu li::after {
+  content: " ";
+  display: block;
+  width: 60%;
+  margin: auto;
+  height: 2px;
+  margin-top: 0.5rem;
+}
+.menu .active {
+  transition: 0.2s;
+  color: #244EFF;
+}
+.menu .active::after {
+  transition: 0.2s;
+  background-color: #244EFF;
+}
+
+.logoCompanyDiv {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+.logoCompanyDiv > div {
+  width: 100%;
+}
+
+.logoPreview {
+  max-width: 30px;
+  max-height: 30px;
+  margin: auto;
+}
+
+/* Rounded sliders */
+.slider {
+  border-radius: 10px;
+}
+
+.slider:before {
+  border-radius: 10px;
+}
+
+.inputsContainer {
+  padding-top: 1.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.inputsContainer label {
+  color: #5c74b2;
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+.inputsContainer ~ button {
+  margin-top: 1.5rem !important;
+}
+
+.inputContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+}
+.inputContainer > div {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+.inputContainer :disabled {
+  color: #5c74b2;
+  font-weight: bold;
+}
+
+.iconsContainer {
+  margin-top: 0.5rem;
+  width: 100%;
+  background: #fff;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.iconsContainer label:first-of-type {
+  font-size: 0.85rem;
+}
+.iconsContainer label {
+  margin: 0;
+  color: #000 !important;
+}
+.iconsContainer svg {
+  cursor: pointer;
+}
+
+.socialsContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.socialsContainer label {
+  font-size: 0.9rem;
+  color: #244EFF;
+}
+.socialsContainer svg {
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.iconInput {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+.iconInput svg {
+  position: absolute;
+  left: 1rem;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.btnsContainer {
+  margin-top: auto;
+  bottom: 2rem;
+  left: 2rem;
+  right: auto;
+  display: flex;
+  justify-content: space-around;
+  margin-right: auto;
+}
+.btnsContainer > button:last-child {
+  margin-left: 1rem;
+}
+
+@media screen and (max-width: 1180px) {
+  .container > img {
+    display: none;
+  }
+}

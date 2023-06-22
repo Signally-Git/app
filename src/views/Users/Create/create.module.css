@@ -85,7 +85,7 @@
 
 .btn {
   display: flex;
-  color: #402927;
+  color: #1B335E;
   border: none;
   background: none;
   outline: none;
@@ -93,7 +93,11 @@
 }
 .btn:hover {
   cursor: pointer;
-  color: #ff7954;
+  color: #244EFF;
+}
+
+.primaryColor {
+  color: #244EFF;
 }
 
 .inputsContainer > div {

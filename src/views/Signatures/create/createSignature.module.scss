@@ -1,4 +1,4 @@
-@import "../../../Assets/style/colors";
+@import "../../../assets/style/global";
 
 .container {
     animation: fadeIn 1000ms linear forwards;
@@ -17,6 +17,11 @@
         background: transparent;
     }
 }
+
+.primaryColor {
+    color: $color-primary;
+}
+
 .container > div {
     display: flex;
     overflow: hidden;
@@ -40,11 +45,11 @@
     align-items: center;
     justify-content: center;
     background: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     width: 25%;
     height: 13rem;
     padding: 0 1rem 1rem;
-    z-index: 3;
+    z-index: 8;
     inset: 0;
     margin: auto;
     left: 15%;
@@ -83,8 +88,8 @@
             margin: 1.5rem 0.5rem 0 !important;
         }
     }
-    .orangeTxt {
-        color: $signally-orange;
+    .primaryTxt {
+        color: $color-primary;
     }
 }
 
@@ -102,10 +107,10 @@
     border: none;
     font-weight: bold;
     font-size: 1rem;
-    color: $signally-brown;
+    color: $color-dark-accent;
     background: none;
     &:hover {
-        color: $signally-orange;
+        color: $color-primary;
     }
     svg {
         font-size: 1.2rem;
@@ -127,7 +132,7 @@
     max-height: 65vh;
     overflow: auto;
     background: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     width: 40%;
     min-width: 15rem;
     padding-top: 5.5rem;
@@ -152,10 +157,10 @@
         border: none;
         outline: none;
         background: none;
-        color: $signally-brown;
+        color: $color-dark-accent;
         cursor: pointer;
         &:hover {
-            color: $signally-orange;
+            color: $color-primary;
         }
     }
     .switchTabs {
@@ -212,7 +217,7 @@
         span {
             width: 50%;
             line-height: 4.5rem;
-            color: $signally-ebony-pink;
+            color: $color-darker-accent;
             font-size: 0.85rem;
             font-weight: bold;
         }
@@ -223,11 +228,11 @@
         width: 100%;
         position: relative;
         cursor: pointer;
-        background-color: $signally-isabelline;
+        background-color: $color-light-accent-variation2;
         -webkit-transition: 0.4s;
         transition: 0.4s;
-        border-left: 12px solid $signally-isabelline;
-        border-right: 12px solid $signally-isabelline;
+        border-left: 12px solid $color-light-accent-variation2;
+        border-right: 12px solid $color-light-accent-variation2;
     }
 
     .sliderTabs:before {
@@ -245,11 +250,11 @@
         transition: 0.4s;
     }
     .sliderTabs {
-        border-radius: 30px;
+        border-radius: $mediumBorderRadius;
     }
 
     .sliderTabs:before {
-        border-radius: 30px;
+        border-radius: $mediumBorderRadius;
     }
 }
 
@@ -305,24 +310,24 @@
         }
     }
     .noBgBtn {
-        background: $signally-brown;
+        background: $color-dark-accent;
         padding: 0.15rem 0.75rem !important;
-        border: $signally-brown;
-        border-radius: 20px;
+        border: $color-dark-accent;
+        border-radius: $borderRadius;
         color: #fff;
         margin-left: 1rem;
     }
     button {
         border: none;
         background: none;
-        color: $signally-orange;
+        color: $color-primary;
         padding: 0;
         font-size: 1.1rem;
         display: flex;
         align-items: center;
         margin: 0 0 0 0.25rem;
         &:last-child {
-            color: $signally-brown;
+            color: $color-dark-accent;
         }
     }
 }
@@ -365,7 +370,7 @@
     background-color: #fff;
     height: fit-content;
     max-height: 80%;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     .browserHeader {
         width: 100%;
         height: 1.75rem;
@@ -382,10 +387,10 @@
             > li {
                 min-width: 10px;
                 min-height: 10px;
-                border-radius: 50%;
+                border-radius: $hugeRadius;
             }
             .close {
-                background: $signally-orange;
+                background: #ff5d24;
             }
             .reduce {
                 background: #ffbd44;
@@ -401,14 +406,14 @@
             height: 1.5rem;
             font-size: 0.7rem;
             color: grey;
-            border-radius: 10px;
+            border-radius: $smallBorderRadius;
             border: none;
         }
     }
     .lazyLoadingLong,
     .lazyLoadingShort,
     .lazyLoadingMedium {
-        border-radius: 20px;
+        border-radius: $borderRadius;
         background: #f1f1f1;
         width: 100%;
         height: 1rem;
@@ -438,7 +443,7 @@
     margin: auto;
     flex-direction: column;
     align-items: center;
-    color: #402a27;
+    color: $color-dark-accent;
     text-align: center;
     padding: 0;
     > div {
@@ -485,13 +490,13 @@
     flex: 100%;
     background: #fff;
     width: 100%;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
 }
 
 .placeholderImg,
 .placeholderBanner {
     background: rgba(184, 184, 184, 0.596);
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     margin-right: 40%;
     height: 38px;
     flex: 100%;
@@ -560,11 +565,11 @@
 }
 
 input:checked + .slider {
-    background-color: $signally-orange;
+    background-color: $color-primary;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px $signally-orange;
+    box-shadow: 0 0 1px $color-primary;
 }
 
 input:checked + .slider:before {
@@ -579,7 +584,7 @@ input:checked + .slider:before {
 }
 
 .slider.round:before {
-    border-radius: 50%;
+    border-radius: $hugeRadius;
 }
 
 .iconsContainer {
@@ -594,10 +599,10 @@ input:checked + .slider:before {
     .borderInput {
         transition: 0.2s;
         background: #fff;
-        border: 1px solid $signally-grey;
+        border: 1px solid $color-lighter-accent;
         padding: 1rem;
         padding-right: 5rem;
-        border-radius: 10px;
+        border-radius: $smallBorderRadius;
         margin: 0.5rem 0;
         font-family: "Montserrat";
         outline: none;
@@ -644,6 +649,6 @@ input:checked + .slider:before {
     }
 }
 
-.orangeTxt {
-    color: $signally-orange;
+.primaryTxt {
+    color: $color-primary;
 }

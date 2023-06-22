@@ -1,0 +1,430 @@
+.loading {
+  animation: spin 1s 0s infinite linear forwards;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.container {
+  background: #F4F7FC;
+  display: flex;
+  flex-direction: row-reverse;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+  position: relative;
+}
+.container h1 {
+  font-size: 1.8rem;
+}
+.container p,
+.container label {
+  font-size: 0.9rem;
+}
+.container .plugins {
+  max-height: 2rem;
+  width: auto;
+  margin-right: auto;
+}
+.container ul {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  align-items: center;
+  padding: 0;
+}
+.container form {
+  width: 100%;
+}
+.container input::placeholder {
+  opacity: 0.25;
+}
+.container input[type=text]:focus,
+.container input[type=email]:focus,
+.container input[type=password]:focus,
+.container select:focus {
+  box-shadow: 0 12px 40px rgba(230, 208, 201, 0.28);
+  border-color: #244EFF;
+}
+.container select {
+  padding: 0.9rem;
+  margin-top: -0.35rem;
+  outline: none;
+  border-radius: 5px;
+  width: 100%;
+  border-color: transparent;
+}
+
+.descriptionBeta {
+  overflow: auto;
+}
+.descriptionBeta p {
+  font-size: 1.1rem;
+}
+.descriptionBeta div {
+  display: flex;
+  flex-direction: column;
+}
+.descriptionBeta div img:first-child {
+  margin-bottom: 0.5rem;
+}
+
+.inputs {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.inputs .inputContainer {
+  width: 48%;
+}
+
+.logInContainer {
+  margin: auto;
+  align-items: center;
+  min-width: 40%;
+}
+
+.registerContainer,
+.logInContainer {
+  display: flex;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+  max-width: 100vw;
+  justify-content: space-between;
+}
+.registerContainer > .formContainer,
+.logInContainer > .formContainer {
+  min-width: 40rem !important;
+  width: 100%;
+  margin: 0;
+}
+.registerContainer input,
+.logInContainer input {
+  width: 100%;
+  font-weight: bold;
+}
+.registerContainer .inputContainer > div,
+.logInContainer .inputContainer > div {
+  position: relative;
+}
+
+.spacing {
+  height: 1rem;
+}
+
+.error p {
+  font-size: 0.7rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.showPassword {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  outline: none;
+  border: none;
+  background: none;
+  right: 1rem;
+  cursor: pointer;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 0;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.inputContainer > div {
+  width: 100%;
+}
+
+.inputContainer .inputTitle {
+  margin-bottom: 6px;
+  color: #1B335E;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.slider > div {
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  overflow: auto;
+  /* Optional: show position indicator in red */
+}
+.slider > div::-webkit-scrollbar {
+  z-index: -10;
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+.slider > div::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.registerContainer .formContainer button svg {
+  animation: spin 1s infinite linear;
+}
+
+.formContainer {
+  min-width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #FFFFFF;
+  align-items: baseline;
+  font-family: Montserrat, serif;
+  flex-direction: column;
+  height: 100%;
+  margin: auto;
+  padding: 5rem;
+}
+.slider .formContainer:first-child {
+  margin-right: 1rem;
+}
+
+.submitContainer {
+  display: flex;
+  max-width: 30rem;
+  padding-top: 1rem;
+  align-items: center;
+  vertical-align: center;
+}
+.submitContainer > button {
+  margin: 0;
+}
+
+.btnsContainer {
+  display: flex;
+  max-width: 30rem;
+  gap: 1rem;
+  padding: 1rem 0 0;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.btnsContainer button {
+  margin: 0;
+}
+.btnsContainer button:last-child:not(:hover) {
+  background: none;
+}
+
+.codeContainer > div {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.codeContainer input {
+  width: 100%;
+}
+
+.formContainer h2 {
+  font-family: Trebuchet MS, serif;
+  color: #1B335E;
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+.formContainer h2 span {
+  color: #244EFF;
+}
+
+.landingContainer {
+  display: flex;
+  height: 100%;
+  padding: 5rem;
+  align-items: center;
+}
+
+.landingContainer h1 {
+  color: #244EFF;
+  margin-bottom: 2rem;
+}
+
+.landingContainer p {
+  color: #1B335E;
+}
+
+.landingContainer p span {
+  color: #244EFF;
+  font-weight: bold;
+}
+
+.landingContainer .takeoff {
+  height: auto;
+  margin-left: -45px;
+}
+
+.congrats {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  max-width: 100%;
+  font-size: 1.25rem;
+  flex-direction: column;
+  padding-left: 5rem;
+  background: #FFF;
+  height: 100%;
+  justify-content: center;
+  text-align: left;
+}
+.congrats * {
+  opacity: 0;
+  animation: fadeIn ease 2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+.congrats p {
+  font-size: 1.15rem;
+  animation-delay: 0.75s;
+}
+.congrats h2 {
+  color: #244EFF;
+}
+.congrats button {
+  margin-left: 0;
+  margin-right: auto;
+  margin-top: 2rem;
+  animation-delay: 0.75s;
+}
+.congrats > span {
+  animation-delay: 0.75s;
+  font-size: 0.8rem;
+  color: #1B335E;
+}
+
+.disappear {
+  opacity: 1;
+  animation: fadeOut ease 0.25s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.forgot {
+  font-size: 0.8rem;
+  margin-left: auto;
+  padding-right: 0.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  cursor: pointer;
+  color: #1B335E;
+}
+.forgot:hover {
+  color: #244EFF;
+}
+
+.modal {
+  padding: 2rem;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 40px rgba(27, 51, 94, 0.3);
+  border-radius: 5px;
+  inset: 0;
+  max-width: 25rem;
+  height: 15rem;
+  z-index: 10;
+  margin: auto;
+  background: #fff;
+}
+.modal p {
+  line-height: 1.5rem;
+  text-align: center;
+}
+.modal p .primaryTxt {
+  color: #244EFF;
+  font-weight: bold;
+  display: inline;
+}
+.modal .btnsContainer {
+  margin-top: 0;
+}
+.modal .btnsContainer button {
+  margin-top: 1rem;
+}
+
+.fadeOut {
+  animation: fadeOutAnimate 1s forwards ease-out !important;
+}
+
+@keyframes fadeOutAnimate {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.error {
+  position: absolute;
+  z-index: 2;
+  right: 1rem;
+  bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  animation: shakeX 1s 200ms forwards ease-out;
+}
+.error > svg {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  background: red;
+  color: #fff;
+  border-radius: 20px;
+  padding: 5px;
+}
+
+.registerContainer .error {
+  top: 1.85rem;
+  left: 5rem;
+  bottom: auto;
+}
+
+@keyframes shakeX {
+  from, to {
+    transform: translate3d(0, 0, 0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translate3d(-5px, 0, 0);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translate3d(5px, 0, 0);
+  }
+}

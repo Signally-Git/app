@@ -1,4 +1,4 @@
-@import "../../Assets/style/colors";
+@import "../../assets/style/global";
 
 .dashboardContainer {
     width: 100%;
@@ -20,6 +20,8 @@
 }
 
 .landing {
+    position: absolute;
+    z-index: 1;
     .logoContainer {
         margin-top: 0;
     }
@@ -34,7 +36,7 @@
     left: 12rem;
     padding: 1rem 5%;
     z-index: 5;
-    border-radius: 20px 20px 0px 0px;
+    border-radius: $borderRadius $borderRadius 0 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -42,7 +44,7 @@
     backdrop-filter: none;
     h2 {
         font-size: 1.35rem;
-        color: $signally-brown;
+        color: $color-dark-accent;
         line-height: 0;
     }
 }
@@ -60,24 +62,24 @@
             font-weight: 600;
             margin-right: 1rem;
             padding: 0.25rem 1rem;
-            border-radius: 20px;
+            border-radius: $borderRadius;
             font-size: 0.9rem;
-            color: $signally-brown;
+            color: $color-dark-accent;
             transition: 0.2s;
         }
         &:last-child a {
-            border: 1px solid $signally-orange;
-            color: $signally-orange;
+            border: 1px solid $color-primary;
+            color: $color-primary;
             &:hover {
-                border-color: $signally-orange;
-                background: $signally-orange;
+                border-color: $color-primary;
+                background: $color-primary;
                 color: #fff;
             }
         }
         &:hover {
             cursor: pointer;
             a {
-                color: $signally-orange;
+                color: $color-primary;
             }
         }
     }
@@ -85,12 +87,12 @@
 
 // .beta {
 //     color: #fff;
-//     background: $signally-brown;
-//     border: 1px solid $signally-brown;
+//     background: $color-dark-accent;
+//     border: 1px solid $color-dark-accent;
 //     font-weight: bold;
 //     font-size: 0.8rem;
 //     margin-top: 1rem;
-//     border-radius: 10px;
+//     border-radius: $smallBorderRadius;
 //     padding: 0.25rem 1rem;
 // }
 
@@ -106,24 +108,21 @@
         width: 15px;
         height: 15px;
         text-align: center;
-        background-color: $signally-orange;
+        background-color: $color-primary;
         color: #fff;
         padding: 2px;
         font-size: 0.8rem;
         right: -9px;
         top: -9px;
-        border-radius: 50%;
-        border: 1px solid $signally-orange;
+        border-radius: $hugeRadius;
+        border: 1px solid $color-primary;
     }
 }
 
 .pageTitle {
     background: #f5eeef;
-    border-radius: 20px 40px 0 0;
-    padding-bottom: 1rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-top: 0.5rem;
+    border-radius: $borderRadius $largeBorderRadius 0 0;
+    padding: 0.5rem 2rem 1rem;
     margin-left: 3.25rem;
     margin-top: 6rem;
     z-index: 2;
@@ -135,36 +134,36 @@
     margin-right: 1rem;
     display: flex;
     align-items: center;
-    border-right: 1px solid $signally-brown;
+    border-right: 1px solid $color-dark-accent;
     .studio {
-        border: 1px solid $signally-orange;
-        color: $signally-orange;
+        border: 1px solid $color-primary;
+        color: $color-primary;
         &:hover {
             color: #fff;
-            background: $signally-orange;
+            background: $color-primary;
         }
     }
     .store {
-        border: 1px solid $signally-orange;
-        color: $signally-orange;
+        border: 1px solid $color-primary;
+        color: $color-primary;
         &:hover {
             color: #fff;
-            background: $signally-orange;
-            border-color: $signally-orange;
+            background: $color-primary;
+            border-color: $color-primary;
         }
     }
     a {
         font-weight: 600;
         margin-right: 1rem;
         padding: 0.25rem 1rem;
-        border: 1px solid $signally-brown;
-        border-radius: 20px;
+        border: 1px solid $color-dark-accent;
+        border-radius: $borderRadius;
         font-size: 0.9rem;
-        color: $signally-brown;
+        color: $color-dark-accent;
         transition: 0.2s;
         &:hover {
-            color: $signally-orange;
-            border-color: $signally-orange;
+            color: $color-primary;
+            border-color: $color-primary;
         }
     }
 }
@@ -193,9 +192,9 @@
 }
 
 .headerSpan {
-    color: $signally-orange;
+    color: $color-primary;
     a {
-        color: $signally-orange;
+        color: $color-primary;
         text-decoration: underline;
     }
 }
@@ -208,9 +207,9 @@
     height: 25px;
     color: #fff;
     font-size: 26px;
-    border-radius: 50%;
+    border-radius: $hugeRadius;
     margin: 0;
-    background: $signally-orange;
+    background: $color-primary;
 }
 
 .options {
@@ -220,20 +219,20 @@
     top: 2.5rem;
     background: rgba(255, 255, 255, 1);
     padding: 0.5rem 1rem;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
     display: flex;
     flex-direction: column;
     li {
         a {
-            color: $signally-brown;
+            color: $color-dark-accent;
         }
         font-size: 1rem;
-        color: $signally-brown;
+        color: $color-dark-accent;
         font-family: "Trebuchet MS";
         padding: 0.5rem 0;
         &:not(:last-of-type) {
-            border-bottom: 1px solid $signally-brown;
+            border-bottom: 1px solid $color-dark-accent;
         }
     }
 }
@@ -259,10 +258,9 @@
     position: relative;
     ul {
         z-index: 3;
-        background: #fbf8f7;
-        padding: 0;
+        background: $outter-background-color;
         padding: 0 1rem;
-        border: 1px solid $signally-brown;
+        border: 1px solid $color-dark-accent;
         border-radius: 15px;
         list-style: none;
         max-height: 1.7rem;
@@ -299,12 +297,13 @@
         white-space: nowrap;
         font-size: 0.8rem;
         font-weight: 500;
-        color: $signally-brown;
+        color: $color-dark-accent;
         transition: 0.2s;
         margin-bottom: 1rem;
     }
     .UserName {
         display: flex;
+        color: $color-dark-accent;
         padding-top: 3px;
         align-items: center;
         justify-content: center;
@@ -317,11 +316,16 @@
             font-weight: 600;
             white-space: nowrap;
             font-size: 0.9rem;
-            color: $signally-brown;
+            color: $color-dark-accent;
             transition: 0.2s;
             margin-right: 0.5rem;
         }
     }
+}
+
+
+.logout {
+    color: $color-primary-variant
 }
 
 .reportContainer {
@@ -333,29 +337,29 @@
     position: relative;
     > div {
         transition: background-color 0.2s, border-color 0.2s;
-        color: $signally-brown;
-        background: $signally-pink;
-        border: 1px solid $signally-pink;
+        color: $color-dark-accent;
+        background: $color-light-accent-variation1;
+        border: 1px solid $color-light-accent-variation1;
         font-weight: bold;
         font-size: 0.9rem;
         width: 100%;
         margin: 0;
         margin-top: 1.25rem;
-        border-radius: 10px;
+        border-radius: $smallBorderRadius;
         padding: 0.5rem 0.55rem;
         display: flex;
         flex-direction: column;
         &:hover {
-            border-color: $signally-brown;
+            border-color: $color-dark-accent;
             color: #fff;
-            background-color: $signally-brown;
+            background-color: $color-dark-accent;
             button {
                 color: #fff;
             }
         }
     }
     button {
-        color: $signally-brown;
+        color: $color-dark-accent;
         font-size: 0.6rem;
         margin-top: 0.15rem;
         cursor: pointer;

@@ -1,4 +1,4 @@
-@import "../../Assets/style/colors";
+@import "../../assets/style/global";
 
 .container {
     display: flex;
@@ -7,7 +7,11 @@
     h1 {
         width: 100%;
     }
-    color: $signally-brown;
+    color: $color-dark-accent;
+}
+
+.primaryColor {
+    color: $color-primary;
 }
 
 .infosContainer {
@@ -23,12 +27,15 @@
 
 .eventsContainer {
     background-color: #fff;
-    border-radius: 20px;
-    max-width: 45%;
-    min-width: 45%;
+    border-radius: $borderRadius;
+    min-width: $leftColMinWidth;
+    width: $leftColWidth;
+    max-width: $leftColMaxWidth;
     padding: 2rem;
     position: relative;
-    height: 100%;
+    min-height: $leftColMinHeight;
+    height: $leftColHeight;
+    max-height: $leftColMaxHeight;
     margin-right: 2rem;
     ul {
         padding: 0;
@@ -60,7 +67,7 @@
     right: 0;
     margin: auto;
     &:hover {
-        color: $signally-orange;
+        color: $color-primary;
     }
     svg {
         opacity: 0.6;
@@ -86,19 +93,18 @@
         content: " ";
         display: block;
         width: 60%;
-        margin: auto;
         height: 2px;
-        margin-top: 0.5rem;
+        margin: 0.5rem auto auto;
     }
 }
 
 .active {
     transition: 0.2s;
     margin-bottom: 0.5rem;
-    color: $signally-orange;
+    color: $color-primary;
     &::after {
         transition: 0.2s;
-        background-color: $signally-orange;
+        background-color: $color-primary;
     }
 }
 
@@ -136,7 +142,7 @@
     align-items: center;
     justify-content: center;
     background: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     width: 30%;
     padding: 0 1rem 1rem;
     z-index: 3;
@@ -160,9 +166,9 @@
     font-weight: bold;
 }
 
-.boldOrange {
+.boldPrimary {
     font-weight: bold;
-    color: $signally-orange !important;
+    color: $color-primary-variant !important;
 }
 
 .itemsList {
@@ -173,8 +179,7 @@
     margin-top: 1rem;
     z-index: 0;
     li {
-        margin: 0.5rem 0;
-        margin-left: auto;
+        margin: 0.5rem 0 0.5rem auto;
         width: 100%;
         transition: 0.2s;
         z-index: 2;
@@ -206,9 +211,9 @@
                 bottom: 0;
                 margin: auto;
                 height: 8px;
-                border-radius: 50%;
+                border-radius: $hugeRadius;
                 width: 8px;
-                background: $signally-orange;
+                background: $color-primary;
                 transition: 0.2s;
             }
         }
@@ -216,19 +221,19 @@
         font-size: 0.85rem;
         font-weight: 600;
         position: relative;
-        background: $signally-grey;
-        border-radius: 10px;
+        background: $color-lighter-accent;
+        border-radius: $smallBorderRadius;
         &::before {
             content: "";
             display: block;
             position: absolute;
-            left: 0rem;
+            left: 0;
             top: 0;
             z-index: -1;
             bottom: 0;
             margin: auto;
             height: 6px;
-            border-radius: 50%;
+            border-radius: $hugeRadius;
             width: 6px;
             background: transparent;
             transition: 0.2s;
@@ -261,7 +266,7 @@
         left: -1rem !important;
         height: 8px !important;
         width: 8px !important;
-        background: $signally-orange !important;
+        background: $color-primary !important;
     }
 }
 
@@ -286,22 +291,22 @@
 
 .search {
     text-indent: 2rem;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     width: 100%;
     outline: none;
     border: 1px solid transparent;
     margin: 1rem 0;
     padding: 0.75rem 0.5rem;
-    background: $signally-grey;
+    background: $color-lighter-accent;
     display: block;
     transition: 0.2s;
     &:focus {
-        border-color: $signally-orange;
+        border-color: $color-primary;
     }
 }
 
-.orangeTxt {
-    color: $signally-orange;
+.primaryTxt {
+    color: $color-primary-variant;
 }
 
 .createEventContainer {
@@ -323,9 +328,6 @@
         font-size: 1.2rem;
         margin-bottom: 2rem;
         margin-top: 0;
-    }
-    > div {
-        margin-bottom: 1rem;
     }
     .groupName {
         font-weight: 600;
@@ -362,7 +364,7 @@
     width: 100%;
     backface-visibility: hidden;
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     margin-bottom: auto;
     h2 {
         font-size: 1.2rem;
@@ -370,7 +372,7 @@
         margin-top: 0;
         svg:hover {
             cursor: pointer;
-            color: $signally-orange;
+            color: $color-primary;
         }
     }
     > div {

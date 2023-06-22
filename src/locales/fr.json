@@ -8,6 +8,7 @@
     "events": "Campagnes",
     "account": "Compte",
     "logo": "Logo",
+    "help": "Aide",
 
     "event": "Campagne",
     "event_playlist_title": "Programmer la diffusion de plusieurs events",
@@ -93,6 +94,7 @@
             "spacing": "Espacement",
             "background_color": "Couleur de fond"
         },
+        "default_greetings": "Cordialement,",
         "choose": "Choisissez une signature",
         "event_or_playlist": "Ajouter un event ou une playlist",
         "active_for": "Signature active pour ",
@@ -239,10 +241,14 @@
 
     "buttons": {
         "placeholder": {
+            "no_account": "Créer un compte",
             "confirm": "Valider",
             "save": "Sauvegarder",
             "end": "Terminer",
             "send": "Envoyer",
+            "legals": "Mentions légales",
+            "tos": "Conditions Générales de Vente",
+            "go_back": "Retour",
             "add": "Ajouter",
             "add_all": "Ajouter tout",
             "skip": "Passer cette étape",

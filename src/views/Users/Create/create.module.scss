@@ -1,4 +1,4 @@
-@import "../../../Assets/style/colors";
+@import "../../../assets/style/global";
 
 .container {
     width: calc(100% - 2rem);
@@ -87,15 +87,19 @@
 
 .btn {
     display: flex;
-    color: $signally-brown;
+    color: $color-dark-accent;
     border: none;
     background: none;
     outline: none;
     margin: auto;
     &:hover {
         cursor: pointer;
-        color: $signally-orange;
+        color: $color-primary;
     }
+}
+
+.primaryColor {
+    color: $color-primary;
 }
 
 .inputsContainer {

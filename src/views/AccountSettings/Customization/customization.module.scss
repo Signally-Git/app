@@ -1,0 +1,57 @@
+@import "../../../assets/style/global";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    width: 100%;
+    form {
+        display: flex;
+        flex-direction: column;
+        > div {
+            align-items: center;
+            display: flex;
+            & ~ input {
+                margin-right: 0;
+                margin-left: 0;
+            }
+        }
+    }
+    .inputsContainer {
+        > div:first-child {
+            margin-right: auto;
+        }
+        > div:first-child > label {
+            color: $color-dark-accent;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        label {
+            color: $color-primary-variant;
+            font-weight: 400;
+            font-size: 0.8rem;
+        }
+        ~ button {
+            margin-top: 1.5rem !important;
+        }
+    }
+
+    .inputContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 0.5rem 0;
+        > div {
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+        :disabled {
+            color: $color-primary;
+            font-weight: bold;
+        }
+    }
+}

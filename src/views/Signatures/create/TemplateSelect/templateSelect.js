@@ -1,15 +1,17 @@
 import classes from "./templateSelect.module.css";
-import { useState, useEffect } from "react";
-import Button from "Utils/Button/btn";
+import { useState, useEffect, Fragment } from "react";
+import { Button } from "components";
 import Template from "../Preview/customizablePreview";
-import request from "Utils/Request/request";
+import { request } from "utils";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { getStyles } from "../createSignature.utils";
 import { FormattedMessage } from "react-intl";
+import { useHistory } from "react-router-dom";
 
 // Displaying the list of bought and free templates (Studio, Store) and allows to select one to create custom signature
 
 export default function TemplateSelection({
+    template,
     setTemplate,
     showFunction,
     signatureOption,
@@ -20,6 +22,7 @@ export default function TemplateSelection({
     const [fetching, setFetching] = useState(true);
     const [templatesList, setTemplatesList] = useState([]);
     const [visibility, setVisibility] = useState("");
+    const history = useHistory();
 
     const handleFilterChange = (e) => {
         setVisibility(e.target.id);
@@ -57,6 +60,7 @@ export default function TemplateSelection({
                         <input
                             hidden
                             checked={visibility === "PUBLIC"}
+                            onChange={() => {}}
                             onClick={handleFilterUntick}
                             id="PUBLIC"
                             type="radio"
@@ -69,6 +73,7 @@ export default function TemplateSelection({
                     <div className={classes.filter}>
                         <input
                             hidden
+                            onChange={() => {}}
                             checked={visibility === "PRIVATE"}
                             onClick={handleFilterUntick}
                             id="PRIVATE"
@@ -89,7 +94,7 @@ export default function TemplateSelection({
             ) : (
                 <form onChange={handleForm}>
                     <ul className={classes.templatesContainer}>
-                        {templatesList?.map((template) => {
+                        {templatesList?.map((template, index) => {
                             if (
                                 !visibility ||
                                 visibility === template.visibility
@@ -116,16 +121,18 @@ export default function TemplateSelection({
                                         />
                                     </li>
                                 );
-                            return <></>;
+                            return <Fragment key={index}></Fragment>;
                         })}
                     </ul>
                     <div className={classes.btnContainer}>
                         <Button
-                            color="orange"
+                            color="primary"
                             width={"5rem"}
                             onClick={(e) => {
                                 e.preventDefault();
-                                showFunction(false, "smooth");
+                                template
+                                    ? showFunction(false, "smooth")
+                                    : history.goBack();
                             }}
                         >
                             <FormattedMessage id="buttons.placeholder.cancel" />

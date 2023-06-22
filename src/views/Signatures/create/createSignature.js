@@ -5,23 +5,23 @@ import Infos from "./Infos/infos";
 import TemplateSelection from "./TemplateSelect/templateSelect";
 import Preview from "./Preview/customizablePreview";
 import { BsArrowRight } from "react-icons/bs";
-import Button from "Utils/Button/btn";
-import Input from "Utils/Input/input";
+import { Button } from "components";
+import { Input } from "components";
 import { useHistory } from "react-router";
-import { UseEvents } from "Utils/useEvents/useEvents";
-import { useNotification } from "Utils/Notifications/notifications";
-import { TokenService } from "Utils";
+import { TokenService, getEvents, useNotification } from "utils";
 import {
-    defaultOptions,
+    useDefaultOptions,
     defaultValues,
     getStyles,
     handleSave,
 } from "./createSignature.utils";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 // Component handling the creation of signature, selection of template
 function CreateSignatureComponent() {
     const [loading, setLoading] = useState(true);
+    const defaultOptions = useDefaultOptions();
+    const intl = useIntl();
     const user = TokenService.getUser();
     const company = TokenService.getOrganisation();
     const [selectedTemplate, setSelectedTemplate] = useState();
@@ -36,11 +36,11 @@ function CreateSignatureComponent() {
     const [signatureInfo, setSignatureInfo] = useState(
         defaultValues(company, user)
     );
-    const [signatureOption, setSignatureOption] = useState(defaultOptions());
+    const [signatureOption, setSignatureOption] = useState(defaultOptions);
 
     const handlePopulate = () => {
         setSignatureInfo(defaultValues(company, user));
-        setSignatureOption(defaultOptions());
+        setSignatureOption(defaultOptions);
     };
 
     useEffect(() => {
@@ -51,12 +51,12 @@ function CreateSignatureComponent() {
         getUser();
     }, []);
 
-    // Menu
+    // AppMenu
     const [tab, setTab] = useState(true);
 
     useEffect(() => {
-        const getEvents = async () => {
-            const eventAPI = await UseEvents(company.id);
+        const fetchEvents = async () => {
+            const eventAPI = await getEvents(company.id);
             setSignatureOption(
                 {
                     ...signatureOption,
@@ -69,7 +69,7 @@ function CreateSignatureComponent() {
                 "active"
             );
         };
-        getEvents();
+        fetchEvents();
     }, [signatureOption?.event.enabled]);
 
     // Used to handle transition
@@ -78,6 +78,7 @@ function CreateSignatureComponent() {
         if (isOpen) {
             setTemplates(
                 <TemplateSelection
+                    template={selectedTemplate}
                     showFunction={showTemplates}
                     setTemplate={setSelectedTemplate}
                     signatureOption={signatureOption}
@@ -118,7 +119,7 @@ function CreateSignatureComponent() {
 
     const [modal, setModal] = useState(false);
     const [modalContent, setModalContent] = useState();
-    const [signatureName, setSignatureName] = useState("test");
+    const [signatureName, setSignatureName] = useState("Signally");
 
     useEffect(() => {
         const handleModal = () => {
@@ -148,7 +149,9 @@ function CreateSignatureComponent() {
                                 <Input
                                     autoFocus
                                     style={{ width: "75%" }}
-                                    placeholder="Nom de la signature"
+                                    placeholder={intl.formatMessage({
+                                        id: "signature.title",
+                                    })}
                                     type="text"
                                     onChange={(e) =>
                                         setSignatureName(e.target.value)
@@ -157,7 +160,7 @@ function CreateSignatureComponent() {
                                 <div>
                                     <Button
                                         width="40%"
-                                        color="orange"
+                                        color="primary"
                                         type="submit"
                                     >
                                         <FormattedMessage id="buttons.placeholder.save" />
@@ -165,7 +168,7 @@ function CreateSignatureComponent() {
                                     <Button
                                         onClick={() => setModal(false)}
                                         width="30%"
-                                        color="brown"
+                                        color="secondary"
                                     >
                                         <FormattedMessage id="buttons.placeholder.cancel" />
                                     </Button>
@@ -210,7 +213,7 @@ function CreateSignatureComponent() {
                                         tagName="span"
                                     />
                                     <FormattedMessage
-                                        id="style"
+                                        id="options"
                                         tagName="span"
                                     />
                                 </div>
@@ -261,7 +264,7 @@ function CreateSignatureComponent() {
                             </div>
                             <div className={classes.CTAsContainer}>
                                 <Button
-                                    color="orange"
+                                    color="primary"
                                     onClick={() => setModal(true)}
                                     style={{
                                         opacity: selectedTemplate ? 1 : 0,
@@ -273,7 +276,7 @@ function CreateSignatureComponent() {
                                     <FormattedMessage id="buttons.placeholder.save" />
                                 </Button>
                                 <Button
-                                    color="brown"
+                                    color="secondary"
                                     onClick={() =>
                                         showTemplates(true, "smooth")
                                     }

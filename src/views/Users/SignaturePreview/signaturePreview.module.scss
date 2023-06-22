@@ -1,4 +1,4 @@
-@import "../../../Assets/style/colors";
+@import "../../../assets/style/global";
 
 .topLine {
     display: flex;
@@ -22,17 +22,17 @@
         outline: none;
     }
     svg {
-        color: $signally-brown;
+        color: $color-dark-accent;
         &:hover {
             cursor: pointer;
-            color: $signally-orange;
+            color: $color-primary;
         }
     }
     form {
         width: 45%;
         select {
-            border-color: $signally-orange;
-            color: $signally-orange;
+            border-color: $color-primary;
+            color: $color-primary;
             margin: 0;
             // margin-top: 3rem;
             width: 100%;
@@ -40,15 +40,15 @@
     }
 }
 
-.orangeTxt {
-    color: $signally-orange;
+.primaryTxt {
+    color: $color-primary;
 }
 
 .groupName {
-    color: rgba($signally-brown, 0.75) !important;
+    color: rgba($color-dark-accent, 0.75) !important;
     padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    background-color: rgba($signally-brown, 0.08);
+    border-radius: $borderRadius;
+    background-color: rgba($color-dark-accent, 0.08);
     margin-top: 0.5rem;
     font-weight: 600;
     font-size: 0.6rem !important;
@@ -121,7 +121,7 @@
 .back {
     backface-visibility: hidden;
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     padding: 2rem;
     margin-bottom: auto;
     h2 {
@@ -137,7 +137,7 @@
         font-weight: 600;
     }
     > span {
-        color: $signally-brown;
+        color: $color-dark-accent;
         padding-top: 0.5rem;
         font-size: 0.8rem;
     }
@@ -167,7 +167,7 @@
         margin-bottom: 1rem;
         padding: 0.5rem;
         /* border: none; */
-        border-radius: 10px;
+        border-radius: $smallBorderRadius;
     }
     > button:last-child {
         margin-right: auto;
@@ -199,7 +199,7 @@
     justify-content: center;
     position: relative;
     & :hover span {
-        color: $signally-ebony-pink;
+        color: $color-darker-accent;
     }
     span {
         width: 0.35rem;
@@ -232,10 +232,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 0 30px rgba($signally-brown, 0.4);
+    box-shadow: 0 0 30px rgba($color-dark-accent, 0.4);
     width: 35rem;
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     height: 40rem;
     padding: 1rem 2rem;
     h3 {
@@ -250,7 +250,7 @@
         display: flex;
         flex-direction: column;
         .active {
-            color: $signally-orange;
+            color: $color-primary;
         }
         li {
             margin: 0.5rem 0;
@@ -265,8 +265,8 @@
             font-size: 0.85rem;
             font-weight: 600;
             position: relative;
-            background: $signally-grey;
-            border-radius: 10px;
+            background: $color-lighter-accent;
+            border-radius: $smallBorderRadius;
             label {
                 display: block;
                 position: relative;
@@ -297,10 +297,10 @@
                     position: absolute;
                     inset: 0;
                     margin: auto;
-                    border-radius: 50%;
+                    border-radius: $hugeRadius;
                     height: 25px;
                     width: 25px;
-                    border: 1px solid $signally-brown;
+                    border: 1px solid $color-dark-accent;
                     &:after {
                         content: " ";
                         position: absolute;
@@ -308,8 +308,8 @@
                         text-align: center;
                         white-space: nowrap;
                         vertical-align: baseline;
-                        background: $signally-brown;
-                        border-radius: 50%;
+                        background: $color-dark-accent;
+                        border-radius: $hugeRadius;
                         padding: 0;
                         height: 15px;
                         width: 15px;
@@ -328,7 +328,7 @@
                 bottom: 0;
                 margin: auto;
                 height: 6px;
-                border-radius: 50%;
+                border-radius: $hugeRadius;
                 width: 6px;
                 background: transparent;
                 transition: 0.2s;
@@ -360,20 +360,20 @@
         }
     }
     .searchInput {
-        color: #402a27;
+        color: $background-color;
         width: 100%;
         font-family: "Montserrat";
         text-indent: 2.5rem;
         transition: 0.2s;
         padding: 0.75rem;
-        border-radius: 30px;
-        background: $signally-grey;
+        border-radius: $mediumBorderRadius;
+        background: $color-lighter-accent;
         border: 1px solid transparent;
         outline: none;
         margin: 1rem 0;
         &:focus {
             background: #fff;
-            border: 1px solid $signally-orange;
+            border: 1px solid $color-primary;
             box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
         }
     }

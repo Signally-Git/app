@@ -10,6 +10,10 @@
   width: 100%;
 }
 
+.primaryColor {
+  color: #244EFF;
+}
+
 .modalContainer {
   display: flex;
   margin: auto;
@@ -25,7 +29,7 @@
   inset: 0;
 }
 .modalContainer > div span > span {
-  color: #ff7954;
+  color: #244EFF;
 }
 
 .row {
@@ -40,14 +44,16 @@
 }
 
 .teamsContainer {
-  width: 45%;
-  max-width: 25rem;
-  min-width: 25rem;
+  width: 40rem;
+  max-width: 40rem;
+  min-width: 40rem;
   background-color: #fff;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 2rem;
   position: relative;
-  height: 85%;
+  min-height: 50rem;
+  height: 65%;
+  max-height: 50rem;
 }
 .teamsContainer ul {
   padding: 0;
@@ -59,7 +65,7 @@
   height: 95%;
 }
 .teamsContainer > div > span {
-  color: #ff7954;
+  color: #5c74b2;
   font-weight: bold;
   margin-top: 1rem;
   font-size: 0.9rem;
@@ -104,11 +110,11 @@
 
 .active {
   transition: 0.2s;
-  color: #ff7954;
+  color: #244EFF;
 }
 .active::after {
   transition: 0.2s;
-  background-color: #ff7954;
+  background-color: #244EFF;
 }
 
 .itemsList {
@@ -137,8 +143,8 @@
   font-weight: 600;
   cursor: pointer;
   position: relative;
-  background: #f7f5f5;
-  border-radius: 10px;
+  background: #F4F7FC;
+  border-radius: 5px;
 }
 .itemsList li::before {
   content: "";
@@ -150,7 +156,7 @@
   bottom: 0;
   margin: auto;
   height: 8px;
-  border-radius: 50%;
+  border-radius: 20px;
   width: 8px;
   background: transparent;
   transition: 0.2s;
@@ -164,7 +170,7 @@
   left: -1em;
   height: 8px;
   width: 8px;
-  background: #ff7954;
+  background: #244EFF;
 }
 .itemsList li > div {
   display: flex;
@@ -181,8 +187,8 @@
 }
 
 .groupName {
-  color: #ff7954;
-  border-radius: 20px;
+  color: #244EFF;
+  border-radius: 5px;
   font-weight: normal;
   font-size: 0.75rem;
 }
@@ -208,28 +214,28 @@
 
 .search {
   text-indent: 2rem;
-  border-radius: 20px;
+  border-radius: 5px;
   width: 100%;
   outline: none;
   border: 1px solid transparent;
   margin: 1rem 0;
   padding: 0.5rem;
-  background: #f7f5f5;
+  background: #F4F7FC;
   display: block;
   transition: 0.2s;
 }
 .search:focus {
-  border-color: #ff7954;
+  border-color: #244EFF;
 }
 
-.orangeTxt {
-  color: #ff7954;
+.primaryTxt {
+  color: #244EFF;
 }
 
 .signaturePreview {
   margin-left: 3rem;
   background-color: #fff;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 0 2rem;
   margin-bottom: auto;
 }
@@ -268,9 +274,9 @@
   width: 60%;
   text-align: center;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-  border: 1px solid #ff7954;
+  border: 1px solid #244EFF;
   background-color: #fff !important;
-  color: #ff7954;
+  color: #244EFF;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -278,18 +284,18 @@
   padding: 0.75rem;
   font-size: 0.85rem;
   font-weight: 600;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 .btn svg,
 .CTA svg {
   transition: 0.2s;
   margin-left: 0.5rem;
-  stroke: #ff7954;
+  stroke: #244EFF;
   stroke-width: 1px;
 }
 .btn:hover,
 .CTA:hover {
-  background-color: #ff7954 !important;
+  background-color: #244EFF !important;
   border: 1px solid transparent;
   color: #fff;
   cursor: pointer;
@@ -313,13 +319,13 @@
   align-items: center;
 }
 .actionsContainer svg {
-  color: #402927;
+  color: #1B335E;
   opacity: 0.6;
 }
 .actionsContainer svg:first-child {
   font-size: 1rem;
 }
 .actionsContainer svg:hover {
-  color: #ff7954;
+  color: #244EFF;
   opacity: 1;
 }

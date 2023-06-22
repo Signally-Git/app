@@ -1,13 +1,9 @@
 import classes from "./signaturePreview.module.css";
 import { useEffect, useState } from "react";
-import Button from "Utils/Button/btn";
-import request from "Utils/Request/request";
-import { useNotification } from "Utils/Notifications/notifications";
-import CopySignature from "components/CopySignature/CopySignature";
-import Search from "Assets/icons/search.svg";
-import CustomSelect from "Utils/CustomSelect/customselect";
-import Modal from "Utils/Modals/modal";
-import Buttons from "Utils/Btns/buttons";
+import { request, useNotification } from "utils";
+import CopySignature from "views/CopySignature/CopySignature.jsx";
+import Search from "assets/icons/search.svg";
+import { Button, CustomSelect, Modal, NavigationButtons } from "components";
 import parse from "html-react-parser";
 import moment from "moment";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -67,7 +63,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
 
         setIncEvents(
             events.data["hydra:member"]
-                .filter((data) => new Date(data.startAt) > new Date())
+                .filter((data) => new Date(data.endAt) > new Date())
                 .sort(function (a, b) {
                     if (a.startAt < b.startAt) {
                         return -1;
@@ -81,6 +77,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     }, [edit]);
 
     useEffect(() => {
+        handleSwapSignature(show?.signature?.["@id"]);
         const sse = new EventSource(
             `${process.env.REACT_APP_HUB_URL}${show?.["@id"]}`
         );
@@ -248,11 +245,12 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                     content: (
                         <>
                             <FormattedMessage id="message.success.signature.edit_variant1" />
-                            <span className={classes.orangeTxt}>
+                            <span className={classes.primaryTxt}>
+                                {" "}
                                 {type === "user"
                                     ? element.firstName + " " + element.lastName
-                                    : element.name}
-                            </span>{" "}
+                                    : element.name}{" "}
+                            </span>
                             <FormattedMessage id="message.success.signature.edit_part2" />
                         </>
                     ),
@@ -397,7 +395,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                 })}
                             </ul>
                         </div>
-                        <Buttons
+                        <NavigationButtons
                             onCancel={() => {
                                 setChoosePlaylist(false);
                             }}
@@ -417,13 +415,13 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                         <>
                             Vous allez mettre en ligne <br />
                             la signature{" "}
-                            <span className={classes.orangeTxt}>
+                            <span className={classes.primaryTxt}>
                                 {selectedTemplate?.name}
                             </span>{" "}
                             <br />
                             <br />
                             pour{" "}
-                            <span className={classes.orangeTxt}>
+                            <span className={classes.primaryTxt}>
                                 {show.name ||
                                     `${show.firstName} ${show.lastName}`}
                             </span>
@@ -449,7 +447,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                     <div className={classes.topLine}>
                         <h2>
                             <FormattedMessage id="signature.active_for" />
-                            <span className={classes.orangeTxt}>
+                            <span className={classes.primaryTxt}>
                                 {show.name ||
                                     `${show.firstName} ${show.lastName}`}
                             </span>
@@ -474,14 +472,14 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                             <div className={classes.topLine}>
                                 <h2>
                                     <FormattedMessage id="signature.edit" />{" "}
-                                    <span className={classes.orangeTxt}>
+                                    <span className={classes.primaryTxt}>
                                         {show.name ||
                                             `${show.firstName} ${show.lastName}`}
                                     </span>
                                 </h2>
                                 {show["@type"] === "Team" ? (
                                     <Button
-                                        color="brown"
+                                        color="secondary"
                                         onClick={() => {
                                             setEdit("assign-team");
                                         }}
@@ -490,7 +488,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                     </Button>
                                 ) : show["@type"] === "Workplace" ? (
                                     <Button
-                                        color="brown"
+                                        color="secondary"
                                         onClick={() => {
                                             setEdit("assign-workplace");
                                         }}
@@ -572,7 +570,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                                 onClick={() => {
                                                     setChoosePlaylist(true);
                                                 }}
-                                                color="orange"
+                                                color="primary"
                                                 style={{
                                                     borderRadius: "10px",
                                                     margin: 0,
@@ -587,7 +585,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                     )}
                                 </div>
                             </div>
-                            <Buttons
+                            <NavigationButtons
                                 style={{ left: ".5rem", bottom: "-5rem" }}
                                 onCancel={() => {
                                     setEdit();

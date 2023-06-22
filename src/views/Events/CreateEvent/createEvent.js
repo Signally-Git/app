@@ -1,25 +1,27 @@
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import classes from "./createEvent.module.css";
-import "moment/locale/fr";
-import Input from "Utils/Input/input";
-import { useEffect, useRef, useState } from "react";
+import { Input, NavigationButtons, UploadFile } from "components";
+import { useContext, useEffect, useRef, useState } from "react";
 import moment from "moment";
-import UploadFile from "Utils/Upload/uploadFile";
-import { useNotification } from "Utils/Notifications/notifications";
-import request from "Utils/Request/request";
-import Buttons from "Utils/Btns/buttons";
+import { useNotification, request } from "utils";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
+import { LangContext } from "contexts/LangContext";
 
 export default function CreateEvent({ setDone, event }) {
+    const { locale } = useContext(LangContext);
     const intl = useIntl();
+    const [lc, setLc] = useState(
+        locale === "en-US" || locale === "en" ? "en" : "fr"
+    );
     const [startDate, setStartDate] = useState(
-        event?.startAt ? new Date(event?.startAt) : new Date()
+        event?.startAt ? new Date(event.startAt) : new Date()
     );
     const [endDate, setEndDate] = useState(
-        event?.endAt ? new Date(event?.endAt) : new Date()
+        event?.endAt ? new Date(event.endAt) : new Date()
     );
+
     const [banner, setBanner] = useState();
     const [eventName, setEventName] = useState(event?.name || "");
     const [eventLink, setEventLink] = useState(event?.link || "");
@@ -29,7 +31,7 @@ export default function CreateEvent({ setDone, event }) {
     const history = useHistory();
 
     useEffect(() => {
-        setEventName(event?.name);
+        setEventName(event?.name || "");
         setEventLink(event?.link || "");
         setStartDate(
             new Date(event?.startAt ? new Date(event?.startAt) : new Date())
@@ -49,10 +51,19 @@ export default function CreateEvent({ setDone, event }) {
         }
     }, [banner]);
 
+    useEffect(() => {
+        // Charger dynamiquement le fichier de locale approprié en fonction de la langue sélectionnée
+        if (lc === "en-US") moment.locale("en-us");
+        else
+            import(`moment/locale/${lc}`).then((module) => {
+                moment.locale(locale, module.default);
+            });
+    }, [lc]);
+
     const checkEventLink = (url) => {
         let isValid = url.startsWith("http://") ? 1 : 0;
         if (isValid == 0) isValid = url.startsWith("https://") ? 2 : 0;
-        if (isValid == 0)
+        if (url.length > 0 && isValid == 0)
             notification({
                 content: (
                     <FormattedMessage id="message.warning.wrong_event_link" />
@@ -94,7 +105,7 @@ export default function CreateEvent({ setDone, event }) {
                             notification({
                                 content: (
                                     <>
-                                        <span style={{ color: "#FF7954" }}>
+                                        <span className={classes.primaryColor}>
                                             {eventName}{" "}
                                         </span>
                                         <FormattedMessage id="message.success.created" />
@@ -111,7 +122,7 @@ export default function CreateEvent({ setDone, event }) {
                                 content: (
                                     <>
                                         <FormattedMessage id="message.error.add" />
-                                        <span style={{ color: "#FF7954" }}>
+                                        <span className={classes.primaryColor}>
                                             {" "}
                                             {eventName}
                                         </span>
@@ -158,7 +169,9 @@ export default function CreateEvent({ setDone, event }) {
                                 notification({
                                     content: (
                                         <>
-                                            <span style={{ color: "#FF7954" }}>
+                                            <span
+                                                className={classes.primaryColor}
+                                            >
                                                 {eventName}
                                             </span>{" "}
                                             <FormattedMessage id="message.success.edit" />
@@ -172,7 +185,9 @@ export default function CreateEvent({ setDone, event }) {
                                     content: (
                                         <>
                                             <FormattedMessage id="message.error.edit" />
-                                            <span style={{ color: "#FF7954" }}>
+                                            <span
+                                                className={classes.primaryColor}
+                                            >
                                                 {" "}
                                                 {eventName}
                                             </span>
@@ -209,7 +224,7 @@ export default function CreateEvent({ setDone, event }) {
                         notification({
                             content: (
                                 <>
-                                    <span style={{ color: "#FF7954" }}>
+                                    <span className={classes.primaryColor}>
                                         {eventName}
                                     </span>{" "}
                                     <FormattedMessage id="message.success.edit" />
@@ -223,7 +238,7 @@ export default function CreateEvent({ setDone, event }) {
                             content: (
                                 <>
                                     <FormattedMessage id="message.error.edit" />
-                                    <span style={{ color: "#FF7954" }}>
+                                    <span className={classes.primaryColor}>
                                         {" "}
                                         {eventName}
                                     </span>
@@ -254,7 +269,7 @@ export default function CreateEvent({ setDone, event }) {
                         tagName="label"
                     />
                     <Datetime
-                        locale="fr-FR"
+                        locale={lc}
                         value={startDate}
                         onChange={setStartDate}
                         closeOnSelect={true}
@@ -268,9 +283,11 @@ export default function CreateEvent({ setDone, event }) {
                         tagName="label"
                     />
                     <Datetime
-                        locale="fr-FR"
+                        locale={lc}
                         value={endDate}
-                        onChange={setEndDate}
+                        onChange={(e) => {
+                            e > startDate && setEndDate(e);
+                        }}
                         closeOnSelect={true}
                         dateFormat="D MMM YYYY"
                         timeFormat="HH mm"
@@ -323,8 +340,8 @@ export default function CreateEvent({ setDone, event }) {
                 />
             </div>
             <div>
-                <Buttons
-                    style={{ left: ".5rem", bottom: "-3rem" }}
+                <NavigationButtons
+                    style={{ left: ".5rem", bottom: "-4rem" }}
                     confirmTxt={
                         <FormattedMessage id="buttons.placeholder.save" />
                     }

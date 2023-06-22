@@ -5,7 +5,7 @@
   flex-direction: column;
   flex-wrap: wrap;
   background: #fff;
-  border-radius: 20px;
+  border-radius: 5px;
   position: relative;
   padding: 2rem;
 }
@@ -13,11 +13,11 @@
   width: 100%;
   display: flex;
   margin-top: 0;
-  color: #402927;
+  color: #1B335E;
 }
 .container h2 span {
   margin-left: 0.5rem;
-  color: #ff7954;
+  color: #5c74b2;
 }
 .container h2 svg {
   margin-left: auto;
@@ -25,29 +25,30 @@
 .container label {
   font-size: 0.7rem;
   font-weight: 600;
-  color: #ff7954;
+  color: #5c74b2;
   margin-left: 0.15rem;
 }
 .container input {
-  border: 1px solid #f7f5f5;
+  border: 1px solid #F4F7FC;
   padding: 1rem;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 0.5rem 0;
   margin-bottom: 1rem;
   outline: none;
 }
 .container input:focus {
-  border-color: #ff7954;
+  border-color: #244EFF;
   box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }
 .container .datePick ~ input {
   margin-bottom: 1.5rem;
 }
 .container button {
-  margin-right: auto;
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-top: 1.5rem;
+  margin: 1.5rem auto 0 0;
+}
+
+.primaryColor {
+  color: #244EFF;
 }
 
 .datePick {
@@ -65,8 +66,8 @@
   width: 100%;
 }
 .datePick > div input:hover, .datePick > div input:focus-within {
-  border-color: #ff7954;
-  box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+  border-color: #244EFF;
+  box-shadow: 0 12px 40px rgba(230, 208, 201, 0.28);
 }
 
 .row {
