@@ -185,7 +185,7 @@ const MenuLinks = (props) => {
         },
         {
             to: "/help",
-            href: "https://support.signally.io/",
+            href: "https://aide.signally.io/",
             icon: <MdHelpOutline />,
             label: <FormattedMessage tagName="label" id="help" />,
             isActive: page.search("help") !== -1,
