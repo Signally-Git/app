@@ -1,8 +1,8 @@
-@import "../../../../Assets/style/colors";
+@import "../../../../assets/style/global";
 
 .modal {
     h1 {
-        color: $signally-brown;
+        color: $color-dark-accent;
     }
     > span {
         margin: auto;
@@ -12,14 +12,14 @@
     height: 100%;
     padding-left: 1rem;
     max-height: 80vh;
-    background-color: #f5eef0;
+    background-color: $background-color;
     display: flex;
     flex-direction: column;
     .searchContainer {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
-        border-radius: 20px;
+        border-radius: $borderRadius;
     }
     input {
         padding: 3rem 10rem;
@@ -28,7 +28,7 @@
         height: 3rem;
         font-size: 0.9rem;
         color: grey;
-        border-radius: 30px;
+        border-radius: $mediumBorderRadius;
         background: transparent;
         border: none;
         &:focus {
@@ -64,7 +64,7 @@
             justify-content: center;
             align-items: center;
             font-size: 0.9rem;
-            color: $signally-brown;
+            color: $color-dark-accent;
             line-height: 1.65rem;
             text-indent: 0.35rem;
         }
@@ -90,9 +90,9 @@
             position: relative;
             transition: 0.2s;
             text-transform: uppercase;
-            border-radius: 20px;
-            border: 1px solid $signally-brown;
-            color: $signally-brown;
+            border-radius: $borderRadius;
+            border: 1px solid $color-dark-accent;
+            color: $color-dark-accent;
             padding: 0.25rem 0.75rem;
             display: flex;
             align-items: center;
@@ -104,14 +104,14 @@
                 display: block;
             }
             &:hover {
-                background: $signally-brown;
+                background: $color-dark-accent;
                 color: #fff;
                 cursor: pointer;
             }
         }
         .active {
             font-weight: bold;
-            background: $signally-brown;
+            background: $color-dark-accent;
             color: #fff;
         }
     }
@@ -143,22 +143,22 @@
         }
         .studio,
         .store {
-            color: $signally-orange;
-            border-color: $signally-orange;
+            color: $color-primary;
+            border-color: $color-primary;
             &:hover {
-                background-color: $signally-orange;
+                background-color: $color-primary;
             }
             input {
                 cursor: pointer;
             }
         }
         .activeStudio {
-            background-color: $signally-orange !important;
+            background-color: $color-primary !important;
             color: #fff;
         }
     }
     h5 {
-        color: $signally-brown;
+        color: $color-dark-accent;
         text-transform: uppercase;
         font-weight: bold;
         font-size: 1rem;
@@ -187,7 +187,7 @@
         li {
             padding: 1rem;
             position: relative;
-            border-radius: 20px;
+            border-radius: $borderRadius;
             background-color: #fff;
             transition: border-color 0.3s;
             border: 1px solid transparent;
@@ -195,9 +195,9 @@
             margin-bottom: 2rem;
             &:hover {
                 p {
-                    color: $signally-orange;
+                    color: $color-primary;
                 }
-                border-color: $signally-orange;
+                border-color: $color-primary;
                 // box-shadow: 0 0 20px rgba(112, 112, 112, 0.6);
             }
             // width: 17rem;
@@ -224,10 +224,10 @@
     border: none;
     font-weight: bold;
     font-size: 1rem;
-    color: $signally-brown;
+    color: $color-dark-accent;
     background: none;
     &:hover {
-        color: $signally-orange;
+        color: $color-primary;
     }
     svg {
         font-size: 1.2rem;
@@ -256,18 +256,18 @@
 
         cursor: pointer;
         padding: 0.25rem 0.5rem;
-        color: $signally-brown;
-        border: 1px solid $signally-brown;
-        border-radius: 20px;
+        color: $color-dark-accent;
+        border: 1px solid $color-dark-accent;
+        border-radius: $borderRadius;
         &:hover {
-            color: $signally-orange;
-            border-color: $signally-orange;
+            color: $color-primary;
+            border-color: $color-primary;
         }
     }
     input:checked ~ label {
         color: #fff;
-        border-color: $signally-orange;
-        background: $signally-orange;
+        border-color: $color-primary;
+        background: $color-primary;
     }
 }
 

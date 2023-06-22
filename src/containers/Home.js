@@ -1,13 +1,11 @@
-import Header from "../components/Header/Header";
-import Landing from "../components/Landing/SignIn/landing";
+import AuthHomePage from "views/AuthHomePage/AuthHomePage";
 
 function Home() {
     return (
         <div
             style={{ background: "#FFF", overflow: "hidden", height: "100vh" }}
         >
-            <Header landing={true} />
-            <Landing />
+            <AuthHomePage />
         </div>
     );
 }

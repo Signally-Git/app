@@ -8,6 +8,7 @@
     "events": "Events",
     "account": "Account",
     "logo": "Logo",
+    "help": "Help",
 
     "event": "Event",
     "event_playlist_title": "Schedule multiple events",
@@ -93,6 +94,7 @@
             "spacing": "Spacing",
             "background_color": "Background color"
         },
+        "default_greetings": "Regards,",
         "choose": "Choose a signature",
         "event_or_playlist": "Add an event or playlist",
         "active_for": "Signature active for ",
@@ -172,8 +174,8 @@
     "welcome": {
         "welcome": "Welcome",
         "title": "Welcome to the Signally Private Beta!",
-        "intro": "We're thrilled to have you as one of our first users.",
-        "description1": "With your help, we want to make Signally the most intuitive and innovative application on the market while best meeting your communication and marketing objectives.",
+        "intro": "We're thrilled to have you as one of our early users.",
+        "description1": "With your valuable feedback, we aim to make Signally the most intuitive and innovative application on the market, perfectly tailored to meet your communication and marketing objectives.",
         "description2": "As we're in beta, everything isn't perfect yet! Nonetheless, thanks to you, we can make the platform increasingly efficient and even simpler to use.",
         "thanks": "Thank you so much for your help.",
         "signature": "-- The Signally team"
@@ -231,6 +233,7 @@
     "logout": "Logout",
     "buttons": {
         "placeholder": {
+            "no_account": "Create an account",
             "confirm": "Confirm",
             "save": "Save",
             "end": "End",
@@ -239,6 +242,9 @@
             "add_all": "Add all",
             "skip": "Skip this step",
             "edit_profile": "Edit my profile",
+            "legals": "Legal notice",
+            "tos": "Terms of Service",
+            "go_back": "Back",
             "reset": "Reset",
             "delete": "Delete",
             "delete_all": "Delete all",

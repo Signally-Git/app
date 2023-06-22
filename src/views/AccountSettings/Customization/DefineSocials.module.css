@@ -1,0 +1,91 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.container > form {
+  display: flex;
+  flex-direction: column;
+}
+.container > form > div {
+  align-items: center;
+  display: flex;
+}
+.container > form > div ~ input {
+  margin-right: auto;
+  margin-left: 0;
+}
+.container label {
+  color: #1B335E;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+.container .addSocials {
+  background: none;
+  border: none;
+  display: flex;
+  margin-left: -0.5rem;
+}
+.container .editSocials {
+  gap: 0.5rem;
+  max-height: 3rem;
+  margin-bottom: 3rem;
+}
+.container .editSocials li {
+  cursor: pointer;
+  max-width: 24px;
+}
+.container .editSocials svg {
+  color: #1B335E;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+.container .editSocials svg:first-of-type {
+  margin-left: 0.5rem;
+}
+.container .editSocials svg:hover {
+  color: #244EFF;
+}
+
+.loading {
+  animation: spin infinite 1s linear;
+  height: 5rem;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.socialsList {
+  list-style: none;
+  border-radius: 5px;
+  background: #F3F7FB;
+  margin-left: 1rem;
+  padding: 0.25rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+}
+.socialsList li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.25rem;
+}
+.socialsList li:last-child {
+  height: auto;
+}
+.socialsList li:last-child button {
+  margin: 0 0 0 1rem;
+}
+.socialsList li:hover img {
+  transition: opacity 300ms;
+  opacity: 0.5;
+}
+.socialsList li img {
+  cursor: pointer;
+  height: 1.75rem;
+}

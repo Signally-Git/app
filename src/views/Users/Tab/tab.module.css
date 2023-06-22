@@ -2,6 +2,10 @@
   max-height: 60%;
 }
 
+.colorPrimary {
+  color: #244EFF;
+}
+
 .modal {
   position: fixed;
   display: flex;
@@ -9,7 +13,7 @@
   align-items: center;
   justify-content: center;
   background: #fff;
-  border-radius: 20px;
+  border-radius: 5px;
   width: 20%;
   padding: 0 1rem 1rem;
   z-index: 3;
@@ -36,8 +40,8 @@
   width: 100%;
 }
 
-.orangeTxt {
-  color: #ff7954 !important;
+.primaryTxt {
+  color: #244EFF !important;
 }
 
 .colheader {
@@ -48,18 +52,18 @@
   width: 100%;
 }
 .colheader .totalNumber {
-  color: #ff7954;
+  color: #5c74b2;
   font-weight: bold;
   font-size: 0.9rem;
 }
 .colheader button {
   border: none;
-  color: #402927;
+  color: #1B335E;
   background: none;
   font-size: 0.9rem;
 }
 .colheader button:hover {
-  color: #ff7954;
+  color: #244EFF;
   cursor: pointer;
 }
 
@@ -95,8 +99,8 @@
   font-size: 0.85rem;
   font-weight: 600;
   position: relative;
-  background: #f7f5f5;
-  border-radius: 10px;
+  background: #F4F7FC;
+  border-radius: 5px;
 }
 .itemsList li .checkbox {
   width: 100%;
@@ -122,9 +126,9 @@
   bottom: 0;
   margin: auto;
   height: 8px;
-  border-radius: 50%;
+  border-radius: 20px;
   width: 8px;
-  background: #ff7954;
+  background: #244EFF;
   transition: 0.2s;
 }
 .itemsList li:hover {
@@ -137,7 +141,7 @@
   justify-content: space-between;
 }
 .itemsList li > div span {
-  color: #402927;
+  color: #1B335E;
 }
 .itemsList li > div > span > span {
   font-weight: normal;
@@ -156,8 +160,9 @@
 
 .wpLogoContainer {
   display: flex;
-  width: 48%;
+  width: 40%;
   gap: 0.25rem;
+  align-items: center;
 }
 .wpLogoContainer .logoPreview {
   max-width: 30px;
@@ -177,7 +182,7 @@
 .teamList .editing .rename {
   padding: 0.5rem 1rem;
   margin: 0 0 0 0;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 .teamList .rename {
   margin-bottom: 0;
@@ -204,7 +209,7 @@
   padding: 1rem;
   box-sizing: border-box;
   position: absolute;
-  border-radius: 10px;
+  border-radius: 5px;
   inset: auto 0;
   margin: auto;
   display: flex;
@@ -258,7 +263,7 @@
 }
 .actionsContainer svg,
 .actionsContainerAdmin svg {
-  color: #402927;
+  color: #1B335E;
   opacity: 0.6;
 }
 .actionsContainer svg:first-child,
@@ -267,7 +272,7 @@
 }
 .actionsContainer svg:hover,
 .actionsContainerAdmin svg:hover {
-  color: #ff7954;
+  color: #244EFF;
   opacity: 1;
 }
 
@@ -288,10 +293,10 @@
   width: 80%;
   border: none;
   opacity: 1;
-  color: #402927;
+  color: #1B335E;
   font-size: 0.85rem;
   font-weight: 600;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 0.5rem 1rem;
 }
 
@@ -300,11 +305,11 @@
 }
 
 .groupName {
-  color: rgba(64, 41, 39, 0.75) !important;
+  color: rgba(27, 51, 94, 0.75) !important;
   padding: 0.25rem 0.75rem;
   padding-top: 0.25rem !important;
-  border-radius: 20px;
-  background-color: rgba(64, 41, 39, 0.05);
+  border-radius: 5px;
+  background-color: rgba(27, 51, 94, 0.05);
   margin-top: 0.5rem;
   font-weight: 600;
   font-size: 0.6rem !important;
@@ -324,20 +329,36 @@
 
 .search {
   text-indent: 2rem;
-  border-radius: 20px;
+  border-radius: 5px;
   width: 100%;
   outline: none;
   border: 1px solid transparent;
   margin: 1rem 0;
   padding: 0.75rem 0.5rem;
-  background: #f7f5f5;
+  background: #F4F7FC;
   display: block;
   transition: 0.2s;
 }
 .search:focus {
-  border-color: #ff7954;
+  border-color: #244EFF;
 }
 
 .btnReady .checkmark {
-  color: #ff7954;
+  color: #244EFF;
+}
+
+.loading {
+  display: flex;
+  margin: 5rem auto auto;
+  color: #244EFF;
+  animation: spin 1s 0s infinite linear forwards;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

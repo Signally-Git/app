@@ -45,7 +45,7 @@
 
 .colorPreview {
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.356);
-  border-radius: 50%;
+  border-radius: 20px;
   margin: 0.2rem;
   width: 20px;
   height: 20px;
@@ -65,7 +65,7 @@
 
 .optionsContainer {
   background: #fff;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 5px 5px;
 }
 
 .optionContainer {
@@ -93,7 +93,7 @@
   border: 1px solid #f6f6f6;
   padding: 1rem 5rem 1rem 1rem !important;
   text-overflow: ellipsis;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 0.5rem 0;
   font-family: "Montserrat";
   outline: none;
@@ -111,7 +111,7 @@
   height: 12rem;
   background: #fff;
   box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
-  border-radius: 10px;
+  border-radius: 5px;
   justify-content: center;
   align-items: center;
   top: 0;
@@ -132,7 +132,7 @@
 }
 
 .colorPreview {
-  border-radius: 50%;
+  border-radius: 20px;
   width: 20px;
   height: 20px;
 }
@@ -154,7 +154,7 @@
 }
 
 .opened svg {
-  color: #ff7954 !important;
+  color: #244EFF !important;
 }
 
 .textStyle {
@@ -168,7 +168,7 @@
   width: 70%;
   margin: 0;
   background-color: #fff;
-  border-radius: 30px;
+  border-radius: 10px;
   box-shadow: 0 2px 20px rgba(177, 176, 175, 0.8);
 }
 .textStyle li {
@@ -186,10 +186,10 @@
   border-image: linear-gradient(to top, #fff 30%, rgba(61, 43, 40, 0.0823529412) 30%, rgba(61, 43, 40, 0.0823529412) 70%, #fff 70%) 1;
 }
 .textStyle li .inputOptions svg {
-  color: #402927;
+  color: #1B335E;
 }
 .textStyle li:hover span {
-  color: #ff7954;
+  color: #244EFF;
 }
 .textStyle li:last-child {
   max-width: 2rem;
@@ -200,12 +200,12 @@
   justify-content: center;
   color: #fff;
   padding: 0;
-  border-radius: 50%;
+  border-radius: 20px;
   width: 1rem;
   height: 1rem;
   font-size: 0.65rem;
   margin: 0;
-  background-color: #ff7954;
+  background-color: #244EFF;
 }
 .textStyle li span {
   width: 100%;

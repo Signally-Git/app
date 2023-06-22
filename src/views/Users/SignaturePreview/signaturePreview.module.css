@@ -21,31 +21,31 @@
   outline: none;
 }
 .topLine svg {
-  color: #402927;
+  color: #1B335E;
 }
 .topLine svg:hover {
   cursor: pointer;
-  color: #ff7954;
+  color: #244EFF;
 }
 .topLine form {
   width: 45%;
 }
 .topLine form select {
-  border-color: #ff7954;
-  color: #ff7954;
+  border-color: #244EFF;
+  color: #244EFF;
   margin: 0;
   width: 100%;
 }
 
-.orangeTxt {
-  color: #ff7954;
+.primaryTxt {
+  color: #244EFF;
 }
 
 .groupName {
-  color: rgba(64, 41, 39, 0.75) !important;
+  color: rgba(27, 51, 94, 0.75) !important;
   padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  background-color: rgba(64, 41, 39, 0.08);
+  border-radius: 5px;
+  background-color: rgba(27, 51, 94, 0.08);
   margin-top: 0.5rem;
   font-weight: 600;
   font-size: 0.6rem !important;
@@ -122,7 +122,7 @@
 .back {
   backface-visibility: hidden;
   background-color: #fff;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 2rem;
   margin-bottom: auto;
   position: absolute;
@@ -146,7 +146,7 @@
 }
 .front > span,
 .back > span {
-  color: #402927;
+  color: #1B335E;
   padding-top: 0.5rem;
   font-size: 0.8rem;
 }
@@ -174,7 +174,7 @@
   margin-bottom: 1rem;
   padding: 0.5rem;
   /* border: none; */
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .back > button:last-child {
   margin-right: auto;
@@ -206,7 +206,7 @@
   position: relative;
 }
 .event :hover span {
-  color: #66433e;
+  color: #0F1E4C;
 }
 .event span {
   width: 0.35rem;
@@ -238,10 +238,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 0 30px rgba(64, 41, 39, 0.4);
+  box-shadow: 0 0 30px rgba(27, 51, 94, 0.4);
   width: 35rem;
   background-color: #fff;
-  border-radius: 20px;
+  border-radius: 5px;
   height: 40rem;
   padding: 1rem 2rem;
 }
@@ -258,7 +258,7 @@
   flex-direction: column;
 }
 .playlistModal ul .active {
-  color: #ff7954;
+  color: #244EFF;
 }
 .playlistModal ul li {
   margin: 0.5rem 0;
@@ -273,8 +273,8 @@
   font-size: 0.85rem;
   font-weight: 600;
   position: relative;
-  background: #f7f5f5;
-  border-radius: 10px;
+  background: #F4F7FC;
+  border-radius: 5px;
 }
 .playlistModal ul li label {
   display: block;
@@ -304,10 +304,10 @@
   position: absolute;
   inset: 0;
   margin: auto;
-  border-radius: 50%;
+  border-radius: 20px;
   height: 25px;
   width: 25px;
-  border: 1px solid #402927;
+  border: 1px solid #1B335E;
 }
 .playlistModal ul li label span:after {
   content: " ";
@@ -316,8 +316,8 @@
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  background: #402927;
-  border-radius: 50%;
+  background: #1B335E;
+  border-radius: 20px;
   padding: 0;
   height: 15px;
   width: 15px;
@@ -334,7 +334,7 @@
   bottom: 0;
   margin: auto;
   height: 6px;
-  border-radius: 50%;
+  border-radius: 20px;
   width: 6px;
   background: transparent;
   transition: 0.2s;
@@ -364,21 +364,21 @@
   transform: translateY(-20%);
 }
 .playlistModal .searchInput {
-  color: #402a27;
+  color: #efeef4;
   width: 100%;
   font-family: "Montserrat";
   text-indent: 2.5rem;
   transition: 0.2s;
   padding: 0.75rem;
-  border-radius: 30px;
-  background: #f7f5f5;
+  border-radius: 10px;
+  background: #F4F7FC;
   border: 1px solid transparent;
   outline: none;
   margin: 1rem 0;
 }
 .playlistModal .searchInput:focus {
   background: #fff;
-  border: 1px solid #ff7954;
+  border: 1px solid #244EFF;
   box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }
 .playlistModal .bannerPreview {
