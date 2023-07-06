@@ -3,12 +3,12 @@ import { AiOutlineEdit, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FiCheck, FiTrash } from "react-icons/fi";
 import { HiOutlineSearch } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import { Button, Input } from "components";
+import { Button, CustomCheckbox, Input } from "components";
 import classes from "./tab.module.css";
 import { FormattedMessage, useIntl } from "react-intl";
 import { TokenService, validateEmail, useNotification, request } from "utils";
 
-function UserTab({
+function ListUsers({
     selected,
     users,
     setUsers,
@@ -87,6 +87,7 @@ function UserTab({
             phone: user.phone,
             position: user.position,
             email: user.email,
+            synchronizable: user.synchronizable,
             urlAgenda: user.urlAgenda,
         };
 
@@ -102,7 +103,7 @@ function UserTab({
                 notification({
                     content: (
                         <>
-                            <span style={{ color: "#FF7954" }}>
+                            <span className={classes.colorPrimary}>
                                 {oldUser?.firstName} {oldUser?.lastName}
                             </span>{" "}
                             <FormattedMessage id="message.success.edit" />
@@ -336,6 +337,25 @@ function UserTab({
                                                 <div
                                                     className={classes.editDiv}
                                                 >
+                                                    <label htmlFor="isDeployed">
+                                                        <FormattedMessage id="deploy.cta" />
+                                                        <CustomCheckbox
+                                                            onChange={(e) =>
+                                                                handleChange(
+                                                                    e.target
+                                                                        .checked,
+                                                                    "synchronizable"
+                                                                )
+                                                            }
+                                                            name="isDeployed"
+                                                            id="isDeployed"
+                                                            type="checkbox"
+                                                            defaultChecked={
+                                                                user.synchronizable
+                                                            }
+                                                        />
+                                                    </label>
+
                                                     <Input
                                                         type="text"
                                                         placeholder={intl.formatMessage(
@@ -422,4 +442,4 @@ function UserTab({
     );
 }
 
-export default UserTab;
+export default ListUsers;

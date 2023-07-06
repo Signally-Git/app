@@ -1,5 +1,5 @@
 import { TokenService } from "utils";
-import classes from "./users.module.css";
+import classes from "./ManageTeams.module.css";
 import { Link } from "react-router-dom";
 
 export const getMenuLink = (type, key, link) => {

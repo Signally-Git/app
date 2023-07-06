@@ -45,7 +45,7 @@ export default function Options(props) {
                         <HexColorInput
                             autoFocus
                             className={classes.input}
-                            color={props.data.bgColor}
+                            color={props?.data?.bgColor}
                             onChange={(e) =>
                                 props.setData({
                                     ...props.data,
@@ -56,7 +56,7 @@ export default function Options(props) {
                         <HexColorPicker
                             name="color"
                             className={classes.colorPick}
-                            color={props.data.bgColor}
+                            color={props?.data?.bgColor}
                             onChange={(e) =>
                                 props.setData({
                                     ...props.data,
@@ -92,12 +92,12 @@ export default function Options(props) {
                             type="checkbox"
                             autoFocus
                             id="salutation"
-                            checked={props.data.salutation.enabled}
+                            checked={props.data?.salutation?.enabled}
                             onChange={(e) => {
                                 props.setData({
                                     ...props.data,
                                     salutation: {
-                                        ...props.data.salutation,
+                                        ...props.data?.salutation,
                                         enabled: e.target.checked,
                                     },
                                 });
@@ -110,7 +110,7 @@ export default function Options(props) {
                 </div>
                 {/* Salutation */}
                 <div className={classes.checkToText}>
-                    {props.data.salutation.enabled ? (
+                    {props.data?.salutation?.enabled ? (
                         <>
                             <input
                                 type="text"
@@ -119,12 +119,12 @@ export default function Options(props) {
                                     props.setData({
                                         ...props.data,
                                         salutation: {
-                                            ...props.data.salutation,
+                                            ...props?.data?.salutation,
                                             value: e.target.value,
                                         },
                                     });
                                 }}
-                                defaultValue={props.data.salutation.value}
+                                defaultValue={props?.data?.salutation.value}
                             />
                             <div className={classes.spacing}>
                                 <FormattedMessage
@@ -135,12 +135,12 @@ export default function Options(props) {
                                     step={2}
                                     min={0}
                                     max={50}
-                                    values={[props.data.salutation.padding]}
+                                    values={[props?.data?.salutation.padding]}
                                     onChange={(range) =>
                                         props.setData({
                                             ...props.data,
                                             salutation: {
-                                                ...props.data.salutation,
+                                                ...props?.data?.salutation,
                                                 padding: range,
                                             },
                                         })
@@ -185,12 +185,12 @@ export default function Options(props) {
                                 type="checkbox"
                                 autoFocus
                                 id="custom"
-                                checked={props.data.custom.enabled}
+                                checked={props?.data?.custom?.enabled}
                                 onChange={(e) => {
                                     props.setData({
                                         ...props.data,
                                         custom: {
-                                            ...props.data.custom,
+                                            ...props?.data?.custom,
                                             enabled: e.target.checked,
                                         },
                                     });
@@ -205,7 +205,7 @@ export default function Options(props) {
                     <div className={classes.optionsContainer}>
                         {handleBackground()}
                     </div>
-                    {props.data.custom.enabled ? (
+                    {props?.data?.custom?.enabled ? (
                         <div
                             className={classes.inputStyle}
                             style={{ width: "10rem", marginRight: "auto" }}
@@ -215,7 +215,9 @@ export default function Options(props) {
                             </span>
                             <div
                                 title="Background color"
-                                style={{ backgroundColor: props.data.bgColor }}
+                                style={{
+                                    backgroundColor: props?.data?.bgColor,
+                                }}
                                 className={classes.colorPreview}
                                 onClick={() =>
                                     colorSelect !== "bg"
@@ -242,12 +244,12 @@ export default function Options(props) {
                                 type="checkbox"
                                 autoFocus
                                 id="event"
-                                checked={props.data.event.enabled}
+                                checked={props?.data?.event?.enabled}
                                 onChange={(e) => {
                                     props.setData({
                                         ...props.data,
                                         event: {
-                                            ...props.data.event,
+                                            ...props?.data?.event,
                                             enabled: e.target.checked,
                                         },
                                     });
@@ -258,27 +260,27 @@ export default function Options(props) {
                             ></span>
                         </label>
                     </div>
-                    {props.data.event.enabled &&
-                    props.data.event.list?.length > 0 ? (
+                    {props?.data?.event?.enabled &&
+                    props?.data?.event.list?.length > 0 ? (
                         <>
                             <CustomSelect
                                 onChange={(e) =>
                                     props.setData({
                                         ...props.data,
                                         event: {
-                                            ...props.data.event,
+                                            ...props?.data?.event,
                                             display: e,
                                             selected: e,
                                         },
                                     })
                                 }
-                                items={props.data.event.list}
+                                items={props?.data?.event.list}
                                 getValue={"imageUrl"}
                                 display={"name"}
                             />
-                            {/* <form onChange={(e) => props.setData({ ...props.data, event: { ...props.data.event, display: `${process.env.REACT_APP_API_URL}${JSON.parse(e.target.value).imageUrl}`, selected: JSON.parse(e.target.value) } })}>
-                                <select defaultValue={JSON.stringify(props.data.event.selected)}>
-                                    {props.data.event.list.map((event) => {
+                            {/* <form onChange={(e) => props.setData({ ...props.data, event: { ...props?.data?.event, display: `${process.env.REACT_APP_API_URL}${JSON.parse(e.target.value).imageUrl}`, selected: JSON.parse(e.target.value) } })}>
+                                <select defaultValue={JSON.stringify(props?.data?.event.selected)}>
+                                    {props?.data?.event.list.map((event) => {
                                         return <option key={event.id} value={JSON.stringify(event)}>{event.name}</option>
                                     })}
                                 </select>
@@ -295,12 +297,12 @@ export default function Options(props) {
                             step={2}
                             min={0}
                             max={50}
-                            values={[props.data.event.padding]}
+                            values={[props?.data?.event.padding]}
                             onChange={(range) =>
                                 props.setData({
                                     ...props.data,
                                     event: {
-                                        ...props.data.event,
+                                        ...props?.data?.event,
                                         padding: range,
                                         display:
                                             props?.data?.event?.selected
@@ -343,12 +345,12 @@ export default function Options(props) {
                             type="checkbox"
                             autoFocus
                             id="socials"
-                            checked={props.data.socials.enabled}
+                            checked={props?.data?.socials?.enabled}
                             onChange={(e) => {
                                 props.setData({
                                     ...props.data,
                                     socials: {
-                                        ...props.data.socials,
+                                        ...props?.data?.socials,
                                         enabled: e.target.checked,
                                     },
                                 });
@@ -372,12 +374,12 @@ export default function Options(props) {
                             type="checkbox"
                             autoFocus
                             id="vcard"
-                            checked={props.data.vcard.enabled}
+                            checked={props?.data?.vcard?.enabled}
                             onChange={(e) => {
                                 props.setData({
                                     ...props.data,
                                     vcard: {
-                                        ...props.data.vcard,
+                                        ...props?.data?.vcard,
                                         enabled: e.target.checked,
                                     },
                                 });
@@ -401,12 +403,12 @@ export default function Options(props) {
                             type="checkbox"
                             autoFocus
                             id="calendar"
-                            checked={props.data.calendar.enabled}
+                            checked={props?.data?.calendar?.enabled}
                             onChange={(e) => {
                                 props.setData({
                                     ...props.data,
                                     calendar: {
-                                        ...props.data.calendar,
+                                        ...props?.data?.calendar,
                                         enabled: e.target.checked,
                                     },
                                 });
@@ -430,12 +432,12 @@ export default function Options(props) {
                             type="checkbox"
                             autoFocus
                             id="footer"
-                            checked={props.data.footer.enabled}
+                            checked={props?.data?.footer?.enabled}
                             onChange={(e) => {
                                 props.setData({
                                     ...props.data,
                                     footer: {
-                                        ...props.data.footer,
+                                        ...props?.data?.footer,
                                         enabled: e.target.checked,
                                     },
                                 });
@@ -447,7 +449,7 @@ export default function Options(props) {
                     </label>
                 </div>
                 <div className={classes.checkToText}>
-                    {props.data.footer.enabled ? (
+                    {props?.data?.footer?.enabled ? (
                         <>
                             <textarea
                                 className={classes.textArea}
@@ -456,12 +458,12 @@ export default function Options(props) {
                                     props.setData({
                                         ...props.data,
                                         footer: {
-                                            ...props.data.footer,
+                                            ...props?.data?.footer,
                                             value: e.target.value,
                                         },
                                     });
                                 }}
-                                defaultValue={props.data.footer.value}
+                                defaultValue={props?.data?.footer.value}
                             />
                             <div className={classes.footerColor}>
                                 <h6>
@@ -475,7 +477,7 @@ export default function Options(props) {
                                             : setColorSelect("")
                                     }
                                     style={{
-                                        background: props.data.footer.color,
+                                        background: props?.data?.footer.color,
                                     }}
                                 />
                             </div>
@@ -487,12 +489,12 @@ export default function Options(props) {
                                     >
                                         <HexColorInput
                                             className={classes.input}
-                                            color={props.data.footer.color}
+                                            color={props?.data?.footer.color}
                                             onChange={(e) =>
                                                 props.setData({
                                                     ...props.data,
                                                     footer: {
-                                                        ...props.data.footer,
+                                                        ...props?.data?.footer,
                                                         color: e,
                                                     },
                                                 })
@@ -500,12 +502,12 @@ export default function Options(props) {
                                         />
                                         <HexColorPicker
                                             className={classes.colorPick}
-                                            color={props.data.footer.color}
+                                            color={props?.data?.footer.color}
                                             onChange={(e) =>
                                                 props.setData({
                                                     ...props.data,
                                                     footer: {
-                                                        ...props.data.footer,
+                                                        ...props?.data?.footer,
                                                         color: e,
                                                     },
                                                 })
@@ -517,18 +519,18 @@ export default function Options(props) {
                             <div className={classes.size}>
                                 <h6>
                                     <FormattedMessage id="size" /> (
-                                    {props.data.footer.fontSize}px)
+                                    {props?.data?.footer.fontSize}px)
                                 </h6>
                                 <Range
                                     step={1}
                                     min={7}
                                     max={22}
-                                    values={[props.data.footer.fontSize]}
+                                    values={[props?.data?.footer.fontSize]}
                                     onChange={(size) =>
                                         props.setData({
                                             ...props.data,
                                             footer: {
-                                                ...props.data.footer,
+                                                ...props?.data?.footer,
                                                 fontSize: size,
                                             },
                                         })
@@ -562,12 +564,12 @@ export default function Options(props) {
                                     step={2}
                                     min={0}
                                     max={50}
-                                    values={[props.data.footer.padding]}
+                                    values={[props?.data?.footer.padding]}
                                     onChange={(range) =>
                                         props.setData({
                                             ...props.data,
                                             footer: {
-                                                ...props.data.footer,
+                                                ...props?.data?.footer,
                                                 padding: range,
                                             },
                                         })

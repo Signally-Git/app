@@ -194,9 +194,10 @@
   max-height: 60%;
 }
 .usersList .editing {
-  height: 13.5rem !important;
+  height: 15.5rem !important;
 }
 .usersList .editing .editDiv {
+  margin-bottom: 1rem;
   bottom: 0.5rem;
 }
 .usersList .editDiv {

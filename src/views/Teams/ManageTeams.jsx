@@ -1,4 +1,4 @@
-import classes from "./users.module.css";
+import classes from "./ManageTeams.module.css";
 import { useEffect, useRef, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import Tab from "./Tab/tab";
@@ -8,7 +8,7 @@ import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
 import { Button } from "components";
 import { handleScroll, TokenService, request } from "utils";
 import { FormattedMessage, useIntl } from "react-intl";
-import { getMenuLink } from "./users.utils";
+import { getMenuLink } from "./ManageTeams.utils";
 
 function Signatures() {
     const [entity, setEntity] = useState();

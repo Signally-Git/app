@@ -4,7 +4,7 @@ import Tiles from "./Tiles/Tiles";
 import Signatures from "../Signatures/signatures";
 import Events from "../Events/events";
 import CreateEvent from "../Events/CreateEvent/createEvent";
-import Users from "../Users/users";
+import Users from "../Teams/ManageTeams";
 import CreateSignature from "../Signatures/create/createSignature";
 import News from "views/News/News";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";

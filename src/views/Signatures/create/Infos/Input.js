@@ -83,7 +83,6 @@ function Input(props) {
                 >
                     <IoTextOutline
                         size="1.35rem"
-                        // color="#ff7954"
                         onClick={() =>
                             setOption(option === "text" ? "" : "text")
                         }

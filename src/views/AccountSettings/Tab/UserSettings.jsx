@@ -1,7 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import classes from "../accountSettings.module.css";
 import { useHistory } from "react-router-dom";
-import { Input, SwitchLang, NavigationButtons } from "components";
+import {
+    Input,
+    SwitchLang,
+    NavigationButtons,
+    CustomCheckbox,
+} from "components";
 import { TokenService, request, useNotification } from "utils";
 import { FormattedMessage } from "react-intl";
 
@@ -13,6 +18,7 @@ function UserSettings() {
     const [position, setPosition] = useState(user?.position || "");
     const [mobile, setMobile] = useState(user?.phone || "");
     const [language, setLanguage] = useState(user?.lang || "");
+    const [deployed, setDeployed] = useState(user?.synchronizable || false);
     const [urlAgenda, setUrlAgenda] = useState(user?.urlAgenda || "");
 
     const notification = useNotification();
@@ -26,6 +32,7 @@ function UserSettings() {
             position: position,
             phone: mobile,
             urlAgenda: urlAgenda,
+            synchronizable: deployed,
             lang: language["@id"] || language,
         };
         await request
@@ -123,11 +130,27 @@ function UserSettings() {
                             placeholder="https://calendly.com/"
                         />
                     </div>
-                    <div className={classes.inputContainer}>
-                        <label>
-                            <FormattedMessage id="email" />
-                        </label>
-                        <Input disabled value={user?.email} type="mail" />
+                    <div>
+                        <div className={classes.inputContainer}>
+                            <label>
+                                <FormattedMessage id="email" />
+                            </label>
+                            <Input disabled value={user?.email} type="mail" />
+                        </div>
+                        <div className={classes.inputContainer}>
+                            <label className={classes.checkbox}>
+                                <FormattedMessage id="deploy.cta" />
+                                <CustomCheckbox
+                                    onChange={(e) =>
+                                        setDeployed(e.target.checked)
+                                    }
+                                    name="isDeployed"
+                                    id="isDeployed"
+                                    type="checkbox"
+                                    defaultChecked={deployed}
+                                />
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div className={classes.inputContainer}>

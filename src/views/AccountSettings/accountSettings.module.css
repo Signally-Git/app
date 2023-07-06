@@ -177,6 +177,11 @@
   margin: auto;
 }
 
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
 .btnsContainer {
   margin-top: auto;
   bottom: 2rem;

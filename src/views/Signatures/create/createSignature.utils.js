@@ -2,15 +2,6 @@ import { request } from "utils";
 import { useIntl } from "react-intl";
 import classes from "./createSignature.module.css";
 
-async function getPreview(twig, styles) {
-    return await request
-        .post("signature_compile", { twig, styles })
-        .then((res) => {
-            return res.data;
-        })
-        .catch((err) => console.log(err));
-}
-
 function defaultValues(company, user) {
     return {
         logo: company?.logo,
@@ -107,6 +98,7 @@ function useDefaultOptions() {
 }
 
 const getStyles = (signatureInfo, signatureOption, company, user) => {
+    if (!signatureInfo.firstName?.style?.fontWeight) return;
     if (!signatureInfo) signatureInfo = defaultValues(company, user);
     return [
         // COLOR FOR EACH TXT
@@ -861,4 +853,4 @@ const handleSave = async (
         });
 };
 
-export { getPreview, defaultValues, getStyles, useDefaultOptions, handleSave };
+export { defaultValues, getStyles, useDefaultOptions, handleSave };

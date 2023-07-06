@@ -1,3 +1,20 @@
+.loading {
+  color: #244EFF;
+  animation: spin infinite 1s linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.hidden {
+  opacity: 0;
+}
+
 .container {
   animation: fadeIn 1000ms linear forwards;
   display: flex;
