@@ -5,6 +5,7 @@ import classes from "./UploadFile.module.css";
 export default function UploadFile({
     file,
     setFile,
+    removeFile,
     type,
     placeholder,
     ...props
@@ -14,7 +15,7 @@ export default function UploadFile({
             {file?.name?.length > 0 ? (
                 <div className={classes.uploadedFile}>
                     <span>{file.name}</span>{" "}
-                    <IoMdClose onClick={() => setFile()} />
+                    <IoMdClose onClick={removeFile} />
                 </div>
             ) : (
                 <>

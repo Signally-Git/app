@@ -4,12 +4,14 @@ import { useHistory } from "react-router-dom";
 import { Input, UploadFile, NavigationButtons } from "components";
 import { TokenService, request, useNotification } from "utils";
 import { FormattedMessage } from "react-intl";
+import Popup from "components/Upload/CropPopup/Popup";
 
 function CompanySettings() {
     const [organisation, setOrganisation] = useState(
         TokenService.getOrganisation()
     );
     const [uploadedMedia, setUploadedMedia] = useState();
+    const [open, setOpen] = useState(false);
     const [companyName, setCompanyName] = useState(organisation?.name || "");
     const [website, setWebsite] = useState(organisation?.websiteUrl || "");
     const [phone, setPhone] = useState(organisation?.address?.phone || "");
@@ -19,6 +21,10 @@ function CompanySettings() {
 
     const notification = useNotification();
     let history = useHistory();
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     useEffect(() => {
         // create the preview
@@ -173,7 +179,14 @@ function CompanySettings() {
                         )}
                         <UploadFile
                             file={uploadedMedia}
-                            setFile={(e) => setUploadedMedia(e)}
+                            setFile={(e) => {
+                                setUploadedMedia(e)
+                                setOpen(true)
+                            }}
+                            removeFile={() => {
+                                setUploadedMedia(null);
+                                setPreview(null);
+                            }}
                             placeholder={
                                 <FormattedMessage id="buttons.placeholder.import.image" />
                             }
@@ -182,6 +195,16 @@ function CompanySettings() {
                                 paddingBottom: ".8rem",
                             }}
                             type="image/*"
+                        />
+                        <Popup
+                            open={open}
+                            handleClose={handleClose}
+                            image={preview}
+                            getCroppedFile={(image) => {
+                                setPreview(image);
+                                handleClose();
+                            }}
+                            aspectRatios={["1:1", "3:4", "16:9", "2:3"]}
                         />
                     </div>
                 </div>
