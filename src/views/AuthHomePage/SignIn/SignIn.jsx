@@ -111,7 +111,7 @@ export const SignIn = () => {
 
     return (
         <>
-            <ForgottenPassword isOpen={modal} />
+            <ForgottenPassword isOpen={modal} setIsOpen={setModal} />
             <div className={classes.slider}>
                 <div
                     ref={slider}
