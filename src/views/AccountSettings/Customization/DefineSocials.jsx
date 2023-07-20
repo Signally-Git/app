@@ -11,12 +11,14 @@ import {
 } from "utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import Popup from "../../../components/Upload/CropPopup/Popup";
 
 export default function DefineSocials({ setList }) {
     const socialBaseUrl = "https://files.signally.io/socials/default/";
 
     const [socials, setSocials] = useState([{ url: "", name: "" }]);
     const [select, setSelect] = useState(0);
+    const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
     const [uploadedMedia, setUploadedMedia] = useState(null);
     const [preview, setPreview] = useState(null);
@@ -257,7 +259,7 @@ export default function DefineSocials({ setList }) {
                             id: "socials.link_placeholder",
                         })}
                     />
-                    <UploadFile
+                    {/* <UploadFile
                         file={uploadedMedia}
                         setFile={setUploadedMedia}
                         style={{
@@ -271,6 +273,38 @@ export default function DefineSocials({ setList }) {
                         placeholder={intl.formatMessage({
                             id: "socials.icon_placeholder",
                         })}
+                    /> */}
+                    <UploadFile
+                        file={uploadedMedia}
+                        setFile={(e) => {
+                            setUploadedMedia(e)
+                            setOpen(true)
+                        }}
+                        removeFile={() => {
+                            setUploadedMedia(null);
+                            setPreview(null);
+                        }}
+                        style={{
+                            width: "15rem",
+                            paddingLeft: 0,
+                            paddingRight: 0,
+                            paddingTop: ".8rem",
+                            paddingBottom: ".8rem",
+                        }}
+                        type="image/*"
+                        placeholder={intl.formatMessage({
+                            id: "socials.icon_placeholder",
+                        })}
+                    />
+                    <Popup
+                        open={open}
+                        handleClose={() => setOpen(false)}
+                        image={preview}
+                        getCroppedFile={(image) => {
+                            setPreview(image);
+                            setOpen(false);
+                        }}
+                        aspectRatios={["1:1"]}
                     />
                     <FiCheck onClick={handleSubmit} />
                     {socials[0]?.url?.length > 1 && (

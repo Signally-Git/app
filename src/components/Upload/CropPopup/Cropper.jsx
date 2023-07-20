@@ -61,8 +61,6 @@ export default function CropperDemo({ src, getCroppedFile, aspectRatios }) {
                 <Button onClick={() => setAspect(null)} color={aspectRatio === null ? "primary" : "default"} style={{ marginRight: "2.5px", marginLeft: "2.5px" }}>Free</Button>
                 {aspectRatios.map(ratio => {
 
-                    console.log(ratio);
-
                     const [numerator, denominator] = ratio.split(":");
                     let ratioValue = numerator / denominator;
 

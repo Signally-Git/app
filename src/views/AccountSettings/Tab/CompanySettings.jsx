@@ -22,10 +22,6 @@ function CompanySettings() {
     const notification = useNotification();
     let history = useHistory();
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-
     useEffect(() => {
         // create the preview
         if (!uploadedMedia) {
@@ -198,11 +194,11 @@ function CompanySettings() {
                         />
                         <Popup
                             open={open}
-                            handleClose={handleClose}
+                            handleClose={() => setOpen(false)}
                             image={preview}
                             getCroppedFile={(image) => {
                                 setPreview(image);
-                                handleClose();
+                                setOpen(false);
                             }}
                             aspectRatios={["1:1", "3:4", "16:9", "2:3"]}
                         />

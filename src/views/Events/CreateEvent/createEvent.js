@@ -8,6 +8,7 @@ import { useNotification, request } from "utils";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
 import { LangContext } from "contexts/LangContext";
+import Popup from "../../../components/Upload/CropPopup/Popup";
 
 export default function CreateEvent({ setDone, event }) {
     const { locale } = useContext(LangContext);
@@ -23,6 +24,8 @@ export default function CreateEvent({ setDone, event }) {
     );
 
     const [banner, setBanner] = useState();
+    const [open, setOpen] = useState(false);
+    const [preview, setPreview] = useState();
     const [eventName, setEventName] = useState(event?.name || "");
     const [eventLink, setEventLink] = useState(event?.link || "");
 
@@ -49,6 +52,17 @@ export default function CreateEvent({ setDone, event }) {
         if (!event) {
             eventNameRef.current.focus();
         }
+
+        // create the preview
+        if (!banner) {
+            setPreview(null);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(banner);
+        setPreview(objectUrl);
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl);
     }, [banner]);
 
     useEffect(() => {
@@ -62,8 +76,8 @@ export default function CreateEvent({ setDone, event }) {
 
     const checkEventLink = (url) => {
         let isValid = url.startsWith("http://") ? 1 : 0;
-        if (isValid == 0) isValid = url.startsWith("https://") ? 2 : 0;
-        if (url.length > 0 && isValid == 0)
+        if (isValid === 0) isValid = url.startsWith("https://") ? 2 : 0;
+        if (url.length > 0 && isValid === 0)
             notification({
                 content: (
                     <FormattedMessage id="message.warning.wrong_event_link" />
@@ -316,7 +330,7 @@ export default function CreateEvent({ setDone, event }) {
             </div>
             <div className={classes.currentEventPreview}>
                 {banner ? (
-                    <img src={URL.createObjectURL(banner)} />
+                    <img src={preview} />
                 ) : event ? (
                     <img src={event.imageUrl} title={event.banner?.name} />
                 ) : (
@@ -324,7 +338,7 @@ export default function CreateEvent({ setDone, event }) {
                 )}
             </div>
             <div className={classes.uploadContainer}>
-                <UploadFile
+                {/* <UploadFile
                     type="image/*"
                     file={banner}
                     placeholder={
@@ -337,6 +351,37 @@ export default function CreateEvent({ setDone, event }) {
                               })
                     }
                     setFile={setBanner}
+                /> */}
+                <UploadFile
+                    file={banner}
+                    setFile={(e) => {
+                        setBanner(e);
+                        setOpen(true);
+                    }}
+                    removeFile={() => {
+                        setBanner(null);
+                        setPreview(null);
+                    }}
+                    type="image/*"
+                    placeholder={
+                        event
+                            ? intl.formatMessage({
+                                  id: "buttons.placeholder.import.other_banner",
+                              })
+                            : intl.formatMessage({
+                                  id: "buttons.placeholder.import.banner",
+                              })
+                    }
+                />
+                <Popup
+                    open={open}
+                    handleClose={() => setOpen(false)}
+                    image={preview}
+                    getCroppedFile={(image) => {
+                        setPreview(image);
+                        setOpen(false);
+                    }}
+                    aspectRatios={["1:1", "16:9", "4:3", "3:2"]}
                 />
             </div>
             <div>
