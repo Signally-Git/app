@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import classes from "../accountSettings.module.css";
 import { useHistory } from "react-router-dom";
-import { Input, UploadFile, NavigationButtons } from "components";
-import { TokenService, request, useNotification } from "utils";
+import { Input, UploadFile, NavigationButtons, Popup } from "components";
+import { TokenService, request, useNotification, dataURItoBlob } from "utils";
 import { FormattedMessage } from "react-intl";
 
 function CompanySettings() {
@@ -10,15 +10,23 @@ function CompanySettings() {
         TokenService.getOrganisation()
     );
     const [uploadedMedia, setUploadedMedia] = useState();
+    const [open, setOpen] = useState(false);
     const [companyName, setCompanyName] = useState(organisation?.name || "");
     const [website, setWebsite] = useState(organisation?.websiteUrl || "");
     const [phone, setPhone] = useState(organisation?.address?.phone || "");
     const [email, setEmail] = useState(organisation?.address?.email || "");
     const [preview, setPreview] = useState();
     const [loading, setLoading] = useState(false);
+    const [croppedImage, setCroppedImage] = useState(null);
 
     const notification = useNotification();
     let history = useHistory();
+
+    const handleCroppedImage = (image) => {
+        setCroppedImage(image);
+        setPreview(image);
+        setOpen(false);
+    };
 
     useEffect(() => {
         // create the preview
@@ -36,7 +44,7 @@ function CompanySettings() {
     const handleSaveCompany = async () => {
         setLoading(true);
         const img = new FormData();
-        img.append("file", uploadedMedia);
+        img.append("file", dataURItoBlob(croppedImage));
         if (uploadedMedia) {
             await request
                 .post(`import/file`, img)
@@ -75,6 +83,9 @@ function CompanySettings() {
                             },
                         })
                         .then(() => {
+                            setCroppedImage(null);
+                            setUploadedMedia(null);
+                            setPreview(organisation?.logo?.url);
                             notification({
                                 content: (
                                     <>
@@ -173,7 +184,14 @@ function CompanySettings() {
                         )}
                         <UploadFile
                             file={uploadedMedia}
-                            setFile={(e) => setUploadedMedia(e)}
+                            setFile={(e) => {
+                                setUploadedMedia(e);
+                                setOpen(true);
+                            }}
+                            removeFile={() => {
+                                setUploadedMedia(null);
+                                setPreview(null);
+                            }}
                             placeholder={
                                 <FormattedMessage id="buttons.placeholder.import.image" />
                             }
@@ -181,7 +199,14 @@ function CompanySettings() {
                                 paddingTop: ".8rem",
                                 paddingBottom: ".8rem",
                             }}
-                            type="image/*"
+                            type=".png, .gif, .jpeg, .jpg"
+                        />
+                        <Popup
+                            open={open}
+                            image={preview}
+                            handleClose={() => setOpen(false)}
+                            getCroppedFile={handleCroppedImage}
+                            aspectRatios={["1:1"]}
                         />
                     </div>
                 </div>
