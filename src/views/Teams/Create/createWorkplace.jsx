@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { request, useNotification } from "utils";
 import { FormattedMessage, useIntl } from "react-intl";
 
+// todo: add crop
 export default function CreateWorkplace({ setDone }) {
     const intl = useIntl();
     const number = !localStorage.getItem("understand_workplace") ? 0 : 1;

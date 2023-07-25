@@ -84,7 +84,7 @@ $max-width: 75%;
         border: 3px solid #fff;
         border-radius: $hugeRadius;
         outline: none;
-        box-shadow: 1px 1px 3px #ff795488;
+        box-shadow: 1px 1px 3px rgba($color-primary, 0.8);
     }
 }
 

@@ -8,7 +8,7 @@ import { BsArrowRight } from "react-icons/bs";
 import { Button, Input } from "components";
 import { useHistory, useParams } from "react-router-dom";
 import { TokenService, useNotification, request, getEvents } from "utils";
-import { useDefaultOptions, getStyles } from "../create/createSignature.utils";
+import { getStyles } from "../create/createSignature.utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import { extractStyle, extractValue, handleSave } from "./editSignature.utils";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -187,9 +187,8 @@ function EditSignatureComponent() {
     });
 
     useEffect(() => {
-        if (defaultStyles && signatureOption && signatureInfo)
-            handlePopulate(defaultStyles);
-    }, [defaultStyles, selectedTemplate]);
+        handlePopulate(defaultStyles);
+    }, [defaultStyles]);
 
     // AppMenu
     const [tab, setTab] = useState(true);

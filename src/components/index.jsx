@@ -10,3 +10,4 @@ export { default as Modal } from "./Modal/Modal";
 export { default as SwitchLang } from "./SwitchLang/SwitchLang";
 export { default as UploadFile } from "./Upload/UploadFile";
 export { default as Footer } from "./Footer/Footer";
+export { default as Popup } from "./Upload/CropPopup/Popup";

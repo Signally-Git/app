@@ -33,7 +33,7 @@
   width: auto;
   margin-right: auto;
 }
-.container ul {
+.container .descriptionBeta > ul {
   display: flex;
   list-style: none;
   gap: 1rem;
