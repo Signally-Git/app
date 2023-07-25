@@ -1,14 +1,13 @@
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import classes from "./createEvent.module.css";
-import { Input, NavigationButtons, UploadFile } from "components";
+import { Input, NavigationButtons, UploadFile, Popup } from "components";
 import { useContext, useEffect, useRef, useState } from "react";
 import moment from "moment";
-import { useNotification, request } from "utils";
+import { useNotification, request, dataURItoBlob } from "utils";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
 import { LangContext } from "contexts/LangContext";
-import Popup from "../../../components/Upload/CropPopup/Popup";
 
 export default function CreateEvent({ setDone, event }) {
     const { locale } = useContext(LangContext);
@@ -28,6 +27,7 @@ export default function CreateEvent({ setDone, event }) {
     const [preview, setPreview] = useState();
     const [eventName, setEventName] = useState(event?.name || "");
     const [eventLink, setEventLink] = useState(event?.link || "");
+    const [croppedImage, setCroppedImage] = useState();
 
     const notification = useNotification();
     const eventNameRef = useRef(null);
@@ -101,7 +101,7 @@ export default function CreateEvent({ setDone, event }) {
         const start = moment(startDate);
         const end = moment(endDate);
         const image = new FormData();
-        image.append("file", banner);
+        image.append("file", dataURItoBlob(croppedImage));
         if (!event && banner) {
             await request
                 .post(`import/file`, image)
@@ -160,7 +160,7 @@ export default function CreateEvent({ setDone, event }) {
             const image = new FormData();
 
             if (banner) {
-                image.append("file", banner);
+                image.append("file", dataURItoBlob(croppedImage));
                 await request
                     .post(`import/file`, image)
                     .then(async (res) => {
@@ -378,6 +378,7 @@ export default function CreateEvent({ setDone, event }) {
                     handleClose={() => setOpen(false)}
                     image={preview}
                     getCroppedFile={(image) => {
+                        setCroppedImage(image);
                         setPreview(image);
                         setOpen(false);
                     }}

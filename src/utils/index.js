@@ -2,6 +2,7 @@ export {
     NotificationProvider,
     useNotification,
 } from "./notifications/notifications";
+export { dataURItoBlob } from "./dataURItoBlob";
 export { detectBrowserLanguage } from "./DetectBrowserLanguage";
 export { checkImageExists } from "./detectSocialMediaImage";
 export { handleScroll } from "./handleScroll";
