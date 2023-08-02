@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import { request } from "utils";
 import parse from "html-react-parser";
 
-export default function Preview({ twig, styles }) {
+export default function TemplatePreview({ id, styles }) {
     const [preview, setPreview] = useState(null);
     useEffect(() => {
         const getPreview = async () => {
-            if (twig && styles)
+            if (id && styles)
                 return await request
-                    .post("signature_compile", { twig, styles })
+                    .post(`compile_for_template/${id}`, { styles })
                     .then((res) => {
                         return res.data;
                     })
-                    .catch();
+                    .catch((err) => console.log(err));
         };
         getPreview().then((result) => result && setPreview(result));
-    }, [twig, styles]);
+    }, [id, styles]);
     if (preview) return parse(preview);
     return <></>;
 }

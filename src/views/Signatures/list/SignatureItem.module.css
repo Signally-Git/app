@@ -1,0 +1,23 @@
+.selected {
+  width: 95% !important;
+}
+
+.actionsContainer {
+  position: absolute;
+  right: 1rem;
+  z-index: 2;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+.actionsContainer svg {
+  color: #1B335E;
+  opacity: 0.6;
+}
+.actionsContainer svg:first-child {
+  font-size: 1rem;
+}
+.actionsContainer svg:hover {
+  color: #244EFF;
+  opacity: 1;
+}

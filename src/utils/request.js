@@ -35,6 +35,7 @@ request.interceptors.response.use(
                 try {
                     const rs = await request.post("/token/refresh", {
                         refresh_token: TokenService.getLocalRefreshToken(),
+                        token: TokenService.getLocalToken(),
                     });
 
                     const { token } = rs.data;

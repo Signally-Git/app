@@ -1,125 +1,74 @@
 import classes from "./signatures.module.css";
 import { Link, useHistory } from "react-router-dom";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
-import { FiTrash } from "react-icons/fi";
-import { AiOutlineEdit } from "react-icons/ai";
 import { Button, Modal } from "components";
 import parse from "html-react-parser";
 import { TokenService, useNotification, request } from "utils";
 import { FormattedMessage, useIntl } from "react-intl";
+import { SignatureItem } from "./list/SignatureItem";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 function Signatures() {
-    const intl = useIntl();
     const [templates, setTemplates] = useState([]);
     const notification = useNotification();
     const [deleted, setDeleted] = useState(false);
-    const [selected, setSelected] = useState({});
-    const [active] = useState("active");
+    const [selected, setSelected] = useState(null);
     const user = TokenService.getUser();
-    const [modal, setModal] = useState();
-    const [signatureOption, setSignatureOption] = useState({});
-    const [defaultStyles, setDefaultStyles] = useState();
-    const [preview, setPreview] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [modal, setModal] = useState(null);
+    const [preview, setPreview] = useState("");
     const [search, setSearch] = useState("");
+
+    const intl = useIntl();
+
     const history = useHistory();
 
     const getData = async () => {
-        const organisationSignatures =
-            TokenService.getOrganisation().signatures;
-        if (organisationSignatures && organisationSignatures.length > 0) {
-            setTemplates(organisationSignatures);
-        }
-
+        setLoading(true);
         try {
-            const response = await request.get(`signatures`);
-            const signatures = response.data["hydra:member"];
+            const organisationSignatures =
+                TokenService.getOrganisation().signatures;
 
-            if (signatures.length > 0) {
-                setTemplates(signatures);
+            let signatures = [];
+            if (organisationSignatures && organisationSignatures.length > 0) {
+                signatures = organisationSignatures;
             } else {
-                history.push("/create-signature");
+                const response = await request.get("signatures");
+                signatures = response.data["hydra:member"];
+
+                if (signatures.length === 0) {
+                    history.push("/create-signature");
+                    return;
+                }
             }
 
-            const signaturePromises = signatures.map((template) => {
-                request.get(`signatures`).then(() => {});
-                return request.get(template["@id"]);
-            });
-
+            const signaturePromises = signatures.map((signature) =>
+                request.get(signature["@id"])
+            );
             const signatureResponses = await Promise.all(signaturePromises);
+
             const signatureData = signatureResponses.map(
                 (response) => response.data
             );
-
             setTemplates(signatureData);
         } catch (error) {
-            console.error("Error fetching signatures:", error);
+            notification({
+                content: <FormattedMessage id="message.error.generic" />,
+                status: "invalid",
+            });
+        } finally {
+            setLoading(false);
         }
     };
 
     useEffect(() => {
-        setSignatureOption({
-            salutation: {
-                value: intl.formatMessage({
-                    id: "signature.default_greetings",
-                }),
-                enabled:
-                    defaultStyles?.filter(
-                        (style) => style.type === "greetings"
-                    )[0].value !== "false",
-                padding: defaultStyles?.filter(
-                    (style) => style.type === "greetingsPadding"
-                )[0].value,
-            },
-            custom: { enabled: false },
-            eco: { value: "Ecoresponsability", enabled: false },
-            followUs: { value: "Follow us", enabled: false },
-            bgColor: defaultStyles?.filter(
-                (style) =>
-                    style.type === "divColor" && style.property === "color"
-            )[0].value,
-            bannerTop: { url: "test", enabled: false, padding: 10 },
-            event: {
-                ...signatureOption.event,
-                display: `${process.env.REACT_APP_API_URL}/${signatureOption.event?.selected?.imagePath}`,
-                enabled:
-                    defaultStyles?.filter((style) => style.type === "event")[0]
-                        .value !== "false",
-                padding: defaultStyles?.filter(
-                    (style) => style.type === "eventPadding"
-                )[0].value,
-            },
-            socials: {
-                enabled: false,
-                bgColor: "#000",
-                fill: "#FFF",
-                items: [
-                    "twitter",
-                    "facebook",
-                    "pinterest",
-                    "snapchat",
-                    "linkedin",
-                    "instagram",
-                ],
-            },
-            footer: {
-                maxWidth: 380,
-                value: `Disclaimer`,
-                enabled:
-                    defaultStyles?.filter(
-                        (style) => style.type === "disclaimer"
-                    )[0].value !== "false",
-                padding: defaultStyles?.filter(
-                    (style) => style.type === "disclaimerPadding"
-                )[0].value,
-                size: 7,
-            },
-        });
-    }, []);
-
-    useEffect(async () => {
         getData();
     }, [deleted]);
+
+    useEffect(() => {
+        console.log(preview);
+    }, [preview]);
 
     const handleModal = (id) => {
         setModal(
@@ -133,7 +82,7 @@ function Signatures() {
                 content={``}
                 cancel={<FormattedMessage id="buttons.placeholder.cancel" />}
                 validate={<FormattedMessage id="buttons.placeholder.delete" />}
-                onCancel={() => setModal()}
+                onCancel={() => setModal(null)}
                 onConfirm={() => handleDelete(id)}
             />
         );
@@ -166,164 +115,92 @@ function Signatures() {
                     status: "invalid",
                 })
             );
-        setModal();
+        setModal(null);
     };
 
     return (
         <div>
             <div className={classes.container}>
-                <h1>
-                    <FormattedMessage id="signatures" />
-                </h1>
+                <FormattedMessage tagName="h1" id="signatures" />
                 <div className={classes.row}>
-                    {modal ? (
+                    {modal && (
                         <div className={classes.modalContainer}>{modal}</div>
-                    ) : (
-                        ""
                     )}
                     <div className={classes.teamsContainer}>
-                        {active === "active" ? (
-                            <div>
-                                {user?.roles[1] !== "ROLE_RH" ? (
-                                    <Link to="create-signature">
-                                        <Button color="primary" arrow={true}>
-                                            <FormattedMessage id="add_signature" />
-                                        </Button>
-                                    </Link>
-                                ) : (
-                                    ""
-                                )}
-                                <div className={classes.searchInput}>
-                                    <HiOutlineSearch />
-                                    <FormattedMessage id="search_signature">
-                                        {(placeholder) => (
-                                            <input
-                                                onChange={(e) =>
-                                                    setSearch(e.target.value)
-                                                }
-                                                className={classes.search}
-                                                type="text"
-                                                placeholder={placeholder}
-                                            />
-                                        )}
-                                    </FormattedMessage>
-                                </div>
-                                <span>
-                                    <FormattedMessage
-                                        id="signature.number"
-                                        values={{ count: templates.length }}
-                                    />
-                                </span>
-                                <ul className={classes.itemsList}>
-                                    {templates.map((signature, index) => {
-                                        if (
-                                            signature.name.search(
-                                                search.toLowerCase()
-                                            ) !== -1
-                                        )
-                                            return (
-                                                <li
-                                                    onMouseEnter={() => {
-                                                        setSelected(signature);
-                                                        request
-                                                            .get(
-                                                                signature["@id"]
-                                                            )
-                                                            .then((res) =>
-                                                                setPreview(
-                                                                    res.data
-                                                                )
-                                                            );
-                                                        setDefaultStyles(
-                                                            signature.signatureStyles
-                                                        );
-                                                    }}
-                                                    key={index}
-                                                    className={
-                                                        selected === signature
-                                                            ? classes.selected
-                                                            : ""
-                                                    }
-                                                >
-                                                    <span
-                                                        onClick={() =>
-                                                            TokenService.getUser()
-                                                                .roles[1] !==
-                                                            "ROLE_RH"
-                                                                ? history.push(
-                                                                      "/edit-signature/" +
-                                                                          signature.id
-                                                                  )
-                                                                : ""
-                                                        }
-                                                    >
-                                                        {signature.name}
-                                                    </span>
-                                                    {user?.roles[1] !==
-                                                    "ROLE_RH" ? (
-                                                        <div
-                                                            className={
-                                                                classes.actionsContainer
-                                                            }
-                                                        >
-                                                            <AiOutlineEdit
-                                                                onClick={() =>
-                                                                    TokenService.getUser()
-                                                                        .roles[1] !==
-                                                                    "ROLE_RH"
-                                                                        ? history.push(
-                                                                              "/edit-signature/" +
-                                                                                  signature.id
-                                                                          )
-                                                                        : ""
-                                                                }
-                                                            />
-                                                            <FiTrash
-                                                                onClick={() =>
-                                                                    handleModal(
-                                                                        signature.id
-                                                                    )
-                                                                }
-                                                            />
-                                                        </div>
-                                                    ) : (
-                                                        ""
-                                                    )}
-                                                </li>
-                                            );
-                                        else {
-                                            return (
-                                                <Fragment
-                                                    key={index}
-                                                ></Fragment>
-                                            );
-                                        }
-                                    })}
-                                </ul>
-                            </div>
-                        ) : active === "inactive" ? (
-                            <div>
-                                <Button color="primary" arrow={true}>
-                                    <Link to="create-signature">
+                        <div>
+                            {user?.roles.includes("ROLE_RH") && (
+                                <Link to="create-signature">
+                                    <Button color="primary" arrow={true}>
                                         <FormattedMessage id="add_signature" />
-                                    </Link>
-                                </Button>
+                                    </Button>
+                                </Link>
+                            )}
+                            <div className={classes.searchInput}>
+                                <HiOutlineSearch />
+                                <input
+                                    onChange={(e) => setSearch(e.target.value)}
+                                    className={classes.search}
+                                    type="text"
+                                    placeholder={intl.formatMessage({
+                                        id: "search_signature",
+                                    })}
+                                />
                             </div>
-                        ) : (
-                            ""
-                        )}
+                            <span>
+                                <FormattedMessage
+                                    id="signature.number"
+                                    values={{ count: templates.length }}
+                                />
+                            </span>
+                            {loading && (
+                                <div className={classes.loading}>
+                                    <AiOutlineLoading3Quarters />
+                                </div>
+                            )}
+                            <ul className={classes.itemsList}>
+                                {templates.map((signature) => (
+                                    <SignatureItem
+                                        key={signature.id}
+                                        search={search}
+                                        signature={signature}
+                                        isSelected={selected === signature}
+                                        onPreview={() => {
+                                            setSelected(signature);
+                                            request
+                                                .get(
+                                                    `/compile_for_listing_signature/${signature.id}`
+                                                )
+                                                .then(({ data }) => {
+                                                    setPreview(data);
+                                                });
+                                        }}
+                                        onDelete={handleModal}
+                                        onEdit={() => {
+                                            setSelected(signature);
+                                            request
+                                                .get(
+                                                    `/compile_for_listing_signature/${signature.id}`
+                                                )
+                                                .then(({ data }) =>
+                                                    setPreview(data)
+                                                );
+                                        }}
+                                    />
+                                ))}
+                            </ul>
+                        </div>
                     </div>
-                    {preview.html?.length > 0 && (
+                    {preview && (
                         <div className={classes.signaturePreview}>
                             <ul>
                                 <li>
                                     <h5>
                                         <FormattedMessage id="signature.title" />{" "}
                                         <span className={classes.primaryTxt}>
-                                            {preview.name}
+                                            {preview?.name}
                                         </span>
                                     </h5>
-                                    {parse(preview.preview)}
+                                    {parse(preview)}
                                 </li>
                             </ul>
                         </div>

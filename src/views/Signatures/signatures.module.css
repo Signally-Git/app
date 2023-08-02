@@ -182,10 +182,6 @@
   text-decoration: underline;
 }
 
-.selected {
-  width: 95% !important;
-}
-
 .groupName {
   color: #244EFF;
   border-radius: 5px;
@@ -308,24 +304,4 @@
 .CTA {
   width: 15rem;
   margin: 0 5rem;
-}
-
-.actionsContainer {
-  position: absolute;
-  right: 1rem;
-  z-index: 2;
-  gap: 0.5rem;
-  justify-content: center;
-  align-items: center;
-}
-.actionsContainer svg {
-  color: #1B335E;
-  opacity: 0.6;
-}
-.actionsContainer svg:first-child {
-  font-size: 1rem;
-}
-.actionsContainer svg:hover {
-  color: #244EFF;
-  opacity: 1;
 }

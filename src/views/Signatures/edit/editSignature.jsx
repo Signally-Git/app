@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import Options from "../create/Options/options";
 import Infos from "../create/Infos/infos";
 import TemplateSelection from "../create/TemplateSelect/templateSelect";
-import Preview from "../create/Preview/customizablePreview";
+import Preview from "../create/Preview/creationCompile";
 import { BsArrowRight } from "react-icons/bs";
 import { Button, Input } from "components";
 import { useHistory, useParams } from "react-router-dom";
@@ -318,7 +318,7 @@ function EditSignatureComponent() {
         if (signatureInfo && signatureOption && selectedTemplate?.html) {
             setPreview(
                 <Preview
-                    twig={selectedTemplate?.html}
+                    id={selectedTemplate?.id}
                     styles={getStyles(
                         signatureInfo,
                         signatureOption,

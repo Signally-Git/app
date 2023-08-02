@@ -108,7 +108,7 @@
   color: #244EFF;
 }
 
-.signaturePreview {
+.signaturePreview > table {
   pointer-events: none;
 }
 

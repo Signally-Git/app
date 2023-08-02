@@ -1,12 +1,12 @@
 import classes from "./templateSelect.module.css";
 import { useState, useEffect, Fragment } from "react";
 import { Button } from "components";
-import Template from "../Preview/customizablePreview";
 import { request } from "utils";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { getStyles } from "../createSignature.utils";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
+import TemplatePreview from "../Preview/templatePreview";
 
 // Displaying the list of bought and free templates (Studio, Store) and allows to select one to create custom signature
 
@@ -110,8 +110,8 @@ export default function TemplateSelection({
                                             name="template"
                                             value={JSON.stringify(template)}
                                         />
-                                        <Template
-                                            twig={template.html}
+                                        <TemplatePreview
+                                            id={template.id}
                                             styles={getStyles(
                                                 signatureInfo,
                                                 signatureOption,

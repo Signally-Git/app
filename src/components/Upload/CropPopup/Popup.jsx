@@ -11,13 +11,13 @@ export default function Popup({
     getCroppedFile,
     aspectRatios,
 }) {
-    const portalContainerRef = useRef(document.createElement("div")); // Créez le portalContainer une seule fois
+    const portalContainerRef = useRef(document.createElement("div"));
 
     useEffect(() => {
         const body = document.body;
 
         if (open) {
-            body.appendChild(portalContainerRef.current); // Ajouter le portalContainer au body s'il n'est pas déjà présent
+            body.appendChild(portalContainerRef.current);
             document.addEventListener("click", handleClickOutside);
         } else {
             document.removeEventListener("click", handleClickOutside);
@@ -25,8 +25,6 @@ export default function Popup({
 
         return () => {
             document.removeEventListener("click", handleClickOutside);
-            // Ne retirez pas le portalContainer du DOM lorsque le composant est démonté
-            // Ainsi, il restera disponible pour les ouvertures ultérieures de la modal
         };
     }, [open]);
 
@@ -55,6 +53,6 @@ export default function Popup({
                 </div>
             </div>
         </div>,
-        portalContainerRef.current // Utilisez le portalContainer comme point d'ancrage pour le createPortal
+        portalContainerRef.current
     );
 }

@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import Options from "./Options/options";
 import Infos from "./Infos/infos";
 import TemplateSelection from "./TemplateSelect/templateSelect";
-import Preview from "./Preview/customizablePreview";
+import Preview from "./Preview/creationCompile";
 import { BsArrowRight } from "react-icons/bs";
 import { Button } from "components";
 import { Input } from "components";
@@ -16,6 +16,7 @@ import {
     handleSave,
 } from "./createSignature.utils";
 import { FormattedMessage, useIntl } from "react-intl";
+import Eye from "../../../components/EyeDropper/EyeDropper";
 
 // Component handling the creation of signature, selection of template
 function CreateSignatureComponent() {
@@ -186,7 +187,7 @@ function CreateSignatureComponent() {
         if (signatureInfo && signatureOption && selectedTemplate)
             setPreview(
                 <Preview
-                    twig={selectedTemplate?.html}
+                    id={selectedTemplate?.id}
                     styles={getStyles(
                         signatureInfo,
                         signatureOption,
@@ -259,6 +260,7 @@ function CreateSignatureComponent() {
                                 ></div>
                                 <br />
                                 <div className={classes.signaturePreview}>
+                                    <Eye />
                                     {selectedTemplate && preview}
                                 </div>
                             </div>

@@ -186,10 +186,6 @@
     }
 }
 
-.selected {
-    width: 95% !important;
-}
-
 .groupName {
     color: $color-primary;
     border-radius: $borderRadius;
@@ -310,24 +306,4 @@
 .CTA {
     width: 15rem;
     margin: 0 5rem;
-}
-
-.actionsContainer {
-    position: absolute;
-    right: 1rem;
-    z-index: 2;
-    gap: 0.5rem;
-    justify-content: center;
-    align-items: center;
-    svg {
-        color: $color-dark-accent;
-        opacity: 0.6;
-    }
-    svg:first-child {
-        font-size: 1rem;
-    }
-    svg:hover {
-        color: $color-primary;
-        opacity: 1;
-    }
 }

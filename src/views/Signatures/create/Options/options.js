@@ -4,6 +4,7 @@ import { Range } from "react-range";
 import { useEffect, useRef, useState } from "react";
 import { CustomSelect } from "components";
 import { FormattedMessage } from "react-intl";
+import Eye from "components/EyeDropper/EyeDropper";
 
 // Options tab
 // Contains : the closing formula
@@ -213,6 +214,7 @@ export default function Options(props) {
                             <span>
                                 <FormattedMessage id="signature.options.background_color" />
                             </span>
+                            <Eye />
                             <div
                                 title="Background color"
                                 style={{

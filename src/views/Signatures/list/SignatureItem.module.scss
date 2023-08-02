@@ -1,0 +1,25 @@
+@import "../../../assets/style/global";
+
+.selected {
+    width: 95% !important;
+}
+
+.actionsContainer {
+    position: absolute;
+    right: 1rem;
+    z-index: 2;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    svg {
+        color: $color-dark-accent;
+        opacity: 0.6;
+    }
+    svg:first-child {
+        font-size: 1rem;
+    }
+    svg:hover {
+        color: $color-primary;
+        opacity: 1;
+    }
+}
