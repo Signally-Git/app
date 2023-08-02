@@ -7,10 +7,10 @@ import {
     NavigationButtons,
     CustomCheckbox,
     UploadFile,
+    Popup,
 } from "components";
-import { TokenService, request, useNotification } from "utils";
+import { TokenService, request, useNotification, dataURItoBlob } from "utils";
 import { FormattedMessage } from "react-intl";
-import Popup from "components/Upload/CropPopup/Popup";
 
 function UserSettings() {
     const user = TokenService.getUser();
@@ -18,8 +18,6 @@ function UserSettings() {
 
     const [uploadedMedia, setUploadedMedia] = useState();
     const [open, setOpen] = useState(false);
-
-    console.log("user?.picture", user?.picture);
 
     const [preview, setPreview] = useState(user?.picture || "");
 
@@ -30,6 +28,7 @@ function UserSettings() {
     const [language, setLanguage] = useState(user?.lang || "");
     const [deployed, setDeployed] = useState(user?.synchronizable || false);
     const [urlAgenda, setUrlAgenda] = useState(user?.urlAgenda || "");
+    const [croppedImage, setCroppedImage] = useState(null);
 
     const notification = useNotification();
     let history = useHistory();
@@ -37,7 +36,7 @@ function UserSettings() {
     useEffect(() => {
         // create the preview
         if (!uploadedMedia) {
-            setPreview(null);
+            setPreview(user?.picture || null);
             return;
         }
         const objectUrl = URL.createObjectURL(uploadedMedia);
@@ -51,18 +50,21 @@ function UserSettings() {
         setPreview(user?.picture ?? "");
     }, [user?.picture]);
 
+    const handleCroppedImage = (image) => {
+        setCroppedImage(image);
+        setPreview(image);
+        setOpen(false);
+        
+    };
+
     const handleSavePersonal = async () => {
         setLoading(true);
         const img = new FormData();
-        img.append("file", uploadedMedia);
-        console.log("img", img);
-        console.log("user.picture", user.picture);
+        img.append("file",  dataURItoBlob(croppedImage));
         if (uploadedMedia) {
             await request
                 .post(`import/file`, img)
                 .then(async (res) => {
-                    console.log("res.data", res.data);
-                    console.log("res.data.url", res.data.url);
                     const req = {
                         picture: res.data.url,
                         firstName: firstName,
@@ -79,6 +81,9 @@ function UserSettings() {
                             headers: { "Content-Type": "application/merge-patch+json" },
                         })
                         .then(() => {
+                            setCroppedImage(null);
+                            setUploadedMedia(null);
+                            // setPreview(res?.data?.picture);
                             notification({
                                 content: (
                                     <>
@@ -197,7 +202,7 @@ function UserSettings() {
                             }}
                             type="image/*"
                         />
-                        <Popup
+                        {/* <Popup
                             open={open}
                             handleClose={() => setOpen(false)}
                             image={preview}
@@ -206,6 +211,13 @@ function UserSettings() {
                                 setOpen(false);
                             }}
                             aspectRatios={["1:1", "3:4", "16:9", "2:3"]}
+                        /> */}
+                        <Popup
+                            open={open}
+                            image={preview}
+                            handleClose={() => setOpen(false)}
+                            getCroppedFile={handleCroppedImage}
+                            aspectRatios={["1:1"]}
                         />
                     </div>
                 </div>

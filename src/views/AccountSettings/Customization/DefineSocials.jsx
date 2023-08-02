@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Input, UploadFile } from "components";
+import { Input, UploadFile, Popup } from "components";
 import classes from "./DefineSocials.module.css";
 import { FiCheck, FiPlusCircle, FiTrash } from "react-icons/fi";
 import {
@@ -11,7 +11,6 @@ import {
 } from "utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import Popup from "../../../components/Upload/CropPopup/Popup";
 
 export default function DefineSocials({ setList }) {
     const socialBaseUrl = "https://files.signally.io/socials/default/";
@@ -277,8 +276,8 @@ export default function DefineSocials({ setList }) {
                     <UploadFile
                         file={uploadedMedia}
                         setFile={(e) => {
-                            setUploadedMedia(e)
-                            setOpen(true)
+                            setUploadedMedia(e);
+                            setOpen(true);
                         }}
                         removeFile={() => {
                             setUploadedMedia(null);

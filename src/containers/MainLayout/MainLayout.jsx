@@ -16,14 +16,14 @@ export default function MainLayout({ path, children }) {
         );
 
         const getRealtimeDataOrganisation = (data) => {
-            setOrganisation((prevOrganisation) => ({
-                ...prevOrganisation,
+            setOrganisation({
+                ...organisation,
                 ...data,
-            }));
-            TokenService.setOrganisation((prevOrganisation) => ({
-                ...prevOrganisation,
+            });
+            TokenService.setOrganisation({
+                ...organisation,
                 ...data,
-            }));
+            });
         };
 
         sseOrganisation.onmessage = (e) => {
@@ -32,14 +32,8 @@ export default function MainLayout({ path, children }) {
         };
 
         const getRealtimeDataUser = (data) => {
-            setUser((prevUser) => ({
-                ...prevUser,
-                ...data,
-            }));
-            TokenService.setUser((prevUser) => ({
-                ...prevUser,
-                ...data,
-            }));
+            setUser({ ...user, ...data });
+            TokenService.setUser({ ...user, ...data });
         };
 
         sseUser.onmessage = (e) => {

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import classes from "../accountSettings.module.css";
 import { useHistory } from "react-router-dom";
-import { Input, UploadFile, NavigationButtons } from "components";
-import { TokenService, request, useNotification } from "utils";
+import { Input, UploadFile, NavigationButtons, Popup } from "components";
+import { TokenService, request, useNotification, dataURItoBlob } from "utils";
 import { FormattedMessage } from "react-intl";
-import Popup from "components/Upload/CropPopup/Popup";
 
 function CompanySettings() {
     const [organisation, setOrganisation] = useState(
@@ -16,16 +15,48 @@ function CompanySettings() {
     const [website, setWebsite] = useState(organisation?.websiteUrl || "");
     const [phone, setPhone] = useState(organisation?.address?.phone || "");
     const [email, setEmail] = useState(organisation?.address?.email || "");
-    const [preview, setPreview] = useState();
+    const [preview, setPreview] = useState(organisation?.logo?.url || null);
     const [loading, setLoading] = useState(false);
+    const [croppedImage, setCroppedImage] = useState(null);
 
     const notification = useNotification();
     let history = useHistory();
 
+    const handleCroppedImage = (image) => {
+        setCroppedImage(image);
+        setPreview(image);
+        setOpen(false);
+    };
+
+    useEffect(() => {
+
+        console.log("organisation useEffect organisation?.logo?.url", organisation?.logo?.url);
+
+        setPreview(organisation?.logo?.url || null)
+        setCompanyName(organisation?.name || "");
+        setWebsite(organisation?.websiteUrl || "");
+        setPhone(organisation?.address?.phone || "");
+        setEmail(organisation?.address?.email || "");
+    }, [organisation]);
+
+    
+    useEffect(() => {
+        request.get(organisation?.["@id"]).then((org) => {
+            org = org?.data;
+            setOrganisation(org);
+            // setPreview(org?.logo?.url);
+            // setCompanyName(org?.name);
+            // setWebsite(org?.websiteUrl);
+            // setPhone(org?.digitalAddress?.phone);
+            // setEmail(org?.digitalAddress?.email);
+        });
+    }, []);
+
     useEffect(() => {
         // create the preview
         if (!uploadedMedia) {
-            setPreview(null);
+            console.log("uploadedMedia useEffect organisation?.logo?.url", organisation?.logo?.url);
+            setPreview(organisation?.logo?.url || null);
             return;
         }
         const objectUrl = URL.createObjectURL(uploadedMedia);
@@ -38,7 +69,7 @@ function CompanySettings() {
     const handleSaveCompany = async () => {
         setLoading(true);
         const img = new FormData();
-        img.append("file", uploadedMedia);
+        img.append("file", dataURItoBlob(croppedImage));
         if (uploadedMedia) {
             await request
                 .post(`import/file`, img)
@@ -48,7 +79,6 @@ function CompanySettings() {
                         path: res.data.path,
                         organisation: organisation["@id"],
                     };
-                    console.log("requestLogo", requestLogo);
                     setTimeout(async () => {
                         await request.post("logos", requestLogo).catch(() =>
                             notification({
@@ -77,7 +107,16 @@ function CompanySettings() {
                                 "Content-Type": "application/merge-patch+json",
                             },
                         })
-                        .then(() => {
+                        .then((response) => {
+
+                            
+                            const updatedOrganisation = response.data;
+                            setOrganisation(updatedOrganisation);
+                            setCroppedImage(null);
+                            setUploadedMedia(null);
+
+                            console.log("triggered", updatedOrganisation?.logo?.url)
+                            setPreview(updatedOrganisation?.logo?.url);
                             notification({
                                 content: (
                                     <>
@@ -149,18 +188,6 @@ function CompanySettings() {
         }
     };
 
-    useEffect(() => {
-        request.get(organisation?.["@id"]).then((org) => {
-            org = org?.data;
-            setOrganisation(org);
-            setPreview(org?.logo?.url);
-            setCompanyName(org?.name);
-            setWebsite(org?.websiteUrl);
-            setPhone(org?.digitalAddress?.phone);
-            setEmail(org?.digitalAddress?.email);
-        });
-    }, []);
-
     return (
         <>
             <div className={classes.inputsContainer}>
@@ -191,17 +218,14 @@ function CompanySettings() {
                                 paddingTop: ".8rem",
                                 paddingBottom: ".8rem",
                             }}
-                            type="image/*"
+                            type=".png, .gif, .jpeg, .jpg"
                         />
                         <Popup
                             open={open}
-                            handleClose={() => setOpen(false)}
                             image={preview}
-                            getCroppedFile={(image) => {
-                                setPreview(image);
-                                setOpen(false);
-                            }}
-                            aspectRatios={["1:1", "3:4", "16:9", "2:3"]}
+                            handleClose={() => setOpen(false)}
+                            getCroppedFile={handleCroppedImage}
+                            aspectRatios={["1:1"]}
                         />
                     </div>
                 </div>

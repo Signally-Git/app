@@ -15,7 +15,7 @@ function Signatures() {
     const notification = useNotification();
     const [deleted, setDeleted] = useState(false);
     const [selected, setSelected] = useState({});
-    const [active, setActive] = useState("active");
+    const [active] = useState("active");
     const user = TokenService.getUser();
     const [modal, setModal] = useState();
     const [signatureOption, setSignatureOption] = useState({});
@@ -42,7 +42,7 @@ function Signatures() {
             }
 
             const signaturePromises = signatures.map((template) => {
-                request.get(`signatures`).then(({ data }) => {});
+                request.get(`signatures`).then(() => {});
                 return request.get(template["@id"]);
             });
 
@@ -238,7 +238,7 @@ function Signatures() {
                                                             signature.signatureStyles
                                                         );
                                                     }}
-                                                    key={signature.id}
+                                                    key={index}
                                                     className={
                                                         selected === signature
                                                             ? classes.selected

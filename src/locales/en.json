@@ -270,6 +270,14 @@
             "from_csv": "From a .csv file",
             "import": {
                 "logo": "Import a logo",
+                "crop": {
+                    "title": "Image crop",
+                    "rotate": "Rotate",
+                    "flip_h": "Flip horizontally",
+                    "flip_v": "Flip vertically",
+                    "free": "Free",
+                    "crop": "Crop"
+                },
                 "image": "Import an image",
                 "banner": "Import a banner",
                 "other_banner": "Import another banner"

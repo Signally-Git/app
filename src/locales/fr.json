@@ -278,6 +278,14 @@
             "from_csv": "A partir d'un fichier .csv",
             "import": {
                 "logo": "Importer un logo",
+                "crop": {
+                    "title": "Recadrer l'image",
+                    "rotate": "Rotation",
+                    "flip_h": "Retourner horizontalement",
+                    "flip_v": "Retourner verticalement",
+                    "free": "Libre",
+                    "crop": "Recadrer"
+                },
                 "image": "Importer une image",
                 "banner": "Importer une bannière",
                 "other_banner": "Importer une autre bannière"
