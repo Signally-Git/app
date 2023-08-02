@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "../accountSettings.module.css";
 import { useHistory } from "react-router-dom";
 import {
@@ -6,13 +6,23 @@ import {
     SwitchLang,
     NavigationButtons,
     CustomCheckbox,
+    UploadFile,
 } from "components";
 import { TokenService, request, useNotification } from "utils";
 import { FormattedMessage } from "react-intl";
+import Popup from "components/Upload/CropPopup/Popup";
 
 function UserSettings() {
     const user = TokenService.getUser();
     const [loading, setLoading] = useState(false);
+
+    const [uploadedMedia, setUploadedMedia] = useState();
+    const [open, setOpen] = useState(false);
+
+    console.log("user?.picture", user?.picture);
+
+    const [preview, setPreview] = useState(user?.picture || "");
+
     const [firstName, setFirstName] = useState(user?.firstName || "");
     const [lastName, setLastName] = useState(user?.lastName || "");
     const [position, setPosition] = useState(user?.position || "");
@@ -24,56 +34,181 @@ function UserSettings() {
     const notification = useNotification();
     let history = useHistory();
 
+    useEffect(() => {
+        // create the preview
+        if (!uploadedMedia) {
+            setPreview(null);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(uploadedMedia);
+        setPreview(objectUrl);
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [uploadedMedia]);
+
+    useEffect(() => {
+        setPreview(user?.picture ?? "");
+    }, [user?.picture]);
+
     const handleSavePersonal = async () => {
         setLoading(true);
-        const req = {
-            firstName: firstName,
-            lastName: lastName,
-            position: position,
-            phone: mobile,
-            urlAgenda: urlAgenda,
-            synchronizable: deployed,
-            lang: language["@id"] || language,
-        };
-        await request
-            .patch(`users/${user.id}`, req, {
-                headers: { "Content-Type": "application/merge-patch+json" },
-            })
-            .then(() => {
-                notification({
-                    content: (
-                        <>
-                            <span className={classes.primaryColor}>
-                                {firstName} {lastName}{" "}
-                            </span>
-                            <FormattedMessage id="message.success.edit" />
-                        </>
-                    ),
-                    status: "valid",
+        const img = new FormData();
+        img.append("file", uploadedMedia);
+        console.log("img", img);
+        console.log("user.picture", user.picture);
+        if (uploadedMedia) {
+            await request
+                .post(`import/file`, img)
+                .then(async (res) => {
+                    console.log("res.data", res.data);
+                    console.log("res.data.url", res.data.url);
+                    const req = {
+                        picture: res.data.url,
+                        firstName: firstName,
+                        lastName: lastName,
+                        position: position,
+                        phone: mobile,
+                        urlAgenda: urlAgenda,
+                        synchronizable: deployed,
+                        lang: language["@id"] || language,
+                    };
+
+                    await request
+                        .patch(`users/${user.id}`, req, {
+                            headers: { "Content-Type": "application/merge-patch+json" },
+                        })
+                        .then(() => {
+                            notification({
+                                content: (
+                                    <>
+                                        <span className={classes.primaryColor}>
+                                            {firstName} {lastName}{" "}
+                                        </span>
+                                        <FormattedMessage id="message.success.edit" />
+                                    </>
+                                ),
+                                status: "valid",
+                            });
+                        })
+                        .catch(() => {
+                            notification({
+                                content: (
+                                    <>
+                                        <FormattedMessage id="message.error.edit" />
+                                        <span className={classes.primaryColor}>
+                                            {" "}
+                                            {firstName} {lastName}
+                                        </span>
+                                    </>
+                                ),
+                                status: "invalid",
+                            });
+                        })
+                        .finally(() => {
+                            setLoading(false);
+                        });
+                })
+                .catch(() =>
+                    notification({
+                        content: <FormattedMessage id="message.error.logo" />,
+                        status: "invalid",
+                    })
+                )
+                .finally(() => {
+                    setLoading(false);
                 });
-            })
-            .catch(() => {
-                notification({
-                    content: (
-                        <>
-                            <FormattedMessage id="message.error.edit" />
-                            <span className={classes.primaryColor}>
-                                {" "}
-                                {firstName} {lastName}
-                            </span>
-                        </>
-                    ),
-                    status: "invalid",
+        } else {
+            const req = {
+                firstName: firstName,
+                lastName: lastName,
+                position: position,
+                phone: mobile,
+                urlAgenda: urlAgenda,
+                synchronizable: deployed,
+                lang: language["@id"] || language,
+            };
+            await request
+                .patch(`users/${user.id}`, req, {
+                    headers: { "Content-Type": "application/merge-patch+json" },
+                })
+                .then(() => {
+                    notification({
+                        content: (
+                            <>
+                                <span className={classes.primaryColor}>
+                                    {firstName} {lastName}{" "}
+                                </span>
+                                <FormattedMessage id="message.success.edit" />
+                            </>
+                        ),
+                        status: "valid",
+                    });
+                })
+                .catch(() => {
+                    notification({
+                        content: (
+                            <>
+                                <FormattedMessage id="message.error.edit" />
+                                <span className={classes.primaryColor}>
+                                    {" "}
+                                    {firstName} {lastName}
+                                </span>
+                            </>
+                        ),
+                        status: "invalid",
+                    });
+                })
+                .finally(() => {
+                    setLoading(false);
                 });
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+        }
     };
 
     return (
         <>
             <div className={classes.inputsContainer}>
+                <div className={classes.inputContainer}>
+                    <FormattedMessage tagName="label" id="picture" />
+                    <div className={classes.logoCompanyDiv}>
+                        {preview && (
+                            <img
+                                alt={`Picture ${firstName} ${lastName}`}
+                                className={classes.logoPreview}
+                                src={preview}
+                            />
+                        )}
+                        <UploadFile
+                            file={uploadedMedia}
+                            setFile={(e) => {
+                                setUploadedMedia(e)
+                                setOpen(true)
+                            }}
+                            removeFile={() => {
+                                setUploadedMedia(null);
+                                setPreview(null);
+                            }}
+                            placeholder={
+                                <FormattedMessage id="buttons.placeholder.import.image" />
+                            }
+                            style={{
+                                paddingTop: ".8rem",
+                                paddingBottom: ".8rem",
+                            }}
+                            type="image/*"
+                        />
+                        <Popup
+                            open={open}
+                            handleClose={() => setOpen(false)}
+                            image={preview}
+                            getCroppedFile={(image) => {
+                                setPreview(image);
+                                setOpen(false);
+                            }}
+                            aspectRatios={["1:1", "3:4", "16:9", "2:3"]}
+                        />
+                    </div>
+                </div>
                 <div>
                     <div className={classes.row}>
                         <div className={classes.inputContainer}>

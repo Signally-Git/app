@@ -48,6 +48,7 @@ function CompanySettings() {
                         path: res.data.path,
                         organisation: organisation["@id"],
                     };
+                    console.log("requestLogo", requestLogo);
                     setTimeout(async () => {
                         await request.post("logos", requestLogo).catch(() =>
                             notification({
