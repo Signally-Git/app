@@ -191,6 +191,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         let template = Object?.values(templates)?.find((obj) => {
             return obj?.["@id"] === id;
         });
+        console.log(show);
         if (event.imageUrl !== undefined)
             template = {
                 ...template,
@@ -199,8 +200,17 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                     `${event?.imageUrl}`
                 ),
             };
-
-        setSelectedTemplate(template);
+        request
+            .get(
+                `compile_for_attribution_signature/${show?.id}/${show?.[
+                    "@type"
+                ].toLowerCase()}`
+            )
+            .then(({ data }) => {
+                console.log(data);
+                setSelectedTemplate({ preview: data });
+            });
+        // setSelectedTemplate(template);
     };
 
     const handleSwapEvent = (id) => {
