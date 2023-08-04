@@ -34,6 +34,8 @@ export default function Options(props) {
         };
     }, [color]);
 
+    console.log("props?.data", props?.data);
+
     const handleBackground = () => {
         if (colorSelect === "bg")
             return (
@@ -126,6 +128,106 @@ export default function Options(props) {
                                 }}
                                 defaultValue={props?.data?.salutation.value}
                             />
+                            <div className={classes.salutationColor}>
+                                <h6>
+                                    <FormattedMessage id="color" />
+                                </h6>
+                                <button
+                                    className={classes.colorPreview}
+                                    onClick={() =>
+                                        colorSelect !== "salutation"
+                                            ? setColorSelect("salutation")
+                                            : setColorSelect("")
+                                    }
+                                    style={{
+                                        background:
+                                            props?.data?.salutation.color,
+                                    }}
+                                />
+                            </div>
+                            {colorSelect === "salutation" && (
+                                <>
+                                    <div
+                                        className={`${classes.optionContainer} ${classes.colorContainer}`}
+                                        ref={color}
+                                    >
+                                        <HexColorInput
+                                            className={classes.input}
+                                            color={
+                                                props?.data?.salutation.color
+                                            }
+                                            onChange={(e) =>
+                                                props.setData({
+                                                    ...props.data,
+                                                    salutation: {
+                                                        ...props?.data
+                                                            ?.salutation,
+                                                        color: e,
+                                                    },
+                                                })
+                                            }
+                                        />
+                                        <HexColorPicker
+                                            className={classes.colorPick}
+                                            color={
+                                                props?.data?.salutation.color
+                                            }
+                                            onChange={(e) =>
+                                                props.setData({
+                                                    ...props.data,
+                                                    salutation: {
+                                                        ...props?.data
+                                                            ?.salutation,
+                                                        color: e,
+                                                    },
+                                                })
+                                            }
+                                        />{" "}
+                                    </div>
+                                </>
+                            )}
+                            <div className={classes.size}>
+                                <h6>
+                                    <FormattedMessage id="size" /> (
+                                    {props?.data?.salutation.fontSize}px)
+                                </h6>
+                                <Range
+                                    step={1}
+                                    min={7}
+                                    max={22}
+                                    values={[
+                                        props?.data?.salutation.fontSize || 14,
+                                    ]}
+                                    onChange={(size) =>
+                                        props.setData({
+                                            ...props.data,
+                                            salutation: {
+                                                ...props?.data?.salutation,
+                                                fontSize: size,
+                                            },
+                                        })
+                                    }
+                                    renderTrack={({ props, children }) => (
+                                        <div
+                                            className={classes.rangeSlider}
+                                            {...props}
+                                            style={{
+                                                ...props.style,
+                                            }}
+                                        >
+                                            {children}
+                                        </div>
+                                    )}
+                                    renderThumb={({ props }) => (
+                                        <div
+                                            {...props}
+                                            style={{
+                                                ...props.style,
+                                            }}
+                                        />
+                                    )}
+                                />
+                            </div>
                             <div className={classes.spacing}>
                                 <FormattedMessage
                                     id="signature.options.spacing"

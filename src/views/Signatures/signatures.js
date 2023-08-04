@@ -65,10 +65,16 @@ function Signatures() {
                 }),
                 enabled:
                     defaultStyles?.filter(
-                        (style) => style.type === "greetings"
+                        (style) => style.type === "greetingsEnabled"
                     )[0].value !== "false",
                 padding: defaultStyles?.filter(
                     (style) => style.type === "greetingsPadding"
+                )[0].value,
+                fontSize: defaultStyles?.filter(
+                    (style) => style.type === "greetingsFontSize"
+                )[0].value,
+                color: defaultStyles?.filter(
+                    (style) => style.type === "greetingsColor"
                 )[0].value,
             },
             custom: { enabled: false },
@@ -112,7 +118,12 @@ function Signatures() {
                 padding: defaultStyles?.filter(
                     (style) => style.type === "disclaimerPadding"
                 )[0].value,
-                size: 7,
+                fontSize: defaultStyles?.filter(
+                    (style) => style.type === "disclaimerFontSize"
+                )[0].value,
+                color: defaultStyles?.filter(
+                    (style) => style.type === "disclaimerColor"
+                )[0].value,
             },
         });
     }, []);

@@ -64,6 +64,8 @@ function useDefaultOptions() {
             value: intl.formatMessage({ id: "signature.default_greetings" }),
             enabled: false,
             padding: 10,
+            color: "#000",
+            fontSize: 10,
         },
         custom: { enabled: false },
         eco: { value: "Ecoresponsability", enabled: false },
@@ -92,7 +94,7 @@ function useDefaultOptions() {
             enabled: false,
             padding: 10,
             color: "#000",
-            fontSize: 7,
+            fontSize: 12,
         },
     };
 }
@@ -358,6 +360,16 @@ const getStyles = (signatureInfo, signatureOption, company, user) => {
             value: signatureOption.salutation.padding?.toString() || "12",
             type: "greetingsPadding",
         },
+        {
+            property: "fontSize",
+            value: signatureOption.salutation.fontSize?.toString() || "12",
+            type: "greetingsFontSize",
+        },
+        {
+            property: "color",
+            value: signatureOption.salutation.color?.toString() || "#000",
+            type: "greetingsColor",
+        },
         // Event
         {
             property: "enabled",
@@ -392,7 +404,7 @@ const getStyles = (signatureInfo, signatureOption, company, user) => {
         },
         {
             property: "fontSize",
-            value: signatureOption.footer.fontSize?.toString() || "7",
+            value: signatureOption.footer.fontSize?.toString() || "12",
             type: "disclaimerFontSize",
         },
         {
@@ -778,6 +790,20 @@ const handleSave = async (
                     value:
                         signatureOption.salutation.padding?.toString() || "12",
                     type: "greetingsPadding",
+                    signature: result?.data?.id,
+                },
+                {
+                    property: "fontSize",
+                    value:
+                        signatureOption.salutation.fontSize?.toString() || "12",
+                    type: "greetingsFontSize",
+                    signature: result?.data?.id,
+                },
+                {
+                    property: "color",
+                    value:
+                        signatureOption.salutation.color?.toString() || "#000",
+                    type: "greetingsColor",
                     signature: result?.data?.id,
                 },
                 // Event

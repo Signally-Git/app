@@ -51,6 +51,24 @@
   padding-right: 0.5rem;
 }
 
+.spacing,
+.size,
+.salutationColor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 75%;
+  height: 2.5rem;
+}
+
+.salutationColor {
+  width: auto !important;
+  margin-right: auto;
+}
+.salutationColor h6 {
+  padding-right: 0.5rem;
+}
+
 .size h6 {
   white-space: nowrap;
 }
