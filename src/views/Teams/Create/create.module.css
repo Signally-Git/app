@@ -1,3 +1,4 @@
+/* global.scss */
 .container {
   width: calc(100% - 2rem);
   max-height: 90%;
@@ -85,7 +86,7 @@
 
 .btn {
   display: flex;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   border: none;
   background: none;
   outline: none;
@@ -93,11 +94,11 @@
 }
 .btn:hover {
   cursor: pointer;
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .primaryColor {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .inputsContainer > div {

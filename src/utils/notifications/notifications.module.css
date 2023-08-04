@@ -1,19 +1,20 @@
+/* global.scss */
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
   width: fit-content !important;
   height: 2.5rem !important;
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
   z-index: 10;
   top: 1rem;
   position: fixed;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   font-weight: bold;
   max-width: 50%;
 }
 .container svg {
-  border-radius: 20px;
+  border-radius: var(--hugeRadius);
   padding: 4px;
   fill: #fff;
   font-size: 1.25rem;

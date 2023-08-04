@@ -1,3 +1,4 @@
+/* global.scss */
 .selected {
   width: 95% !important;
 }
@@ -11,13 +12,13 @@
   align-items: center;
 }
 .actionsContainer svg {
-  color: #1B335E;
+  color: var(--color-dark-accent);
   opacity: 0.6;
 }
 .actionsContainer svg:first-child {
   font-size: 1rem;
 }
 .actionsContainer svg:hover {
-  color: #244EFF;
+  color: var(--color-primary);
   opacity: 1;
 }

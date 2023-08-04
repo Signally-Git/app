@@ -1,3 +1,4 @@
+/* global.scss */
 .container {
   width: 80%;
   height: 90vh;
@@ -32,7 +33,7 @@
 .container .editContainer > ul > li > button {
   background-color: transparent;
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: var(--hugeRadius);
   height: 2rem;
   width: 2rem;
   font-size: 1rem;

@@ -1,14 +1,15 @@
+/* global.scss */
 .input {
   transition: 0.2s;
   background: #fff;
-  border: 1px solid #E7EEF8;
+  border: 1px solid var(--color-light-accent);
   padding: 1rem;
   font-size: 0.8rem;
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
   margin: 0.5rem 0;
   outline: none;
   font-family: inherit;
 }
 .input:focus {
-  border-color: #244EFF;
+  border-color: var(--color-primary);
 }

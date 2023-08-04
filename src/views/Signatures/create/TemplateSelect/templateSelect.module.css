@@ -1,15 +1,16 @@
+/* global.scss */
 .modal {
   width: 100%;
   margin-left: 3rem;
   height: 100%;
   padding-left: 1rem;
   max-height: 80vh;
-  background-color: #efeef4;
+  background-color: var(--background-color);
   display: flex;
   flex-direction: column;
 }
 .modal h1 {
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 .modal > span {
   margin: auto;
@@ -18,7 +19,7 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
 }
 .modal input {
   padding: 3rem 10rem;
@@ -27,7 +28,7 @@
   height: 3rem;
   font-size: 0.9rem;
   color: grey;
-  border-radius: 10px;
+  border-radius: var(--mediumBorderRadius);
   background: transparent;
   border: none;
 }
@@ -64,7 +65,7 @@
   justify-content: center;
   align-items: center;
   font-size: 0.9rem;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   line-height: 1.65rem;
   text-indent: 0.35rem;
 }
@@ -91,9 +92,9 @@
   position: relative;
   transition: 0.2s;
   text-transform: uppercase;
-  border-radius: 5px;
-  border: 1px solid #1B335E;
-  color: #1B335E;
+  border-radius: var(--borderRadius);
+  border: 1px solid var(--color-dark-accent);
+  color: var(--color-dark-accent);
   padding: 0.25rem 0.75rem;
   display: flex;
   align-items: center;
@@ -108,14 +109,14 @@
 }
 .modal .tagsContainer .otherTags li:hover,
 .modal .studioStore li:hover {
-  background: #1B335E;
+  background: var(--color-dark-accent);
   color: #fff;
   cursor: pointer;
 }
 .modal .tagsContainer .otherTags .active,
 .modal .studioStore .active {
   font-weight: bold;
-  background: #1B335E;
+  background: var(--color-dark-accent);
   color: #fff;
 }
 .modal .otherTagsContainer {
@@ -145,23 +146,23 @@
 }
 .modal .studioStore .studio,
 .modal .studioStore .store {
-  color: #244EFF;
-  border-color: #244EFF;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 .modal .studioStore .studio:hover,
 .modal .studioStore .store:hover {
-  background-color: #244EFF;
+  background-color: var(--color-primary);
 }
 .modal .studioStore .studio input,
 .modal .studioStore .store input {
   cursor: pointer;
 }
 .modal .studioStore .activeStudio {
-  background-color: #244EFF !important;
+  background-color: var(--color-primary) !important;
   color: #fff;
 }
 .modal h5 {
-  color: #1B335E;
+  color: var(--color-dark-accent);
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1rem;
@@ -191,7 +192,7 @@
 .modal .templatesContainer li {
   padding: 1rem;
   position: relative;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   background-color: #fff;
   transition: border-color 0.3s;
   border: 1px solid transparent;
@@ -199,10 +200,10 @@
   margin-bottom: 2rem;
 }
 .modal .templatesContainer li:hover {
-  border-color: #244EFF;
+  border-color: var(--color-primary);
 }
 .modal .templatesContainer li:hover p {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .templateName {
@@ -223,11 +224,11 @@
   border: none;
   font-weight: bold;
   font-size: 1rem;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   background: none;
 }
 .btnBackTemplate:hover {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .btnBackTemplate svg {
   font-size: 1.2rem;
@@ -251,18 +252,18 @@
   font-size: 0.9rem;
   cursor: pointer;
   padding: 0.25rem 0.5rem;
-  color: #1B335E;
-  border: 1px solid #1B335E;
-  border-radius: 5px;
+  color: var(--color-dark-accent);
+  border: 1px solid var(--color-dark-accent);
+  border-radius: var(--borderRadius);
 }
 .filter label:hover {
-  color: #244EFF;
-  border-color: #244EFF;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 .filter input:checked ~ label {
   color: #fff;
-  border-color: #244EFF;
-  background: #244EFF;
+  border-color: var(--color-primary);
+  background: var(--color-primary);
 }
 
 .loading {

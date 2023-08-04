@@ -1,3 +1,4 @@
+/* global.scss */
 .btn {
   background-color: transparent;
   display: flex;
@@ -10,7 +11,7 @@
   padding: 0.5rem 1rem;
   font-size: 0.85rem;
   font-weight: 600;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
 }
 .btn * {
   color: inherit;
@@ -20,7 +21,7 @@
   border-color: transparent;
 }
 .link-primary:hover {
-  color: #244EFF;
+  color: var(--color-primary);
   cursor: pointer;
 }
 
@@ -29,12 +30,12 @@
 }
 
 .primary {
-  color: #244EFF;
-  border-color: #244EFF;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
   cursor: pointer;
 }
 .primary:hover {
-  background-color: #244EFF;
+  background-color: var(--color-primary);
   color: #fff;
 }
 .primary:hover svg {
@@ -43,7 +44,7 @@
 .primary svg {
   transition: 0.2s;
   margin-left: 0.5rem;
-  stroke: #244EFF;
+  stroke: var(--color-primary);
   stroke-width: 1px;
 }
 
@@ -54,16 +55,16 @@
 
 .primaryFill {
   color: #fff;
-  background-color: #244EFF;
-  border-color: #244EFF;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 .primaryFill:hover {
   background-color: transparent;
-  color: #244EFF;
+  color: var(--color-primary);
   cursor: pointer;
 }
 .primaryFill:hover svg {
-  stroke: #244EFF;
+  stroke: var(--color-primary);
 }
 .primaryFill svg {
   transition: 0.2s;
@@ -73,12 +74,12 @@
 }
 
 .secondary {
-  color: #1B335E;
-  border-color: #1B335E;
+  color: var(--color-dark-accent);
+  border-color: var(--color-dark-accent);
 }
 .secondary:hover {
   cursor: pointer;
-  background: #1B335E;
+  background: var(--color-dark-accent);
   color: #fff;
 }
 .secondary:hover svg {
@@ -87,18 +88,18 @@
 .secondary svg {
   transition: 0.2s;
   margin-left: 0.5rem;
-  stroke: #1B335E;
+  stroke: var(--color-dark-accent);
   stroke-width: 1px;
 }
 
 .secondaryFill {
   color: #fff;
-  background-color: #1B335E;
-  border-color: #1B335E;
+  background-color: var(--color-dark-accent);
+  border-color: var(--color-dark-accent);
 }
 .secondaryFill:hover {
   background-color: transparent;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   cursor: pointer;
 }
 
@@ -109,7 +110,7 @@
 }
 .white:hover {
   color: #fff;
-  background-color: #1B335E;
+  background-color: var(--color-dark-accent);
 }
 
 .disabled, .loading {

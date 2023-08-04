@@ -1,3 +1,4 @@
+/* global.scss */
 @media screen and (max-width: 680px) {
   .container {
     padding-bottom: 10rem;
@@ -15,7 +16,7 @@
 .container h1 {
   flex: 100%;
   margin-left: 0.5rem;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   font-size: 1.75rem;
 }
 
@@ -37,19 +38,19 @@
   flex: 48%;
   max-width: 48%;
   padding: 1rem 1rem;
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
   margin: 0.5rem 0;
   background: #fff;
   box-shadow: 0 20px 20px rgba(206, 142, 124, 0.15);
 }
 .tile * {
   font-family: "Montserrat", serif;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   margin: 0;
   padding: 0;
 }
 .tile:first-of-type {
-  background-color: #244EFF;
+  background-color: var(--color-primary);
 }
 .tile:first-of-type span,
 .tile:first-of-type p,
@@ -58,7 +59,7 @@
   color: #fff !important;
 }
 .tile:nth-of-type(2) {
-  background-color: #FFBE00;
+  background-color: var(--color-secondary);
 }
 .tile:nth-of-type(2) span,
 .tile:nth-of-type(2) p {
@@ -74,7 +75,7 @@
 }
 
 .primaryTxt {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .loadingBtn {
@@ -120,7 +121,7 @@
 
 .deploy {
   cursor: pointer;
-  background-color: #e79388 !important;
+  background-color: var(--color-thirdary) !important;
 }
 .deploy .onHover {
   display: none;
@@ -217,7 +218,7 @@
   }
 }
 .billingTile {
-  background: #1B335E !important;
+  background: var(--color-dark-accent) !important;
 }
 .billingTile * {
   color: #fff;

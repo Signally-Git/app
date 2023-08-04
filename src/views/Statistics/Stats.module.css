@@ -1,3 +1,4 @@
+/* global.scss */
 .statisticContainer {
   position: relative;
   width: 60%;
@@ -5,7 +6,7 @@
   min-height: 25rem;
   background: rgba(255, 255, 255, 0.4);
   padding: 0.25rem 1rem;
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
 }
 
 .entitySelectContainer,
@@ -22,7 +23,7 @@
   padding: 1rem;
   list-style: none;
   background: rgba(255, 255, 255, 0.4);
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
 }
 
 @keyframes spin {
@@ -36,7 +37,7 @@
 .loadingContainer {
   left: 1rem;
   margin-top: 3rem;
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .loadingContainer > svg {
   animation-name: spin;
@@ -73,14 +74,14 @@
   position: absolute;
   bottom: -10rem;
   background: rgb(255, 255, 255);
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
 }
 .entitiesContainer > div {
   width: 25%;
   padding: 0.25rem;
   position: fixed;
   background: rgba(255, 255, 255, 0.4);
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
   font-size: 0.9rem;
 }
 .entitiesContainer > div > input {

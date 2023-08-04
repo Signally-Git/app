@@ -1,15 +1,16 @@
+/* global.scss */
 .container {
   display: flex;
   flex-wrap: wrap;
   height: 70vh;
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 .container h1 {
   width: 100%;
 }
 
 .primaryColor {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .infosContainer {
@@ -25,15 +26,15 @@
 
 .eventsContainer {
   background-color: #fff;
-  border-radius: 5px;
-  min-width: 40rem;
-  width: 65%;
-  max-width: 40rem;
+  border-radius: var(--borderRadius);
+  min-width: var(--leftColMinWidth);
+  width: var(--leftColWidth);
+  max-width: var(--leftColMaxWidth);
   padding: 2rem;
   position: relative;
-  min-height: 50rem;
-  height: 65%;
-  max-height: 50rem;
+  min-height: var(--leftColMinHeight);
+  height: var(--leftColHeight);
+  max-height: var(--leftColMaxHeight);
   margin-right: 2rem;
 }
 .eventsContainer ul {
@@ -65,7 +66,7 @@
   margin: auto;
 }
 .actionsContainer:hover {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .actionsContainer svg {
   opacity: 0.6;
@@ -98,11 +99,11 @@
 .active {
   transition: 0.2s;
   margin-bottom: 0.5rem;
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .active::after {
   transition: 0.2s;
-  background-color: #244EFF;
+  background-color: var(--color-primary);
 }
 
 .pastEvent {
@@ -139,7 +140,7 @@
   align-items: center;
   justify-content: center;
   background: #fff;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   width: 30%;
   padding: 0 1rem 1rem;
   z-index: 3;
@@ -165,7 +166,7 @@
 
 .boldPrimary {
   font-weight: bold;
-  color: #5c74b2 !important;
+  color: var(--color-primary-variant) !important;
 }
 
 .itemsList {
@@ -189,8 +190,8 @@
   font-size: 0.85rem;
   font-weight: 600;
   position: relative;
-  background: #F4F7FC;
-  border-radius: 5px;
+  background: var(--color-lighter-accent);
+  border-radius: var(--smallBorderRadius);
 }
 .itemsList li .checkbox {
   width: 100%;
@@ -217,9 +218,9 @@
   bottom: 0;
   margin: auto;
   height: 8px;
-  border-radius: 20px;
+  border-radius: var(--hugeRadius);
   width: 8px;
-  background: #244EFF;
+  background: var(--color-primary);
   transition: 0.2s;
 }
 .itemsList li::before {
@@ -232,7 +233,7 @@
   bottom: 0;
   margin: auto;
   height: 6px;
-  border-radius: 20px;
+  border-radius: var(--hugeRadius);
   width: 6px;
   background: transparent;
   transition: 0.2s;
@@ -262,7 +263,7 @@
   left: -1rem !important;
   height: 8px !important;
   width: 8px !important;
-  background: #244EFF !important;
+  background: var(--color-primary) !important;
 }
 
 .infos {
@@ -286,22 +287,22 @@
 
 .search {
   text-indent: 2rem;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   width: 100%;
   outline: none;
   border: 1px solid transparent;
   margin: 1rem 0;
   padding: 0.75rem 0.5rem;
-  background: #F4F7FC;
+  background: var(--color-lighter-accent);
   display: block;
   transition: 0.2s;
 }
 .search:focus {
-  border-color: #244EFF;
+  border-color: var(--color-primary);
 }
 
 .primaryTxt {
-  color: #5c74b2;
+  color: var(--color-primary-variant);
 }
 
 .createEventContainer {
@@ -359,7 +360,7 @@
   width: 100%;
   backface-visibility: hidden;
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   margin-bottom: auto;
   position: absolute;
   top: 0;
@@ -374,7 +375,7 @@
 .front h2 svg:hover,
 .back h2 svg:hover {
   cursor: pointer;
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .front > div,
 .back > div {

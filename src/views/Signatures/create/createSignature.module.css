@@ -1,5 +1,6 @@
+/* global.scss */
 .loading {
-  color: #244EFF;
+  color: var(--color-primary);
   animation: spin infinite 1s linear;
 }
 
@@ -34,7 +35,7 @@
 }
 
 .primaryColor {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .container > div {
@@ -60,7 +61,7 @@
   align-items: center;
   justify-content: center;
   background: #fff;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   width: 25%;
   height: 13rem;
   padding: 0 1rem 1rem;
@@ -105,7 +106,7 @@
   margin: 1.5rem 0.5rem 0 !important;
 }
 .modal .primaryTxt {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .signaturePreview > table {
@@ -122,11 +123,11 @@
   border: none;
   font-weight: bold;
   font-size: 1rem;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   background: none;
 }
 .btnTemplate:hover {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .btnTemplate svg {
   font-size: 1.2rem;
@@ -147,7 +148,7 @@
   max-height: 65vh;
   overflow: auto;
   background: #fff;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   width: 40%;
   min-width: 15rem;
   padding-top: 5.5rem;
@@ -173,11 +174,11 @@
   border: none;
   outline: none;
   background: none;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   cursor: pointer;
 }
 .tabsContainer > button:hover {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .tabsContainer .switchTabs {
   cursor: pointer;
@@ -225,7 +226,7 @@
 .tabsContainer .tabTitles span {
   width: 50%;
   line-height: 4.5rem;
-  color: #0F1E4C;
+  color: var(--color-darker-accent);
   font-size: 0.85rem;
   font-weight: bold;
 }
@@ -234,11 +235,11 @@
   width: 100%;
   position: relative;
   cursor: pointer;
-  background-color: #F3F7FB;
+  background-color: var(--color-light-accent-variation2);
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  border-left: 12px solid #F3F7FB;
-  border-right: 12px solid #F3F7FB;
+  border-left: 12px solid var(--color-light-accent-variation2);
+  border-right: 12px solid var(--color-light-accent-variation2);
 }
 .tabsContainer .sliderTabs:before {
   position: absolute;
@@ -255,10 +256,10 @@
   transition: 0.4s;
 }
 .tabsContainer .sliderTabs {
-  border-radius: 10px;
+  border-radius: var(--mediumBorderRadius);
 }
 .tabsContainer .sliderTabs:before {
-  border-radius: 10px;
+  border-radius: var(--mediumBorderRadius);
 }
 
 .col {
@@ -314,17 +315,17 @@
   cursor: pointer;
 }
 .confirm .noBgBtn {
-  background: #1B335E;
+  background: var(--color-dark-accent);
   padding: 0.15rem 0.75rem !important;
-  border: #1B335E;
-  border-radius: 5px;
+  border: var(--color-dark-accent);
+  border-radius: var(--borderRadius);
   color: #fff;
   margin-left: 1rem;
 }
 .confirm button {
   border: none;
   background: none;
-  color: #244EFF;
+  color: var(--color-primary);
   padding: 0;
   font-size: 1.1rem;
   display: flex;
@@ -332,7 +333,7 @@
   margin: 0 0 0 0.25rem;
 }
 .confirm button:last-child {
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 
 @keyframes blink {
@@ -368,7 +369,7 @@
   background-color: #fff;
   height: fit-content;
   max-height: 80%;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
 }
 .signatureContainer .preview {
   pointer-events: none;
@@ -391,7 +392,7 @@
 .signatureContainer .browserHeader .btnsContainer > li {
   min-width: 10px;
   min-height: 10px;
-  border-radius: 20px;
+  border-radius: var(--hugeRadius);
 }
 .signatureContainer .browserHeader .btnsContainer .close {
   background: #ff5d24;
@@ -409,13 +410,13 @@
   height: 1.5rem;
   font-size: 0.7rem;
   color: grey;
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
   border: none;
 }
 .signatureContainer .lazyLoadingLong,
 .signatureContainer .lazyLoadingShort,
 .signatureContainer .lazyLoadingMedium {
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   background: #f1f1f1;
   width: 100%;
   height: 1rem;
@@ -443,7 +444,7 @@
   margin: auto;
   flex-direction: column;
   align-items: center;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   text-align: center;
   padding: 0;
 }
@@ -490,13 +491,13 @@
   flex: 100%;
   background: #fff;
   width: 100%;
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
 }
 
 .placeholderImg,
 .placeholderBanner {
   background: rgba(184, 184, 184, 0.596);
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
   margin-right: 40%;
   height: 38px;
   flex: 100%;
@@ -565,11 +566,11 @@
 }
 
 input:checked + .slider {
-  background-color: #244EFF;
+  background-color: var(--color-primary);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #244EFF;
+  box-shadow: 0 0 1px var(--color-primary);
 }
 
 input:checked + .slider:before {
@@ -584,7 +585,7 @@ input:checked + .slider:before {
 }
 
 .slider.round:before {
-  border-radius: 20px;
+  border-radius: var(--hugeRadius);
 }
 
 .iconsContainer {
@@ -600,10 +601,10 @@ input:checked + .slider:before {
 .iconsContainer .borderInput {
   transition: 0.2s;
   background: #fff;
-  border: 1px solid #F4F7FC;
+  border: 1px solid var(--color-lighter-accent);
   padding: 1rem;
   padding-right: 5rem;
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
   margin: 0.5rem 0;
   font-family: "Montserrat";
   outline: none;
@@ -650,5 +651,5 @@ input:checked + .slider:before {
 }
 
 .primaryTxt {
-  color: #244EFF;
+  color: var(--color-primary);
 }

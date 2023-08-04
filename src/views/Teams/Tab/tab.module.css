@@ -1,9 +1,10 @@
+/* global.scss */
 .container {
   max-height: 60%;
 }
 
 .colorPrimary {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .modal {
@@ -13,7 +14,7 @@
   align-items: center;
   justify-content: center;
   background: #fff;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   width: 20%;
   padding: 0 1rem 1rem;
   z-index: 3;
@@ -41,7 +42,7 @@
 }
 
 .primaryTxt {
-  color: #244EFF !important;
+  color: var(--color-primary) !important;
 }
 
 .colheader {
@@ -52,18 +53,18 @@
   width: 100%;
 }
 .colheader .totalNumber {
-  color: #5c74b2;
+  color: var(--color-primary-variant);
   font-weight: bold;
   font-size: 0.9rem;
 }
 .colheader button {
   border: none;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   background: none;
   font-size: 0.9rem;
 }
 .colheader button:hover {
-  color: #244EFF;
+  color: var(--color-primary);
   cursor: pointer;
 }
 
@@ -99,8 +100,8 @@
   font-size: 0.85rem;
   font-weight: 600;
   position: relative;
-  background: #F4F7FC;
-  border-radius: 5px;
+  background: var(--color-lighter-accent);
+  border-radius: var(--smallBorderRadius);
 }
 .itemsList li .checkbox {
   width: 100%;
@@ -126,9 +127,9 @@
   bottom: 0;
   margin: auto;
   height: 8px;
-  border-radius: 20px;
+  border-radius: var(--hugeRadius);
   width: 8px;
-  background: #244EFF;
+  background: var(--color-primary);
   transition: 0.2s;
 }
 .itemsList li:hover {
@@ -141,7 +142,7 @@
   justify-content: space-between;
 }
 .itemsList li > div span {
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 .itemsList li > div > span > span {
   font-weight: normal;
@@ -182,7 +183,7 @@
 .teamList .editing .rename {
   padding: 0.5rem 1rem;
   margin: 0 0 0 0;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
 }
 .teamList .rename {
   margin-bottom: 0;
@@ -210,7 +211,7 @@
   padding: 1rem;
   box-sizing: border-box;
   position: absolute;
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
   inset: auto 0;
   margin: auto;
   display: flex;
@@ -264,7 +265,7 @@
 }
 .actionsContainer svg,
 .actionsContainerAdmin svg {
-  color: #1B335E;
+  color: var(--color-dark-accent);
   opacity: 0.6;
 }
 .actionsContainer svg:first-child,
@@ -273,7 +274,7 @@
 }
 .actionsContainer svg:hover,
 .actionsContainerAdmin svg:hover {
-  color: #244EFF;
+  color: var(--color-primary);
   opacity: 1;
 }
 
@@ -294,10 +295,10 @@
   width: 80%;
   border: none;
   opacity: 1;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   font-size: 0.85rem;
   font-weight: 600;
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
   padding: 0.5rem 1rem;
 }
 
@@ -306,11 +307,11 @@
 }
 
 .groupName {
-  color: rgba(27, 51, 94, 0.75) !important;
+  color: rgba(var(--color-dark-accent), 0.75) !important;
   padding: 0.25rem 0.75rem;
   padding-top: 0.25rem !important;
-  border-radius: 5px;
-  background-color: rgba(27, 51, 94, 0.05);
+  border-radius: var(--borderRadius);
+  background-color: rgba(var(--color-dark-accent), 0.05);
   margin-top: 0.5rem;
   font-weight: 600;
   font-size: 0.6rem !important;
@@ -330,28 +331,28 @@
 
 .search {
   text-indent: 2rem;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   width: 100%;
   outline: none;
   border: 1px solid transparent;
   margin: 1rem 0;
   padding: 0.75rem 0.5rem;
-  background: #F4F7FC;
+  background: var(--color-lighter-accent);
   display: block;
   transition: 0.2s;
 }
 .search:focus {
-  border-color: #244EFF;
+  border-color: var(--color-primary);
 }
 
 .btnReady .checkmark {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .loading {
   display: flex;
   margin: 5rem auto auto;
-  color: #244EFF;
+  color: var(--color-primary);
   animation: spin 1s 0s infinite linear forwards;
 }
 

@@ -1,3 +1,4 @@
+/* global.scss */
 .container {
   display: flex;
   flex-direction: column;
@@ -18,7 +19,7 @@
 }
 
 .open input {
-  border-radius: 5px 5px 0 0;
+  border-radius: var(--smallBorderRadius) var(--smallBorderRadius) 0 0;
 }
 .open .inputContainer > svg {
   transform: rotate(-180deg);
@@ -34,7 +35,7 @@
   z-index: 6;
   width: 100%;
   font-weight: bold;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   padding: 0.65rem 2rem 0.65rem 1rem;
 }
 .inputContainer svg {
@@ -46,12 +47,12 @@
   top: 0;
   margin: auto;
   position: absolute;
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 
 .splitter {
   font-size: 0.8rem;
-  color: #244EFF;
+  color: var(--color-primary);
   font-weight: bold;
 }
 
@@ -64,11 +65,11 @@
   right: 0;
   z-index: 5;
   margin: 0 auto;
-  border: 1px solid #DDE5F1;
+  border: 1px solid var(--color-light-accent-variation);
   width: 100%;
   background-color: #fff;
-  box-shadow: 0 20px 30px #DDE5F1;
-  border-radius: 0 0 5px 5px;
+  box-shadow: 0 20px 30px var(--color-light-accent-variation);
+  border-radius: 0 0 var(--smallBorderRadius) var(--smallBorderRadius);
   padding: 2.65rem 0 0;
   list-style: none;
   opacity: 0;
@@ -85,20 +86,20 @@
   justify-content: space-between;
   font-size: 0.9rem;
   font-weight: normal;
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 .list li input,
 .list li input + svg {
   opacity: 0;
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .list li input:checked + svg {
   opacity: 1;
 }
 .list li:hover, .list li:focus-within {
   transition: 0.2s;
-  color: #1B335E;
-  background-color: #ECEFF6;
+  color: var(--color-dark-accent);
+  background-color: var(--color-light-accent-variation1);
 }
 
 @keyframes dropDown {

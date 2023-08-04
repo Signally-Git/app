@@ -1,3 +1,4 @@
+/* global.scss */
 .loading {
   animation: spin 1s 0s infinite linear forwards;
 }
@@ -11,7 +12,7 @@
   }
 }
 .container {
-  background: #F4F7FC;
+  background: var(--color-lighter-accent);
   display: flex;
   flex-direction: row-reverse;
   height: 100vh;
@@ -51,13 +52,13 @@
 .container input[type=password]:focus,
 .container select:focus {
   box-shadow: 0 12px 40px rgba(230, 208, 201, 0.28);
-  border-color: #244EFF;
+  border-color: var(--color-primary);
 }
 .container select {
   padding: 0.9rem;
   margin-top: -0.35rem;
   outline: none;
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
   width: 100%;
   border-color: transparent;
 }
@@ -152,7 +153,7 @@
 
 .inputContainer .inputTitle {
   margin-bottom: 6px;
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 
 .slider {
@@ -189,7 +190,7 @@
   position: relative;
   display: flex;
   justify-content: center;
-  background-color: #FFFFFF;
+  background-color: var(--pureLight);
   align-items: baseline;
   font-family: Montserrat, serif;
   flex-direction: column;
@@ -238,13 +239,13 @@
 
 .formContainer h2 {
   font-family: Trebuchet MS, serif;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   margin-top: 0;
   font-size: 2rem;
 }
 
 .formContainer h2 span {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .landingContainer {
@@ -255,16 +256,16 @@
 }
 
 .landingContainer h1 {
-  color: #244EFF;
+  color: var(--color-primary);
   margin-bottom: 2rem;
 }
 
 .landingContainer p {
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 
 .landingContainer p span {
-  color: #244EFF;
+  color: var(--color-primary);
   font-weight: bold;
 }
 
@@ -297,7 +298,7 @@
   animation-delay: 0.75s;
 }
 .congrats h2 {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .congrats button {
   margin-left: 0;
@@ -308,7 +309,7 @@
 .congrats > span {
   animation-delay: 0.75s;
   font-size: 0.8rem;
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 
 .disappear {
@@ -342,10 +343,10 @@
   display: flex;
   justify-content: right;
   cursor: pointer;
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 .forgot:hover {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .modal {
@@ -355,8 +356,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 40px rgba(27, 51, 94, 0.3);
-  border-radius: 5px;
+  box-shadow: 0 0 40px rgba(var(--color-dark-accent), 0.3);
+  border-radius: var(--borderRadius);
   inset: 0;
   max-width: 25rem;
   height: 15rem;
@@ -369,7 +370,7 @@
   text-align: center;
 }
 .modal p .primaryTxt {
-  color: #244EFF;
+  color: var(--color-primary);
   font-weight: bold;
   display: inline;
 }
@@ -407,7 +408,7 @@
   margin-left: 0.5rem;
   background: red;
   color: #fff;
-  border-radius: 20px;
+  border-radius: var(--hugeRadius);
   padding: 5px;
 }
 

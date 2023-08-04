@@ -1,3 +1,4 @@
+/* global.scss */
 .container {
   width: 100%;
   display: flex;
@@ -5,8 +6,8 @@
   min-height: 100%;
 }
 .container select {
-  border: 1px solid #F4F7FC;
-  border-radius: 5px;
+  border: 1px solid var(--color-lighter-accent);
+  border-radius: var(--smallBorderRadius);
   padding: 0.5rem 0.5rem;
   width: 75%;
   outline: none;
@@ -17,7 +18,7 @@
   font-weight: normal;
 }
 .container h4 {
-  color: #1B335E;
+  color: var(--color-dark-accent);
   font-weight: bold;
   font-size: 1rem;
   text-align: left;
@@ -57,7 +58,7 @@
 
 .colorPreview {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.356);
-  border-radius: 20px;
+  border-radius: var(--hugeRadius);
   border: none;
   margin: 0.2rem;
   width: 20px;
@@ -67,7 +68,7 @@
 .rangeSlider {
   height: 6px;
   width: 100%;
-  background-color: #F4F7FC;
+  background-color: var(--color-lighter-accent);
   margin: auto;
   margin-right: 0;
   margin-left: 1.25rem;
@@ -77,11 +78,11 @@
   transition: 200ms;
   height: 25px;
   width: 25px;
-  background-color: #244EFF;
+  background-color: var(--color-primary);
   border: 3px solid #fff;
-  border-radius: 20px;
+  border-radius: var(--hugeRadius);
   outline: none;
-  box-shadow: 1px 1px 3px rgba(36, 78, 255, 0.8);
+  box-shadow: 1px 1px 3px rgba(var(--color-primary), 0.8);
 }
 
 .checkToText {
@@ -92,8 +93,8 @@
 }
 .checkToText > input[type=text] {
   background: none;
-  border: 1px solid #F4F7FC;
-  border-radius: 5px;
+  border: 1px solid var(--color-lighter-accent);
+  border-radius: var(--smallBorderRadius);
   padding: 0.5rem 0.5rem;
   margin-left: 0;
   width: 75%;
@@ -108,8 +109,8 @@
 
 .textArea {
   background: none;
-  border: 1px solid #F4F7FC;
-  border-radius: 5px;
+  border: 1px solid var(--color-lighter-accent);
+  border-radius: var(--smallBorderRadius);
   padding: 0.5rem 0.5rem;
   margin-left: 0;
   font-family: "Helvetica", serif;
@@ -133,15 +134,15 @@
   justify-content: space-between;
   font-size: 0.75rem;
   width: 75%;
-  border: 1px solid #F4F7FC;
-  border-radius: 5px;
+  border: 1px solid var(--color-lighter-accent);
+  border-radius: var(--smallBorderRadius);
   padding: 0.5rem 0.5rem;
   margin-top: 0.5rem;
 }
 
 .colorPreview {
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: var(--hugeRadius);
   width: 20px;
   height: 20px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.55);
@@ -154,7 +155,7 @@
   max-width: 9rem;
   background: #fff;
   box-shadow: 0 12px 40px rgba(230, 208, 201, 0.8);
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
   justify-content: center;
   align-items: center;
   top: 0;
@@ -250,11 +251,11 @@
 }
 
 input:checked + .slider {
-  background-color: #244EFF;
+  background-color: var(--color-primary);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #244EFF;
+  box-shadow: 0 0 1px var(--color-primary);
 }
 
 input:checked + .slider:before {
@@ -266,7 +267,7 @@ input:checked + .slider:before {
 }
 
 .slider.round:before {
-  border-radius: 20px;
+  border-radius: var(--hugeRadius);
 }
 
 .socialsList {
@@ -293,7 +294,7 @@ input:checked + .slider:before {
   cursor: grab;
   padding: 0.5rem 0.5rem 0 0.75rem;
   border: 1px solid #f5f5f5;
-  border-radius: 5px;
+  border-radius: var(--smallBorderRadius);
 }
 .socialsList > div[role=button]::before {
   color: grey;

@@ -1,3 +1,4 @@
+/* global.scss */
 @media screen and (max-width: 680px) {
   .dashboardContainer {
     flex-direction: row;
@@ -39,7 +40,7 @@
 }
 .signaturePreview a,
 .eventPreview a {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .signaturePreview .banner,
 .eventPreview .banner {
@@ -58,14 +59,14 @@
   transition: width 1s;
   display: flex;
   background: #fff;
-  border-radius: 10px;
+  border-radius: var(--mediumBorderRadius);
   padding: 1.5rem 1.5rem;
   flex-wrap: nowrap;
   overflow: hidden;
 }
 
 .h1 {
-  color: #efeef4;
+  color: var(--background-color);
   flex: 100%;
   font-size: 1.75rem;
 }
@@ -95,7 +96,7 @@
   margin-bottom: 3rem;
   padding: 2rem;
   background: #fff;
-  border-radius: 10px;
+  border-radius: var(--mediumBorderRadius);
 }
 .eventText > div {
   transform: scale(0.9);
@@ -144,7 +145,7 @@
 
 .title svg {
   font-size: 1rem;
-  color: #244EFF;
+  color: var(--color-primary);
   animation: rotate 1s infinite linear;
 }
 

@@ -1,3 +1,4 @@
+/* global.scss */
 .container {
   display: flex;
   flex-direction: column;
@@ -15,7 +16,7 @@
   margin-left: 0;
 }
 .container label {
-  color: #1B335E;
+  color: var(--color-dark-accent);
   font-weight: bold;
   font-size: 0.85rem;
 }
@@ -35,7 +36,7 @@
   max-width: 24px;
 }
 .container .editSocials svg {
-  color: #1B335E;
+  color: var(--color-dark-accent);
   font-size: 1.2rem;
   transition: color 0.3s;
 }
@@ -43,7 +44,7 @@
   margin-left: 0.5rem;
 }
 .container .editSocials svg:hover {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .loading {
@@ -61,8 +62,8 @@
 }
 .socialsList {
   list-style: none;
-  border-radius: 5px;
-  background: #F3F7FB;
+  border-radius: var(--borderRadius);
+  background: var(--color-light-accent-variation2);
   margin-left: 1rem;
   padding: 0.25rem;
   height: 2.5rem;

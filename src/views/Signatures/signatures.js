@@ -128,7 +128,7 @@ function Signatures() {
                     )}
                     <div className={classes.teamsContainer}>
                         <div>
-                            {user?.roles.includes("ROLE_RH") && (
+                            {!user?.roles.includes("ROLE_RH") && (
                                 <Link to="create-signature">
                                     <Button color="primary" arrow={true}>
                                         <FormattedMessage id="add_signature" />

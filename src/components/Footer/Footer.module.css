@@ -1,3 +1,4 @@
+/* global.scss */
 .footer {
   opacity: 0.5;
   position: absolute;
@@ -11,6 +12,6 @@
   align-items: center;
 }
 .footer a {
-  color: #5c74b2;
+  color: var(--color-primary-variant);
   font-size: 0.8rem;
 }

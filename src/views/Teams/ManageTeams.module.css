@@ -1,3 +1,4 @@
+/* global.scss */
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -38,13 +39,13 @@
 
 .teamsContainer {
   background-color: #fff;
-  border-radius: 5px;
-  min-width: 40rem;
-  width: 65%;
-  max-width: 40rem;
-  min-height: 50rem;
-  height: 65%;
-  max-height: 50rem;
+  border-radius: var(--borderRadius);
+  min-width: var(--leftColMinWidth);
+  width: var(--leftColWidth);
+  max-width: var(--leftColMaxWidth);
+  min-height: var(--leftColMinHeight);
+  height: var(--leftColHeight);
+  max-height: var(--leftColMaxHeight);
   margin-bottom: 1rem;
   margin-right: 2rem;
   padding: 2rem;
@@ -82,7 +83,7 @@
   cursor: pointer;
 }
 .menu > li > a {
-  color: #1B335E;
+  color: var(--color-dark-accent);
   display: block;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -98,15 +99,15 @@
 }
 
 .active {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .active a {
   transition: 0.2s;
-  color: #244EFF !important;
+  color: var(--color-primary) !important;
 }
 .active::after {
   transition: 0.2s;
-  background-color: #244EFF;
+  background-color: var(--color-primary);
 }
 
 .slider {
@@ -144,7 +145,7 @@
 }
 
 .added {
-  color: #244EFF;
+  color: var(--color-primary);
   height: 1.65rem;
   display: flex;
   align-items: center;
@@ -196,8 +197,8 @@
   font-size: 0.85rem;
   font-weight: 600;
   position: relative;
-  background: #F4F7FC;
-  border-radius: 5px;
+  background: var(--color-lighter-accent);
+  border-radius: var(--smallBorderRadius);
 }
 .itemsList li::before {
   content: "";
@@ -209,7 +210,7 @@
   bottom: 0;
   margin: auto;
   height: 4px;
-  border-radius: 20px;
+  border-radius: var(--hugeRadius);
   width: 4px;
   background: transparent;
   transition: 0.2s;
@@ -227,7 +228,7 @@
   left: -1em;
   height: 8px;
   width: 8px;
-  background: #244EFF;
+  background: var(--color-primary);
 }
 .itemsList li > div {
   display: flex;
@@ -240,8 +241,8 @@
 }
 
 .groupName {
-  color: #244EFF !important;
-  border-radius: 5px;
+  color: var(--color-primary) !important;
+  border-radius: var(--borderRadius);
   font-weight: normal;
   font-size: 0.75rem;
 }
@@ -254,12 +255,12 @@
 }
 
 .primaryTxt {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .teamAssignment {
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   padding: 1rem 2rem;
   margin-bottom: auto;
 }
@@ -269,7 +270,7 @@
   margin-top: 0;
 }
 .teamAssignment h2 span {
-  color: #244EFF !important;
+  color: var(--color-primary) !important;
   font-size: 1.2rem !important;
 }
 .teamAssignment > div {
@@ -289,13 +290,13 @@
   align-items: center !important;
 }
 .assignItem:hover, .assignItem:hover button {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .assignItem > span {
   padding-top: 0 !important;
 }
 .assignItem button {
-  color: #1B335E;
+  color: var(--color-dark-accent);
   transition: 0.2s;
   background: none;
   border: none;
@@ -333,9 +334,9 @@
   position: absolute;
   left: -1em;
   height: 8px;
-  border-radius: 20px;
+  border-radius: var(--hugeRadius);
   width: 8px;
-  background: #244EFF;
+  background: var(--color-primary);
 }
 
 .searchInput {
@@ -352,18 +353,18 @@
 
 .search {
   text-indent: 2rem;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   width: 100%;
   outline: none;
   border: 1px solid transparent;
   margin: 1rem 0;
   padding: 0.75rem 0.5rem;
-  background: #F4F7FC;
+  background: var(--color-lighter-accent);
   display: block;
   transition: 0.2s;
 }
 .search:focus {
-  border-color: #244EFF;
+  border-color: var(--color-primary);
 }
 
 .all {
@@ -372,5 +373,5 @@
   float: right;
 }
 .all:hover {
-  color: #244EFF;
+  color: var(--color-primary);
 }

@@ -1,13 +1,14 @@
+/* global.scss */
 .container {
   width: auto;
   position: relative;
-  border: 1px solid #E7EEF8;
-  border-radius: 5px;
+  border: 1px solid var(--color-light-accent);
+  border-radius: var(--smallBorderRadius);
   padding: 0.5rem;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 .container:hover {
-  border-color: #244EFF;
+  border-color: var(--color-primary);
 }
 .container input {
   top: 0;

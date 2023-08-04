@@ -10,6 +10,27 @@
     box-sizing: border-box;
 }
 
+.loading {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    animation: rotate 1s infinite ease;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+
 .rdtActive {
     background-color: $color-primary !important;
 }
