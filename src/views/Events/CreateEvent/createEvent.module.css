@@ -6,7 +6,7 @@
   flex-direction: column;
   flex-wrap: wrap;
   background: #fff;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   position: relative;
   padding: 2rem;
 }
@@ -32,7 +32,7 @@
 .container input {
   border: 1px solid var(--color-lighter-accent);
   padding: 1rem;
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
   margin: 0.5rem 0;
   margin-bottom: 1rem;
   outline: none;

@@ -13,7 +13,7 @@
   height: 100%;
   position: relative;
   margin: auto;
-  border-radius: var(--mediumBorderRadius);
+  border-radius: var(--medium-border-radius);
   display: flex;
   flex-direction: column;
   background-color: var(--outter-background-color);
@@ -91,7 +91,7 @@
   padding-top: 1rem;
   background-color: var(--background-color);
   position: relative;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   align-content: flex-start;
   opacity: 0;
   animation: fadeIn 1s 1s forwards;

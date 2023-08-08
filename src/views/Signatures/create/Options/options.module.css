@@ -7,7 +7,7 @@
 }
 .container select {
   border: 1px solid var(--color-lighter-accent);
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
   padding: 0.5rem 0.5rem;
   width: 75%;
   outline: none;
@@ -58,7 +58,7 @@
 
 .colorPreview {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.356);
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
   border: none;
   margin: 0.2rem;
   width: 20px;
@@ -80,7 +80,7 @@
   width: 25px;
   background-color: var(--color-primary);
   border: 3px solid #fff;
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
   outline: none;
   box-shadow: 1px 1px 3px rgba(var(--color-primary), 0.8);
 }
@@ -94,7 +94,7 @@
 .checkToText > input[type=text] {
   background: none;
   border: 1px solid var(--color-lighter-accent);
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
   padding: 0.5rem 0.5rem;
   margin-left: 0;
   width: 75%;
@@ -110,7 +110,7 @@
 .textArea {
   background: none;
   border: 1px solid var(--color-lighter-accent);
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
   padding: 0.5rem 0.5rem;
   margin-left: 0;
   font-family: "Helvetica", serif;
@@ -135,14 +135,14 @@
   font-size: 0.75rem;
   width: 75%;
   border: 1px solid var(--color-lighter-accent);
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
   padding: 0.5rem 0.5rem;
   margin-top: 0.5rem;
 }
 
 .colorPreview {
   cursor: pointer;
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
   width: 20px;
   height: 20px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.55);
@@ -155,7 +155,7 @@
   max-width: 9rem;
   background: #fff;
   box-shadow: 0 12px 40px rgba(230, 208, 201, 0.8);
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
   justify-content: center;
   align-items: center;
   top: 0;
@@ -267,7 +267,7 @@ input:checked + .slider:before {
 }
 
 .slider.round:before {
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
 }
 
 .socialsList {
@@ -294,7 +294,7 @@ input:checked + .slider:before {
   cursor: grab;
   padding: 0.5rem 0.5rem 0 0.75rem;
   border: 1px solid #f5f5f5;
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
 }
 .socialsList > div[role=button]::before {
   color: grey;

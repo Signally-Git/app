@@ -59,7 +59,7 @@
   transition: width 1s;
   display: flex;
   background: #fff;
-  border-radius: var(--mediumBorderRadius);
+  border-radius: var(--medium-border-radius);
   padding: 1.5rem 1.5rem;
   flex-wrap: nowrap;
   overflow: hidden;
@@ -96,7 +96,7 @@
   margin-bottom: 3rem;
   padding: 2rem;
   background: #fff;
-  border-radius: var(--mediumBorderRadius);
+  border-radius: var(--medium-border-radius);
 }
 .eventText > div {
   transform: scale(0.9);

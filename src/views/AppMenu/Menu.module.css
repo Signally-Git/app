@@ -88,7 +88,7 @@
     margin-bottom: 0;
     padding-bottom: 2rem;
     padding-top: 1rem;
-    border-radius: var(--borderRadius) var(--borderRadius) 0 0;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
   }
   .tabMenu li {
     font-size: 0.8rem;

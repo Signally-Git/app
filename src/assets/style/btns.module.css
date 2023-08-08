@@ -30,7 +30,7 @@
   height: 25px;
   width: 25px;
   background-color: #eee;
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
 }
 
 /* On mouse-over, add a grey background color */
@@ -61,6 +61,6 @@
   left: 9px;
   width: 8px;
   height: 8px;
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
   background: white;
 }

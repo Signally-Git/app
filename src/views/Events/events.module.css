@@ -26,15 +26,15 @@
 
 .eventsContainer {
   background-color: #fff;
-  border-radius: var(--borderRadius);
-  min-width: var(--leftColMinWidth);
-  width: var(--leftColWidth);
-  max-width: var(--leftColMaxWidth);
+  border-radius: var(--border-radius);
+  min-width: var(--left-col-min-width);
+  width: var(--left-col-width);
+  max-width: var(--left-col-max-width);
   padding: 2rem;
   position: relative;
-  min-height: var(--leftColMinHeight);
-  height: var(--leftColHeight);
-  max-height: var(--leftColMaxHeight);
+  min-height: var(--left-col-min-height);
+  height: var(--left-col-height);
+  max-height: var(--left-col-max-height);
   margin-right: 2rem;
 }
 .eventsContainer ul {
@@ -140,7 +140,7 @@
   align-items: center;
   justify-content: center;
   background: #fff;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   width: 30%;
   padding: 0 1rem 1rem;
   z-index: 3;
@@ -191,7 +191,7 @@
   font-weight: 600;
   position: relative;
   background: var(--color-lighter-accent);
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
 }
 .itemsList li .checkbox {
   width: 100%;
@@ -218,7 +218,7 @@
   bottom: 0;
   margin: auto;
   height: 8px;
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
   width: 8px;
   background: var(--color-primary);
   transition: 0.2s;
@@ -233,7 +233,7 @@
   bottom: 0;
   margin: auto;
   height: 6px;
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
   width: 6px;
   background: transparent;
   transition: 0.2s;
@@ -287,7 +287,7 @@
 
 .search {
   text-indent: 2rem;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   width: 100%;
   outline: none;
   border: 1px solid transparent;
@@ -360,7 +360,7 @@
   width: 100%;
   backface-visibility: hidden;
   background-color: #fff;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   margin-bottom: auto;
   position: absolute;
   top: 0;

@@ -6,7 +6,7 @@
   min-height: 25rem;
   background: rgba(255, 255, 255, 0.4);
   padding: 0.25rem 1rem;
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
 }
 
 .entitySelectContainer,
@@ -23,7 +23,7 @@
   padding: 1rem;
   list-style: none;
   background: rgba(255, 255, 255, 0.4);
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
 }
 
 @keyframes spin {
@@ -74,14 +74,14 @@
   position: absolute;
   bottom: -10rem;
   background: rgb(255, 255, 255);
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
 }
 .entitiesContainer > div {
   width: 25%;
   padding: 0.25rem;
   position: fixed;
   background: rgba(255, 255, 255, 0.4);
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
   font-size: 0.9rem;
 }
 .entitiesContainer > div > input {

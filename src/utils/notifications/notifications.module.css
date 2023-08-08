@@ -5,7 +5,7 @@
   justify-content: center;
   width: fit-content !important;
   height: 2.5rem !important;
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
   z-index: 10;
   top: 1rem;
   position: fixed;
@@ -14,7 +14,7 @@
   max-width: 50%;
 }
 .container svg {
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
   padding: 4px;
   fill: #fff;
   font-size: 1.25rem;

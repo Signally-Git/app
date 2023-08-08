@@ -5,7 +5,7 @@
   border: 1px solid var(--color-light-accent);
   padding: 1rem;
   font-size: 0.8rem;
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
   margin: 0.5rem 0;
   outline: none;
   font-family: inherit;

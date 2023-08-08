@@ -19,7 +19,7 @@
 }
 
 .open input {
-  border-radius: var(--smallBorderRadius) var(--smallBorderRadius) 0 0;
+  border-radius: var(--small-border-radius) var(--small-border-radius) 0 0;
 }
 .open .inputContainer > svg {
   transform: rotate(-180deg);
@@ -69,7 +69,7 @@
   width: 100%;
   background-color: #fff;
   box-shadow: 0 20px 30px var(--color-light-accent-variation);
-  border-radius: 0 0 var(--smallBorderRadius) var(--smallBorderRadius);
+  border-radius: 0 0 var(--small-border-radius) var(--small-border-radius);
   padding: 2.65rem 0 0;
   list-style: none;
   opacity: 0;

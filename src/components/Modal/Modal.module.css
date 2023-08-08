@@ -5,7 +5,7 @@
   width: 60%;
   max-height: 15rem;
   max-width: 30rem;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   position: absolute;
   padding: 1rem;
   inset: 0;

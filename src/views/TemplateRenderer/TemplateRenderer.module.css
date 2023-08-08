@@ -33,7 +33,7 @@
 .container .editContainer > ul > li > button {
   background-color: transparent;
   cursor: pointer;
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
   height: 2rem;
   width: 2rem;
   font-size: 1rem;

@@ -45,16 +45,16 @@
 }
 
 .teamsContainer {
-  width: var(--leftColMinWidth);
-  max-width: var(--leftColMinWidth);
-  min-width: var(--leftColMinWidth);
+  width: var(--left-col-min-width);
+  max-width: var(--left-col-min-width);
+  min-width: var(--left-col-min-width);
   background-color: #fff;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   padding: 2rem;
   position: relative;
-  min-height: var(--leftColMinHeight);
-  height: var(--leftColHeight);
-  max-height: var(--leftColMaxHeight);
+  min-height: var(--left-col-min-height);
+  height: var(--left-col-height);
+  max-height: var(--left-col-max-height);
 }
 .teamsContainer ul {
   padding: 0;
@@ -145,7 +145,7 @@
   cursor: pointer;
   position: relative;
   background: var(--color-lighter-accent);
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
 }
 .itemsList li::before {
   content: "";
@@ -157,7 +157,7 @@
   bottom: 0;
   margin: auto;
   height: 8px;
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
   width: 8px;
   background: transparent;
   transition: 0.2s;
@@ -185,7 +185,7 @@
 
 .groupName {
   color: var(--color-primary);
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   font-weight: normal;
   font-size: 0.75rem;
 }
@@ -211,7 +211,7 @@
 
 .search {
   text-indent: 2rem;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   width: 100%;
   outline: none;
   border: 1px solid transparent;
@@ -232,7 +232,7 @@
 .signaturePreview {
   margin-left: 3rem;
   background-color: #fff;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   padding: 0 2rem;
   margin-bottom: auto;
 }
@@ -281,7 +281,7 @@
   padding: 0.75rem;
   font-size: 0.85rem;
   font-weight: 600;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
 }
 .btn svg,
 .CTA svg {

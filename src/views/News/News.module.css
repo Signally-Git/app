@@ -1,6 +1,6 @@
 /* global.scss */
 .container {
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   color: var(--color-dark-accent);
   background-color: #fff;
   width: 55%;

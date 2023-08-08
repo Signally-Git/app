@@ -62,7 +62,7 @@
 }
 .socialsList {
   list-style: none;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   background: var(--color-light-accent-variation2);
   margin-left: 1rem;
   padding: 0.25rem;

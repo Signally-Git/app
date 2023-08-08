@@ -35,7 +35,7 @@
   left: 12rem;
   padding: 1rem 5%;
   z-index: 5;
-  border-radius: var(--borderRadius) var(--borderRadius) 0 0;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -63,7 +63,7 @@
   font-weight: 600;
   margin-right: 1rem;
   padding: 0.25rem 1rem;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   font-size: 0.9rem;
   color: var(--color-dark-accent);
   transition: 0.2s;
@@ -103,13 +103,13 @@
   font-size: 0.8rem;
   right: -9px;
   top: -9px;
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
   border: 1px solid var(--color-primary);
 }
 
 .pageTitle {
   background: #f5eeef;
-  border-radius: var(--borderRadius) var(--largeBorderRadius) 0 0;
+  border-radius: var(--border-radius) var(--large-border-radius) 0 0;
   padding: 0.5rem 2rem 1rem;
   margin-left: 3.25rem;
   margin-top: 6rem;
@@ -146,7 +146,7 @@
   margin-right: 1rem;
   padding: 0.25rem 1rem;
   border: 1px solid var(--color-dark-accent);
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   font-size: 0.9rem;
   color: var(--color-dark-accent);
   transition: 0.2s;
@@ -195,7 +195,7 @@
   height: 25px;
   color: #fff;
   font-size: 26px;
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
   margin: 0;
   background: var(--color-primary);
 }
@@ -207,7 +207,7 @@
   top: 2.5rem;
   background: rgb(255, 255, 255);
   padding: 0.5rem 1rem;
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
   box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
   display: flex;
   flex-direction: column;
@@ -322,7 +322,7 @@
   width: 100%;
   margin: 0;
   margin-top: 1.25rem;
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
   padding: 0.5rem 0.55rem;
   display: flex;
   flex-direction: column;

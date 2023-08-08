@@ -61,7 +61,7 @@
   align-items: center;
   justify-content: center;
   background: #fff;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   width: 25%;
   height: 13rem;
   padding: 0 1rem 1rem;
@@ -148,7 +148,7 @@
   max-height: 65vh;
   overflow: auto;
   background: #fff;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   width: 40%;
   min-width: 15rem;
   padding-top: 5.5rem;
@@ -256,10 +256,10 @@
   transition: 0.4s;
 }
 .tabsContainer .sliderTabs {
-  border-radius: var(--mediumBorderRadius);
+  border-radius: var(--medium-border-radius);
 }
 .tabsContainer .sliderTabs:before {
-  border-radius: var(--mediumBorderRadius);
+  border-radius: var(--medium-border-radius);
 }
 
 .col {
@@ -318,7 +318,7 @@
   background: var(--color-dark-accent);
   padding: 0.15rem 0.75rem !important;
   border: var(--color-dark-accent);
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   color: #fff;
   margin-left: 1rem;
 }
@@ -369,7 +369,7 @@
   background-color: #fff;
   height: fit-content;
   max-height: 80%;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
 }
 .signatureContainer .preview {
   pointer-events: none;
@@ -392,7 +392,7 @@
 .signatureContainer .browserHeader .btnsContainer > li {
   min-width: 10px;
   min-height: 10px;
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
 }
 .signatureContainer .browserHeader .btnsContainer .close {
   background: #ff5d24;
@@ -410,13 +410,13 @@
   height: 1.5rem;
   font-size: 0.7rem;
   color: grey;
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
   border: none;
 }
 .signatureContainer .lazyLoadingLong,
 .signatureContainer .lazyLoadingShort,
 .signatureContainer .lazyLoadingMedium {
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   background: #f1f1f1;
   width: 100%;
   height: 1rem;
@@ -491,13 +491,13 @@
   flex: 100%;
   background: #fff;
   width: 100%;
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
 }
 
 .placeholderImg,
 .placeholderBanner {
   background: rgba(184, 184, 184, 0.596);
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
   margin-right: 40%;
   height: 38px;
   flex: 100%;
@@ -585,7 +585,7 @@ input:checked + .slider:before {
 }
 
 .slider.round:before {
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
 }
 
 .iconsContainer {
@@ -604,7 +604,7 @@ input:checked + .slider:before {
   border: 1px solid var(--color-lighter-accent);
   padding: 1rem;
   padding-right: 5rem;
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
   margin: 0.5rem 0;
   font-family: "Montserrat";
   outline: none;

@@ -39,13 +39,13 @@
 
 .teamsContainer {
   background-color: #fff;
-  border-radius: var(--borderRadius);
-  min-width: var(--leftColMinWidth);
-  width: var(--leftColWidth);
-  max-width: var(--leftColMaxWidth);
-  min-height: var(--leftColMinHeight);
-  height: var(--leftColHeight);
-  max-height: var(--leftColMaxHeight);
+  border-radius: var(--border-radius);
+  min-width: var(--left-col-min-width);
+  width: var(--left-col-width);
+  max-width: var(--left-col-max-width);
+  min-height: var(--left-col-min-height);
+  height: var(--left-col-height);
+  max-height: var(--left-col-max-height);
   margin-bottom: 1rem;
   margin-right: 2rem;
   padding: 2rem;
@@ -198,7 +198,7 @@
   font-weight: 600;
   position: relative;
   background: var(--color-lighter-accent);
-  border-radius: var(--smallBorderRadius);
+  border-radius: var(--small-border-radius);
 }
 .itemsList li::before {
   content: "";
@@ -210,7 +210,7 @@
   bottom: 0;
   margin: auto;
   height: 4px;
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
   width: 4px;
   background: transparent;
   transition: 0.2s;
@@ -242,7 +242,7 @@
 
 .groupName {
   color: var(--color-primary) !important;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   font-weight: normal;
   font-size: 0.75rem;
 }
@@ -260,7 +260,7 @@
 
 .teamAssignment {
   background-color: #fff;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   padding: 1rem 2rem;
   margin-bottom: auto;
 }
@@ -334,7 +334,7 @@
   position: absolute;
   left: -1em;
   height: 8px;
-  border-radius: var(--hugeRadius);
+  border-radius: var(--huge-radius);
   width: 8px;
   background: var(--color-primary);
 }
@@ -353,7 +353,7 @@
 
 .search {
   text-indent: 2rem;
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   width: 100%;
   outline: none;
   border: 1px solid transparent;
