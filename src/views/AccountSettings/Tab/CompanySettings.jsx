@@ -15,7 +15,7 @@ function CompanySettings() {
     const [website, setWebsite] = useState(organisation?.websiteUrl || "");
     const [phone, setPhone] = useState(organisation?.address?.phone || "");
     const [email, setEmail] = useState(organisation?.address?.email || "");
-    const [preview, setPreview] = useState();
+    const [preview, setPreview] = useState(organisation?.logo?.url || null);
     const [loading, setLoading] = useState(false);
     const [croppedImage, setCroppedImage] = useState(null);
 
@@ -29,9 +29,34 @@ function CompanySettings() {
     };
 
     useEffect(() => {
+
+        console.log("organisation useEffect organisation?.logo?.url", organisation?.logo?.url);
+
+        setPreview(organisation?.logo?.url || null)
+        setCompanyName(organisation?.name || "");
+        setWebsite(organisation?.websiteUrl || "");
+        setPhone(organisation?.address?.phone || "");
+        setEmail(organisation?.address?.email || "");
+    }, [organisation]);
+
+    
+    useEffect(() => {
+        request.get(organisation?.["@id"]).then((org) => {
+            org = org?.data;
+            setOrganisation(org);
+            // setPreview(org?.logo?.url);
+            // setCompanyName(org?.name);
+            // setWebsite(org?.websiteUrl);
+            // setPhone(org?.digitalAddress?.phone);
+            // setEmail(org?.digitalAddress?.email);
+        });
+    }, []);
+
+    useEffect(() => {
         // create the preview
         if (!uploadedMedia) {
-            setPreview(null);
+            console.log("uploadedMedia useEffect organisation?.logo?.url", organisation?.logo?.url);
+            setPreview(organisation?.logo?.url || null);
             return;
         }
         const objectUrl = URL.createObjectURL(uploadedMedia);
@@ -82,10 +107,16 @@ function CompanySettings() {
                                 "Content-Type": "application/merge-patch+json",
                             },
                         })
-                        .then(() => {
+                        .then((response) => {
+
+                            
+                            const updatedOrganisation = response.data;
+                            setOrganisation(updatedOrganisation);
                             setCroppedImage(null);
                             setUploadedMedia(null);
-                            setPreview(organisation?.logo?.url);
+
+                            console.log("triggered", updatedOrganisation?.logo?.url)
+                            setPreview(updatedOrganisation?.logo?.url);
                             notification({
                                 content: (
                                     <>
@@ -157,18 +188,6 @@ function CompanySettings() {
         }
     };
 
-    useEffect(() => {
-        request.get(organisation?.["@id"]).then((org) => {
-            org = org?.data;
-            setOrganisation(org);
-            setPreview(org?.logo?.url);
-            setCompanyName(org?.name);
-            setWebsite(org?.websiteUrl);
-            setPhone(org?.digitalAddress?.phone);
-            setEmail(org?.digitalAddress?.email);
-        });
-    }, []);
-
     return (
         <>
             <div className={classes.inputsContainer}>
@@ -185,8 +204,8 @@ function CompanySettings() {
                         <UploadFile
                             file={uploadedMedia}
                             setFile={(e) => {
-                                setUploadedMedia(e);
-                                setOpen(true);
+                                setUploadedMedia(e)
+                                setOpen(true)
                             }}
                             removeFile={() => {
                                 setUploadedMedia(null);

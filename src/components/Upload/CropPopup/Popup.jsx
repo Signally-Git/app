@@ -25,6 +25,8 @@ export default function Popup({
 
         return () => {
             document.removeEventListener("click", handleClickOutside);
+            // Ne retirez pas le portalContainer du DOM lorsque le composant est démonté
+            // Ainsi, il restera disponible pour les ouvertures ultérieures de la modal
         };
     }, [open]);
 
