@@ -1,1 +1,6 @@
-
+.studioContainer {
+  display: flex;
+}
+.studioContainer > div {
+  width: 50%;
+}

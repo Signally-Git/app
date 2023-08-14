@@ -8,13 +8,13 @@
 
 .browserHeader {
   width: 100%;
-  height: 1.75rem;
   margin-bottom: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .browserHeader .btnsContainer {
+  margin: 0 0 0.5rem;
   display: flex;
   justify-content: space-between;
   width: 2.85rem;

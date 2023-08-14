@@ -6,6 +6,7 @@ import { request } from "utils";
 import { Menu } from "./Menu/Menu";
 import SignaturePreview from "./SignaturePreview/SignaturePreview";
 import Custom from "./Custom/Custom";
+import classes from "./studio.module.css";
 
 const Studio = () => {
     const { signatureId } = useParams();
@@ -25,9 +26,9 @@ const Studio = () => {
     return (
         <>
             <FormattedMessage id="signature.studio" tagName="h1" />
-            <div>
+            <Menu onTabSelect={setSelectedTab} />
+            <div className={classes.studioContainer}>
                 <div>
-                    <Menu onTabSelect={setSelectedTab} />
                     <Custom tab={selectedTab} />
                 </div>
                 <div>
