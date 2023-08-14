@@ -468,60 +468,6 @@ const handleSave = async (
                     type: "lastName",
                     signature: result?.data?.id,
                 },
-                {
-                    property: "color",
-                    value: signatureInfo.jobName.color,
-                    type: "jobName",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "color",
-                    value: signatureInfo.company.color,
-                    type: "companyName",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "color",
-                    value: signatureInfo.mobile.color,
-                    type: "mobile",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "color",
-                    value: signatureInfo.addressStreet.color,
-                    type: "addressStreet",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "color",
-                    value: signatureInfo.addressInfo.color,
-                    type: "addressInfo",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "color",
-                    value: signatureInfo.addressZipcode.color,
-                    type: "addressZipcode",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "color",
-                    value: signatureInfo.addressCity.color,
-                    type: "addressCity",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "color",
-                    value: signatureInfo.addressCountry.color,
-                    type: "addressCountry",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "color",
-                    value: signatureInfo.phone.color,
-                    type: "phone",
-                    signature: result?.data?.id,
-                },
                 // FONT WEIGHT FOR EACH TXT
                 {
                     property: "fontWeight",
@@ -533,68 +479,6 @@ const handleSave = async (
                     property: "fontWeight",
                     value: signatureInfo.lastName.style.fontWeight || "normal",
                     type: "lastName",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontWeight",
-                    value: signatureInfo.jobName.style.fontWeight || "normal",
-                    type: "jobName",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontWeight",
-                    value: signatureInfo.company.style.fontWeight || "normal",
-                    type: "companyName",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontWeight",
-                    value: signatureInfo.mobile.style.fontWeight || "normal",
-                    type: "mobile",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontWeight",
-                    value:
-                        signatureInfo.addressStreet.style.fontWeight ||
-                        "normal",
-                    type: "addressStreet",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontWeight",
-                    value:
-                        signatureInfo.addressInfo.style.fontWeight || "normal",
-                    type: "addressInfo",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontWeight",
-                    value:
-                        signatureInfo.addressZipcode.style.fontWeight ||
-                        "normal",
-                    type: "addressZipcode",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontWeight",
-                    value:
-                        signatureInfo.addressCity.style.fontWeight || "normal",
-                    type: "addressCity",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontWeight",
-                    value:
-                        signatureInfo.addressCountry.style.fontWeight ||
-                        "normal",
-                    type: "addressCountry",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontWeight",
-                    value: signatureInfo.phone.style.fontWeight || "normal",
-                    type: "phone",
                     signature: result?.data?.id,
                 },
                 // TEXT DECORATION FOR EACH TXT
@@ -612,70 +496,7 @@ const handleSave = async (
                     type: "lastName",
                     signature: result?.data?.id,
                 },
-                {
-                    property: "textDecoration",
-                    value: signatureInfo.jobName.style.textDecoration || "none",
-                    type: "jobName",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "textDecoration",
-                    value: signatureInfo.company.style.textDecoration || "none",
-                    type: "companyName",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "textDecoration",
-                    value: signatureInfo.mobile.style.textDecoration || "none",
-                    type: "mobile",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "textDecoration",
-                    value:
-                        signatureInfo.addressStreet.style.textDecoration ||
-                        "none",
-                    type: "addressStreet",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "textDecoration",
-                    value:
-                        signatureInfo.addressInfo.style.textDecoration ||
-                        "none",
-                    type: "addressInfo",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "textDecoration",
-                    value:
-                        signatureInfo.addressZipcode.style.textDecoration ||
-                        "none",
-                    type: "addressZipcode",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "textDecoration",
-                    value:
-                        signatureInfo.addressCity.style.textDecoration ||
-                        "none",
-                    type: "addressCity",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "textDecoration",
-                    value:
-                        signatureInfo.addressCountry.style.textDecoration ||
-                        "none",
-                    type: "addressCountry",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "textDecoration",
-                    value: signatureInfo.phone.style.textDecoration || "none",
-                    type: "phone",
-                    signature: result?.data?.id,
-                },
+
                 // FONT STYLE FOR EACH TXT
                 {
                     property: "fontStyle",
@@ -687,67 +508,6 @@ const handleSave = async (
                     property: "fontStyle",
                     value: signatureInfo.lastName.style.fontStyle || "normal",
                     type: "lastName",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontStyle",
-                    value: signatureInfo.jobName.style.fontStyle || "normal",
-                    type: "jobName",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontStyle",
-                    value: signatureInfo.company.style.fontStyle || "none",
-                    type: "companyName",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontStyle",
-                    value: signatureInfo.mobile.style.fontStyle || "normal",
-                    type: "mobile",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontStyle",
-                    value:
-                        signatureInfo.addressStreet.style.fontStyle || "normal",
-                    type: "addressStreet",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontStyle",
-                    value:
-                        signatureInfo.addressInfo.style.fontStyle || "normal",
-                    type: "addressInfo",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontStyle",
-                    value:
-                        signatureInfo.addressZipcode.style.fontStyle ||
-                        "normal",
-                    type: "addressZipcode",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontStyle",
-                    value:
-                        signatureInfo.addressCity.style.fontStyle || "normal",
-                    type: "addressCity",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontStyle",
-                    value:
-                        signatureInfo.addressCountry.style.fontStyle ||
-                        "normal",
-                    type: "addressCountry",
-                    signature: result?.data?.id,
-                },
-                {
-                    property: "fontStyle",
-                    value: signatureInfo.phone.style.fontStyle || "normal",
-                    type: "phone",
                     signature: result?.data?.id,
                 },
                 // FONT GENERAL STYLE

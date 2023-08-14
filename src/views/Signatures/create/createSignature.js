@@ -16,7 +16,6 @@ import {
     handleSave,
 } from "./createSignature.utils";
 import { FormattedMessage, useIntl } from "react-intl";
-import Eye from "../../../components/EyeDropper/EyeDropper";
 
 // Component handling the creation of signature, selection of template
 function CreateSignatureComponent() {
@@ -260,7 +259,6 @@ function CreateSignatureComponent() {
                                 ></div>
                                 <br />
                                 <div className={classes.signaturePreview}>
-                                    <Eye />
                                     {selectedTemplate && preview}
                                 </div>
                             </div>

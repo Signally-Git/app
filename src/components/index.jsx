@@ -5,6 +5,7 @@ export { default as NavigationButtons } from "./NavigationButtons/buttons";
 export { default as CustomCheckbox } from "./Checkbox/customCheckbox";
 export { default as CustomSelect } from "./CustomSelect/CustomSelect";
 export { default as Input } from "./Input/Input";
+export { default as Loading } from "./Loading/Loading";
 export { default as Logo } from "./Logo/Logo";
 export { default as Modal } from "./Modal/Modal";
 export { default as SwitchLang } from "./SwitchLang/SwitchLang";

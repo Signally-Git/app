@@ -10,6 +10,7 @@ import News from "views/News/News";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import StatsPage from "views/Statistics/Stats.page";
 import AccountSettings from "../AccountSettings/accountSettings";
+import Studio from "../Signatures/Studio/Studio";
 
 const Dashboard = ({ page }) => {
     const [loadingTiles, setLoadingTiles] = useState(false);
@@ -45,7 +46,7 @@ const Dashboard = ({ page }) => {
         ),
         teams: <Users />,
         statistics: <StatsPage />,
-        signatures: <Signatures />,
+        signatures: <Studio />,
         "create-signature": <CreateSignature />,
         events: <Events />,
         "create-event": <CreateEvent />,
