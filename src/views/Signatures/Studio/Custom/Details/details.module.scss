@@ -1,0 +1,35 @@
+.container {
+  hr {
+    margin: 2rem 3rem;
+    border: none;
+    background: none;
+    border-bottom: 1px solid;
+    opacity: .1;
+  }
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  h4 {
+    margin-bottom: .5rem;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    > div {
+      max-width: 48%;
+    }
+  }
+}
+.fontSize {
+  font-weight: normal;
+  opacity: .8;
+}

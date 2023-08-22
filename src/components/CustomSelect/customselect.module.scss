@@ -21,7 +21,6 @@
 
 .open {
     input {
-        // border-bottom: none;
         border-radius: $smallBorderRadius $smallBorderRadius 0 0;
     }
     .inputContainer > svg {
@@ -72,7 +71,7 @@
     border: 1px solid $color-light-accent-variation;
     width: 100%;
     background-color: #fff;
-    box-shadow: 0 20px 30px $color-light-accent-variation;
+    box-shadow: 0 5px 5px $color-light-accent-variation;
     border-radius: 0 0 $smallBorderRadius $smallBorderRadius;
     padding: 2.65rem 0 0;
     list-style: none;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Input, UploadFile, Popup } from "components";
+import { Input, UploadFile } from "components";
 import classes from "./DefineSocials.module.css";
 import { FiCheck, FiPlusCircle, FiTrash } from "react-icons/fi";
 import {
@@ -258,21 +258,6 @@ export default function DefineSocials({ setList }) {
                             id: "socials.link_placeholder",
                         })}
                     />
-                    {/* <UploadFile
-                        file={uploadedMedia}
-                        setFile={setUploadedMedia}
-                        style={{
-                            width: "15rem",
-                            paddingLeft: 0,
-                            paddingRight: 0,
-                            paddingTop: ".8rem",
-                            paddingBottom: ".8rem",
-                        }}
-                        type="image/*"
-                        placeholder={intl.formatMessage({
-                            id: "socials.icon_placeholder",
-                        })}
-                    /> */}
                     <UploadFile
                         file={uploadedMedia}
                         setFile={(e) => {
@@ -294,16 +279,6 @@ export default function DefineSocials({ setList }) {
                         placeholder={intl.formatMessage({
                             id: "socials.icon_placeholder",
                         })}
-                    />
-                    <Popup
-                        open={open}
-                        handleClose={() => setOpen(false)}
-                        image={preview}
-                        getCroppedFile={(image) => {
-                            setPreview(image);
-                            setOpen(false);
-                        }}
-                        aspectRatios={["1:1"]}
                     />
                     <FiCheck onClick={handleSubmit} />
                     {socials[0]?.url?.length > 1 && (

@@ -88,6 +88,7 @@
     "email": "Email",
 
     "signature": {
+        "studio": "Personnalisez votre signature",
         "title": "Signature",
         "number": "{count, plural, =0 {Aucune signature} one {# signature} other {# signatures}}",
         "options": {
@@ -277,6 +278,7 @@
             "manual": "Manuellement",
             "from_csv": "A partir d'un fichier .csv",
             "import": {
+                "profile_picture": "Photo de profil",
                 "logo": "Importer un logo",
                 "crop": {
                     "title": "Recadrer l'image",

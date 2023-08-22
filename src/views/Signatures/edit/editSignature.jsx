@@ -100,7 +100,13 @@ function EditSignatureComponent() {
                     )[0]?.value !== "false",
                 padding: styles?.filter(
                     (style) => style.type === "greetingsPadding"
-                )[0].value,
+                )[0]?.value,
+                fontSize: styles?.filter(
+                    (style) => style.type === "greetingsFontSize"
+                )[0]?.value,
+                color: styles?.filter(
+                    (style) => style.type === "greetingsColor"
+                )[0]?.value,
             },
             custom: { enabled: false },
             eco: { value: "Ecoresponsability", enabled: false },

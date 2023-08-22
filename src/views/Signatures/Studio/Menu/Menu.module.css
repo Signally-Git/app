@@ -1,0 +1,31 @@
+/* global.scss */
+.menuContainer {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: flex;
+  position: relative;
+  width: max-content;
+  border: 1px solid var(--color-lighter-accent);
+  border-radius: var(--medium-border-radius);
+  background-color: var(--color-light-accent-variation2);
+}
+.menuContainer .slider {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  background-color: var(--pure-light);
+  border-radius: var(--medium-border-radius);
+  transition: left 0.3s, width 0.3s;
+}
+.menuContainer .menuItem {
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 20px;
+  position: relative;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.menuContainer .menuItem:hover {
+  color: var(--color-primary-variant);
+}

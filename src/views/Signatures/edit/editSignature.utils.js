@@ -396,6 +396,20 @@ const handleSave = async (
                     type: "greetingsPadding",
                     signature: result?.data?.id,
                 },
+                {
+                    property: "fontSize",
+                    value:
+                        signatureOption.salutation.fontSize?.toString() || "12",
+                    type: "greetingsFontSize",
+                    signature: result?.data?.id,
+                },
+                {
+                    property: "color",
+                    value:
+                        signatureOption.salutation.color?.toString() || "12",
+                    type: "greetingsColor",
+                    signature: result?.data?.id,
+                },
                 // vCard
                 {
                     property: "enabled",

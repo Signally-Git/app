@@ -1,0 +1,288 @@
+{# START GREETINGS #}
+    {% if styles['greetingsEnabled']['enabled'] is same as( 'true' ) %}
+        <p style="padding-top: {{ styles['greetingsPadding']['padding'] }}px; padding-bottom:{{ styles['greetingsPadding']['padding'] }}px;"> 
+   <b style="color:{{ styles['greetingsColor']['color'] }};
+            font-size: {{ styles['greetingsFontSize']['fontSize'] }}px;
+            line-height: 11px;">
+       {{ styles['greetingsValue']['value'] }}
+   </b>
+</p>
+
+    {% endif %}
+    {# END GREETINGS #}
+<table cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse; width: 320px;">
+    <tr>
+        <td>
+            <table cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse; width: 100%;">
+                <tr>
+                    <td style="padding: 0; width: 120px;">
+                        <a title="{{ company.name }}" href="{{ company.websiteUrl }}">
+                            <img style="width: 120px; height: 90px;" width="120" height="90" alt="{{ company.name }}" src="{{ logo }}" />
+                        </a>
+                    </td>
+                    <td style="width: 12px;"></td>
+                    <td width="320">
+                        <table cellspacing="0" cellpadding="0" border="0" style="width:100%; border-collapse:collapse; border:none; border-color: {{ styles['divColor']['color'] }};">
+                            <tr>
+                                <td style="background: {{ styles['divColor']['color'] }}; width: 12px; border-radius: 4px 0 0 4px;"></td>
+                                <td style="background: {{ styles['divColor']['color'] }}; padding-top: 8px; padding-bottom: 8px">
+                                    <table cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse; border:none;">
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="middle" style="vertical-align: middle">
+                                                <b style="color:{{ styles['firstName']['color'] }};
+                                                        text-decoration: {{ styles['firstName']['textDecoration'] }};
+                                                        font-style: {{ styles['firstName']['fontStyle'] }};
+                                                        font-weight: {{ styles['firstName']['fontWeight'] }};
+                                                        font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                                        font-size: {{ styles['generalFontSize']['fontSize'] }}px;
+                                                        line-height: 11px;">
+                                                    {% if isPreview %}
+                                                        Prénom
+                                                    {% else %}
+                                                        {{ user.firstName }}
+                                                    {% endif %}
+                                                </b>
+                                                <b style="color:{{ styles['lastName']['color'] }};
+                                                        text-decoration: {{ styles['lastName']['textDecoration'] }};
+                                                        font-style: {{ styles['lastName']['fontStyle'] }};
+                                                        font-weight: {{ styles['lastName']['fontWeight'] }};
+                                                        font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                                        font-size: {{ styles['generalFontSize']['fontSize'] }}px;
+                                                        line-height: 11px;">
+                                                    {% if isPreview %}
+                                                        Nom
+                                                    {% else %}
+                                                        {{ user.lastName }}
+                                                    {% endif %}
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                        <span style="color:{{ styles['jobName']['color'] }};
+                                                text-decoration: {{ styles['jobName']['textDecoration'] }};
+                                                font-style: {{ styles['jobName']['fontStyle'] }};
+                                                font-weight: {{ styles['jobName']['fontWeight'] }};
+                                                padding: 0;
+                                                font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                                font-size: {{ styles['generalFontSize']['fontSize'] }}px;">
+                                            {% if isPreview %}
+                                                Poste
+                                            {% else %}
+                                                {{ user.position }}
+                                            {% endif %}
+                                        </span>
+                                            </td>
+                                        </tr>
+                                        <tr style="line-height: {{ styles['generalFontSize']['fontSize'] }}px;">
+                                            <td>
+                                                <div style="vertical-align: 2px">
+                                                    <span style="padding: 0;
+                                                            color: {{ styles['mobile']['color'] }};
+                                                            font-weight: {{ styles['mobile']['fontWeight'] }};
+                                                            font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                                            text-decoration: {{ styles['mobile']['textDecoration'] }};
+                                                            font-size: {{ styles['generalFontSize']['fontSize'] }}px;
+                                                            line-height: {{ styles['generalFontSize']['fontSize'] }}px;">
+                                                        <b style="color:{{ styles['companyName']['color'] }};
+                                                                font-weight: {{ styles['mobile']['fontWeight'] }};
+                                                                font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                                                font-size: {{ styles['generalFontSize']['fontSize'] }};">
+                                                            E :
+                                                        </b>
+                                                    </span>
+                                                    <a style="font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                                            text-decoration: {{ styles['addressZipcode']['textDecoration'] }};
+                                                            font-style: {{ styles['addressZipcode']['fontStyle'] }};
+                                                            font-weight: {{ styles['addressZipcode']['fontWeight'] }};
+                                                            color:{{ styles['addressZipcode']['color'] }};
+                                                            font-size: {{ styles['generalFontSize']['fontSize'] }}px;
+                                                            line-height: {{ styles['generalFontSize']['fontSize'] }}px;" href="mailto:{{ user.email }}" title="mailto:{{ user.email }}">
+                                                        <span style="font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                                                text-decoration: {{ styles['addressZipcode']['textDecoration'] }};
+                                                                font-style: {{ styles['addressZipcode']['fontStyle'] }};
+                                                                font-weight: {{ styles['addressZipcode']['fontWeight'] }};
+                                                                color:{{ styles['addressZipcode']['color'] }};
+                                                                font-size: {{ styles['generalFontSize']['fontSize'] }}px;
+                                                                line-height: {{ styles['generalFontSize']['fontSize'] }}px;">{{ user.email }}</span>
+                                                    </a>
+                                                    <br />
+                                                    {# START PHONE #}
+                                                    {% if user.phone %}
+                                                        {% if user.phone or isPreview %}
+                                                            <span style="padding: 0;
+                                                                    color: {{ styles['mobile']['color'] }};
+                                                                    font-weight: {{ styles['mobile']['fontWeight'] }};
+                                                                    font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                                                    text-decoration: {{ styles['mobile']['textDecoration'] }};
+                                                                    font-size: {{ styles['generalFontSize']['fontSize'] }}px;
+                                                                    line-height: {{ styles['generalFontSize']['fontSize'] }}px">
+
+                                                            <b style="color:{{ styles['companyName']['color'] }};
+                                                                    font-weight: {{ styles['mobile']['fontWeight'] }}">
+                                                                M :
+                                                            </b>
+                                                    {% if isPreview %}
+                                                        <a style="color: {{ styles['mobile']['color'] }};
+                                                                font-weight: {{ styles['mobile']['fontWeight'] }};
+                                                                font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                                                text-decoration: {{ styles['mobile']['textDecoration'] }};
+                                                                font-size: {{ styles['generalFontSize']['fontSize'] }}px;" href="tel:0123456789">0123456789</a>
+                                                    {% else %}
+                                                        <a style="color: {{ styles['mobile']['color'] }};
+                                                                font-weight: {{ styles['mobile']['fontWeight'] }};
+                                                                font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                                                text-decoration: {{ styles['mobile']['textDecoration'] }};
+                                                                font-size: {{ styles['generalFontSize']['fontSize'] }}px;" href="tel:{{ user.phone }}">{{ user.phone }}</a>
+                                                    {% endif %}
+                                                </span>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    {# END PHONE #}
+                                                    <br />
+                                                    <span style="padding: 0;
+                                                            color: {{ styles['mobile']['color'] }};
+                                                            font-weight: {{ styles['mobile']['fontWeight'] }};
+                                                            font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                                            text-decoration: {{ styles['mobile']['textDecoration'] }};
+                                                            font-size: {{ styles['generalFontSize']['fontSize'] }}px;
+                                                            line-height: {{ styles['generalFontSize']['fontSize'] }}px;">
+                                                        <b style="color:{{ styles['companyName']['color'] }};
+                                                                font-weight: {{ styles['mobile']['fontWeight'] }};
+                                                                font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                                                font-size: {{ styles['generalFontSize']['fontSize'] }};">
+                                                            A :
+                                                        </b>
+                                                    </span>
+                                                    <span style="color:{{ styles['addressZipcode']['color'] }};
+                                                            text-decoration: {{ styles['addressZipcode']['textDecoration'] }};
+                                                            font-style: {{ styles['addressZipcode']['fontStyle'] }};
+                                                            font-weight: {{ styles['addressZipcode']['fontWeight'] }};
+                                                            font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                                            font-size: {{ styles['generalFontSize']['fontSize'] }}px;
+                                                            line-height: {{ styles['generalFontSize']['fontSize'] }}px;">
+                                                {{ address.street }}
+                                                <br />
+                                                <b style="color:{{ styles['divColor']['color'] }};
+                                                        font-weight: {{ styles['mobile']['fontWeight'] }};
+                                                        font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                                        font-size: {{ styles['generalFontSize']['fontSize'] }};">
+                                                            A :
+                                                        </b>{{ address.zipCode }} {{ address.city }}, {{ address.country }}
+                                                </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td valign="top" style="background: {{ styles['divColor']['color'] }}; padding-top: 8px;">
+                                    <a title="Ajouter {{ user.firstName }} {{ user.lastName }} à mes contacts" href="{{ API }}/user/token/{{ user.token }}/vcard">
+                                        {# START VCARD #}
+                                        {% if styles['vCardEnabled']['enabled'] is same as('true') %}
+                                            <img width="25" height="25" alt="Ajouter {{ user.firstName }} {{ user.lastName }} à mes contacts" src="https://s3.eu-west-3.amazonaws.com/files.signally.io/vcard/Plus-VCard.png" />
+                                        {% endif %}
+                                        {# END VCARD #}
+                                    </a>
+                                </td>
+                                <td style="background: {{ styles['divColor']['color'] }}; width: 12px; border-radius: 0 4px 4px 0;"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table></td>
+    </tr>
+    {# START EVENT #}
+    {% if event or isPreview %}
+        {% if styles['event']['enabled'] is same as( 'true' ) %}
+            <tr>
+                <td>
+                    <table cellpadding="0" cellspacing="0" border="0" style="display: inline-block; width: 320px;">
+                        {% if event %}
+                                    <tr
+                                            style="border: none;">
+                                        <td style=" padding-top: {{ styles['eventPadding']['padding'] }}px;
+                                                padding-bottom: calc(10 - {{ styles['eventPadding']['padding'] }})px;">
+                                            <a
+                                                    style="display: block;"
+                                                    target="_blank"
+                                                    href="{{ API }}/event/token/{{ user.token }}/link">
+                                                <img width="320" style="padding: 0; width: 100%;" src="{{ API }}/event/token/{{ user.token }}/image"
+                                                     alt="{{ event.name }}"/></a>
+                                        </td>
+                                    </tr>
+                                    {# START ELSE #}
+                                    {% else %}
+                                        <tr
+                                                style="border: none;
+                                                        padding-top: {{ styles['eventPadding']['padding'] }}px;
+                                                        padding-bottom: {{ styles['eventPadding']['padding'] }}px;"><td>
+                                                <img
+                                                        style="padding: 0; width: 100%;"
+                                                        src="https://fakeimg.pl/480x86?font=noto&font_size=14" alt="Event"
+                                                />
+                                            </td>
+                                        </tr>
+                        {% endif %}
+                        {# END ELSE #}
+                    </table>
+                </td>
+            </tr>
+            {% endif %}
+        {% endif %}
+            {# END EVENT #}
+    {# START SOCIALS #}
+    {% if socialMediaAccounts %}
+    <tr>
+        <td style="padding-top: 10px">
+
+                <table border="0" cellspacing="0" cellpadding="0" style="background: black; border-radius: 4px; width: 100%; padding: 12px;">
+                    <tr valign="middle">
+                        <td valign="middle" style="vertical-align: middle;">
+                                <span style="color: #FFFFFF;
+                                        text-decoration: {{ styles['addressZipcode']['textDecoration'] }};
+                                        font-style: {{ styles['addressZipcode']['fontStyle'] }};
+                                        font-weight: {{ styles['addressZipcode']['fontWeight'] }};
+                                        font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+                                        font-size: {{ styles['generalFontSize']['fontSize'] }}px;
+                                        line-height: 12px;
+                                        vertical-align:6px">
+                                Follow Pathé on
+                                </span>
+                            {# START SOCIALSLIST #}
+                            {% for media in socialMediaAccounts %}
+                                <a href="{{ media.url }} " title="{{ media.name }}">
+                                    <img width="24" height="24" src="{{ media.image }}" alt='{{ media.name }}'/>
+                                </a>
+                                <span style="width: 12px;">&nbsp;</span>
+                            {% endfor %}
+                            {# END SOCIALSLIST #}
+                        </td>
+                    </tr>
+                </table>
+
+        </td>
+    </tr>
+    {% endif %}
+    {# END SOCIALS #}
+</table>
+
+{# START CALENDAR #}
+<br />
+{% if styles['calendarEnabled']['enabled'] is same as('true') %}
+    <a style="font-family: {{ styles['generalFontFamily']['fontFamily'] }};
+            color:{{ styles['companyName']['color'] }};
+            font-size: {{ styles['generalFontSize']['fontSize'] }}px;" href="{{ API }}/user/token/{{ user.token }}/calendar" title="Prendre rendez-vous avec {{ user.firstName }} {{ user.lastName }}">
+        Prenez rendez-vous avec moi</a>
+{% endif %}
+    {# END CALENDAR #}
+    {# START DISCLAIMER #}
+{% if styles['disclaimerEnabled']['enabled'] is same as( 'true' ) %}
+    <p style="padding-top: {{ styles['disclaimerPadding']['padding'] }}; padding-bottom: {{ styles['disclaimerPadding']['padding'] }};">{{ styles['disclaimerValue']['value'] }}</p>
+{% endif %}
+{# END DISCLAIMER #}

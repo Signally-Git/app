@@ -1,0 +1,34 @@
+.container hr {
+  margin: 2rem 3rem;
+  border: none;
+  background: none;
+  border-bottom: 1px solid;
+  opacity: 0.1;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.inputsContainer h4 {
+  margin-bottom: 0.5rem;
+}
+.inputsContainer h4:first-child {
+  margin-top: 0;
+}
+.inputsContainer > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.inputsContainer > div > div {
+  max-width: 48%;
+}
+
+.fontSize {
+  font-weight: normal;
+  opacity: 0.8;
+}
