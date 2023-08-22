@@ -1,6 +1,7 @@
 import { request } from "utils";
 import { useEffect, useState } from "react";
 import { Template } from "./Template";
+import classes from "./templates.module.css";
 
 const fetchTemplates = async () => {
     try {
@@ -25,13 +26,14 @@ const Templates = () => {
     }, []);
 
     return (
-        <ul>
+        <ul className={classes.templatesList}>
             {templates.map((template) => {
                 console.log(template);
                 return (
                     <li key={template.id}>
                         <Template
                             id={template.id}
+                            template={template}
                             styles={template.signatureStyles}
                         />
                     </li>

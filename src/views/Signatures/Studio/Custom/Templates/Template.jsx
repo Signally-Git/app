@@ -3,9 +3,10 @@ import { request } from "utils";
 import parse from "html-react-parser";
 import { Loading } from "components";
 
-const Template = ({ id, styles }) => {
-    console.log(styles);
+const Template = ({ id, styles, template }) => {
+    console.log(id, styles);
     const [preview, setPreview] = useState(null);
+    const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -19,7 +20,8 @@ const Template = ({ id, styles }) => {
                 );
                 setPreview(response.data);
             } catch (err) {
-                console.error("Error fetching preview:", err);
+                console.log(err);
+                // setError(data);
             } finally {
                 setLoading(false);
             }
@@ -29,8 +31,18 @@ const Template = ({ id, styles }) => {
     }, [id, styles]);
 
     if (loading) return <Loading />;
-    if (preview) return parse(preview);
-    return null;
+    if (preview)
+        return (
+            <>
+                {id}
+                {preview && parse(preview)}
+            </>
+        );
+    return (
+        <>
+            {template.name} : {id} : {error}
+        </>
+    );
 };
 
 export { Template };
