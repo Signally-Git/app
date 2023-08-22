@@ -35,7 +35,6 @@ const Menu = ({ onTabSelect }) => {
                         ref={addToRefs}
                         key={tabName}
                         onClick={() => {
-                            console.log("Tab clicked:", tabName);
                             setSelectedTab(tabName);
                             onTabSelect(tabName);
                         }}

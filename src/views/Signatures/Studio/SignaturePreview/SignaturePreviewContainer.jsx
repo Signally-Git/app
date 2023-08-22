@@ -1,8 +1,9 @@
-import classes from "./SignaturePreview.module.css";
+import classes from "./SignaturePreviewContainer.module.css";
 import { useEffect, useState } from "react";
 import { Loading } from "components";
+import { SignatureBuildPreview } from "./SignatureBuildPreview";
 
-const SignaturePreview = () => {
+const SignaturePreviewContainer = ({ templateId, templateStyles }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -26,10 +27,15 @@ const SignaturePreview = () => {
                 {loading ? (
                     <Loading />
                 ) : (
-                    <div className={classes.signaturePreview}></div>
+                    <div className={classes.signaturePreview}>
+                        <SignatureBuildPreview
+                            id={templateId}
+                            styles={templateStyles}
+                        />
+                    </div>
                 )}
             </section>
         </aside>
     );
 };
-export default SignaturePreview;
+export default SignaturePreviewContainer;

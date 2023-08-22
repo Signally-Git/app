@@ -4,8 +4,8 @@ import { FormattedMessage } from "react-intl";
 import { useParams } from "react-router-dom";
 import { request } from "utils";
 import { Menu } from "./Menu/Menu";
-import SignaturePreview from "./SignaturePreview/SignaturePreview";
-import Custom from "./Custom/Custom";
+import SignaturePreviewContainer from "./SignaturePreview/SignaturePreviewContainer";
+import CustomTab from "./Custom/CustomTab";
 import classes from "./studio.module.css";
 
 const Studio = () => {
@@ -29,10 +29,10 @@ const Studio = () => {
             <Menu onTabSelect={setSelectedTab} />
             <div className={classes.studioContainer}>
                 <div>
-                    <Custom tab={selectedTab} />
+                    <CustomTab tab={selectedTab} />
                 </div>
                 <div>
-                    <SignaturePreview />
+                    <SignaturePreviewContainer />
                 </div>
             </div>
         </>

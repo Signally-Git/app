@@ -1,0 +1,20 @@
+@import "../../assets/style/global";
+
+.range {
+  height: 6px;
+  width: 100%;
+  background-color: $color-light-accent;
+  margin: 1rem 0;
+  border-radius: $hugeRadius;
+}
+
+.rangeThumb {
+  transition: 0.2s;
+  height: 25px;
+  width: 25px;
+  background-color: $color-primary;
+  border: 3px solid #FFF;
+  border-radius: 50%;
+  outline: none;
+  box-shadow: 1px 1px 3px $color-primary-variant;
+}

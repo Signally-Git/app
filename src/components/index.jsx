@@ -3,6 +3,8 @@ export { default as Header } from "./Header/Header";
 export { default as Button } from "./Button/Button";
 export { default as NavigationButtons } from "./NavigationButtons/buttons";
 export { default as CustomCheckbox } from "./Checkbox/customCheckbox";
+export { default as FontSizeRange } from "./FontSizeRange/FontSizeRange";
+export { default as ColorPicker } from "./ColorPicker/ColorPicker";
 export { default as CustomSelect } from "./CustomSelect/CustomSelect";
 export { default as Input } from "./Input/Input";
 export { default as Loading } from "./Loading/Loading";

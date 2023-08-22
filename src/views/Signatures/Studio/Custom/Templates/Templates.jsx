@@ -26,11 +26,17 @@ const Templates = () => {
 
     return (
         <ul>
-            {templates.map((template) => (
-                <li key={template.id}>
-                    <Template id={template.id} />
-                </li>
-            ))}
+            {templates.map((template) => {
+                console.log(template);
+                return (
+                    <li key={template.id}>
+                        <Template
+                            id={template.id}
+                            styles={template.signatureStyles}
+                        />
+                    </li>
+                );
+            })}
         </ul>
     );
 };

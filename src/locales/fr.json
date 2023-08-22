@@ -278,6 +278,7 @@
             "manual": "Manuellement",
             "from_csv": "A partir d'un fichier .csv",
             "import": {
+                "profile_picture": "Photo de profil",
                 "logo": "Importer un logo",
                 "crop": {
                     "title": "Recadrer l'image",
