@@ -19,9 +19,9 @@ const Template = ({ id, styles, template }) => {
                     { styles }
                 );
                 setPreview(response.data);
-            } catch (err) {
-                console.log(err);
-                // setError(data);
+            } catch ({ response }) {
+                console.log(response.data.detail);
+                setError(response.data.detail);
             } finally {
                 setLoading(false);
             }
@@ -40,7 +40,8 @@ const Template = ({ id, styles, template }) => {
         );
     return (
         <>
-            {template.name} : {id} : {error}
+            <h3>{template.name}</h3> {id} <br />
+            <span style={{ color: "red" }}>{error}</span>
         </>
     );
 };
