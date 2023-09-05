@@ -2,93 +2,115 @@ import React from "react";
 import { CustomCheckbox, Input } from "components";
 import classes from "./GroupedStylesImagesRenderer.module.css";
 
-const GroupedStylesImagesRenderer = ({
-    styles,
-    filter,
-    ignoreSubcategories = [],
-}) => {
-    const recursivelyGroupStyles = (styles) => {
-        const grouped = {};
-
-        styles.forEach((style) => {
-            console.log(style);
-            let levels = style.type.split(".");
-            let currentLevel = grouped;
-
-            levels.forEach((level, index) => {
-                if (!currentLevel[level]) {
-                    currentLevel[level] = {};
-                }
-                if (index === levels.length - 1) {
-                    currentLevel[level][style.property] = style.value;
-                } else {
-                    currentLevel = currentLevel[level];
-                }
-            });
-        });
-
-        return grouped;
+const GroupedStylesImagesRenderer = ({ styles, setStyles }) => {
+    const updateImageProperty = (styleUpdate) => {
+        const updatedStyles = styles.map((style) =>
+            style.id === styleUpdate.id
+                ? { ...style, value: styleUpdate.value }
+                : style
+        );
+        setStyles(updatedStyles);
     };
 
-    const renderGroupedStyles = (grouped, path = []) => {
-        return Object.entries(grouped).reduce((acc, [key, value]) => {
-            if (ignoreSubcategories.includes(path.concat(key).join("."))) {
-                return acc;
-            }
+    const findStyleByTypeAndProperty = (type, property) => {
+        return styles.find(
+            (style) => style.type === type && style.property === property
+        );
+    };
 
-            if (
-                typeof value === "object" &&
-                !(value instanceof Array) &&
-                !value.fontWeight
-            ) {
-                let TitleElement = path.length === 0 ? "h3" : "h4";
-                const renderedSubgroup = renderGroupedStyles(
-                    value,
-                    path.concat(key)
+    const renderImagePropertyEditor = (type) => {
+        const enabledStyle = findStyleByTypeAndProperty(type, "enabled");
+        const widthStyle = findStyleByTypeAndProperty(type, "width");
+        const heightStyle = findStyleByTypeAndProperty(type, "height");
+
+        return (
+            <div key={type}>
+                {enabledStyle && (
+                    <CustomCheckbox
+                        checked={enabledStyle.value === "true"}
+                        onChange={(e) => {
+                            updateImageProperty({
+                                id: enabledStyle.id,
+                                value: e.target.checked.toString(),
+                            });
+                        }}
+                    />
+                )}
+                {widthStyle && (
+                    <Input
+                        type="number"
+                        min={0}
+                        value={widthStyle.value}
+                        placeholder="Width"
+                        onChange={(e) => {
+                            updateImageProperty({
+                                id: widthStyle.id,
+                                value: e.target.value,
+                            });
+                        }}
+                    />
+                )}
+                {heightStyle && (
+                    <Input
+                        type="number"
+                        min={0}
+                        value={heightStyle.value}
+                        placeholder="Height"
+                        onChange={(e) => {
+                            updateImageProperty({
+                                id: heightStyle.id,
+                                value: e.target.value,
+                            });
+                        }}
+                    />
+                )}
+            </div>
+        );
+    };
+
+    const renderGroupByType = () => {
+        const types = [...new Set(styles.map((s) => s.type))];
+
+        return types
+            .map((type) => {
+                const typeParts = type.split(".");
+                const mainType = typeParts[0]; // "company"
+                const subType = typeParts[1]; // "logo"
+
+                const enabledStyle = findStyleByTypeAndProperty(
+                    type,
+                    "enabled"
                 );
-                if (renderedSubgroup.length > 0) {
-                    acc.push(
-                        <div className={classes.main} key={key}>
-                            <TitleElement>{key}</TitleElement>
-                            <div className={classes.child}>
-                                {renderedSubgroup}
-                            </div>
-                        </div>
-                    );
+                const widthStyle = findStyleByTypeAndProperty(type, "width");
+                const heightStyle = findStyleByTypeAndProperty(type, "height");
+
+                // Vérification de la présence des trois propriétés
+                if (!enabledStyle || !widthStyle || !heightStyle) {
+                    return null; // Ne rend rien si une des propriétés est manquante
                 }
-            } else {
-                if (key === "enabled")
-                    acc.push(
-                        <React.Fragment key={path.concat(key).join(".")}>
-                            <CustomCheckbox defaultChecked={!value} />
-                        </React.Fragment>
-                    );
-                else
-                    acc.push(
-                        <React.Fragment key={path.concat(key).join(".")}>
-                            <Input
-                                type="number"
-                                min={0}
-                                defaultValue={value}
-                                placeholder={key}
-                            />
-                        </React.Fragment>
-                    );
-            }
-            return acc;
-        }, []);
+
+                return (
+                    <div className={classes.main} key={mainType}>
+                        <h3>
+                            {mainType.charAt(0).toUpperCase() +
+                                mainType.slice(1)}
+                        </h3>
+                        <div className={classes.child}>
+                            {subType ? (
+                                <h4>
+                                    {subType.charAt(0).toUpperCase() +
+                                        subType.slice(1)}
+                                </h4>
+                            ) : null}
+                            {renderImagePropertyEditor(type)}
+                        </div>
+                    </div>
+                );
+            })
+            .filter(Boolean); // Filtre les éléments null pour ne pas les rendre
     };
 
-    const groupedStyles = recursivelyGroupStyles(styles);
-
-    const filteredGroupedStyles = {};
-    filter.forEach((category) => {
-        if (groupedStyles[category]) {
-            filteredGroupedStyles[category] = groupedStyles[category];
-        }
-    });
-
-    return <>{renderGroupedStyles(filteredGroupedStyles)}</>;
+    return <div>{renderGroupByType()}</div>;
 };
 
 export default GroupedStylesImagesRenderer;

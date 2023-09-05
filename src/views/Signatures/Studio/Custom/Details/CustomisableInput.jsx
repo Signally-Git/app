@@ -22,10 +22,10 @@ const CustomisableInput = ({
                 onChange={(e) => {
                     onEnableChange({
                         id: isVisible.id,
-                        value: e.target.checked,
+                        value: e.target.checked.toString(),
                     });
                 }}
-                checked={isVisible.value}
+                checked={isVisible.value === "true"}
             />
             <div className={classes.inputWithStyles}>
                 <Input
