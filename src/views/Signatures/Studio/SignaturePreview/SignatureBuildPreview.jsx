@@ -5,15 +5,15 @@ import { Loading } from "components";
 
 const SignatureBuildPreview = ({ id, styles }) => {
     const [preview, setPreview] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        setLoading(true);
         const getPreview = async () => {
             if (!id || !styles) {
                 return;
             }
-
             try {
                 const response = await request.post(
                     "compile_for_create_signature/" + id,
@@ -26,7 +26,7 @@ const SignatureBuildPreview = ({ id, styles }) => {
                 setLoading(false);
             }
         };
-
+        // console.log(styles);
         getPreview();
     }, [id, styles]);
 

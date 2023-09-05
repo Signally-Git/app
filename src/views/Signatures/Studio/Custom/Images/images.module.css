@@ -1,6 +1,23 @@
-.imagesContainer h3 {
-  margin-top: 0;
+/* global.scss */
+.imagesContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 .imagesContainer p {
   font-size: 0.8rem;
+}
+.imagesContainer h3 {
+  text-transform: capitalize;
+  margin: 1.5rem 0 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-light-accent);
+}
+.imagesContainer h3:first-child {
+  margin-top: 0;
+}
+.imagesContainer h4 {
+  margin: 0;
+  text-transform: capitalize;
 }

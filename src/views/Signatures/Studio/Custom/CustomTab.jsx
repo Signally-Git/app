@@ -13,13 +13,18 @@ const COMPONENT_MAP = {
     Addons: Addons,
 };
 
-const CustomTab = ({ tab }) => {
+const CustomTab = ({ tab, template, setTemplate, styles, setStyles }) => {
     const Component = COMPONENT_MAP[tab];
     if (!Component) return null;
 
     return (
         <div className={classes.customTabContainer}>
-            <Component />
+            <Component
+                styles={styles}
+                setStyles={setStyles}
+                selectedTemplate={template}
+                setSelectedTemplate={setTemplate}
+            />
         </div>
     );
 };

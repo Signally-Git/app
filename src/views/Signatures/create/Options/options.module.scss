@@ -99,7 +99,7 @@ $max-width: 75%;
         height: 25px;
         width: 25px;
         background-color: $color-primary;
-        border: 3px solid #fff;
+        border: 3px solid $pureLight;
         border-radius: $hugeRadius;
         outline: none;
         box-shadow: 1px 1px 3px rgba($color-primary, 0.8);
@@ -174,7 +174,7 @@ $max-width: 75%;
     padding: 0.5rem;
     height: 10rem;
     max-width: 9rem;
-    background: #fff;
+    background: $pureLight;
     box-shadow: 0 12px 40px rgba(230, 208, 201, 0.8);
     border-radius: $smallBorderRadius;
     justify-content: center;
@@ -204,7 +204,7 @@ $max-width: 75%;
 }
 
 .optionsContainer {
-    background: #fff;
+    background: $pureLight;
     border-radius: 0 0 10px 10px;
 }
 
@@ -266,7 +266,7 @@ $max-width: 75%;
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: $pureLight;
     -webkit-transition: 0.4s;
     transition: 0.4s;
 }

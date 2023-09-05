@@ -110,14 +110,14 @@
 .modal .tagsContainer .otherTags li:hover,
 .modal .studioStore li:hover {
   background: var(--color-dark-accent);
-  color: #fff;
+  color: var(--pure-light);
   cursor: pointer;
 }
 .modal .tagsContainer .otherTags .active,
 .modal .studioStore .active {
   font-weight: bold;
   background: var(--color-dark-accent);
-  color: #fff;
+  color: var(--pure-light);
 }
 .modal .otherTagsContainer {
   display: flex;
@@ -159,7 +159,7 @@
 }
 .modal .studioStore .activeStudio {
   background-color: var(--color-primary) !important;
-  color: #fff;
+  color: var(--pure-light);
 }
 .modal h5 {
   color: var(--color-dark-accent);
@@ -193,7 +193,7 @@
   padding: 1rem;
   position: relative;
   border-radius: var(--border-radius);
-  background-color: #fff;
+  background-color: var(--pure-light);
   transition: border-color 0.3s;
   border: 1px solid transparent;
   margin-right: 2rem;
@@ -261,7 +261,7 @@
   border-color: var(--color-primary);
 }
 .filter input:checked ~ label {
-  color: #fff;
+  color: var(--pure-light);
   border-color: var(--color-primary);
   background: var(--color-primary);
 }

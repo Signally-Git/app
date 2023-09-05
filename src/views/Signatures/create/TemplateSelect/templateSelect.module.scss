@@ -105,14 +105,14 @@
             }
             &:hover {
                 background: $color-dark-accent;
-                color: #fff;
+                color: $pureLight;
                 cursor: pointer;
             }
         }
         .active {
             font-weight: bold;
             background: $color-dark-accent;
-            color: #fff;
+            color: $pureLight;
         }
     }
     .otherTagsContainer {
@@ -154,7 +154,7 @@
         }
         .activeStudio {
             background-color: $color-primary !important;
-            color: #fff;
+            color: $pureLight;
         }
     }
     h5 {
@@ -188,7 +188,7 @@
             padding: 1rem;
             position: relative;
             border-radius: $borderRadius;
-            background-color: #fff;
+            background-color: $pureLight;
             transition: border-color 0.3s;
             border: 1px solid transparent;
             margin-right: 2rem;
@@ -265,7 +265,7 @@
         }
     }
     input:checked ~ label {
-        color: #fff;
+        color: $pureLight;
         border-color: $color-primary;
         background: $color-primary;
     }

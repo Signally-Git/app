@@ -2,12 +2,24 @@ import React, { useEffect, useState } from "react";
 import { request } from "utils";
 import parse from "html-react-parser";
 import { Loading } from "components";
+import classes from "./templates.module.css";
 
-const Template = ({ id, styles, template }) => {
-    console.log(id, styles);
+const Template = ({
+    id,
+    styles,
+    template,
+    selectedTemplate,
+    setSelectedTemplate,
+    setDefaultStyles,
+}) => {
     const [preview, setPreview] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    const handleOnChange = () => {
+        setSelectedTemplate(template);
+        setDefaultStyles(template.signatureStyles);
+    };
 
     useEffect(() => {
         const getPreview = async () => {
@@ -20,7 +32,6 @@ const Template = ({ id, styles, template }) => {
                 );
                 setPreview(response.data);
             } catch ({ response }) {
-                console.log(response.data.detail);
                 setError(response.data.detail);
             } finally {
                 setLoading(false);
@@ -34,16 +45,24 @@ const Template = ({ id, styles, template }) => {
     if (preview)
         return (
             <>
-                {id}
-                {preview && parse(preview)}
+                <span className={classes.templateName}>{template.name}</span>
+                <div className={classes.template}>
+                    <input
+                        checked={
+                            selectedTemplate &&
+                            selectedTemplate["@id"] === template["@id"]
+                        }
+                        onChange={handleOnChange}
+                        id={template.id}
+                        type="radio"
+                        name="template"
+                    />
+                    <div className={classes.selectedTemplate}></div>
+                    {preview && parse(preview)}
+                </div>
             </>
         );
-    return (
-        <>
-            <h3>{template.name}</h3> {id} <br />
-            <span style={{ color: "red" }}>{error}</span>
-        </>
-    );
+    return null;
 };
 
 export { Template };

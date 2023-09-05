@@ -3,12 +3,11 @@ import { useEffect, useState } from "react";
 import { Loading } from "components";
 import { SignatureBuildPreview } from "./SignatureBuildPreview";
 
-const SignaturePreviewContainer = ({ templateId, templateStyles }) => {
+const SignaturePreviewContainer = ({ template, styles }) => {
     const [loading, setLoading] = useState(true);
-
     useEffect(() => {
         setLoading(false);
-    }, []);
+    }, [template]);
 
     return (
         <aside className={classes.container}>
@@ -24,13 +23,11 @@ const SignaturePreviewContainer = ({ templateId, templateStyles }) => {
                 <div className={classes.lazyLoadingShort}></div>
                 <div className={classes.lazyLoadingMedium}></div>
                 <br />
-                {loading ? (
-                    <Loading />
-                ) : (
+                {!template ? null : (
                     <div className={classes.signaturePreview}>
                         <SignatureBuildPreview
-                            id={templateId}
-                            styles={templateStyles}
+                            id={template.id}
+                            styles={styles}
                         />
                     </div>
                 )}

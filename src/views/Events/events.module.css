@@ -14,7 +14,7 @@
 }
 
 .infosContainer {
-  background-color: #fff;
+  background-color: var(--pure-light);
 }
 
 .bannerPreview {
@@ -25,7 +25,7 @@
 }
 
 .eventsContainer {
-  background-color: #fff;
+  background-color: var(--pure-light);
   border-radius: var(--border-radius);
   min-width: var(--left-col-min-width);
   width: var(--left-col-width);
@@ -139,7 +139,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: var(--pure-light);
   border-radius: var(--border-radius);
   width: 30%;
   padding: 0 1rem 1rem;
@@ -359,7 +359,7 @@
 .back {
   width: 100%;
   backface-visibility: hidden;
-  background-color: #fff;
+  background-color: var(--pure-light);
   border-radius: var(--border-radius);
   margin-bottom: auto;
   position: absolute;

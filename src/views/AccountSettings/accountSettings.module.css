@@ -14,7 +14,7 @@
   padding: 2rem;
   margin-bottom: auto;
   position: relative;
-  background: #fff;
+  background: var(--pure-light);
   border-radius: var(--border-radius);
   overflow: auto;
   min-width: var(--left-col-min-width);
@@ -130,7 +130,7 @@
 .iconsContainer {
   margin-top: 0.5rem;
   width: 100%;
-  background: #fff;
+  background: var(--pure-light);
   flex-wrap: wrap;
   border-radius: var(--small-border-radius);
   padding: 1rem;
@@ -143,7 +143,7 @@
 }
 .iconsContainer label {
   margin: 0;
-  color: #000 !important;
+  color: var(--pure-dark) !important;
 }
 .iconsContainer svg {
   cursor: pointer;
@@ -181,6 +181,9 @@
 .checkbox {
   display: flex;
   align-items: center;
+}
+.checkbox > label {
+  margin-left: 0.5rem;
 }
 
 .btnsContainer {

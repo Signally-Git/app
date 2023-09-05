@@ -61,7 +61,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
+    background: $pureLight;
     border-radius: $borderRadius;
     width: 25%;
     height: 13rem;
@@ -148,7 +148,7 @@
     min-height: 65vh;
     max-height: 65vh;
     overflow: auto;
-    background: #fff;
+    background: $pureLight;
     border-radius: $borderRadius;
     width: 40%;
     min-width: 15rem;
@@ -263,7 +263,7 @@
         margin: auto;
         margin-left: 0;
         margin-right: auto;
-        background-color: white;
+        background-color: $pureLight;
         transition: 0.4s;
     }
     .sliderTabs {
@@ -306,7 +306,7 @@
         animation: blink 1s infinite;
     }
     button:hover svg {
-        stroke: #fff !important;
+        stroke: $pureLight !important;
     }
 }
 
@@ -320,7 +320,7 @@
         margin-right: 1rem;
     }
     &:hover {
-        background-color: #fff !important;
+        background-color: $pureLight !important;
         cursor: default !important;
         button {
             cursor: pointer;
@@ -331,7 +331,7 @@
         padding: 0.15rem 0.75rem !important;
         border: $color-dark-accent;
         border-radius: $borderRadius;
-        color: #fff;
+        color: $pureLight;
         margin-left: 1rem;
     }
     button {
@@ -384,7 +384,7 @@
     position: relative;
     padding: 0.25rem 1rem 1rem;
     flex-direction: column;
-    background-color: #fff;
+    background-color: $pureLight;
     height: fit-content;
     max-height: 80%;
     border-radius: $borderRadius;
@@ -505,7 +505,7 @@
 
 .rangeUpload {
     flex: 100%;
-    background: #fff;
+    background: $pureLight;
     width: 100%;
     border-radius: $smallBorderRadius;
 }
@@ -576,7 +576,7 @@
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: $pureLight;
     -webkit-transition: 0.4s;
     transition: 0.4s;
 }
@@ -608,14 +608,14 @@ input:checked + .slider:before {
     margin-top: 0.5rem;
     width: 100%;
     max-width: 100%;
-    background: #fff;
+    background: $pureLight;
     flex-wrap: wrap;
     display: flex;
     align-items: center;
     justify-content: space-between;
     .borderInput {
         transition: 0.2s;
-        background: #fff;
+        background: $pureLight;
         border: 1px solid $color-lighter-accent;
         padding: 1rem;
         padding-right: 5rem;
@@ -629,7 +629,7 @@ input:checked + .slider:before {
     }
     label {
         margin: 0;
-        color: #000 !important;
+        color: $pureDark !important;
     }
 }
 

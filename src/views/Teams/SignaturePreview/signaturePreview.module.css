@@ -122,7 +122,7 @@
 .front,
 .back {
   backface-visibility: hidden;
-  background-color: #fff;
+  background-color: var(--pure-light);
   border-radius: var(--border-radius);
   padding: 2rem;
   margin-bottom: auto;
@@ -241,7 +241,7 @@
   justify-content: space-between;
   box-shadow: 0 0 30px rgba(var(--color-dark-accent), 0.4);
   width: 35rem;
-  background-color: #fff;
+  background-color: var(--pure-light);
   border-radius: var(--border-radius);
   height: 40rem;
   padding: 1rem 2rem;
@@ -378,7 +378,7 @@
   margin: 1rem 0;
 }
 .playlistModal .searchInput:focus {
-  background: #fff;
+  background: var(--pure-light);
   border: 1px solid var(--color-primary);
   box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }

@@ -120,7 +120,7 @@
 .front,
 .back {
     backface-visibility: hidden;
-    background-color: #fff;
+    background-color: $pureLight;
     border-radius: $borderRadius;
     padding: 2rem;
     margin-bottom: auto;
@@ -234,7 +234,7 @@
     justify-content: space-between;
     box-shadow: 0 0 30px rgba($color-dark-accent, 0.4);
     width: 35rem;
-    background-color: #fff;
+    background-color: $pureLight;
     border-radius: $borderRadius;
     height: 40rem;
     padding: 1rem 2rem;
@@ -372,7 +372,7 @@
         outline: none;
         margin: 1rem 0;
         &:focus {
-            background: #fff;
+            background: $pureLight;
             border: 1px solid $color-primary;
             box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
         }

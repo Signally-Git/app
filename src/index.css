@@ -67,17 +67,6 @@
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1) !important;
 }
 
-li {
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-li * {
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  outline: none;
-}
-
 a,
 a:hover,
 a:visited,
@@ -159,12 +148,12 @@ h6 {
 }
 
 .rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span {
-  color: #fff !important;
+  color: var(--pure-light) !important;
   z-index: 2;
 }
 
 .rdrEndEdge {
-  color: #fff !important;
+  color: var(--pure-light) !important;
   border: 1px solid var(--color-primary) !important;
   width: 44px !important;
   height: 44px !important;
@@ -179,11 +168,11 @@ h6 {
 }
 
 .rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span {
-  color: #000 !important;
+  color: var(--pure-dark) !important;
 }
 
 .rdrEndEdge + span span {
-  color: #000 !important;
+  color: var(--pure-dark) !important;
 }
 
 .rdrDayStartPreview .rdrDayEndPreview {
@@ -193,11 +182,11 @@ h6 {
 
 .rdrInRange,
 .rdrStartEdge {
-  color: #fdf8f7 !important;
+  color: var(--color-lighter-accent) !important;
 }
 
 .rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span {
-  color: #000 !important;
+  color: var(--pure-dark) !important;
 }
 
 ::-webkit-scrollbar-track {

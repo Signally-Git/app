@@ -29,33 +29,32 @@ function CompanySettings() {
     };
 
     useEffect(() => {
+        console.log(
+            "organisation useEffect organisation?.logo?.url",
+            organisation?.logo?.url
+        );
 
-        console.log("organisation useEffect organisation?.logo?.url", organisation?.logo?.url);
-
-        setPreview(organisation?.logo?.url || null)
+        setPreview(organisation?.logo?.url || null);
         setCompanyName(organisation?.name || "");
         setWebsite(organisation?.websiteUrl || "");
         setPhone(organisation?.address?.phone || "");
         setEmail(organisation?.address?.email || "");
     }, [organisation]);
 
-    
     useEffect(() => {
         request.get(organisation?.["@id"]).then((org) => {
             org = org?.data;
             setOrganisation(org);
-            // setPreview(org?.logo?.url);
-            // setCompanyName(org?.name);
-            // setWebsite(org?.websiteUrl);
-            // setPhone(org?.digitalAddress?.phone);
-            // setEmail(org?.digitalAddress?.email);
         });
     }, []);
 
     useEffect(() => {
         // create the preview
         if (!uploadedMedia) {
-            console.log("uploadedMedia useEffect organisation?.logo?.url", organisation?.logo?.url);
+            console.log(
+                "uploadedMedia useEffect organisation?.logo?.url",
+                organisation?.logo?.url
+            );
             setPreview(organisation?.logo?.url || null);
             return;
         }
@@ -108,14 +107,15 @@ function CompanySettings() {
                             },
                         })
                         .then((response) => {
-
-                            
                             const updatedOrganisation = response.data;
                             setOrganisation(updatedOrganisation);
                             setCroppedImage(null);
                             setUploadedMedia(null);
 
-                            console.log("triggered", updatedOrganisation?.logo?.url)
+                            console.log(
+                                "triggered",
+                                updatedOrganisation?.logo?.url
+                            );
                             setPreview(updatedOrganisation?.logo?.url);
                             notification({
                                 content: (
@@ -204,8 +204,8 @@ function CompanySettings() {
                         <UploadFile
                             file={uploadedMedia}
                             setFile={(e) => {
-                                setUploadedMedia(e)
-                                setOpen(true)
+                                setUploadedMedia(e);
+                                setOpen(true);
                             }}
                             removeFile={() => {
                                 setUploadedMedia(null);

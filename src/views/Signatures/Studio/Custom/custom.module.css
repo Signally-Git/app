@@ -2,8 +2,6 @@
 .customTabContainer {
   height: 100%;
   overflow: auto;
-  max-height: calc(100% - 10rem);
-  min-height: calc(100% - 10rem);
   padding: 1rem;
   margin-right: 1rem;
   border-radius: var(--medium-border-radius);

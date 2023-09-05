@@ -56,14 +56,14 @@ export default function CustomSelect({
                     />
                     <VscTriangleDown />
                 </div>
-                <form
-                    style={{ maxHeight: styleList?.maxHeight }}
-                    onChange={(e) => {
-                        onChange(e.target.value);
-                        setValue(e.target.value);
-                    }}
-                >
-                    {isOpen ? (
+                {isOpen && (
+                    <form
+                        style={{ maxHeight: styleList?.maxHeight }}
+                        onChange={(e) => {
+                            onChange(e.target.value);
+                            setValue(e.target.value);
+                        }}
+                    >
                         <ul className={classes.list} style={styleList}>
                             {items?.map((item, index) => {
                                 return (
@@ -93,10 +93,8 @@ export default function CustomSelect({
                                 );
                             })}
                         </ul>
-                    ) : (
-                        " "
-                    )}
-                </form>
+                    </form>
+                )}
             </div>
         </>
     );

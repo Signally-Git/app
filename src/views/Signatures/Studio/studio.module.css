@@ -1,6 +1,18 @@
+.menuContainer {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.menuContainer > button {
+  height: 2rem;
+  margin: 0;
+}
+
 .studioContainer {
   display: flex;
-  height: 100%;
+  height: calc(100% - 10rem);
+  overflow: hidden;
 }
 .studioContainer > div {
   width: 50%;

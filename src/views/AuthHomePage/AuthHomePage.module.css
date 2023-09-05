@@ -282,7 +282,7 @@
   font-size: 1.25rem;
   flex-direction: column;
   padding-left: 5rem;
-  background: #FFF;
+  background: var(--pure-light);
   height: 100%;
   justify-content: center;
   text-align: left;
@@ -363,7 +363,7 @@
   height: 15rem;
   z-index: 10;
   margin: auto;
-  background: #fff;
+  background: var(--pure-light);
 }
 .modal p {
   line-height: 1.5rem;
@@ -407,7 +407,7 @@
   font-size: 1.2rem;
   margin-left: 0.5rem;
   background: red;
-  color: #fff;
+  color: var(--pure-light);
   border-radius: var(--huge-radius);
   padding: 5px;
 }

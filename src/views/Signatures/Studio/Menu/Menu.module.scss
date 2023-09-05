@@ -3,10 +3,9 @@
 .menuContainer {
   list-style-type: none;
   padding: 0;
-  margin: 0 0 1rem;
+  margin: 0;
   display: flex;
   position: relative;
-  width: max-content;
   border: 1px solid $color-lighter-accent;
   border-radius: $mediumBorderRadius;
   background-color: $color-light-accent-variation2;
