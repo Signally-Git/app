@@ -1,0 +1,77 @@
+.custom-console {
+  background-color: #222;
+  color: white;
+  padding: 0;
+  max-height: 30em;
+  overflow-y: scroll;
+  border: 1px solid #444;
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  right: 0;
+  width: 50em;
+  & .log {
+    color: #55a3da;
+  }
+  & .error {
+    color: #ff5555;
+  }
+}
+
+.custom-console {
+  display: flex;
+  flex-direction: column;
+  letter-spacing: 0.05em;
+  position: absolute;
+  z-index: 9999;
+  opacity: 0.5;
+  overflow: hidden;
+  transition: opacity 200ms;
+  border: 1px solid #ccc;
+  background-color: #2a2a2a;
+  button {
+    cursor: pointer;
+  }
+
+  .console-content {
+    position: relative;
+    line-height: 1.35;
+    width: 100%;
+    padding-right: 2em;
+    height: 100%;
+    overflow: auto;
+    > ul > li {
+      padding: .5rem;
+      font-family: "Helvetica", serif;
+    }
+  }
+
+  &:hover {
+    opacity: 1 !important;
+  }
+
+  .console-header {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+    font-weight: bolder;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    padding: 10px;
+    background-color: #4b4b4b;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  .fixed {
+    cursor: default;
+
+    &:active {
+      cursor: not-allowed
+    }
+  }
+}

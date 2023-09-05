@@ -18,6 +18,7 @@
 }
 
 .link-primary {
+  color: var(--pure-dark);
   border-color: transparent;
 }
 .link-primary:hover {
@@ -26,7 +27,7 @@
 }
 
 .whiteBg {
-  background-color: #fff;
+  background-color: var(--pure-light);
 }
 
 .primary {
@@ -36,10 +37,10 @@
 }
 .primary:hover {
   background-color: var(--color-primary);
-  color: #fff;
+  color: var(--pure-light);
 }
 .primary:hover svg {
-  stroke: #fff;
+  stroke: var(--pure-light);
 }
 .primary svg {
   transition: 0.2s;
@@ -54,7 +55,7 @@
 }
 
 .primaryFill {
-  color: #fff;
+  color: var(--pure-light);
   background-color: var(--color-primary);
   border-color: var(--color-primary);
 }
@@ -69,7 +70,7 @@
 .primaryFill svg {
   transition: 0.2s;
   margin-left: 0.5rem;
-  stroke: #fff;
+  stroke: var(--pure-light);
   stroke-width: 1px;
 }
 
@@ -80,10 +81,10 @@
 .secondary:hover {
   cursor: pointer;
   background: var(--color-dark-accent);
-  color: #fff;
+  color: var(--pure-light);
 }
 .secondary:hover svg {
-  stroke: #fff;
+  stroke: var(--pure-light);
 }
 .secondary svg {
   transition: 0.2s;
@@ -93,7 +94,7 @@
 }
 
 .secondaryFill {
-  color: #fff;
+  color: var(--pure-light);
   background-color: var(--color-dark-accent);
   border-color: var(--color-dark-accent);
 }
@@ -105,11 +106,12 @@
 
 .white {
   border-color: transparent;
-  background-color: #fff;
+  color: var(--pure-dark);
+  background-color: var(--pure-light);
   cursor: pointer;
 }
 .white:hover {
-  color: #fff;
+  color: var(--pure-light);
   background-color: var(--color-dark-accent);
 }
 

@@ -1,7 +1,7 @@
 @import "../../assets/style/global";
 
 .container {
-    background: #fff;
+    background: $pureLight;
     box-shadow: 0 0 40px rgba($color-dark-accent, 0.3);
     width: 60%;
     max-height: 15rem;

@@ -11,7 +11,7 @@
 }
 
 .infosContainer {
-    background-color: #fff;
+    background-color: $pureLight;
 }
 
 .tagline {
@@ -39,7 +39,7 @@
 }
 
 .teamsContainer {
-    background-color: #fff;
+    background-color: $pureLight;
     border-radius: $borderRadius;
     min-width: $leftColMinWidth;
     width: $leftColWidth;
@@ -267,7 +267,7 @@
 }
 
 .teamAssignment {
-    background-color: #fff;
+    background-color: $pureLight;
     border-radius: $borderRadius;
     padding: 1rem 2rem;
     margin-bottom: auto;

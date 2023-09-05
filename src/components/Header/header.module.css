@@ -75,7 +75,7 @@
 .nonLogged li:last-child a:hover {
   border-color: var(--color-primary);
   background: var(--color-primary);
-  color: #fff;
+  color: var(--pure-light);
 }
 .nonLogged li:hover {
   cursor: pointer;
@@ -98,7 +98,7 @@
   height: 15px;
   text-align: center;
   background-color: var(--color-primary);
-  color: #fff;
+  color: var(--pure-light);
   padding: 2px;
   font-size: 0.8rem;
   right: -9px;
@@ -129,7 +129,7 @@
   color: var(--color-primary);
 }
 .btnsContainer .studio:hover {
-  color: #fff;
+  color: var(--pure-light);
   background: var(--color-primary);
 }
 .btnsContainer .store {
@@ -137,7 +137,7 @@
   color: var(--color-primary);
 }
 .btnsContainer .store:hover {
-  color: #fff;
+  color: var(--pure-light);
   background: var(--color-primary);
   border-color: var(--color-primary);
 }
@@ -164,7 +164,7 @@
 }
 .searchContainer input {
   border: none;
-  background: #fff;
+  background: var(--pure-light);
   outline: none;
   border-radius: 25px;
   padding: 1rem;
@@ -193,7 +193,7 @@
   width: 25px;
   line-height: 25px;
   height: 25px;
-  color: #fff;
+  color: var(--pure-light);
   font-size: 26px;
   border-radius: var(--huge-radius);
   margin: 0;
@@ -329,11 +329,11 @@
 }
 .reportContainer > div:hover {
   border-color: var(--color-dark-accent);
-  color: #fff;
+  color: var(--pure-light);
   background-color: var(--color-dark-accent);
 }
 .reportContainer > div:hover button {
-  color: #fff;
+  color: var(--pure-light);
 }
 .reportContainer button {
   color: var(--color-dark-accent);
@@ -393,7 +393,7 @@
     margin-left: 0;
     width: 100%;
     border-radius: 0px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(var(--pure-light), 0.5);
     backdrop-filter: blur(5px);
   }
 }

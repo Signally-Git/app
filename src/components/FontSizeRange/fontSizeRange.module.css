@@ -12,7 +12,7 @@
   height: 25px;
   width: 25px;
   background-color: var(--color-primary);
-  border: 3px solid #FFF;
+  border: 3px solid var(--pure-light);
   border-radius: 50%;
   outline: none;
   box-shadow: 1px 1px 3px var(--color-primary-variant);

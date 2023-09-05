@@ -16,7 +16,7 @@
 .container svg {
   border-radius: var(--huge-radius);
   padding: 4px;
-  fill: #fff;
+  fill: var(--pure-light);
   font-size: 1.25rem;
 }
 .container p {

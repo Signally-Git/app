@@ -1,59 +1,83 @@
-import { CustomisableInput } from "./CustomisableInput";
-import classes from "./details.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CustomSelect, FontSizeRange } from "components";
+import classes from "./details.module.css";
+import GroupedStylesRenderer from "./GroupedStylesRenderer";
 
-const Details = () => {
-    const [fontSize, setFontSize] = useState([8]);
+const Details = ({ selectedTemplate, styles, setStyles }) => {
+    const getInitialFontSize = () => {
+        for (let style of selectedTemplate.signatureStyles) {
+            if (style.property === "fontSize") {
+                return parseInt(style.value);
+            }
+        }
+        return 8;
+    };
+
+    const getInitialFontFamily = () => {
+        for (let style of styles) {
+            if (style.property === "fontFamily") {
+                return style.value;
+            }
+        }
+        return "Arial, sans-serif";
+    };
+
+    const defaultFontSize = getInitialFontSize();
+    const [fontSize, setFontSize] = useState([defaultFontSize]);
+    const initialFontFamily = getInitialFontFamily();
+    const [fontFamily, setFontFamily] = useState(initialFontFamily);
+
+    useEffect(() => {
+        const newStyles = styles.map((style) => {
+            if (style.property === "fontSize") {
+                return { ...style, value: `${fontSize[0]}px` };
+            }
+            if (style.property === "fontFamily") {
+                return { ...style, value: fontFamily };
+            }
+            return style;
+        });
+        setStyles(newStyles);
+    }, [fontSize, fontFamily]);
+
+    const handleFontChange = (selectedItem) => {
+        setFontFamily(selectedItem);
+    };
+
     return (
         <div className={classes.container}>
             <div className={classes.inputsContainer}>
-                <h4>User</h4>
-                <div>
-                    <CustomisableInput defaultValue={"First name"} isVisible />
-                    <CustomisableInput defaultValue={"Last name"} isVisible />
-                    <CustomisableInput defaultValue={"Position"} isVisible />
-                    <CustomisableInput defaultValue={"Email"} isVisible />
-                    <CustomisableInput defaultValue={"Mobile"} isVisible />
-                </div>
-
-                <h4>Organisation</h4>
-                <div>
-                    <CustomisableInput defaultValue={"Phone"} isVisible />
-                    <CustomisableInput defaultValue={"Street"} isVisible />
-                    <CustomisableInput defaultValue={"Zip code"} isVisible />
-                    <CustomisableInput defaultValue={"City"} isVisible />
-                    <CustomisableInput defaultValue={"Country"} isVisible />
-                    <CustomisableInput
-                        defaultValue={"Organisation name"}
-                        isVisible
-                    />
-                </div>
-                <h4>Workplace</h4>
-                <div>
-                    <CustomisableInput defaultValue={"Phone"} isVisible />
-                    <CustomisableInput defaultValue={"Street"} isVisible />
-                    <CustomisableInput defaultValue={"Zip code"} isVisible />
-                    <CustomisableInput defaultValue={"City"} isVisible />
-                    <CustomisableInput defaultValue={"Country"} isVisible />
-                    <CustomisableInput
-                        defaultValue={"Workplace name"}
-                        isVisible
-                    />
-                </div>
+                <GroupedStylesRenderer
+                    styles={styles}
+                    setStyles={setStyles}
+                    filter={["user", "company", "organisation"]}
+                    ignoreSubcategories={[
+                        "user.picture",
+                        "company.logo",
+                        "organisation.logo",
+                    ]}
+                />
             </div>
             <hr />
             <h4>
                 Font size{" "}
-                <span className={classes.fontSize}>- {fontSize}px</span>
+                <span className={classes.fontSize}>
+                    - {fontSize[0]}px{" "}
+                    {fontSize[0] === defaultFontSize && <>(Recommended)</>}
+                </span>
             </h4>
 
-            <FontSizeRange fontSize={fontSize} setFontSize={setFontSize} />
+            <FontSizeRange
+                defaultFontSize={defaultFontSize}
+                fontSize={fontSize}
+                setFontSize={setFontSize}
+            />
             <CustomSelect
                 styleList={{ height: "21.5rem" }}
                 getValue={"name"}
-                defaultValue={"Arial"}
+                value={"Arial"}
                 display={"name"}
+                onChange={handleFontChange} // Add this handler
                 items={[
                     {
                         name: "Arial",

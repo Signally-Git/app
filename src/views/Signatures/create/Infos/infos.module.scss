@@ -63,7 +63,7 @@
     height: 25px;
     width: 25px;
     background-color: $color-primary;
-    border: 3px solid #FFF;
+    border: 3px solid $pureLight;
     border-radius: 50%;
     outline: none;
     box-shadow: 1px 1px 3px $color-primary-variant;
@@ -76,7 +76,7 @@
     position: relative;
     flex-direction: column;
     width: 100%;
-    background: #fff;
+    background: $pureLight;
     border-radius: $smallBorderRadius;
     border: 1px solid $color-lighter-accent;
     div {
@@ -142,7 +142,7 @@
                 content: " ";
                 width: 15px;
                 height: 15px;
-                background: #000;
+                background: $pureDark;
                 border-radius: $hugeRadius;
             }
         }
@@ -245,7 +245,7 @@
     border-radius: $smallBorderRadius;
     display: flex;
     position: relative;
-    background: #fff;
+    background: $pureLight;
     cursor: pointer;
 }
 
@@ -262,7 +262,7 @@
     padding: 0.5rem 0;
     border-radius: 20px 20px 0 0;
     list-style: none;
-    background-color: #fff;
+    background-color: $pureLight;
     box-shadow: 0 20px 30px $color-light-accent-variation;
     width: 100%;
     li {
@@ -276,7 +276,7 @@
         align-items: center;
         transition: 0.2s;
         &:nth-child(even) {
-            border: 1px solid #fff;
+            border: 1px solid $pureLight;
             border-right: none;
             border-left: none;
         }

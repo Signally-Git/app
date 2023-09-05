@@ -24,7 +24,7 @@
     -moz-box-sizing: border-box;
     border: none;
     outline: none;
-    background: #fff;
+    background: $pureLight;
     border: 1px solid $color-primary;
     border-radius: 5px;
     padding: 1rem;
@@ -66,7 +66,7 @@
 }
 
 .optionsContainer {
-    background: #fff;
+    background: $pureLight;
     border-radius: 0 0 $smallBorderRadius $smallBorderRadius;
 }
 
@@ -91,7 +91,7 @@
 
 .container input {
     transition: 0.2s;
-    background: #fff;
+    background: $pureLight;
     border: 1px solid #f6f6f6;
     padding: 1rem 5rem 1rem 1rem !important;
     text-overflow: ellipsis;
@@ -111,7 +111,7 @@
     min-width: 10vw;
     padding: 0.5rem;
     height: 12rem;
-    background: #fff;
+    background: $pureLight;
     box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
     border-radius: $smallBorderRadius;
     justify-content: center;
@@ -169,7 +169,7 @@
     height: 2rem;
     width: 70%;
     margin: 0;
-    background-color: #fff;
+    background-color: $pureLight;
     border-radius: $mediumBorderRadius;
     box-shadow: 0 2px 20px rgba(177, 176, 175, 0.8);
     li {
@@ -185,10 +185,10 @@
             border-right: 1px solid;
             border-image: linear-gradient(
                     to top,
-                    #fff 30%,
+                    $pureLight 30%,
                     #3d2b2815 30%,
                     #3d2b2815 70%,
-                    #fff 70%
+                    $pureLight 70%
                 )
                 1;
         }
@@ -208,7 +208,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                color: #fff;
+                color: $pureLight;
                 padding: 0;
                 border-radius: $hugeRadius;
                 width: 1rem;

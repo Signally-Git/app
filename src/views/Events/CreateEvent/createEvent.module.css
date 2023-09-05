@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  background: #fff;
+  background: var(--pure-light);
   border-radius: var(--border-radius);
   position: relative;
   padding: 2rem;

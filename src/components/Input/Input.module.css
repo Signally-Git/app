@@ -1,7 +1,7 @@
 /* global.scss */
 .input {
   transition: 0.2s;
-  background: #fff;
+  background: var(--pure-light);
   border: 1px solid var(--color-light-accent);
   padding: 1rem;
   font-size: 0.8rem;

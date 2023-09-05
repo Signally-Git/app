@@ -1,6 +1,6 @@
 /* global.scss */
 .container {
-  background: #fff;
+  background: var(--pure-light);
   box-shadow: 0 0 40px rgba(var(--color-dark-accent), 0.3);
   width: 60%;
   max-height: 15rem;

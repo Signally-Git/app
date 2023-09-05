@@ -2,7 +2,7 @@
 .container {
   border-radius: var(--border-radius);
   color: var(--color-dark-accent);
-  background-color: #fff;
+  background-color: var(--pure-light);
   width: 55%;
   padding: 2rem;
   margin-right: 2rem;
