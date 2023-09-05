@@ -44,11 +44,7 @@ const GroupedStylesRenderer = ({
         return grouped;
     };
 
-    const renderGroupedStyles = (
-        grouped,
-        path = [],
-        currentProperty = null
-    ) => {
+    const renderGroupedStyles = (grouped, path = []) => {
         return Object.entries(grouped).reduce((acc, [key, value]) => {
             if (ignoreSubcategories.includes(path.concat(key).join("."))) {
                 return acc;
