@@ -5,7 +5,7 @@ import GroupedStylesRenderer from "./GroupedStylesRenderer";
 
 const Details = ({ selectedTemplate, styles, setStyles }) => {
     const getInitialFontSize = () => {
-        for (let style of selectedTemplate.signatureStyles) {
+        for (let style of selectedTemplate?.signatureStyles) {
             if (style.property === "fontSize") {
                 return parseInt(style.value);
             }
@@ -40,6 +40,7 @@ const Details = ({ selectedTemplate, styles, setStyles }) => {
         setStyles(newStyles);
     }, [fontSize, fontFamily]);
 
+    if (!selectedTemplate) return <></>;
     const handleFontChange = (selectedItem) => {
         setFontFamily(selectedItem);
     };

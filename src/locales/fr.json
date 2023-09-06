@@ -286,7 +286,8 @@
                     "flip_h": "Retourner horizontalement",
                     "flip_v": "Retourner verticalement",
                     "free": "Libre",
-                    "crop": "Recadrer"
+                    "crop": "Recadrer",
+                    "close": "Fermer"
                 },
                 "image": "Importer une image",
                 "banner": "Importer une bannière",

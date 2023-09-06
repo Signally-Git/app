@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import classes from "./Cropper.module.css";
 import CropperInput from "./CropperInput";
 import { FormattedMessage } from "react-intl";
+import { Button } from "components";
 
 export default function Popup({
     open,
@@ -12,12 +13,15 @@ export default function Popup({
     aspectRatios,
 }) {
     const portalContainerRef = useRef(document.createElement("div"));
+    const container = useRef(null);
+    const handleClickOutside = (event) => {
+        if (!container?.current?.contains(event.target)) {
+            handleClose();
+        }
+    };
 
     useEffect(() => {
-        const body = document.body;
-
         if (open) {
-            body.appendChild(portalContainerRef.current);
             document.addEventListener("click", handleClickOutside);
         } else {
             document.removeEventListener("click", handleClickOutside);
@@ -25,22 +29,19 @@ export default function Popup({
 
         return () => {
             document.removeEventListener("click", handleClickOutside);
-            // Ne retirez pas le portalContainer du DOM lorsque le composant est démonté
-            // Ainsi, il restera disponible pour les ouvertures ultérieures de la modal
         };
     }, [open]);
 
-    const handleClickOutside = (event) => {
-        if (!portalContainerRef.current.contains(event.target)) {
-            handleClose();
-        }
-    };
-
     if (!open) return null;
+
+    // Si le conteneur n'est pas déjà dans le body, ajoutez-le
+    if (!document.body.contains(portalContainerRef.current)) {
+        document.body.appendChild(portalContainerRef.current);
+    }
 
     return createPortal(
         <div className={classes.popupOverlay}>
-            <div ref={portalContainerRef} className={classes.popupContainer}>
+            <div ref={container} className={classes.popupContainer}>
                 <FormattedMessage
                     id="buttons.placeholder.import.crop.title"
                     tagName="h2"

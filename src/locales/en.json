@@ -278,7 +278,8 @@
                     "flip_h": "Flip horizontally",
                     "flip_v": "Flip vertically",
                     "free": "Free",
-                    "crop": "Crop"
+                    "crop": "Crop",
+                    "close": "Close"
                 },
                 "image": "Import an image",
                 "banner": "Import a banner",

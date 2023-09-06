@@ -35,6 +35,16 @@
   margin-bottom: 20px;
 }
 
+.btnsContainer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.btnsContainer > button {
+  margin: 0;
+}
+
 .popup-content {
   /* Ajoutez ici les styles pour le contenu du popup */
 }

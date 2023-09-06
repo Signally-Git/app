@@ -61,7 +61,9 @@ const CustomisableInput = ({
                                 );
                             }}
                         />
-                        <GrBold />
+                        <label htmlFor="fontWeight">
+                            <GrBold />
+                        </label>
                     </div>
                     <div className={classes.checkboxContainer}>
                         <input
