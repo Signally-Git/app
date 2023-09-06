@@ -110,6 +110,7 @@ const GroupedStylesImagesRenderer = ({ styles, setStyles }) => {
             })
             .filter(Boolean); // Filtre les éléments null pour ne pas les rendre
     };
+
     const hasDisplayableContent = () => {
         const types = [...new Set(styles.map((s) => s.type))];
         return types.some((type) => {

@@ -5,6 +5,7 @@ import GroupedStylesRenderer from "./GroupedStylesRenderer";
 
 const Details = ({ selectedTemplate, styles, setStyles }) => {
     const getInitialFontSize = () => {
+e-editor
         if (
             selectedTemplate?.signatureStyles &&
             Array.isArray(selectedTemplate.signatureStyles)
