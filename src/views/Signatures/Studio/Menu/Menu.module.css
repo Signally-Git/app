@@ -28,3 +28,9 @@
 .menuContainer .menuItem:hover {
   color: var(--color-primary-variant);
 }
+
+.disabledTab {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}

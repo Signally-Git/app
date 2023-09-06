@@ -1,10 +1,10 @@
 import React from "react";
 import { CustomisableInput } from "./CustomisableInput";
 
-const GroupedAddonsRenderer = ({
+const GroupedStylesRenderer = ({
     styles,
     setStyles,
-    filter,
+    ignoreCategories = [],
     ignoreSubcategories = [],
 }) => {
     const updateStyleProperty = (styleUpdate) => {
@@ -13,11 +13,23 @@ const GroupedAddonsRenderer = ({
                 ? { ...style, value: styleUpdate.value }
                 : style
         );
-
         setStyles(updatedStyles);
     };
 
     if (!styles) return null;
+
+    const matchesPattern = (str, pattern) => {
+        const escapeRegExp = (string) =>
+            string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const patternRegExp = new RegExp(
+            `^${pattern.split("*").map(escapeRegExp).join(".*")}$`
+        );
+        return patternRegExp.test(str);
+    };
+
+    const shouldIgnore = (str, ignoreList) => {
+        return ignoreList.some((pattern) => matchesPattern(str, pattern));
+    };
 
     const recursivelyGroupStyles = (styles) => {
         const grouped = {};
@@ -46,7 +58,12 @@ const GroupedAddonsRenderer = ({
 
     const renderGroupedStyles = (grouped, path = []) => {
         return Object.entries(grouped).reduce((acc, [key, value]) => {
-            if (ignoreSubcategories.includes(path.concat(key).join("."))) {
+            const combinedPath = path.concat(key).join(".");
+
+            if (
+                shouldIgnore(key, ignoreCategories) ||
+                shouldIgnore(combinedPath, ignoreSubcategories)
+            ) {
                 return acc;
             }
 
@@ -58,8 +75,7 @@ const GroupedAddonsRenderer = ({
                 let TitleElement = path.length === 0 ? "h3" : "h4";
                 const renderedSubgroup = renderGroupedStyles(
                     value,
-                    path.concat(key),
-                    key
+                    path.concat(key)
                 );
                 if (renderedSubgroup.length > 0) {
                     acc.push(
@@ -71,7 +87,7 @@ const GroupedAddonsRenderer = ({
                 }
             } else {
                 acc.push(
-                    <div key={path.concat(key).join(".")}>
+                    <div key={combinedPath}>
                         <CustomisableInput
                             defaultValue={key}
                             isVisible={value.enabled}
@@ -104,14 +120,7 @@ const GroupedAddonsRenderer = ({
 
     const groupedStyles = recursivelyGroupStyles(styles);
 
-    const filteredGroupedStyles = {};
-    filter.forEach((category) => {
-        if (groupedStyles[category]) {
-            filteredGroupedStyles[category] = groupedStyles[category];
-        }
-    });
-
-    return <>{renderGroupedStyles(filteredGroupedStyles)}</>;
+    return <>{renderGroupedStyles(groupedStyles)}</>;
 };
 
-export default GroupedAddonsRenderer;
+export default GroupedStylesRenderer;

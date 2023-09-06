@@ -5,18 +5,25 @@ import GroupedStylesRenderer from "./GroupedStylesRenderer";
 
 const Details = ({ selectedTemplate, styles, setStyles }) => {
     const getInitialFontSize = () => {
-        for (let style of selectedTemplate?.signatureStyles) {
-            if (style.property === "fontSize") {
-                return parseInt(style.value);
+        if (
+            selectedTemplate?.signatureStyles &&
+            Array.isArray(selectedTemplate.signatureStyles)
+        ) {
+            for (let style of selectedTemplate.signatureStyles) {
+                if (style?.property === "fontSize") {
+                    return parseInt(style.value);
+                }
             }
         }
         return 8;
     };
 
     const getInitialFontFamily = () => {
-        for (let style of styles) {
-            if (style.property === "fontFamily") {
-                return style.value;
+        if (styles && Array.isArray(styles)) {
+            for (let style of styles) {
+                if (style?.property === "fontFamily") {
+                    return style.value;
+                }
             }
         }
         return "Arial, sans-serif";
@@ -29,10 +36,10 @@ const Details = ({ selectedTemplate, styles, setStyles }) => {
 
     useEffect(() => {
         const newStyles = styles.map((style) => {
-            if (style.property === "fontSize") {
+            if (style?.property === "fontSize") {
                 return { ...style, value: `${fontSize[0]}px` };
             }
-            if (style.property === "fontFamily") {
+            if (style?.property === "fontFamily") {
                 return { ...style, value: fontFamily };
             }
             return style;

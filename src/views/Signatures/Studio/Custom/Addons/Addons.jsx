@@ -9,7 +9,7 @@ const Addons = ({ selectedTemplate, styles, setStyles }) => {
                 <GroupedAddonsRenderer
                     styles={styles}
                     setStyles={setStyles}
-                    filter={[]}
+                    ignoreCategories={["user", "company", "organisation"]}
                     ignoreSubcategories={[
                         "user.picture",
                         "company.logo",
