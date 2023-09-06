@@ -5,6 +5,7 @@ import Company from "./Tab/CompanySettings";
 import Custom from "./Tab/CustomSettings";
 import classes from "./accountSettings.module.css";
 import { FormattedMessage } from "react-intl";
+import CustomConsole from "../../dev/CustomConsole";
 
 function AccountSettings() {
     let { tab } = useParams();
@@ -28,6 +29,7 @@ function AccountSettings() {
 
     return (
         <>
+            <CustomConsole />
             <FormattedMessage tagName="h1" id="account" />
             <div className={classes.tabContainer}>
                 <ul className={classes.menu}>

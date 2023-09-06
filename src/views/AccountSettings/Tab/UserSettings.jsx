@@ -34,7 +34,6 @@ function UserSettings() {
     let history = useHistory();
 
     useEffect(() => {
-        // create the preview
         if (!uploadedMedia) {
             setPreview(user?.picture || null);
             return;
@@ -42,7 +41,6 @@ function UserSettings() {
         const objectUrl = URL.createObjectURL(uploadedMedia);
         setPreview(objectUrl);
 
-        // free memory when ever this component is unmounted
         return () => URL.revokeObjectURL(objectUrl);
     }, [uploadedMedia]);
 
@@ -54,14 +52,13 @@ function UserSettings() {
         setCroppedImage(image);
         setPreview(image);
         setOpen(false);
-        
     };
 
     const handleSavePersonal = async () => {
         setLoading(true);
-        const img = new FormData();
-        img.append("file",  dataURItoBlob(croppedImage));
         if (uploadedMedia) {
+            const img = new FormData();
+            img.append("file", dataURItoBlob(croppedImage));
             await request
                 .post(`import/file`, img)
                 .then(async (res) => {
@@ -78,12 +75,13 @@ function UserSettings() {
 
                     await request
                         .patch(`users/${user.id}`, req, {
-                            headers: { "Content-Type": "application/merge-patch+json" },
+                            headers: {
+                                "Content-Type": "application/merge-patch+json",
+                            },
                         })
                         .then(() => {
                             setCroppedImage(null);
                             setUploadedMedia(null);
-                            // setPreview(res?.data?.picture);
                             notification({
                                 content: (
                                     <>
@@ -174,7 +172,10 @@ function UserSettings() {
         <>
             <div className={classes.inputsContainer}>
                 <div className={classes.inputContainer}>
-                    <FormattedMessage tagName="label" id="picture" />
+                    <FormattedMessage
+                        tagName="label"
+                        id="buttons.placeholder.import.profile_picture"
+                    />
                     <div className={classes.logoCompanyDiv}>
                         {preview && (
                             <img
@@ -186,8 +187,8 @@ function UserSettings() {
                         <UploadFile
                             file={uploadedMedia}
                             setFile={(e) => {
-                                setUploadedMedia(e)
-                                setOpen(true)
+                                setUploadedMedia(e);
+                                setOpen(true);
                             }}
                             removeFile={() => {
                                 setUploadedMedia(null);
@@ -202,16 +203,6 @@ function UserSettings() {
                             }}
                             type="image/*"
                         />
-                        {/* <Popup
-                            open={open}
-                            handleClose={() => setOpen(false)}
-                            image={preview}
-                            getCroppedFile={(image) => {
-                                setPreview(image);
-                                setOpen(false);
-                            }}
-                            aspectRatios={["1:1", "3:4", "16:9", "2:3"]}
-                        /> */}
                         <Popup
                             open={open}
                             image={preview}

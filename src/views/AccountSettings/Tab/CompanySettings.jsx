@@ -67,9 +67,9 @@ function CompanySettings() {
 
     const handleSaveCompany = async () => {
         setLoading(true);
-        const img = new FormData();
-        img.append("file", dataURItoBlob(croppedImage));
         if (uploadedMedia) {
+            const img = new FormData();
+            img.append("file", dataURItoBlob(croppedImage));
             await request
                 .post(`import/file`, img)
                 .then(async (res) => {
@@ -112,10 +112,6 @@ function CompanySettings() {
                             setCroppedImage(null);
                             setUploadedMedia(null);
 
-                            console.log(
-                                "triggered",
-                                updatedOrganisation?.logo?.url
-                            );
                             setPreview(updatedOrganisation?.logo?.url);
                             notification({
                                 content: (
