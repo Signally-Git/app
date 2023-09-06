@@ -4,8 +4,8 @@ import classes from "./images.module.css";
 import GroupedStylesImagesRenderer from "./GroupedStylesImagesRenderer";
 
 const Images = ({ styles, setStyles, selectedTemplate }) => {
-    const intl = useIntl();
-    if (!selectedTemplate?.signatureStyles) return null;
+    if (!selectedTemplate?.signatureStyles)
+        return <FormattedMessage id="message.warning.no_data" />;
     return (
         <div className={classes.imagesContainer}>
             <GroupedStylesImagesRenderer

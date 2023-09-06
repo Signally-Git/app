@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./Menu.module.scss";
 
-const Menu = ({ onTabSelect }) => {
+const Menu = ({ isTemplateSelected, onTabSelect }) => {
     const tabs = ["Templates", "Details", "Images", "Social", "Addons"];
     const [selectedTab, setSelectedTab] = useState("Templates");
     const tabsRef = useRef([]);
@@ -35,10 +35,19 @@ const Menu = ({ onTabSelect }) => {
                         ref={addToRefs}
                         key={tabName}
                         onClick={() => {
-                            setSelectedTab(tabName);
-                            onTabSelect(tabName);
+                            if (isTemplateSelected) {
+                                // Ajoutez cette vérification
+                                setSelectedTab(tabName);
+                                onTabSelect(tabName);
+                            }
                         }}
-                        className={styles.menuItem}
+                        className={`${styles.menuItem} ${
+                            tabName !== selectedTab &&
+                            !isTemplateSelected &&
+                            tabName !== "Templates"
+                                ? styles.disabledTab
+                                : ""
+                        }`}
                     >
                         {tabName}
                     </li>

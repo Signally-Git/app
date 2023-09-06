@@ -41,7 +41,10 @@ const Studio = () => {
         <>
             <FormattedMessage id="signature.studio" tagName="h1" />
             <div className={classes.menuContainer}>
-                <Menu onTabSelect={setSelectedTab} />
+                <Menu
+                    isTemplateSelected={!!selectedTemplate}
+                    onTabSelect={setSelectedTab}
+                />
                 <Button
                     onClick={() => {
                         if (selectedTemplate) {
@@ -50,15 +53,16 @@ const Studio = () => {
                             setStyles(selectedTemplate.signatureStyles);
                         }
                     }}
+                    disabled={!selectedTemplate}
                     color="primary"
                 >
                     Reset
                 </Button>
                 <Button
                     onClick={() => console.log(styles)}
+                    disabled={!selectedTemplate}
                     color={`${
-                        (styles === selectedTemplate?.signatureStyles ||
-                            !selectedTemplate) &&
+                        styles === selectedTemplate?.signatureStyles &&
                         signatureId
                             ? "primary"
                             : "primaryFill"

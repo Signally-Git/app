@@ -1,6 +1,7 @@
 import React from "react";
 import { CustomCheckbox, Input } from "components";
 import classes from "./GroupedStylesImagesRenderer.module.css";
+import { FormattedMessage } from "react-intl";
 
 const GroupedStylesImagesRenderer = ({ styles, setStyles }) => {
     const updateImageProperty = (styleUpdate) => {
@@ -110,6 +111,19 @@ const GroupedStylesImagesRenderer = ({ styles, setStyles }) => {
             .filter(Boolean); // Filtre les éléments null pour ne pas les rendre
     };
 
+    const hasDisplayableContent = () => {
+        const types = [...new Set(styles.map((s) => s.type))];
+        return types.some((type) => {
+            const enabledStyle = findStyleByTypeAndProperty(type, "enabled");
+            const widthStyle = findStyleByTypeAndProperty(type, "width");
+            const heightStyle = findStyleByTypeAndProperty(type, "height");
+            return enabledStyle && widthStyle && heightStyle;
+        });
+    };
+
+    if (!hasDisplayableContent()) {
+        return <FormattedMessage id="message.warning.no_data" />;
+    }
     return <div>{renderGroupByType()}</div>;
 };
 

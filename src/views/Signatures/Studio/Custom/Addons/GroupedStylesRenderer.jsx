@@ -4,7 +4,8 @@ import { CustomisableInput } from "./CustomisableInput";
 const GroupedAddonsRenderer = ({
     styles,
     setStyles,
-    filter,
+
+    ignoreCategories = [],
     ignoreSubcategories = [],
 }) => {
     const updateStyleProperty = (styleUpdate) => {
@@ -13,11 +14,20 @@ const GroupedAddonsRenderer = ({
                 ? { ...style, value: styleUpdate.value }
                 : style
         );
+    if (!styles) return null;
 
-        setStyles(updatedStyles);
+    const matchesPattern = (str, pattern) => {
+        const escapeRegExp = (string) =>
+            string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const patternRegExp = new RegExp(
+            `^${pattern.split("*").map(escapeRegExp).join(".*")}$`
+        );
+        return patternRegExp.test(str);
     };
 
-    if (!styles) return null;
+    const shouldIgnore = (str, ignoreList) => {
+        return ignoreList.some((pattern) => matchesPattern(str, pattern));
+    };
 
     const recursivelyGroupStyles = (styles) => {
         const grouped = {};
@@ -46,7 +56,12 @@ const GroupedAddonsRenderer = ({
 
     const renderGroupedStyles = (grouped, path = []) => {
         return Object.entries(grouped).reduce((acc, [key, value]) => {
-            if (ignoreSubcategories.includes(path.concat(key).join("."))) {
+            const combinedPath = path.concat(key).join(".");
+
+            if (
+                shouldIgnore(key, ignoreCategories) ||
+                shouldIgnore(combinedPath, ignoreSubcategories)
+            ) {
                 return acc;
             }
 
@@ -71,7 +86,7 @@ const GroupedAddonsRenderer = ({
                 }
             } else {
                 acc.push(
-                    <div key={path.concat(key).join(".")}>
+                    <div key={combinedPath}>
                         <CustomisableInput
                             defaultValue={key}
                             isVisible={value.enabled}
@@ -104,14 +119,7 @@ const GroupedAddonsRenderer = ({
 
     const groupedStyles = recursivelyGroupStyles(styles);
 
-    const filteredGroupedStyles = {};
-    filter.forEach((category) => {
-        if (groupedStyles[category]) {
-            filteredGroupedStyles[category] = groupedStyles[category];
-        }
-    });
-
-    return <>{renderGroupedStyles(filteredGroupedStyles)}</>;
+    return <>{renderGroupedStyles(groupedStyles)}</>;
 };
 
 export default GroupedAddonsRenderer;

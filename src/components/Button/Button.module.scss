@@ -118,6 +118,7 @@
 
 .disabled, .loading {
     pointer-events: none;
+    opacity: .5;
     .loadingCircle {
         animation: spin infinite 1s linear;
     }
