@@ -138,11 +138,18 @@ export default function CropperInput({ src, getCroppedFile, aspectRatios }) {
                 }}
                 ref={cropperRef}
             />
-            <Button color="primary" onClick={handleClick}>
-                {intl.formatMessage({
-                    id: "buttons.placeholder.import.crop.crop",
-                })}
-            </Button>
+            <div className={classes.btnsContainer}>
+                <Button color="primary" onClick={handleClick}>
+                    {intl.formatMessage({
+                        id: "buttons.placeholder.import.crop.close",
+                    })}
+                </Button>
+                <Button color="primaryFill" onClick={handleClick}>
+                    {intl.formatMessage({
+                        id: "buttons.placeholder.import.crop.crop",
+                    })}
+                </Button>
+            </div>
         </>
     );
 }
