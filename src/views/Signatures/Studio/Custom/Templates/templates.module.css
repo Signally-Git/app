@@ -23,7 +23,6 @@
   font-size: 0.75rem;
   margin-top: 0.25rem;
   border: 1px solid var(--color-primary);
-  border-radius: var(--small-border-radius);
 }
 .template > input[type=radio] {
   width: 100%;

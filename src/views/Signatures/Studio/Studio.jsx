@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Button, Loading } from "components";
+import { Button, Input, Loading, Modal } from "components";
 import { FormattedMessage } from "react-intl";
-import { useParams } from "react-router-dom";
-import { request } from "utils";
+import { useHistory, useParams } from "react-router-dom";
+import { request, useNotification } from "utils";
 import { Menu } from "./Menu/Menu";
 import SignaturePreviewContainer from "./SignaturePreview/SignaturePreviewContainer";
 import CustomTab from "./Custom/CustomTab";
 import classes from "./studio.module.css";
-import CustomConsole from "dev/CustomConsole";
 
 const Studio = () => {
     const { signatureId } = useParams();
@@ -15,7 +14,13 @@ const Studio = () => {
     const [selectedTab, setSelectedTab] = useState("Templates");
     const [loading, setLoading] = useState(true);
     const [styles, setStyles] = useState([null]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [signatureName, setSignatureName] = useState("");
     const [forceUpdate, setForceUpdate] = useState(0);
+
+    const notification = useNotification();
+
+    const history = useHistory();
 
     const fetchSignature = () => {
         request.get(`signatures/${signatureId}`).then(({ data }) => {
@@ -23,13 +28,40 @@ const Studio = () => {
         });
     };
 
-    // const handleSave = async () => {
-    //     if (signatureId) console.log("edit");
-    //     else
-    //         await request
-    //             .post(`signatures`, { styles })
-    //             .then(({ data }) => console.log(data));
-    // };
+    const handleSave = async () => {
+        if (signatureId) console.log("edit");
+        else
+            await request
+                .post(`signatures`, {
+                    signatureTemplate: selectedTemplate["@id"],
+                    name: signatureName || selectedTemplate.name,
+                })
+                .then(({ data }) => {
+                    const updatedStyles = styles.map((style) => ({
+                        ...style,
+                        signature: data.id,
+                    }));
+                    request
+                        .post("signature_styles/batch", updatedStyles)
+                        .then(() => {
+                            notification({
+                                content: (
+                                    <>
+                                        Votre signature{" "}
+                                        <span className={classes.primaryColor}>
+                                            {signatureName}
+                                        </span>{" "}
+                                        a été créée avec succès
+                                    </>
+                                ),
+                                status: "valid",
+                            });
+                            if (window.location.hash === "#onboarding")
+                                history.goBack();
+                            else history.push("/signatures");
+                        });
+                });
+    };
 
     useEffect(() => {
         if (signatureId) fetchSignature();
@@ -59,19 +91,42 @@ const Studio = () => {
                     Reset
                 </Button>
                 <Button
-                    onClick={() => console.log(styles)}
+                    onClick={() => setIsModalOpen(true)}
                     disabled={!selectedTemplate}
-                    color={`${
+                    color={
                         styles === selectedTemplate?.signatureStyles &&
                         signatureId
                             ? "primary"
                             : "primaryFill"
-                    }`}
+                    }
                 >
                     Save
                 </Button>
             </div>
             <div className={classes.studioContainer}>
+                {isModalOpen && (
+                    <Modal
+                        className={classes.modalContainer}
+                        title="Nom de la signature"
+                        content={
+                            <Input
+                                type="text"
+                                value={signatureName}
+                                onChange={(e) =>
+                                    setSignatureName(e.target.value)
+                                }
+                                placeholder="Saisissez le nom de la signature"
+                            />
+                        }
+                        cancel="Annuler"
+                        validate="Save"
+                        onCancel={() => setIsModalOpen(false)}
+                        onConfirm={() => {
+                            handleSave();
+                            setIsModalOpen(false);
+                        }}
+                    />
+                )}
                 <div>
                     <CustomTab
                         key={forceUpdate}
@@ -87,7 +142,6 @@ const Studio = () => {
                         template={selectedTemplate}
                         styles={styles}
                     />
-                    <CustomConsole />
                 </div>
             </div>
         </>

@@ -100,9 +100,10 @@ export default function CreateEvent({ setDone, event }) {
         }
         const start = moment(startDate);
         const end = moment(endDate);
-        const image = new FormData();
-        image.append("file", dataURItoBlob(croppedImage));
+
         if (!event && banner) {
+            const image = new FormData();
+            image.append("file", dataURItoBlob(croppedImage));
             await request
                 .post(`import/file`, image)
                 .then(async (res) => {

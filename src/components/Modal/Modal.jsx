@@ -18,7 +18,7 @@ export default function Modal({
                 <Button color="secondary" onClick={() => onCancel()}>
                     {cancel}
                 </Button>
-                <Button color="primary" onClick={() => onConfirm()}>
+                <Button color="primaryFill" onClick={() => onConfirm()}>
                     {validate}
                 </Button>
             </div>

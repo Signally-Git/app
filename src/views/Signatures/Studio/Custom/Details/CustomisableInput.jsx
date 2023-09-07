@@ -33,7 +33,7 @@ const CustomisableInput = ({
                     defaultValue={defaultValue}
                     disabled
                 />
-                <div>
+                <div className={classes.stylesContainer}>
                     <ColorPicker
                         color={fontColor.value || "#000000"}
                         onColorChange={(e) => {

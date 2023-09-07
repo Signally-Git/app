@@ -26,7 +26,12 @@
   color: var(--color-primary);
 }
 
+.stylesContainer > div > svg {
+  cursor: pointer;
+}
+
 .checkboxContainer {
+  display: flex;
   position: relative;
 }
 .checkboxContainer svg {

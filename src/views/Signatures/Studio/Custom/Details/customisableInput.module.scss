@@ -27,7 +27,14 @@
     }
 }
 
+.stylesContainer {
+    > div > svg {
+        cursor: pointer;
+    }
+}
+
 .checkboxContainer {
+    display: flex;
     position: relative;
     svg {
         color: $pureDark;
