@@ -3,17 +3,17 @@ import classes from "./customisableInput.module.css";
 import { GrBold, GrClearOption, GrItalic, GrUnderline } from "react-icons/gr";
 
 const CustomisableInput = ({
-    defaultValue,
-    isVisible = {}, // valeur par défaut
-    fontWeight = {},
-    fontStyle = {},
-    textDecoration = {},
-    fontColor = { value: "#000000" }, // set default color to black
-    onColorChange,
-    onEnableChange,
-    onWeightChange,
-    onStyleChange,
-    onDecorationChange,
+                               defaultValue,
+                               isVisible = {}, // valeur par défaut
+                               fontWeight = {},
+                               fontStyle = {},
+                               textDecoration = {},
+                               fontColor = { value: "#000000" }, // set default color to black
+                               onColorChange,
+                               onEnableChange,
+                               onWeightChange,
+                               onStyleChange,
+                               onDecorationChange,
 }) => {
     return (
         <div className={classes.inputContainer}>

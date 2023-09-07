@@ -1,10 +1,9 @@
 import React from "react";
 import { CustomisableInput } from "./CustomisableInput";
 
-const GroupedAddonsRenderer = ({
+const GroupedStylesRenderer = ({
     styles,
     setStyles,
-
     ignoreCategories = [],
     ignoreSubcategories = [],
 }) => {
@@ -14,6 +13,9 @@ const GroupedAddonsRenderer = ({
                 ? { ...style, value: styleUpdate.value }
                 : style
         );
+        setStyles(updatedStyles);
+    };
+
     if (!styles) return null;
 
     const matchesPattern = (str, pattern) => {
@@ -73,8 +75,7 @@ const GroupedAddonsRenderer = ({
                 let TitleElement = path.length === 0 ? "h3" : "h4";
                 const renderedSubgroup = renderGroupedStyles(
                     value,
-                    path.concat(key),
-                    key
+                    path.concat(key)
                 );
                 if (renderedSubgroup.length > 0) {
                     acc.push(
@@ -122,4 +123,4 @@ const GroupedAddonsRenderer = ({
     return <>{renderGroupedStyles(groupedStyles)}</>;
 };
 
-export default GroupedAddonsRenderer;
+export default GroupedStylesRenderer;

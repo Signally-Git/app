@@ -4,11 +4,11 @@ import { GrBold, GrClearOption, GrItalic, GrUnderline } from "react-icons/gr";
 
 const CustomisableInput = ({
     defaultValue,
-    isVisible,
-    fontWeight,
-    fontStyle,
-    textDecoration,
-    fontColor,
+    isVisible = {}, // valeur par défaut
+    fontWeight = {},
+    fontStyle = {},
+    textDecoration = {},
+    fontColor = { value: "#000000" }, // set default color to black
     onColorChange,
     onEnableChange,
     onWeightChange,
