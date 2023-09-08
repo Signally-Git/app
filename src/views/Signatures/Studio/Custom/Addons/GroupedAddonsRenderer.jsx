@@ -1,7 +1,7 @@
 import React from "react";
 import { CustomisableInput } from "./CustomisableInput";
 
-const GroupedStylesRenderer = ({
+const GroupedAddonsRenderer = ({
     styles,
     setStyles,
     ignoreCategories = [],
@@ -123,4 +123,4 @@ const GroupedStylesRenderer = ({
     return <>{renderGroupedStyles(groupedStyles)}</>;
 };
 
-export default GroupedStylesRenderer;
+export default GroupedAddonsRenderer;

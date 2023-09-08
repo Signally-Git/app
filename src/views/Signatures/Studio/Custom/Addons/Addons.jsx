@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classes from "./addons.module.css";
-import GroupedAddonsRenderer from "./GroupedStylesRenderer";
+import GroupedAddonsRenderer from "./GroupedAddonsRenderer";
 
 const Addons = ({ selectedTemplate, styles, setStyles }) => {
     return (
@@ -9,17 +9,8 @@ const Addons = ({ selectedTemplate, styles, setStyles }) => {
                 <GroupedAddonsRenderer
                     styles={styles}
                     setStyles={setStyles}
-                    ignoreCategories={[
-                        "user",
-                        "company",
-                        "organisation",
-                        "U_content_custom_text_*",
-                    ]}
-                    ignoreSubcategories={[
-                        "user.picture",
-                        "company.logo",
-                        "organisation.logo",
-                    ]}
+                    ignoreCategories={[]}
+                    ignoreSubcategories={[]}
                 />
             </div>
             <hr />
