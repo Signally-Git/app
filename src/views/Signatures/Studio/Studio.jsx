@@ -17,7 +17,7 @@ const Studio = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [signatureName, setSignatureName] = useState("");
     const [forceUpdate, setForceUpdate] = useState(0);
-
+    console.log(selectedTemplate);
     const notification = useNotification();
 
     const history = useHistory();
@@ -35,6 +35,8 @@ const Studio = () => {
                 .post(`signatures`, {
                     signatureTemplate: selectedTemplate["@id"],
                     name: signatureName || selectedTemplate.name,
+                    html: "selectedTab.html",
+                    organisation: selectedTemplate.owner,
                 })
                 .then(({ data }) => {
                     const updatedStyles = styles.map((style) => ({
@@ -59,6 +61,19 @@ const Studio = () => {
                             if (window.location.hash === "#onboarding")
                                 history.goBack();
                             else history.push("/signatures");
+                        })
+                        .catch(() => {
+                            notification({
+                                content: (
+                                    <>
+                                        Erreur lors de la création de{" "}
+                                        <span className={classes.primaryColor}>
+                                            {signatureName}
+                                        </span>{" "}
+                                    </>
+                                ),
+                                status: "invalid",
+                            });
                         });
                 });
     };
@@ -67,7 +82,7 @@ const Studio = () => {
         if (signatureId) fetchSignature();
         setLoading(false);
     }, []);
-    // console.log(selectedTemplate?.signatureStyles);
+
     if (loading) return <Loading />;
     return (
         <>

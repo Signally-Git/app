@@ -54,7 +54,7 @@ const Tags = ({ selectedVisibility, setVisibility, selectedTag, setTag }) => {
                 <li>
                     <Button
                         onClick={() => setVisibility(null)}
-                        color="link-primary"
+                        color="primaryLink"
                     >
                         Reset
                     </Button>
@@ -76,7 +76,7 @@ const Tags = ({ selectedVisibility, setVisibility, selectedTag, setTag }) => {
                     </li>
                 ))}
                 <li>
-                    <Button onClick={() => setTag(null)} color="link-primary">
+                    <Button onClick={() => setTag(null)} color="primaryLink">
                         Reset
                     </Button>
                 </li>

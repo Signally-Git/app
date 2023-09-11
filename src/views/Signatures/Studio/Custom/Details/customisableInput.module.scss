@@ -30,6 +30,10 @@
 .stylesContainer {
     > div > svg {
         cursor: pointer;
+        color: $pureDark;
+        &:hover{
+        color: $color-light-accent;
+    }
     }
 }
 
@@ -38,7 +42,12 @@
     position: relative;
     svg {
         color: $pureDark;
+        transition: color 200ms;
+        &:hover{
+            color: $color-light-accent;
+        }
     }
+    
     input[type="checkbox"] {
         position: absolute;
         inset: 0;
@@ -48,6 +57,9 @@
         padding: 0;
         cursor: pointer;
         opacity: 0;
+        &:hover ~ svg {
+            color: $color-light-accent;
+        }
         &:checked ~ svg {
             color: $color-light-accent-variation2;
         }

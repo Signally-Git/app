@@ -95,6 +95,14 @@
             "spacing": "Spacing",
             "background_color": "Background color"
         },
+        "infos": {
+            "logo": "You can change your {value} {link}.",
+            "here": "here"
+        },
+        "ratio": {
+            "unlock": "Unlock ratio",
+            "lock": "Lock ratio"
+        },
         "default_greetings": "Regards,",
         "choose": "Choose a signature",
         "event_or_playlist": "Add an event or playlist",

@@ -12,10 +12,10 @@
     width: 100%;
     gap: .25rem;
     align-items: center;
- > div {
-     display: flex;
-     align-items: center;
- } 
+    > div {
+        display: flex;
+        align-items: center;
+    }
     svg {
         padding: 0;
         font-size: 1.25rem;
@@ -27,7 +27,14 @@
     }
 }
 
+.stylesContainer {
+    > div > svg {
+        cursor: pointer;
+    }
+}
+
 .checkboxContainer {
+    display: flex;
     position: relative;
     svg {
         color: $pureDark;

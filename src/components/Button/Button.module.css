@@ -17,11 +17,11 @@
   color: inherit;
 }
 
-.link-primary {
+.primaryLink {
   color: var(--pure-dark);
   border-color: transparent;
 }
-.link-primary:hover {
+.primaryLink:hover {
   color: var(--color-primary);
   cursor: pointer;
 }

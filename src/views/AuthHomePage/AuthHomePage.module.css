@@ -43,6 +43,8 @@
 }
 .container form {
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .container input::placeholder {
   opacity: 0.25;
@@ -130,16 +132,19 @@
 .showPassword {
   display: flex;
   align-items: center;
-  position: absolute;
   outline: none;
-  border: none;
-  background: none;
-  right: 1rem;
+  background: rgba(var(--color-primary-rgb), 0.1);
+  border-radius: var(--small-border-radius) 0 0 var(--small-border-radius);
   cursor: pointer;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  padding: 0;
+  padding: 1rem;
+  margin: auto -3.1rem auto auto;
+  position: relative;
+  z-index: 0;
+  border: 1px solid transparent;
+  border-right-color: var(--color-light-accent);
+}
+.showPassword:hover {
+  background: rgba(var(--color-primary), 0.3);
 }
 
 .inputContainer {
@@ -339,9 +344,6 @@
   font-size: 0.8rem;
   margin-left: auto;
   padding-right: 0.5rem;
-  width: 100%;
-  display: flex;
-  justify-content: right;
   cursor: pointer;
   color: var(--color-dark-accent);
 }

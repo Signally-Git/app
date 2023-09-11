@@ -1,14 +1,14 @@
-import { ColorPicker, CustomCheckbox, Input } from "components";
+import { ColorPicker, Input, VisibilityToggle } from "components";
 import classes from "./customisableInput.module.css";
 import { GrBold, GrClearOption, GrItalic, GrUnderline } from "react-icons/gr";
 
 const CustomisableInput = ({
     defaultValue,
-    isVisible = {}, // valeur par défaut
+    isVisible = {},
     fontWeight = {},
     fontStyle = {},
     textDecoration = {},
-    fontColor = { value: "#000000" }, // set default color to black
+    fontColor = { value: "#000000" },
     onColorChange,
     onEnableChange,
     onWeightChange,
@@ -17,7 +17,7 @@ const CustomisableInput = ({
 }) => {
     return (
         <div className={classes.inputContainer}>
-            <CustomCheckbox
+            <VisibilityToggle
                 title="Enabled"
                 onChange={(e) => {
                     onEnableChange({

@@ -4,7 +4,7 @@ import { CustomisableInput } from "./CustomisableInput";
 const GroupedAddonsRenderer = ({
     styles,
     setStyles,
-    ignoreCategories = [],
+    filter,
     ignoreSubcategories = [],
 }) => {
     const updateStyleProperty = (styleUpdate) => {
@@ -13,23 +13,11 @@ const GroupedAddonsRenderer = ({
                 ? { ...style, value: styleUpdate.value }
                 : style
         );
+
         setStyles(updatedStyles);
     };
 
     if (!styles) return null;
-
-    const matchesPattern = (str, pattern) => {
-        const escapeRegExp = (string) =>
-            string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        const patternRegExp = new RegExp(
-            `^${pattern.split("*").map(escapeRegExp).join(".*")}$`
-        );
-        return patternRegExp.test(str);
-    };
-
-    const shouldIgnore = (str, ignoreList) => {
-        return ignoreList.some((pattern) => matchesPattern(str, pattern));
-    };
 
     const recursivelyGroupStyles = (styles) => {
         const grouped = {};
@@ -58,12 +46,7 @@ const GroupedAddonsRenderer = ({
 
     const renderGroupedStyles = (grouped, path = []) => {
         return Object.entries(grouped).reduce((acc, [key, value]) => {
-            const combinedPath = path.concat(key).join(".");
-
-            if (
-                shouldIgnore(key, ignoreCategories) ||
-                shouldIgnore(combinedPath, ignoreSubcategories)
-            ) {
+            if (ignoreSubcategories.includes(path.concat(key).join("."))) {
                 return acc;
             }
 
@@ -72,10 +55,11 @@ const GroupedAddonsRenderer = ({
                 !(value instanceof Array) &&
                 !value.fontWeight
             ) {
-                let TitleElement = path.length === 0 ? "h3" : "h4";
+                let TitleElement = path.length === 0 ? "h4" : "h3";
                 const renderedSubgroup = renderGroupedStyles(
                     value,
-                    path.concat(key)
+                    path.concat(key),
+                    key
                 );
                 if (renderedSubgroup.length > 0) {
                     acc.push(
@@ -87,7 +71,11 @@ const GroupedAddonsRenderer = ({
                 }
             } else {
                 acc.push(
-                    <div key={combinedPath}>
+                    <div
+                        className={styles.inputContainer}
+                        key={path.concat(key).join(".")}
+                    >
+                        <h3>{key}</h3>
                         <CustomisableInput
                             defaultValue={key}
                             isVisible={value.enabled}
@@ -110,6 +98,11 @@ const GroupedAddonsRenderer = ({
                             onDecorationChange={(newDecoration) =>
                                 updateStyleProperty(newDecoration)
                             }
+                            contentValue={value.content}
+                            onContentValueChange={(newContent) => {
+                                console.log(newContent);
+                                updateStyleProperty(newContent);
+                            }}
                         />
                     </div>
                 );
@@ -120,7 +113,14 @@ const GroupedAddonsRenderer = ({
 
     const groupedStyles = recursivelyGroupStyles(styles);
 
-    return <>{renderGroupedStyles(groupedStyles)}</>;
+    const filteredGroupedStyles = {};
+    filter.forEach((category) => {
+        if (groupedStyles[category]) {
+            filteredGroupedStyles[category] = groupedStyles[category];
+        }
+    });
+
+    return <>{renderGroupedStyles(filteredGroupedStyles)}</>;
 };
 
 export default GroupedAddonsRenderer;

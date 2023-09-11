@@ -20,6 +20,7 @@
     margin: 1.5rem 0 .5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid $color-light-accent;
+    width: 100%;
     &:first-child {
       margin-top: 0;
     }
@@ -30,9 +31,11 @@
   }
   > div {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 1rem;
     justify-content: space-between;
+    margin-bottom: 1rem;
     flex-wrap: wrap;
     > div {
       max-width: 48%;

@@ -1,0 +1,13 @@
+/* global.scss */
+.visibilityContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.visibilityContainer > svg {
+  color: var(--color-primary);
+}
+.visibilityContainer > svg:hover {
+  cursor: pointer;
+  color: var(--color-primary-variant);
+}

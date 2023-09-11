@@ -1,23 +1,25 @@
-import { ColorPicker, CustomCheckbox, Input } from "components";
+import { ColorPicker, VisibilityToggle, Input } from "components";
 import classes from "./customisableInput.module.css";
 import { GrBold, GrClearOption, GrItalic, GrUnderline } from "react-icons/gr";
 
 const CustomisableInput = ({
-                               defaultValue,
-                               isVisible = {}, // valeur par défaut
-                               fontWeight = {},
-                               fontStyle = {},
-                               textDecoration = {},
-                               fontColor = { value: "#000000" }, // set default color to black
-                               onColorChange,
-                               onEnableChange,
-                               onWeightChange,
-                               onStyleChange,
-                               onDecorationChange,
+    defaultValue,
+    isVisible = {}, // valeur par défaut
+    fontWeight = {},
+    fontStyle = {},
+    textDecoration = {},
+    fontColor = { value: "#000000" }, // set default color to black
+    onColorChange,
+    onEnableChange,
+    onWeightChange,
+    onStyleChange,
+    onDecorationChange,
+    contentValue,
+    onContentValueChange,
 }) => {
     return (
         <div className={classes.inputContainer}>
-            <CustomCheckbox
+            <VisibilityToggle
                 title="Enabled"
                 onChange={(e) => {
                     onEnableChange({
@@ -28,11 +30,26 @@ const CustomisableInput = ({
                 checked={isVisible.value === "true"}
             />
             <div className={classes.inputWithStyles}>
-                <Input
-                    style={{ padding: ".5rem", margin: "0" }}
-                    defaultValue={defaultValue}
-                    disabled
-                />
+                {contentValue !== undefined ? (
+                    <>
+                        <Input
+                            style={{ padding: ".5rem", margin: "0" }}
+                            value={contentValue.value}
+                            onChange={(e) =>
+                                onContentValueChange({
+                                    id: contentValue.id,
+                                    value: e.target.value,
+                                })
+                            }
+                        />
+                    </>
+                ) : (
+                    <Input
+                        style={{ padding: ".5rem", margin: "0" }}
+                        defaultValue={defaultValue}
+                        disabled
+                    />
+                )}
                 <div>
                     <ColorPicker
                         color={fontColor.value || "#000000"}
