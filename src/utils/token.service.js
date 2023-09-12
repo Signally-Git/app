@@ -9,9 +9,10 @@ const getLocalToken = () => {
     return user?.token;
 };
 
-const updateLocalToken = (token) => {
+const updateToken = (token, refresh_token) => {
     let user = JSON.parse(localStorage.getItem("user"));
     user.token = token;
+    user.refresh_token = refresh_token;
     localStorage.setItem("user", JSON.stringify(user));
 };
 
@@ -64,7 +65,7 @@ const clearLocalStorage = () => {
 const TokenService = {
     getLocalRefreshToken,
     getLocalToken,
-    updateLocalToken,
+    updateToken,
     getUser,
     setUser,
     removeUser,

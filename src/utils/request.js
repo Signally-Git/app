@@ -5,6 +5,22 @@ const request = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
 });
 
+let isRefreshing = false;
+let failedQueue = [];
+let retryCount = 0;
+
+const processQueue = (error, token = null) => {
+    failedQueue.forEach((prom) => {
+        if (token) {
+            prom.resolve(token);
+        } else {
+            prom.reject(error);
+        }
+    });
+
+    failedQueue = [];
+};
+
 request.interceptors.request.use(
     (config) => {
         const token = TokenService.getLocalToken();
@@ -13,44 +29,59 @@ request.interceptors.request.use(
         }
         return config;
     },
-    (error) => {
-        return Promise.reject(error);
-    }
+    (error) => Promise.reject(error)
 );
 
-let _retry = undefined;
-
 request.interceptors.response.use(
-    (res) => {
-        return res;
-    },
+    (res) => res,
     async (err) => {
         const originalConfig = err.config;
 
-        if (originalConfig?.url !== "/token/auth" && err.response) {
-            // Access Token was expired
-            if (err.response.status === 401 && !_retry) {
-                _retry = true;
-
-                try {
-                    const rs = await request.post("/token/refresh", {
-                        refresh_token: TokenService.getLocalRefreshToken(),
-                        token: TokenService.getLocalToken(),
-                    });
-
-                    const { token } = rs.data;
-                    TokenService.updateLocalToken(token);
-
-                    return request(originalConfig);
-                } catch (_error) {
-                    return Promise.reject(_error);
-                }
-            } else if (err.response.status === 401) {
+        if (
+            err.response.status === 401 &&
+            !originalConfig._retry &&
+            originalConfig.url !== "/token/auth"
+        ) {
+            if (retryCount >= 1) {
                 TokenService.clearLocalStorage();
-                window.location.replace("/sign-in");
+                return Promise.reject(err);
             }
-        }
 
+            originalConfig._retry = true;
+
+            if (isRefreshing) {
+                return new Promise((resolve, reject) => {
+                    failedQueue.push({ resolve, reject });
+                }).then((token) => {
+                    originalConfig.headers["Authorization"] = "Bearer " + token;
+                    return request(originalConfig);
+                });
+            }
+
+            isRefreshing = true;
+
+            return request
+                .post("/token/refresh", {
+                    refresh_token: TokenService.getLocalRefreshToken(),
+                })
+                .then((res) => {
+                    const { token, refresh_token } = res.data;
+                    TokenService.updateToken(token, refresh_token);
+                    request.defaults.headers["Authorization"] =
+                        "Bearer " + token;
+                    originalConfig.headers["Authorization"] = "Bearer " + token;
+                    processQueue(null, token);
+                    isRefreshing = false;
+                    retryCount = 0;
+                    return request(originalConfig);
+                })
+                .catch((error) => {
+                    processQueue(error, null);
+                    isRefreshing = false;
+                    retryCount++;
+                    return Promise.reject(error);
+                });
+        }
         return Promise.reject(err);
     }
 );
