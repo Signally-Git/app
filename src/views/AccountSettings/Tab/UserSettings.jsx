@@ -60,7 +60,7 @@ function UserSettings() {
             const img = new FormData();
             img.append("file", dataURItoBlob(croppedImage));
             await request
-                .post(`import/file`, img)
+                .post(`import/file?destination=profile_picture`, img)
                 .then(async (res) => {
                     const req = {
                         picture: res.data.url,

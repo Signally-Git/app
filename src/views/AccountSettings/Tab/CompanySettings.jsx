@@ -15,6 +15,7 @@ function CompanySettings() {
     const [website, setWebsite] = useState(organisation?.websiteUrl || "");
     const [phone, setPhone] = useState(organisation?.address?.phone || "");
     const [email, setEmail] = useState(organisation?.address?.email || "");
+    const [tenantId, setTenantId] = useState(organisation?.tenantId || "");
     const [preview, setPreview] = useState(organisation?.logo?.url || null);
     const [loading, setLoading] = useState(false);
     const [croppedImage, setCroppedImage] = useState(null);
@@ -92,6 +93,7 @@ function CompanySettings() {
                         name: companyName,
                         websiteUrl: website,
                         logo: res.data["@id"],
+                        tenantId: tenantId,
                         address: {
                             ...organisation.address,
                         },
@@ -153,6 +155,7 @@ function CompanySettings() {
             const req = {
                 name: companyName,
                 websiteUrl: website,
+                tenantId: tenantId,
                 address: {
                     ...organisation.address,
                 },
@@ -357,18 +360,32 @@ function CompanySettings() {
                         />
                     </div>
                 </div>
-                {!organisation?.azure && (
-                    <div className={classes.inputContainer}>
-                        <label>
-                            <FormattedMessage id="profile.informations.google_email_address" />
-                        </label>
-                        <Input
-                            type="email"
-                            value={email || ""}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </div>
-                )}
+                <div className={classes.row}>
+                    {!organisation?.azure && (
+                        <div className={classes.inputContainer}>
+                            <label>
+                                <FormattedMessage id="profile.informations.google_email_address" />
+                            </label>
+                            <Input
+                                type="email"
+                                value={email || ""}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                    )}
+                    {!organisation?.google && (
+                        <div className={classes.inputContainer}>
+                            <label>
+                                <FormattedMessage id="profile.informations.tenant_id" />
+                            </label>
+                            <Input
+                                type="text"
+                                value={tenantId || ""}
+                                onChange={(e) => setTenantId(e.target.value)}
+                            />
+                        </div>
+                    )}
+                </div>
             </div>
             <NavigationButtons
                 onCancel={() => {

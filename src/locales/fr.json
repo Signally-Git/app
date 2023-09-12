@@ -134,6 +134,7 @@
             "title": "Informations du profil",
             "custom_labels": "Personnalisation des libellés",
             "google_email_address": "Adresse mail de l'administrateur Google",
+            "tenant_id": "ID du tenant Azure",
             "lang": "Langue"
         }
     },

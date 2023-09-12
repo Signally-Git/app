@@ -133,6 +133,7 @@
                 "title": "Profile informations",
                 "custom_labels": "Custom labels",
                 "google_email_address": "Google administrator email address",
+                "tenant_id": "Azure tenant ID",
                 "lang": "Language"
             }
         },
