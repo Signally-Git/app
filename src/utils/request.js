@@ -7,7 +7,6 @@ const request = axios.create({
 
 let isRefreshing = false;
 let failedQueue = [];
-let retryCount = 0;
 
 const processQueue = (error, token = null) => {
     failedQueue.forEach((prom) => {
@@ -17,7 +16,6 @@ const processQueue = (error, token = null) => {
             prom.reject(error);
         }
     });
-
     failedQueue = [];
 };
 
@@ -37,50 +35,51 @@ request.interceptors.response.use(
     async (err) => {
         const originalConfig = err.config;
 
-        if (
-            err.response.status === 401 &&
-            !originalConfig._retry &&
-            originalConfig.url !== "/token/auth"
-        ) {
-            if (retryCount >= 1) {
+        if (err.response.status === 401) {
+            if (originalConfig.url === "/token/refresh") {
                 TokenService.clearLocalStorage();
+                window.location.href = "/sign-in";
                 return Promise.reject(err);
             }
 
-            originalConfig._retry = true;
+            if (!originalConfig._retry) {
+                originalConfig._retry = true;
 
-            if (isRefreshing) {
-                return new Promise((resolve, reject) => {
-                    failedQueue.push({ resolve, reject });
-                }).then((token) => {
-                    originalConfig.headers["Authorization"] = "Bearer " + token;
-                    return request(originalConfig);
-                });
+                if (isRefreshing) {
+                    return new Promise((resolve, reject) => {
+                        failedQueue.push({ resolve, reject });
+                    }).then((token) => {
+                        originalConfig.headers["Authorization"] =
+                            "Bearer " + token;
+                        return request(originalConfig);
+                    });
+                }
+
+                isRefreshing = true;
+
+                return request
+                    .post("/token/refresh", {
+                        refresh_token: TokenService.getLocalRefreshToken(),
+                    })
+                    .then((res) => {
+                        const { token, refresh_token } = res.data;
+                        TokenService.updateToken(token, refresh_token);
+                        request.defaults.headers["Authorization"] =
+                            "Bearer " + token;
+                        originalConfig.headers["Authorization"] =
+                            "Bearer " + token;
+                        processQueue(null, token);
+                        isRefreshing = false;
+                        return request(originalConfig);
+                    })
+                    .catch((error) => {
+                        processQueue(error, null);
+                        isRefreshing = false;
+                        TokenService.clearLocalStorage();
+                        window.location.href = "/sign-in";
+                        return Promise.reject(error);
+                    });
             }
-
-            isRefreshing = true;
-
-            return request
-                .post("/token/refresh", {
-                    refresh_token: TokenService.getLocalRefreshToken(),
-                })
-                .then((res) => {
-                    const { token, refresh_token } = res.data;
-                    TokenService.updateToken(token, refresh_token);
-                    request.defaults.headers["Authorization"] =
-                        "Bearer " + token;
-                    originalConfig.headers["Authorization"] = "Bearer " + token;
-                    processQueue(null, token);
-                    isRefreshing = false;
-                    retryCount = 0;
-                    return request(originalConfig);
-                })
-                .catch((error) => {
-                    processQueue(error, null);
-                    isRefreshing = false;
-                    retryCount++;
-                    return Promise.reject(error);
-                });
         }
         return Promise.reject(err);
     }
