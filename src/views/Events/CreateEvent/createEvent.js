@@ -87,6 +87,15 @@ export default function CreateEvent({ setDone, event }) {
         return true;
     };
 
+    const handleStartDateChange = (newStartDate) => {
+        setStartDate(newStartDate);
+
+        // Si la nouvelle date de début est après la date de fin, mettez la date de fin à la même valeur que la date de début
+        if (newStartDate > endDate) {
+            setEndDate(newStartDate);
+        }
+    };
+
     const saveEvent = async (e) => {
         e.preventDefault();
         if (!eventName) {
@@ -286,7 +295,7 @@ export default function CreateEvent({ setDone, event }) {
                     <Datetime
                         locale={lc}
                         value={startDate}
-                        onChange={setStartDate}
+                        onChange={handleStartDateChange}
                         closeOnSelect={true}
                         dateFormat="D MMM YYYY"
                         timeFormat="HH mm"
