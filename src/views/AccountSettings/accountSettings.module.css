@@ -76,17 +76,26 @@
 
 .logoCompanyDiv {
   display: flex;
-  gap: 1rem;
+  justify-content: center;
+  align-items: flex-start;
   width: 100%;
+  flex-direction: column;
 }
 .logoCompanyDiv > div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+.logoCompanyDiv > div > div {
   width: 100%;
 }
 
 .logoPreview {
-  max-width: 30px;
-  max-height: 30px;
-  margin: auto;
+  max-width: 3rem;
+  max-height: 3rem;
 }
 
 /* Rounded sliders */

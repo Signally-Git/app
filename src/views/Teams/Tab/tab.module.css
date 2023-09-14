@@ -195,7 +195,7 @@
   max-height: 60%;
 }
 .usersList .editing {
-  height: 15.5rem !important;
+  height: 20.5rem !important;
 }
 .usersList .editing .editDiv {
   margin-bottom: 1rem;
@@ -203,7 +203,27 @@
 }
 .usersList .editDiv {
   top: auto;
+  padding-top: 0;
   bottom: 1rem;
+}
+.usersList .profilePictureContainer {
+  display: flex;
+  width: 100%;
+  margin-top: 0.5rem;
+  gap: 0.5rem;
+  align-items: center;
+}
+.usersList .profilePictureContainer img {
+  max-height: 30px;
+  max-width: 50px;
+}
+.usersList .profilePictureContainer > div {
+  width: 100%;
+  padding: 0.25rem !important;
+  background-color: var(--pure-light);
+}
+.usersList .profilePictureContainer > div > span {
+  font-size: 0.75rem;
 }
 
 .editDiv {
@@ -235,6 +255,9 @@
 .editDiv .inputsContainer input:not(input[type=file]) {
   min-width: 48%;
   max-width: 48%;
+}
+.editDiv > label > label {
+  margin-left: 0.5rem;
 }
 
 @keyframes fadeIn {

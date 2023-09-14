@@ -41,6 +41,7 @@ const Studio = () => {
                 .then(({ data }) => {
                     const updatedStyles = styles.map((style) => ({
                         ...style,
+                        signatureTemplate: data.signatureTemplate.id,
                         signature: data.id,
                     }));
                     request

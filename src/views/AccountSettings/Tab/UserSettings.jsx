@@ -24,6 +24,7 @@ function UserSettings() {
     const [firstName, setFirstName] = useState(user?.firstName || "");
     const [lastName, setLastName] = useState(user?.lastName || "");
     const [position, setPosition] = useState(user?.position || "");
+    const [linkPicture, setLinkPicture] = useState(user?.linkPicture || "");
     const [mobile, setMobile] = useState(user?.phone || "");
     const [language, setLanguage] = useState(user?.lang || "");
     const [deployed, setDeployed] = useState(user?.synchronizable || false);
@@ -64,6 +65,7 @@ function UserSettings() {
                 .then(async (res) => {
                     const req = {
                         picture: res.data.url,
+                        linkPicture: linkPicture,
                         firstName: firstName,
                         lastName: lastName,
                         position: position,
@@ -128,6 +130,7 @@ function UserSettings() {
                 position: position,
                 phone: mobile,
                 urlAgenda: urlAgenda,
+                linkPicture: linkPicture,
                 synchronizable: deployed,
                 lang: language["@id"] || language,
             };
@@ -172,44 +175,58 @@ function UserSettings() {
         <>
             <div className={classes.inputsContainer}>
                 <div className={classes.inputContainer}>
-                    <FormattedMessage
-                        tagName="label"
-                        id="buttons.placeholder.import.profile_picture"
-                    />
-                    <div className={classes.logoCompanyDiv}>
-                        {preview && (
-                            <img
-                                alt={`Picture ${firstName} ${lastName}`}
-                                className={classes.logoPreview}
-                                src={preview}
+                    <div className={classes.row}>
+                        <div className={classes.logoCompanyDiv}>
+                            <FormattedMessage
+                                tagName="label"
+                                id="buttons.placeholder.import.profile_picture"
                             />
-                        )}
-                        <UploadFile
-                            file={uploadedMedia}
-                            setFile={(e) => {
-                                setUploadedMedia(e);
-                                setOpen(true);
-                            }}
-                            removeFile={() => {
-                                setUploadedMedia(null);
-                                setPreview(null);
-                            }}
-                            placeholder={
-                                <FormattedMessage id="buttons.placeholder.import.image" />
-                            }
-                            style={{
-                                paddingTop: ".8rem",
-                                paddingBottom: ".8rem",
-                            }}
-                            type="image/*"
-                        />
-                        <Popup
-                            open={open}
-                            image={preview}
-                            handleClose={() => setOpen(false)}
-                            getCroppedFile={handleCroppedImage}
-                            aspectRatios={["1:1"]}
-                        />
+                            <div>
+                                {preview && (
+                                    <img
+                                        alt={`Picture ${firstName} ${lastName}`}
+                                        className={classes.logoPreview}
+                                        src={preview}
+                                    />
+                                )}
+                                <UploadFile
+                                    file={uploadedMedia}
+                                    setFile={(e) => {
+                                        setUploadedMedia(e);
+                                        setOpen(true);
+                                    }}
+                                    removeFile={() => {
+                                        setUploadedMedia(null);
+                                        setPreview(null);
+                                    }}
+                                    placeholder={
+                                        <FormattedMessage id="buttons.placeholder.import.image" />
+                                    }
+                                    style={{
+                                        paddingTop: ".8rem",
+                                        paddingBottom: ".8rem",
+                                    }}
+                                    type="image/*"
+                                />
+                                <Popup
+                                    open={open}
+                                    image={preview}
+                                    handleClose={() => setOpen(false)}
+                                    getCroppedFile={handleCroppedImage}
+                                    aspectRatios={["1:1"]}
+                                />
+                            </div>
+                        </div>
+                        <div className={classes.inputContainer}>
+                            <label>
+                                <FormattedMessage id="buttons.placeholder.import.profile_picture_link" />
+                            </label>
+                            <Input
+                                value={linkPicture}
+                                onChange={(e) => setLinkPicture(e.target.value)}
+                                type="text"
+                            />
+                        </div>
                     </div>
                 </div>
                 <div>

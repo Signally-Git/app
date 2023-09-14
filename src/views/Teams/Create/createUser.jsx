@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from "react";
-import { Button, CustomSelect, Input } from "components";
+import React, { useEffect, useRef, useState } from "react";
+import { Button, CustomSelect, Input, UploadFile, Popup } from "components";
 import classes from "./create.module.css";
-
 import { useHistory } from "react-router-dom";
-import { request, useNotification } from "utils";
+import { request, useNotification, dataURItoBlob } from "utils";
 import { FormattedMessage, useIntl } from "react-intl";
 
 export default function CreateUser({ setDone }) {
@@ -14,10 +13,10 @@ export default function CreateUser({ setDone }) {
     const width = "12rem";
     const [teams, setTeams] = useState([]);
     const [roles] = useState([
-        { name: intl.formatMessage({ id: "user" }), value: "ROLE_USER" },
-        { name: intl.formatMessage({ id: "rh" }), value: "ROLE_RH" },
+        { name: intl.formatMessage({ id: "roles.user" }), value: "ROLE_USER" },
+        { name: intl.formatMessage({ id: "roles.rh" }), value: "ROLE_RH" },
         {
-            name: intl.formatMessage({ id: "administrator" }),
+            name: intl.formatMessage({ id: "roles.administrator" }),
             value: "ROLE_ADMIN",
         },
     ]);
@@ -27,12 +26,19 @@ export default function CreateUser({ setDone }) {
         firstName: "",
         lastName: "",
         position: "",
+        picture: "",
+        linkPicture: "",
         email: "",
         phone: "",
         urlAgenda: "",
         roles: ["ROLE_USER"],
     });
     const [hide, setHide] = useState(false);
+    const [uploadedMedia, setUploadedMedia] = useState();
+    const [open, setOpen] = useState(false);
+    const [croppedImage, setCroppedImage] = useState(null);
+    const [preview, setPreview] = useState("");
+
     const history = useHistory();
     const notification = useNotification();
 
@@ -42,6 +48,26 @@ export default function CreateUser({ setDone }) {
             .match(
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             );
+    };
+
+    const uploadProfilePicture = async () => {
+        const img = new FormData();
+        img.append("file", dataURItoBlob(croppedImage));
+
+        await request
+            .post("import/file?destination=profile_picture", img)
+            .then((res) => {
+                const updatedUser = { ...user, profilePicture: res.data.url };
+                setUser(updatedUser);
+            })
+            .catch(() => {
+                notification({
+                    content: (
+                        <FormattedMessage id="message.error.profile_picture" />
+                    ),
+                    status: "invalid",
+                });
+            });
     };
 
     const handleCSV = async (file) => {
@@ -58,7 +84,6 @@ export default function CreateUser({ setDone }) {
                     status: "valid",
                 });
                 setDone(true);
-                // props.setState(`${res.data["hydra:totalItems"]} ${props.fill.type} ajoutés`)
                 if (window.location.hash === "#onboarding") history.goBack();
                 else history.push(`/teams/users`);
             })
@@ -92,6 +117,9 @@ export default function CreateUser({ setDone }) {
                       team: team,
                       ...user,
                   };
+        if (uploadedMedia) {
+            uploadProfilePicture();
+        }
 
         await request
             .post("users", req)
@@ -176,6 +204,27 @@ export default function CreateUser({ setDone }) {
         getTeams();
     }, []);
 
+    useEffect(() => {
+        if (!uploadedMedia) {
+            setPreview(user.profilePicture || null);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(uploadedMedia);
+        setPreview(objectUrl);
+
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [uploadedMedia]);
+
+    useEffect(() => {
+        setPreview(user.profilePicture || "");
+    }, [user.profilePicture]);
+
+    const handleCroppedImage = (image) => {
+        setCroppedImage(image);
+        setPreview(image);
+        setOpen(false);
+    };
+
     return (
         <div className={classes.container}>
             <div className={classes.slidesContainer} ref={slide}>
@@ -216,7 +265,6 @@ export default function CreateUser({ setDone }) {
                             type="file"
                             accept=".csv"
                             onChange={(e) => {
-                                // handleSave()
                                 handleCSV(e.target.files[0]);
                             }}
                         />
@@ -245,6 +293,59 @@ export default function CreateUser({ setDone }) {
                                 defaultValue={team}
                             />
                         )}
+                        <div className={classes.inputsContainer}>
+                            <div className={classes.inputContainer}>
+                                <div className={classes.logoCompanyDiv}>
+                                    {preview && (
+                                        <img
+                                            alt={`${user.firstName} ${user.lastName}`}
+                                            className={classes.logoPreview}
+                                            src={preview}
+                                        />
+                                    )}
+                                    <UploadFile
+                                        file={uploadedMedia}
+                                        setFile={(e) => {
+                                            setUploadedMedia(e);
+                                            setOpen(true);
+                                        }}
+                                        removeFile={() => {
+                                            setUploadedMedia(null);
+                                            setPreview(null);
+                                        }}
+                                        placeholder={
+                                            <FormattedMessage id="buttons.placeholder.import.profile_picture" />
+                                        }
+                                        style={{
+                                            paddingTop: ".8rem",
+                                            paddingBottom: ".8rem",
+                                        }}
+                                        type="image/*"
+                                    />
+                                    <Popup
+                                        open={open}
+                                        image={preview}
+                                        handleClose={() => setOpen(false)}
+                                        getCroppedFile={handleCroppedImage}
+                                        aspectRatios={["1:1"]}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <Input
+                            style={{ width: "100%" }}
+                            ref={focus}
+                            onChange={(e) =>
+                                setUser({
+                                    ...user,
+                                    linkPicture: e.target.value,
+                                })
+                            }
+                            type="text"
+                            placeholder={intl.formatMessage({
+                                id: "buttons.placeholder.import.profile_picture_link",
+                            })}
+                        />
                         <Input
                             style={{ width: "100%" }}
                             ref={focus}
@@ -350,7 +451,6 @@ export default function CreateUser({ setDone }) {
                                     id: "mobile",
                                 })}
                             />
-                            {/* Todo: add a Phone number - default is organisation's */}
                             <Input
                                 style={{ width: "100%" }}
                                 onChange={(e) =>

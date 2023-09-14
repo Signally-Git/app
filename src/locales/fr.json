@@ -288,6 +288,8 @@
             "from_csv": "A partir d'un fichier .csv",
             "import": {
                 "profile_picture": "Photo de profil",
+                "profile_picture_link": "Lien de photo de profil",
+                "replace_profile_picture": "Remplacer photo de profil",
                 "logo": "Importer un logo",
                 "crop": {
                     "title": "Recadrer l'image",

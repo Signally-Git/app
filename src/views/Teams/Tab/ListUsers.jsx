@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { AiOutlineEdit, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FiCheck, FiTrash } from "react-icons/fi";
 import { HiOutlineSearch } from "react-icons/hi";
-import { Link } from "react-router-dom";
-import { Button, CustomCheckbox, Input } from "components";
-import classes from "./tab.module.css";
+import { Button, CustomCheckbox, Input, Popup, UploadFile } from "components";
 import { FormattedMessage, useIntl } from "react-intl";
-import { TokenService, validateEmail, useNotification, request } from "utils";
+import {
+    TokenService,
+    validateEmail,
+    useNotification,
+    request,
+    dataURItoBlob,
+} from "utils";
+import classes from "./tab.module.css";
 
 function ListUsers({
     selected,
@@ -25,6 +31,10 @@ function ListUsers({
     const [changed, setChanged] = React.useState(false);
     const [usersList, setUsersList] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
+    const [uploadedMedia, setUploadedMedia] = useState();
+    const [open, setOpen] = useState(false);
+    const [preview, setPreview] = useState(user?.picture || "");
+    const [croppedImage, setCroppedImage] = useState(null);
     const toFocus = React.useRef(null);
     const notification = useNotification();
     const intl = useIntl();
@@ -86,10 +96,27 @@ function ListUsers({
             lastName: user.lastName,
             phone: user.phone,
             position: user.position,
+            linkPicture: user.linkPicture,
             email: user.email,
             synchronizable: user.synchronizable,
             urlAgenda: user.urlAgenda,
         };
+
+        if (uploadedMedia) {
+            const img = new FormData();
+            img.append("file", dataURItoBlob(croppedImage));
+            await request
+                .post(`import/file?destination=profile_picture`, img)
+                .then(async (res) => {
+                    req.picture = res.data.url;
+                })
+                .catch(() =>
+                    notification({
+                        content: <FormattedMessage id="message.error.logo" />,
+                        status: "invalid",
+                    })
+                );
+        }
 
         await request
             .patch(id, req, {
@@ -122,6 +149,28 @@ function ListUsers({
                         status: "invalid",
                     })
             );
+    };
+
+    useEffect(() => {
+        console.log(user);
+        if (!uploadedMedia) {
+            setPreview(user?.picture || null);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(uploadedMedia);
+        setPreview(objectUrl);
+
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [uploadedMedia]);
+
+    useEffect(() => {
+        setPreview(user?.picture ?? "");
+    }, [user?.picture]);
+
+    const handleCroppedImage = (image) => {
+        setCroppedImage(image);
+        setPreview(image);
+        setOpen(false);
     };
 
     return (
@@ -427,7 +476,83 @@ function ListUsers({
                                                             )
                                                         }
                                                     />
+                                                    <div
+                                                        className={
+                                                            classes.profilePictureContainer
+                                                        }
+                                                    >
+                                                        {preview && (
+                                                            <img
+                                                                alt={`${user.firstName} ${user.lastName}`}
+                                                                className={
+                                                                    classes.logoPreview
+                                                                }
+                                                                src={preview}
+                                                            />
+                                                        )}
+                                                        <UploadFile
+                                                            file={uploadedMedia}
+                                                            setFile={(e) => {
+                                                                setUploadedMedia(
+                                                                    e
+                                                                );
+                                                                setOpen(true);
+                                                            }}
+                                                            removeFile={() => {
+                                                                setUploadedMedia(
+                                                                    null
+                                                                );
+                                                                setPreview(
+                                                                    null
+                                                                );
+                                                            }}
+                                                            placeholder={
+                                                                <FormattedMessage
+                                                                    id={
+                                                                        preview
+                                                                            ? "buttons.placeholder.import.replace_profile_picture"
+                                                                            : "buttons.placeholder.import.profile_picture"
+                                                                    }
+                                                                />
+                                                            }
+                                                            style={{
+                                                                paddingTop:
+                                                                    ".8rem",
+                                                                paddingBottom:
+                                                                    ".8rem",
+                                                            }}
+                                                            type="image/*"
+                                                        />
+                                                    </div>
+                                                    <Input
+                                                        type="text"
+                                                        placeholder={intl.formatMessage(
+                                                            {
+                                                                id: "buttons.placeholder.import.profile_picture_link",
+                                                            }
+                                                        )}
+                                                        defaultValue={
+                                                            user.linkPicture
+                                                        }
+                                                        onChange={(e) =>
+                                                            handleChange(
+                                                                e.target.value,
+                                                                "linkPicture"
+                                                            )
+                                                        }
+                                                    />
                                                 </div>
+                                                <Popup
+                                                    open={open}
+                                                    image={preview}
+                                                    handleClose={() =>
+                                                        setOpen(false)
+                                                    }
+                                                    getCroppedFile={
+                                                        handleCroppedImage
+                                                    }
+                                                    aspectRatios={["1:1"]}
+                                                />
                                             </>
                                         ) : (
                                             <></>
