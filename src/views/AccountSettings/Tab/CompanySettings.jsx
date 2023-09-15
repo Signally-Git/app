@@ -13,8 +13,12 @@ function CompanySettings() {
     const [open, setOpen] = useState(false);
     const [companyName, setCompanyName] = useState(organisation?.name || "");
     const [website, setWebsite] = useState(organisation?.websiteUrl || "");
-    const [phone, setPhone] = useState(organisation?.address?.phone || "");
-    const [email, setEmail] = useState(organisation?.address?.email || "");
+    const [phone, setPhone] = useState(
+        organisation?.digitalAddress?.phone || ""
+    );
+    const [email, setEmail] = useState(
+        organisation?.digitalAddress?.email || ""
+    );
     const [tenantId, setTenantId] = useState(organisation?.tenantId || "");
     const [preview, setPreview] = useState(organisation?.logo?.url || null);
     const [loading, setLoading] = useState(false);
@@ -38,8 +42,8 @@ function CompanySettings() {
         setPreview(organisation?.logo?.url || null);
         setCompanyName(organisation?.name || "");
         setWebsite(organisation?.websiteUrl || "");
-        setPhone(organisation?.address?.phone || "");
-        setEmail(organisation?.address?.email || "");
+        setPhone(organisation?.digitalAddress?.phone || "");
+        setEmail(organisation?.digitalAddress?.email || "");
     }, [organisation]);
 
     useEffect(() => {
