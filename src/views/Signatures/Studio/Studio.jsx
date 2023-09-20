@@ -17,7 +17,7 @@ const Studio = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [signatureName, setSignatureName] = useState("");
     const [forceUpdate, setForceUpdate] = useState(0);
-    console.log(selectedTemplate);
+
     const notification = useNotification();
 
     const history = useHistory();
@@ -25,11 +25,67 @@ const Studio = () => {
     const fetchSignature = () => {
         request.get(`signatures/${signatureId}`).then(({ data }) => {
             setSelectedTemplate(data.signatureTemplate);
+            setStyles(data.signatureStyles);
+            setSignatureName(data.name);
         });
     };
 
     const handleSave = async () => {
-        if (signatureId) console.log("edit");
+        if (signatureId)
+            await request
+                .patch(
+                    `signatures/${signatureId}`,
+                    {
+                        signatureTemplate: selectedTemplate["@id"],
+                        name: signatureName || selectedTemplate.name,
+                        html: "selectedTab.html",
+                        organisation: selectedTemplate.owner,
+                    },
+                    {
+                        headers: {
+                            "Content-Type": "application/merge-patch+json",
+                        },
+                    }
+                )
+                .then(({ data }) => {
+                    const updatedStyles = styles.map((style) => ({
+                        ...style,
+                        signatureTemplate: data.signatureTemplate.id,
+                        signature: data.id,
+                    }));
+                    request
+                        .post("signature_styles/batch", updatedStyles)
+                        .then(() => {
+                            notification({
+                                content: (
+                                    <>
+                                        Votre signature{" "}
+                                        <span className={classes.primaryColor}>
+                                            {signatureName}
+                                        </span>{" "}
+                                        a été éditée avec succès
+                                    </>
+                                ),
+                                status: "valid",
+                            });
+                            if (window.location.hash === "#onboarding")
+                                history.goBack();
+                            else history.push("/signatures");
+                        })
+                        .catch(() => {
+                            notification({
+                                content: (
+                                    <>
+                                        Erreur lors de la modification de{" "}
+                                        <span className={classes.primaryColor}>
+                                            {signatureName}
+                                        </span>{" "}
+                                    </>
+                                ),
+                                status: "invalid",
+                            });
+                        });
+                });
         else
             await request
                 .post(`signatures`, {
