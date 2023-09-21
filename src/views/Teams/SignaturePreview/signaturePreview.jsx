@@ -8,10 +8,12 @@ import parse from "html-react-parser";
 import moment from "moment";
 import { FormattedMessage, useIntl } from "react-intl";
 
+// @TODO rework component
+
 export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     const [templates, setTemplates] = useState([]);
     const [selectedTemplate, setSelectedTemplate] = useState([
-        { "@id": "signature", name: "signature" },
+        { id: "signature", name: "signature" },
     ]);
     const [previewSignature, setPreviewSignature] = useState();
     const [event, setEvent] = useState({ "@id": "event", name: "event" });
@@ -77,7 +79,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
     }, [edit]);
 
     useEffect(() => {
-        handleSwapSignature(show?.signature?.["@id"]);
+        handleSwapSignature(show?.signature?.["id"]);
         const sse = new EventSource(
             `${process.env.REACT_APP_HUB_URL}${show?.["@id"]}`
         );
@@ -189,9 +191,8 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
 
     const handleSwapSignature = (id) => {
         let template = Object?.values(templates)?.find((obj) => {
-            return obj?.["@id"] === id;
+            return obj?.["id"] === id;
         });
-        console.log(show);
         if (event.imageUrl !== undefined)
             template = {
                 ...template,
@@ -201,11 +202,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 ),
             };
         request
-            .get(
-                `compile_for_attribution_signature/${show?.id}/${show?.[
-                    "@type"
-                ].toLowerCase()}`
-            )
+            .get(`compile_for_attribution_signature/${show?.["id"]}/${id}`)
             .then(({ data }) => {
                 console.log(data);
                 setSelectedTemplate({ preview: data });
@@ -521,11 +518,11 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                                 handleSwapSignature(e)
                                             }
                                             defaultValue={
-                                                show?.signature?.["@id"]
+                                                show?.signature?.["id"]
                                             }
                                             items={templates}
                                             display={"name"}
-                                            getValue={"@id"}
+                                            getValue={"id"}
                                         />
                                     )}
                                     <div className={classes.signature}>
