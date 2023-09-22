@@ -17,6 +17,9 @@
   inset: 0;
   cursor: pointer;
 }
+.container form {
+  max-height: 20rem;
+}
 
 .open input {
   border-radius: var(--small-border-radius) var(--small-border-radius) 0 0;
