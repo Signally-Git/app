@@ -204,8 +204,10 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
         request
             .get(`compile_for_attribution_signature/${show?.["id"]}/${id}`)
             .then(({ data }) => {
-                console.log(data);
-                setSelectedTemplate({ preview: data });
+                setSelectedTemplate({
+                    "@id": template?.["@id"],
+                    preview: data,
+                });
             });
         // setSelectedTemplate(template);
     };
