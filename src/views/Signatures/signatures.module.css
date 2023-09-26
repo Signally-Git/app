@@ -1,3 +1,4 @@
+/* global.scss */
 .container {
   display: flex;
   height: 80vh;
@@ -11,7 +12,7 @@
 }
 
 .primaryColor {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .modalContainer {
@@ -29,7 +30,7 @@
   inset: 0;
 }
 .modalContainer > div span > span {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .row {
@@ -40,20 +41,20 @@
 }
 
 .infosContainer {
-  background-color: #fff;
+  background-color: var(--pure-light);
 }
 
 .teamsContainer {
-  width: 40rem;
-  max-width: 40rem;
-  min-width: 40rem;
-  background-color: #fff;
-  border-radius: 5px;
+  width: var(--left-col-min-width);
+  max-width: var(--left-col-min-width);
+  min-width: var(--left-col-min-width);
+  background-color: var(--pure-light);
+  border-radius: var(--border-radius);
   padding: 2rem;
   position: relative;
-  min-height: 50rem;
-  height: 65%;
-  max-height: 50rem;
+  min-height: var(--left-col-min-height);
+  height: var(--left-col-height);
+  max-height: var(--left-col-max-height);
 }
 .teamsContainer ul {
   padding: 0;
@@ -65,7 +66,7 @@
   height: 95%;
 }
 .teamsContainer > div > span {
-  color: #5c74b2;
+  color: var(--color-primary-variant);
   font-weight: bold;
   margin-top: 1rem;
   font-size: 0.9rem;
@@ -110,11 +111,11 @@
 
 .active {
   transition: 0.2s;
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .active::after {
   transition: 0.2s;
-  background-color: #244EFF;
+  background-color: var(--color-primary);
 }
 
 .itemsList {
@@ -143,8 +144,8 @@
   font-weight: 600;
   cursor: pointer;
   position: relative;
-  background: #F4F7FC;
-  border-radius: 5px;
+  background: var(--color-lighter-accent);
+  border-radius: var(--small-border-radius);
 }
 .itemsList li::before {
   content: "";
@@ -156,7 +157,7 @@
   bottom: 0;
   margin: auto;
   height: 8px;
-  border-radius: 20px;
+  border-radius: var(--huge-radius);
   width: 8px;
   background: transparent;
   transition: 0.2s;
@@ -170,7 +171,7 @@
   left: -1em;
   height: 8px;
   width: 8px;
-  background: #244EFF;
+  background: var(--color-primary);
 }
 .itemsList li > div {
   display: flex;
@@ -182,13 +183,9 @@
   text-decoration: underline;
 }
 
-.selected {
-  width: 95% !important;
-}
-
 .groupName {
-  color: #244EFF;
-  border-radius: 5px;
+  color: var(--color-primary);
+  border-radius: var(--border-radius);
   font-weight: normal;
   font-size: 0.75rem;
 }
@@ -214,28 +211,28 @@
 
 .search {
   text-indent: 2rem;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   width: 100%;
   outline: none;
   border: 1px solid transparent;
   margin: 1rem 0;
   padding: 0.5rem;
-  background: #F4F7FC;
+  background: var(--color-lighter-accent);
   display: block;
   transition: 0.2s;
 }
 .search:focus {
-  border-color: #244EFF;
+  border-color: var(--color-primary);
 }
 
 .primaryTxt {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .signaturePreview {
   margin-left: 3rem;
-  background-color: #fff;
-  border-radius: 5px;
+  background-color: var(--pure-light);
+  border-radius: var(--border-radius);
   padding: 0 2rem;
   margin-bottom: auto;
 }
@@ -274,9 +271,9 @@
   width: 60%;
   text-align: center;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-  border: 1px solid #244EFF;
-  background-color: #fff !important;
-  color: #244EFF;
+  border: 1px solid var(--color-primary);
+  background-color: var(--pure-light) !important;
+  color: var(--color-primary);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -284,48 +281,28 @@
   padding: 0.75rem;
   font-size: 0.85rem;
   font-weight: 600;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
 }
 .btn svg,
 .CTA svg {
   transition: 0.2s;
   margin-left: 0.5rem;
-  stroke: #244EFF;
+  stroke: var(--color-primary);
   stroke-width: 1px;
 }
 .btn:hover,
 .CTA:hover {
-  background-color: #244EFF !important;
+  background-color: var(--color-primary) !important;
   border: 1px solid transparent;
-  color: #fff;
+  color: var(--pure-light);
   cursor: pointer;
 }
 .btn:hover svg,
 .CTA:hover svg {
-  stroke: #fff;
+  stroke: var(--pure-light);
 }
 
 .CTA {
   width: 15rem;
   margin: 0 5rem;
-}
-
-.actionsContainer {
-  position: absolute;
-  right: 1rem;
-  z-index: 2;
-  gap: 0.5rem;
-  justify-content: center;
-  align-items: center;
-}
-.actionsContainer svg {
-  color: #1B335E;
-  opacity: 0.6;
-}
-.actionsContainer svg:first-child {
-  font-size: 1rem;
-}
-.actionsContainer svg:hover {
-  color: #244EFF;
-  opacity: 1;
 }

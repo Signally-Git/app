@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import classes from "../accountSettings.module.css";
 import { useHistory } from "react-router-dom";
-import { Input, UploadFile, NavigationButtons } from "components";
-import { TokenService, request, useNotification } from "utils";
+import { Input, UploadFile, NavigationButtons, Popup } from "components";
+import { TokenService, request, useNotification, dataURItoBlob } from "utils";
 import { FormattedMessage } from "react-intl";
 
 function CompanySettings() {
@@ -10,20 +10,57 @@ function CompanySettings() {
         TokenService.getOrganisation()
     );
     const [uploadedMedia, setUploadedMedia] = useState();
+    const [open, setOpen] = useState(false);
     const [companyName, setCompanyName] = useState(organisation?.name || "");
     const [website, setWebsite] = useState(organisation?.websiteUrl || "");
-    const [phone, setPhone] = useState(organisation?.address?.phone || "");
-    const [email, setEmail] = useState(organisation?.address?.email || "");
-    const [preview, setPreview] = useState();
+    const [phone, setPhone] = useState(
+        organisation?.digitalAddress?.phone || ""
+    );
+    const [email, setEmail] = useState(
+        organisation?.digitalAddress?.email || ""
+    );
+    const [tenantId, setTenantId] = useState(organisation?.tenantId || "");
+    const [preview, setPreview] = useState(organisation?.logo?.url || null);
     const [loading, setLoading] = useState(false);
+    const [croppedImage, setCroppedImage] = useState(null);
 
     const notification = useNotification();
     let history = useHistory();
 
+    const handleCroppedImage = (image) => {
+        setCroppedImage(image);
+        setPreview(image);
+        setOpen(false);
+    };
+
+    useEffect(() => {
+        console.log(
+            "organisation useEffect organisation?.logo?.url",
+            organisation?.logo?.url
+        );
+
+        setPreview(organisation?.logo?.url || null);
+        setCompanyName(organisation?.name || "");
+        setWebsite(organisation?.websiteUrl || "");
+        setPhone(organisation?.digitalAddress?.phone || "");
+        setEmail(organisation?.digitalAddress?.email || "");
+    }, [organisation]);
+
+    useEffect(() => {
+        request.get(organisation?.["@id"]).then((org) => {
+            org = org?.data;
+            setOrganisation(org);
+        });
+    }, []);
+
     useEffect(() => {
         // create the preview
         if (!uploadedMedia) {
-            setPreview(null);
+            console.log(
+                "uploadedMedia useEffect organisation?.logo?.url",
+                organisation?.logo?.url
+            );
+            setPreview(organisation?.logo?.url || null);
             return;
         }
         const objectUrl = URL.createObjectURL(uploadedMedia);
@@ -35,9 +72,9 @@ function CompanySettings() {
 
     const handleSaveCompany = async () => {
         setLoading(true);
-        const img = new FormData();
-        img.append("file", uploadedMedia);
         if (uploadedMedia) {
+            const img = new FormData();
+            img.append("file", dataURItoBlob(croppedImage));
             await request
                 .post(`import/file`, img)
                 .then(async (res) => {
@@ -60,6 +97,7 @@ function CompanySettings() {
                         name: companyName,
                         websiteUrl: website,
                         logo: res.data["@id"],
+                        tenantId: tenantId,
                         address: {
                             ...organisation.address,
                         },
@@ -74,7 +112,13 @@ function CompanySettings() {
                                 "Content-Type": "application/merge-patch+json",
                             },
                         })
-                        .then(() => {
+                        .then((response) => {
+                            const updatedOrganisation = response.data;
+                            setOrganisation(updatedOrganisation);
+                            setCroppedImage(null);
+                            setUploadedMedia(null);
+
+                            setPreview(updatedOrganisation?.logo?.url);
                             notification({
                                 content: (
                                     <>
@@ -115,6 +159,7 @@ function CompanySettings() {
             const req = {
                 name: companyName,
                 websiteUrl: website,
+                tenantId: tenantId,
                 address: {
                     ...organisation.address,
                 },
@@ -146,18 +191,6 @@ function CompanySettings() {
         }
     };
 
-    useEffect(() => {
-        request.get(organisation?.["@id"]).then((org) => {
-            org = org?.data;
-            setOrganisation(org);
-            setPreview(org?.logo?.url);
-            setCompanyName(org?.name);
-            setWebsite(org?.websiteUrl);
-            setPhone(org?.digitalAddress?.phone);
-            setEmail(org?.digitalAddress?.email);
-        });
-    }, []);
-
     return (
         <>
             <div className={classes.inputsContainer}>
@@ -173,7 +206,14 @@ function CompanySettings() {
                         )}
                         <UploadFile
                             file={uploadedMedia}
-                            setFile={(e) => setUploadedMedia(e)}
+                            setFile={(e) => {
+                                setUploadedMedia(e);
+                                setOpen(true);
+                            }}
+                            removeFile={() => {
+                                setUploadedMedia(null);
+                                setPreview(null);
+                            }}
                             placeholder={
                                 <FormattedMessage id="buttons.placeholder.import.image" />
                             }
@@ -181,7 +221,14 @@ function CompanySettings() {
                                 paddingTop: ".8rem",
                                 paddingBottom: ".8rem",
                             }}
-                            type="image/*"
+                            type=".png, .gif, .jpeg, .jpg"
+                        />
+                        <Popup
+                            open={open}
+                            image={preview}
+                            handleClose={() => setOpen(false)}
+                            getCroppedFile={handleCroppedImage}
+                            aspectRatios={["1:1"]}
                         />
                     </div>
                 </div>
@@ -317,18 +364,32 @@ function CompanySettings() {
                         />
                     </div>
                 </div>
-                {!organisation?.azure && (
-                    <div className={classes.inputContainer}>
-                        <label>
-                            <FormattedMessage id="profile.informations.google_email_address" />
-                        </label>
-                        <Input
-                            type="email"
-                            value={email || ""}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </div>
-                )}
+                <div className={classes.row}>
+                    {!organisation?.azure && (
+                        <div className={classes.inputContainer}>
+                            <label>
+                                <FormattedMessage id="profile.informations.google_email_address" />
+                            </label>
+                            <Input
+                                type="email"
+                                value={email || ""}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                    )}
+                    {!organisation?.google && (
+                        <div className={classes.inputContainer}>
+                            <label>
+                                <FormattedMessage id="profile.informations.tenant_id" />
+                            </label>
+                            <Input
+                                type="text"
+                                value={tenantId || ""}
+                                onChange={(e) => setTenantId(e.target.value)}
+                            />
+                        </div>
+                    )}
+                </div>
             </div>
             <NavigationButtons
                 onCancel={() => {

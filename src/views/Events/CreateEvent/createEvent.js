@@ -1,10 +1,10 @@
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import classes from "./createEvent.module.css";
-import { Input, NavigationButtons, UploadFile } from "components";
+import { Input, NavigationButtons, UploadFile, Popup } from "components";
 import { useContext, useEffect, useRef, useState } from "react";
 import moment from "moment";
-import { useNotification, request } from "utils";
+import { useNotification, request, dataURItoBlob } from "utils";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
 import { LangContext } from "contexts/LangContext";
@@ -23,8 +23,11 @@ export default function CreateEvent({ setDone, event }) {
     );
 
     const [banner, setBanner] = useState();
+    const [open, setOpen] = useState(false);
+    const [preview, setPreview] = useState();
     const [eventName, setEventName] = useState(event?.name || "");
     const [eventLink, setEventLink] = useState(event?.link || "");
+    const [croppedImage, setCroppedImage] = useState();
 
     const notification = useNotification();
     const eventNameRef = useRef(null);
@@ -49,6 +52,17 @@ export default function CreateEvent({ setDone, event }) {
         if (!event) {
             eventNameRef.current.focus();
         }
+
+        // create the preview
+        if (!banner) {
+            setPreview(null);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(banner);
+        setPreview(objectUrl);
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl);
     }, [banner]);
 
     useEffect(() => {
@@ -62,8 +76,8 @@ export default function CreateEvent({ setDone, event }) {
 
     const checkEventLink = (url) => {
         let isValid = url.startsWith("http://") ? 1 : 0;
-        if (isValid == 0) isValid = url.startsWith("https://") ? 2 : 0;
-        if (url.length > 0 && isValid == 0)
+        if (isValid === 0) isValid = url.startsWith("https://") ? 2 : 0;
+        if (url.length > 0 && isValid === 0)
             notification({
                 content: (
                     <FormattedMessage id="message.warning.wrong_event_link" />
@@ -71,6 +85,15 @@ export default function CreateEvent({ setDone, event }) {
                 status: "invalid",
             });
         return true;
+    };
+
+    const handleStartDateChange = (newStartDate) => {
+        setStartDate(newStartDate);
+
+        // Si la nouvelle date de début est après la date de fin, mettez la date de fin à la même valeur que la date de début
+        if (newStartDate > endDate) {
+            setEndDate(newStartDate);
+        }
     };
 
     const saveEvent = async (e) => {
@@ -86,9 +109,10 @@ export default function CreateEvent({ setDone, event }) {
         }
         const start = moment(startDate);
         const end = moment(endDate);
-        const image = new FormData();
-        image.append("file", banner);
+
         if (!event && banner) {
+            const image = new FormData();
+            image.append("file", dataURItoBlob(croppedImage));
             await request
                 .post(`import/file`, image)
                 .then(async (res) => {
@@ -146,7 +170,7 @@ export default function CreateEvent({ setDone, event }) {
             const image = new FormData();
 
             if (banner) {
-                image.append("file", banner);
+                image.append("file", dataURItoBlob(croppedImage));
                 await request
                     .post(`import/file`, image)
                     .then(async (res) => {
@@ -271,7 +295,7 @@ export default function CreateEvent({ setDone, event }) {
                     <Datetime
                         locale={lc}
                         value={startDate}
-                        onChange={setStartDate}
+                        onChange={handleStartDateChange}
                         closeOnSelect={true}
                         dateFormat="D MMM YYYY"
                         timeFormat="HH mm"
@@ -316,7 +340,7 @@ export default function CreateEvent({ setDone, event }) {
             </div>
             <div className={classes.currentEventPreview}>
                 {banner ? (
-                    <img src={URL.createObjectURL(banner)} />
+                    <img src={preview} />
                 ) : event ? (
                     <img src={event.imageUrl} title={event.banner?.name} />
                 ) : (
@@ -324,7 +348,7 @@ export default function CreateEvent({ setDone, event }) {
                 )}
             </div>
             <div className={classes.uploadContainer}>
-                <UploadFile
+                {/* <UploadFile
                     type="image/*"
                     file={banner}
                     placeholder={
@@ -337,6 +361,38 @@ export default function CreateEvent({ setDone, event }) {
                               })
                     }
                     setFile={setBanner}
+                /> */}
+                <UploadFile
+                    file={banner}
+                    setFile={(e) => {
+                        setBanner(e);
+                        setOpen(true);
+                    }}
+                    removeFile={() => {
+                        setBanner(null);
+                        setPreview(null);
+                    }}
+                    type="image/*"
+                    placeholder={
+                        event
+                            ? intl.formatMessage({
+                                  id: "buttons.placeholder.import.other_banner",
+                              })
+                            : intl.formatMessage({
+                                  id: "buttons.placeholder.import.banner",
+                              })
+                    }
+                />
+                <Popup
+                    open={open}
+                    handleClose={() => setOpen(false)}
+                    image={preview}
+                    getCroppedFile={(image) => {
+                        setCroppedImage(image);
+                        setPreview(image);
+                        setOpen(false);
+                    }}
+                    aspectRatios={["1:1", "16:9", "4:3", "3:2"]}
                 />
             </div>
             <div>

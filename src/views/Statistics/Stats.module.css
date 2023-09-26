@@ -1,15 +1,4 @@
-:local :root {
-  --color-primary: #ff7954;
-  --color-secondary: #ffc300;
-  --color-dark-accent: #402927;
-  --color-darker-accent: #66433e;
-  --color-lighter-accent: #f7f5f5;
-  --color-light-accent: #f0e9e9;
-  --color-light-accent-variation: #ebe4e1;
-  --color-light-accent-variation1: #ECEFF6;
-  --color-light-accent-variation2: #f8f2f0;
-}
-
+/* global.scss */
 .statisticContainer {
   position: relative;
   width: 60%;
@@ -17,7 +6,7 @@
   min-height: 25rem;
   background: rgba(255, 255, 255, 0.4);
   padding: 0.25rem 1rem;
-  border-radius: 5px;
+  border-radius: var(--small-border-radius);
 }
 
 .entitySelectContainer,
@@ -34,7 +23,7 @@
   padding: 1rem;
   list-style: none;
   background: rgba(255, 255, 255, 0.4);
-  border-radius: 5px;
+  border-radius: var(--small-border-radius);
 }
 
 @keyframes spin {
@@ -48,7 +37,7 @@
 .loadingContainer {
   left: 1rem;
   margin-top: 3rem;
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .loadingContainer > svg {
   animation-name: spin;
@@ -85,14 +74,14 @@
   position: absolute;
   bottom: -10rem;
   background: rgb(255, 255, 255);
-  border-radius: 5px;
+  border-radius: var(--small-border-radius);
 }
 .entitiesContainer > div {
   width: 25%;
   padding: 0.25rem;
   position: fixed;
   background: rgba(255, 255, 255, 0.4);
-  border-radius: 5px;
+  border-radius: var(--small-border-radius);
   font-size: 0.9rem;
 }
 .entitiesContainer > div > input {

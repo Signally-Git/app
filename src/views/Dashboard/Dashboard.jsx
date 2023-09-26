@@ -4,12 +4,13 @@ import Tiles from "./Tiles/Tiles";
 import Signatures from "../Signatures/signatures";
 import Events from "../Events/events";
 import CreateEvent from "../Events/CreateEvent/createEvent";
-import Users from "../Users/users";
+import Users from "../Teams/ManageTeams";
 import CreateSignature from "../Signatures/create/createSignature";
 import News from "views/News/News";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import StatsPage from "views/Statistics/Stats.page";
 import AccountSettings from "../AccountSettings/accountSettings";
+import Studio from "../Signatures/Studio/Studio";
 
 const Dashboard = ({ page }) => {
     const [loadingTiles, setLoadingTiles] = useState(false);
@@ -46,7 +47,7 @@ const Dashboard = ({ page }) => {
         teams: <Users />,
         statistics: <StatsPage />,
         signatures: <Signatures />,
-        "create-signature": <CreateSignature />,
+        "create-signature": <Studio />,
         events: <Events />,
         "create-event": <CreateEvent />,
         account: <AccountSettings />,

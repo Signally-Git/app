@@ -1,0 +1,422 @@
+@import "../../../assets/style/global";
+
+.topLine {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    button {
+        margin-left: auto;
+        margin-right: 0;
+        right: 2rem;
+        left: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+        position: absolute;
+    }
+    h2 {
+        margin-bottom: 0 !important;
+    }
+    select {
+        outline: none;
+    }
+    svg {
+        color: $color-dark-accent;
+        &:hover {
+            cursor: pointer;
+            color: $color-primary;
+        }
+    }
+    form {
+        width: 45%;
+        select {
+            border-color: $color-primary;
+            color: $color-primary;
+            margin: 0;
+            // margin-top: 3rem;
+            width: 100%;
+        }
+    }
+}
+
+.primaryTxt {
+    color: $color-primary;
+}
+
+.groupName {
+    color: rgba($color-dark-accent, 0.75) !important;
+    padding: 0.25rem 0.75rem;
+    border-radius: $borderRadius;
+    background-color: rgba($color-dark-accent, 0.08);
+    margin-top: 0.5rem;
+    font-weight: 600;
+    font-size: 0.6rem !important;
+}
+
+.signature {
+    margin-top: 1.5rem;
+    transform: scale(0.75);
+    width: 150%;
+    margin-bottom: -25%;
+    transform-origin: top left;
+}
+
+.row {
+    height: 90%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    > div {
+        width: 45% !important;
+    }
+    + button {
+        position: absolute;
+        bottom: 1rem;
+    }
+}
+
+.signaturePreviewSelect {
+    height: 90%;
+}
+
+.flipContainer {
+    perspective: 1000px;
+}
+
+.flip {
+    transform: rotateY(180deg);
+}
+
+.flipContainer,
+.front,
+.back {
+    min-width: 30rem;
+    min-height: 35rem;
+    width: 100%;
+    height: 100%;
+    > .btnsContainer {
+        top: auto;
+        bottom: 1rem;
+        position: absolute;
+        display: flex;
+        justify-content: space-between;
+        width: 36%;
+        button {
+            margin: 0;
+        }
+    }
+}
+
+/* flip speed goes here */
+.flipper {
+    transition: 0.6s linear;
+    transform-style: preserve-3d;
+    height: 100%;
+    position: relative;
+}
+
+/* hide back of pane during swap */
+.front,
+.back {
+    backface-visibility: hidden;
+    background-color: $pureLight;
+    border-radius: $borderRadius;
+    padding: 2rem;
+    margin-bottom: auto;
+    h2 {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        margin-top: 0;
+    }
+    > div {
+        overflow: auto;
+        margin-bottom: 2rem;
+    }
+    .groupName {
+        font-weight: 600;
+    }
+    > span {
+        color: $color-dark-accent;
+        padding-top: 0.5rem;
+        font-size: 0.8rem;
+    }
+    label {
+        margin-top: 2rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+        display: block;
+    }
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+    z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+    transform: rotateY(180deg);
+    select {
+        width: 100%;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        /* border: none; */
+        border-radius: $smallBorderRadius;
+    }
+    > button:last-child {
+        margin-right: auto;
+        margin-left: 0;
+    }
+}
+
+.entityEdit {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    > div {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        > div,
+        input {
+            width: 48%;
+            height: 2rem;
+        }
+    }
+}
+
+.event {
+    height: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    & :hover span {
+        color: $color-darker-accent;
+    }
+    span {
+        width: 0.35rem;
+        font-weight: 600;
+        text-align: center;
+        right: 0;
+        left: 0;
+        bottom: 0.35rem;
+        margin: auto;
+        font-size: 0.7rem;
+        position: absolute;
+    }
+}
+
+.modalContainer {
+    position: absolute;
+    z-index: 10;
+    width: 210%;
+    height: 135%;
+    inset: 0;
+    left: -100%;
+    top: -25%;
+}
+
+.playlistModal {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 30px rgba($color-dark-accent, 0.4);
+    width: 35rem;
+    background-color: $pureLight;
+    border-radius: $borderRadius;
+    height: 40rem;
+    padding: 1rem 2rem;
+    h3 {
+        font-size: 1.15rem;
+        text-align: center;
+    }
+    ul {
+        overflow: auto;
+        max-height: 60%;
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        .active {
+            color: $color-primary;
+        }
+        li {
+            margin: 0.5rem 0;
+            margin-left: auto;
+            width: 100%;
+            transition: 0.2s;
+            z-index: 2;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            position: relative;
+            background: $color-lighter-accent;
+            border-radius: $smallBorderRadius;
+            label {
+                display: block;
+                position: relative;
+                padding-left: 35px;
+                cursor: pointer;
+                font-size: 22px;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                line-height: 25px;
+                input {
+                    position: absolute;
+                    height: 100%;
+                    z-index: 11;
+                    width: 100%;
+                    inset: 0;
+                    cursor: pointer;
+                    opacity: 0;
+                    // &:checked ~ span {
+                    //     background-color: ;
+                    // }
+                    &:checked ~ span:after {
+                        display: block;
+                    }
+                }
+                span {
+                    position: absolute;
+                    inset: 0;
+                    margin: auto;
+                    border-radius: $hugeRadius;
+                    height: 25px;
+                    width: 25px;
+                    border: 1px solid $color-dark-accent;
+                    &:after {
+                        content: " ";
+                        position: absolute;
+                        display: none;
+                        text-align: center;
+                        white-space: nowrap;
+                        vertical-align: baseline;
+                        background: $color-dark-accent;
+                        border-radius: $hugeRadius;
+                        padding: 0;
+                        height: 15px;
+                        width: 15px;
+                        inset: 0;
+                        margin: auto;
+                    }
+                }
+            }
+            &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                left: 0rem;
+                top: 0;
+                z-index: -1;
+                bottom: 0;
+                margin: auto;
+                height: 6px;
+                border-radius: $hugeRadius;
+                width: 6px;
+                background: transparent;
+                transition: 0.2s;
+            }
+            > div {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 60%;
+                > span > span {
+                    font-weight: normal;
+                    font-size: 0.75rem;
+                }
+                img {
+                    height: auto;
+                }
+            }
+        }
+    }
+    .searchContainer {
+        width: 100%;
+        display: flex;
+        position: relative;
+        img {
+            position: absolute;
+            top: 40%;
+            left: 1rem;
+            transform: translateY(-20%);
+        }
+    }
+    .searchInput {
+        color: $background-color;
+        width: 100%;
+        font-family: "Montserrat";
+        text-indent: 2.5rem;
+        transition: 0.2s;
+        padding: 0.75rem;
+        border-radius: $mediumBorderRadius;
+        background: $color-lighter-accent;
+        border: 1px solid transparent;
+        outline: none;
+        margin: 1rem 0;
+        &:focus {
+            background: $pureLight;
+            border: 1px solid $color-primary;
+            box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
+        }
+    }
+    .bannerPreview {
+        height: auto;
+        width: 30%;
+        max-height: 3rem;
+        padding: 0.5rem;
+        margin: auto;
+    }
+    .eventText {
+        display: flex;
+        margin: auto;
+        position: relative;
+        margin-left: 1rem;
+    }
+
+    .duration {
+        margin-top: 0.25rem;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        font-weight: normal;
+        .col {
+            display: flex;
+            flex-direction: column;
+            &:first-child {
+                margin-right: 1rem;
+            }
+        }
+    }
+    .btnsContainer {
+        position: absolute;
+        bottom: 1.5rem;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: flex;
+        width: 70%;
+        justify-content: space-around;
+        button {
+            margin: 0;
+        }
+    }
+}

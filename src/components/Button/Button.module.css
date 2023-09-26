@@ -1,3 +1,4 @@
+/* global.scss */
 .btn {
   background-color: transparent;
   display: flex;
@@ -10,40 +11,41 @@
   padding: 0.5rem 1rem;
   font-size: 0.85rem;
   font-weight: 600;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
 }
 .btn * {
   color: inherit;
 }
 
-.link-primary {
+.primaryLink {
+  color: var(--pure-dark);
   border-color: transparent;
 }
-.link-primary:hover {
-  color: #244EFF;
+.primaryLink:hover {
+  color: var(--color-primary);
   cursor: pointer;
 }
 
 .whiteBg {
-  background-color: #fff;
+  background-color: var(--pure-light);
 }
 
 .primary {
-  color: #244EFF;
-  border-color: #244EFF;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
   cursor: pointer;
 }
 .primary:hover {
-  background-color: #244EFF;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--pure-light);
 }
 .primary:hover svg {
-  stroke: #fff;
+  stroke: var(--pure-light);
 }
 .primary svg {
   transition: 0.2s;
   margin-left: 0.5rem;
-  stroke: #244EFF;
+  stroke: var(--color-primary);
   stroke-width: 1px;
 }
 
@@ -53,67 +55,69 @@
 }
 
 .primaryFill {
-  color: #fff;
-  background-color: #244EFF;
-  border-color: #244EFF;
+  color: var(--pure-light);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 .primaryFill:hover {
   background-color: transparent;
-  color: #244EFF;
+  color: var(--color-primary);
   cursor: pointer;
 }
 .primaryFill:hover svg {
-  stroke: #244EFF;
+  stroke: var(--color-primary);
 }
 .primaryFill svg {
   transition: 0.2s;
   margin-left: 0.5rem;
-  stroke: #fff;
+  stroke: var(--pure-light);
   stroke-width: 1px;
 }
 
 .secondary {
-  color: #1B335E;
-  border-color: #1B335E;
+  color: var(--color-dark-accent);
+  border-color: var(--color-dark-accent);
 }
 .secondary:hover {
   cursor: pointer;
-  background: #1B335E;
-  color: #fff;
+  background: var(--color-dark-accent);
+  color: var(--pure-light);
 }
 .secondary:hover svg {
-  stroke: #fff;
+  stroke: var(--pure-light);
 }
 .secondary svg {
   transition: 0.2s;
   margin-left: 0.5rem;
-  stroke: #1B335E;
+  stroke: var(--color-dark-accent);
   stroke-width: 1px;
 }
 
 .secondaryFill {
-  color: #fff;
-  background-color: #1B335E;
-  border-color: #1B335E;
+  color: var(--pure-light);
+  background-color: var(--color-dark-accent);
+  border-color: var(--color-dark-accent);
 }
 .secondaryFill:hover {
   background-color: transparent;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   cursor: pointer;
 }
 
 .white {
   border-color: transparent;
-  background-color: #fff;
+  color: var(--pure-dark);
+  background-color: var(--pure-light);
   cursor: pointer;
 }
 .white:hover {
-  color: #fff;
-  background-color: #1B335E;
+  color: var(--pure-light);
+  background-color: var(--color-dark-accent);
 }
 
 .disabled, .loading {
   pointer-events: none;
+  opacity: 0.5;
 }
 .disabled .loadingCircle, .loading .loadingCircle {
   animation: spin infinite 1s linear;

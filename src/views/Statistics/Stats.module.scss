@@ -1,19 +1,5 @@
 @import "../../assets/style/global";
 
-:local {
-    :root {
-        --color-primary: #ff7954;
-        --color-secondary: #ffc300;
-        --color-dark-accent: #402927;
-        --color-darker-accent: #66433e;
-        --color-lighter-accent: #f7f5f5;
-        --color-light-accent: #f0e9e9;
-        --color-light-accent-variation: #ebe4e1;
-        --color-light-accent-variation1: #ECEFF6;
-        --color-light-accent-variation2: #f8f2f0;
-    }
-}
-
 .statisticContainer {
     position: relative;
     width: 60%;

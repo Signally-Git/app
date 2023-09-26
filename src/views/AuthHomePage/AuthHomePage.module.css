@@ -1,3 +1,4 @@
+/* global.scss */
 .loading {
   animation: spin 1s 0s infinite linear forwards;
 }
@@ -11,7 +12,7 @@
   }
 }
 .container {
-  background: #F4F7FC;
+  background: var(--color-lighter-accent);
   display: flex;
   flex-direction: row-reverse;
   height: 100vh;
@@ -33,7 +34,7 @@
   width: auto;
   margin-right: auto;
 }
-.container ul {
+.container .descriptionBeta > ul {
   display: flex;
   list-style: none;
   gap: 1rem;
@@ -42,6 +43,8 @@
 }
 .container form {
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .container input::placeholder {
   opacity: 0.25;
@@ -51,13 +54,13 @@
 .container input[type=password]:focus,
 .container select:focus {
   box-shadow: 0 12px 40px rgba(230, 208, 201, 0.28);
-  border-color: #244EFF;
+  border-color: var(--color-primary);
 }
 .container select {
   padding: 0.9rem;
   margin-top: -0.35rem;
   outline: none;
-  border-radius: 5px;
+  border-radius: var(--small-border-radius);
   width: 100%;
   border-color: transparent;
 }
@@ -129,16 +132,19 @@
 .showPassword {
   display: flex;
   align-items: center;
-  position: absolute;
   outline: none;
-  border: none;
-  background: none;
-  right: 1rem;
+  background: rgba(var(--color-primary-rgb), 0.1);
+  border-radius: var(--small-border-radius) 0 0 var(--small-border-radius);
   cursor: pointer;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  padding: 0;
+  padding: 1rem;
+  margin: auto -3.1rem auto auto;
+  position: relative;
+  z-index: 0;
+  border: 1px solid transparent;
+  border-right-color: var(--color-light-accent);
+}
+.showPassword:hover {
+  background: rgba(var(--color-primary), 0.3);
 }
 
 .inputContainer {
@@ -152,7 +158,7 @@
 
 .inputContainer .inputTitle {
   margin-bottom: 6px;
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 
 .slider {
@@ -189,7 +195,7 @@
   position: relative;
   display: flex;
   justify-content: center;
-  background-color: #FFFFFF;
+  background-color: var(--pure-light);
   align-items: baseline;
   font-family: Montserrat, serif;
   flex-direction: column;
@@ -238,13 +244,13 @@
 
 .formContainer h2 {
   font-family: Trebuchet MS, serif;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   margin-top: 0;
   font-size: 2rem;
 }
 
 .formContainer h2 span {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .landingContainer {
@@ -255,16 +261,16 @@
 }
 
 .landingContainer h1 {
-  color: #244EFF;
+  color: var(--color-primary);
   margin-bottom: 2rem;
 }
 
 .landingContainer p {
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 
 .landingContainer p span {
-  color: #244EFF;
+  color: var(--color-primary);
   font-weight: bold;
 }
 
@@ -281,7 +287,7 @@
   font-size: 1.25rem;
   flex-direction: column;
   padding-left: 5rem;
-  background: #FFF;
+  background: var(--pure-light);
   height: 100%;
   justify-content: center;
   text-align: left;
@@ -297,7 +303,7 @@
   animation-delay: 0.75s;
 }
 .congrats h2 {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .congrats button {
   margin-left: 0;
@@ -308,7 +314,7 @@
 .congrats > span {
   animation-delay: 0.75s;
   font-size: 0.8rem;
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 
 .disappear {
@@ -338,14 +344,11 @@
   font-size: 0.8rem;
   margin-left: auto;
   padding-right: 0.5rem;
-  width: 100%;
-  display: flex;
-  justify-content: right;
   cursor: pointer;
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 .forgot:hover {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .modal {
@@ -355,21 +358,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 40px rgba(27, 51, 94, 0.3);
-  border-radius: 5px;
+  box-shadow: 0 0 40px rgba(var(--color-dark-accent), 0.3);
+  border-radius: var(--border-radius);
   inset: 0;
   max-width: 25rem;
   height: 15rem;
   z-index: 10;
   margin: auto;
-  background: #fff;
+  background: var(--pure-light);
 }
 .modal p {
   line-height: 1.5rem;
   text-align: center;
 }
 .modal p .primaryTxt {
-  color: #244EFF;
+  color: var(--color-primary);
   font-weight: bold;
   display: inline;
 }
@@ -406,8 +409,8 @@
   font-size: 1.2rem;
   margin-left: 0.5rem;
   background: red;
-  color: #fff;
-  border-radius: 20px;
+  color: var(--pure-light);
+  border-radius: var(--huge-radius);
   padding: 5px;
 }
 

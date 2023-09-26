@@ -1,0 +1,37 @@
+/* global.scss */
+.container {
+  position: relative;
+}
+
+.colorPicker {
+  position: fixed;
+  background-color: var(--pure-light);
+  border-radius: var(--medium-border-radius);
+  border: 1px solid var(--color-light-accent);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+.colorPicker div[aria-label=Color] > div {
+  width: 15px;
+  height: 15px !important;
+  cursor: move;
+}
+.colorPicker input {
+  margin-top: 0.5rem;
+  outline: none;
+  padding: 0.5rem;
+  background-color: transparent;
+  border-radius: var(--border-radius);
+  border: none;
+}
+.colorPicker div[aria-label=Hue] > div {
+  cursor: ew-resize;
+  border-radius: 0 !important;
+  width: 10px;
+  opacity: 1;
+  border: 1px solid rgb(255, 255, 255);
+  box-shadow: none;
+  height: 26px;
+}

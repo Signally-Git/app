@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import Options from "./Options/options";
 import Infos from "./Infos/infos";
 import TemplateSelection from "./TemplateSelect/templateSelect";
-import Preview from "./Preview/customizablePreview";
+import Preview from "./Preview/creationCompile";
 import { BsArrowRight } from "react-icons/bs";
 import { Button } from "components";
 import { Input } from "components";
@@ -186,7 +186,7 @@ function CreateSignatureComponent() {
         if (signatureInfo && signatureOption && selectedTemplate)
             setPreview(
                 <Preview
-                    twig={selectedTemplate?.html}
+                    id={selectedTemplate?.id}
                     styles={getStyles(
                         signatureInfo,
                         signatureOption,

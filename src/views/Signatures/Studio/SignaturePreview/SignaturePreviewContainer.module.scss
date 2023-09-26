@@ -1,0 +1,71 @@
+@import "../../../../assets/style/global";
+
+.container {
+  max-width: 50rem;
+  padding: .5rem;
+  border-radius: $mediumBorderRadius;
+  background-color: $pureLight; 
+}
+
+.browserHeader {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .btnsContainer {
+    margin: 0 0 .5rem;
+    display: flex;
+    justify-content: space-between;
+    width: 2.85rem;
+    list-style: none;
+    padding: 0;
+    > li {
+      min-width: 10px;
+      min-height: 10px;
+      border-radius: $hugeRadius;
+    }
+    .close {
+      background: #ff5d24;
+    }
+    .reduce {
+      background: #ffbd44;
+    }
+    .fullscreen {
+      background: #00ca4e;
+    }
+  }
+  input {
+    margin-left: 1rem;
+    width: 100%;
+    text-indent: 0.5rem;
+    height: 1.5rem;
+    font-size: 0.7rem;
+    color: grey;
+    border-radius: $smallBorderRadius;
+    border: none;
+  }
+}
+.lazyLoadingLong,
+.lazyLoadingShort,
+.lazyLoadingMedium {
+  border-radius: $borderRadius;
+  background: #f1f1f1;
+  width: 100%;
+  height: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  margin-right: auto;
+}
+.lazyLoadingShort {
+  width: 40%;
+}
+.lazyLoadingMedium {
+  width: 70%;
+}
+
+.signaturePreview {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}

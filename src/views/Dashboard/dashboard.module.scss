@@ -39,7 +39,7 @@
         margin-right: -5rem;
     }
     a {
-        color: #ff7954;
+        color: $color-primary;
     }
     .banner {
         width: 100%;
@@ -57,7 +57,7 @@
     margin-bottom: 2rem;
     transition: width 1s;
     display: flex;
-    background: #fff;
+    background: $pureLight;
     border-radius: $mediumBorderRadius;
     padding: 1.5rem 1.5rem;
     flex-wrap: nowrap;
@@ -94,7 +94,7 @@
     margin-top: 1rem;
     margin-bottom: 3rem;
     padding: 2rem;
-    background: #fff;
+    background: $pureLight;
     border-radius: $mediumBorderRadius;
     > div {
         transform: scale(0.9);

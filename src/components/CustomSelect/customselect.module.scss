@@ -17,11 +17,13 @@
         inset: 0;
         cursor: pointer;
     }
+    form {
+        max-height: 20rem;
+    }
 }
 
 .open {
     input {
-        // border-bottom: none;
         border-radius: $smallBorderRadius $smallBorderRadius 0 0;
     }
     .inputContainer > svg {
@@ -34,6 +36,7 @@
     display: flex;
     width: 100%;
     input[type="text"] {
+        pointer-events: none;
         text-overflow: ellipsis;
         z-index: 6;
         width: 100%;
@@ -71,8 +74,8 @@
     margin: 0 auto;
     border: 1px solid $color-light-accent-variation;
     width: 100%;
-    background-color: #fff;
-    box-shadow: 0 20px 30px $color-light-accent-variation;
+    background-color: $pureLight;
+    box-shadow: 0 5px 5px $color-light-accent-variation;
     border-radius: 0 0 $smallBorderRadius $smallBorderRadius;
     padding: 2.65rem 0 0;
     list-style: none;

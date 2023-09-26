@@ -1,3 +1,4 @@
+/* global.scss */
 .dashboardContainer {
   width: 100%;
   padding: 2rem;
@@ -34,7 +35,7 @@
   left: 12rem;
   padding: 1rem 5%;
   z-index: 5;
-  border-radius: 5px 5px 0 0;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -43,7 +44,7 @@
 }
 .container h2 {
   font-size: 1.35rem;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   line-height: 0;
 }
 
@@ -62,25 +63,25 @@
   font-weight: 600;
   margin-right: 1rem;
   padding: 0.25rem 1rem;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   font-size: 0.9rem;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   transition: 0.2s;
 }
 .nonLogged li:last-child a {
-  border: 1px solid #244EFF;
-  color: #244EFF;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
 }
 .nonLogged li:last-child a:hover {
-  border-color: #244EFF;
-  background: #244EFF;
-  color: #fff;
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--pure-light);
 }
 .nonLogged li:hover {
   cursor: pointer;
 }
 .nonLogged li:hover a {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .notif {
@@ -96,19 +97,19 @@
   width: 15px;
   height: 15px;
   text-align: center;
-  background-color: #244EFF;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--pure-light);
   padding: 2px;
   font-size: 0.8rem;
   right: -9px;
   top: -9px;
-  border-radius: 20px;
-  border: 1px solid #244EFF;
+  border-radius: var(--huge-radius);
+  border: 1px solid var(--color-primary);
 }
 
 .pageTitle {
   background: #f5eeef;
-  border-radius: 5px 10px 0 0;
+  border-radius: var(--border-radius) var(--large-border-radius) 0 0;
   padding: 0.5rem 2rem 1rem;
   margin-left: 3.25rem;
   margin-top: 6rem;
@@ -121,38 +122,38 @@
   margin-right: 1rem;
   display: flex;
   align-items: center;
-  border-right: 1px solid #1B335E;
+  border-right: 1px solid var(--color-dark-accent);
 }
 .btnsContainer .studio {
-  border: 1px solid #244EFF;
-  color: #244EFF;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
 }
 .btnsContainer .studio:hover {
-  color: #fff;
-  background: #244EFF;
+  color: var(--pure-light);
+  background: var(--color-primary);
 }
 .btnsContainer .store {
-  border: 1px solid #244EFF;
-  color: #244EFF;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
 }
 .btnsContainer .store:hover {
-  color: #fff;
-  background: #244EFF;
-  border-color: #244EFF;
+  color: var(--pure-light);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
 }
 .btnsContainer a {
   font-weight: 600;
   margin-right: 1rem;
   padding: 0.25rem 1rem;
-  border: 1px solid #1B335E;
-  border-radius: 5px;
+  border: 1px solid var(--color-dark-accent);
+  border-radius: var(--border-radius);
   font-size: 0.9rem;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   transition: 0.2s;
 }
 .btnsContainer a:hover {
-  color: #244EFF;
-  border-color: #244EFF;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .searchContainer {
@@ -163,7 +164,7 @@
 }
 .searchContainer input {
   border: none;
-  background: #fff;
+  background: var(--pure-light);
   outline: none;
   border-radius: 25px;
   padding: 1rem;
@@ -179,10 +180,10 @@
 }
 
 .headerSpan {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .headerSpan a {
-  color: #244EFF;
+  color: var(--color-primary);
   text-decoration: underline;
 }
 
@@ -192,11 +193,11 @@
   width: 25px;
   line-height: 25px;
   height: 25px;
-  color: #fff;
+  color: var(--pure-light);
   font-size: 26px;
-  border-radius: 20px;
+  border-radius: var(--huge-radius);
   margin: 0;
-  background: #244EFF;
+  background: var(--color-primary);
 }
 
 .options {
@@ -206,22 +207,22 @@
   top: 2.5rem;
   background: rgb(255, 255, 255);
   padding: 0.5rem 1rem;
-  border-radius: 5px;
+  border-radius: var(--small-border-radius);
   box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
   display: flex;
   flex-direction: column;
 }
 .options li {
   font-size: 1rem;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   font-family: "Trebuchet MS";
   padding: 0.5rem 0;
 }
 .options li a {
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 .options li:not(:last-of-type) {
-  border-bottom: 1px solid #1B335E;
+  border-bottom: 1px solid var(--color-dark-accent);
 }
 
 .rightSide {
@@ -242,9 +243,9 @@
 }
 .name ul {
   z-index: 3;
-  background: #f7f8fb;
+  background: var(--outter-background-color);
   padding: 0 1rem;
-  border: 1px solid #1B335E;
+  border: 1px solid var(--color-dark-accent);
   border-radius: 15px;
   list-style: none;
   max-height: 1.7rem;
@@ -274,13 +275,13 @@
   white-space: nowrap;
   font-size: 0.8rem;
   font-weight: 500;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   transition: 0.2s;
   margin-bottom: 1rem;
 }
 .name .UserName {
   display: flex;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   padding-top: 3px;
   align-items: center;
   justify-content: center;
@@ -294,13 +295,13 @@
   font-weight: 600;
   white-space: nowrap;
   font-size: 0.9rem;
-  color: #1B335E;
+  color: var(--color-dark-accent);
   transition: 0.2s;
   margin-right: 0.5rem;
 }
 
 .logout {
-  color: #5c74b2;
+  color: var(--color-primary-variant);
 }
 
 .reportContainer {
@@ -313,29 +314,29 @@
 }
 .reportContainer > div {
   transition: background-color 0.2s, border-color 0.2s;
-  color: #1B335E;
-  background: #ECEFF6;
-  border: 1px solid #ECEFF6;
+  color: var(--color-dark-accent);
+  background: var(--color-light-accent-variation1);
+  border: 1px solid var(--color-light-accent-variation1);
   font-weight: bold;
   font-size: 0.9rem;
   width: 100%;
   margin: 0;
   margin-top: 1.25rem;
-  border-radius: 5px;
+  border-radius: var(--small-border-radius);
   padding: 0.5rem 0.55rem;
   display: flex;
   flex-direction: column;
 }
 .reportContainer > div:hover {
-  border-color: #1B335E;
-  color: #fff;
-  background-color: #1B335E;
+  border-color: var(--color-dark-accent);
+  color: var(--pure-light);
+  background-color: var(--color-dark-accent);
 }
 .reportContainer > div:hover button {
-  color: #fff;
+  color: var(--pure-light);
 }
 .reportContainer button {
-  color: #1B335E;
+  color: var(--color-dark-accent);
   font-size: 0.6rem;
   margin-top: 0.15rem;
   cursor: pointer;
@@ -392,7 +393,7 @@
     margin-left: 0;
     width: 100%;
     border-radius: 0px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(var(--pure-light), 0.5);
     backdrop-filter: blur(5px);
   }
 }

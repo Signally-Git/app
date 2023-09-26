@@ -16,3 +16,13 @@
         font-size: .8rem;
     }
 }
+
+@media screen and (max-width: 1200px) {
+   .footer {
+       position: relative;
+        inset: auto;
+       justify-content: center;
+       width: 100%;
+       margin-bottom:  2rem;
+   }
+}

@@ -1,0 +1,43 @@
+/* global.scss */
+.menuContainer {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.menuContainer > button {
+  height: 2rem;
+  margin: 0;
+}
+
+.studioContainer {
+  display: flex;
+  height: calc(100% - 10rem);
+  overflow: hidden;
+}
+.studioContainer > div {
+  width: 50%;
+}
+.studioContainer > .modalContainer {
+  position: absolute;
+  background-color: var(--pure-light);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2rem 3rem;
+  border-radius: var(--border-radius);
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 60px var(--backdrop-color);
+  margin: auto;
+  max-height: 15rem;
+  gap: 1rem;
+  max-width: 25rem;
+  inset: 0;
+}
+.studioContainer > .modalContainer > p {
+  width: 100%;
+}
+.studioContainer > .modalContainer input {
+  width: 100%;
+}

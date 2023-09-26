@@ -1,11 +1,12 @@
+/* global.scss */
 .active {
   position: relative;
 }
 .active * {
-  color: #244EFF !important;
+  color: var(--color-primary) !important;
 }
 .active label {
-  color: #244EFF !important;
+  color: var(--color-primary) !important;
   display: block !important;
 }
 
@@ -32,7 +33,7 @@
   height: 2rem !important;
 }
 .tabMenu li * {
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 .tabMenu li > a {
   display: flex;
@@ -56,14 +57,14 @@
   position: relative;
 }
 .event :hover span {
-  color: #0F1E4C;
+  color: var(--color-darker-accent);
 }
 .event svg {
   font-size: 1rem;
 }
 .event span {
   font-weight: 600;
-  color: #0F1E4C;
+  color: var(--color-darker-accent);
   text-align: center;
   right: 0;
   left: 0;
@@ -81,13 +82,13 @@
     position: fixed;
     flex-direction: row;
     z-index: 2;
-    background: #fff;
+    background: var(--pure-light);
     bottom: 0;
     width: 100%;
     margin-bottom: 0;
     padding-bottom: 2rem;
     padding-top: 1rem;
-    border-radius: 5px 5px 0 0;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
   }
   .tabMenu li {
     font-size: 0.8rem;

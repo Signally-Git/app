@@ -17,6 +17,7 @@ export default function DefineSocials({ setList }) {
 
     const [socials, setSocials] = useState([{ url: "", name: "" }]);
     const [select, setSelect] = useState(0);
+    const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
     const [uploadedMedia, setUploadedMedia] = useState(null);
     const [preview, setPreview] = useState(null);
@@ -259,7 +260,14 @@ export default function DefineSocials({ setList }) {
                     />
                     <UploadFile
                         file={uploadedMedia}
-                        setFile={setUploadedMedia}
+                        setFile={(e) => {
+                            setUploadedMedia(e);
+                            setOpen(true);
+                        }}
+                        removeFile={() => {
+                            setUploadedMedia(null);
+                            setPreview(null);
+                        }}
                         style={{
                             width: "15rem",
                             paddingLeft: 0,

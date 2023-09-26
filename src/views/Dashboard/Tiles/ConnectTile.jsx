@@ -2,16 +2,17 @@ import { Tile } from "./Tile";
 import { FcGoogle } from "react-icons/fc";
 import { MdCloudSync } from "react-icons/md";
 import Outlook from "assets/icons/outlook.svg";
-import { request } from "utils";
+import { request, TokenService } from "utils";
 import { useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
 export const ConnectTile = ({ organisation }) => {
     const [connectionStatus, setConnectionStatus] = useState(null);
     const [importStatus, setImportStatus] = useState(null);
+    const user = TokenService.getUser();
     const intl = useIntl();
 
-    const importUsers = async () => {
+    const importUsersGoogle = async () => {
         setImportStatus(<FormattedMessage id="import.pending" />);
         await request
             .get("/google/importusers")
@@ -63,6 +64,20 @@ export const ConnectTile = ({ organisation }) => {
             });
     };
 
+    // @todo
+
+    const importUsersAzure = async () => {
+        const clientId = "1397c450-2566-4dfc-a9ad-d1a1993cc7ca";
+        const tenantId = "ca4cbc6c-6216-4581-86d6-75f4951fbe7a";
+        const windowFeatures = "left=100,top=100,width=600,height=600";
+
+        window.open(
+            `https://login.microsoftonline.com/${organisation?.tenantId}/oauth2/v2.0/authorize?client_id=${process.env.REACT_APP_AZURE_CLIENT_ID}&response_type=code&redirect_uri=${process.env.REACT_APP_API_URL}/azure/importusers&state=${user.email}&response_mode=query&scope=User.Read.All`,
+            "mozillaWindow",
+            windowFeatures
+        );
+    };
+
     if (organisation?.google === true) {
         !connectionStatus && fetchGoogleStatus();
         return (
@@ -81,7 +96,7 @@ export const ConnectTile = ({ organisation }) => {
                                 title={intl.formatMessage({
                                     id: "import.title",
                                 })}
-                                onClick={importUsers}
+                                onClick={importUsersGoogle}
                             >
                                 <MdCloudSync
                                     style={{ verticalAlign: "bottom" }}
@@ -115,6 +130,24 @@ export const ConnectTile = ({ organisation }) => {
                     <>
                         <img alt="Microsoft Outlook" src={Outlook} /> Outlook{" "}
                         <span></span>
+                        {importStatus || (
+                            <button
+                                style={{
+                                    cursor: "pointer",
+                                    border: "none",
+                                    background: "none",
+                                }}
+                                title={intl.formatMessage({
+                                    id: "import.title",
+                                })}
+                                onClick={importUsersAzure}
+                            >
+                                <MdCloudSync
+                                    style={{ verticalAlign: "bottom" }}
+                                    fontSize={"1.5rem"}
+                                />
+                            </button>
+                        )}
                     </>
                 }
                 leftCorner={

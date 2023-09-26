@@ -1,7 +1,7 @@
 import classes from "../AuthHomePage.module.css";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Input, Button } from "components";
-import { FiEye, FiEyeOff } from "react-icons/fi";
+import { PiEyeDuotone, PiEyeClosedDuotone } from "react-icons/pi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import React, { useEffect, useRef, useState } from "react";
 import { TokenService, validateEmail } from "utils";
@@ -111,7 +111,7 @@ export const SignIn = () => {
 
     return (
         <>
-            <ForgottenPassword isOpen={modal} />
+            <ForgottenPassword isOpen={modal} setIsOpen={setModal} />
             <div className={classes.slider}>
                 <div
                     ref={slider}
@@ -166,7 +166,7 @@ export const SignIn = () => {
                                 </Button>
                                 <Button
                                     width={"50%"}
-                                    color="link-primary"
+                                    color="primaryLink"
                                     onClick={(e) => {
                                         e.preventDefault();
                                         history.push("sign-up");
@@ -196,6 +196,18 @@ export const SignIn = () => {
                                     >
                                         {error.content}
                                     </span>
+                                    <div
+                                        className={classes.showPassword}
+                                        onClick={() =>
+                                            setShowPass(!showPassword)
+                                        }
+                                    >
+                                        {showPassword ? (
+                                            <PiEyeDuotone />
+                                        ) : (
+                                            <PiEyeClosedDuotone />
+                                        )}
+                                    </div>
                                     <Input
                                         autoFocus={false}
                                         autoCorrect="off"
@@ -204,6 +216,7 @@ export const SignIn = () => {
                                         autoComplete="current-password"
                                         defaultValue={code}
                                         ref={toFocus}
+                                        style={{ paddingLeft: "4rem" }}
                                         placeholder={intl.formatMessage({
                                             id: "password",
                                         })}
@@ -214,19 +227,6 @@ export const SignIn = () => {
                                             setCode(e.target.value)
                                         }
                                     />
-
-                                    <div
-                                        className={classes.showPassword}
-                                        onClick={() =>
-                                            setShowPass(!showPassword)
-                                        }
-                                    >
-                                        {showPassword ? (
-                                            <FiEyeOff />
-                                        ) : (
-                                            <FiEye />
-                                        )}
-                                    </div>
                                 </div>
                             </div>
                             <span

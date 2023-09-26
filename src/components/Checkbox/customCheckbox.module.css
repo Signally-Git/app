@@ -1,9 +1,11 @@
+/* global.scss */
 .switch {
-  transform: scale(0.6) translateX(30%);
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  vertical-align: bottom;
+  width: 30px;
+  min-width: 30px;
+  height: 17px;
 }
 .switch * {
   -webkit-tap-highlight-color: transparent;
@@ -22,10 +24,7 @@
 .slider {
   position: absolute;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background-color: #ccc;
   -webkit-transition: 0.4s;
   transition: 0.4s;
@@ -34,31 +33,31 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: var(--pure-light);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #244EFF;
+  background-color: var(--color-primary);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #244EFF;
+  box-shadow: 0 0 1px var(--color-primary);
 }
 
 input:checked + .slider:before {
-  transform: translateX(26px);
+  transform: translateX(13px);
 }
 
 .slider.round {
-  border-radius: 34px;
+  border-radius: var(--huge-radius);
 }
 
 .slider.round:before {
-  border-radius: 20px;
+  border-radius: var(--huge-radius);
 }

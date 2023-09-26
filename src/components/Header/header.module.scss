@@ -73,7 +73,7 @@
             &:hover {
                 border-color: $color-primary;
                 background: $color-primary;
-                color: #fff;
+                color: $pureLight;
             }
         }
         &:hover {
@@ -86,7 +86,7 @@
 }
 
 // .beta {
-//     color: #fff;
+//     color: $pureLight;
 //     background: $color-dark-accent;
 //     border: 1px solid $color-dark-accent;
 //     font-weight: bold;
@@ -109,7 +109,7 @@
         height: 15px;
         text-align: center;
         background-color: $color-primary;
-        color: #fff;
+        color: $pureLight;
         padding: 2px;
         font-size: 0.8rem;
         right: -9px;
@@ -139,7 +139,7 @@
         border: 1px solid $color-primary;
         color: $color-primary;
         &:hover {
-            color: #fff;
+            color: $pureLight;
             background: $color-primary;
         }
     }
@@ -147,7 +147,7 @@
         border: 1px solid $color-primary;
         color: $color-primary;
         &:hover {
-            color: #fff;
+            color: $pureLight;
             background: $color-primary;
             border-color: $color-primary;
         }
@@ -175,7 +175,7 @@
     position: relative;
     input {
         border: none;
-        background: #fff;
+        background: $pureLight;
         outline: none;
         border-radius: 25px;
         padding: 1rem;
@@ -205,7 +205,7 @@
     width: 25px;
     line-height: 25px;
     height: 25px;
-    color: #fff;
+    color: $pureLight;
     font-size: 26px;
     border-radius: $hugeRadius;
     margin: 0;
@@ -351,10 +351,10 @@
         flex-direction: column;
         &:hover {
             border-color: $color-dark-accent;
-            color: #fff;
+            color: $pureLight;
             background-color: $color-dark-accent;
             button {
-                color: #fff;
+                color: $pureLight;
             }
         }
     }
@@ -421,7 +421,7 @@
         margin-left: 0;
         width: 100%;
         border-radius: 0px;
-        background: rgba($color: #fff, $alpha: 0.5);
+        background: rgba($color: $pureLight, $alpha: 0.5);
         backdrop-filter: blur(5px);
     }
 }

@@ -411,7 +411,7 @@ const Signup = () => {
                             </Button>
                             <Button
                                 width={"30%"}
-                                color="link-primary"
+                                color="primaryLink"
                                 onClick={(e) => {
                                     e.preventDefault();
                                     history.push("/");

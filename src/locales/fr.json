@@ -88,11 +88,20 @@
     "email": "Email",
 
     "signature": {
+        "studio": "Personnalisez votre signature",
         "title": "Signature",
         "number": "{count, plural, =0 {Aucune signature} one {# signature} other {# signatures}}",
         "options": {
             "spacing": "Espacement",
             "background_color": "Couleur de fond"
+        },
+        "infos": {
+            "logo": "Vous pouvez changer votre {value} {link}.",
+            "here": "ici"
+        },
+        "ratio": {
+            "unlock": "Déverrouiller ratio",
+            "lock": "Verrouiller ratio"
         },
         "default_greetings": "Cordialement,",
         "choose": "Choisissez une signature",
@@ -125,6 +134,7 @@
             "title": "Informations du profil",
             "custom_labels": "Personnalisation des libellés",
             "google_email_address": "Adresse mail de l'administrateur Google",
+            "tenant_id": "ID du tenant Azure",
             "lang": "Langue"
         }
     },
@@ -277,7 +287,19 @@
             "manual": "Manuellement",
             "from_csv": "A partir d'un fichier .csv",
             "import": {
+                "profile_picture": "Photo de profil",
+                "profile_picture_link": "Lien de photo de profil",
+                "replace_profile_picture": "Remplacer photo de profil",
                 "logo": "Importer un logo",
+                "crop": {
+                    "title": "Recadrer l'image",
+                    "rotate": "Rotation",
+                    "flip_h": "Retourner horizontalement",
+                    "flip_v": "Retourner verticalement",
+                    "free": "Libre",
+                    "crop": "Recadrer",
+                    "close": "Fermer"
+                },
                 "image": "Importer une image",
                 "banner": "Importer une bannière",
                 "other_banner": "Importer une autre bannière"

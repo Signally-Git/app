@@ -1,16 +1,17 @@
 import classes from "../create/createSignature.module.css";
-import { useRef, useState, useEffect, useMemo } from "react";
+import { useRef, useState, useEffect } from "react";
 import Options from "../create/Options/options";
 import Infos from "../create/Infos/infos";
 import TemplateSelection from "../create/TemplateSelect/templateSelect";
-import Preview from "../create/Preview/customizablePreview";
+import Preview from "../create/Preview/creationCompile";
 import { BsArrowRight } from "react-icons/bs";
 import { Button, Input } from "components";
 import { useHistory, useParams } from "react-router-dom";
 import { TokenService, useNotification, request, getEvents } from "utils";
-import { useDefaultOptions, getStyles } from "../create/createSignature.utils";
+import { getStyles } from "../create/createSignature.utils";
 import { FormattedMessage, useIntl } from "react-intl";
-import { extractStyle, extractValue } from "./editSignature.utils";
+import { extractStyle, extractValue, handleSave } from "./editSignature.utils";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 // Component handling the modification of signature, selection of template
 
@@ -19,8 +20,8 @@ function EditSignatureComponent() {
     const user = TokenService.getUser();
     const company = TokenService.getOrganisation();
     const [loading, setLoading] = useState(false);
-    const [selectedTemplate, setSelectedTemplate] = useState();
-    const [defaultStyles, setDefaultStyles] = useState();
+    const [selectedTemplate, setSelectedTemplate] = useState(null);
+    const [defaultStyles, setDefaultStyles] = useState(null);
     const history = useHistory();
     const notification = useNotification();
     const [preview, setPreview] = useState("");
@@ -29,8 +30,8 @@ function EditSignatureComponent() {
     // Used to handle transition
     const elem = useRef(null);
     const [templates, setTemplates] = useState(false);
-    const [signatureInfo, setSignatureInfo] = useState();
-    const [signatureOption, setSignatureOption] = useState(useDefaultOptions());
+    const [signatureInfo, setSignatureInfo] = useState(null);
+    const [signatureOption, setSignatureOption] = useState(null);
     const [modal, setModal] = useState(false);
     const [modalContent, setModalContent] = useState();
     const [signatureName, setSignatureName] = useState("");
@@ -99,7 +100,13 @@ function EditSignatureComponent() {
                     )[0]?.value !== "false",
                 padding: styles?.filter(
                     (style) => style.type === "greetingsPadding"
-                )[0].value,
+                )[0]?.value,
+                fontSize: styles?.filter(
+                    (style) => style.type === "greetingsFontSize"
+                )[0]?.value,
+                color: styles?.filter(
+                    (style) => style.type === "greetingsColor"
+                )[0]?.value,
             },
             custom: { enabled: false },
             eco: { value: "Ecoresponsability", enabled: false },
@@ -119,8 +126,8 @@ function EditSignatureComponent() {
                     )?.[0]?.value !== "false",
             },
             event: {
-                ...signatureOption.event,
-                display: signatureOption.event?.selected?.imageUrl,
+                ...signatureOption?.event,
+                display: signatureOption?.event?.selected?.imageUrl,
                 enabled:
                     styles?.filter((style) => style.type === "event")[0]
                         .value !== "false",
@@ -170,35 +177,37 @@ function EditSignatureComponent() {
             await request
                 .get("signatures/" + signatureId)
                 .then(async ({ data }) => {
-                    handlePopulate(data.signatureStyles);
                     setSelectedTemplate(data.signatureTemplate);
                     setDefaultStyles(data.signatureStyles);
                     setSignatureName(data.name);
                 });
         };
         setLoading(true);
-        getSignatureFromId().then(() => setLoading(false));
+        getSignatureFromId().then(() => {
+            setLoading(false);
+        });
     }, []);
 
     const [templateRules] = useState({
         fontSize: { min: 9, max: 13, step: 1 },
     });
 
-    // useEffect(() => {
-    //     if (defaultStyles) handlePopulate();
-    // }, [defaultStyles, selectedTemplate]);
+    useEffect(() => {
+        handlePopulate(defaultStyles);
+    }, [defaultStyles]);
 
     // AppMenu
     const [tab, setTab] = useState(true);
 
     useEffect(() => {
         const fetchEvents = async () => {
+            console.log(company);
             const eventAPI = await getEvents(company.id);
             setSignatureOption(
                 {
                     ...signatureOption,
                     event: {
-                        ...signatureOption.event,
+                        ...signatureOption?.event,
                         selected: eventAPI[0],
                         list: eventAPI,
                     },
@@ -220,12 +229,12 @@ function EditSignatureComponent() {
                                     setModal(false);
                                     handleSave(
                                         signatureName,
-                                        selectedTemplate,
-                                        company,
+                                        signatureId,
                                         signatureInfo,
                                         signatureOption,
-                                        history,
-                                        notification
+                                        selectedTemplate,
+                                        notification,
+                                        history
                                     );
                                 }}
                                 className={classes.slide}
@@ -271,474 +280,6 @@ function EditSignatureComponent() {
         setModalContent(handleModal(modal));
     }, [modal, signatureName]);
 
-    const handleSave = async () => {
-        await request
-            .patch(
-                `signatures/` + signatureId,
-                {
-                    name: signatureName,
-                    signatureTemplate: selectedTemplate["@id"],
-                },
-                {
-                    headers: { "Content-Type": "application/merge-patch+json" },
-                }
-            )
-            .then(async (result) => {
-                notification({
-                    content: (
-                        <>
-                            <FormattedMessage id="message.success.signature.edit_part1" />
-                            <span style={{ color: "#FF7954" }}>
-                                {" "}
-                                {signatureName}{" "}
-                            </span>
-                            <FormattedMessage id="message.success.signature.edit_part2" />
-                        </>
-                    ),
-                    status: "valid",
-                });
-                const styles = [
-                    // COLOR FOR EACH TXT
-                    {
-                        property: "color",
-                        value: signatureInfo.firstName.color,
-                        type: "firstName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "color",
-                        value: signatureInfo.lastName.color,
-                        type: "lastName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "color",
-                        value: signatureInfo.jobName.color,
-                        type: "jobName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "color",
-                        value: signatureInfo.company.color,
-                        type: "companyName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "color",
-                        value: signatureInfo.mobile.color,
-                        type: "mobile",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "color",
-                        value: signatureInfo.addressStreet.color,
-                        type: "addressStreet",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "color",
-                        value: signatureInfo.addressInfo.color,
-                        type: "addressInfo",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "color",
-                        value: signatureInfo.addressZipcode.color,
-                        type: "addressZipcode",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "color",
-                        value: signatureInfo.addressCity.color,
-                        type: "addressCity",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "color",
-                        value: signatureInfo.addressCountry.color,
-                        type: "addressCountry",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "color",
-                        value: signatureInfo.phone.color,
-                        type: "phone",
-                        signature: result.data.id,
-                    },
-                    // FONT WEIGHT FOR EACH TXT
-                    {
-                        property: "fontWeight",
-                        value:
-                            signatureInfo.firstName.style.fontWeight ||
-                            "normal",
-                        type: "firstName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontWeight",
-                        value:
-                            signatureInfo.lastName.style.fontWeight || "normal",
-                        type: "lastName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontWeight",
-                        value:
-                            signatureInfo.jobName.style.fontWeight || "normal",
-                        type: "jobName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontWeight",
-                        value:
-                            signatureInfo.company.style.fontWeight || "normal",
-                        type: "companyName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontWeight",
-                        value:
-                            signatureInfo.mobile.style.fontWeight || "normal",
-                        type: "mobile",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontWeight",
-                        value:
-                            signatureInfo.addressStreet.style.fontWeight ||
-                            "normal",
-                        type: "addressStreet",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontWeight",
-                        value:
-                            signatureInfo.addressInfo.style.fontWeight ||
-                            "normal",
-                        type: "addressInfo",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontWeight",
-                        value:
-                            signatureInfo.addressZipcode.style.fontWeight ||
-                            "normal",
-                        type: "addressZipcode",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontWeight",
-                        value:
-                            signatureInfo.addressCity.style.fontWeight ||
-                            "normal",
-                        type: "addressCity",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontWeight",
-                        value:
-                            signatureInfo.addressCountry.style.fontWeight ||
-                            "normal",
-                        type: "addressCountry",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontWeight",
-                        value: signatureInfo.phone.style.fontWeight || "normal",
-                        type: "phone",
-                        signature: result.data.id,
-                    },
-                    // TEXT DECORATION FOR EACH TXT
-                    {
-                        property: "textDecoration",
-                        value:
-                            signatureInfo.firstName.style.textDecoration ||
-                            "none",
-                        type: "firstName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "textDecoration",
-                        value:
-                            signatureInfo.lastName.style.textDecoration ||
-                            "none",
-                        type: "lastName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "textDecoration",
-                        value:
-                            signatureInfo.jobName.style.textDecoration ||
-                            "none",
-                        type: "jobName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "textDecoration",
-                        value:
-                            signatureInfo.company.style.textDecoration ||
-                            "none",
-                        type: "companyName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "textDecoration",
-                        value:
-                            signatureInfo.mobile.style.textDecoration || "none",
-                        type: "mobile",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "textDecoration",
-                        value:
-                            signatureInfo.addressStreet.style.textDecoration ||
-                            "none",
-                        type: "addressStreet",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "textDecoration",
-                        value:
-                            signatureInfo.addressInfo.style.textDecoration ||
-                            "none",
-                        type: "addressInfo",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "textDecoration",
-                        value:
-                            signatureInfo.addressZipcode.style.textDecoration ||
-                            "none",
-                        type: "addressZipcode",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "textDecoration",
-                        value:
-                            signatureInfo.addressCity.style.textDecoration ||
-                            "none",
-                        type: "addressCity",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "textDecoration",
-                        value:
-                            signatureInfo.addressCountry.style.textDecoration ||
-                            "none",
-                        type: "addressCountry",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "textDecoration",
-                        value:
-                            signatureInfo.phone.style.textDecoration || "none",
-                        type: "phone",
-                        signature: result.data.id,
-                    },
-                    // FONT STYLE FOR EACH TXT
-                    {
-                        property: "fontStyle",
-                        value:
-                            signatureInfo.firstName.style.fontStyle || "normal",
-                        type: "firstName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontStyle",
-                        value:
-                            signatureInfo.lastName.style.fontStyle || "normal",
-                        type: "lastName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontStyle",
-                        value:
-                            signatureInfo.jobName.style.fontStyle || "normal",
-                        type: "jobName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontStyle",
-                        value: signatureInfo.company.style.fontStyle || "none",
-                        type: "companyName",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontStyle",
-                        value: signatureInfo.mobile.style.fontStyle || "normal",
-                        type: "mobile",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontStyle",
-                        value:
-                            signatureInfo.addressStreet.style.fontStyle ||
-                            "normal",
-                        type: "addressStreet",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontStyle",
-                        value:
-                            signatureInfo.addressInfo.style.fontStyle ||
-                            "normal",
-                        type: "addressInfo",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontStyle",
-                        value:
-                            signatureInfo.addressZipcode.style.fontStyle ||
-                            "normal",
-                        type: "addressZipcode",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontStyle",
-                        value:
-                            signatureInfo.addressCity.style.fontStyle ||
-                            "normal",
-                        type: "addressCity",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontStyle",
-                        value:
-                            signatureInfo.addressCountry.style.fontStyle ||
-                            "normal",
-                        type: "addressCountry",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontStyle",
-                        value: signatureInfo.phone.style.fontStyle || "normal",
-                        type: "phone",
-                        signature: result.data.id,
-                    },
-                    // FONT GENERAL STYLE
-                    {
-                        property: "fontFamily",
-                        value: signatureInfo.fontFamily,
-                        type: "generalFontFamily",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "fontSize",
-                        value: signatureInfo.fontSize[0]?.toString(),
-                        type: "generalFontSize",
-                        signature: result.data.id,
-                    },
-                    // DIV COLOR,
-                    {
-                        property: "color",
-                        value: signatureOption.bgColor,
-                        type: "divColor",
-                        signature: result.data.id,
-                    },
-                    // Greetings
-                    {
-                        property: "enabled",
-                        value:
-                            signatureOption.salutation.enabled?.toString() ||
-                            "false",
-                        type: "greetingsEnabled",
-                        signature: result?.data?.id,
-                    },
-                    {
-                        property: "value",
-                        value: signatureOption.salutation.value,
-                        type: "greetingsValue",
-                        signature: result?.data?.id,
-                    },
-                    {
-                        property: "padding",
-                        value:
-                            signatureOption.salutation.padding?.toString() ||
-                            "12",
-                        type: "greetingsPadding",
-                        signature: result?.data?.id,
-                    },
-                    // vCard
-                    {
-                        property: "enabled",
-                        value:
-                            signatureOption.vcard.enabled?.toString() || false,
-                        type: "vCardEnabled",
-                        signature: result?.data?.id,
-                    },
-                    // Calendar
-                    {
-                        property: "enabled",
-                        value:
-                            signatureOption.calendar.enabled?.toString() ||
-                            false,
-                        type: "calendarEnabled",
-                        signature: result?.data?.id,
-                    },
-                    // Event
-                    {
-                        property: "enabled",
-                        value:
-                            signatureOption.event.enabled?.toString() ||
-                            "false",
-                        type: "event",
-                        signature: result.data.id,
-                    },
-                    {
-                        property: "padding",
-                        value:
-                            signatureOption.event.padding?.toString() || "12",
-                        type: "eventPadding",
-                        signature: result.data.id,
-                    },
-                    // Disclaimer
-                    {
-                        property: "enabled",
-                        value:
-                            signatureOption.footer.enabled?.toString() ||
-                            "false",
-                        type: "disclaimerEnabled",
-                        signature: result?.data?.id,
-                    },
-                    {
-                        property: "value",
-                        value: signatureOption.footer.value,
-                        type: "disclaimerValue",
-                        signature: result?.data?.id,
-                    },
-                    {
-                        property: "color",
-                        value: signatureOption.footer.color,
-                        type: "disclaimerColor",
-                        signature: result?.data?.id,
-                    },
-                    {
-                        property: "fontSize",
-                        value:
-                            signatureOption.footer.fontSize?.toString() || "7",
-                        type: "disclaimerFontSize",
-                        signature: result?.data?.id,
-                    },
-                    {
-                        property: "padding",
-                        value:
-                            signatureOption.footer.padding?.toString() || "12",
-                        type: "disclaimerPadding",
-                        signature: result?.data?.id,
-                    },
-                ];
-                request.post("signature_styles/batch", styles);
-
-                history.push("/signatures");
-            })
-            .catch(() => {
-                notification({
-                    content: <FormattedMessage id="message.error.generic" />,
-                    status: "invalid",
-                });
-            });
-    };
-
     useEffect(() => {
         showTemplates(false);
     }, [selectedTemplate]);
@@ -775,12 +316,15 @@ function EditSignatureComponent() {
         }
     };
 
-    useMemo(() => {
-        if (loading) setPreview(<h3>Loading</h3>);
+    useEffect(() => {
+        if (loading)
+            setPreview(
+                <AiOutlineLoading3Quarters className={classes.loading} />
+            );
         if (signatureInfo && signatureOption && selectedTemplate?.html) {
             setPreview(
                 <Preview
-                    twig={selectedTemplate?.html}
+                    id={selectedTemplate?.id}
                     styles={getStyles(
                         signatureInfo,
                         signatureOption,

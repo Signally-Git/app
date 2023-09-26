@@ -1,10 +1,11 @@
+/* global.scss */
 .container {
-  background: #fff;
-  box-shadow: 0 0 40px rgba(27, 51, 94, 0.3);
+  background: var(--pure-light);
+  box-shadow: 0 0 40px rgba(var(--color-dark-accent), 0.3);
   width: 60%;
   max-height: 15rem;
   max-width: 30rem;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   position: absolute;
   padding: 1rem;
   inset: 0;

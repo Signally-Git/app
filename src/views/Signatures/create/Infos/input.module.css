@@ -1,3 +1,4 @@
+/* global.scss */
 .container {
   width: 100%;
   position: relative;
@@ -22,8 +23,8 @@
   -moz-box-sizing: border-box;
   border: none;
   outline: none;
-  background: #fff;
-  border: 1px solid #ff7954;
+  background: var(--pure-light);
+  border: 1px solid var(--color-primary);
   border-radius: 5px;
   padding: 1rem;
   width: 50%;
@@ -31,7 +32,7 @@
   margin: 2rem auto;
 }
 .select::placeholder {
-  color: #a87069;
+  color: var(--color-dark-accent);
 }
 .select select:focus {
   box-shadow: none;
@@ -44,8 +45,8 @@
 }
 
 .colorPreview {
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.356);
-  border-radius: 20px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.356);
+  border-radius: var(--huge-radius);
   margin: 0.2rem;
   width: 20px;
   height: 20px;
@@ -64,8 +65,8 @@
 }
 
 .optionsContainer {
-  background: #fff;
-  border-radius: 0 0 5px 5px;
+  background: var(--pure-light);
+  border-radius: 0 0 var(--small-border-radius) var(--small-border-radius);
 }
 
 .optionContainer {
@@ -89,17 +90,17 @@
 
 .container input {
   transition: 0.2s;
-  background: #fff;
+  background: var(--pure-light);
   border: 1px solid #f6f6f6;
   padding: 1rem 5rem 1rem 1rem !important;
   text-overflow: ellipsis;
-  border-radius: 5px;
+  border-radius: var(--small-border-radius);
   margin: 0.5rem 0;
   font-family: "Montserrat";
   outline: none;
 }
 .container input:focus {
-  border: 1px solid #ff7954;
+  border: 1px solid var(--color-primary);
   box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.28);
 }
 
@@ -109,9 +110,9 @@
   min-width: 10vw;
   padding: 0.5rem;
   height: 12rem;
-  background: #fff;
+  background: var(--pure-light);
   box-shadow: 0px 12px 40px rgba(230, 208, 201, 0.8);
-  border-radius: 5px;
+  border-radius: var(--small-border-radius);
   justify-content: center;
   align-items: center;
   top: 0;
@@ -132,7 +133,7 @@
 }
 
 .colorPreview {
-  border-radius: 20px;
+  border-radius: var(--huge-radius);
   width: 20px;
   height: 20px;
 }
@@ -154,7 +155,7 @@
 }
 
 .opened svg {
-  color: #244EFF !important;
+  color: var(--color-primary) !important;
 }
 
 .textStyle {
@@ -167,8 +168,8 @@
   height: 2rem;
   width: 70%;
   margin: 0;
-  background-color: #fff;
-  border-radius: 10px;
+  background-color: var(--pure-light);
+  border-radius: var(--medium-border-radius);
   box-shadow: 0 2px 20px rgba(177, 176, 175, 0.8);
 }
 .textStyle li {
@@ -183,13 +184,13 @@
 .textStyle li:nth-child(2) {
   border-left: 1px solid;
   border-right: 1px solid;
-  border-image: linear-gradient(to top, #fff 30%, rgba(61, 43, 40, 0.0823529412) 30%, rgba(61, 43, 40, 0.0823529412) 70%, #fff 70%) 1;
+  border-image: linear-gradient(to top, var(--pure-light) 30%, rgba(61, 43, 40, 0.0823529412) 30%, rgba(61, 43, 40, 0.0823529412) 70%, var(--pure-light) 70%) 1;
 }
 .textStyle li .inputOptions svg {
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 .textStyle li:hover span {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 .textStyle li:last-child {
   max-width: 2rem;
@@ -198,14 +199,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--pure-light);
   padding: 0;
-  border-radius: 20px;
+  border-radius: var(--huge-radius);
   width: 1rem;
   height: 1rem;
   font-size: 0.65rem;
   margin: 0;
-  background-color: #244EFF;
+  background-color: var(--color-primary);
 }
 .textStyle li span {
   width: 100%;
@@ -227,5 +228,5 @@
   height: 100%;
 }
 .textStyle li input:checked ~ span {
-  color: #ff7954;
+  color: var(--color-primary);
 }

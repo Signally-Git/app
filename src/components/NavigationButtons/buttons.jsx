@@ -14,7 +14,7 @@ function NavigationButtons({
         <div className={classes.container} {...props}>
             <Button
                 loading={loading}
-                color={"primary"}
+                color={"primaryFill"}
                 onClick={(e) => onConfirm(e)}
                 type="submit"
             >
@@ -22,7 +22,7 @@ function NavigationButtons({
                     <FormattedMessage id="buttons.placeholder.save" />
                 )}
             </Button>
-            <Button color={"secondary"} onClick={(e) => onCancel(e)}>
+            <Button color={"primary"} onClick={(e) => onCancel(e)}>
                 {cancelTxt || (
                     <FormattedMessage id="buttons.placeholder.cancel" />
                 )}

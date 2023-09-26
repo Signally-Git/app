@@ -48,7 +48,7 @@
     padding: 1rem 1rem;
     border-radius: $smallBorderRadius;
     margin: 0.5rem 0;
-    background: #fff;
+    background: $pureLight;
     box-shadow: 0 20px 20px rgba(206, 142, 124, 0.15);
     &:first-of-type {
         background-color: $color-primary;
@@ -56,14 +56,14 @@
         p,
         svg,
         svg path {
-            color: #fff !important;
+            color: $pureLight !important;
         }
     }
     &:nth-of-type(2) {
         background-color: $color-secondary;
         span,
         p {
-            color: #fff;
+            color: $pureLight;
         }
     }
     p,
@@ -102,7 +102,7 @@
         color: #00ca4e;
     }
     .notConnected svg * {
-        color: #ff7954;
+        color: #ff5d24;
     }
     svg {
         animation: flash infinite ease 2s;
@@ -141,7 +141,7 @@
         }
     }
     * {
-        color: #ffffff !important;
+        color: $pureLight !important;
     }
     background-color: $color-thirdary !important;
 }
@@ -233,7 +233,7 @@
 .billingTile {
     background: $color-dark-accent !important;
     * {
-        color: #fff;
+        color: $pureLight;
     }
 }
 

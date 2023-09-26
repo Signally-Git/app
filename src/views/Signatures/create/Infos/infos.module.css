@@ -1,8 +1,9 @@
+/* global.scss */
 .infosContainer {
   width: 100%;
 }
 .infosContainer h4 {
-  color: #1B335E;
+  color: var(--color-dark-accent);
   font-weight: bold;
   font-size: 1rem;
   text-align: left;
@@ -23,12 +24,12 @@
   flex-wrap: wrap;
 }
 .inputsFlex input {
-  background-color: #F3F7FB;
+  background-color: var(--color-light-accent-variation2);
   padding: 0.5rem 0.75rem;
   font-size: 0.9rem;
 }
 .inputsFlex input::placeholder {
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 .inputsFlex .inputContainer {
   width: 48%;
@@ -52,18 +53,18 @@
   width: 100%;
   background-color: #F1ECEA;
   margin: 0;
-  border-radius: 20px;
+  border-radius: var(--huge-radius);
 }
 
 .rangeThumb {
   transition: 0.2s;
   height: 25px;
   width: 25px;
-  background-color: #244EFF;
-  border: 3px solid #FFF;
+  background-color: var(--color-primary);
+  border: 3px solid var(--pure-light);
   border-radius: 50%;
   outline: none;
-  box-shadow: 1px 1px 3px #5c74b2;
+  box-shadow: 1px 1px 3px var(--color-primary-variant);
 }
 
 .fileUpload {
@@ -73,9 +74,9 @@
   position: relative;
   flex-direction: column;
   width: 100%;
-  background: #fff;
-  border-radius: 5px;
-  border: 1px solid #F4F7FC;
+  background: var(--pure-light);
+  border-radius: var(--small-border-radius);
+  border: 1px solid var(--color-lighter-accent);
 }
 .fileUpload div {
   display: flex;
@@ -115,8 +116,8 @@
   padding: 1rem 2rem;
   margin-right: 1rem;
   background: transparent;
-  color: #efeef4;
-  border: 1px solid #efeef4;
+  color: var(--background-color);
+  border: 1px solid var(--background-color);
 }
 
 .inputContainer,
@@ -138,8 +139,8 @@
   content: " ";
   width: 15px;
   height: 15px;
-  background: #000;
-  border-radius: 20px;
+  background: var(--pure-dark);
+  border-radius: var(--huge-radius);
 }
 
 .select {
@@ -189,7 +190,7 @@
   align-items: center;
 }
 .styleContainer .row h6 {
-  color: #244EFF;
+  color: var(--color-primary);
   font-weight: normal;
   padding-right: 1rem;
   font-size: 1rem;
@@ -211,7 +212,7 @@
   font-size: 0.75rem;
   position: absolute;
   bottom: 1.5rem;
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 
 .selectFontContainer {
@@ -236,10 +237,10 @@
   height: 3rem;
   z-index: 1;
   border: 1px solid #f1f1f1;
-  border-radius: 5px;
+  border-radius: var(--small-border-radius);
   display: flex;
   position: relative;
-  background: #fff;
+  background: var(--pure-light);
   cursor: pointer;
 }
 
@@ -256,8 +257,8 @@
   padding: 0.5rem 0;
   border-radius: 20px 20px 0 0;
   list-style: none;
-  background-color: #fff;
-  box-shadow: 0 20px 30px #DDE5F1;
+  background-color: var(--pure-light);
+  box-shadow: 0 20px 30px var(--color-light-accent-variation);
   width: 100%;
 }
 .selectFont li {
@@ -272,7 +273,7 @@
   transition: 0.2s;
 }
 .selectFont li:nth-child(even) {
-  border: 1px solid #fff;
+  border: 1px solid var(--pure-light);
   border-right: none;
   border-left: none;
 }
@@ -282,8 +283,8 @@
 }
 .selectFont li:hover, .selectFont li:focus-within {
   transition: 0.2s;
-  color: #1B335E;
-  background-color: #ECEFF6;
+  color: var(--color-dark-accent);
+  background-color: var(--color-light-accent-variation1);
 }
 .selectFont input {
   opacity: 0;

@@ -1,0 +1,38 @@
+@import "../../assets/style/global";
+
+.container {
+  position: relative;
+}
+
+.colorPicker {
+  div[aria-label="Color"] > div {
+    width: 15px;
+    height: 15px!important;
+    cursor: move;
+  }
+  position: fixed;
+  background-color: $pureLight;
+  border-radius: $mediumBorderRadius;
+  border: 1px solid $color-light-accent;
+  padding: .5rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  input {
+    margin-top: .5rem;
+    outline: none;
+    padding: .5rem;
+    background-color: transparent;
+    border-radius: $borderRadius;
+    border: none;
+  }
+  div[aria-label="Hue"] > div {
+    cursor: ew-resize;
+    border-radius: 0!important;
+    width: 10px;
+    opacity: 1;
+    border: 1px solid rgb(255, 255, 255);
+    box-shadow: none;
+    height: 26px;
+  }
+}

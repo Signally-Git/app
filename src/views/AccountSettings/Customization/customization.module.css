@@ -1,3 +1,4 @@
+/* global.scss */
 .container {
   display: flex;
   flex-direction: column;
@@ -25,13 +26,13 @@
   margin-right: auto;
 }
 .container .inputsContainer > div:first-child > label {
-  color: #1B335E;
+  color: var(--color-dark-accent);
   font-weight: bold;
   margin-bottom: 0.5rem;
   font-size: 0.85rem;
 }
 .container .inputsContainer label {
-  color: #5c74b2;
+  color: var(--color-primary-variant);
   font-weight: 400;
   font-size: 0.8rem;
 }
@@ -49,6 +50,6 @@
   text-align: center;
 }
 .container .inputContainer :disabled {
-  color: #244EFF;
+  color: var(--color-primary);
   font-weight: bold;
 }

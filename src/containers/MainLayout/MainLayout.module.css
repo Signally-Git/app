@@ -1,3 +1,4 @@
+/* global.scss */
 .desktop {
   animation: fadeIn 0.5s forwards;
   height: 100vh;
@@ -12,10 +13,10 @@
   height: 100%;
   position: relative;
   margin: auto;
-  border-radius: 10px;
+  border-radius: var(--medium-border-radius);
   display: flex;
   flex-direction: column;
-  background-color: #f7f8fb;
+  background-color: var(--outter-background-color);
 }
 .desktop .desktopSubcontainer > div {
   flex: 1;
@@ -51,6 +52,7 @@
   margin: 0 3rem 0 auto;
   max-height: 100vh;
   min-height: 80vh;
+  width: 8rem;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -60,7 +62,7 @@
   width: 100%;
   font-size: 0.9rem;
   text-align: center;
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 .userInfos p {
   line-height: 0.5rem;
@@ -88,16 +90,16 @@
   height: 100%;
   padding: 2rem;
   padding-top: 1rem;
-  background-color: #efeef4;
+  background-color: var(--background-color);
   position: relative;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   align-content: flex-start;
   opacity: 0;
   animation: fadeIn 1s 1s forwards;
 }
 .dashboardContainer h1 {
   flex: 100%;
-  color: #1B335E;
+  color: var(--color-dark-accent);
 }
 .dashboardContainer .tilesContainer {
   width: 26vw;

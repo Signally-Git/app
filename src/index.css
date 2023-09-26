@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"); /* global.scss */
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -8,8 +8,27 @@
   box-sizing: border-box;
 }
 
+.loading {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  animation: rotate 1s infinite ease;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
 .rdtActive {
-  background-color: #244EFF !important;
+  background-color: var(--color-primary) !important;
 }
 
 .rdtPicker {
@@ -33,11 +52,11 @@
 }
 
 .rdtToday::before {
-  border-bottom-color: #244EFF !important;
+  border-bottom-color: var(--color-primary) !important;
 }
 
 .rdtCounter .rdtBtn {
-  color: #244EFF;
+  color: var(--color-primary);
 }
 
 .rdtSwitch {
@@ -46,17 +65,6 @@
 
 .rdtPicker {
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1) !important;
-}
-
-li {
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-li * {
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  outline: none;
 }
 
 a,
@@ -78,8 +86,8 @@ html {
 }
 
 body {
-  background: #f7f8fb;
-  color: #0F1E4C;
+  background: var(--outter-background-color);
+  color: var(--color-darker-accent);
   margin: 0;
   padding: 0;
   font-size: 1rem;
@@ -91,7 +99,7 @@ body {
 }
 
 .primaryBg {
-  background: #f7f8fb;
+  background: var(--outter-background-color);
 }
 
 h1,
@@ -125,7 +133,7 @@ h6 {
 }
 
 .rdrStartEdge + span {
-  border: 22px solid #244EFF;
+  border: 22px solid var(--color-primary);
   width: 44px !important;
   height: 44px !important;
   top: -50% !important;
@@ -140,13 +148,13 @@ h6 {
 }
 
 .rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span {
-  color: #fff !important;
+  color: var(--pure-light) !important;
   z-index: 2;
 }
 
 .rdrEndEdge {
-  color: #fff !important;
-  border: 1px solid #244EFF !important;
+  color: var(--pure-light) !important;
+  border: 1px solid var(--color-primary) !important;
   width: 44px !important;
   height: 44px !important;
   border-radius: 50% !important;
@@ -160,25 +168,25 @@ h6 {
 }
 
 .rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span {
-  color: #000 !important;
+  color: var(--pure-dark) !important;
 }
 
 .rdrEndEdge + span span {
-  color: #000 !important;
+  color: var(--pure-dark) !important;
 }
 
 .rdrDayStartPreview .rdrDayEndPreview {
   border-radius: 50% !important;
-  border: 1px solid #244EFF !important;
+  border: 1px solid var(--color-primary) !important;
 }
 
 .rdrInRange,
 .rdrStartEdge {
-  color: #fdf8f7 !important;
+  color: var(--color-lighter-accent) !important;
 }
 
 .rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span {
-  color: #000 !important;
+  color: var(--pure-dark) !important;
 }
 
 ::-webkit-scrollbar-track {

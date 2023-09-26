@@ -1,0 +1,73 @@
+.custom-console {
+  background-color: #222;
+  color: white;
+  padding: 0;
+  max-height: 10rem;
+  overflow-y: scroll;
+  border: 1px solid #444;
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  right: 0;
+  width: 50em;
+  max-width: 50em;
+}
+.custom-console .log {
+  color: #55a3da;
+}
+.custom-console .error {
+  color: #ff5555;
+}
+
+.custom-console {
+  display: flex;
+  flex-direction: column;
+  letter-spacing: 0.05em;
+  position: absolute;
+  z-index: 9999;
+  max-height: 5rem;
+  opacity: 0.5;
+  overflow: hidden;
+  transition: opacity 200ms;
+  border: 1px solid #ccc;
+  background-color: #2a2a2a;
+}
+.custom-console button {
+  cursor: pointer;
+}
+.custom-console .console-content {
+  position: relative;
+  line-height: 1.35;
+  width: 100%;
+  padding-right: 2em;
+  height: 100%;
+  overflow: auto;
+}
+.custom-console .console-content > ul > li {
+  padding: 0.5rem;
+  font-family: "Helvetica", serif;
+}
+.custom-console:hover {
+  opacity: 1 !important;
+}
+.custom-console .console-header {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-weight: bolder;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  padding: 10px;
+  background-color: #4b4b4b;
+  cursor: grab;
+}
+.custom-console .console-header:active {
+  cursor: grabbing;
+}
+.custom-console .fixed {
+  cursor: default;
+}
+.custom-console .fixed:active {
+  cursor: not-allowed;
+}

@@ -88,11 +88,20 @@
     "email": "Email",
 
     "signature": {
+        "studio": "Custom your signature",
         "title": "Signature",
         "number": "{count, plural, =0 {No signature} one {# signature} other {# signatures}}",
         "options": {
             "spacing": "Spacing",
             "background_color": "Background color"
+        },
+        "infos": {
+            "logo": "You can change your {value} {link}.",
+            "here": "here"
+        },
+        "ratio": {
+            "unlock": "Unlock ratio",
+            "lock": "Lock ratio"
         },
         "default_greetings": "Regards,",
         "choose": "Choose a signature",
@@ -124,6 +133,7 @@
                 "title": "Profile informations",
                 "custom_labels": "Custom labels",
                 "google_email_address": "Google administrator email address",
+                "tenant_id": "Azure tenant ID",
                 "lang": "Language"
             }
         },
@@ -269,7 +279,19 @@
             "manual": "Manually",
             "from_csv": "From a .csv file",
             "import": {
+                "profile_picture": "Profile picture",
+                "profile_picture_link": "Profile picture link",
+                "replace_profile_picture": "Replace profile picture",
                 "logo": "Import a logo",
+                "crop": {
+                    "title": "Image crop",
+                    "rotate": "Rotate",
+                    "flip_h": "Flip horizontally",
+                    "flip_v": "Flip vertically",
+                    "free": "Free",
+                    "crop": "Crop",
+                    "close": "Close"
+                },
                 "image": "Import an image",
                 "banner": "Import a banner",
                 "other_banner": "Import another banner"
