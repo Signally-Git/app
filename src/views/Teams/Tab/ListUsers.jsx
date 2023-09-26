@@ -181,7 +181,7 @@ function ListUsers({
                     {
                         JSON.parse(
                             localStorage.getItem("configuration")
-                        ).filter((item) => item.key === "USER_NAME")[0].value
+                        ).filter((item) => item.key === "USER_NAME")[0]?.value
                     }
                 </Button>
             </Link>
@@ -194,7 +194,7 @@ function ListUsers({
                     placeholder={`${intl.formatMessage({ id: "search" })} ${
                         JSON.parse(
                             localStorage.getItem("configuration")
-                        ).filter((item) => item.key === "USER_NAME")[0].value
+                        ).filter((item) => item.key === "USER_NAME")[0]?.value
                     }`}
                 />
             </div>
@@ -205,7 +205,7 @@ function ListUsers({
                     {
                         JSON.parse(
                             localStorage.getItem("configuration")
-                        ).filter((item) => item.key === "USER_NAME")[0].value
+                        ).filter((item) => item.key === "USER_NAME")[0]?.value
                     }
                 </span>
                 <button
