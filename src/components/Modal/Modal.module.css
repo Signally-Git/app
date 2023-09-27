@@ -1,5 +1,38 @@
 /* global.scss */
-.container {
+.btnsContainer {
+  display: flex;
+  margin-top: 1.25rem;
+  align-items: center;
+  justify-content: space-around;
+}
+.btnsContainer button {
+  position: relative;
+  margin: 0 0.75rem;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9;
+}
+.overlay form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.overlay form input[type=text] {
+  width: 70%;
+}
+.overlay > div {
   background: var(--pure-light);
   box-shadow: 0 0 40px rgba(var(--color-dark-accent), 0.3);
   width: 60%;
@@ -13,22 +46,11 @@
   margin: auto;
   display: flex;
   flex-direction: column;
-  left: -100%;
   top: -25%;
   align-items: center;
   justify-content: space-evenly;
 }
-.container h3 {
+.overlay > div h3 {
   margin: 0;
   text-align: center;
-}
-
-.btnsContainer {
-  display: flex;
-  width: 70%;
-  justify-content: space-around;
-}
-.btnsContainer button {
-  position: relative;
-  margin: 0 0.75rem;
 }
