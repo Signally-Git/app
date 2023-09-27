@@ -345,9 +345,9 @@ function Events() {
                 ) : (
                     ""
                 )}
+                {modal && modalContent}
                 {preview ? (
                     <div className={classes.flipcontainer}>
-                        {modal ? modalContent : ""}
                         <div
                             className={`${classes.flipper} ${
                                 edit ? classes.flip : ""
