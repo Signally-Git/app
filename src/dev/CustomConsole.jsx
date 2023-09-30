@@ -6,8 +6,8 @@ function CustomConsole() {
     const [messages, setMessages] = useState([]);
     const [offset, setOffset] = useState({ x: 0, y: 0 });
     const isDragging = useRef(false);
-    const [position, setPosition] = useState({ x: 850, y: 400 });
-    const [isFixed, setIsFixed] = useState(false);
+    const [position, setPosition] = useState({ x: 0, y: 400 });
+    const [isFixed, setIsFixed] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
     const consoleRef = useRef();
     const lastMessageRef = useRef(null);

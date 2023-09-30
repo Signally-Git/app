@@ -1,4 +1,4 @@
-import { CustomisableInput } from "../Details/CustomisableInput";
+import { CustomisableInput } from "components";
 import DefineSocials from "views/AccountSettings/Customization/DefineSocials";
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";

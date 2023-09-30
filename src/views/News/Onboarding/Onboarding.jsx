@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "swiper/swiper.min.css";
 import classes from "./Onboarding.module.css";
 import { useHistory } from "react-router-dom";
@@ -10,6 +10,7 @@ import { Button } from "components";
 import { request } from "utils";
 import Outlook from "assets/icons/outlook.svg";
 import { FormattedMessage } from "react-intl";
+import { ThemeContext } from "contexts/ThemeProvider";
 
 function Onboarding({ organisation, completed, setCompleted }) {
     const [swiper, setSwiper] = React.useState(null);
@@ -18,6 +19,7 @@ function Onboarding({ organisation, completed, setCompleted }) {
     const [events, setEvents] = React.useState([]);
     const [users, setUsers] = React.useState([]);
     const history = useHistory();
+    const { name } = useContext(ThemeContext);
 
     const [menu, setMenu] = React.useState([]);
 
@@ -257,7 +259,10 @@ function Onboarding({ organisation, completed, setCompleted }) {
                         {organisation.google !== true &&
                         organisation.office365 !== true ? (
                             <>
-                                <FormattedMessage id="onboarding.missing.plugins.generic" />
+                                <FormattedMessage
+                                    id="onboarding.missing.plugins.generic"
+                                    values={{ brandName: name }}
+                                />
                                 <div className={classes.btnsContainer}>
                                     <a
                                         target="_blank"
@@ -324,6 +329,7 @@ function Onboarding({ organisation, completed, setCompleted }) {
                 <FormattedMessage
                     id="onboarding.congratulations_description"
                     tagName="p"
+                    values={{ brandName: name }}
                 />
                 <Button
                     color="primary"

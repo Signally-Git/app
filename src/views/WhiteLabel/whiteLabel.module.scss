@@ -1,0 +1,153 @@
+@import "../../assets/style/global";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .header {
+        display: flex;
+        align-items: center;
+    }
+
+    .fullContainer {
+        background-color: $pureLight;
+        border-radius: $borderRadius;
+        padding: 2rem;
+        height: 80vh;
+        min-height: 80vh;
+        overflow: auto;
+
+    }
+
+    > div > svg {
+        cursor: pointer;
+        color: $pureDark;
+
+        &:hover {
+            color: $color-light-accent;
+        }
+    }
+
+    h2 {
+        display: inline-block;
+        margin-top: 0;
+        margin-bottom: .5rem;
+        font-size: 1.2rem;
+        color: $color-primary;
+        position: relative;
+
+        &::after {
+            background-color: $color-primary;
+            display: block;
+            width: 120%;
+            position: absolute;
+            left: 0;
+            content: '';
+            bottom: -.35rem;
+            height: 1px;
+        }
+    }
+}
+
+.detailsContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    margin-top: .5rem;
+
+    > div {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+        min-width: 15rem;
+    }
+
+    label {
+        font-size: .85rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-top: .5rem;
+        margin-bottom: .5rem;
+    }
+
+    input[type="text"] {
+        margin: 0;
+        padding: .65rem 1rem;
+    }
+}
+
+.colorPreview {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    text-transform: uppercase;
+
+    &::before {
+        border: 1px solid $color-primary;
+        border-radius: $borderRadius;
+        background-color: var(--bg-color);
+        content: "";
+        display: block;
+        width: 15px;
+        height: 15px;
+    }
+}
+
+.inputsContainer {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.logoCompanyDiv {
+    display: flex;
+    gap: .5rem;
+    width: 100%;
+
+    img {
+        max-width: 3rem;
+        max-height: 5rem;
+    }
+
+    align-items: center;
+
+    > div {
+        width: 100%;
+    }
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+
+    > label {
+        font-size: .85rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-top: .5rem;
+        margin-bottom: .5rem;
+    }
+}
+
+.range {
+    height: 6px;
+    width: 100%;
+    background-color: $color-light-accent;
+    margin: 1rem 0;
+    border-radius: $hugeRadius;
+}
+
+.rangeThumb {
+    transition: 0.2s;
+    height: 25px;
+    width: 25px;
+    background-color: $color-primary;
+    border: 3px solid $pureLight;
+    border-radius: 50%;
+    outline: none;
+    box-shadow: 1px 1px 3px $color-primary-variant;
+}
