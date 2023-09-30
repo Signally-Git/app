@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { getTheme, camelToKebab } from "utils";
+import { getTheme, camelToKebab, getInstance } from "utils";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const ThemeContext = createContext();
@@ -14,10 +14,11 @@ const ThemeProvider = ({ children }) => {
         const fetchThemeData = async () => {
             try {
                 const fetchedTheme = await getTheme(url);
+                const fetchInstance = await getInstance(url);
                 console.log(fetchedTheme);
                 setTheme(fetchedTheme.styles);
-                setName(fetchedTheme.name);
-                setLogo(fetchedTheme.organisation?.logoDistributor);
+                setName(fetchInstance.name);
+                setLogo(fetchInstance.organisation?.logoDistributor);
             } catch (error) {
                 console.error(
                     "Erreur lors de la récupération des couleurs :",
