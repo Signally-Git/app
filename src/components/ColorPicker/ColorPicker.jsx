@@ -36,7 +36,6 @@ const ColorPicker = ({ color, onColorChange, children }) => {
             {isPickerVisible && (
                 <div className={classes.colorPicker}>
                     <HexColorPicker
-                        alpha
                         color={color}
                         onChange={handleColorChange}
                     />

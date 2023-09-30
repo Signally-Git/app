@@ -17,12 +17,12 @@
   background: var(--pure-light);
   border-radius: var(--border-radius);
   overflow: auto;
-  min-width: var(--left-col-min-width);
-  width: var(--left-col-width);
-  max-width: var(--left-col-max-width);
-  min-height: var(--left-col-min-height);
-  height: var(--left-col-height);
-  max-height: var(--left-col-max-height);
+  min-width: 40rem;
+  width: 65rem;
+  max-width: 40rem;
+  min-height: 50rem;
+  height: 65rem;
+  max-height: 50rem;
   display: flex;
   flex-direction: column;
   align-items: center;

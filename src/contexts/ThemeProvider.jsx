@@ -5,14 +5,19 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 const ThemeContext = createContext();
 const ThemeProvider = ({ children }) => {
     const [theme, setTheme] = useState(null);
-    const url = window.location.origin;
     const [loading, setLoading] = useState(true);
+    const [logo, setLogo] = useState("");
+    const [name, setName] = useState("");
+    const url = `?url=${window.location.origin}`;
 
     useEffect(() => {
         const fetchThemeData = async () => {
             try {
                 const fetchedTheme = await getTheme(url);
+                console.log(fetchedTheme);
                 setTheme(fetchedTheme.styles);
+                setName(fetchedTheme.name);
+                setLogo(fetchedTheme.organisation?.logoDistributor);
             } catch (error) {
                 console.error(
                     "Erreur lors de la récupération des couleurs :",
@@ -38,7 +43,7 @@ const ThemeProvider = ({ children }) => {
     }, [theme]);
 
     return (
-        <ThemeContext.Provider value={theme}>
+        <ThemeContext.Provider value={{ theme, logo, name }}>
             {loading ? (
                 <AiOutlineLoading3Quarters className="loading" />
             ) : (

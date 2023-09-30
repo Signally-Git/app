@@ -3,12 +3,13 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { Input, Button } from "components";
 import { PiEyeDuotone, PiEyeClosedDuotone } from "react-icons/pi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { TokenService, validateEmail } from "utils";
 import { ImCross } from "react-icons/im";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { ForgottenPassword } from "./ForgottenPassword";
+import { ThemeContext } from "contexts/ThemeProvider";
 
 export const SignIn = () => {
     const [email, setEmail] = useState("");
@@ -19,6 +20,8 @@ export const SignIn = () => {
     const [isScrollable, setIsScrollable] = useState(false);
     const [error, setError] = useState({ content: "", disappear: false });
     const [modal, setModal] = useState(null);
+
+    const { name } = useContext(ThemeContext);
 
     const slider = useRef(null);
     const toFocus = useRef(null);
@@ -122,7 +125,7 @@ export const SignIn = () => {
                     <div className={classes.formContainer}>
                         <h2>
                             <FormattedMessage id="signin.connect_to" />{" "}
-                            <span>Signally</span>
+                            <span>{name}</span>
                         </h2>
                         <form onSubmit={(e) => handleSubmit(e)}>
                             <div className={classes.inputContainer}>

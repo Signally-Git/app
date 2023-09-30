@@ -10,6 +10,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import StatsPage from "views/Statistics/Stats.page";
 import AccountSettings from "../AccountSettings/accountSettings";
 import Studio from "../Signatures/Studio/Studio";
+import { WhiteLabel } from "../WhiteLabel/WhiteLabel";
 
 const Dashboard = ({ page }) => {
     const [loadingTiles, setLoadingTiles] = useState(false);
@@ -44,6 +45,7 @@ const Dashboard = ({ page }) => {
             </>
         ),
         teams: <Users />,
+        whiteLabel: <WhiteLabel />,
         statistics: <StatsPage />,
         signatures: <Signatures />,
         "create-signature": <Studio />,

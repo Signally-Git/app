@@ -1,15 +1,17 @@
-import { Logo, SwitchLang } from "components";
+import { SwitchLang } from "components";
 import { IoPower } from "react-icons/io5";
 import classes from "./header.module.css";
 import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { TokenService } from "utils";
 import { FormattedMessage, useIntl } from "react-intl";
+import { ThemeContext } from "contexts/ThemeProvider";
 
 function Header(props) {
     const [hover, setHover] = useState(false);
     const intl = useIntl();
+    const { logo } = useContext(ThemeContext);
 
     let history = useHistory();
 
@@ -19,7 +21,7 @@ function Header(props) {
                 props.landing ? classes.landing : ""
             }`}
         >
-            <Logo />
+            <img src={logo} />
             {props.landing !== true ? (
                 <>
                     <div className={classes.rightSide}>
