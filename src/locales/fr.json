@@ -176,7 +176,8 @@
         "title": "Profil",
         "company": {
             "title": "Société",
-            "name": "Nom de l'entreprise"
+            "name": "Nom de l'entreprise",
+            "url": "Adresse url"
         },
         "informations": {
             "title": "Informations du profil",

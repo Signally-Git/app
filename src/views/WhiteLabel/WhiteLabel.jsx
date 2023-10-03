@@ -34,37 +34,77 @@ const WhiteLabel = () => {
         fetchThemeData();
     }, []);
 
-    const handleSave = () => {
-        request
-            .patch(theme["@id"], theme, {
-                headers: {
-                    "Content-Type": "application/merge-patch+json",
-                },
-            })
-            .then(() => {
-                notification({
-                    content: (
-                        <>
-                            <span className={classes.primaryColor}>
-                                {theme.name}{" "}
-                            </span>
-                            <FormattedMessage id="message.success.edit" />
-                        </>
-                    ),
-                    status: "valid",
-                });
-            })
-            .catch(() =>
+    const handleSaveThemeStyles = async () => {
+        for (let style of theme.styles) {
+            console.log(style);
+
+            try {
+                const response = await request.patch(
+                    `/theme_styles/${style["id"]}`,
+                    style,
+                    {
+                        headers: {
+                            "Content-Type": "application/merge-patch+json",
+                        },
+                    }
+                );
+
+                if (response.status >= 200 && response.status < 300) {
+                    notification({
+                        content: (
+                            <>
+                                <span className={classes.primaryColor}>
+                                    {style.property}{" "}
+                                </span>
+                                <FormattedMessage id="message.success.edit" />
+                            </>
+                        ),
+                        status: "valid",
+                    });
+                } else {
+                    throw new Error(`Error updating style: ${style.property}`);
+                }
+            } catch (error) {
                 notification({
                     content: (
                         <>
                             <FormattedMessage id="message.error.edit" />
                             <span className={classes.primaryColor}>
                                 {" "}
-                                {theme.name}
+                                {style.property}
                             </span>
                         </>
                     ),
+                    status: "invalid",
+                });
+            }
+        }
+    };
+
+    const handleSave = () => {
+        console.log(theme);
+        handleSaveThemeStyles();
+
+        // Save instance data
+        request
+            .patch(
+                instance["@id"],
+                { name: instance.name },
+                {
+                    headers: {
+                        "Content-Type": "application/merge-patch+json",
+                    },
+                }
+            )
+            .then(() => {
+                notification({
+                    content: "Instance successfully saved!",
+                    status: "valid",
+                });
+            })
+            .catch(() =>
+                notification({
+                    content: "Error saving instance.",
                     status: "invalid",
                 })
             );

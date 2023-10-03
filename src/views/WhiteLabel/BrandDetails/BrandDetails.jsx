@@ -7,10 +7,7 @@ import classes from "../whiteLabel.module.css"; // Importez le bon fichier CSS
 function BrandDetails({ instance, setInstance }) {
     const [uploadedMedia, setUploadedMedia] = useState();
     const [open, setOpen] = useState(false);
-    const [instanceName, setInstanceName] = useState(instance?.name || "");
     const [preview, setPreview] = useState(instance?.logo?.url || null);
-    const [instanceUrl, setInstanceUrl] = useState(instance?.url || "");
-    const [loading, setLoading] = useState(false);
     const [croppedImage, setCroppedImage] = useState(null);
     const organisation = TokenService.getOrganisation();
     const notification = useNotification();
@@ -21,10 +18,10 @@ function BrandDetails({ instance, setInstance }) {
         setOpen(false);
     };
 
-    useEffect(() => {
-        setPreview(instance?.logo?.url || null);
-        setInstanceName(instance?.name || "");
-    }, [instance]);
+    // useEffect(() => {
+    //     setPreview(instance?.logo?.url || null);
+    //     setInstance({ ...instance, name: instance.name } || {});
+    // }, [instance]);
 
     useEffect(() => {
         if (!uploadedMedia) {
@@ -37,57 +34,6 @@ function BrandDetails({ instance, setInstance }) {
         return () => URL.revokeObjectURL(objectUrl);
     }, [uploadedMedia]);
 
-    const handleSaveInstance = async () => {
-        setLoading(true);
-        try {
-            if (uploadedMedia) {
-                const img = new FormData();
-                img.append("file", dataURItoBlob(croppedImage));
-
-                const uploadedImage = await request.post(`import/file`, img); // Ajustez selon votre API
-                const req = {
-                    name: instanceName,
-                    path: uploadedImage.data.path,
-                    distributor: true,
-                    organisation: organisation["@id"],
-                };
-                await request
-                    .post("logos", req)
-                    .then(({ data }) => console.log(data));
-                const updatedInstance = {
-                    ...instance,
-                    name: instanceName,
-                };
-
-                await setInstance(updatedInstance); // Ajustez selon votre logique d'application
-
-                notification({
-                    content: <FormattedMessage id="message.success.edit" />,
-                    status: "valid",
-                });
-            } else {
-                const updatedInstance = {
-                    ...instance,
-                    name: instanceName,
-                };
-
-                await setInstance(updatedInstance); // Ajustez selon votre logique d'application
-
-                notification({
-                    content: <FormattedMessage id="message.success.edit" />,
-                    status: "valid",
-                });
-            }
-        } catch (error) {
-            notification({
-                content: <FormattedMessage id="message.error.edit" />,
-                status: "invalid",
-            });
-        } finally {
-            setLoading(false);
-        }
-    };
-
     return (
         <div>
             <h2>Details</h2>
@@ -97,7 +43,7 @@ function BrandDetails({ instance, setInstance }) {
                     <div className={classes.logoCompanyDiv}>
                         {preview && (
                             <img
-                                alt={`Logo ${instanceName}`}
+                                alt={`Logo ${instance.name}`}
                                 className={classes.logoPreview}
                                 src={preview}
                             />
@@ -133,25 +79,26 @@ function BrandDetails({ instance, setInstance }) {
                     />
                     <Input
                         type="text"
-                        value={instanceName || ""}
-                        onChange={(e) => setInstanceName(e.target.value)}
+                        value={instance.name}
+                        onChange={(e) =>
+                            setInstance({ ...instance, name: e.target.value })
+                        }
                     />
                 </div>
                 <div>
                     <FormattedMessage
-                        id="profile.company.name"
+                        id="profile.company.url"
                         tagName="label"
                     />
                     <Input
                         type="text"
-                        value={instanceUrl || ""}
-                        onChange={(e) => setInstanceUrl(e.target.value)}
+                        value={instance.url}
+                        onChange={(e) =>
+                            setInstance({ ...instance, url: e.target.value })
+                        }
                     />
                 </div>
             </div>
-            <button onClick={handleSaveInstance} disabled={loading}>
-                Save Instance
-            </button>
         </div>
     );
 }
