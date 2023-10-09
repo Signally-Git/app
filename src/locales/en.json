@@ -8,8 +8,8 @@
     "events": "Events",
     "account": "Account",
     "logo": "Logo",
+    "white_label": "White label",
     "help": "Help",
-
     "event": "Event",
     "event_playlist_title": "Schedule multiple events",
     "edit_event": "Edit event {event}",
@@ -22,7 +22,6 @@
     "future": "Future",
     "start_date_placeholder": "Start date and time",
     "end_date_placeholder": "End date and time",
-
     "vcard": "vCard",
     "greetings": "Greetings",
     "calendar": "Schedule a meeting",
@@ -32,13 +31,11 @@
     "size": "Size",
     "billing": "Billing",
     "free": "Free",
-
     "socials": {
         "title": "Social networks",
         "link_placeholder": "URL",
         "icon_placeholder": "Custom icon"
     },
-
     "address": "Address",
     "city": "City",
     "zipcode": "Zip code",
@@ -48,7 +45,6 @@
     "company": "Company",
     "siren": "SIREN",
     "number_of_employees": "Number of employees",
-
     "enter_password": "Enter your password",
     "password": "Password",
     "reset_password": "Reset your password",
@@ -58,17 +54,14 @@
     "reset_password.thanks": "Thank you.",
     "reset_password.password_reset": "Your password has been reset.",
     "reset_password.redirect": "Redirecting to login page...",
-
     "add_blank": "Add",
     "members": "{count, plural, =0 {member} one {member} other {members}}",
     "search": "Search",
     "workplace_name": "Workplace name",
     "team_name": "Team name",
-
     "workplaces_description": "Manage your teams' signatures by country, city, subsidiary, department, etc. according to your organization's structure.",
     "teams_description": "Create your teams (Marketing, Sales, Corporate, Design, etc.). Add the members of each team and associate them with a specific email signature.",
     "users_description": "Add all your employees by importing a simple CSV file or manually.",
-
     "no_workplace": "No group",
     "no_team": "No team",
     "roles": {
@@ -76,7 +69,6 @@
         "rh": "HR",
         "administrator": "Administrator"
     },
-
     "code": "Code",
     "forgotten_password": "Forgot password",
     "firstname": "First name",
@@ -86,9 +78,8 @@
     "link": "Link",
     "url_agenda": "Meeting scheduling link",
     "email": "Email",
-
     "signature": {
-        "studio": "Custom your signature",
+        "studio": "Customize your signature",
         "title": "Signature",
         "number": "{count, plural, =0 {No signature} one {# signature} other {# signatures}}",
         "options": {
@@ -114,85 +105,129 @@
             "title": "Choose your signature template",
             "public": "Public",
             "private": "Private",
-            "no_template": "No template available. Please contact your Signally administrator."
+            "no_template": "No template available. Please contact your {brandName} administrator."
         },
         "spacing": "Spacing"
     },
-        "statistic": {
-            "no_event": "No campaign available.",
-            "no_signature": "No signature available."
-        },
 
-        "profile": {
-            "title": "Profile",
-            "company": {
-                "title": "Company",
-                "name": "Company name"
-            },
-            "informations": {
-                "title": "Profile informations",
-                "custom_labels": "Custom labels",
-                "google_email_address": "Google administrator email address",
-                "tenant_id": "Azure tenant ID",
-                "lang": "Language"
-            }
+    "white_label_page": {
+        "categories": {
+            "color": "Couleur",
+            "border": "Bordures",
+            "length": "Largeur"
         },
+        "styles": {
+            "colorPrimary": "Primary Color",
+            "colorPrimaryVariant": "Primary Color Variant",
+            "colorSecondary": "Secondary Color",
+            "colorTertiary": "Tertiary Color",
 
-        "company_informations_title": "Company informations",
-        "style": "Style",
-        "options": "Options",
-        "style_size_text": "Style and text size",
+            "colorLighterAccent": "Light Accent Color",
+            "colorLighterAccentVariation": "Light Accent Color Variation",
 
-        "copy": "Copy",
-        "templates": "Templates",
-        "add_signature": "Add a signature",
-        "search_signature": "Search a signature",
-        "copySignature": "Copy your signature",
-        "signatureCopied": "Signature copied",
+            "colorLightAccent": "Light Accent Hue",
+            "colorLightAccentVariation": "Light Accent Hue Variation",
+            "colorLightAccentVariation1": "First Light Accent Hue Variation",
+            "colorLightAccentVariation2": "Second Light Accent Hue Variation",
 
-        "activated": {
-            "male": "{count, plural, =0 {active} one {active} other {active}}",
-            "female": "{count, plural, =0 {active} one {active} other {active}}"
+            "colorDarkAccent": "Dark Accent Color",
+            "colorDarkerAccent": "Darker Accent Color",
+
+            "pureLight": "Pure White",
+            "pureDark": "Pure Black",
+
+            "backgroundColor": "Background Color",
+            "outerBackgroundColor": "Outer Background Color",
+            "backdropColor": "Backdrop Color",
+
+            "smallBorderRadius": "Small Border Radius",
+            "borderRadius": "Border Radius",
+            "mediumBorderRadius": "Medium Border Radius",
+            "largeBorderRadius": "Large Border Radius",
+            "hugeRadius": "Huge Radius",
+
+            "leftColHeight": "Left Panel Height",
+            "leftColMinHeight": "Minimum Left Panel Height",
+            "leftColMaxHeight": "Maximum Left Panel Height",
+
+            "leftColWidth": "Left Panel Width",
+            "leftColMinWidth": "Minimum Left Panel Width",
+            "leftColMaxWidth": "Maximum Left Panel Width"
+        }
+
+    },
+    
+    "statistic": {
+        "no_event": "No campaign available.",
+        "no_signature": "No signature available."
+    },
+    "profile": {
+        "title": "Profile",
+        "company": {
+            "title": "Company",
+            "name": "Company name"
         },
-        "deploy": {
-            "title": "Deployment",
-            "cta": "Deploy",
-            "send_mail": {
-                "title": "Send the link by email to all employees",
-                "description": "Deployment allows your employees to directly copy their signature in their mail client (mobile or desktop)"
-            }
-        },
-            "signin": {
-                "connect_to": "Connect to"
-            },
-        "signup": {
-            "magic_link": "To retrieve your signature and be able to modify it, you must log in to Signally",
-            "no_mail": "Didn't receive an email?",
-            "check_email": "Check your email address",
-            "congratulations": "Congratulations {firstname}.",
-            "accountCreated": "Your account has been successfully created.",
-            "checkMail": "Now please check your mailbox and click on the connection link.",
-            "mailNotReceived": "The email does not appear in your inbox? Please check your spam folder.",
-            "number_of_employees_options": {
-                "1-5": "1 to 5",
-                "5-20": "5 to 20",
-                "20-50": "20 to 50",
-                "50-100": "50 to 100",
-                "100+": "100+"
-            }
-        },
+        "informations": {
+            "title": "Profile information",
+            "custom_labels": "Custom labels",
+            "google_email_address": "Google administrator email address",
+            "tenant_id": "Azure tenant ID",
+            "lang": "Language"
+        }
+    },
+    "company_informations_title": "Company information",
+    "style": "Style",
+    "options": "Options",
+    "style_size_text": "Style and text size",
+    "copy": "Copy",
+    "templates": "Templates",
+    "add_signature": "Add a signature",
+    "search_signature": "Search a signature",
+    "copySignature": "Copy your signature",
+    "signatureCopied": "Signature copied",
+    "activated": {
+        "male": "{count, plural, =0 {active} one {active} other {active}}",
+        "female": "{count, plural, =0 {active} one {active} other {active}}"
+    },
+    "deploy": {
+        "title": "Deployment",
+        "cta": "Deploy",
+        "send_mail": {
+            "title": "Send the link by email to all employees",
+            "description": "Deployment allows your employees to directly copy their signature in their mail client (mobile or desktop)"
+        }
+    },
+    "signin": {
+        "connect_to": "Connect to"
+    },
+    "signup": {
+        "magic_link": "To retrieve your signature and be able to modify it, you must log in to {brandName}",
+        "no_mail": "Didn't receive an email?",
+        "check_email": "Check your email address",
+        "congratulations": "Congratulations {firstname}.",
+        "accountCreated": "Your account has been successfully created.",
+        "checkMail": "Now please check your mailbox and click on the connection link.",
+        "mailNotReceived": "The email does not appear in your inbox? Please check your spam folder.",
+        "number_of_employees_options": {
+            "1-5": "1 to 5",
+            "5-20": "5 to 20",
+            "20-50": "20 to 50",
+            "50-100": "50 to 100",
+            "100+": "100+"
+        }
+    },
     "welcome": {
         "welcome": "Welcome",
-        "title": "Welcome to the Signally Private Beta!",
+        "title": "Welcome to the {brandName} Private Beta!",
         "intro": "We're thrilled to have you as one of our early users.",
-        "description1": "With your valuable feedback, we aim to make Signally the most intuitive and innovative application on the market, perfectly tailored to meet your communication and marketing objectives.",
+        "description1": "With your valuable feedback, we aim to make {brandName} the most intuitive and innovative application on the market, perfectly tailored to meet your communication and marketing objectives.",
         "description2": "As we're in beta, everything isn't perfect yet! Nonetheless, thanks to you, we can make the platform increasingly efficient and even simpler to use.",
         "thanks": "Thank you so much for your help.",
-        "signature": "-- The Signally team"
+        "signature": "-- The {brandName} team"
     },
     "feedback": {
         "title": "Feedback",
-        "tagline": "Welcome to the Signally Private Beta!",
+        "tagline": "Welcome to the {brandName} Private Beta!",
         "text1": "As we're in beta, everything isn't perfect yet!",
         "text2": "Nonetheless, thanks to you, we can make the platform increasingly efficient and even simpler to use.",
         "formHeader": "Type of problem, comment, suggestion",
@@ -203,7 +238,7 @@
         "attachmentPlaceholder": "Upload file",
         "submitButton": "Submit form",
         "form": {
-            "signally_app": "Issue encountered on the application",
+            "{brandName}_app": "Issue encountered on the application",
             "outlook_display": "Signature display in Outlook",
             "comments": "Comments",
             "suggestions": "Suggestions"
@@ -211,7 +246,7 @@
     },
     "onboarding": {
         "congratulations": "Congratulations",
-        "congratulations_description": "You've successfully completed your Signally profile.",
+        "congratulations_description": "You've successfully completed your {brandName} profile.",
         "complete": "Your profile contains all the necessary information for signature templates.",
         "completed": {
             "plugins": {
@@ -225,7 +260,7 @@
         },
         "missing": {
             "plugins": {
-                "generic": "Install the Signally plugin on Office 365 Azure or Gmail."
+                "generic": "Install the {brandName} plugin on Office 365 Azure or Gmail."
             },
             "events": "You haven't created any events yet. Click below to add them and schedule promotional campaigns.",
             "employees": "You haven't imported any employees yet. Click below to add them and start managing your teams.",
@@ -318,7 +353,6 @@
             "check": "Check connection"
         }
     },
-
     "message": {
         "warning": {
             "delete": "You are about to delete",
@@ -332,7 +366,10 @@
                 "title": "404 - Page not found",
                 "description": "It looks like this page is unavailable."
             },
-            "teams": {"part1": "Team", "part2":  "could not be created"},
+            "teams": {
+                "part1": "Team",
+                "part2": "could not be created"
+            },
             "generic": "An error has occurred. Please try again",
             "logo": "Error while importing logo.",
             "image": "Error while importing image.",
@@ -342,12 +379,12 @@
             "invalid_email": "Invalid email format",
             "email": "Please check your email address",
             "siren": "Please check your SIREN",
-            "company_already_created": "This company is already registered on Signally",
-            "user_already_created": "This user is already registered on Signally",
+            "company_already_created": "This company is already registered",
+            "user_already_created": "This user is already registered",
             "invalid_user_email": "doesn't seem to be a valid email address",
             "credentials": "Invalid email or password",
             "report": "An error occurred while submitting the form",
-            "social_unknown": "{social} non reconnu. Merci de télécharger un logo personnalisé."
+            "social_unknown": "{social} not recognized. Please upload a custom logo."
         },
         "success": {
             "signature": {
@@ -372,11 +409,10 @@
             },
             "added": "Added",
             "removed": "Removed",
-            "delete": "deleted successfully",
-            "created": "created successfully",
-            "edit": "edited successfully",
-            "saved": "enregistré"
+            "delete": "Deleted successfully",
+            "created": "Created successfully",
+            "edit": "Edited successfully",
+            "saved": "Saved"
         }
     }
-  }
-
+}

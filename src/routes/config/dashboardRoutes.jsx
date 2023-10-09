@@ -17,6 +17,13 @@ export const dashboardRoutes = [
 
     <PrivateRouteHelper
         exact
+        path="/white-label"
+        page="whiteLabel"
+        component={Dashboard}
+    />,
+
+    <PrivateRouteHelper
+        exact
         path="/statistics"
         page="statistics"
         component={Dashboard}
