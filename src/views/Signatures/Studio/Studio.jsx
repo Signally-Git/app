@@ -41,7 +41,7 @@ const Studio = () => {
                         signatureTemplate: selectedTemplate["@id"],
                         name: signatureName || selectedTemplate.name,
                         html: "selectedTab.html",
-                        organisation: organisation.id,
+                        organisation: organisation["@id"],
                     },
                     {
                         headers: {
@@ -94,7 +94,7 @@ const Studio = () => {
                     signatureTemplate: selectedTemplate["@id"],
                     name: signatureName || selectedTemplate.name,
                     html: "selectedTab.html",
-                    organisation: organisation.id,
+                    organisation: organisation["@id"],
                 })
                 .then(({ data }) => {
                     const updatedStyles = styles.map((style) => ({
