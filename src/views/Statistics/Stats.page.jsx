@@ -159,7 +159,7 @@ function StatsPage() {
                                 id={
                                     configuration.filter(
                                         (item) => item.key === "WORKPLACE_NAME"
-                                    )[0].value
+                                    )[0]?.value
                                 }
                                 value="workplace"
                                 name="entityType"
@@ -172,13 +172,13 @@ function StatsPage() {
                                 htmlFor={
                                     configuration.filter(
                                         (item) => item.key === "WORKPLACE_NAME"
-                                    )[0].value
+                                    )[0]?.value
                                 }
                             >
                                 {
                                     configuration.filter(
                                         (item) => item.key === "WORKPLACE_NAME"
-                                    )[0].value
+                                    )[0]?.value
                                 }
                             </label>
                         </li>
@@ -187,7 +187,7 @@ function StatsPage() {
                                 id={
                                     configuration.filter(
                                         (item) => item.key === "TEAM_NAME"
-                                    )[0].value
+                                    )[0]?.value
                                 }
                                 value="team"
                                 name="entityType"
@@ -200,13 +200,13 @@ function StatsPage() {
                                 htmlFor={
                                     configuration.filter(
                                         (item) => item.key === "TEAM_NAME"
-                                    )[0].value
+                                    )[0]?.value
                                 }
                             >
                                 {
                                     configuration.filter(
                                         (item) => item.key === "TEAM_NAME"
-                                    )[0].value
+                                    )[0]?.value
                                 }
                             </label>
                         </li>
@@ -215,7 +215,7 @@ function StatsPage() {
                                 id={
                                     configuration.filter(
                                         (item) => item.key === "USER_NAME"
-                                    )[0].value
+                                    )[0]?.value
                                 }
                                 value="user"
                                 name="entityType"
@@ -234,7 +234,7 @@ function StatsPage() {
                                 {
                                     configuration.filter(
                                         (item) => item.key === "USER_NAME"
-                                    )[0].value
+                                    )[0]?.value
                                 }
                             </label>
                         </li>
