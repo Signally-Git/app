@@ -138,10 +138,7 @@ function BrandDetails({ instance, setInstance }) {
                     />
                 </div>
                 <div>
-                    <FormattedMessage
-                        id="profile.company.name"
-                        tagName="label"
-                    />
+                    <FormattedMessage id="link" tagName="label" />
                     <Input
                         type="text"
                         value={instanceUrl || ""}
