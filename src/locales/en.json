@@ -313,6 +313,9 @@
             "sign_in": "Sign in",
             "manual": "Manually",
             "from_csv": "From a .csv file",
+            "width": "Width",
+            "height": "Height",
+            "auto": "Auto",
             "import": {
                 "profile_picture": "Profile picture",
                 "profile_picture_link": "Profile picture link",

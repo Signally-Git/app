@@ -98,7 +98,7 @@
         },
         "infos": {
             "logo": "Vous pouvez changer votre {value} {link}.",
-            "here": "ici"
+            "here": " ici"
         },
         "ratio": {
             "unlock": "Déverrouiller ratio",
@@ -314,6 +314,9 @@
             "sign_in": "Se connecter",
             "manual": "Manuellement",
             "from_csv": "A partir d'un fichier .csv",
+            "width": "Largeur",
+            "height": "Hauteur",
+            "auto": "Auto",
             "import": {
                 "profile_picture": "Photo de profil",
                 "profile_picture_link": "Lien de photo de profil",
