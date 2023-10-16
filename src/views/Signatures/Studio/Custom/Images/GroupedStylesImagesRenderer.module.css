@@ -16,13 +16,44 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-top: 1.5rem;
 }
 .child > span {
   display: flex;
 }
 .child a, .child a:hover, .child a:visited, .child a:focus {
+  text-indent: 0.25rem;
   color: var(--color-primary);
   text-decoration: underline;
+}
+
+.dimensionContainer {
+  position: relative;
+}
+.dimensionContainer > label {
+  position: absolute;
+  z-index: 2;
+  top: -0.75rem;
+}
+.dimensionContainer .dimensionInputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.dimensionContainer .auto {
+  inset: auto 0.5rem auto auto;
+  position: absolute;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.dimensionContainer label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+.dimensionContainer label:first-of-type {
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 .lock > button {
