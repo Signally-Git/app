@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { VisibilityToggle, Input, Button } from "components";
+import { VisibilityToggle, Input, Button, CustomCheckbox } from "components";
 import classes from "./GroupedStylesImagesRenderer.module.css";
 import { FormattedMessage } from "react-intl";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi2";
@@ -15,6 +15,7 @@ const GroupedStylesImagesRenderer = ({ styles, setStyles }) => {
     };
 
     const [lockedRatios, setLockedRatios] = useState(initializeLockedRatios);
+    const [lastNumericValues, setLastNumericValues] = useState({});
 
     const updateImageProperty = (styleUpdate) => {
         setStyles((prevStyles) =>
@@ -37,6 +38,7 @@ const GroupedStylesImagesRenderer = ({ styles, setStyles }) => {
     };
 
     const updateOtherDimension = (type, updatedProperty, newValue) => {
+        if (!isLockable(type)) return;
         if (!newValue || isNaN(newValue) || Number(newValue) === 0) {
             const oppositeProperty =
                 updatedProperty === "width" ? "height" : "width";
@@ -57,7 +59,6 @@ const GroupedStylesImagesRenderer = ({ styles, setStyles }) => {
         const widthStyle = findStyleByTypeAndProperty(type, "width");
         const heightStyle = findStyleByTypeAndProperty(type, "height");
 
-        // Utilisez les anciennes valeurs pour calculer le ratio
         const oldWidth = Number(widthStyle.value);
         const oldHeight = Number(heightStyle.value);
         const ratio = calculateRatio(oldWidth, oldHeight);
@@ -80,21 +81,38 @@ const GroupedStylesImagesRenderer = ({ styles, setStyles }) => {
             }
         }
     };
+    const isLockable = (type) => {
+        const widthStyle = findStyleByTypeAndProperty(type, "width");
+        const heightStyle = findStyleByTypeAndProperty(type, "height");
+        return (
+            widthStyle &&
+            heightStyle &&
+            !isNaN(widthStyle.value) &&
+            !isNaN(heightStyle.value)
+        );
+    };
 
     const toggleLockRatio = (type) => {
-        setLockedRatios((prev) => ({
-            ...prev,
-            [type]: !prev[type],
-        }));
+        if (isLockable(type)) {
+            setLockedRatios((prev) => ({
+                ...prev,
+                [type]: !prev[type],
+            }));
+        }
     };
 
     const handleDimensionChange = (type, updatedProperty, value) => {
+        if (!isNaN(value)) {
+            setLastNumericValues((prev) => ({
+                ...prev,
+                [`${type}-${updatedProperty}`]: value,
+            }));
+        }
         updateImageProperty({
             id: findStyleByTypeAndProperty(type, updatedProperty).id,
             value: value,
         });
 
-        // Si la valeur n'est pas vide et que le ratio est verrouillé, mettez à jour l'autre dimension
         if (value && lockedRatios[type]) {
             updateOtherDimension(type, updatedProperty, value);
         }
@@ -127,35 +145,117 @@ const GroupedStylesImagesRenderer = ({ styles, setStyles }) => {
                     />
                 )}
                 {widthStyle && (
-                    <Input
-                        type="number"
-                        min={1}
-                        value={widthStyle.value || ""}
-                        placeholder="Width"
-                        onChange={(e) =>
-                            handleDimensionChange(type, "width", e.target.value)
-                        }
-                    />
+                    <div className={classes.dimensionContainer}>
+                        <FormattedMessage
+                            id="buttons.placeholder.width"
+                            tagName="label"
+                        />
+                        <div className={classes.dimensionInputContainer}>
+                            <div className={classes.auto}>
+                                <CustomCheckbox
+                                    checked={widthStyle.value === "auto"}
+                                    onChange={(e) => {
+                                        const lastValue =
+                                            lastNumericValues[
+                                                `${type}-width`
+                                            ] || "1";
+                                        updateImageProperty({
+                                            id: widthStyle.id,
+                                            value: e.target.checked
+                                                ? "auto"
+                                                : lastValue,
+                                        });
+                                    }}
+                                />
+                                <FormattedMessage
+                                    id="buttons.placeholder.auto"
+                                    tagName="label"
+                                />
+                            </div>
+                            <Input
+                                type="number"
+                                min={1}
+                                disabled={widthStyle.value === "auto"}
+                                value={
+                                    widthStyle.value !== "auto"
+                                        ? widthStyle.value
+                                        : ""
+                                }
+                                placeholder={
+                                    widthStyle.value === "auto"
+                                        ? lastNumericValues[`${type}-width`]
+                                        : widthStyle.value
+                                }
+                                onChange={(e) =>
+                                    handleDimensionChange(
+                                        type,
+                                        "width",
+                                        e.target.value
+                                    )
+                                }
+                            />
+                        </div>
+                    </div>
                 )}
+
                 {heightStyle && (
-                    <Input
-                        type="number"
-                        min={1}
-                        value={heightStyle.value || ""}
-                        placeholder="Height"
-                        onChange={(e) =>
-                            handleDimensionChange(
-                                type,
-                                "height",
-                                e.target.value
-                            )
-                        }
-                    />
+                    <div className={classes.dimensionContainer}>
+                        <FormattedMessage
+                            id="buttons.placeholder.height"
+                            tagName="label"
+                        />
+                        <div className={classes.dimensionInputContainer}>
+                            <div className={classes.auto}>
+                                <CustomCheckbox
+                                    checked={heightStyle.value === "auto"}
+                                    onChange={(e) => {
+                                        const lastValue =
+                                            lastNumericValues[
+                                                `${type}-height`
+                                            ] || "1";
+                                        updateImageProperty({
+                                            id: heightStyle.id,
+                                            value: e.target.checked
+                                                ? "auto"
+                                                : lastValue,
+                                        });
+                                    }}
+                                />
+                                <FormattedMessage
+                                    id="buttons.placeholder.auto"
+                                    tagName="label"
+                                />
+                            </div>
+                            <Input
+                                type="number"
+                                min={1}
+                                disabled={heightStyle.value === "auto"}
+                                value={
+                                    heightStyle.value !== "auto"
+                                        ? heightStyle.value
+                                        : ""
+                                }
+                                placeholder={
+                                    heightStyle.value === "auto"
+                                        ? lastNumericValues[`${type}-height`]
+                                        : heightStyle.value
+                                }
+                                onChange={(e) =>
+                                    handleDimensionChange(
+                                        type,
+                                        "height",
+                                        e.target.value
+                                    )
+                                }
+                            />
+                        </div>
+                    </div>
                 )}
                 <div className={classes.lock}>
                     <Button
                         color="primaryLink"
                         onClick={() => toggleLockRatio(type)}
+                        disabled={!isLockable(type)}
                     >
                         {lockedRatios[type] ? (
                             <>

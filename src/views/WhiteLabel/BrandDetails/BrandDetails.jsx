@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Input, UploadFile, Popup } from "components"; // Assurez-vous d'importer les bons composants
-import { request, useNotification, dataURItoBlob, TokenService } from "utils"; // Assurez-vous d'importer les bons utilitaires
+import { Input, UploadFile, Popup } from "components";
+import { request, useNotification, dataURItoBlob, TokenService } from "utils";
 import { FormattedMessage } from "react-intl";
-import classes from "../whiteLabel.module.css"; // Importez le bon fichier CSS
+import classes from "../whiteLabel.module.css";
 
 function BrandDetails({ instance, setInstance }) {
     const [uploadedMedia, setUploadedMedia] = useState();
@@ -138,10 +138,7 @@ function BrandDetails({ instance, setInstance }) {
                     />
                 </div>
                 <div>
-                    <FormattedMessage
-                        id="profile.company.name"
-                        tagName="label"
-                    />
+                    <FormattedMessage id="link" tagName="label" />
                     <Input
                         type="text"
                         value={instanceUrl || ""}
