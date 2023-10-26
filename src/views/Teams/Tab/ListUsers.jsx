@@ -11,6 +11,7 @@ import {
     useNotification,
     request,
     dataURItoBlob,
+    fileToBase64,
 } from "utils";
 import classes from "./tab.module.css";
 
@@ -166,6 +167,17 @@ function ListUsers({
     useEffect(() => {
         setPreview(user?.picture ?? "");
     }, [user?.picture]);
+
+    const handleUploadImage = async (image) => {
+        if (image?.type === "image/gif") {
+            setUploadedMedia(image);
+            const imgBase64 = await fileToBase64(image);
+            handleCroppedImage(imgBase64);
+        } else {
+            setUploadedMedia(image);
+            setOpen(true);
+        }
+    };
 
     const handleCroppedImage = (image) => {
         setCroppedImage(image);
@@ -493,10 +505,9 @@ function ListUsers({
                                                         <UploadFile
                                                             file={uploadedMedia}
                                                             setFile={(e) => {
-                                                                setUploadedMedia(
+                                                                handleUploadImage(
                                                                     e
                                                                 );
-                                                                setOpen(true);
                                                             }}
                                                             removeFile={() => {
                                                                 setUploadedMedia(
