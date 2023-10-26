@@ -3,6 +3,7 @@ export {
     useNotification,
 } from "./notifications/notifications";
 export { dataURItoBlob } from "./dataURItoBlob";
+export { default as fileToBase64 } from "./fileToBase64";
 export { detectBrowserLanguage } from "./DetectBrowserLanguage";
 export { checkImageExists } from "./detectSocialMediaImage";
 export { handleScroll } from "./handleScroll";
