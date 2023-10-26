@@ -5,8 +5,14 @@ import { Button } from "components";
 import classes from "./Cropper.module.scss";
 import { useIntl } from "react-intl";
 import { GrPowerReset } from "react-icons/gr";
+import fileToBase64 from "utils/fileToBase64";
 
-export default function CropperInput({ src, getCroppedFile, aspectRatios }) {
+export default function CropperInput({
+    src,
+    initialImage,
+    getCroppedFile,
+    aspectRatios,
+}) {
     const cropperRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [scaleX, setScaleX] = useState(1);
@@ -14,6 +20,18 @@ export default function CropperInput({ src, getCroppedFile, aspectRatios }) {
     const [aspectRatio, setAspectRatio] = useState(null);
 
     const intl = useIntl();
+
+    const handleClose = async () => {
+        try {
+            const base64Image = await fileToBase64(initialImage);
+            getCroppedFile(base64Image);
+        } catch (e) {
+            console.error(
+                "Erreur lors de la conversion de l'image en Base64:",
+                e
+            );
+        }
+    };
 
     const handleClick = () => {
         const imageElement = cropperRef?.current;
@@ -139,7 +157,7 @@ export default function CropperInput({ src, getCroppedFile, aspectRatios }) {
                 ref={cropperRef}
             />
             <div className={classes.btnsContainer}>
-                <Button color="primary" onClick={handleClick}>
+                <Button color="primary" onClick={handleClose}>
                     {intl.formatMessage({
                         id: "buttons.placeholder.import.crop.close",
                     })}

@@ -1,6 +1,5 @@
 // Fonction utilitaire pour convertir les données base64 en objet Blob
 export function dataURItoBlob(dataURI) {
-    console.log(dataURI);
     if (!dataURI || typeof dataURI !== "string") {
         throw new Error("Invalid dataURI provided.");
     }

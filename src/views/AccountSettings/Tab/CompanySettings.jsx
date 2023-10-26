@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import classes from "../accountSettings.module.css";
 import { useHistory } from "react-router-dom";
 import { Input, UploadFile, NavigationButtons, Popup } from "components";
-import { TokenService, request, useNotification, dataURItoBlob } from "utils";
+import {
+    TokenService,
+    request,
+    useNotification,
+    dataURItoBlob,
+    fileToBase64,
+} from "utils";
 import { FormattedMessage } from "react-intl";
 
 function CompanySettings() {
@@ -27,6 +33,17 @@ function CompanySettings() {
     const notification = useNotification();
     let history = useHistory();
 
+    const handleUploadImage = async (image) => {
+        if (image?.type === "image/gif") {
+            setUploadedMedia(image);
+            const imgBase64 = await fileToBase64(image);
+            handleCroppedImage(imgBase64);
+        } else {
+            setUploadedMedia(image);
+            setOpen(true);
+        }
+    };
+
     const handleCroppedImage = (image) => {
         setCroppedImage(image);
         setPreview(image);
@@ -34,11 +51,6 @@ function CompanySettings() {
     };
 
     useEffect(() => {
-        console.log(
-            "organisation useEffect organisation?.logo?.url",
-            organisation?.logo?.url
-        );
-
         setPreview(organisation?.logo?.url || null);
         setCompanyName(organisation?.name || "");
         setWebsite(organisation?.websiteUrl || "");
@@ -56,10 +68,6 @@ function CompanySettings() {
     useEffect(() => {
         // create the preview
         if (!uploadedMedia) {
-            console.log(
-                "uploadedMedia useEffect organisation?.logo?.url",
-                organisation?.logo?.url
-            );
             setPreview(organisation?.logo?.url || null);
             return;
         }
@@ -74,6 +82,7 @@ function CompanySettings() {
         setLoading(true);
         if (uploadedMedia) {
             const img = new FormData();
+            console.log(croppedImage);
             img.append("file", dataURItoBlob(croppedImage));
             await request
                 .post(`import/file`, img)
@@ -207,12 +216,11 @@ function CompanySettings() {
                         <UploadFile
                             file={uploadedMedia}
                             setFile={(e) => {
-                                setUploadedMedia(e);
-                                setOpen(true);
+                                handleUploadImage(e);
                             }}
                             removeFile={() => {
                                 setUploadedMedia(null);
-                                setPreview(null);
+                                setPreview(organisation?.logo?.url);
                             }}
                             placeholder={
                                 <FormattedMessage id="buttons.placeholder.import.image" />
@@ -226,6 +234,7 @@ function CompanySettings() {
                         <Popup
                             open={open}
                             image={preview}
+                            initialImage={uploadedMedia}
                             handleClose={() => setOpen(false)}
                             getCroppedFile={handleCroppedImage}
                             aspectRatios={["1:1"]}

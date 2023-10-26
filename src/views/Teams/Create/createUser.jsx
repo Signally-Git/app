@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button, CustomSelect, Input, UploadFile, Popup } from "components";
 import classes from "./create.module.css";
 import { useHistory } from "react-router-dom";
-import { request, useNotification, dataURItoBlob } from "utils";
+import { request, useNotification, dataURItoBlob, fileToBase64 } from "utils";
 import { FormattedMessage, useIntl } from "react-intl";
 
 export default function CreateUser({ setDone }) {
@@ -219,6 +219,17 @@ export default function CreateUser({ setDone }) {
         setPreview(user.profilePicture || "");
     }, [user.profilePicture]);
 
+    const handleUploadImage = async (image) => {
+        if (image?.type === "image/gif") {
+            setUploadedMedia(image);
+            const imgBase64 = await fileToBase64(image);
+            handleCroppedImage(imgBase64);
+        } else {
+            setUploadedMedia(image);
+            setOpen(true);
+        }
+    };
+
     const handleCroppedImage = (image) => {
         setCroppedImage(image);
         setPreview(image);
@@ -306,8 +317,7 @@ export default function CreateUser({ setDone }) {
                                     <UploadFile
                                         file={uploadedMedia}
                                         setFile={(e) => {
-                                            setUploadedMedia(e);
-                                            setOpen(true);
+                                            handleUploadImage(e);
                                         }}
                                         removeFile={() => {
                                             setUploadedMedia(null);

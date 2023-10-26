@@ -3,10 +3,10 @@ import { createPortal } from "react-dom";
 import classes from "./Cropper.module.css";
 import CropperInput from "./CropperInput";
 import { FormattedMessage } from "react-intl";
-import { Button } from "components";
 
 export default function Popup({
     open,
+    initialImage,
     image,
     handleClose,
     getCroppedFile,
@@ -50,6 +50,7 @@ export default function Popup({
                     <CropperInput
                         handleClose={handleClose}
                         src={image}
+                        initialImage={initialImage}
                         getCroppedFile={getCroppedFile}
                         aspectRatios={aspectRatios}
                     />

@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Input, UploadFile, Popup } from "components";
-import { request, useNotification, dataURItoBlob, TokenService } from "utils";
+import {
+    request,
+    useNotification,
+    dataURItoBlob,
+    TokenService,
+    fileToBase64,
+} from "utils";
 import { FormattedMessage } from "react-intl";
 import classes from "../whiteLabel.module.css";
 
@@ -14,6 +20,17 @@ function BrandDetails({ instance, setInstance }) {
     const [croppedImage, setCroppedImage] = useState(null);
     const organisation = TokenService.getOrganisation();
     const notification = useNotification();
+
+    const handleUploadImage = async (image) => {
+        if (image?.type === "image/gif") {
+            setUploadedMedia(image);
+            const imgBase64 = await fileToBase64(image);
+            handleCroppedImage(imgBase64);
+        } else {
+            setUploadedMedia(image);
+            setOpen(true);
+        }
+    };
 
     const handleCroppedImage = (image) => {
         setCroppedImage(image);
@@ -105,8 +122,7 @@ function BrandDetails({ instance, setInstance }) {
                         <UploadFile
                             file={uploadedMedia}
                             setFile={(e) => {
-                                setUploadedMedia(e);
-                                setOpen(true);
+                                handleUploadImage(e);
                             }}
                             removeFile={() => {
                                 setUploadedMedia(null);
