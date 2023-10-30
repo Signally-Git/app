@@ -4,7 +4,7 @@ import classes from "./createEvent.module.css";
 import { Input, NavigationButtons, UploadFile, Popup } from "components";
 import { useContext, useEffect, useRef, useState } from "react";
 import moment from "moment";
-import { useNotification, request, dataURItoBlob } from "utils";
+import { useNotification, request, dataURItoBlob, fileToBase64 } from "utils";
 import { useHistory } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
 import { LangContext } from "contexts/LangContext";
@@ -47,6 +47,19 @@ export default function CreateEvent({ setDone, event }) {
             )
         );
     }, [event]);
+
+    const handleUploadImage = async (image) => {
+        if (image?.type === "image/gif") {
+            setBanner(image);
+            const imgBase64 = await fileToBase64(image);
+            setCroppedImage(imgBase64);
+            setPreview(imgBase64);
+            setOpen(false);
+        } else {
+            setBanner(image);
+            setOpen(true);
+        }
+    };
 
     useEffect(() => {
         if (!event) {
@@ -365,8 +378,7 @@ export default function CreateEvent({ setDone, event }) {
                 <UploadFile
                     file={banner}
                     setFile={(e) => {
-                        setBanner(e);
-                        setOpen(true);
+                        handleUploadImage(e);
                     }}
                     removeFile={() => {
                         setBanner(null);

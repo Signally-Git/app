@@ -112,7 +112,7 @@ export default function SignaturePreview({ show, edit, setEdit, signatures }) {
                     </div>
                     <SignatureManager
                         signatures={signatures}
-                        entity={edit}
+                        entity={edit || show}
                         setEditSignature={setEditSignature}
                     />
                     <EventManager edit={edit} />

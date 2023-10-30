@@ -11,6 +11,7 @@ import {
     useNotification,
     request,
     dataURItoBlob,
+    fileToBase64,
 } from "utils";
 import classes from "./tab.module.css";
 
@@ -167,6 +168,17 @@ function ListUsers({
         setPreview(user?.picture ?? "");
     }, [user?.picture]);
 
+    const handleUploadImage = async (image) => {
+        if (image?.type === "image/gif") {
+            setUploadedMedia(image);
+            const imgBase64 = await fileToBase64(image);
+            handleCroppedImage(imgBase64);
+        } else {
+            setUploadedMedia(image);
+            setOpen(true);
+        }
+    };
+
     const handleCroppedImage = (image) => {
         setCroppedImage(image);
         setPreview(image);
@@ -181,7 +193,7 @@ function ListUsers({
                     {
                         JSON.parse(
                             localStorage.getItem("configuration")
-                        ).filter((item) => item.key === "USER_NAME")[0].value
+                        ).filter((item) => item.key === "USER_NAME")[0]?.value
                     }
                 </Button>
             </Link>
@@ -194,7 +206,7 @@ function ListUsers({
                     placeholder={`${intl.formatMessage({ id: "search" })} ${
                         JSON.parse(
                             localStorage.getItem("configuration")
-                        ).filter((item) => item.key === "USER_NAME")[0].value
+                        ).filter((item) => item.key === "USER_NAME")[0]?.value
                     }`}
                 />
             </div>
@@ -205,7 +217,7 @@ function ListUsers({
                     {
                         JSON.parse(
                             localStorage.getItem("configuration")
-                        ).filter((item) => item.key === "USER_NAME")[0].value
+                        ).filter((item) => item.key === "USER_NAME")[0]?.value
                     }
                 </span>
                 <button
@@ -493,10 +505,9 @@ function ListUsers({
                                                         <UploadFile
                                                             file={uploadedMedia}
                                                             setFile={(e) => {
-                                                                setUploadedMedia(
+                                                                handleUploadImage(
                                                                     e
                                                                 );
-                                                                setOpen(true);
                                                             }}
                                                             removeFile={() => {
                                                                 setUploadedMedia(

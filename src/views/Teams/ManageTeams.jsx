@@ -2,7 +2,7 @@ import classes from "./ManageTeams.module.css";
 import { useEffect, useRef, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import Tab from "./Tab/tab";
-import SignaturePreview from "./SignaturePreview/SignaturePreview";
+import SignaturePreview from "./SignaturePreview/signaturePreview";
 import { useParams } from "react-router-dom";
 import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
 import { Button } from "components";

@@ -2,11 +2,14 @@ import { FormattedMessage } from "react-intl";
 import { IoStatsChart } from "react-icons/io5";
 import classes from "./Menu.module.css";
 import { MdHelpOutline, MdOutlineAccountCircle } from "react-icons/md";
+import { PiTagBold } from "react-icons/pi";
 import React from "react";
+import { TokenService } from "utils";
 
 const MenuLinks = (props) => {
     const page = props.page || "";
     const today = new Date();
+    const isDistributor = TokenService.getOrganisation()?.distributor;
 
     return [
         {
@@ -38,6 +41,12 @@ const MenuLinks = (props) => {
             icon: <IoStatsChart />,
             label: <FormattedMessage tagName="label" id="statistics" />,
             isActive: page.search("/statistics") !== -1,
+        },
+        isDistributor && {
+            to: "/white-label",
+            icon: <PiTagBold />,
+            label: <FormattedMessage tagName="label" id="white_label" />,
+            isActive: page.search("white-label") !== -1,
         },
         {
             to: "/signatures",

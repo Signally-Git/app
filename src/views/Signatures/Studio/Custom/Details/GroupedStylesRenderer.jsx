@@ -1,5 +1,5 @@
 import React from "react";
-import { CustomisableInput } from "./CustomisableInput";
+import { CustomisableInput } from "components";
 
 const GroupedStylesRenderer = ({
     styles,

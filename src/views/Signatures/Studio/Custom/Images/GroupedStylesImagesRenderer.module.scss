@@ -15,14 +15,47 @@
   > div {
     display: flex;
     align-items: center;
-    gap: 1rem
+    gap: 1rem;
+    margin-top: 1.5rem;
   }
   > span {
     display: flex;
   }
   a, a:hover, a:visited, a:focus {
+    text-indent: .25rem;
     color: $color-primary;
     text-decoration: underline;
+  }
+}
+
+.dimensionContainer {
+  position: relative;
+  > label {
+    position: absolute;
+    z-index: 2;
+    top: -.75rem;
+  }
+  .dimensionInputContainer {
+   position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .auto {
+    inset: auto .5rem auto auto;
+    position: absolute;
+    display: flex;
+    //flex-direction: column-reverse;
+    //flex-direction: row-reverse;
+    gap: .5rem;
+    align-items: center;
+  }
+  label {
+    font-size: .7rem;
+    text-transform: uppercase;
+    &:first-of-type {
+    font-size: .8rem;
+      font-weight: 600;
+    }
   }
 }
 

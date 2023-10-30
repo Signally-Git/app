@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Input, Loading, Modal } from "components";
 import { FormattedMessage } from "react-intl";
 import { useHistory, useParams } from "react-router-dom";
-import { request, useNotification } from "utils";
+import { request, TokenService, useNotification } from "utils";
 import { Menu } from "./Menu/Menu";
 import SignaturePreviewContainer from "./SignaturePreview/SignaturePreviewContainer";
 import CustomTab from "./Custom/CustomTab";
@@ -17,6 +17,8 @@ const Studio = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [signatureName, setSignatureName] = useState("");
     const [forceUpdate, setForceUpdate] = useState(0);
+
+    const organisation = TokenService.getOrganisation();
 
     const notification = useNotification();
 
@@ -39,7 +41,7 @@ const Studio = () => {
                         signatureTemplate: selectedTemplate["@id"],
                         name: signatureName || selectedTemplate.name,
                         html: "selectedTab.html",
-                        organisation: selectedTemplate.owner,
+                        organisation: organisation["@id"],
                     },
                     {
                         headers: {
@@ -92,7 +94,7 @@ const Studio = () => {
                     signatureTemplate: selectedTemplate["@id"],
                     name: signatureName || selectedTemplate.name,
                     html: "selectedTab.html",
-                    organisation: selectedTemplate.owner,
+                    organisation: organisation["@id"],
                 })
                 .then(({ data }) => {
                     const updatedStyles = styles.map((style) => ({

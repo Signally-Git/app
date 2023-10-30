@@ -250,6 +250,7 @@
 }
 
 .formContainer h2 span {
+  text-transform: capitalize;
   color: var(--color-primary);
 }
 

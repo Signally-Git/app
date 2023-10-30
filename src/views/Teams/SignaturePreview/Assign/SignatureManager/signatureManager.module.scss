@@ -5,8 +5,4 @@
   a {
     pointer-events: none;
   }
-  cursor: grab;
-  &:active {
-    cursor: grabbing;
-  }
 }

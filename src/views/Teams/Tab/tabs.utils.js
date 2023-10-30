@@ -2,7 +2,18 @@ import { request } from "utils";
 import classes from "./tab.module.css";
 import { FormattedMessage } from "react-intl";
 import React from "react";
-import { Button } from "../../../components";
+import { Button } from "components";
+
+const ModalButton = ({ color, onClick, messageId }) => (
+    <Button color={color} onClick={onClick}>
+        <FormattedMessage id={messageId} />
+    </Button>
+);
+
+const getConfigurationValue = (configuration, key) => {
+    const configItem = configuration.find((item) => item.key === key);
+    return configItem ? configItem.value : "";
+};
 
 const handleModal = (
     toDelete,
@@ -17,181 +28,104 @@ const handleModal = (
     teams,
     users
 ) => {
-    switch (toDelete.type) {
-        case "allworkplaces":
-            return (
-                <div className={classes.modal}>
-                    <h4>
-                        <FormattedMessage id="message.warning.delete" />
-                        <br />
-                        <span className={classes.primaryTxt}>{`${
-                            workplaces.length
-                        } ${
-                            configuration.filter(
-                                (item) => item.key === "WORKPLACE_NAME"
-                            )[0].value
-                        }`}</span>
-                    </h4>
-                    <div>
-                        <Button
-                            color="primary"
-                            onClick={() =>
-                                setModal({ type: "", name: "", id: "" })
-                            }
-                        >
-                            <FormattedMessage id="buttons.placeholder.cancel" />
-                        </Button>
-                        <Button
-                            color="primaryFill"
-                            onClick={() =>
-                                handleDeleteAll(
-                                    "workplaces",
-                                    notification,
-                                    configuration,
-                                    refreshData,
-                                    setEdit,
-                                    setSelected,
-                                    teams,
-                                    users,
-                                    setModal
-                                )
-                            }
-                        >
-                            <FormattedMessage id="buttons.placeholder.delete" />
-                        </Button>
-                    </div>
-                </div>
+    const handleCloseModal = () => setModal({ type: "", name: "", id: "" });
+    const { type, id, name } = toDelete;
+
+    const getEntityCount = () => {
+        switch (type) {
+            case "allworkplaces":
+                return workplaces.length;
+            case "allteams":
+                return teams.length;
+            case "allusers":
+                return users.length - 1;
+            default:
+                return toDelete?.name;
+        }
+    };
+
+    const getEntityName = () => {
+        switch (type) {
+            case "allworkplaces":
+                return getConfigurationValue(configuration, "WORKPLACE_NAME");
+            case "allteams":
+                return getConfigurationValue(configuration, "TEAM_NAME");
+            case "allusers":
+                return getConfigurationValue(configuration, "USER_NAME");
+            default:
+                return "";
+        }
+    };
+
+    const handleDeleteClick = () => {
+        if (["allworkplaces", "allteams", "allusers"].includes(type)) {
+            handleDeleteAll(
+                type,
+                users, // maintenant en deuxième position
+                notification,
+                configuration,
+                refreshData,
+                setEdit,
+                setSelected,
+                teams,
+                setModal
             );
-        case "allteams":
-            return (
-                <div className={classes.modal}>
-                    <h4>
-                        <FormattedMessage id="message.warning.delete" />
-                        <br />
-                        <span className={classes.primaryTxt}>{`${
-                            teams.length
-                        } ${
-                            configuration.filter(
-                                (item) => item.key === "TEAM_NAME"
-                            )[0].value
-                        }`}</span>
-                    </h4>
-                    <br />
-                    <div>
-                        <Button
-                            color="primary"
-                            onClick={() =>
-                                setModal({ type: "", name: "", id: "" })
-                            }
-                        >
-                            <FormattedMessage id="buttons.placeholder.cancel" />
-                        </Button>
-                        <Button
-                            color="primaryFill"
-                            onClick={() =>
-                                handleDeleteAll(
-                                    "teams",
-                                    notification,
-                                    configuration,
-                                    refreshData,
-                                    setEdit,
-                                    setSelected,
-                                    teams,
-                                    users,
-                                    setModal
-                                )
-                            }
-                        >
-                            <FormattedMessage id="buttons.placeholder.delete" />
-                        </Button>
-                    </div>
-                </div>
+        } else {
+            handleDelete(
+                id,
+                type,
+                name,
+                notification,
+                setModal,
+                selected,
+                setSelected,
+                refreshData
             );
-        case "allusers":
-            return (
-                <div className={classes.modal}>
-                    <h4>
-                        <FormattedMessage id="message.warning.delete" />
-                        <br />
-                        <span className={classes.primaryTxt}>{`${
-                            users.length - 1
-                        } ${
-                            configuration.filter(
-                                (item) => item.key === "USER_NAME"
-                            )[0].value
-                        }`}</span>
-                    </h4>
-                    <div>
-                        <Button
-                            color="primary"
-                            onClick={() =>
-                                setModal({ type: "", name: "", id: "" })
-                            }
-                        >
-                            <FormattedMessage id="buttons.placeholder.cancel" />
-                        </Button>
-                        <Button
-                            color="primaryFill"
-                            onClick={() =>
-                                handleDeleteAll(
-                                    "users",
-                                    notification,
-                                    configuration,
-                                    refreshData,
-                                    setEdit,
-                                    setSelected,
-                                    teams,
-                                    users,
-                                    setModal
-                                )
-                            }
-                        >
-                            <FormattedMessage id="buttons.placeholder.delete" />
-                        </Button>
-                    </div>
-                </div>
-            );
-        default:
-            return (
-                <div className={classes.modal}>
-                    <h4>
-                        <FormattedMessage id="message.warning.delete" />
-                        <br />
-                        <span className={classes.primaryTxt}>
-                            {toDelete?.name}
-                        </span>
-                    </h4>
-                    <div>
-                        <Button
-                            color="primary"
-                            onClick={() =>
-                                setModal({ type: "", name: "", id: "" })
-                            }
-                        >
-                            <FormattedMessage id="buttons.placeholder.cancel" />
-                        </Button>
-                        <Button
-                            color="primaryFill"
-                            onClick={() =>
-                                handleDelete(
-                                    toDelete?.id,
-                                    toDelete?.type,
-                                    toDelete?.name,
-                                    notification,
-                                    setModal,
-                                    selected,
-                                    setSelected,
-                                    refreshData
-                                )
-                            }
-                        >
-                            <FormattedMessage id="buttons.placeholder.delete" />
-                        </Button>
-                    </div>
-                </div>
-            );
-    }
+        }
+    };
+
+    return (
+        <div className={classes.modal}>
+            <h4>
+                <FormattedMessage id="message.warning.delete" />
+                <br />
+                <span
+                    className={classes.primaryTxt}
+                >{`${getEntityCount()} ${getEntityName()}`}</span>
+            </h4>
+            <div>
+                <ModalButton
+                    color="primary"
+                    onClick={handleCloseModal}
+                    messageId="buttons.placeholder.cancel"
+                />
+                <ModalButton
+                    color="primaryFill"
+                    onClick={handleDeleteClick}
+                    messageId="buttons.placeholder.delete"
+                />
+            </div>
+        </div>
+    );
 };
+
+const notify = (messageId, name, status, notification, classes) => {
+    notification({
+        content: (
+            <>
+                {messageId === "message.success.delete" ? (
+                    <span className={classes.primaryColor}>{name}</span>
+                ) : null}
+                <FormattedMessage id={messageId} />
+                {messageId === "message.error.delete" ? (
+                    <span className={classes.primaryColor}>{name}</span>
+                ) : null}
+            </>
+        ),
+        status: status,
+    });
+};
+
 const handleDelete = async (
     id,
     type,
@@ -200,221 +134,74 @@ const handleDelete = async (
     setModal,
     selected,
     setSelected,
-    refreshData
+    refreshData,
+    classes
 ) => {
-    await request
-        .delete(`${type}/${id}`)
-        .then(() => {
-            notification({
-                content: (
-                    <>
-                        <span className={classes.primaryColor}>{name}</span>{" "}
-                        <FormattedMessage id="message.success.delete" />
-                    </>
-                ),
-                status: "valid",
-            });
-            setModal({ type: "", name: "", id: "" });
-        })
-        .catch(() =>
-            notification({
-                content: (
-                    <>
-                        <FormattedMessage id="message.error.delete" />{" "}
-                        <span className={classes.primaryColor}>{name}</span>
-                    </>
-                ),
-                status: "invalid",
-            })
-        );
-    if (selected?.id === id) setSelected();
-    await refreshData();
-    setModal({ type: "", name: "", id: "" });
+    try {
+        await request.delete(`${type}/${id}`);
+        notify("message.success.delete", name, "valid", notification, classes);
+    } catch (error) {
+        notify("message.error.delete", name, "invalid", notification, classes);
+    } finally {
+        if (selected?.id === id) {
+            setSelected();
+        }
+        await refreshData();
+        setModal({ type: "", name: "", id: "" });
+    }
 };
 
-// Deletes either every workplace, every team or every user
 const handleDeleteAll = async (
     type,
-    workplaces,
+    items,
     notification,
     configuration,
     refreshData,
     setEdit,
     setSelected,
-    teams,
-    users,
-    setModal
+    setModal,
+    classes
 ) => {
     let count = 0;
+    const promises = items.map(async (element) => {
+        try {
+            await request.delete(`${type.replace("all", "")}/${element.id}`);
+            notify(
+                "message.success.delete",
+                element.name,
+                "valid",
+                classes,
+                notification
+            );
+            count++;
+        } catch (error) {
+            notify(
+                "message.error.delete",
+                element.name,
+                "invalid",
+                classes,
+                notification
+            );
+        }
+    });
 
-    switch (type) {
-        case "workplaces":
-            const wps = workplaces;
-            for (let index = 0; index < wps.length; index++) {
-                const element = wps[index];
-                request
-                    .delete(`workplaces/${element.id}`)
-                    .then(() => {
-                        notification({
-                            content: (
-                                <>
-                                    <span className={classes.primaryColor}>
-                                        {element.name}
-                                    </span>{" "}
-                                    <FormattedMessage id="message.success.delete" />
-                                </>
-                            ),
-                            status: "valid",
-                        });
-                        count++;
-                        if (count === workplaces.length) {
-                            notification({
-                                content: (
-                                    <>
-                                        <span className={classes.primaryColor}>
-                                            {count}{" "}
-                                            {
-                                                configuration.filter(
-                                                    (item) =>
-                                                        item.key === "TEAM_NAME"
-                                                )[0].value
-                                            }
-                                        </span>{" "}
-                                        <FormattedMessage id="message.success.delete" />
-                                    </>
-                                ),
-                                status: "valid",
-                            });
-                            refreshData();
-                            setEdit();
-                            setSelected();
-                        }
-                    })
-                    .catch(() =>
-                        notification({
-                            content: (
-                                <>
-                                    <FormattedMessage id="message.error.delete" />{" "}
-                                    <span className={classes.primaryColor}>
-                                        {element.name}
-                                    </span>
-                                </>
-                            ),
-                            status: "invalid",
-                        })
-                    );
-            }
+    await Promise.all(promises);
 
-            break;
-        case "teams":
-            for (let index = 0; index < teams.length; index++) {
-                const element = teams[index];
-                request
-                    .delete(`teams/${element.id}`)
-                    .then(() => {
-                        index === teams.length - 1 && refreshData();
-                        count++;
-                        if (count === teams.length) {
-                            notification({
-                                content: (
-                                    <>
-                                        <span className={classes.primaryColor}>
-                                            {count}{" "}
-                                            {
-                                                configuration.filter(
-                                                    (item) =>
-                                                        item.key === "TEAM_NAME"
-                                                )[0].value
-                                            }
-                                        </span>{" "}
-                                        <FormattedMessage id="message.success.delete" />
-                                    </>
-                                ),
-                                status: "valid",
-                            });
-                            refreshData();
-                            setEdit();
-                            setSelected();
-                        }
-                    })
-                    .catch(() =>
-                        notification({
-                            content: (
-                                <>
-                                    <FormattedMessage id="message.error.delete" />{" "}
-                                    <span className={classes.primaryColor}>
-                                        {element.name}
-                                    </span>
-                                </>
-                            ),
-                            status: "invalid",
-                        })
-                    );
-            }
-            break;
-        case "users":
-            for (let index = 0; index < users.length; index++) {
-                const element = users[index];
-                if (
-                    element?.id !== JSON.parse(localStorage.getItem("user"))?.id
-                )
-                    request
-                        .delete(`users/${element.id}`)
-                        .then(() => {
-                            index === users.length - 1 && refreshData();
-                            count++;
-                            if (count === users.length - 1) {
-                                notification({
-                                    content: (
-                                        <>
-                                            <span
-                                                className={classes.primaryColor}
-                                            >
-                                                {count}{" "}
-                                                <FormattedMessage id="employees" />
-                                            </span>{" "}
-                                            <FormattedMessage id="message.success.delete" />
-                                        </>
-                                    ),
-                                    status: "valid",
-                                });
-                                refreshData();
-                                setEdit();
-                                setSelected();
-                                setModal({ type: "", name: "", id: "" });
-                            }
-                        })
-                        .catch(() =>
-                            notification({
-                                content: (
-                                    <>
-                                        <FormattedMessage id="message.error.delete" />{" "}
-                                        <span className={classes.primaryColor}>
-                                            {element.firstName}{" "}
-                                            {element.lastName}
-                                        </span>
-                                    </>
-                                ),
-                                status: "invalid",
-                            })
-                        );
-            }
-            break;
-        default:
-            break;
+    if (count > 0) {
+        const configItem = configuration.find(
+            (item) => item.key === `${type.toUpperCase()}_NAME`
+        );
+        notify(
+            "message.success.delete",
+            `${count} ${configItem?.value}`,
+            "valid",
+            classes,
+            notification
+        );
+        await refreshData();
+        setEdit();
+        setSelected();
     }
-    if (count > 0)
-        notification({
-            content: (
-                <>
-                    <span className={classes.primaryColor}>
-                        {count} {type}
-                    </span>{" "}
-                    <FormattedMessage id="message.success.delete" />
-                </>
-            ),
-            status: "valid",
-        });
     setModal({ type: "", name: "", id: "" });
 };
 

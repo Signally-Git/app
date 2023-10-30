@@ -8,6 +8,7 @@
     "events": "Campagnes",
     "account": "Compte",
     "logo": "Logo",
+    "white_label": "Marque blanche",
     "help": "Aide",
 
     "event": "Campagne",
@@ -97,7 +98,7 @@
         },
         "infos": {
             "logo": "Vous pouvez changer votre {value} {link}.",
-            "here": "ici"
+            "here": " ici"
         },
         "ratio": {
             "unlock": "Déverrouiller ratio",
@@ -114,9 +115,56 @@
             "title": "Choisissez votre modèle de signature",
             "public": "Public",
             "private": "Privé",
-            "no_template": "Aucun modèle disponible. Veuillez contacter votre administrateur Signally."
+            "no_template": "Aucun modèle disponible. Veuillez contacter votre administrateur {brandName}."
         },
         "spacing": "Espacement"
+    },
+    
+    "white_label_page": {
+        "categories": {
+            "color": "Couleur",
+            "border": "Bordures",
+            "length": "Largeur"
+        },
+        "styles": {
+            "colorPrimary": "Couleur principale",
+            "colorPrimaryVariant": "Nuance de la couleur principale",
+            "colorSecondary": "Couleur secondaire",
+            "colorThirdary": "Couleur tertiaire",
+
+            "colorLighterAccent": "Couleur accent claire",
+            "colorLighterAccentVariation": "Variation légère de la couleur accent",
+
+            "colorLightAccent": "Teinte claire accentuée",
+            "colorLightAccentVariation": "Variation de teinte claire accentuée",
+            "colorLightAccentVariation1": "Première variation de teinte claire accentuée",
+            "colorLightAccentVariation2": "Deuxième variation de teinte claire accentuée",
+
+            "colorDarkAccent": "Couleur accent foncée",
+            "colorDarkerAccent": "Couleur accent encore plus foncée",
+
+            "pureLight": "Blanc pur",
+            "pureDark": "Noir pur",
+
+            "backgroundColor": "Couleur de l'arrière-plan",
+            "outterBackgroundColor": "Couleur de l'arrière-plan extérieur",
+            "backdropColor": "Couleur de toile de fond",
+
+            "smallBorderRadius": "Arrondi de bordure petit",
+            "borderRadius": "Arrondi de bordure",
+            "mediumBorderRadius": "Arrondi de bordure moyen",
+            "largeBorderRadius": "Arrondi de bordure grand",
+            "hugeRadius": "Arrondi énorme",
+
+            "leftColHeight": "Hauteur du panneau gauche",
+            "leftColMinHeight": "Hauteur minimum du panneau gauche",
+            "leftColMaxHeight": "Hauteur maximum du panneau gauche",
+
+            "leftColWidth": "Largeur du panneau gauche",
+            "leftColMinWidth": "Largeur minimum du panneau gauche",
+            "leftColMaxWidth": "Largeur maximum du panneau gauche"
+        }
+
     },
     
     "statistic": {
@@ -168,7 +216,7 @@
         "connect_to": "Connectez-vous à votre espace"
     },
     "signup": {
-        "magic_link": "Pour récupérer votre signature et pouvoir la modifier vous devez vous connecter à Signally",
+        "magic_link": "Pour récupérer votre signature et pouvoir la modifier vous devez vous connecter à {brandName}",
         "no_mail": "Vous n’avez pas reçu de mail ?",
         "check_email": "Vérifiez votre adresse mail",
         "congratulations": "Félicitations {firstname}.",
@@ -186,37 +234,17 @@
 
     "welcome": {
         "welcome": "Bienvenue",
-        "title": "Bienvenue sur la Beta privée Signally !",
+        "title": "Bienvenue sur la Beta privée {brandName} !",
         "intro": "Nous sommes très heureux de vous compter parmi nos premiers utilisateurs.",
-        "description1": "Avec vous, nous souhaitons faire de Signally, l’application la plus intuitive et la plus innovante du marché tout en répondant au mieux à vos objectifs de communication et de marketing.",
+        "description1": "Avec vous, nous souhaitons faire de {brandName}, l’application la plus intuitive et la plus innovante du marché tout en répondant au mieux à vos objectifs de communication et de marketing.",
         "description2": "Comme nous sommes en version Beta, tout n’est pas encore parfait ! Néanmoins, grâce à vous, nous pourrons rendre la plateforme de plus en plus performante et encore plus simple à utiliser.",
         "thanks": "Un grand merci pour votre aide.",
-        "signature": "-- L'équipe Signally"
+        "signature": "-- L'équipe {brandName}"
     },
-    
-    "feedback" : {
-        "title": "Retour d'expérience",
-        "tagline": "Bienvenue sur la Beta privée Signally !",
-        "text1": "Comme nous sommes en version Beta, tout n’est pas encore parfait !",
-        "text2": "Néanmoins, grâce à vous, nous pourrons rendre la plateforme de plus en plus performante et encore plus simple à utiliser.",
-        "formHeader": "Type du problème, commentaire, suggestion",
-        "selectPlaceholder": "Sélectionnez une option...",
-        "bugHeader": "Type de problème",
-        "bugPlaceholder": "Bonjour, comme vous pouvez le voir sur cette image en PJ, le logo de l'entreprise ne s'affiche pas sur Outlook.",
-        "attachmentHeader": "Pièce jointe (capture d'écran, fichier d'import corrompu...)",
-        "attachmentPlaceholder": "Importer un fichier",
-        "submitButton": "Envoyer le formulaire",
-        "form": {
-            "signally_app": "Problème rencontré sur l'application",
-            "outlook_display": "Affichage de la signature dans Outlook",
-            "comments": "Commentaire",
-            "suggestions": "Suggestion"
-        }
-    },
-    
+        
     "onboarding": {
         "congratulations": "Félicitations",
-        "congratulations_description": "Vous avez complété votre profil Signally avec succès.",
+        "congratulations_description": "Vous avez complété votre profil {brandName} avec succès.",
         "complete": "Votre profil contient toutes les informations nécessaires aux templates des signatures.",
         "completed": {
             "plugins": {
@@ -230,7 +258,7 @@
         },
         "missing": {
             "plugins": {
-                "generic": "Installez le plugin Signally sur Office 365 Azure ou Gmail."
+                "generic": "Installez le plugin {brandName} sur Office 365 Azure ou Gmail."
             },
             "events": "Vous n'avez pas encore créé d'event. Cliquez ci-dessous pour en ajouter et programmer des campagnes de promotion",
             "employees": "Vous n'avez pas encore importé d'autres collaborateurs. Cliquez ci-dessous pour en ajouter et commencer à gérer vos équipes",
@@ -286,6 +314,9 @@
             "sign_in": "Se connecter",
             "manual": "Manuellement",
             "from_csv": "A partir d'un fichier .csv",
+            "width": "Largeur",
+            "height": "Hauteur",
+            "auto": "Auto",
             "import": {
                 "profile_picture": "Photo de profil",
                 "profile_picture_link": "Lien de photo de profil",
@@ -351,8 +382,8 @@
             "invalid_email": "Le format d'email n'est pas valide",
             "email": "Veuillez vérifier votre adresse mail",
             "siren": "Veuillez vérifier votre SIREN",
-            "company_already_created": "Cette société est déjà enregistrée sur Signally",
-            "user_already_created": "Cet utilisateur est déjà enregistré sur Signally",
+            "company_already_created": "Cette société est déjà enregistrée",
+            "user_already_created": "Cet utilisateur est déjà enregistré",
             "invalid_user_email": "ne semble pas être une adresse mail valide",
             "credentials": "Email ou mot de passe invalide",
             "report": "Une erreur s'est produite lors de l'envoi du formulaire",

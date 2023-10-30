@@ -1,4 +1,4 @@
-import classes from "./signaturePreview.module.css";
+import classes from "./eventManager.module.css";
 import { useEffect, useState } from "react";
 import { request } from "utils";
 import Search from "assets/icons/search.svg";

@@ -1,4 +1,4 @@
-import { ColorPicker, Input, VisibilityToggle } from "components";
+import { ColorPicker, Input, VisibilityToggle } from "components/index";
 import classes from "./customisableInput.module.css";
 import { GrBold, GrClearOption, GrItalic, GrUnderline } from "react-icons/gr";
 
@@ -106,4 +106,4 @@ const CustomisableInput = ({
     );
 };
 
-export { CustomisableInput };
+export default CustomisableInput;

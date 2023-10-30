@@ -19,6 +19,7 @@
 }
 
 .template {
+  padding: 1rem;
   position: relative;
   font-size: 0.75rem;
   margin-top: 0.25rem;
@@ -37,8 +38,8 @@
 .template > input[type=radio] + .selectedTemplate {
   box-sizing: border-box;
   position: absolute;
-  margin-top: -4px;
-  margin-left: -4px;
+  margin-top: -1.25rem;
+  margin-left: -1.25rem;
   z-index: 0;
   width: calc(100% + 8px);
   height: calc(100% + 8px);

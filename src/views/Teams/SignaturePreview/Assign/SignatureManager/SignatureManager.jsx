@@ -13,30 +13,41 @@ const SignatureManager = memo(({ entity, signatures, setEditSignature }) => {
         selectedSignatureId: null,
     });
 
+    const {
+        signaturesDisplay,
+        loading,
+        signaturePreview,
+        selectedSignatureId,
+    } = state;
+
+    const [parsedHTML, setParsedHTML] = useState(null);
     const notification = useNotification();
 
+    const updateSignatures = (results) => {
+        return signatures
+            .map((signature, index) => {
+                if (results[index].status === "fulfilled") {
+                    return { ...signature, html: results[index].value?.data };
+                }
+                return null;
+            })
+            .filter(Boolean);
+    };
+
     const fetchSignatures = useCallback(async () => {
+        if (!entity || !signatures) return;
+
+        setState((prev) => ({ ...prev, loading: true }));
+
+        const promises = signatures.map((signature) =>
+            request.get(
+                `/compile_for_attribution_signature/${entity.id}/${signature.id}`
+            )
+        );
+
         try {
-            setState((prev) => ({ ...prev, loading: true }));
-            const promises = signatures.map((signature) =>
-                request.get(
-                    `/compile_for_attribution_signature/${entity.id}/${signature.id}`
-                )
-            );
-
             const results = await Promise.allSettled(promises);
-
-            const updatedSignatures = signatures
-                .map((signature, index) => {
-                    if (results[index].status === "fulfilled") {
-                        return {
-                            ...signature,
-                            html: results[index].value.data,
-                        };
-                    }
-                    return null;
-                })
-                .filter(Boolean);
+            const updatedSignatures = updateSignatures(results);
 
             const correspondingSignature = updatedSignatures.find(
                 (sig) => sig["@id"] === entity.signature["@id"]
@@ -54,6 +65,7 @@ const SignatureManager = memo(({ entity, signatures, setEditSignature }) => {
                 content: <FormattedMessage id="message.error.generic" />,
                 status: "invalid",
             });
+        } finally {
             setState((prev) => ({ ...prev, loading: false }));
         }
     }, [entity, signatures, notification]);
@@ -62,22 +74,23 @@ const SignatureManager = memo(({ entity, signatures, setEditSignature }) => {
         fetchSignatures();
     }, [fetchSignatures]);
 
-    let parsedHTML = "";
-    if (typeof state.signaturePreview?.html === "string") {
-        parsedHTML = parse(state.signaturePreview?.html);
-    }
+    useEffect(() => {
+        if (typeof signaturePreview?.html === "string") {
+            setParsedHTML(parse(signaturePreview.html));
+        }
+    }, [signaturePreview]);
 
     return (
         <>
-            {state.signaturesDisplay.length > 0 && (
+            {signaturesDisplay.length > 0 && (
                 <CustomSelect
                     key={entity?.id}
-                    defaultValue={state.selectedSignatureId}
-                    items={state.signaturesDisplay}
+                    defaultValue={selectedSignatureId}
+                    items={signaturesDisplay}
                     display={"name"}
                     getValue={"id"}
                     onChange={(selectedId) => {
-                        const selectedItem = state.signaturesDisplay.find(
+                        const selectedItem = signaturesDisplay.find(
                             (sig) => sig?.id === selectedId
                         );
                         setState((prev) => ({
@@ -90,8 +103,8 @@ const SignatureManager = memo(({ entity, signatures, setEditSignature }) => {
                 />
             )}
             <div className={classes.signatureContainer}>
-                <h3>{state.signaturePreview?.name}</h3>
-                {state.loading ? <Loading /> : parsedHTML}
+                <h3>{signaturePreview?.name}</h3>
+                {loading ? <Loading /> : parsedHTML}
             </div>
         </>
     );

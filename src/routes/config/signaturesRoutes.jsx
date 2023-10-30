@@ -1,5 +1,4 @@
 import PrivateRouteHelper from "../PrivateRoute.helper";
-import EditSignatureComponent from "../../views/Signatures/edit/editSignature";
 import Users from "../../views/Teams/ManageTeams";
 import Studio from "../../views/Signatures/Studio/Studio";
 

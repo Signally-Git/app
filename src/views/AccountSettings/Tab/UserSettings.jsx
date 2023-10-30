@@ -9,7 +9,13 @@ import {
     UploadFile,
     Popup,
 } from "components";
-import { TokenService, request, useNotification, dataURItoBlob } from "utils";
+import {
+    TokenService,
+    request,
+    useNotification,
+    dataURItoBlob,
+    fileToBase64,
+} from "utils";
 import { FormattedMessage } from "react-intl";
 
 function UserSettings() {
@@ -48,6 +54,17 @@ function UserSettings() {
     useEffect(() => {
         setPreview(user?.picture ?? "");
     }, [user?.picture]);
+
+    const handleUploadImage = async (image) => {
+        if (image?.type === "image/gif") {
+            setUploadedMedia(image);
+            const imgBase64 = await fileToBase64(image);
+            handleCroppedImage(imgBase64);
+        } else {
+            setUploadedMedia(image);
+            setOpen(true);
+        }
+    };
 
     const handleCroppedImage = (image) => {
         setCroppedImage(image);
@@ -192,8 +209,7 @@ function UserSettings() {
                                 <UploadFile
                                     file={uploadedMedia}
                                     setFile={(e) => {
-                                        setUploadedMedia(e);
-                                        setOpen(true);
+                                        handleUploadImage(e);
                                     }}
                                     removeFile={() => {
                                         setUploadedMedia(null);

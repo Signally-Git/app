@@ -1,3 +1,4 @@
+/* global.scss */
 .container {
   display: flex;
   flex-direction: column;
@@ -12,4 +13,14 @@
 }
 .container > div {
   margin-bottom: 7vh;
+}
+
+.signature {
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: var(--background-color);
+}
+
+body {
+  background-color: transparent;
 }
