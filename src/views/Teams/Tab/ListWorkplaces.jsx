@@ -285,7 +285,12 @@ export const ListWorkplaces = ({
                                     {editInfo === workplace ? (
                                         <>
                                             <div className={classes.editDiv}>
-                                                <label htmlFor="isDeployed">
+                                                <label
+                                                    className={
+                                                        classes.deployContainer
+                                                    }
+                                                    htmlFor="isDeployed"
+                                                >
                                                     <FormattedMessage id="deploy.cta" />
                                                     <CustomCheckbox
                                                         onChange={(e) =>
