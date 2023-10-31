@@ -23,14 +23,14 @@ export default function SignaturePreview({ show, edit, setEdit, signatures }) {
     const fetchSignature = (entity) => {
         setFetchingSignature(true);
         if (!entity) return null;
-
+        const type = entity["@type"].toLowerCase();
+        console.log("type: ", type);
         request
-            .get(entity["@id"])
-            .then(({ data: { compiledSignature } }) => {
-                setDisplayedSignature(compiledSignature);
-            })
-            .catch((error) => {
-                setDisplayedSignature(`Error: ${error.message}`);
+            .get(
+                `compile_for_listing_signature_for_entity/${entity.id}/${type}`
+            )
+            .then(({ data }) => {
+                setDisplayedSignature(data);
             })
             .finally(() => {
                 setFetchingSignature(false);
