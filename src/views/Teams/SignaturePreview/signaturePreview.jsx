@@ -201,15 +201,25 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                     `${event?.imageUrl}`
                 ),
             };
-        request
-            .get(`compile_for_attribution_signature/${show?.["id"]}/${id}`)
-            .then(({ data }) => {
-                setSelectedTemplate({
-                    "@id": template?.["@id"],
-                    preview: data,
+        if (show["@type"] === "User")
+            request
+                .get(`compile_for_attribution_signature/${show?.["id"]}/${id}`)
+                .then(({ data }) => {
+                    setSelectedTemplate({
+                        "@id": template?.["@id"],
+                        preview: data,
+                    });
+                })
+                .catch(() => {
+                    console.log("here");
+                    return;
                 });
+        else {
+            setSelectedTemplate({
+                "@id": template?.["@id"],
+                name: template?.name,
             });
-        // setSelectedTemplate(template);
+        }
     };
 
     const handleSwapEvent = (id) => {

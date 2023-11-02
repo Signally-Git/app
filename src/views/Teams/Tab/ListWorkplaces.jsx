@@ -68,6 +68,10 @@ export const ListWorkplaces = ({
         setIsDeployed(editInfo?.synchronizable || false);
     }, [editInfo]);
 
+    useEffect(() => {
+        console.log(edit);
+    }, [edit]);
+
     const handleChangeWP = async (e, workplace) => {
         const img = new FormData();
         img.append("file", file);
@@ -183,8 +187,9 @@ export const ListWorkplaces = ({
                             return (
                                 <li
                                     onMouseMove={() => {
-                                        if (edit === "" || !editInfo) {
+                                        if (!edit) {
                                             clearTimeout(time);
+                                            console.log(edit, editInfo);
                                             time = setTimeout(() => {
                                                 setSelected(workplace);
                                             }, 100);
@@ -285,7 +290,12 @@ export const ListWorkplaces = ({
                                     {editInfo === workplace ? (
                                         <>
                                             <div className={classes.editDiv}>
-                                                <label htmlFor="isDeployed">
+                                                <label
+                                                    className={
+                                                        classes.deployContainer
+                                                    }
+                                                    htmlFor="isDeployed"
+                                                >
                                                     <FormattedMessage id="deploy.cta" />
                                                     <CustomCheckbox
                                                         onChange={(e) =>

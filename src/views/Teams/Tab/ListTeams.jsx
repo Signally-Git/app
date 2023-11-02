@@ -218,7 +218,12 @@ export const ListTeams = ({
                                                     setChanged(true);
                                                 }}
                                             />
-                                            <label htmlFor="isDeployed">
+                                            <label
+                                                className={
+                                                    classes.deployContainer
+                                                }
+                                                htmlFor="isDeployed"
+                                            >
                                                 <FormattedMessage id="deploy.cta" />
                                                 <CustomCheckbox
                                                     onChange={(e) => {
