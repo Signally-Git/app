@@ -8,9 +8,13 @@
     border-bottom: 1px solid;
     opacity: .1;
   }
+  > h3 {
+    margin: 0;
+  }
 }
 
 .inputsContainer {
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
