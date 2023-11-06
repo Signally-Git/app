@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CustomSelect } from "components";
 import classes from "./details.module.css";
 import GroupedStylesRenderer from "./GroupedStylesRenderer";
+import { FormattedMessage } from "react-intl";
 
 const Details = ({ selectedTemplate, styles, setStyles }) => {
     const getInitialFontFamily = () => {
@@ -17,6 +18,32 @@ const Details = ({ selectedTemplate, styles, setStyles }) => {
 
     const initialFontFamily = getInitialFontFamily();
     const [fontFamily, setFontFamily] = useState(initialFontFamily);
+    const fonts = [
+        {
+            name: "Arial",
+            style: { fontFamily: "Arial, sans-serif" },
+        },
+        {
+            name: "Courier New",
+            style: { fontFamily: "Courier New, monospace" },
+        },
+        {
+            name: "Georgia",
+            style: { fontFamily: "Georgia, serif" },
+        },
+        {
+            name: "Times New Roman",
+            style: { fontFamily: "Times New Roman, serif" },
+        },
+        {
+            name: "Trebuchet MS",
+            style: { fontFamily: "Trebuchet MS, sans-serif" },
+        },
+        {
+            name: "Verdana",
+            style: { fontFamily: "Verdana, sans-serif" },
+        },
+    ];
 
     useEffect(() => {
         const newStyles = styles.map((style) => {
@@ -34,6 +61,18 @@ const Details = ({ selectedTemplate, styles, setStyles }) => {
     };
     return (
         <div className={classes.container}>
+            <FormattedMessage
+                id="buttons.placeholder.font_family"
+                tagName="h3"
+            />
+            <CustomSelect
+                styleList={{ maxHeight: "20rem" }}
+                getValue={"name"}
+                value={"Arial"}
+                display={"name"}
+                onChange={handleFontChange}
+                items={fonts}
+            />
             <div className={classes.inputsContainer}>
                 <GroupedStylesRenderer
                     styles={styles}
@@ -46,40 +85,6 @@ const Details = ({ selectedTemplate, styles, setStyles }) => {
                     ]}
                 />
             </div>
-            <hr />
-            <CustomSelect
-                styleList={{ height: "21.5rem" }}
-                getValue={"name"}
-                value={"Arial"}
-                display={"name"}
-                onChange={handleFontChange} // Add this handler
-                items={[
-                    {
-                        name: "Arial",
-                        style: { fontFamily: "Arial, sans-serif" },
-                    },
-                    {
-                        name: "Courier New",
-                        style: { fontFamily: "Courier New, monospace" },
-                    },
-                    {
-                        name: "Georgia",
-                        style: { fontFamily: "Georgia, serif" },
-                    },
-                    {
-                        name: "Times New Roman",
-                        style: { fontFamily: "Times New Roman, serif" },
-                    },
-                    {
-                        name: "Trebuchet MS",
-                        style: { fontFamily: "Trebuchet MS, sans-serif" },
-                    },
-                    {
-                        name: "Verdana",
-                        style: { fontFamily: "Verdana, sans-serif" },
-                    },
-                ]}
-            />
         </div>
     );
 };
