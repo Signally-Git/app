@@ -1,20 +1,31 @@
-import { ColorPicker, Input, VisibilityToggle } from "components/index";
+import {
+    ColorPicker,
+    FontSizeRange,
+    Input,
+    VisibilityToggle,
+} from "components/index";
 import classes from "./customisableInput.module.css";
 import { GrBold, GrClearOption, GrItalic, GrUnderline } from "react-icons/gr";
+import React from "react";
 
 const CustomisableInput = ({
     defaultValue,
     isVisible = {},
+    fontSize = {},
     fontWeight = {},
     fontStyle = {},
     textDecoration = {},
     fontColor = { value: "#000000" },
     onColorChange,
     onEnableChange,
+    onFontSizeChange,
     onWeightChange,
     onStyleChange,
     onDecorationChange,
 }) => {
+    const parseFontSize = (fontSizeStr) =>
+        parseInt(fontSizeStr.replace("px", ""), 10);
+
     return (
         <div className={classes.inputContainer}>
             <VisibilityToggle
@@ -99,6 +110,21 @@ const CustomisableInput = ({
                             }}
                         />
                         <GrUnderline />
+                    </div>
+                    <div className={classes.fontSizeContainer}>
+                        <FontSizeRange
+                            defaultFontSize={12}
+                            fontSize={[parseFontSize(fontSize.value)]}
+                            setFontSize={(size) => {
+                                onFontSizeChange({
+                                    ...fontSize,
+                                    value: `${size[0]}px`,
+                                });
+                            }}
+                        />
+                        <span className={classes.fontSize}>
+                            {parseFontSize(fontSize.value)}px{" "}
+                        </span>
                     </div>
                 </div>
             </div>

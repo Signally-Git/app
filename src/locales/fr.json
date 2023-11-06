@@ -314,6 +314,8 @@
             "sign_in": "Se connecter",
             "manual": "Manuellement",
             "from_csv": "A partir d'un fichier .csv",
+            "font_size": "Taille de police",
+            "font_family": "Famille de police",
             "width": "Largeur",
             "height": "Hauteur",
             "auto": "Auto",

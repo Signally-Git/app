@@ -3,6 +3,7 @@ import { Range } from "react-range";
 import React from "react";
 
 const FontSizeRange = ({ defaultFontSize, fontSize, setFontSize }) => {
+    console.log(fontSize);
     return (
         <Range
             step={1}

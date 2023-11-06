@@ -65,19 +65,19 @@
 
 .list {
     position: absolute;
-    top: 1rem;
     overflow-y: auto;
     overflow-x: hidden;
     left: 0;
     right: 0;
+    bottom: auto;
     z-index: 5;
-    margin: 0 auto;
+    margin: -0.65rem 0 auto;
     border: 1px solid $color-light-accent-variation;
     width: 100%;
     background-color: $pureLight;
     box-shadow: 0 5px 5px $color-light-accent-variation;
     border-radius: 0 0 $smallBorderRadius $smallBorderRadius;
-    padding: 2.65rem 0 0;
+    padding: 0;
     list-style: none;
     opacity: 0;
     max-height: inherit !important;
@@ -95,6 +95,7 @@
         color: $color-dark-accent;
         input,
         input + svg {
+            margin: 0;
             opacity: 0;
             color: $color-primary;
         }
