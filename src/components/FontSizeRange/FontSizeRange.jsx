@@ -7,8 +7,8 @@ const FontSizeRange = ({ defaultFontSize, fontSize, setFontSize }) => {
     return (
         <Range
             step={1}
-            min={defaultFontSize - 4}
-            max={defaultFontSize + 4}
+            min={defaultFontSize - 10}
+            max={defaultFontSize + 10}
             values={fontSize}
             onChange={(size) => setFontSize(size)}
             renderTrack={({ props, children }) => (
