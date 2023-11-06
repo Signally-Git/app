@@ -1,23 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { CustomSelect, FontSizeRange } from "components";
+import { CustomSelect } from "components";
 import classes from "./details.module.css";
 import GroupedStylesRenderer from "./GroupedStylesRenderer";
 
 const Details = ({ selectedTemplate, styles, setStyles }) => {
-    const getInitialFontSize = () => {
-        if (
-            selectedTemplate?.signatureStyles &&
-            Array.isArray(selectedTemplate.signatureStyles)
-        ) {
-            for (let style of selectedTemplate.signatureStyles) {
-                if (style?.property === "fontSize") {
-                    return parseInt(style.value);
-                }
-            }
-        }
-        return 8;
-    };
-
     const getInitialFontFamily = () => {
         if (styles && Array.isArray(styles)) {
             for (let style of styles) {
@@ -29,36 +15,30 @@ const Details = ({ selectedTemplate, styles, setStyles }) => {
         return "Arial, sans-serif";
     };
 
-    const defaultFontSize = getInitialFontSize();
-    const [fontSize, setFontSize] = useState([defaultFontSize]);
     const initialFontFamily = getInitialFontFamily();
     const [fontFamily, setFontFamily] = useState(initialFontFamily);
 
     useEffect(() => {
         const newStyles = styles.map((style) => {
-            if (style?.property === "fontSize") {
-                return { ...style, value: `${fontSize[0]}px` };
-            }
             if (style?.property === "fontFamily") {
                 return { ...style, value: fontFamily };
             }
             return style;
         });
         setStyles(newStyles);
-    }, [fontSize, fontFamily]);
+    }, [fontFamily]);
 
     if (!selectedTemplate) return <></>;
     const handleFontChange = (selectedItem) => {
         setFontFamily(selectedItem);
     };
-
     return (
         <div className={classes.container}>
             <div className={classes.inputsContainer}>
                 <GroupedStylesRenderer
                     styles={styles}
                     setStyles={setStyles}
-                    filter={["user", "company", "organisation"]}
+                    filter={["user", "company", "organisation", "address"]}
                     ignoreSubcategories={[
                         "user.picture",
                         "company.logo",
@@ -67,19 +47,6 @@ const Details = ({ selectedTemplate, styles, setStyles }) => {
                 />
             </div>
             <hr />
-            <h4>
-                Font size{" "}
-                <span className={classes.fontSize}>
-                    - {fontSize[0]}px{" "}
-                    {fontSize[0] === defaultFontSize && <>(Recommended)</>}
-                </span>
-            </h4>
-
-            <FontSizeRange
-                defaultFontSize={defaultFontSize}
-                fontSize={fontSize}
-                setFontSize={setFontSize}
-            />
             <CustomSelect
                 styleList={{ height: "21.5rem" }}
                 getValue={"name"}
