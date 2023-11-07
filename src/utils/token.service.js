@@ -35,8 +35,43 @@ const getOrganisation = () => {
 };
 
 const setOrganisation = (organisation) => {
-    organisation &&
-        localStorage.setItem("organisation", JSON.stringify(organisation));
+    const fieldsToKeep = [
+        "@id",
+        "id",
+        "@type",
+        "address",
+        "configurations",
+        "digitalAdress",
+        "distributor",
+        "employeeNumber",
+        "hasOnBoarding",
+        "events",
+        "google",
+        "office365",
+        "logo",
+        "logoDistributor",
+        "name",
+        "siren",
+        "tenantId",
+        "websiteUrl",
+    ];
+
+    const filterObject = (obj, fields) => {
+        return fields.reduce((filteredObj, field) => {
+            if (obj[field]) {
+                filteredObj[field] = obj[field];
+            }
+            return filteredObj;
+        }, {});
+    };
+
+    const filteredOrganisation = filterObject(organisation, fieldsToKeep);
+
+    filteredOrganisation &&
+        localStorage.setItem(
+            "organisation",
+            JSON.stringify(filteredOrganisation)
+        );
 };
 
 const removeOrganisation = () => {
