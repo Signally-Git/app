@@ -374,7 +374,7 @@ function CompanySettings() {
                     </div>
                 </div>
                 <div className={classes.row}>
-                    {organisation.azure === false && (
+                    {organisation?.azure === false && (
                         <div className={classes.inputContainer}>
                             <label>
                                 <FormattedMessage id="profile.informations.google_email_address" />
@@ -386,7 +386,7 @@ function CompanySettings() {
                             />
                         </div>
                     )}
-                    {organisation.google === false && (
+                    {organisation?.google === false && (
                         <div className={classes.inputContainer}>
                             <label>
                                 <FormattedMessage id="profile.informations.tenant_id" />
