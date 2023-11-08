@@ -115,9 +115,15 @@ const GroupedAddonsRenderer = ({
     };
 
     const groupedStyles = recursivelyGroupStyles(styles);
-
     const filteredGroupedStyles = {};
     filter.forEach((category) => {
+        if (category.indexOf(".") > -1) {
+            const parent = category.split(".")[0];
+            const children = category.split(".")[1];
+            if (groupedStyles?.[parent]?.[children])
+                filteredGroupedStyles[children] =
+                    groupedStyles[parent][children];
+        }
         if (groupedStyles[category]) {
             filteredGroupedStyles[category] = groupedStyles[category];
         }

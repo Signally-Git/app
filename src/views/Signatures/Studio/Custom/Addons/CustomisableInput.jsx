@@ -25,16 +25,8 @@ const CustomisableInput = ({
     contentValue,
     onContentValueChange,
 }) => {
-    const encodeContent = (text) => {
-        return text.replace(/\n/g, "<br />");
-    };
-
-    const decodeContent = (text) => {
-        return text.replace(/<br \/>/g, "\n");
-    };
-
     const parseFontSize = (fontSizeStr) =>
-        parseInt(fontSizeStr.replace("px", ""), 10);
+        parseInt(fontSizeStr?.replace("px", ""), 10);
 
     return (
         <div className={classes.inputContainer}>
@@ -59,11 +51,11 @@ const CustomisableInput = ({
                                 minWidth: "10rem",
                                 minHeight: "5rem",
                             }}
-                            value={decodeContent(contentValue.value)}
+                            value={contentValue.value}
                             onChange={(e) =>
                                 onContentValueChange({
                                     id: contentValue.id,
-                                    value: encodeContent(e.target.value),
+                                    value: e.target.value,
                                 })
                             }
                         />
