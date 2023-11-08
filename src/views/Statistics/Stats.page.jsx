@@ -228,7 +228,7 @@ function StatsPage() {
                                 htmlFor={
                                     configuration.filter(
                                         (item) => item.key === "USER_NAME"
-                                    )[0].value
+                                    )[0]?.value
                                 }
                             >
                                 {
