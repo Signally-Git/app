@@ -46,7 +46,6 @@ const GroupedAddonsRenderer = ({
 
     const renderGroupedStyles = (grouped, path = []) => {
         return Object.entries(grouped).reduce((acc, [key, value]) => {
-            console.log(value);
             if (ignoreSubcategories.includes(path.concat(key).join("."))) {
                 return acc;
             }
