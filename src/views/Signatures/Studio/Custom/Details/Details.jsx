@@ -46,7 +46,7 @@ const Details = ({ selectedTemplate, styles, setStyles }) => {
     ];
 
     useEffect(() => {
-        const newStyles = styles.map((style) => {
+        const newStyles = styles?.map((style) => {
             if (style?.property === "fontFamily") {
                 return { ...style, value: fontFamily };
             }
