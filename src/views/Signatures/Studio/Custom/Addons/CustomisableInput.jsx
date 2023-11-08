@@ -1,6 +1,12 @@
-import { ColorPicker, VisibilityToggle, Input } from "components";
+import {
+    ColorPicker,
+    VisibilityToggle,
+    Input,
+    FontSizeRange,
+} from "components";
 import classes from "./customisableInput.module.css";
 import { GrBold, GrClearOption, GrItalic, GrUnderline } from "react-icons/gr";
+import React from "react";
 
 const CustomisableInput = ({
     defaultValue,
@@ -8,6 +14,8 @@ const CustomisableInput = ({
     fontWeight = {},
     fontStyle = {},
     textDecoration = {},
+    fontSize = {},
+    onFontSizeChange,
     fontColor = { value: "#000000" }, // set default color to black
     onColorChange,
     onEnableChange,
@@ -17,6 +25,17 @@ const CustomisableInput = ({
     contentValue,
     onContentValueChange,
 }) => {
+    const encodeContent = (text) => {
+        return text.replace(/\n/g, "<br />");
+    };
+
+    const decodeContent = (text) => {
+        return text.replace(/<br \/>/g, "\n");
+    };
+
+    const parseFontSize = (fontSizeStr) =>
+        parseInt(fontSizeStr.replace("px", ""), 10);
+
     return (
         <div className={classes.inputContainer}>
             <VisibilityToggle
@@ -33,12 +52,18 @@ const CustomisableInput = ({
                 {contentValue !== undefined ? (
                     <>
                         <Input
-                            style={{ padding: ".5rem", margin: "0" }}
-                            value={contentValue.value}
+                            type="textarea"
+                            style={{
+                                padding: ".5rem",
+                                margin: "0",
+                                minWidth: "10rem",
+                                minHeight: "5rem",
+                            }}
+                            value={decodeContent(contentValue.value)}
                             onChange={(e) =>
                                 onContentValueChange({
                                     id: contentValue.id,
-                                    value: e.target.value,
+                                    value: encodeContent(e.target.value),
                                 })
                             }
                         />
@@ -116,6 +141,21 @@ const CustomisableInput = ({
                             }}
                         />
                         <GrUnderline />
+                    </div>
+                    <div className={classes.fontSizeContainer}>
+                        <FontSizeRange
+                            defaultFontSize={12}
+                            fontSize={[parseFontSize(fontSize.value)]}
+                            setFontSize={(size) => {
+                                onFontSizeChange({
+                                    ...fontSize,
+                                    value: `${size[0]}px`,
+                                });
+                            }}
+                        />
+                        <span className={classes.fontSize}>
+                            {parseFontSize(fontSize.value)}px{" "}
+                        </span>
                     </div>
                 </div>
             </div>

@@ -46,6 +46,7 @@ const GroupedAddonsRenderer = ({
 
     const renderGroupedStyles = (grouped, path = []) => {
         return Object.entries(grouped).reduce((acc, [key, value]) => {
+            console.log(value);
             if (ignoreSubcategories.includes(path.concat(key).join("."))) {
                 return acc;
             }
@@ -83,9 +84,13 @@ const GroupedAddonsRenderer = ({
                             fontStyle={value.fontStyle}
                             textDecoration={value.textDecoration}
                             fontColor={value.color}
+                            fontSize={value.fontSize}
                             onColorChange={(newColor) =>
                                 updateStyleProperty(newColor)
                             }
+                            onFontSizeChange={(newSize) => {
+                                updateStyleProperty(newSize);
+                            }}
                             onEnableChange={(newVisibility) =>
                                 updateStyleProperty(newVisibility)
                             }
@@ -98,9 +103,8 @@ const GroupedAddonsRenderer = ({
                             onDecorationChange={(newDecoration) =>
                                 updateStyleProperty(newDecoration)
                             }
-                            contentValue={value.content}
+                            contentValue={value.htmlContent}
                             onContentValueChange={(newContent) => {
-                                console.log(newContent);
                                 updateStyleProperty(newContent);
                             }}
                         />
