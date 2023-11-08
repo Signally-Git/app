@@ -24,3 +24,11 @@
 body {
   background-color: transparent;
 }
+
+@media (max-width: 768px) {
+  .signature {
+    transform: scale(0.8);
+    transform-origin: top left;
+    overflow-x: auto;
+  }
+}

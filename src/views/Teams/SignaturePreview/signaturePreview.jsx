@@ -3,7 +3,13 @@ import { useEffect, useState } from "react";
 import { request, useNotification } from "utils";
 import CopySignature from "views/CopySignature/CopySignature.jsx";
 import Search from "assets/icons/search.svg";
-import { Button, CustomSelect, Modal, NavigationButtons } from "components";
+import {
+    Button,
+    CopyButton,
+    CustomSelect,
+    Modal,
+    NavigationButtons,
+} from "components";
 import parse from "html-react-parser";
 import moment from "moment";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -471,6 +477,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                                     `${show.firstName} ${show.lastName}`}
                             </span>
                         </h2>
+                        <CopyButton signature={previewSignature} />
                     </div>
                     <div className={classes.signaturePreviewSelect}>
                         {typeof previewSignature === "string"
