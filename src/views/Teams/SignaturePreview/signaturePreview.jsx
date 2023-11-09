@@ -50,7 +50,7 @@ export default function SignaturePreview({ show, setShow, edit, setEdit }) {
                 }
                 return 0;
             });
-        toPush.unshift({ name: "Event", "@id": "event" });
+        toPush.unshift({ name: "Event", "@id": "event", listName: "No event" });
         setEvents([
             ...toPush,
             {
