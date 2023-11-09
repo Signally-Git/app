@@ -26,7 +26,10 @@ const Studio = () => {
 
     const fetchSignature = () => {
         request.get(`signatures/${signatureId}`).then(({ data }) => {
-            setSelectedTemplate(data.signatureTemplate);
+            setSelectedTemplate({
+                ...data.signatureTemplate,
+                signatureStyles: data.signatureStyles,
+            });
             setStyles(data.signatureStyles);
             setSignatureName(data.name);
         });
