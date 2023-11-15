@@ -33,15 +33,18 @@ const Deploy = () => {
     const intl = useIntl();
 
     useEffect(() => {
-        request.get("workplaces").then((response) => {
-            setWorkplaces(response.data["hydra:member"]);
-        });
-        request.get("teams").then((response) => {
-            setTeams(response.data["hydra:member"]);
-        });
-        request.get("users").then((response) => {
-            setUsers(response.data["hydra:member"]);
-        });
+        const fetchData = async () => {
+            const [workplacesRes, teamsRes, usersRes] = await Promise.all([
+                request.get("workplaces"),
+                request.get("teams"),
+                request.get("users"),
+            ]);
+
+            setWorkplaces(workplacesRes.data["hydra:member"]);
+            setTeams(teamsRes.data["hydra:member"]);
+            setUsers(usersRes.data["hydra:member"]);
+        };
+        fetchData();
     }, []);
 
     const handleSelectAll = (type, checked) => {
