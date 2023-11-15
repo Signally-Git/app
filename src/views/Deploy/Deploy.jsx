@@ -150,12 +150,13 @@ const Deploy = () => {
                 ),
                 status: "valid",
             });
-            console.log(response.data);
         } catch (error) {
             notification({
                 content: <FormattedMessage id="message.error.generic" />,
                 status: "invalid",
             });
+        } finally {
+            cancelDeployment();
         }
     };
 
