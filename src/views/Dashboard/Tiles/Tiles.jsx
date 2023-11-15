@@ -223,25 +223,6 @@ function Tiles(props) {
 
     return (
         <div className={classes.container}>
-            {modal && (
-                <Modal
-                    style={{ left: 0, padding: "1rem 2rem" }}
-                    title={
-                        <span className={classes.primaryTxt}>
-                            <FormattedMessage id="deploy.send_mail.title" />
-                        </span>
-                    }
-                    content={
-                        <FormattedMessage id="deploy.send_mail.description" />
-                    }
-                    cancel={
-                        <FormattedMessage id="buttons.placeholder.cancel" />
-                    }
-                    validate={sendMailBtn}
-                    onCancel={() => setModal(false)}
-                    onConfirm={handleDeploy}
-                />
-            )}
             <div className={classes.tilesList}>
                 {!templates.length < 1 && (
                     <Tile
@@ -343,57 +324,21 @@ function Tiles(props) {
                         />
                     }
                 />
-                <div
-                    className={`${classes.tile} ${classes.deploy}`}
-                    onClick={() => setModal(true)}
-                >
-                    <div className={`${classes.row} ${classes.onUnHover}`}>
-                        <p style={{ width: "5rem" }}>
-                            <FormattedMessage id="deploy.title" />
-                        </p>
-                        <BsBroadcastPin
-                            fontSize={"1.75rem"}
-                            style={{ margin: "auto 0 1rem 0" }}
+                <Tile
+                    link="/deploy"
+                    title={<FormattedMessage id="deploy.title" />}
+                    icon={ChevronRight}
+                    iconAlt="Deploy"
+                    leftCorner={
+                        users.filter((user) => user.synchronizable).length
+                    }
+                    rightCorner={
+                        <FormattedMessage
+                            id="activated.male"
+                            values={{ count: users.length }}
                         />
-                    </div>
-                    <div className={`${classes.row} ${classes.onHover}`}>
-                        <p style={{ width: "5rem" }}>
-                            <FormattedMessage id="deploy.cta" />
-                        </p>
-                        <BsBroadcastPin
-                            fontSize={"1.75rem"}
-                            style={{ margin: "auto 0 1rem 0" }}
-                        />
-                    </div>
-                    <div className={classes.row}>
-                        <div>
-                            <span className={classes.bigTxt}>
-                                {users.length}
-                            </span>
-                        </div>
-                        <span className={classes.activeSpan}>
-                            <FormattedMessage
-                                id="activated.male"
-                                values={{ count: users.length }}
-                            />
-                        </span>
-                    </div>
-                </div>
-                <div className={`${classes.tile} ${classes.billingTile}`}>
-                    <div className={classes.row}>
-                        <p>
-                            <FormattedMessage id="billing" />
-                        </p>
-                        <img src={ChevronRight} alt="View" />
-                    </div>
-                    <div className={classes.row}>
-                        <div>
-                            <span className={classes.free}>
-                                <FormattedMessage id="free" />
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                    }
+                />
                 <ConnectTile organisation={TokenService.getOrganisation()} />
             </div>
         </div>
