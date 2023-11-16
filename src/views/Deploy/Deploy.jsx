@@ -168,130 +168,131 @@ const Deploy = () => {
             <h1>
                 <FormattedMessage id="deploy.title" />
             </h1>
-
-            <div className={classes.column}>
-                <div className={classes.header}>
-                    <h2>
-                        <label htmlFor="selectAllWorkplaces">
-                            {workplaceName}
-                        </label>
-                    </h2>
-                    <CustomCheckbox
-                        checked={selectAllWorkplaces}
-                        id="selectAllWorkplaces"
-                        onChange={(e) =>
-                            handleSelectAll("workplaces", e.target.checked)
-                        }
-                    />
-                </div>
-                <Input
-                    placeholder={intl.formatMessage({ id: "search" })}
-                    value={searchWorkplaces}
-                    onChange={(e) => setSearchWorkplaces(e.target.value)}
-                />
-                <div className={classes.scrollableList}>
-                    {filterItems(workplaces, searchWorkplaces).map((wp) => (
-                        <div className={classes.checkboxContainer}>
-                            <CustomCheckbox
-                                key={wp.id}
-                                id={`workplace-${wp.id}`}
-                                checked={selectedWorkplaces.has(wp.id)}
-                                onChange={(e) =>
-                                    handleCheckboxChange(
-                                        wp.id,
-                                        e.target.checked,
-                                        "workplaces"
-                                    )
-                                }
-                                label={wp.name}
-                            />
-                            <label htmlFor={`workplace-${wp.id}`}>
-                                {wp.name}
+            <div className={classes.row}>
+                <div className={classes.column}>
+                    <div className={classes.header}>
+                        <h2>
+                            <label htmlFor="selectAllWorkplaces">
+                                {workplaceName}
                             </label>
-                        </div>
-                    ))}
-                </div>
-            </div>
-            <div className={classes.column}>
-                <div className={classes.header}>
-                    <h2>
-                        <label htmlFor="selectAllTeams">{teamName}</label>
-                    </h2>
-                    <CustomCheckbox
-                        checked={selectAllTeams}
-                        id="selectAllTeams"
-                        onChange={(e) =>
-                            handleSelectAll("teams", e.target.checked)
-                        }
+                        </h2>
+                        <CustomCheckbox
+                            checked={selectAllWorkplaces}
+                            id="selectAllWorkplaces"
+                            onChange={(e) =>
+                                handleSelectAll("workplaces", e.target.checked)
+                            }
+                        />
+                    </div>
+                    <Input
+                        placeholder={intl.formatMessage({ id: "search" })}
+                        value={searchWorkplaces}
+                        onChange={(e) => setSearchWorkplaces(e.target.value)}
                     />
+                    <div className={classes.scrollableList}>
+                        {filterItems(workplaces, searchWorkplaces).map((wp) => (
+                            <div className={classes.checkboxContainer}>
+                                <CustomCheckbox
+                                    key={wp.id}
+                                    id={`workplace-${wp.id}`}
+                                    checked={selectedWorkplaces.has(wp.id)}
+                                    onChange={(e) =>
+                                        handleCheckboxChange(
+                                            wp.id,
+                                            e.target.checked,
+                                            "workplaces"
+                                        )
+                                    }
+                                    label={wp.name}
+                                />
+                                <label htmlFor={`workplace-${wp.id}`}>
+                                    {wp.name}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-                <Input
-                    placeholder={intl.formatMessage({ id: "search" })}
-                    value={searchTeams}
-                    onChange={(e) => setSearchTeams(e.target.value)}
-                />
-                <div className={classes.scrollableList}>
-                    {filterItems(teams, searchTeams).map((team) => (
-                        <div className={classes.checkboxContainer}>
-                            <CustomCheckbox
-                                key={team.id}
-                                id={`team-${team.id}`}
-                                checked={selectedTeams.has(team.id)}
-                                onChange={(e) =>
-                                    handleCheckboxChange(
-                                        team.id,
-                                        e.target.checked,
-                                        "teams"
-                                    )
-                                }
-                                label={team.name}
-                            />
-                            <label htmlFor={`team-${team.id}`}>
-                                {team.name}
-                            </label>
-                        </div>
-                    ))}
-                </div>
-            </div>
-            <div className={classes.column}>
-                <div className={classes.header}>
-                    <h2>
-                        <label htmlFor="selectAllUSers">{userName}</label>
-                    </h2>
-                    <CustomCheckbox
-                        id="selectAllUSers"
-                        checked={selectAllUsers}
-                        onChange={(e) =>
-                            handleSelectAll("users", e.target.checked)
-                        }
+                <div className={classes.column}>
+                    <div className={classes.header}>
+                        <h2>
+                            <label htmlFor="selectAllTeams">{teamName}</label>
+                        </h2>
+                        <CustomCheckbox
+                            checked={selectAllTeams}
+                            id="selectAllTeams"
+                            onChange={(e) =>
+                                handleSelectAll("teams", e.target.checked)
+                            }
+                        />
+                    </div>
+                    <Input
+                        placeholder={intl.formatMessage({ id: "search" })}
+                        value={searchTeams}
+                        onChange={(e) => setSearchTeams(e.target.value)}
                     />
+                    <div className={classes.scrollableList}>
+                        {filterItems(teams, searchTeams).map((team) => (
+                            <div className={classes.checkboxContainer}>
+                                <CustomCheckbox
+                                    key={team.id}
+                                    id={`team-${team.id}`}
+                                    checked={selectedTeams.has(team.id)}
+                                    onChange={(e) =>
+                                        handleCheckboxChange(
+                                            team.id,
+                                            e.target.checked,
+                                            "teams"
+                                        )
+                                    }
+                                    label={team.name}
+                                />
+                                <label htmlFor={`team-${team.id}`}>
+                                    {team.name}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-                <Input
-                    placeholder={intl.formatMessage({ id: "search" })}
-                    value={searchUsers}
-                    onChange={(e) => setSearchUsers(e.target.value)}
-                />
-                <div className={classes.scrollableList}>
-                    {filterItems(users, searchUsers).map((user) => (
-                        <div className={classes.checkboxContainer}>
-                            <CustomCheckbox
-                                key={user.id}
-                                id={`user-${user.id}`}
-                                checked={selectedUsers.has(user.id)}
-                                onChange={(e) =>
-                                    handleCheckboxChange(
-                                        user.id,
-                                        e.target.checked,
-                                        "users"
-                                    )
-                                }
-                                label={`${user.firstName} ${user.lastName}`}
-                            />
-                            <label
-                                htmlFor={`user-${user.id}`}
-                            >{`${user.firstName} ${user.lastName}`}</label>
-                        </div>
-                    ))}
+                <div className={classes.column}>
+                    <div className={classes.header}>
+                        <h2>
+                            <label htmlFor="selectAllUSers">{userName}</label>
+                        </h2>
+                        <CustomCheckbox
+                            id="selectAllUSers"
+                            checked={selectAllUsers}
+                            onChange={(e) =>
+                                handleSelectAll("users", e.target.checked)
+                            }
+                        />
+                    </div>
+                    <Input
+                        placeholder={intl.formatMessage({ id: "search" })}
+                        value={searchUsers}
+                        onChange={(e) => setSearchUsers(e.target.value)}
+                    />
+                    <div className={classes.scrollableList}>
+                        {filterItems(users, searchUsers).map((user) => (
+                            <div className={classes.checkboxContainer}>
+                                <CustomCheckbox
+                                    key={user.id}
+                                    id={`user-${user.id}`}
+                                    checked={selectedUsers.has(user.id)}
+                                    onChange={(e) =>
+                                        handleCheckboxChange(
+                                            user.id,
+                                            e.target.checked,
+                                            "users"
+                                        )
+                                    }
+                                    label={`${user.firstName} ${user.lastName}`}
+                                />
+                                <label
+                                    htmlFor={`user-${user.id}`}
+                                >{`${user.firstName} ${user.lastName}`}</label>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
             <div className={classes.ctaContainer}>
