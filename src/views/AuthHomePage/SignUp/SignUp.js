@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classes from "../AuthHomePage.module.css";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import axios from "axios";
@@ -8,8 +8,10 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { useHistory } from "react-router-dom";
 import { validateEmail, validateSiren } from "utils";
 import { CustomSelect, Input, Button } from "components";
+import { LangContext } from "../../../contexts/LangContext";
 
 const Signup = () => {
+    const { languageId } = useContext(LangContext);
     const intl = useIntl();
     const [email, setEmail] = useState("");
     const [firstname, setFirstname] = useState("");
@@ -112,6 +114,7 @@ const Signup = () => {
             position: position,
             organisationName: societyName,
             employeeNumber: nbPerson,
+            langId: languageId,
             siren: siren,
         };
         if (valid) {
