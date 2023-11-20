@@ -13,9 +13,11 @@
 .studioContainer {
   display: flex;
   height: calc(100% - 10rem);
-  overflow: hidden;
+  overflow: auto;
+  gap: 1rem;
 }
 .studioContainer > div {
+  min-width: calc(500px + 5rem);
   width: 50%;
 }
 .studioContainer > .modalContainer {
