@@ -290,7 +290,7 @@ const Signup = () => {
                                 >
                                     <Input
                                         required
-                                        placeholder="jean.dupont@signally.io"
+                                        placeholder="jean.dupont@company.io"
                                         onChange={(e) => {
                                             setEmail(e.target.value);
                                         }}
@@ -343,7 +343,7 @@ const Signup = () => {
                                 <Input
                                     required
                                     autoComplete="organization"
-                                    placeholder="Signally"
+                                    placeholder="Company"
                                     onChange={(e) =>
                                         setSocietyName(e.target.value)
                                     }
