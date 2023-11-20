@@ -18,6 +18,7 @@ function Onboarding({ organisation, completed, setCompleted }) {
     const [missing, setMissing] = React.useState([]);
     const [events, setEvents] = React.useState([]);
     const [users, setUsers] = React.useState([]);
+    const [signatures, setSignatures] = React.useState([]);
     const history = useHistory();
     const { name } = useContext(ThemeContext);
 
@@ -41,6 +42,9 @@ function Onboarding({ organisation, completed, setCompleted }) {
             });
             request.get("users").then((r) => {
                 setUsers(r.data["hydra:member"]);
+            });
+            request.get("signatures").then((r) => {
+                setSignatures(r.data["hydra:member"]);
             });
         };
         getData();
@@ -132,10 +136,10 @@ function Onboarding({ organisation, completed, setCompleted }) {
             {
                 link: <FormattedMessage id="signature.title" />,
                 title: <FormattedMessage id="signature.title" />,
-                done: organisation?.signatures?.length > 0,
+                done: signatures?.length > 0,
                 content: (
                     <>
-                        {organisation?.signatures?.length > 0 ? (
+                        {signatures?.length > 0 ? (
                             <>
                                 <FormattedMessage id="onboarding.completed.signature" />
                                 <Button
