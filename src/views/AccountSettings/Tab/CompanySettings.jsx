@@ -107,6 +107,7 @@ function CompanySettings() {
                         websiteUrl: website,
                         logo: res.data["@id"],
                         tenantId: tenantId,
+                        office365: tenantId ? "true" : "false",
                         address: {
                             ...organisation.address,
                         },
@@ -169,6 +170,7 @@ function CompanySettings() {
                 name: companyName,
                 websiteUrl: website,
                 tenantId: tenantId,
+                office365: tenantId ? "true" : "false",
                 address: {
                     ...organisation.address,
                 },
