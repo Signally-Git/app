@@ -60,27 +60,32 @@ const Tags = ({ selectedVisibility, setVisibility, selectedTag, setTag }) => {
                     </Button>
                 </li>
             </ul>
-            <ul className={classes.tagsList}>
-                {tags.map((tag) => (
-                    <li key={tag.id}>
+            {tags.length > 0 && (
+                <ul className={classes.tagsList}>
+                    {tags.map((tag) => (
+                        <li key={tag.id}>
+                            <Button
+                                onClick={() => setTag(tag.name)}
+                                color={`${
+                                    selectedTag === tag.name
+                                        ? "primaryFill"
+                                        : "primary"
+                                }`}
+                            >
+                                {tag.name}
+                            </Button>
+                        </li>
+                    ))}
+                    <li>
                         <Button
-                            onClick={() => setTag(tag.name)}
-                            color={`${
-                                selectedTag === tag.name
-                                    ? "primaryFill"
-                                    : "primary"
-                            }`}
+                            onClick={() => setTag(null)}
+                            color="primaryLink"
                         >
-                            {tag.name}
+                            Reset
                         </Button>
                     </li>
-                ))}
-                <li>
-                    <Button onClick={() => setTag(null)} color="primaryLink">
-                        Reset
-                    </Button>
-                </li>
-            </ul>
+                </ul>
+            )}
         </>
     );
 };
