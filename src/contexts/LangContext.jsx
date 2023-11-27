@@ -21,6 +21,9 @@ export const LangProvider = ({ children }) => {
     const [locale, setLocale] = useState(
         TokenService.getUser()?.lang?.locale || detectBrowserLanguage() || "fr"
     );
+    const [languageId, setLanguageId] = useState(
+        TokenService.getUser()?.lang?.id || null
+    );
 
     function getMessages(locale) {
         switch (locale) {
@@ -37,7 +40,9 @@ export const LangProvider = ({ children }) => {
     const messages = flattenMessages(getMessages(locale));
 
     return (
-        <LangContext.Provider value={{ locale, setLocale, messages }}>
+        <LangContext.Provider
+            value={{ locale, setLocale, messages, languageId, setLanguageId }}
+        >
             {children}
         </LangContext.Provider>
     );

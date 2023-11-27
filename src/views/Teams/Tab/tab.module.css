@@ -178,7 +178,13 @@
   margin-bottom: 0.25rem;
 }
 .teamList .editing {
-  height: 3.5rem !important;
+  height: 5.5rem !important;
+}
+.teamList .editing .deployContainer {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 .teamList .editing .rename {
   padding: 0.5rem 1rem;
@@ -237,8 +243,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 70%;
-  max-height: 70%;
+  min-height: 75%;
+  max-height: 75%;
   bottom: 1rem;
 }
 .editDiv input:not(input[type=file]) {
@@ -258,6 +264,11 @@
 }
 .editDiv > label > label {
   margin-left: 0.5rem;
+}
+.editDiv .deployContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
 }
 
 @keyframes fadeIn {

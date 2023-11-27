@@ -4,7 +4,7 @@ import { LangContext } from "contexts/LangContext";
 import { request } from "utils";
 
 function SwitchLang({ setUserLanguage }) {
-    const { locale, setLocale } = useContext(LangContext);
+    const { locale, setLocale, setLanguageId } = useContext(LangContext);
     const [languages, setLanguages] = useState([]);
     const isMountedRef = useRef(true);
     function findLocale(arr, locale) {
@@ -48,6 +48,9 @@ function SwitchLang({ setUserLanguage }) {
             setUserLanguage(
                 languages.find((lang) => lang.locale === selectedLang)?.["@id"]
             );
+        setLanguageId(
+            languages.find((lang) => lang.locale === selectedLang)?.["@id"]
+        );
     }
 
     return (

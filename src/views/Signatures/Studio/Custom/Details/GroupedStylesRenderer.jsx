@@ -75,6 +75,7 @@ const GroupedStylesRenderer = ({
                         <CustomisableInput
                             defaultValue={key}
                             isVisible={value.enabled}
+                            fontSize={value.fontSize}
                             fontWeight={value.fontWeight}
                             fontStyle={value.fontStyle}
                             textDecoration={value.textDecoration}
@@ -85,6 +86,9 @@ const GroupedStylesRenderer = ({
                             onEnableChange={(newVisibility) =>
                                 updateStyleProperty(newVisibility)
                             }
+                            onFontSizeChange={(newSize) => {
+                                updateStyleProperty(newSize);
+                            }}
                             onWeightChange={(newWeight) => {
                                 updateStyleProperty(newWeight);
                             }}

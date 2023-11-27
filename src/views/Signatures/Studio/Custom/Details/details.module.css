@@ -6,8 +6,12 @@
   border-bottom: 1px solid;
   opacity: 0.1;
 }
+.container > h3 {
+  margin: 0;
+}
 
 .inputsContainer {
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -35,9 +39,4 @@
 }
 .inputsContainer > div > div {
   max-width: 48%;
-}
-
-.fontSize {
-  font-weight: normal;
-  opacity: 0.8;
 }

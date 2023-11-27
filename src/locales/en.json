@@ -313,6 +313,8 @@
             "sign_in": "Sign in",
             "manual": "Manually",
             "from_csv": "From a .csv file",
+            "font_size": "Font size",
+            "font_family": "Font family",
             "width": "Width",
             "height": "Height",
             "auto": "Auto",

@@ -65,3 +65,22 @@
         }
     }
 }
+
+.fontSizeContainer
+{
+    display: flex;
+    gap: 1.5rem;
+    margin-left: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 15rem;
+    .fontSize {
+        display: flex;
+        position: relative;
+        small {
+            position: absolute;
+            left: 0;
+            bottom: -1rem;
+        }
+    }
+}

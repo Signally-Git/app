@@ -1,7 +1,11 @@
 import { FormattedMessage } from "react-intl";
 import { IoStatsChart } from "react-icons/io5";
 import classes from "./Menu.module.css";
-import { MdHelpOutline, MdOutlineAccountCircle } from "react-icons/md";
+import {
+    MdHelpOutline,
+    MdOutlineAccountCircle,
+    MdOutlineRocketLaunch,
+} from "react-icons/md";
 import { PiTagBold } from "react-icons/pi";
 import React from "react";
 import { TokenService } from "utils";
@@ -149,6 +153,12 @@ const MenuLinks = (props) => {
             ),
             label: <FormattedMessage tagName="label" id="teams" />,
             isActive: page.search("team") !== -1,
+        },
+        {
+            to: "/deploy",
+            icon: <MdOutlineRocketLaunch />,
+            label: <FormattedMessage tagName="label" id="deploy.title" />,
+            isActive: page.search("deploy") !== -1,
         },
         {
             to: "/events",

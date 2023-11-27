@@ -20,7 +20,7 @@ export const getDataTeam = (teams, setTeams) => {
                             team["preview"] = res.data.preview;
                             return team;
                         })
-                        .catch((err) => {
+                        .catch(() => {
                             return team;
                         });
                 } else {
@@ -72,7 +72,7 @@ export const ListTeams = ({
             await request
                 .patch(
                     team["@id"],
-                    { name: teamName, synchronizable: isDeployed },
+                    { name: teamName || team.name, synchronizable: isDeployed },
                     {
                         headers: {
                             "Content-Type": "application/merge-patch+json",
@@ -218,7 +218,12 @@ export const ListTeams = ({
                                                     setChanged(true);
                                                 }}
                                             />
-                                            <label htmlFor="isDeployed">
+                                            <label
+                                                className={
+                                                    classes.deployContainer
+                                                }
+                                                htmlFor="isDeployed"
+                                            >
                                                 <FormattedMessage id="deploy.cta" />
                                                 <CustomCheckbox
                                                     onChange={(e) => {

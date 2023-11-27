@@ -1,30 +1,37 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { VisibilityToggle, Input, Button, CustomCheckbox } from "components";
-import classes from "./GroupedStylesImagesRenderer.module.css";
+import classes from "../Images/GroupedStylesImagesRenderer.module.css";
 import { FormattedMessage } from "react-intl";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi2";
 
-const GroupedStylesImagesRenderer = ({ styles, setStyles, ignore }) => {
-    const initializeLockedRatios = () => {
-        const types = [...new Set(styles.map((s) => s.type))];
-        const initialLocks = {};
-        types.forEach((type) => {
-            initialLocks[type] = true;
-        });
-        return initialLocks;
-    };
+const SocialsRenderer = ({ styles, setStyles, typesToShow }) => {
+    const stylesByType = useMemo(() => {
+        if (!typesToShow) return;
+        return styles.reduce((acc, style) => {
+            if (typesToShow?.includes(style.type)) {
+                acc[style.type] = {
+                    ...(acc[style.type] || {}),
+                    [style.property]: style,
+                };
+            }
+            return acc;
+        }, {});
+    }, [styles, typesToShow]);
 
-    const [lockedRatios, setLockedRatios] = useState(initializeLockedRatios);
+    const [lockedRatios, setLockedRatios] = useState(
+        Object.fromEntries(typesToShow?.map((type) => [type, true]) || [])
+    );
     const [lastNumericValues, setLastNumericValues] = useState({});
 
     const updateImageProperty = (styleUpdate) => {
-        setStyles((prevStyles) =>
-            prevStyles.map((style) =>
+        setStyles((prevStyles) => {
+            if (!prevStyles) return;
+            return prevStyles.map((style) =>
                 style.id === styleUpdate.id
                     ? { ...style, value: styleUpdate.value }
                     : style
-            )
-        );
+            );
+        });
     };
 
     const findStyleByTypeAndProperty = (type, property) => {
@@ -117,15 +124,6 @@ const GroupedStylesImagesRenderer = ({ styles, setStyles, ignore }) => {
             updateOtherDimension(type, updatedProperty, value);
         }
     };
-
-    const subTypeToUrlMap = {
-        Company: "/account/company",
-        Organisation: "/account/company",
-        User: "/account/user",
-        Event: "events",
-        Workplace: "/teams/workplaces",
-    };
-
     const renderImagePropertyEditor = (type) => {
         const enabledStyle = findStyleByTypeAndProperty(type, "enabled");
         const widthStyle = findStyleByTypeAndProperty(type, "width");
@@ -275,128 +273,26 @@ const GroupedStylesImagesRenderer = ({ styles, setStyles, ignore }) => {
     };
 
     const renderGroupByType = () => {
-        const types = [...new Set(styles.map((s) => s.type))];
-
-        return types
-            .filter((type) => !ignore?.includes(type))
-            .map((type) => {
-                const typeParts = type.split(".");
-                const mainType = typeParts[0];
-                const subType = typeParts[1];
-
-                const enabledStyle = findStyleByTypeAndProperty(
-                    type,
-                    "enabled"
-                );
-                const widthStyle = findStyleByTypeAndProperty(type, "width");
-                const heightStyle = findStyleByTypeAndProperty(type, "height");
-
-                if (!enabledStyle || !widthStyle || !heightStyle) {
-                    return null;
-                }
-
-                return (
-                    <div className={classes.main} key={mainType}>
-                        <h3>
-                            {mainType.charAt(0).toUpperCase() +
-                                mainType.slice(1)}
-                        </h3>
-                        <div className={classes.child}>
-                            {subType ? (
-                                <>
-                                    <h4>
-                                        {subType.charAt(0).toUpperCase() +
-                                            subType.slice(1)}
-                                    </h4>
-                                    {subTypeToUrlMap[
-                                        mainType.charAt(0).toUpperCase() +
-                                            mainType.slice(1)
-                                    ] ? (
-                                        <FormattedMessage
-                                            tagName="span"
-                                            values={{
-                                                value: `${subType} ${mainType}`,
-                                                link: (
-                                                    <>
-                                                        <a
-                                                            href={
-                                                                subTypeToUrlMap[
-                                                                    mainType
-                                                                        .charAt(
-                                                                            0
-                                                                        )
-                                                                        .toUpperCase() +
-                                                                        mainType.slice(
-                                                                            1
-                                                                        )
-                                                                ]
-                                                            }
-                                                        >
-                                                            <FormattedMessage id="signature.infos.here" />
-                                                        </a>
-                                                    </>
-                                                ),
-                                            }}
-                                            id={`signature.infos.${subType}`}
-                                        />
-                                    ) : null}
-                                </>
-                            ) : subTypeToUrlMap[
-                                  mainType.charAt(0).toUpperCase() +
-                                      mainType.slice(1)
-                              ] ? (
-                                <FormattedMessage
-                                    tagName="span"
-                                    values={{
-                                        value: mainType,
-                                        link: (
-                                            <>
-                                                <a
-                                                    href={
-                                                        subTypeToUrlMap[
-                                                            mainType
-                                                                .charAt(0)
-                                                                .toUpperCase() +
-                                                                mainType.slice(
-                                                                    1
-                                                                )
-                                                        ]
-                                                    }
-                                                >
-                                                    ici
-                                                </a>
-                                            </>
-                                        ),
-                                    }}
-                                    id={`signature.infos.logo`}
-                                />
-                            ) : null}
-
-                            {renderImagePropertyEditor(type)}
-                        </div>
-                    </div>
-                );
-            })
-            .filter(Boolean);
+        if (!typesToShow) return [];
+        return typesToShow
+            .filter((type) => stylesByType[type])
+            .map((type) => renderImagePropertyEditor(type));
     };
 
     const hasDisplayableContent = () => {
-        const types = [...new Set(styles.map((s) => s.type))];
-        return types.some((type) => {
-            if (ignore?.includes(type)) return false; // Ignorer les types spécifiés
-
-            const enabledStyle = findStyleByTypeAndProperty(type, "enabled");
-            const widthStyle = findStyleByTypeAndProperty(type, "width");
-            const heightStyle = findStyleByTypeAndProperty(type, "height");
-
-            return enabledStyle && widthStyle && heightStyle;
-        });
+        if (!typesToShow) return [];
+        return typesToShow.some((type) => stylesByType[type]);
     };
 
     if (!hasDisplayableContent()) {
         return <FormattedMessage id="message.warning.no_data" />;
     }
-    return <div>{renderGroupByType()}</div>;
+
+    return (
+        <div className={classes.main}>
+            <div className={classes.child}>{renderGroupByType()}</div>
+        </div>
+    );
 };
 
-export default GroupedStylesImagesRenderer;
+export default SocialsRenderer;

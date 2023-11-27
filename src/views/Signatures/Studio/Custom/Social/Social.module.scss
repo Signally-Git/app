@@ -1,0 +1,25 @@
+@import "../../../../../assets/style/global";
+
+.container {
+    p {
+        font-size: .8rem;
+    }
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: .5rem;
+    h3 {
+        text-transform: capitalize;
+        margin: 1.5rem 0 .5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid $color-light-accent;
+        &:first-child {
+            margin-top: 0;
+        }
+        width: 100%;
+    }
+    h4 {
+        margin: 0;
+        text-transform: capitalize;
+    }
+}

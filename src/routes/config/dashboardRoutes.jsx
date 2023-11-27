@@ -34,6 +34,12 @@ export const dashboardRoutes = [
         page="teams"
         component={Dashboard}
     />,
+    <PrivateRouteHelper
+        exact
+        path="/deploy"
+        page="deploy"
+        component={Dashboard}
+    />,
 
     <PrivateRouteHelper
         path="/account/:tab"

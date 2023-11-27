@@ -107,6 +107,7 @@ function CompanySettings() {
                         websiteUrl: website,
                         logo: res.data["@id"],
                         tenantId: tenantId,
+                        office365: tenantId ? "true" : "false",
                         address: {
                             ...organisation.address,
                         },
@@ -169,6 +170,7 @@ function CompanySettings() {
                 name: companyName,
                 websiteUrl: website,
                 tenantId: tenantId,
+                office365: tenantId ? "true" : "false",
                 address: {
                     ...organisation.address,
                 },
@@ -374,7 +376,7 @@ function CompanySettings() {
                     </div>
                 </div>
                 <div className={classes.row}>
-                    {organisation.azure === false && (
+                    {organisation?.azure === false && (
                         <div className={classes.inputContainer}>
                             <label>
                                 <FormattedMessage id="profile.informations.google_email_address" />
@@ -386,7 +388,7 @@ function CompanySettings() {
                             />
                         </div>
                     )}
-                    {organisation.google === false && (
+                    {organisation?.google === false && (
                         <div className={classes.inputContainer}>
                             <label>
                                 <FormattedMessage id="profile.informations.tenant_id" />

@@ -11,6 +11,7 @@ import StatsPage from "views/Statistics/Stats.page";
 import AccountSettings from "../AccountSettings/accountSettings";
 import Studio from "../Signatures/Studio/Studio";
 import { WhiteLabel } from "../WhiteLabel/WhiteLabel";
+import { Deploy } from "../Deploy/Deploy";
 
 const Dashboard = ({ page }) => {
     const [loadingTiles, setLoadingTiles] = useState(false);
@@ -45,6 +46,7 @@ const Dashboard = ({ page }) => {
             </>
         ),
         teams: <Users />,
+        deploy: <Deploy />,
         whiteLabel: <WhiteLabel />,
         statistics: <StatsPage />,
         signatures: <Signatures />,

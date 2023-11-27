@@ -9,7 +9,14 @@ const Addons = ({ styles, setStyles }) => {
                 <GroupedAddonsRenderer
                     styles={styles}
                     setStyles={setStyles}
-                    filter={["greetings", "disclaimers"]}
+                    filter={[
+                        "greetings",
+                        "disclaimers",
+                        "user.urlagenda",
+                        "customfield_1",
+                        "customfield_2",
+                        "customfield_3",
+                    ]}
                 />
             </div>
             <hr />

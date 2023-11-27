@@ -630,7 +630,7 @@ function Signatures() {
                                                                         classes.added
                                                                     }
                                                                 >
-                                                                    <FormattedMessage id="message.success.add" />
+                                                                    <FormattedMessage id="message.success.added" />
                                                                 </span>
                                                             ) : (
                                                                 <button>
