@@ -1,323 +1,133 @@
-import classes from "./eventManager.module.css";
-import { useEffect, useState } from "react";
-import { request } from "utils";
-import Search from "assets/icons/search.svg";
-import { Button, CustomSelect, NavigationButtons } from "components";
-import moment from "moment";
-import { FormattedMessage, useIntl } from "react-intl";
+import { CustomSelect } from "components";
+import { memo, useEffect, useState } from "react";
+import { filterPastCampaigns, getCurrentCampaigns, request } from "utils";
+import { useIntl } from "react-intl";
+import Playlist from "./Playlist";
 
-export default function EventManager({ edit }) {
-    const [event, setEvent] = useState({ "@id": "event", name: "event" });
-    const [multiEvents, setMultiEvents] = useState([]);
-    const [events, setEvents] = useState([]);
-    const [incomingEvents, setIncEvents] = useState([]);
-    const [choosePlaylist, setChoosePlaylist] = useState(false);
-    const [searchQuery, setSearchQuery] = useState("");
+const EventManager = memo(({ editedEntity, setEditedEntityEvent }) => {
     const intl = useIntl();
+    console.log(editedEntity);
 
-    //  PREVIEW EVENT
-    useEffect(async () => {
-        const events = await request.get("events");
-        const toPush = events.data["hydra:member"]
-            .filter(
-                (data) =>
-                    new Date(data.startAt) < new Date() &&
-                    new Date(data.endAt) > new Date()
-            )
-            .sort(function (a, b) {
-                if (a.startAt < b.startAt) {
-                    return -1;
-                }
-                if (a.startAt > b.startAt) {
-                    return 1;
-                }
-                return 0;
-            });
-        toPush.unshift({ name: "Event", "@id": "event" });
-        setEvents([
-            ...toPush,
-            {
-                name: "Playlist",
-                "@id": "playlist",
-                callback: setChoosePlaylist,
-                listName:
-                    event["@id"] === "playlist"
-                        ? "Modifier la playlist"
-                        : "Playlist",
-                style: { fontWeight: "bold" },
-            },
-        ]);
-    }, []);
+    const [selectedEvent, setSelectedEvent] = useState(null);
 
-    useEffect(async () => {
-        const events = await request.get("events");
+    const [selectedCampaigns, setSelectedCampaigns] = useState([]);
+    const [showPlaylistEditor, setShowPlaylistEditor] = useState(false);
 
-        setIncEvents(
-            events.data["hydra:member"]
-                .filter((data) => new Date(data.endAt) > new Date())
-                .sort(function (a, b) {
-                    if (a.startAt < b.startAt) {
-                        return -1;
-                    }
-                    if (a.startAt > b.startAt) {
-                        return 1;
-                    }
-                    return 0;
-                })
-        );
-    }, [edit]);
-
-    // Modal
-    const [modal, setModal] = useState(false);
-
-    useEffect(() => {
-        if (event === "playlist" || events === "playlist") {
-            events.pop();
-            setEvents([
-                ...events,
-                {
-                    name: "Playlist",
-                    "@id": "playlist",
-                    callback: setChoosePlaylist,
-                    listName:
-                        event !== "playlist"
-                            ? "Playlist"
-                            : "Modifier la playlist",
-                    style: { fontWeight: "bold", color: `#FF7954` },
-                },
-            ]);
-        }
-        if (event !== "playlist" && events.length > 1) {
-            events.pop();
-            setEvents((events) => [
-                ...events,
-                {
-                    name: "Playlist",
-                    "@id": "playlist",
-                    callback: setChoosePlaylist,
-                    listName:
-                        event !== "playlist"
-                            ? "Playlist"
-                            : "Modifier la playlist",
-                    style: { fontWeight: "bold", color: `#FF7954` },
-                },
-            ]);
-        }
-    }, [event]);
-
-    // ASSIGNATION
-    const handleProgram = () => {
-        let markedCheckbox = document.querySelectorAll(
-            'input[type="checkbox"]:checked'
-        );
-        let tmp = [];
-        for (let checkbox of markedCheckbox) {
-            tmp.push(JSON.parse(checkbox.value)["@id"]);
-        }
-        setMultiEvents(tmp);
-        setChoosePlaylist(false);
+    const noCampaign = {
+        "@id": "none",
+        name: intl.formatMessage({ id: "no_event" }),
+    };
+    const playlistOption = {
+        "@id": "playlist",
+        name: "Playlist",
+        style: { fontWeight: "bold" },
+        callback: () => setShowPlaylistEditor(true),
     };
 
-    const handleSwapEvent = (id) => {
-        if (id === "playlist") {
-            setChoosePlaylist(true);
+    const determineDefaultValue = () => {
+        const events = Array.isArray(editedEntity?.events)
+            ? [...editedEntity.events]
+            : [];
+        if (events.length > 1) {
+            return "playlist"; // ID de la playlist
+        } else if (events.length === 1) {
+            return events[0]["@id"]; // ID de l'événement unique
+        } else {
+            return noCampaign["@id"]; // ID pour 'aucun événement'
         }
+    };
 
-        setEvent(
-            Object?.values(events)?.find((obj) => {
-                return obj["@id"] === id;
-            })
+    // Selected event or playlist
+    const [assignedCampaigns, setAssignedCampaigns] = useState(
+        determineDefaultValue
+    );
+
+    // List of active campaigns : starting date is anterior to now & ending date is posterior
+    const [currentCampaignsList, setCurrentCampaignsList] = useState([]);
+
+    // List playlist campaigns : starting date is anterior or posterior to now & ending date is posterior
+    const [playlistCampaignsList, setPlaylistCampaignsList] = useState([]);
+
+    const fetchCampaigns = async () => {
+        setCurrentCampaignsList([]);
+        request.get("events").then(({ data }) => {
+            let campaignsFetchedList = data["hydra:member"];
+
+            setPlaylistCampaignsList(filterPastCampaigns(campaignsFetchedList));
+
+            // Filter the list, then adds the no_campaign item
+            campaignsFetchedList = getCurrentCampaigns(campaignsFetchedList);
+            campaignsFetchedList.unshift(noCampaign);
+            campaignsFetchedList.push(playlistOption);
+            setCurrentCampaignsList(campaignsFetchedList);
+        });
+    };
+
+    useEffect(() => {
+        fetchCampaigns();
+        setSelectedCampaigns(
+            editedEntity?.events.map((event) => event["@id"]) || []
         );
-        return null;
+        setAssignedCampaigns(determineDefaultValue());
+        const event = currentCampaignsList.find(
+            (event) => event["@id"] === determineDefaultValue()
+        );
+        setSelectedEvent(event);
+    }, [editedEntity]);
+
+    const handleChangeCampaign = (eventId) => {
+        setAssignedCampaigns([eventId]);
+        setEditedEntityEvent([eventId]);
+
+        const event = currentCampaignsList.find(
+            (event) => event["@id"] === eventId
+        );
+        setSelectedEvent(event);
+    };
+
+    const handleFinalizeSelection = () => {
+        setEditedEntityEvent(selectedCampaigns);
     };
 
     return (
-        <div className={classes.flipContainer}>
-            {choosePlaylist && (
-                <div className={classes.modalContainer}>
-                    {" "}
-                    <div className={classes.playlistModal}>
-                        <div>
-                            <FormattedMessage
-                                id="event_playlist_title"
-                                tagName="h3"
+        <div>
+            {currentCampaignsList.length > 0 && (
+                <>
+                    <CustomSelect
+                        items={currentCampaignsList}
+                        display="name"
+                        getValue="@id"
+                        defaultValue={assignedCampaigns}
+                        onChange={(e) => handleChangeCampaign(e)}
+                    />
+                    {selectedEvent?.imageUrl &&
+                        assignedCampaigns[0] !== "playlist" && (
+                            <img
+                                src={selectedEvent.imageUrl}
+                                alt={selectedEvent.name}
                             />
-                            <div className={classes.searchContainer}>
-                                <img src={Search} alt="search" />
-                                <input
-                                    type="text"
-                                    value={searchQuery}
-                                    onChange={(e) =>
-                                        setSearchQuery(e.target.value)
-                                    }
-                                    className={classes.searchInput}
-                                    placeholder={intl.formatMessage({
-                                        id: "event_search",
-                                    })}
-                                />
-                            </div>
-                            <ul>
-                                {incomingEvents.map((event) => {
-                                    let checked = false;
-                                    if (
-                                        event.name
-                                            .toLowerCase()
-                                            .search(
-                                                searchQuery?.toLowerCase()
-                                            ) >= 0
-                                    ) {
-                                        checked =
-                                            edit.events?.filter(
-                                                (a) =>
-                                                    a?.["@id"] ===
-                                                    event?.["@id"]
-                                            )[0]?.["@id"] === event?.["@id"];
-                                        return (
-                                            <li key={event["@id"]}>
-                                                <img
-                                                    alt={event.name}
-                                                    className={
-                                                        classes.bannerPreview
-                                                    }
-                                                    src={event.imageUrl}
-                                                />
-                                                <div
-                                                    className={
-                                                        classes.eventText
-                                                    }
-                                                >
-                                                    <span
-                                                        className={
-                                                            classes.active
-                                                        }
-                                                    >
-                                                        {event.name}
-                                                    </span>
-                                                    <span
-                                                        className={
-                                                            classes.duration
-                                                        }
-                                                    >
-                                                        <div
-                                                            className={
-                                                                classes.col
-                                                            }
-                                                        >
-                                                            <span>{`du ${moment
-                                                                .utc(
-                                                                    event?.startAt
-                                                                )
-                                                                .local(false)
-                                                                .format(
-                                                                    "DD/MM"
-                                                                )}`}</span>
-                                                            <span>{`au ${moment
-                                                                .utc(
-                                                                    event?.endAt
-                                                                )
-                                                                .local(false)
-                                                                .format(
-                                                                    "D/MM"
-                                                                )}`}</span>
-                                                        </div>
-                                                        <div
-                                                            className={
-                                                                classes.col
-                                                            }
-                                                        >
-                                                            <span>{`${moment
-                                                                .utc(
-                                                                    event?.startAt
-                                                                )
-                                                                .local(false)
-                                                                .format(
-                                                                    "HH:mm"
-                                                                )}`}</span>
-                                                            <span>{`${moment
-                                                                .utc(
-                                                                    event?.endAt
-                                                                )
-                                                                .local(false)
-                                                                .format(
-                                                                    "HH:mm"
-                                                                )}`}</span>
-                                                        </div>
-                                                    </span>
-                                                </div>
-                                                <label>
-                                                    <input
-                                                        defaultChecked={checked}
-                                                        type="checkbox"
-                                                        value={JSON.stringify(
-                                                            event
-                                                        )}
-                                                    />
-                                                    <span></span>
-                                                </label>
-                                            </li>
-                                        );
-                                    }
-                                })}
-                            </ul>
-                        </div>
-                        <NavigationButtons
-                            onCancel={() => {
-                                setChoosePlaylist(false);
-                            }}
-                            confirmTxt={intl.formatMessage({
-                                id: "buttons.placeholder.confirm",
-                            })}
-                            onConfirm={() => handleProgram()}
-                        />
-                    </div>
-                </div>
+                        )}
+                </>
             )}
-            <div>
-                <div className={classes.back}>
+            {assignedCampaigns.length > 0 &&
+                (assignedCampaigns[0] === "playlist" ||
+                    assignedCampaigns === "playlist") &&
+                showPlaylistEditor && (
                     <>
-                        <div className={classes.row}>
-                            <div>
-                                {/* if event list events */}
-                                {events.length > 1 ? (
-                                    <>
-                                        <FormattedMessage
-                                            id="signature.event_or_playlist"
-                                            tagName="label"
-                                        />
-                                        <CustomSelect
-                                            onChange={(e) => handleSwapEvent(e)}
-                                            display="name"
-                                            displayinlist="listName"
-                                            getValue="@id"
-                                            items={events}
-                                            defaultValue={
-                                                edit?.events?.length > 1
-                                                    ? events[0]
-                                                    : edit?.events?.[0]?.["@id"]
-                                            }
-                                        />
-                                    </>
-                                ) : (
-                                    <>
-                                        <FormattedMessage
-                                            id="event_playlist_title"
-                                            tagName="label"
-                                        />
-                                        <Button
-                                            onClick={() => {
-                                                setChoosePlaylist(true);
-                                            }}
-                                            color="primary"
-                                        >
-                                            <FormattedMessage id="add_playlist" />
-                                        </Button>
-                                    </>
-                                )}
-                            </div>
-                        </div>
+                        <Playlist
+                            eventsList={playlistCampaignsList}
+                            selectedEvents={selectedCampaigns}
+                            setSelectedEvents={setSelectedCampaigns}
+                            onClose={() => setShowPlaylistEditor(false)}
+                            onSave={() => {
+                                handleFinalizeSelection();
+                                setShowPlaylistEditor(false);
+                            }}
+                        />
                     </>
-                </div>
-            </div>
+                )}
         </div>
     );
-}
+});
+
+export default EventManager;

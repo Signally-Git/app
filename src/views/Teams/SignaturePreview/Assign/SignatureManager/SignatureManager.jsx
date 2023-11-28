@@ -75,9 +75,15 @@ const SignatureManager = memo(({ entity, signatures, setEditSignature }) => {
     }, [fetchSignatures]);
 
     useEffect(() => {
-        if (typeof signaturePreview?.html === "string") {
+        const regex = /The user with [\w-]+ has not been found/;
+
+        if (
+            typeof signaturePreview?.html === "string" &&
+            !signaturePreview.html.match(regex)
+        ) {
             setParsedHTML(parse(signaturePreview.html));
         }
+        setParsedHTML("");
     }, [signaturePreview]);
 
     return (

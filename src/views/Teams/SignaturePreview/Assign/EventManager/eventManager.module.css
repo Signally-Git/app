@@ -1,12 +1,1 @@
-.signatureContainer {
-  cursor: grab;
-}
-.signatureContainer img {
-  max-height: 5rem;
-}
-.signatureContainer a {
-  pointer-events: none;
-}
-.signatureContainer:active {
-  cursor: grabbing;
-}
+

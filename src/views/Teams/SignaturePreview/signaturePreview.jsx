@@ -1,5 +1,5 @@
 import classes from "./signaturePreview.module.css";
-import { Button, Loading, NavigationButtons } from "components";
+import { Button, CopyButton, Loading, NavigationButtons } from "components";
 import parse from "html-react-parser";
 import { FormattedMessage } from "react-intl";
 import { request, useNotification } from "utils";
@@ -7,7 +7,13 @@ import React, { useEffect, useState } from "react";
 import { SignatureManager } from "./Assign/SignatureManager/SignatureManager";
 import EventManager from "./Assign/EventManager/EventManager";
 
-export default function SignaturePreview({ show, edit, setEdit, signatures }) {
+export default function SignaturePreview({
+    show,
+    setShow,
+    edit,
+    setEdit,
+    signatures,
+}) {
     const { name, firstName, lastName } = show || {};
     const displayName = name || `${firstName} ${lastName}`;
 
@@ -18,13 +24,12 @@ export default function SignaturePreview({ show, edit, setEdit, signatures }) {
     const [editSignature, setEditSignature] = useState(
         edit?.signature?.["@id"]
     );
-    const [editEvent, setEditEvent] = useState(edit?.signature?.id);
+    const [editEvent, setEditEvent] = useState(edit?.events);
 
     const fetchSignature = (entity) => {
         setFetchingSignature(true);
         if (!entity) return null;
         const type = entity["@type"].toLowerCase();
-        console.log("type: ", type);
         request
             .get(
                 `compile_for_listing_signature_for_entity/${entity.id}/${type}`
@@ -38,12 +43,12 @@ export default function SignaturePreview({ show, edit, setEdit, signatures }) {
     };
 
     const handleSave = () => {
-        const req = { signature: editSignature, event: editEvent };
+        const req = { signature: editSignature, events: editEvent };
         request
             .patch(edit["@id"], req, {
                 headers: { "Content-Type": "application/merge-patch+json" },
             })
-            .then(() => {
+            .then(({ data }) => {
                 notification({
                     content: (
                         <>
@@ -53,6 +58,7 @@ export default function SignaturePreview({ show, edit, setEdit, signatures }) {
                     ),
                     status: "valid",
                 });
+                setShow({ ...show, data });
                 setEdit(false);
             })
             .catch(() => {
@@ -83,12 +89,17 @@ export default function SignaturePreview({ show, edit, setEdit, signatures }) {
                                 {displayName}
                             </span>
                         </h2>
-                        <Button
-                            color="primaryFill"
-                            onClick={() => setEdit(show)}
-                        >
-                            Assign
-                        </Button>
+                        <div className={classes.headerBtnsContainer}>
+                            {displayedSignature && (
+                                <CopyButton signature={displayedSignature} />
+                            )}
+                            <Button
+                                color="primaryFill"
+                                onClick={() => setEdit(show)}
+                            >
+                                Assign
+                            </Button>
+                        </div>
                     </div>
                     <div>
                         {fetchingSignature ? (
@@ -106,16 +117,24 @@ export default function SignaturePreview({ show, edit, setEdit, signatures }) {
                                 {displayName}
                             </span>
                         </h2>
-                        <Button color="primary" onClick={() => setEdit(null)}>
-                            Preview
-                        </Button>
+                        <div className={classes.headerBtnsContainer}>
+                            <Button
+                                color="primary"
+                                onClick={() => setEdit(null)}
+                            >
+                                Preview
+                            </Button>
+                        </div>
                     </div>
                     <SignatureManager
                         signatures={signatures}
                         entity={edit || show}
                         setEditSignature={setEditSignature}
                     />
-                    <EventManager edit={edit} />
+                    <EventManager
+                        editedEntity={edit || show}
+                        setEditedEntityEvent={setEditEvent}
+                    />
                     <NavigationButtons
                         onConfirm={handleSave}
                         onCancel={() => setEdit(null)}

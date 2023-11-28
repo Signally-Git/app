@@ -153,7 +153,6 @@ function ListUsers({
     };
 
     useEffect(() => {
-        console.log(user);
         if (!uploadedMedia) {
             setPreview(user?.picture || null);
             return;

@@ -13,6 +13,8 @@ export { camelToKebab } from "./camelCaseToKebabCase";
 export { getTheme, getInstance } from "./themes/getTheme";
 export { TokenService } from "./token.service";
 export { getEvents } from "./getEvents";
+export { default as getCurrentCampaigns } from "./events/getCurrentCampaigns";
+export { default as filterPastCampaigns } from "./events/filterPastCampaigns";
 export { useOrganisation } from "./useOrganisation";
 export {
     validateEmail,
