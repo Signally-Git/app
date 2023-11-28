@@ -13,6 +13,7 @@ import { getMenuLink } from "./ManageTeams.utils";
 function Signatures() {
     const [entity, setEntity] = useState();
     const { type } = useParams();
+    const [signatures, setSignatures] = useState([]);
     const [users, setUsers] = useState([]);
     const [otherUser, setOtherUser] = useState("");
     const [currentUsers, setCurrentUsers] = useState("");
@@ -31,10 +32,12 @@ function Signatures() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const [listUsers, listTeams] = await Promise.all([
+            const [listUsers, listTeams, listSignatures] = await Promise.all([
                 request.get("users?exists[team]=false"),
                 request.get("teams?exists[workplace]=false"),
+                request.get("signatures"),
             ]);
+            setSignatures(listSignatures.data["hydra:member"]);
             setUsers(listUsers.data["hydra:member"]);
             setTeams(listTeams.data["hydra:member"]);
         };
@@ -653,6 +656,7 @@ function Signatures() {
                             <div className={classes.signaturePreview}>
                                 <SignaturePreview
                                     show={entity}
+                                    signatures={signatures}
                                     setShow={setEntity}
                                     edit={edit}
                                     setEdit={setEdit}

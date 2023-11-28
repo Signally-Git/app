@@ -12,6 +12,7 @@
     "help": "Aide",
 
     "event": "Campagne",
+    "no_event": "Pas de campagne",
     "event_playlist_title": "Programmer la diffusion de plusieurs events",
     "edit_event": "Modifier la campagne {event}",
     "create_event": "Créer une campagne",

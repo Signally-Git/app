@@ -1,0 +1,106 @@
+/* global.scss */
+.container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: auto;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 5;
+  padding: 0 1rem 1rem;
+  border-radius: var(--border-radius);
+  background-color: var(--pure-light);
+  border: 1px solid var(--color-light-accent);
+  box-shadow: 2px 2px 10px var(--color-light-accent);
+}
+.container > div {
+  overflow: hidden;
+}
+
+.eventList {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  list-style: none;
+  max-height: 70%;
+  overflow: auto;
+}
+
+.event {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 500px;
+  cursor: pointer !important;
+  padding: 1rem;
+  border-top: 1px solid var(--color-light-accent);
+  transition: background-color 300ms;
+}
+.event:hover {
+  background-color: var(--color-lighter-accent);
+}
+
+.bannerPreview {
+  max-width: 60%;
+}
+
+.eventText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.titleContainer {
+  display: flex;
+  gap: 0.25rem;
+  align-items: baseline;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.duration {
+  display: flex;
+  gap: 0.5rem;
+}
+.duration .col {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchContainer {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+.searchContainer input {
+  border: 1px solid var(--color-light-accent);
+  background: var(--pure-light);
+  outline: none;
+  border-radius: 25px;
+  padding: 0.5rem;
+  text-indent: 1.5rem;
+  width: 100%;
+}
+.searchContainer img {
+  height: 1rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 0.75rem;
+  position: absolute;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 1rem;
+}
+.buttonsContainer > button {
+  margin: 0;
+}
