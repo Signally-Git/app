@@ -68,14 +68,20 @@ const Playlist = ({
                                         </span>
                                         <span className={classes.duration}>
                                             <div className={classes.col}>
-                                                <span>{`du ${moment
-                                                    .utc(event?.startAt)
-                                                    .local(false)
-                                                    .format("DD/MM")}`}</span>
-                                                <span>{`au ${moment
-                                                    .utc(event?.endAt)
-                                                    .local(false)
-                                                    .format("D/MM")}`}</span>
+                                                <FormattedMessage
+                                                    id={"campaign_dates"}
+                                                    tagName="span"
+                                                    values={{
+                                                        start: moment
+                                                            .utc(event?.startAt)
+                                                            .local(false)
+                                                            .format("DD/MM"),
+                                                        end: moment
+                                                            .utc(event?.endAt)
+                                                            .local(false)
+                                                            .format("D/MM"),
+                                                    }}
+                                                />
                                             </div>
                                             <div className={classes.col}>
                                                 <span>{`${moment

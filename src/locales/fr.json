@@ -13,6 +13,7 @@
 
     "event": "Campagne",
     "no_event": "Pas de campagne",
+    "campaign_dates": "Du {start} au {end}",
     "event_playlist_title": "Programmer la diffusion de plusieurs events",
     "edit_event": "Modifier la campagne {event}",
     "create_event": "Créer une campagne",

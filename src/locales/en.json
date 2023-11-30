@@ -12,6 +12,7 @@
     "help": "Help",
     "event": "Campaign",
     "no_event": "No campaign",
+    "campaign_dates": "From {start} to {end}",
     "event_playlist_title": "Schedule multiple campaigns",
     "edit_event": "Edit campaign {event}",
     "create_event": "Create campaign",

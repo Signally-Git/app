@@ -361,20 +361,6 @@ export default function CreateEvent({ setDone, event }) {
                 )}
             </div>
             <div className={classes.uploadContainer}>
-                {/* <UploadFile
-                    type="image/*"
-                    file={banner}
-                    placeholder={
-                        event
-                            ? intl.formatMessage({
-                                  id: "buttons.placeholder.import.other_banner",
-                              })
-                            : intl.formatMessage({
-                                  id: "buttons.placeholder.import.banner",
-                              })
-                    }
-                    setFile={setBanner}
-                /> */}
                 <UploadFile
                     file={banner}
                     setFile={(e) => {
