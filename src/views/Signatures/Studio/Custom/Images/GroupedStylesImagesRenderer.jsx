@@ -319,6 +319,8 @@ const GroupedStylesImagesRenderer = ({ styles, setStyles, ignore }) => {
                                                 link: (
                                                     <>
                                                         <a
+                                                            target="_blank"
+                                                            rel="noreferrer"
                                                             href={
                                                                 subTypeToUrlMap[
                                                                     mainType
