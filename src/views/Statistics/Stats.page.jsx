@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getEntityList } from "./Utils/Stats.utils";
-import { TokenService } from "utils";
+import {request, TokenService} from "utils";
 import classes from "./Stats.module.css";
 import EventStatistic from "./EventStatistic.module";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -10,7 +10,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 
 function StatsPage() {
     const intl = useIntl();
-    const organisation = TokenService.getOrganisation();
+    const [organisation, setOrganisation] = useState(TokenService.getOrganisation());
     const configuration = TokenService.getConfig();
     const [isLoading, setLoading] = useState(false);
     const [type, setType] = useState("organisation");
@@ -19,8 +19,12 @@ function StatsPage() {
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-        const fetchEntityData = () => {
+        const fetchEntityData = async () => {
             setLoading(true);
+            if (organisation['@id'])
+                await request.get(organisation['@id']).then(({ data }) => {
+                    setOrganisation(data)
+                })
             setSearch("");
             if (type === "organisation") {
                 setLoading(false);
