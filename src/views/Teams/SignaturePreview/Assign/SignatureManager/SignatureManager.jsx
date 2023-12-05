@@ -7,7 +7,7 @@ import { FormattedMessage } from "react-intl";
 
 const SignatureManager = memo(({ entity, signatures, setEditSignature }) => {
     const [state, setState] = useState({
-        signaturesDisplay: [],
+        signaturesDisplay: signatures,
         loading: false,
         signaturePreview: null,
         selectedSignatureId: null,
@@ -19,7 +19,7 @@ const SignatureManager = memo(({ entity, signatures, setEditSignature }) => {
         signaturePreview,
         selectedSignatureId,
     } = state;
-
+    
     const [parsedHTML, setParsedHTML] = useState(null);
     const notification = useNotification();
 
