@@ -61,7 +61,7 @@ const handleModal = (
         if (["allworkplaces", "allteams", "allusers"].includes(type)) {
             handleDeleteAll(
                 type,
-                users, // maintenant en deuxième position
+                users,
                 notification,
                 configuration,
                 refreshData,
@@ -114,11 +114,11 @@ const notify = (messageId, name, status, notification, classes) => {
         content: (
             <>
                 {messageId === "message.success.delete" ? (
-                    <span className={classes.primaryColor}>{name}</span>
+                    <span>{name}</span>
                 ) : null}
                 <FormattedMessage id={messageId} />
                 {messageId === "message.error.delete" ? (
-                    <span className={classes.primaryColor}>{name}</span>
+                    <span>{name}</span>
                 ) : null}
             </>
         ),

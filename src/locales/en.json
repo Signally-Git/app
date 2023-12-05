@@ -402,11 +402,11 @@
             },
             "teams": {
                 "edit_part1": "Team ",
-                "edit_part2": "created successfully"
+                "edit_part2": " created successfully"
             },
             "users": {
                 "edit_part1": "Collaborator ",
-                "edit_part2": "created successfully"
+                "edit_part2": " created successfully"
             },
             "report": "Your form has been submitted successfully",
             "sign_up": {
@@ -416,9 +416,9 @@
             },
             "added": "Added",
             "removed": "Removed",
-            "delete": "Deleted successfully",
-            "created": "Created successfully",
-            "edit": "Edited successfully",
+            "delete": " deleted successfully",
+            "created": " created successfully",
+            "edit": " edited successfully",
             "saved": "Saved"
         }
     }
