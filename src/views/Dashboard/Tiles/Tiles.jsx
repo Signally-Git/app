@@ -1,13 +1,10 @@
 import ChevronRight from "assets/icons/chevron-right.svg";
 import classes from "./tiles.module.css";
-import { useEffect, useRef, useState } from "react";
-import { Modal } from "components";
-import { BsBroadcastPin } from "react-icons/bs";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { TokenService, request, useNotification } from "utils";
-import { Tile } from "./Tile";
-import { ConnectTile } from "./ConnectTile";
-import { FormattedMessage } from "react-intl";
+import {useEffect, useRef, useState} from "react";
+import {TokenService, request, useNotification} from "utils";
+import {Tile} from "./Tile";
+import {ConnectTile} from "./ConnectTile";
+import {FormattedMessage} from "react-intl";
 
 function Tiles(props) {
     const [events, setEvents] = useState([]);
@@ -17,7 +14,6 @@ function Tiles(props) {
     const [activeWorkplaces, setActiveWorkplaces] = useState(0);
     const [users, setUsers] = useState([]);
     const [wps, setWPs] = useState([]);
-    const [modal, setModal] = useState(false);
     const [templates, setTemplates] = useState([]);
     const [signatures, setSignatures] = useState([]);
     const [activeSignatures, setActiveSignatures] = useState(0);
@@ -25,10 +21,6 @@ function Tiles(props) {
     const [userName, setUserName] = useState("USER_NAME");
 
     const config = TokenService.getConfig() || [];
-
-    const [sendMailBtn, setSendMailBtn] = useState(
-        <FormattedMessage id="buttons.placeholder.send_mail" />
-    );
 
     const notification = useNotification();
 
@@ -43,16 +35,10 @@ function Tiles(props) {
     useEffect(async () => {
         props.setLoading(false);
 
-        await request.get("configurations").then(({ data }) => {
+        await request.get("configurations").then(({data}) => {
             TokenService.setConfig(data["hydra:member"]);
-            workplaceName = data["hydra:member"]?.filter(
-                (entity) => (entity.key = workplaceName)
-            ).value;
-            setUserName(
-                data["hydra:member"]?.filter(
-                    (entity) => (entity.key = userName)
-                ).value
-            );
+            workplaceName = data["hydra:member"]?.filter((entity) => (entity.key = workplaceName)).value;
+            setUserName(data["hydra:member"]?.filter((entity) => (entity.key = userName)).value);
         });
 
         await request
@@ -60,12 +46,7 @@ function Tiles(props) {
             .then((res) => {
                 let count = 0;
                 res.data["hydra:member"].map((event) => {
-                    if (
-                        event.users.length > 0 ||
-                        event.teams.length > 0 ||
-                        event.workplaces.length > 0
-                    )
-                        count++;
+                    if (event.users.length > 0 || event.teams.length > 0 || event.workplaces.length > 0) count++;
                 });
                 if (isMountedRef.current) {
                     setActiveEvent(count);
@@ -75,10 +56,7 @@ function Tiles(props) {
             .catch(() => {
                 if (isMountedRef.current) {
                     notification({
-                        content: (
-                            <FormattedMessage id="message.error.generic" />
-                        ),
-                        status: "invalid",
+                        content: (<FormattedMessage id="message.error.generic"/>), status: "invalid",
                     });
                 }
             });
@@ -97,10 +75,7 @@ function Tiles(props) {
             .catch(() => {
                 if (isMountedRef.current) {
                     notification({
-                        content: (
-                            <FormattedMessage id="message.error.generic" />
-                        ),
-                        status: "invalid",
+                        content: (<FormattedMessage id="message.error.generic"/>), status: "invalid",
                     });
                 }
             });
@@ -119,10 +94,7 @@ function Tiles(props) {
             .catch(() => {
                 if (isMountedRef.current) {
                     notification({
-                        content: (
-                            <FormattedMessage id="message.error.generic" />
-                        ),
-                        status: "invalid",
+                        content: (<FormattedMessage id="message.error.generic"/>), status: "invalid",
                     });
                 }
             });
@@ -136,10 +108,7 @@ function Tiles(props) {
             .catch(() => {
                 if (isMountedRef.current) {
                     notification({
-                        content: (
-                            <FormattedMessage id="message.error.generic" />
-                        ),
-                        status: "invalid",
+                        content: (<FormattedMessage id="message.error.generic"/>), status: "invalid",
                     });
                 }
             });
@@ -148,12 +117,7 @@ function Tiles(props) {
             .then((res) => {
                 let count = 0;
                 res.data["hydra:member"].map((signature) => {
-                    if (
-                        signature.users.length > 0 ||
-                        signature.teams.length > 0 ||
-                        signature.workplaces.length > 0
-                    )
-                        count++;
+                    if (signature.users.length > 0 || signature.teams.length > 0 || signature.workplaces.length > 0) count++;
                 });
                 if (isMountedRef.current) {
                     setActiveSignatures(count);
@@ -163,10 +127,7 @@ function Tiles(props) {
             .catch(() => {
                 if (isMountedRef.current) {
                     notification({
-                        content: (
-                            <FormattedMessage id="message.error.generic" />
-                        ),
-                        status: "invalid",
+                        content: (<FormattedMessage id="message.error.generic"/>), status: "invalid",
                     });
                 }
             });
@@ -175,174 +136,82 @@ function Tiles(props) {
 
     useEffect(() => {
         users.map((user) => {
-            if (user.signature_template_id)
-                setSignatures([...signatures, [user.signature_template_id]]);
+            if (user.signature_template_id) setSignatures([...signatures, [user.signature_template_id]]);
         });
     }, [users, props.loading]);
 
-    const handleDeploy = async () => {
-        setSendMailBtn(
-            <>
-                <span style={{ opacity: 0 }}>
-                    <FormattedMessage id="buttons.placeholder.send_mail" />
-                </span>
-                <AiOutlineLoading3Quarters className={classes.loadingBtn} />
-            </>
-        );
-        await request
-            .get("user/send-token")
-            .then(() => {
-                if (isMountedRef.current) {
-                    notification({
-                        content: <>{users.length} collaborateur(s) notifiés</>,
-                        status: "valid",
-                    });
-                    setSendMailBtn(
-                        <FormattedMessage id="buttons.placeholder.send_mail" />
-                    );
-                    setModal(false);
-                }
-            })
-            .catch(() => {
-                if (isMountedRef.current) {
-                    notification({
-                        content: (
-                            <FormattedMessage id="buttons.placeholder.send_mail" />
-                        ),
-                        status: "invalid",
-                    });
-                    setSendMailBtn(
-                        <>
-                            <FormattedMessage id="buttons.placeholder.send_mail" />
-                        </>
-                    );
-                    setModal(false);
-                }
-            });
-    };
-
-    return (
-        <div className={classes.container}>
+    return (<div className={classes.container}>
             <div className={classes.tilesList}>
-                {!templates.length < 1 && (
-                    <Tile
+                {!templates.length < 1 && (<Tile
                         link="/signatures"
-                        title={<FormattedMessage id="signatures" />}
+                        title={<FormattedMessage id="signatures"/>}
                         icon={ChevronRight}
                         iconAlt="View"
-                        leftCorner={
-                            <>
-                                {activeSignatures}{" "}
-                                <span> /{templates?.length}</span>
-                            </>
-                        }
-                        rightCorner={
-                            <FormattedMessage
-                                id="activated.female"
-                                values={{ count: templates.length }}
-                            />
-                        }
-                    />
-                )}
-                {!events.length < 1 && (
-                    <Tile
+                        leftCorner={<>
+                            {activeSignatures}{" "}
+                            <span> /{templates?.length}</span>
+                        </>}
+                    />)}
+                {!events.length < 1 && (<Tile
                         link="/events"
-                        title={<FormattedMessage id="events" />}
+                        title={<FormattedMessage id="events"/>}
                         icon={ChevronRight}
                         iconAlt="View"
-                        leftCorner={
-                            <>
-                                {activeEvent} <span> /{events.length}</span>
-                            </>
-                        }
-                        rightCorner={
-                            <FormattedMessage
-                                id="activated.male"
-                                values={{ count: events.length }}
-                            />
-                        }
-                    />
-                )}
-                {!wps.length < 1 && (
-                    <Tile
+                        leftCorner={<>
+                            {activeEvent} <span> /{events.length}</span>
+                        </>}
+                    />)}
+                {!wps.length < 1 && (<Tile
                         link="/teams/workplaces"
-                        title={
-                            config.filter(
-                                (item) => item.key === "WORKPLACE_NAME"
-                            )[0].value
-                        }
+                        title={config.filter((item) => item.key === "WORKPLACE_NAME")[0].value}
                         icon={ChevronRight}
                         iconAlt="View"
-                        leftCorner={
-                            <>
-                                {activeWorkplaces} <span> /{wps.length}</span>
-                            </>
-                        }
-                        rightCorner={
-                            <FormattedMessage
-                                id="activated.male"
-                                values={{ count: wps.length }}
-                            />
-                        }
-                    />
-                )}
-                {!teamsList.length < 1 && (
-                    <Tile
+                        leftCorner={<>
+                            {activeWorkplaces} <span> /{wps.filter((wp) => wp.synchronizable).length}</span>
+                        </>}
+                        rightCorner={<FormattedMessage
+                            id="activated.male"
+                            values={{count: wps.length}}
+                        />}
+                    />)}
+                {!teamsList.length < 1 && (<Tile
                         link="/teams/teams"
-                        title={
-                            config.filter((item) => item.key === "TEAM_NAME")[0]
-                                .value
-                        }
+                        title={config.filter((item) => item.key === "TEAM_NAME")[0].value}
                         icon={ChevronRight}
                         iconAlt="View"
-                        leftCorner={
-                            <>
-                                {activeTeams} <span> /{teamsList.length}</span>
-                            </>
-                        }
-                        rightCorner={
-                            <FormattedMessage
-                                id="activated.female"
-                                values={{ count: teamsList.length }}
-                            />
-                        }
-                    />
-                )}
+                        leftCorner={<>
+                            {activeTeams} <span> /{teamsList.filter((team) => team.synchronizable).length}</span>
+                        </>}
+                        rightCorner={<FormattedMessage
+                            id="activated.female"
+                            values={{count: teamsList.length}}
+                        />}
+                    />)}
                 <Tile
                     link="/teams/users"
-                    title={
-                        config.filter((item) => item.key === "USER_NAME")[0]
-                            ?.value
-                    }
+                    title={config.filter((item) => item.key === "USER_NAME")[0]?.value}
                     icon={ChevronRight}
                     iconAlt="View"
                     leftCorner={users.length}
-                    rightCorner={
-                        <FormattedMessage
-                            id="activated.male"
-                            values={{ count: users.length }}
-                        />
-                    }
+                    rightCorner={<FormattedMessage
+                        id="activated.male"
+                        values={{count: users.length}}
+                    />}
                 />
                 <Tile
                     link="/deploy"
-                    title={<FormattedMessage id="deploy.title" />}
+                    title={<FormattedMessage id="deploy.title"/>}
                     icon={ChevronRight}
                     iconAlt="Deploy"
-                    leftCorner={
-                        users.filter((user) => user.synchronizable).length
-                    }
-                    rightCorner={
-                        <FormattedMessage
-                            id="activated.male"
-                            values={{ count: users.length }}
-                        />
-                    }
+                    leftCorner={users.filter((user) => user.synchronizable).length}
+                    rightCorner={<FormattedMessage
+                        id="activated.male"
+                        values={{count: users.length}}
+                    />}
                 />
-                <ConnectTile organisation={TokenService.getOrganisation()} />
+                <ConnectTile organisation={TokenService.getOrganisation()}/>
             </div>
-        </div>
-    );
+        </div>);
 }
 
 export default Tiles;
