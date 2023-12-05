@@ -198,17 +198,6 @@ function Tiles(props) {
                         values={{count: users.length}}
                     />}
                 />
-                <Tile
-                    link="/deploy"
-                    title={<FormattedMessage id="deploy.title"/>}
-                    icon={ChevronRight}
-                    iconAlt="Deploy"
-                    leftCorner={users.filter((user) => user.synchronizable).length}
-                    rightCorner={<FormattedMessage
-                        id="activated.male"
-                        values={{count: users.length}}
-                    />}
-                />
                 <ConnectTile organisation={TokenService.getOrganisation()}/>
             </div>
         </div>);
