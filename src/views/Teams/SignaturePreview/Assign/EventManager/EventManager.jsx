@@ -6,7 +6,6 @@ import Playlist from "./Playlist";
 
 const EventManager = memo(({ editedEntity, setEditedEntityEvent }) => {
     const intl = useIntl();
-    console.log(editedEntity);
 
     const [selectedEvent, setSelectedEvent] = useState(null);
 
