@@ -11,6 +11,7 @@ export default function CropperInput({
     src,
     initialImage,
     getCroppedFile,
+    handleClose,
     aspectRatios,
 }) {
     const cropperRef = useRef(null);
@@ -20,18 +21,6 @@ export default function CropperInput({
     const [aspectRatio, setAspectRatio] = useState(null);
 
     const intl = useIntl();
-
-    const handleClose = async () => {
-        try {
-            const base64Image = await fileToBase64(initialImage);
-            getCroppedFile(base64Image);
-        } catch (e) {
-            console.error(
-                "Erreur lors de la conversion de l'image en Base64:",
-                e
-            );
-        }
-    };
 
     const handleClick = () => {
         const imageElement = cropperRef?.current;

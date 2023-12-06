@@ -170,14 +170,20 @@ function Events() {
                                     <div
                                         className={`${classes.col} ${classes.bold}`}
                                     >
-                                        <span>{`du ${moment
-                                            .utc(activeEvent?.startAt)
-                                            .local(false)
-                                            .format("D MMM YYYY")}`}</span>
-                                        <span>{`au ${moment
-                                            .utc(activeEvent?.endAt)
-                                            .local(false)
-                                            .format("D MMM YYYY")}`}</span>
+                                        <FormattedMessage
+                                            id={"campaign_dates"}
+                                            tagName="span"
+                                            values={{
+                                                start: moment
+                                                    .utc(activeEvent?.startAt)
+                                                    .local(false)
+                                                    .format("DD/MM"),
+                                                end: moment
+                                                    .utc(activeEvent?.endAt)
+                                                    .local(false)
+                                                    .format("D/MM"),
+                                            }}
+                                        />
                                     </div>
                                     <div className={classes.col}>
                                         <span>{`${moment

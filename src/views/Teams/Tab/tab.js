@@ -3,8 +3,8 @@ import CreateTeam from "../Create/createTeam";
 import CreateUser from "../Create/createUser";
 import CreateWorkplace from "../Create/createWorkplace";
 import ListUsers from "./ListUsers";
-import { getDataTeam, ListTeams } from "./ListTeams";
-import { TokenService, request, useNotification } from "utils";
+import { getDataTeam, ListTeams} from "./ListTeams";
+import { TokenService, useNotification } from "utils";
 import { handleModal } from "./tabs.utils";
 import { getDataWorkplaces, ListWorkplaces } from "./ListWorkplaces";
 
@@ -36,7 +36,7 @@ export default function Tab({
 
     const refreshData = async () => {
         getDataWorkplaces(setWorkplaces);
-        // await getDataTeam(teams, setTeams);
+        await getDataTeam(teams, setTeams);
         setDone(false);
     };
 
@@ -72,7 +72,7 @@ export default function Tab({
     useEffect(() => {
         toFocus?.current?.focus();
     }, [edit]);
-
+    
     if (tab === "workplaces")
         return (
             <ListWorkplaces

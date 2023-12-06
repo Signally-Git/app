@@ -11,11 +11,7 @@ const Images = ({ styles, setStyles, selectedTemplate }) => {
                 styles={styles}
                 setStyles={setStyles}
                 filter={["company", "organisation", "logo", "workplace"]}
-                ignoreSubcategories={[
-                    "company.address",
-                    "organisation.name",
-                    "organisation.phone",
-                ]}
+                ignore={["socialMedias", "socialIcons"]}
             />
         </div>
     );

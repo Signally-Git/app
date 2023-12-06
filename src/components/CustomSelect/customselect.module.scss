@@ -34,11 +34,11 @@
 .inputContainer {
     position: relative;
     display: flex;
+        z-index: 4;
     width: 100%;
     input[type="text"] {
         pointer-events: none;
         text-overflow: ellipsis;
-        z-index: 6;
         width: 100%;
         font-weight: bold;
         color: $color-dark-accent;

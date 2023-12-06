@@ -15,7 +15,6 @@ const ThemeProvider = ({ children }) => {
             try {
                 const fetchedTheme = await getTheme(url);
                 const fetchInstance = await getInstance(url);
-                console.log(fetchedTheme);
                 setTheme(fetchedTheme.styles);
                 setName(fetchInstance.name);
                 setLogo(fetchInstance.organisation?.logoDistributor);

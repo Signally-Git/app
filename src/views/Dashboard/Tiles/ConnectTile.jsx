@@ -67,8 +67,6 @@ export const ConnectTile = ({ organisation }) => {
     // @todo
 
     const importUsersAzure = async () => {
-        const clientId = "1397c450-2566-4dfc-a9ad-d1a1993cc7ca";
-        const tenantId = "ca4cbc6c-6216-4581-86d6-75f4951fbe7a";
         const windowFeatures = "left=100,top=100,width=600,height=600";
 
         window.open(
@@ -166,12 +164,14 @@ export const ConnectTile = ({ organisation }) => {
                     <a
                         style={{ marginRight: "1rem" }}
                         target="_blank"
+                        rel="noreferrer"
                         href={`${process.env.REACT_APP_API_URL}/google/downloadapp`}
                     >
                         <FcGoogle />
                     </a>
                     <a
                         target="_blank"
+                        rel="noreferrer"
                         href={`${process.env.REACT_APP_API_URL}/azure/downloadapp`}
                     >
                         <img

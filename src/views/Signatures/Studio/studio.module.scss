@@ -1,43 +1,51 @@
 @import "../../../assets/style/global";
 
 .menuContainer {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  margin-bottom: 1rem;
-  > button {
-    height: 2rem;
-    margin: 0;
-  }
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    > button {
+        height: 2rem;
+        margin: 0;
+    }
 }
 
 .studioContainer {
     display: flex;
     height: calc(100% - 10rem);
-    overflow: hidden;
-  > div {
-    width: 50%;
-  }
-  > .modalContainer {
-    position: absolute;
-    background-color: $pureLight;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    padding: 2rem 2rem 3rem;
-    border-radius: $borderRadius;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 60px $backdrop-color;
-    margin: auto;
-    max-height: 15rem;
+    overflow: auto;
     gap: 1rem;
-    max-width: 25rem;
-    inset:0;
-    > p {
-      width: 100%;
-    } input {
-      width: 100%;
+
+    > div {
+        min-width: calc(500px + 5rem);
+        width: 50%;
     }
-  }
+
+    > .modalContainer {
+        position: absolute;
+        background-color: $pureLight;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 2rem 3rem;
+        border-radius: $borderRadius;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 60px $backdrop-color;
+        margin: auto;
+        max-height: 15rem;
+        gap: 1rem;
+        max-width: 25rem;
+        inset: 0;
+
+        > p {
+            width: 100%;
+        }
+
+        input {
+            width: 100%;
+        }
+    }
 }

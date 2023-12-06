@@ -35,7 +35,7 @@ request.interceptors.response.use(
     async (err) => {
         const originalConfig = err.config;
 
-        if (err.response.status === 401) {
+        if (err.response?.status === 401) {
             if (originalConfig.url === "/token/refresh") {
                 TokenService.clearLocalStorage();
                 window.location.href = "/sign-in";

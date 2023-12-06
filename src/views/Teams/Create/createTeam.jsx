@@ -73,7 +73,7 @@ export default function CreateTeam({ setDone }) {
         if (wps.data["hydra:member"].length > 0) {
             wps.data["hydra:member"].unshift({
                 "@id": "Aucun groupe",
-                name: <FormattedMessage id="no_workplace" />,
+                name: intl.formatMessage({id: "no_workplace" }),
             });
             setWorkplace(wps.data["hydra:member"][1]["@id"]);
             setWorkplaces(wps.data["hydra:member"]);

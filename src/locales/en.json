@@ -10,13 +10,15 @@
     "logo": "Logo",
     "white_label": "White label",
     "help": "Help",
-    "event": "Event",
-    "event_playlist_title": "Schedule multiple events",
-    "edit_event": "Edit event {event}",
-    "create_event": "Create event",
+    "event": "Campaign",
+    "no_event": "No campaign",
+    "campaign_dates": "From {start} to {end}",
+    "event_playlist_title": "Schedule multiple campaigns",
+    "edit_event": "Edit campaign {event}",
+    "create_event": "Create campaign",
     "add_playlist": "Add playlist",
     "event_name": "Event name",
-    "event_search": "Search for an event",
+    "event_search": "Search for an campaign",
     "past": "Past",
     "present": "Present",
     "future": "Future",
@@ -97,7 +99,7 @@
         "default_greetings": "Regards,",
         "choose": "Choose a signature",
         "event_or_playlist": "Add an event or playlist",
-        "active_for": "Signature active for ",
+        "active_for": "Active signature for ",
         "name_signature": "Give a name to this signature",
         "create": "Create a signature",
         "edit": "Edit",
@@ -400,11 +402,11 @@
             },
             "teams": {
                 "edit_part1": "Team ",
-                "edit_part2": "created successfully"
+                "edit_part2": " created successfully"
             },
             "users": {
                 "edit_part1": "Collaborator ",
-                "edit_part2": "created successfully"
+                "edit_part2": " created successfully"
             },
             "report": "Your form has been submitted successfully",
             "sign_up": {
@@ -414,9 +416,9 @@
             },
             "added": "Added",
             "removed": "Removed",
-            "delete": "Deleted successfully",
-            "created": "Created successfully",
-            "edit": "Edited successfully",
+            "delete": " deleted successfully",
+            "created": " created successfully",
+            "edit": " edited successfully",
             "saved": "Saved"
         }
     }
