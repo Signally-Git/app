@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
-import classes from "./deploy.module.css";
 import { FormattedMessage, useIntl } from "react-intl";
-import { request, TokenService, useNotification } from "utils";
-import { CustomCheckbox, Button, Input, Modal } from "components";
+import { request, useNotification } from "utils";
+import { Button, CustomSelect } from "components";
+import classes from "./deploy.module.css";
+import EntitySelector from "./EntitySelector";
+import ConfirmModal from "./ConfirmModal";
 
 const Deploy = () => {
+    // États pour les données
     const [workplaces, setWorkplaces] = useState([]);
     const [teams, setTeams] = useState([]);
     const [users, setUsers] = useState([]);
+
+    // États pour les recherches
     const [searchWorkplaces, setSearchWorkplaces] = useState("");
     const [searchTeams, setSearchTeams] = useState("");
     const [searchUsers, setSearchUsers] = useState("");
+
+    // États pour la sélection
     const [selectAllWorkplaces, setSelectAllWorkplaces] = useState(false);
     const [selectAllTeams, setSelectAllTeams] = useState(false);
     const [selectAllUsers, setSelectAllUsers] = useState(false);
@@ -18,125 +25,98 @@ const Deploy = () => {
     const [selectedTeams, setSelectedTeams] = useState(new Set());
     const [selectedUsers, setSelectedUsers] = useState(new Set());
 
+    const [sortCriteria, setSortCriteria] = useState("name_asc"); // Les options peuvent être 'name_asc', 'name_desc', 'date_asc', 'date_desc'
+    const sortOptions = [
+        { value: "name_asc", label: "Nom (Ascendant)" },
+        { value: "name_desc", label: "Nom (Descendant)" },
+        { value: "lastName_asc", label: "Nom de famille (Ascendant)" },
+        { value: "lastName_desc", label: "Nom de famille (Descendant)" },
+        // @Todo update API to get date
+        // { value: "date_asc", label: "Date de création (Ascendant)" },
+        // { value: "date_desc", label: "Date de création (Descendant)" },
+    ];
+
     const [isModalVisible, setIsModalVisible] = useState(false);
 
-    const configuration = TokenService.getConfig();
-    const workplaceName = configuration.filter(
-        (item) => item.key === "WORKPLACE_NAME"
-    )[0]?.value;
-    const teamName = configuration.filter((item) => item.key === "TEAM_NAME")[0]
-        ?.value;
-    const userName = configuration.filter((item) => item.key === "USER_NAME")[0]
-        ?.value;
-
     const notification = useNotification();
-    const intl = useIntl();
 
     useEffect(() => {
         const fetchData = async () => {
-            const [workplacesRes, teamsRes, usersRes] = await Promise.all([
-                request.get("workplaces"),
-                request.get("teams"),
-                request.get("users"),
-            ]);
-
-            setWorkplaces(workplacesRes.data["hydra:member"]);
-            setTeams(teamsRes.data["hydra:member"]);
-            setUsers(usersRes.data["hydra:member"]);
+            try {
+                const [workplacesRes, teamsRes, usersRes] = await Promise.all([
+                    request.get("workplaces"),
+                    request.get("teams"),
+                    request.get("users"),
+                ]);
+                setWorkplaces(workplacesRes.data["hydra:member"]);
+                setTeams(teamsRes.data["hydra:member"]);
+                setUsers(usersRes.data["hydra:member"]);
+            } catch (error) {
+                notification({
+                    content: "Error loading data",
+                    status: "invalid",
+                });
+            }
         };
         fetchData();
     }, []);
 
-    const handleSelectAll = (type, checked) => {
-        if (type === "workplaces") {
-            setSelectAllWorkplaces(checked);
-            setSelectedWorkplaces(
-                checked ? new Set(workplaces.map((wp) => wp.id)) : new Set()
-            );
-        } else if (type === "teams") {
-            setSelectAllTeams(checked);
-            setSelectedTeams(
-                checked ? new Set(teams.map((team) => team.id)) : new Set()
-            );
-        } else if (type === "users") {
-            setSelectAllUsers(checked);
-            setSelectedUsers(
-                checked ? new Set(users.map((user) => user.id)) : new Set()
-            );
+    const handleSelectAll = (entityType, isChecked) => {
+        switch (entityType) {
+            case "workplaces":
+                setSelectAllWorkplaces(isChecked);
+                setSelectedWorkplaces(
+                    isChecked
+                        ? new Set(workplaces.map((wp) => wp.id))
+                        : new Set()
+                );
+                break;
+            case "teams":
+                setSelectAllTeams(isChecked);
+                setSelectedTeams(
+                    isChecked
+                        ? new Set(teams.map((team) => team.id))
+                        : new Set()
+                );
+                break;
+            case "users":
+                setSelectAllUsers(isChecked);
+                setSelectedUsers(
+                    isChecked
+                        ? new Set(users.map((user) => user.id))
+                        : new Set()
+                );
+                break;
+            default:
+                break;
         }
     };
 
-    const handleCheckboxChange = (id, isChecked, type) => {
-        const selectionSets = {
-            workplaces: selectedWorkplaces,
-            teams: selectedTeams,
-            users: selectedUsers,
-        };
-        const setSelected = {
-            workplaces: setSelectedWorkplaces,
-            teams: setSelectedTeams,
-            users: setSelectedUsers,
-        };
+    const handleCheckboxChange = (id, isChecked, entityType) => {
+        const newSet = new Set(
+            entityType === "workplaces"
+                ? selectedWorkplaces
+                : entityType === "teams"
+                ? selectedTeams
+                : selectedUsers
+        );
         if (isChecked) {
-            selectionSets[type].add(id);
+            newSet.add(id);
         } else {
-            selectionSets[type].delete(id);
+            newSet.delete(id);
         }
-        setSelected[type](new Set(selectionSets[type]));
+
+        if (entityType === "workplaces") {
+            setSelectedWorkplaces(newSet);
+        } else if (entityType === "teams") {
+            setSelectedTeams(newSet);
+        } else if (entityType === "users") {
+            setSelectedUsers(newSet);
+        }
     };
 
-    const filterItems = (items, search) => {
-        if (!search) return items;
-        const lowercasedSearch = search.toLowerCase();
-        return items.filter((item) => {
-            const name = item.name || `${item.firstName} ${item.lastName}`;
-            return name.toLowerCase().includes(lowercasedSearch);
-        });
-    };
-
-    const confirmDeployment = () => {
-        setIsModalVisible(true);
-    };
-
-    const cancelDeployment = () => {
-        setIsModalVisible(false);
-    };
-
-    const selectedEntitiesPreview = () => {
-        const workplacesPreview = Array.from(selectedWorkplaces)
-            .map((id) => workplaces.find((wp) => wp.id === id)?.name)
-            .join(", ");
-        const teamsPreview = Array.from(selectedTeams)
-            .map((id) => teams.find((team) => team.id === id)?.name)
-            .join(", ");
-        const usersPreview = Array.from(selectedUsers)
-            .map((id) => {
-                const user = users.find((user) => user.id === id);
-                return `${user?.firstName} ${user?.lastName}`;
-            })
-            .join(", ");
-        if (workplacesPreview || teamsPreview || usersPreview)
-            return (
-                <ul className={classes.recapContainer}>
-                    {workplacesPreview && (
-                        <li>
-                            <b>{workplaceName}:</b> {workplacesPreview}
-                        </li>
-                    )}
-                    {teamsPreview && (
-                        <li>
-                            <b>{teamName}:</b> {teamsPreview}
-                        </li>
-                    )}
-                    {usersPreview && (
-                        <li>
-                            <b>{userName}:</b> {usersPreview}
-                        </li>
-                    )}
-                </ul>
-            );
-        return <>{TokenService.getOrganisation().name}</>;
-    };
+    const confirmDeployment = () => setIsModalVisible(true);
+    const cancelDeployment = () => setIsModalVisible(false);
 
     const handleSubmit = async () => {
         const payload = {
@@ -146,197 +126,143 @@ const Deploy = () => {
         };
 
         try {
-            const response = await request.post("/user/send-token", payload);
+            const response = await request.post("/deploy/send", payload);
             notification({
-                content: (
-                    <>{response.data.sentTo.length} collaborateur(s) notifiés</>
-                ),
+                content: `Emails sent to ${response.data.count} users`,
                 status: "valid",
             });
+            setIsModalVisible(false);
         } catch (error) {
             notification({
-                content: <FormattedMessage id="message.error.generic" />,
+                content: "Error sending emails",
                 status: "invalid",
             });
-        } finally {
-            cancelDeployment();
         }
+    };
+
+    const filterEntities = (entities = [], search) => {
+        if (!Array.isArray(entities)) {
+            console.error(
+                "Expected 'entities' to be an array, but got:",
+                entities
+            );
+            return [];
+        }
+
+        let filtered = entities.filter((entity) => {
+            const entityName =
+                entity.name || `${entity.firstName} ${entity.lastName}`;
+            return entityName.toLowerCase().includes(search.toLowerCase());
+        });
+        console.log(workplaces, teams, users); // Pour débogage
+
+        switch (sortCriteria) {
+            case "name_asc":
+                filtered.sort((a, b) =>
+                    (a.name || `${a.firstName} ${a.lastName}`).localeCompare(
+                        b.name || `${b.firstName} ${b.lastName}`
+                    )
+                );
+                break;
+            case "name_desc":
+                filtered.sort((a, b) =>
+                    (b.name || `${b.firstName} ${b.lastName}`).localeCompare(
+                        a.name || `${a.firstName} ${a.lastName}`
+                    )
+                );
+                break;
+            case "lastName_asc":
+                filtered.sort((a, b) =>
+                    (a.lastName || "").localeCompare(b.lastName || "")
+                );
+                break;
+            case "lastName_desc":
+                filtered.sort((a, b) =>
+                    (b.lastName || "").localeCompare(a.lastName || "")
+                );
+                break;
+
+            case "date_asc":
+                filtered.sort(
+                    (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+                );
+                break;
+            case "date_desc":
+                filtered.sort(
+                    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                );
+                break;
+            default:
+                break;
+        }
+
+        return filtered;
     };
 
     return (
         <div className={classes.container}>
             <h1>
                 <FormattedMessage id="deploy.title" />
+                <CustomSelect
+                    items={sortOptions}
+                    display="label"
+                    displayinlist="label"
+                    getValue="value"
+                    defaultValue={sortCriteria}
+                    onChange={(newValue) => setSortCriteria(newValue)}
+                    styleList={{ maxHeight: "200px" }} // Exemple de style, ajustez selon vos besoins
+                />
             </h1>
             <div className={classes.row}>
-                <div className={classes.column}>
-                    <div className={classes.header}>
-                        <h2>
-                            <label htmlFor="selectAllWorkplaces">
-                                {workplaceName}
-                            </label>
-                        </h2>
-                        <CustomCheckbox
-                            checked={selectAllWorkplaces}
-                            id="selectAllWorkplaces"
-                            onChange={(e) =>
-                                handleSelectAll("workplaces", e.target.checked)
-                            }
-                        />
-                    </div>
-                    <Input
-                        placeholder={intl.formatMessage({ id: "search" })}
-                        value={searchWorkplaces}
-                        onChange={(e) => setSearchWorkplaces(e.target.value)}
-                    />
-                    <div className={classes.scrollableList}>
-                        {filterItems(workplaces, searchWorkplaces).map((wp) => (
-                            <div className={classes.checkboxContainer}>
-                                <CustomCheckbox
-                                    key={wp.id}
-                                    id={`workplace-${wp.id}`}
-                                    checked={selectedWorkplaces.has(wp.id)}
-                                    onChange={(e) =>
-                                        handleCheckboxChange(
-                                            wp.id,
-                                            e.target.checked,
-                                            "workplaces"
-                                        )
-                                    }
-                                    label={wp.name}
-                                />
-                                <label htmlFor={`workplace-${wp.id}`}>
-                                    {wp.name}
-                                </label>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                <div className={classes.column}>
-                    <div className={classes.header}>
-                        <h2>
-                            <label htmlFor="selectAllTeams">{teamName}</label>
-                        </h2>
-                        <CustomCheckbox
-                            checked={selectAllTeams}
-                            id="selectAllTeams"
-                            onChange={(e) =>
-                                handleSelectAll("teams", e.target.checked)
-                            }
-                        />
-                    </div>
-                    <Input
-                        placeholder={intl.formatMessage({ id: "search" })}
-                        value={searchTeams}
-                        onChange={(e) => setSearchTeams(e.target.value)}
-                    />
-                    <div className={classes.scrollableList}>
-                        {filterItems(teams, searchTeams).map((team) => (
-                            <div className={classes.checkboxContainer}>
-                                <CustomCheckbox
-                                    key={team.id}
-                                    id={`team-${team.id}`}
-                                    checked={selectedTeams.has(team.id)}
-                                    onChange={(e) =>
-                                        handleCheckboxChange(
-                                            team.id,
-                                            e.target.checked,
-                                            "teams"
-                                        )
-                                    }
-                                    label={team.name}
-                                />
-                                <label htmlFor={`team-${team.id}`}>
-                                    {team.name}
-                                </label>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                <div className={classes.column}>
-                    <div className={classes.header}>
-                        <h2>
-                            <label htmlFor="selectAllUSers">{userName}</label>
-                        </h2>
-                        <CustomCheckbox
-                            id="selectAllUSers"
-                            checked={selectAllUsers}
-                            onChange={(e) =>
-                                handleSelectAll("users", e.target.checked)
-                            }
-                        />
-                    </div>
-                    <Input
-                        placeholder={intl.formatMessage({ id: "search" })}
-                        value={searchUsers}
-                        onChange={(e) => setSearchUsers(e.target.value)}
-                    />
-                    <div className={classes.scrollableList}>
-                        {filterItems(users, searchUsers).map((user) => (
-                            <div className={classes.checkboxContainer}>
-                                <CustomCheckbox
-                                    key={user.id}
-                                    id={`user-${user.id}`}
-                                    checked={selectedUsers.has(user.id)}
-                                    onChange={(e) =>
-                                        handleCheckboxChange(
-                                            user.id,
-                                            e.target.checked,
-                                            "users"
-                                        )
-                                    }
-                                    label={`${user.firstName} ${user.lastName}`}
-                                />
-                                <label
-                                    htmlFor={`user-${user.id}`}
-                                >{`${user.firstName} ${user.lastName}`}</label>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                <EntitySelector
+                    entityType="Workplaces"
+                    entities={filterEntities(workplaces, searchWorkplaces)}
+                    selectedEntities={selectedWorkplaces}
+                    selectAll={selectAllWorkplaces}
+                    handleSelectAll={handleSelectAll}
+                    handleCheckboxChange={handleCheckboxChange}
+                    searchValue={searchWorkplaces}
+                    handleSearchChange={(e) =>
+                        setSearchWorkplaces(e.target.value)
+                    }
+                />
+                <EntitySelector
+                    entityType="Teams"
+                    entities={filterEntities(teams, searchTeams)}
+                    selectedEntities={selectedTeams}
+                    selectAll={selectAllTeams}
+                    handleSelectAll={handleSelectAll}
+                    handleCheckboxChange={handleCheckboxChange}
+                    searchValue={searchTeams}
+                    handleSearchChange={(e) => setSearchTeams(e.target.value)}
+                />
+                <EntitySelector
+                    entityType="Users"
+                    entities={filterEntities(users, searchUsers)}
+                    selectedEntities={selectedUsers}
+                    selectAll={selectAllUsers}
+                    handleSelectAll={handleSelectAll}
+                    handleCheckboxChange={handleCheckboxChange}
+                    searchValue={searchUsers}
+                    handleSearchChange={(e) => setSearchUsers(e.target.value)}
+                />
             </div>
             <div className={classes.ctaContainer}>
                 <Button color="primaryFill" onClick={confirmDeployment}>
                     <FormattedMessage id="buttons.placeholder.send_mail" />
                 </Button>
-
-                {selectedWorkplaces.size === 0 &&
-                    selectedTeams.size === 0 &&
-                    selectedUsers.size === 0 && (
-                        <p className={classes.infoMessage}>
-                            <FormattedMessage
-                                id="noSelectionInfo"
-                                defaultMessage="Si rien n'est sélectionné, l'email sera envoyé à tout le monde."
-                            />
-                        </p>
-                    )}
             </div>
-            {isModalVisible && (
-                <Modal
-                    style={{ maxHeight: "max-content" }}
-                    title={
-                        <span className={classes.primaryTxt}>
-                            <FormattedMessage id="deploy.send_mail.title" />
-                        </span>
-                    }
-                    content={
-                        <>
-                            <p>
-                                <FormattedMessage id="deploy.send_mail.description" />
-                            </p>
-                            {selectedEntitiesPreview()}
-                        </>
-                    }
-                    cancel={
-                        <FormattedMessage id="buttons.placeholder.cancel" />
-                    }
-                    validate={
-                        <FormattedMessage id="buttons.placeholder.send_mail" />
-                    }
-                    onCancel={cancelDeployment}
-                    onConfirm={handleSubmit}
-                />
-            )}
+            <ConfirmModal
+                isModalVisible={isModalVisible}
+                cancelDeployment={cancelDeployment}
+                handleSubmit={handleSubmit}
+                selectedWorkplaces={selectedWorkplaces}
+                selectedTeams={selectedTeams}
+                selectedUsers={selectedUsers}
+                workplaces={workplaces}
+                teams={teams}
+                users={users}
+            />
         </div>
     );
 };

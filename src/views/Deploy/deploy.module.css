@@ -22,10 +22,20 @@
 }
 .container h1 {
   font-size: 2rem;
-  align-self: flex-start;
+  gap: 1rem;
+  display: flex;
   margin-bottom: 1rem;
   height: 2rem;
   max-height: 3rem;
+  width: 100%;
+}
+.container h1 > div {
+  font-size: 1rem;
+  width: 100%;
+  max-width: 15rem;
+}
+.container h1 input {
+  margin: 0;
 }
 .container h2 {
   font-size: 1.5rem;
@@ -71,7 +81,7 @@
   align-items: center;
 }
 .container .scrollableList {
-  max-height: 5rem;
+  max-height: 50vh;
   overflow: auto;
 }
 .container .recapContainer {
