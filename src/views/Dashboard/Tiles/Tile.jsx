@@ -10,7 +10,7 @@ export const Tile = ({
 }) => {
     const history = useHistory();
     return (
-        <div onClick={() => history.push(link)} className={classes.tile}>
+        <div onClick={() => history.push(link)} className={`${classes.tile} ${link ? classes.clickable : ""}`}>
             <div className={classes.row}>
                 <p>{title}</p>
                 <img src={icon} alt={iconAlt} />

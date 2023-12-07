@@ -36,11 +36,11 @@
   background: var(--pure-light);
   box-shadow: 0 0 40px rgba(var(--color-dark-accent), 0.3);
   width: 60%;
-  max-height: 15rem;
+  max-height: max-content;
   max-width: 30rem;
   border-radius: var(--border-radius);
   position: absolute;
-  padding: 1rem;
+  padding: 1rem 2rem;
   inset: 0;
   z-index: 10;
   margin: auto;
