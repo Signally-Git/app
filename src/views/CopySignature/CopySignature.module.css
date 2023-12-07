@@ -1,5 +1,6 @@
 /* global.scss */
 .container {
+  gap: 1rem;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -8,14 +9,18 @@
   justify-content: center;
   align-items: center;
 }
-.container h2 {
-  margin-bottom: 2.5rem;
+
+.langContainer {
+  max-width: 30rem;
+  margin-top: 1rem;
 }
-.container > div {
-  margin-bottom: 7vh;
+.langContainer ul {
+  top: -5rem;
+  bottom: auto;
 }
 
 .signature {
+  max-width: 600px;
   border-radius: 10px;
   padding: 1rem;
   background-color: var(--background-color);
@@ -27,6 +32,8 @@ body {
 
 @media (max-width: 768px) {
   .signature {
+    margin-top: -3rem;
+    margin-bottom: -3rem;
     transform: scale(0.6);
     transform-origin: center;
     overflow-x: auto;

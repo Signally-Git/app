@@ -4,7 +4,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { request } from "utils";
 import { FormattedMessage } from "react-intl";
-import { CopyButton } from "components";
+import { CopyButton, SwitchLang } from "components";
 
 export default function CopySignature() {
     const [signature, setSignature] = React.useState(null);
@@ -23,11 +23,18 @@ export default function CopySignature() {
     return (
         <>
             <div className={classes.container}>
-                <FormattedMessage id={"copySignature"} tagName="h2" />
+                <div>
+                    <FormattedMessage id={"copySignature"} tagName="h2" />
+                    <CopyButton signature={signature} />
+                </div>
                 <div className={classes.signature}>
                     {signature?.length > 0 && parse(signature)}
                 </div>
-                <CopyButton signature={signature} />
+                <iframe width="360" height="202" src="https://www.youtube.com/embed/vHsJ-4CabrM?si=VgHaIflp9Vqb5RFJ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                <div className={classes.langContainer}>
+                    
+                <SwitchLang />
+                </div>
             </div>
         </>
     );
