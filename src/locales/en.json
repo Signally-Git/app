@@ -358,7 +358,9 @@
             "none": "Not connected",
             "connected": "Deployed",
             "check": "Check connection"
-        }
+        },
+        "sync_now": "Sync now",
+        "sync_auto": "Auto sync"
     },
     "message": {
         "warning": {
@@ -391,7 +393,8 @@
             "invalid_user_email": "doesn't seem to be a valid email address",
             "credentials": "Invalid email or password",
             "report": "An error occurred while submitting the form",
-            "social_unknown": "{social} not recognized. Please upload a custom logo."
+            "social_unknown": "{social} not recognized. Please upload a custom logo.",
+            "auto_sync": "Error while updating auto sync preferences."
         },
         "success": {
             "signature": {
@@ -419,7 +422,9 @@
             "delete": " deleted successfully",
             "created": " created successfully",
             "edit": " edited successfully",
-            "saved": "Saved"
+            "saved": "Saved",
+            "auto_sync_active": "Auto sync is now active.",
+            "auto_sync_inactive": "Auto sync is now inactive."
         }
     }
 }

@@ -30,11 +30,14 @@
     width: 100%;
 }
 
-.tile {
+.clickable {
     cursor: pointer;
     &:hover {
         opacity: .8;
     }
+}
+
+.tile {
     * {
         font-family: "Montserrat", serif;
         color: $color-dark-accent;
@@ -76,6 +79,7 @@
         font-weight: 400;
     }
     p {
+        width: 100%;
         line-height: 2.5;
     }
 }
@@ -288,4 +292,26 @@
 
 .fliping {
     transform: rotateY(180deg);
+}
+
+.deployTileTitle {
+    display: flex;
+    gap: .5rem;
+    .outlookContainer {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.autoSyncContainer {
+    & label {
+    cursor: pointer;
+    }
+    display: flex;
+    margin-top: 1.75rem;
+    width: 100%;
+    gap: .5rem;
+    justify-content: center;
+    align-items: center;
+    font-size: .8rem;
 }
