@@ -55,8 +55,7 @@ export const ConnectTile = ({ organisation }) => {
                 }
             });
     };
-
-    const [isCheckboxChecked, setIsCheckboxChecked] = useState(organisation?.enableAzureSync || false);
+    const [isCheckboxChecked, setIsCheckboxChecked] = useState(organisation.enableAzureSync || false);
     const notification = useNotification();
     const handleCheckboxChange = async (e) => {
         const checked = e.target.checked;
@@ -148,7 +147,7 @@ export const ConnectTile = ({ organisation }) => {
             </div>
                 </>
     } leftCorner={<div className={classes.autoSyncContainer}>
-        <CustomCheckbox value={isCheckboxChecked} id="autoDeploy" onChange={handleCheckboxChange} />
+        <CustomCheckbox checked={isCheckboxChecked} id="autoDeploy" onChange={handleCheckboxChange} />
         <label htmlFor="autoDeploy">
             <FormattedMessage id="office.sync_auto" />
         </label>
