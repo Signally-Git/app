@@ -4,6 +4,7 @@ import ResetPassword from "views/ResetPassword/ResetPassword";
 import TemplateRendererPage from "views/TemplateRenderer/TemplateRenderer.page";
 import CopySignature from "views/CopySignature/CopySignature.jsx";
 import ErrorPage from "views/Error/ErrorPage";
+import { Route } from "react-router-dom";
 
 export const guestRoutes = [
     <PublicRouteHelper
@@ -19,8 +20,7 @@ export const guestRoutes = [
         <ResetPassword />
     </PublicRouteHelper>,
 
-    <PublicRouteHelper
-        landing
+    <Route
         path="/users/:token"
         component={CopySignature}
     />,
