@@ -48,6 +48,7 @@ const setOrganisation = (organisation) => {
         "events",
         "google",
         "office365",
+        "enableAzureSync",
         "logo",
         "logoDistributor",
         "name",
