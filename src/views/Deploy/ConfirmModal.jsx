@@ -2,6 +2,7 @@ import React from "react";
 import { Modal } from "components";
 import { FormattedMessage } from "react-intl";
 import SelectedEntitiesPreview from "./SelectedEntitiesPreview";
+import classes from "./deploy.module.css";
 
 const ConfirmModal = ({
     isModalVisible,
@@ -22,10 +23,7 @@ const ConfirmModal = ({
             title={<FormattedMessage id="deploy.send_mail.title" />}
             content={
                 <>
-                    <p>
-                        <FormattedMessage id="deploy.send_mail.description" />
-                    </p>
-                    <ul className="recapContainer">
+                    <ul className={classes.recapContainer}>
                         <SelectedEntitiesPreview
                             selectedEntities={selectedWorkplaces}
                             entities={workplaces}

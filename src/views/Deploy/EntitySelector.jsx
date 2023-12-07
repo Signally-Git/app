@@ -38,6 +38,7 @@ const EntitySelector = ({
             <EntityList
                 items={entities}
                 selectedItems={selectedEntities}
+                entityType={entityType}
                 onCheckboxChange={handleCheckboxChange}
             />
         </div>

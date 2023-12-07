@@ -2,7 +2,7 @@ import React from "react";
 import { CustomCheckbox } from "components";
 import classes from "./deploy.module.css";
 
-const EntityList = ({ items, selectedItems, onCheckboxChange }) => {
+const EntityList = ({ items, selectedItems, onCheckboxChange, entityType }) => {
     if (!items) return null;
     return (
         <div className={classes.scrollableList}>
@@ -12,7 +12,7 @@ const EntityList = ({ items, selectedItems, onCheckboxChange }) => {
                         id={`entity-${item.id}`}
                         checked={selectedItems.has(item.id)}
                         onChange={(e) =>
-                            onCheckboxChange(item.id, e.target.checked)
+                            onCheckboxChange(item.id, e.target.checked, entityType)
                         }
                         label={
                             item.name || `${item.firstName} ${item.lastName}`
