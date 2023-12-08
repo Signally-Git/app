@@ -394,7 +394,8 @@
             "credentials": "Email ou mot de passe invalide",
             "report": "Une erreur s'est produite lors de l'envoi du formulaire",
             "social_unknown": "{social} non reconnu. Merci de télécharger un logo personnalisé.",
-            "auto_sync": "Erreur lors de la mise à jour de la synchronisation automatique."
+            "auto_sync": "Erreur lors de la mise à jour de la synchronisation automatique.",
+            "missing_tenant_id": "Vous devez d'abord renseigner votre tenant ID dans les informations de l'organisation"
         },
         "success": {
             "signature": {

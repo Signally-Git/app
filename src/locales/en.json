@@ -394,7 +394,8 @@
             "credentials": "Invalid email or password",
             "report": "An error occurred while submitting the form",
             "social_unknown": "{social} not recognized. Please upload a custom logo.",
-            "auto_sync": "Error while updating auto sync preferences."
+            "auto_sync": "Error while updating auto sync preferences.",
+            "missing_tenant_id": "You need to provide your tenant ID in the organization tab."
         },
         "success": {
             "signature": {
