@@ -45,7 +45,7 @@ export default function SignaturePreview({
     const handleSave = () => {
         const req = {
             signature: editSignature,
-            events: editEvent[0] === "none" ? [] : editEvent,
+            events: editEvent?.[0] === "none" ? [] : editEvent,
         };
         request
             .patch(edit["@id"], req, {
