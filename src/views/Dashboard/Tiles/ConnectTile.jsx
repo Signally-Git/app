@@ -55,7 +55,7 @@ export const ConnectTile = ({ organisation }) => {
                 }
             });
     };
-    const [isCheckboxChecked, setIsCheckboxChecked] = useState(organisation.enableAzureSync || false);
+    const [isCheckboxChecked, setIsCheckboxChecked] = useState(organisation?.enableAzureSync || false);
     const notification = useNotification();
     const handleCheckboxChange = async (e) => {
         const checked = e.target.checked;
