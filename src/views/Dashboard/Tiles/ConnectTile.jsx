@@ -91,6 +91,16 @@ export const ConnectTile = ({ organisation }) => {
 
 
     const importUsersAzure = async () => {
+        if (!organisation.tenantId) {
+            notification({
+                content: (
+                    <FormattedMessage id="message.error.missing_tenant_id" />
+                ),
+                status: "invalid"
+            });
+            return;
+        }
+        
         const windowFeatures = "left=100,top=100,width=600,height=600";
 
         window.open(`https://login.microsoftonline.com/${organisation?.tenantId}/oauth2/v2.0/authorize?client_id=${process.env.REACT_APP_AZURE_CLIENT_ID}&response_type=code&redirect_uri=${process.env.REACT_APP_API_URL}/azure/importusers&state=${user.signallyToken}&response_mode=query&scope=User.Read.All`, "mozillaWindow", windowFeatures);
