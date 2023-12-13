@@ -68,7 +68,7 @@ const Details = ({ selectedTemplate, styles, setStyles }) => {
             <CustomSelect
                 styleList={{ maxHeight: "20rem" }}
                 getValue={"name"}
-                value={"Arial"}
+                defaultValue={fontFamily}
                 display={"name"}
                 onChange={handleFontChange}
                 items={fonts}
