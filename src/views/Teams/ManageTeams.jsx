@@ -66,7 +66,7 @@ function Signatures() {
         function handleRealtimeData(setData, key, data) {
             setTimeout(() => {
                 if (key) {
-                    setData((prevData) => ({ ...prevData, [key]: data.users }));
+                    setData((prevData) => ({ ...prevData, [key]: data[key] }));
                 } else {
                     setData(data);
                 }
