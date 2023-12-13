@@ -17,7 +17,6 @@ export default function DefineSocials({ setList }) {
 
     const [socials, setSocials] = useState([{ url: "", name: "" }]);
     const [select, setSelect] = useState(0);
-    const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
     const [uploadedMedia, setUploadedMedia] = useState(null);
     const [preview, setPreview] = useState(null);
@@ -46,14 +45,25 @@ export default function DefineSocials({ setList }) {
         e.preventDefault();
         const name = getDomainName(e.target.value);
         const updatedSocials = [...socials];
-        updatedSocials[select] = {
-            url: e.target.value,
-            name: name,
-            image: preview,
-        };
+        const isExistingSocial = socials[select]?.["@id"]; // Vérifie si le RS actuel a un @id
+
+        updatedSocials[select] = isExistingSocial
+            ? {
+                ...socials[select], // Pour un RS existant, conservez toutes les propriétés existantes
+                url: e.target.value,
+                name: name,
+                image: preview, // Mettez à jour avec la nouvelle image, si elle a été modifiée
+            }
+            : {
+                url: e.target.value, // Pour un nouveau RS, créez un nouvel objet
+                name: name,
+                image: preview,
+            };
+
         setSocials(updatedSocials);
         setValue(e.target.value || "");
     };
+
 
     const handleAdd = (e) => {
         e.preventDefault();
@@ -79,7 +89,12 @@ export default function DefineSocials({ setList }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const image = await handleSaveIcon();
+        let image;
+        if (uploadedMedia instanceof File) {
+            image = await handleSaveIcon();
+        } else {
+            image = socials[select]?.image;
+        }
         if (!getDomainName(value)) {
             notification({
                 content: <FormattedMessage id="message.error.generic" />,
@@ -129,6 +144,7 @@ export default function DefineSocials({ setList }) {
             image: image || `${socialBaseUrl}${getDomainName(value)}.png`,
             organisation: TokenService.getUser().organisation,
         };
+        
         if (socials[select]["@id"]) {
             await request.patch(socials[select]["@id"], updatedSocial, {
                 headers: {
@@ -262,7 +278,6 @@ export default function DefineSocials({ setList }) {
                         file={uploadedMedia}
                         setFile={(e) => {
                             setUploadedMedia(e);
-                            setOpen(true);
                         }}
                         removeFile={() => {
                             setUploadedMedia(null);
