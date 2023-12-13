@@ -11,9 +11,9 @@ export default function SignaturePreview({
                                              show, setShow, edit, setEdit, signatures
                                          }) {
     const { name, firstName, lastName } = show || {};
-    const type = show["@type"].toLowerCase();
+    const type = show?.["@type"].toLowerCase();
     const displayName = name || `${firstName} ${lastName}`;
-    
+
     const intl = useIntl();
 
     const notification = useNotification();
@@ -48,9 +48,9 @@ export default function SignaturePreview({
             .then(({ data }) => {
                 notification({
                     content: (<>
-                            {displayName}
-                            <FormattedMessage id="message.success.edit" />
-                        </>), status: "valid"
+                        {displayName}
+                        <FormattedMessage id="message.success.edit" />
+                    </>), status: "valid"
                 });
                 setShow({ ...show, data });
                 setEdit(false);
@@ -58,9 +58,9 @@ export default function SignaturePreview({
             .catch(() => {
                 notification({
                     content: (<>
-                            {displayName}
-                            <FormattedMessage id="message.error.edit" />
-                        </>), status: "invalid"
+                        {displayName}
+                        <FormattedMessage id="message.error.edit" />
+                    </>), status: "invalid"
                 });
             });
     };
@@ -70,71 +70,72 @@ export default function SignaturePreview({
     }, [show]);
 
     return (<div className={classes.flipContainer}>
-            <div className={`${classes.flipper} ${edit ? classes.flip : ""}`}>
-                <div className={classes.front}>
-                    <div className={classes.topLine}>
-                        <h2>
-                            <FormattedMessage id="signature.active_for" />
-                            <span className={classes.primaryTxt}>
+        <div className={`${classes.flipper} ${edit ? classes.flip : ""}`}>
+            <div className={classes.front}>
+                <div className={classes.topLine}>
+                    <h2>
+                        <FormattedMessage id="signature.active_for" />
+                        <span className={classes.primaryTxt}>
                                 {displayName}
                             </span>
-                        </h2>
-                        <div className={classes.headerBtnsContainer}>
-                            {displayedSignature && (<CopyButton signature={displayedSignature} />)}
-                            <Button
-                                color="primaryFill"
-                                onClick={() => setEdit(show)}
-                            >
-                                Assign
-                            </Button>
-                            {type === "workplace" ? (<Button
-                                    color="secondary"
-                                    onClick={() => {
-                                        setEdit("assign-workplace");
-                                    }}
-                                >
-                                    <FormattedMessage id="teams" />
-                                </Button>) : type === "team" ?
-                                <Button color="secondary" onClick={() => setEdit("assign-team")}>
-                                    <FormattedMessage id="employees" />
-                                </Button> : null}
-                        </div>
-                    </div>
-                    <div>
-                        {fetchingSignature ? (<Loading />) : (parse(displayedSignature || intl.formatMessage({id: "statistic.no_signature"})))}
+                    </h2>
+                    <div className={classes.headerBtnsContainer}>
+                        {displayedSignature && (<CopyButton signature={displayedSignature} />)}
+                        <Button
+                            color="primaryFill"
+                            onClick={() => setEdit(show)}
+                        >
+                            Assign
+                        </Button>
+                        {type === "workplace" ? (<Button
+                            color="secondary"
+                            onClick={() => {
+                                setEdit("assign-workplace");
+                            }}
+                        >
+                            <FormattedMessage id="teams" />
+                        </Button>) : type === "team" ? <Button color="secondary" onClick={() => setEdit("assign-team")}>
+                            <FormattedMessage id="employees" />
+                        </Button> : null}
                     </div>
                 </div>
-                <div className={classes.back}>
-                    <div className={classes.topLine}>
-                        <h2>
-                            <span>Assignation </span>
-                            <span className={classes.primaryTxt}>
-                                {displayName}
-                            </span>
-                        </h2>
-                        <div className={classes.headerBtnsContainer}>
-                            <Button
-                                color="primary"
-                                onClick={() => setEdit(null)}
-                            >
-                                Preview
-                            </Button>
-                        </div>
-                    </div>
-                    <SignatureManager
-                        signatures={signatures}
-                        entity={edit || show}
-                        setEditSignature={setEditSignature}
-                    />
-                    <EventManager
-                        editedEntity={edit || show}
-                        setEditedEntityEvent={setEditEvent}
-                    />
-                    <NavigationButtons
-                        onConfirm={handleSave}
-                        onCancel={() => setEdit(null)}
-                    />
+                <div>
+                    {fetchingSignature ? (
+                        <Loading />) : (parse(displayedSignature || intl.formatMessage({ id: "statistic.no_signature" })))}
                 </div>
             </div>
-        </div>);
+            <div className={classes.back}>
+                <div className={classes.topLine}>
+                    <h2>
+                        <span>Assignation </span>
+                        <span className={classes.primaryTxt}>
+                                {displayName}
+                            </span>
+                    </h2>
+                    <div className={classes.headerBtnsContainer}>
+                        <Button
+                            color="primary"
+                            onClick={() => setEdit(null)}
+                        >
+                            Preview
+                        </Button>
+                    </div>
+                </div>
+                <SignatureManager
+                    signatures={signatures}
+                    entity={edit || show}
+                    setEditSignature={setEditSignature}
+                />
+                <br />
+                <EventManager
+                    editedEntity={edit || show}
+                    setEditedEntityEvent={setEditEvent}
+                />
+                <NavigationButtons
+                    onConfirm={handleSave}
+                    onCancel={() => setEdit(null)}
+                />
+            </div>
+        </div>
+    </div>);
 }
