@@ -48,16 +48,15 @@ const SignatureManager = memo(({ entity, signatures, setEditSignature }) => {
         try {
             const results = await Promise.allSettled(promises);
             const updatedSignatures = updateSignatures(results);
-
             const correspondingSignature = updatedSignatures.find(
-                (sig) => sig["@id"] === entity.signature["@id"]
+                (sig) => sig["@id"] === entity?.signature?.["@id"]
             );
-
+            setEditSignature(correspondingSignature?.["@id"] || updatedSignatures[0]?.["@id"])
             setState((prev) => ({
                 ...prev,
                 signaturesDisplay: updatedSignatures,
-                signaturePreview: correspondingSignature,
-                selectedSignatureId: correspondingSignature?.id,
+                signaturePreview: correspondingSignature || updatedSignatures[0],
+                selectedSignatureId: correspondingSignature?.id || updatedSignatures[0]?.id,
                 loading: false,
             }));
         } catch (error) {
@@ -83,9 +82,11 @@ const SignatureManager = memo(({ entity, signatures, setEditSignature }) => {
         ) {
             setParsedHTML(parse(signaturePreview.html));
         }
-        setParsedHTML("");
+        else {
+            setParsedHTML("");
+        }
     }, [signaturePreview]);
-
+    
     return (
         <>
             {signaturesDisplay.length > 0 && (

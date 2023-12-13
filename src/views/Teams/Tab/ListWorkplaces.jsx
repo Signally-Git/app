@@ -68,10 +68,6 @@ export const ListWorkplaces = ({
         setIsDeployed(editInfo?.synchronizable || false);
     }, [editInfo]);
 
-    useEffect(() => {
-        console.log(edit);
-    }, [edit]);
-
     const handleChangeWP = async (e, workplace) => {
         const img = new FormData();
         img.append("file", file);
@@ -189,7 +185,6 @@ export const ListWorkplaces = ({
                                     onMouseMove={() => {
                                         if (!edit) {
                                             clearTimeout(time);
-                                            console.log(edit, editInfo);
                                             time = setTimeout(() => {
                                                 setSelected(workplace);
                                             }, 100);

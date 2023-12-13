@@ -1,7 +1,7 @@
 import classes from "./signaturePreview.module.css";
 import { Button, CopyButton, Loading, NavigationButtons } from "components";
 import parse from "html-react-parser";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { request, useNotification } from "utils";
 import React, { useEffect, useState } from "react";
 import { SignatureManager } from "./Assign/SignatureManager/SignatureManager";
@@ -13,6 +13,8 @@ export default function SignaturePreview({
     const { name, firstName, lastName } = show || {};
     const type = show["@type"].toLowerCase();
     const displayName = name || `${firstName} ${lastName}`;
+    
+    const intl = useIntl();
 
     const notification = useNotification();
 
@@ -99,7 +101,7 @@ export default function SignaturePreview({
                         </div>
                     </div>
                     <div>
-                        {fetchingSignature ? (<Loading />) : (parse(displayedSignature || ""))}
+                        {fetchingSignature ? (<Loading />) : (parse(displayedSignature || intl.formatMessage({id: "statistic.no_signature"})))}
                     </div>
                 </div>
                 <div className={classes.back}>

@@ -77,6 +77,7 @@
     height: 100%;
     min-width: 30rem;
     min-height: 35rem;
+    overflow: auto;
 
     // Styles pour .btnsContainer à l'intérieur de .flipContainer, .front, .back
     > .btnsContainer {
