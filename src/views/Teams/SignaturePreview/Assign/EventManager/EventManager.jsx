@@ -70,7 +70,7 @@ const EventManager = memo(({ editedEntity, setEditedEntityEvent }) => {
     useEffect(() => {
         fetchCampaigns();
         setSelectedCampaigns(
-            editedEntity?.events.map((event) => event["@id"]) || []
+            editedEntity?.events?.map((event) => event["@id"]) || []
         );
         setAssignedCampaigns(determineDefaultValue());
         const event = currentCampaignsList.find(
