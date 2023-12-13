@@ -51,12 +51,12 @@ const SignatureManager = memo(({ entity, signatures, setEditSignature }) => {
             const correspondingSignature = updatedSignatures.find(
                 (sig) => sig["@id"] === entity?.signature?.["@id"]
             );
-
+            setEditSignature(correspondingSignature?.["@id"] || updatedSignatures[0]?.["@id"])
             setState((prev) => ({
                 ...prev,
                 signaturesDisplay: updatedSignatures,
-                signaturePreview: correspondingSignature,
-                selectedSignatureId: correspondingSignature?.id,
+                signaturePreview: correspondingSignature || updatedSignatures[0],
+                selectedSignatureId: correspondingSignature?.id || updatedSignatures[0]?.id,
                 loading: false,
             }));
         } catch (error) {
