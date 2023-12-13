@@ -80,14 +80,13 @@ const SignatureManager = memo(({ entity, signatures, setEditSignature }) => {
             typeof signaturePreview?.html === "string" &&
             !signaturePreview.html.match(regex)
         ) {
-            console.log(signaturePreview.html)
             setParsedHTML(parse(signaturePreview.html));
         }
         else {
             setParsedHTML("");
         }
     }, [signaturePreview]);
-    console.log(parsedHTML)
+    
     return (
         <>
             {signaturesDisplay.length > 0 && (
