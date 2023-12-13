@@ -57,6 +57,7 @@
   height: 100%;
   min-width: 30rem;
   min-height: 35rem;
+  overflow: auto;
 }
 .flipContainer > .btnsContainer, .front > .btnsContainer, .back > .btnsContainer {
   position: absolute;
