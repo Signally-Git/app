@@ -48,9 +48,8 @@ const SignatureManager = memo(({ entity, signatures, setEditSignature }) => {
         try {
             const results = await Promise.allSettled(promises);
             const updatedSignatures = updateSignatures(results);
-
             const correspondingSignature = updatedSignatures.find(
-                (sig) => sig["@id"] === entity.signature["@id"]
+                (sig) => sig["@id"] === entity?.signature?.["@id"]
             );
 
             setState((prev) => ({
@@ -81,11 +80,14 @@ const SignatureManager = memo(({ entity, signatures, setEditSignature }) => {
             typeof signaturePreview?.html === "string" &&
             !signaturePreview.html.match(regex)
         ) {
+            console.log(signaturePreview.html)
             setParsedHTML(parse(signaturePreview.html));
         }
-        setParsedHTML("");
+        else {
+            setParsedHTML("");
+        }
     }, [signaturePreview]);
-
+    console.log(parsedHTML)
     return (
         <>
             {signaturesDisplay.length > 0 && (
