@@ -402,15 +402,15 @@
                 "delete": "La signature a bien été supprimée",
                 "edit_part1": "Votre signature",
                 "edit_variant1": "Signature de",
-                "edit_part2": "a été modifiée avec succès"
+                "edit_part2": " a été modifiée avec succès"
             },
             "teams": {
                 "edit_part1": "L'équipe ",
-                "edit_part2": "a été créée avec succès"
+                "edit_part2": " a été créée avec succès"
             },
             "users": {
                 "edit_part1": "Le collaborateur ",
-                "edit_part2": "a été créé avec succès"
+                "edit_part2": " a été créé avec succès"
             },
             "report": "Votre formulaire a bien été envoyé",
             "sign_up": {
@@ -420,9 +420,9 @@
             },
             "added": "Ajouté",
             "removed": "Retiré",
-            "delete": "supprimé avec succès",
-            "created": "créé avec succès",
-            "edit": "édité avec succès",
+            "delete": " supprimé avec succès",
+            "created": " créé avec succès",
+            "edit": " édité avec succès",
             "saved": "enregistré",
             "auto_sync_active": "Auto synchronisation activée",
             "auto_sync_inactive": "Auto synchronisation désactivée"
