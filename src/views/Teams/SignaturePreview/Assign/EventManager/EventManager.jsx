@@ -3,6 +3,7 @@ import { memo, useEffect, useState } from "react";
 import { filterPastCampaigns, getCurrentCampaigns, request } from "utils";
 import { useIntl } from "react-intl";
 import Playlist from "./Playlist";
+import classes from './eventManager.module.css'
 
 const EventManager = memo(({ editedEntity, setEditedEntityEvent }) => {
     const intl = useIntl();
@@ -102,6 +103,7 @@ const EventManager = memo(({ editedEntity, setEditedEntityEvent }) => {
                     {selectedEvent?.imageUrl &&
                         assignedCampaigns[0] !== "playlist" && (
                             <img
+                                className={classes.event}
                                 src={selectedEvent.imageUrl}
                                 alt={selectedEvent.name}
                             />
