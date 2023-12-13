@@ -16,6 +16,7 @@ const SignatureBuildPreview = ({ id, styles }) => {
 
         const callPreviewAPI = async () => {
             try {
+                setError(null)
                 setLoading(true);
                 const response = await request.post(
                     "compile_for_create_signature/" + id,

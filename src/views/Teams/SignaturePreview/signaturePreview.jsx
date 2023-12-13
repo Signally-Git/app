@@ -6,7 +6,6 @@ import { request, useNotification } from "utils";
 import React, { useEffect, useState } from "react";
 import { SignatureManager } from "./Assign/SignatureManager/SignatureManager";
 import EventManager from "./Assign/EventManager/EventManager";
-import { AiOutlineEdit } from "react-icons/ai";
 
 export default function SignaturePreview({
                                              show, setShow, edit, setEdit, signatures
@@ -81,7 +80,7 @@ export default function SignaturePreview({
                             </span>
                     </h2>
                     <div className={classes.headerBtnsContainer}>
-                        <AiOutlineEdit fontSize="1.5rem" onClick={() => setEdit(show)} />
+                        {displayedSignature && (<CopyButton signature={displayedSignature} />)}
                         {type === "workplace" ? (<Button
                             color="secondary"
                             onClick={() => {
@@ -99,7 +98,6 @@ export default function SignaturePreview({
                     {fetchingSignature ? (
                         <Loading />) : (parse(displayedSignature || intl.formatMessage({ id: "statistic.no_signature" })))}
                 </div>
-                {displayedSignature && (<CopyButton signature={displayedSignature} />)}
 
             </div>
             <div className={classes.back}>

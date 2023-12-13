@@ -9,6 +9,7 @@ const EventManager = memo(({ editedEntity, setEditedEntityEvent }) => {
     const intl = useIntl();
 
     const [selectedEvent, setSelectedEvent] = useState(null);
+    const [loading, setLoading] = useState(false)
 
     const [selectedCampaigns, setSelectedCampaigns] = useState([]);
     const [showPlaylistEditor, setShowPlaylistEditor] = useState(false);
@@ -49,8 +50,9 @@ const EventManager = memo(({ editedEntity, setEditedEntityEvent }) => {
     const [playlistCampaignsList, setPlaylistCampaignsList] = useState([]);
 
     const fetchCampaigns = async () => {
+        setLoading(true)
         setCurrentCampaignsList([]);
-        request.get("events").then(({ data }) => {
+        await request.get("events").then(({ data }) => {
             let campaignsFetchedList = data["hydra:member"];
 
             setPlaylistCampaignsList(filterPastCampaigns(campaignsFetchedList));
@@ -60,6 +62,8 @@ const EventManager = memo(({ editedEntity, setEditedEntityEvent }) => {
             campaignsFetchedList.unshift(noCampaign);
             campaignsFetchedList.push(playlistOption);
             setCurrentCampaignsList(campaignsFetchedList);
+        }).finally(() => {
+            setLoading(false)
         });
     };
 
@@ -72,7 +76,7 @@ const EventManager = memo(({ editedEntity, setEditedEntityEvent }) => {
         const event = currentCampaignsList.find(
             (event) => event["@id"] === determineDefaultValue()
         );
-        setSelectedEvent(event);
+        setSelectedEvent(event); 
     }, [editedEntity]);
 
     const handleChangeCampaign = (eventId) => {
@@ -89,6 +93,9 @@ const EventManager = memo(({ editedEntity, setEditedEntityEvent }) => {
         setEditedEntityEvent(selectedCampaigns);
     };
 
+    if (loading)
+        return null;
+    
     return (
         <div>
             {currentCampaignsList.length > 0 && (
