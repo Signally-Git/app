@@ -6,6 +6,7 @@ import { request, useNotification } from "utils";
 import React, { useEffect, useState } from "react";
 import { SignatureManager } from "./Assign/SignatureManager/SignatureManager";
 import EventManager from "./Assign/EventManager/EventManager";
+import { AiOutlineEdit } from "react-icons/ai";
 
 export default function SignaturePreview({
                                              show, setShow, edit, setEdit, signatures
@@ -80,13 +81,7 @@ export default function SignaturePreview({
                             </span>
                     </h2>
                     <div className={classes.headerBtnsContainer}>
-                        {displayedSignature && (<CopyButton signature={displayedSignature} />)}
-                        <Button
-                            color="primaryFill"
-                            onClick={() => setEdit(show)}
-                        >
-                            Assign
-                        </Button>
+                        <AiOutlineEdit fontSize="1.5rem" onClick={() => setEdit(show)} />
                         {type === "workplace" ? (<Button
                             color="secondary"
                             onClick={() => {
@@ -99,10 +94,13 @@ export default function SignaturePreview({
                         </Button> : null}
                     </div>
                 </div>
+                <br />
                 <div>
                     {fetchingSignature ? (
                         <Loading />) : (parse(displayedSignature || intl.formatMessage({ id: "statistic.no_signature" })))}
                 </div>
+                {displayedSignature && (<CopyButton signature={displayedSignature} />)}
+
             </div>
             <div className={classes.back}>
                 <div className={classes.topLine}>
@@ -112,15 +110,8 @@ export default function SignaturePreview({
                                 {displayName}
                             </span>
                     </h2>
-                    <div className={classes.headerBtnsContainer}>
-                        <Button
-                            color="primary"
-                            onClick={() => setEdit(null)}
-                        >
-                            Preview
-                        </Button>
-                    </div>
                 </div>
+                <br />
                 <SignatureManager
                     signatures={signatures}
                     entity={edit || show}
