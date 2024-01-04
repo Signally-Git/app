@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineEdit, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FiCheck, FiTrash } from "react-icons/fi";
 import { HiOutlineSearch } from "react-icons/hi";
-import { Button, CustomCheckbox, Input, Popup, UploadFile } from "components";
+import { Button, CustomCheckbox, CustomSelect, Input, Popup, UploadFile } from "components";
 import { FormattedMessage, useIntl } from "react-intl";
 import {
     TokenService,
@@ -28,6 +28,8 @@ function ListUsers({
     setModal,
 }) {
     const [user, setUser] = React.useState({});
+    const [selectedRole, setSelectedRole] = useState(
+        user && user.roles && user.roles.length > 0 ? user.roles[0] : "ROLE_USER");
     const [search, setSearch] = React.useState("");
     const [changed, setChanged] = React.useState(false);
     const [usersList, setUsersList] = React.useState([]);
@@ -39,6 +41,14 @@ function ListUsers({
     const toFocus = React.useRef(null);
     const notification = useNotification();
     const intl = useIntl();
+    const [roles] = useState([
+        { name: intl.formatMessage({ id: "roles.user" }), value: "ROLE_USER" },
+        { name: intl.formatMessage({ id: "roles.rh" }), value: "ROLE_RH" },
+        {
+            name: intl.formatMessage({ id: "roles.administrator" }),
+            value: "ROLE_ADMIN",
+        },
+    ]);
 
     const sortUsers = (usersList) => {
         let admin;
@@ -73,10 +83,19 @@ function ListUsers({
     React.useMemo(() => {
         getDataUser();
     }, [modal, edit]);
-
     const handleChange = (e, data) => {
         setChanged(true);
         setUser({ ...user, [data]: e });
+    };
+    const handleRoleChange = (e) => {
+        setChanged(true);
+        const newRole = e.target.value;
+        setSelectedRole(newRole); 
+        setUser(prevUser => ({
+            ...prevUser,
+            roles: [newRole]
+        }));
+        console.log(users)
     };
 
     const handleSubmit = async (e, id) => {
@@ -101,6 +120,7 @@ function ListUsers({
             email: user.email,
             synchronizable: user.synchronizable,
             urlAgenda: user.urlAgenda,
+            roles: [selectedRole]
         };
 
         if (uploadedMedia) {
@@ -420,7 +440,13 @@ function ListUsers({
                                                             }
                                                         />
                                                     </label>
-
+                                                    <select value={selectedRole} onChange={handleRoleChange}>
+                                                        {roles.map((role, index) => (
+                                                            <option key={index} value={role.value}>
+                                                                {role.name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
                                                     <Input
                                                         type="text"
                                                         placeholder={intl.formatMessage(
@@ -440,7 +466,7 @@ function ListUsers({
                                                         className={
                                                             classes.inputsContainer
                                                         }
-                                                    >
+                                                    >   
                                                         <Input
                                                             type="text"
                                                             placeholder={intl.formatMessage(
