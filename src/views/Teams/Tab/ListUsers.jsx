@@ -83,10 +83,12 @@ function ListUsers({
     React.useMemo(() => {
         getDataUser();
     }, [modal, edit]);
+
     const handleChange = (e, data) => {
         setChanged(true);
         setUser({ ...user, [data]: e });
     };
+
     const handleRoleChange = (e) => {
         setChanged(true);
         const newRole = e.target.value;
@@ -95,7 +97,6 @@ function ListUsers({
             ...prevUser,
             roles: [newRole]
         }));
-        console.log(users)
     };
 
     const handleSubmit = async (e, id) => {
