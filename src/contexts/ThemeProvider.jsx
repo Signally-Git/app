@@ -17,7 +17,7 @@ const ThemeProvider = ({ children }) => {
                 const fetchInstance = await getInstance(url);
                 setTheme(fetchedTheme.styles);
                 setName(fetchInstance.name);
-                setLogo(fetchInstance.organisation?.logoDistributor);
+                setLogo(fetchInstance.organisation?.logoDistributor.url);
             } catch (error) {
                 console.error(
                     "Erreur lors de la récupération des couleurs :",
