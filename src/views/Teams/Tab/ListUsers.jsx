@@ -30,6 +30,7 @@ function ListUsers({
     const [user, setUser] = React.useState({});
     const [selectedRole, setSelectedRole] = useState(
         user && user.roles && user.roles.length > 0 ? user.roles[0] : "ROLE_USER");
+    const [prevRole, setPrevRole] = useState(null)
     const [search, setSearch] = React.useState("");
     const [changed, setChanged] = React.useState(false);
     const [usersList, setUsersList] = React.useState([]);
@@ -93,8 +94,9 @@ function ListUsers({
         setChanged(true);
         const newRole = e.target.value;
         setSelectedRole(newRole); 
+        console.log(newRole)
         setUser(prevUser => ({
-            ...prevUser,
+            ...prevUser, 
             roles: [newRole]
         }));
     };
