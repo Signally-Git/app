@@ -21,7 +21,7 @@ function Header(props) {
                 props.landing ? classes.landing : ""
             }`}
         >
-            <img src={logo} />
+            <img className={classes.logo} src={logo} />
             {props.landing !== true ? (
                 <>
                     <div className={classes.rightSide}>

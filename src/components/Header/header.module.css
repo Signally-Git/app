@@ -18,6 +18,11 @@
   z-index: 5;
 }
 
+.logo {
+  max-width: 5rem;
+  max-height: 3rem;
+}
+
 .landing {
   position: absolute;
   z-index: 1;
